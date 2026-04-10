@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
 // Theme init BEFORE paint to avoid flash
@@ -34,11 +34,9 @@
   --max: 1280px;
   --ease: cubic-bezier(.2,.7,.1,1);
 
-  /* Headline font — Barlow Condensed Black is the closest Google Fonts match
-     to Acumin Pro Condensed Black (the brand headline font, Adobe-only) */
-  --font-head: 'Barlow Condensed', 'Arial Black', sans-serif;
+  --font-head: 'Archivo Black', 'Arial Black', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-logo: 'Arial Black', 'Helvetica Neue', sans-serif;
+  --font-logo: 'Archivo Black', 'Arial Black', 'Helvetica Neue', sans-serif;
 }
 
 html[data-theme="light"] {
@@ -80,10 +78,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ===== BRAND DOT — solid square anchor in actual brand green #00FFAA ===== */
 .bd {
   display: inline-block;
-  width: 0.55em;
-  height: 0.55em;
+  width: 0.32em;
+  height: 0.32em;
   background: var(--green);
-  margin-left: 0.03em;
+  margin-left: 0.04em;
   vertical-align: baseline;
   transform: translateY(0.02em);
 }
@@ -108,7 +106,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: inline-flex;
   align-items: center;
 }
-.logo .bd { width: 10px; height: 10px; margin-left: 2px; transform: none; }
+.logo .bd { width: 7px; height: 7px; margin-left: 2px; transform: none; }
 .nav-links { display: flex; gap: 34px; align-items: center; }
 .nav-links a {
   font-size: 14px;
@@ -188,8 +186,8 @@ html[data-theme="dark"] .hero::before { opacity: 0.28; }
 }
 .hero h1 {
   font-family: var(--font-head);
-  font-weight: 900;
-  font-size: clamp(72px, 13vw, 200px);
+  font-weight: 400;
+  font-size: clamp(56px, 10vw, 152px);
   line-height: 0.88;
   letter-spacing: -0.015em;
   margin-bottom: 40px;
@@ -243,8 +241,8 @@ section { padding: 140px 0; position: relative; }
 }
 .section-title {
   font-family: var(--font-head);
-  font-weight: 900;
-  font-size: clamp(48px, 7vw, 112px);
+  font-weight: 400;
+  font-size: clamp(38px, 5.2vw, 76px);
   line-height: 0.9;
   letter-spacing: -0.015em;
   margin-bottom: 28px;
@@ -283,8 +281,8 @@ section { padding: 140px 0; position: relative; }
 }
 .stat-num {
   font-family: var(--font-head);
-  font-weight: 900;
-  font-size: clamp(54px, 6vw, 92px);
+  font-weight: 400;
+  font-size: clamp(44px, 5vw, 72px);
   color: var(--fg);
   line-height: 1;
   letter-spacing: -0.01em;
@@ -332,14 +330,14 @@ section { padding: 140px 0; position: relative; }
 }
 .service-label {
   font-family: var(--font-head);
-  font-weight: 900;
-  font-size: clamp(80px, 11vw, 160px);
+  font-weight: 400;
+  font-size: clamp(64px, 9vw, 124px);
   line-height: 0.82;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: #fff;
 }
-.service-label .bd { width: 0.42em; height: 0.42em; }
+.service-label .bd { width: 0.3em; height: 0.3em; }
 .service-body h3 {
   font-family: var(--font-body);
   font-size: 23px;
@@ -484,8 +482,8 @@ html[data-theme="dark"] .contact::before { opacity: 0.22; }
 .contact-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
 .contact h2 {
   font-family: var(--font-head);
-  font-weight: 900;
-  font-size: clamp(58px, 9vw, 144px);
+  font-weight: 400;
+  font-size: clamp(46px, 7vw, 108px);
   line-height: 0.9;
   letter-spacing: -0.015em;
   margin-bottom: 36px;
@@ -501,7 +499,7 @@ html[data-theme="dark"] .contact::before { opacity: 0.22; }
   display: inline-block;
   font-family: var(--font-logo);
   font-weight: 900;
-  font-size: clamp(22px, 3vw, 40px);
+  font-size: clamp(22px, 3vw, 38px);
   color: var(--fg);
   padding: 28px 46px;
   background: var(--bg);
