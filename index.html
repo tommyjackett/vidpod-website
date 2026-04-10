@@ -75,16 +75,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 36px; }
 @media (max-width: 640px) { .wrap { padding: 0 22px; } }
 
-/* ===== BRAND DOT — solid square anchor in actual brand green #00FFAA ===== */
-.bd {
-  display: inline-block;
-  width: 0.32em;
-  height: 0.32em;
-  background: var(--green);
-  margin-left: 0.04em;
-  vertical-align: baseline;
-  transform: translateY(0.02em);
-}
+/* ===== BRAND MARK — the full stop IS the logo ===== */
+.dot { color: var(--green); }
 
 /* ===== NAV ===== */
 .nav {
@@ -106,7 +98,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: inline-flex;
   align-items: center;
 }
-.logo .bd { width: 7px; height: 7px; margin-left: 2px; transform: none; }
 .nav-links { display: flex; gap: 34px; align-items: center; }
 .nav-links a {
   font-size: 14px;
@@ -194,7 +185,6 @@ html[data-theme="dark"] .hero::before { opacity: 0.28; }
   color: var(--fg);
   text-transform: uppercase;
 }
-.hero h1 .bd { width: 0.22em; height: 0.22em; }
 .hero-sub {
   font-family: var(--font-body);
   font-size: clamp(18px, 1.6vw, 22px);
@@ -319,15 +309,16 @@ section { padding: 140px 0; position: relative; }
 }
 .service-card:hover { transform: translateY(-6px); }
 .service-vid {
+  background: var(--green);
+  color: #000;
+}
+.service-vid .dot { color: #000; }
+.service-pod {
   background: #000;
   color: #fff;
-  background-image: radial-gradient(circle at 90% 0%, rgba(0,255,170,0.55), transparent 55%);
 }
-.service-pod {
-  background: #0A0A0A;
-  color: #fff;
-  background-image: radial-gradient(circle at 10% 100%, rgba(0,255,170,0.28), transparent 55%);
-}
+.service-pod .service-label { color: var(--green); }
+.service-pod .dot { color: var(--green); }
 .service-label {
   font-family: var(--font-head);
   font-weight: 400;
@@ -335,9 +326,7 @@ section { padding: 140px 0; position: relative; }
   line-height: 0.82;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: #fff;
 }
-.service-label .bd { width: 0.2em; height: 0.2em; }
 .service-body h3 {
   font-family: var(--font-body);
   font-size: 23px;
@@ -363,48 +352,39 @@ section { padding: 140px 0; position: relative; }
 .service-list li {
   padding: 8px 14px;
   border-radius: 100px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+}
+.service-vid .service-list li {
+  background: rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.18);
+  color: #000;
+}
+.service-pod .service-list li {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #fff;
 }
 
-/* ===== WORK — two distinct bands, VID. and POD. ===== */
+/* ===== WORK — two distinct bands, VID. (green) and POD. (black) ===== */
 .work-vid {
-  border-top: 1px solid var(--line);
-  background: var(--bg);
+  background: var(--green);
+  color: #000;
   position: relative;
   overflow: hidden;
 }
-.work-vid::before {
-  content: '';
-  position: absolute;
-  top: -20%; right: -15%;
-  width: 900px; height: 900px;
-  background: radial-gradient(circle, var(--green) 0%, rgba(0,255,170,0.3) 25%, transparent 60%);
-  opacity: 0.4;
-  filter: blur(30px);
-  pointer-events: none;
-}
-html[data-theme="dark"] .work-vid::before { opacity: 0.22; }
+.work-vid .section-eyebrow { color: #000; }
+.work-vid .section-title { color: #000; }
+.work-vid .section-title .dot { color: #000; }
+.work-vid .section-intro { color: rgba(0,0,0,0.72); }
 
 .work-pod {
-  background: #050505;
+  background: #000;
   color: #FAFAF7;
   position: relative;
   overflow: hidden;
-  border-top: 1px solid transparent;
-}
-.work-pod::before {
-  content: '';
-  position: absolute;
-  bottom: -30%; left: -15%;
-  width: 1000px; height: 1000px;
-  background: radial-gradient(circle, var(--green) 0%, rgba(0,255,170,0.22) 22%, transparent 58%);
-  opacity: 0.3;
-  filter: blur(40px);
-  pointer-events: none;
 }
 .work-pod .section-eyebrow { color: #fff; }
 .work-pod .section-title { color: #fff; }
+.work-pod .section-title .dot { color: var(--green); }
 .work-pod .section-intro { color: rgba(255,255,255,0.7); }
 
 .work-inner { position: relative; z-index: 1; }
@@ -424,15 +404,15 @@ html[data-theme="dark"] .work-vid::before { opacity: 0.22; }
   flex-direction: column;
 }
 .work-vid .work-item {
-  background: var(--bg-2);
-  border: 1px solid var(--line);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
 }
 .work-pod .work-item {
   background: #111;
   border: 1px solid #222;
 }
 .work-item:hover { transform: translateY(-5px); }
-.work-vid .work-item:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.08); }
+.work-vid .work-item:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.18); }
 .work-pod .work-item:hover { border-color: var(--green); box-shadow: 0 24px 60px rgba(0,255,170,0.12); }
 
 .work-img {
@@ -450,13 +430,13 @@ html[data-theme="dark"] .work-vid::before { opacity: 0.22; }
   letter-spacing: -0.01em;
   margin-bottom: 10px;
 }
-.work-vid .work-body h4 { color: var(--fg); }
+.work-vid .work-body h4 { color: #000; }
 .work-pod .work-body h4 { color: #fff; }
 .work-body p {
   font-size: 15px;
   line-height: 1.6;
 }
-.work-vid .work-body p { color: var(--muted); }
+.work-vid .work-body p { color: rgba(0,0,0,0.65); }
 .work-pod .work-body p { color: rgba(255,255,255,0.65); }
 
 /* ===== CONTACT ===== */
@@ -549,7 +529,7 @@ footer {
 
 <nav class="nav">
   <div class="wrap nav-inner">
-    <a href="#" class="logo">VIDPOD<span class="bd"></span></a>
+    <a href="#" class="logo">VIDPOD<span class="dot">.</span></a>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -567,7 +547,7 @@ footer {
 <header class="hero">
   <div class="wrap hero-inner">
     <div class="hero-eyebrow reveal">Melbourne · Video &amp; Podcast Production</div>
-    <h1 class="reveal">We sell<br>your story<span class="bd"></span></h1>
+    <h1 class="reveal">We sell<br>your story<span class="dot">.</span></h1>
     <p class="hero-sub reveal">Story-first video and podcast production for brands that care about what their audience actually watches and hears. End-to-end, one point of contact, from brief to delivery.</p>
     <div class="hero-actions reveal">
       <a href="#work-vid" class="btn btn-primary">See the work →</a>
@@ -581,7 +561,7 @@ footer {
     <div class="about-grid">
       <div class="reveal">
         <div class="section-eyebrow">About</div>
-        <h2 class="section-title">Not guns<br>for hire<span class="bd"></span></h2>
+        <h2 class="section-title">Not guns<br>for hire<span class="dot">.</span></h2>
       </div>
       <div class="about-copy reveal">
         <p>Welcome to VIDPOD — your go-to video and podcast production company in Melbourne. <strong>We're passionate creators and problem solvers</strong>, with over a decade of experience crafting engaging content that resonates with your audience.</p>
@@ -589,11 +569,11 @@ footer {
         <p>We spend time understanding your brief, brand and audience first. Then we go to work.</p>
         <div class="stats">
           <div>
-            <div class="stat-num">1,500<span class="bd"></span></div>
+            <div class="stat-num">1,500<span class="dot">.</span></div>
             <div class="stat-label">Podcast episodes produced</div>
           </div>
           <div>
-            <div class="stat-num">10+ yrs<span class="bd"></span></div>
+            <div class="stat-num">10+ yrs<span class="dot">.</span></div>
             <div class="stat-label">Producing for brands</div>
           </div>
         </div>
@@ -606,13 +586,13 @@ footer {
   <div class="wrap">
     <div class="reveal">
       <div class="section-eyebrow">Services</div>
-      <h2 class="section-title">Two pillars<span class="bd"></span><br>One partner<span class="bd"></span></h2>
+      <h2 class="section-title">Two pillars<span class="dot">.</span><br>One partner<span class="dot">.</span></h2>
       <p class="section-intro">Everything we do lives under one of two labels. Whether it's a 60-second founder story or a 200-episode branded podcast, the thinking is the same — story first, craft second, tech last.</p>
     </div>
 
     <div class="services-grid">
       <div class="service-card service-vid reveal">
-        <div class="service-label">VID<span class="bd"></span></div>
+        <div class="service-label">VID<span class="dot">.</span></div>
         <div class="service-body">
           <h3>Video production</h3>
           <p>Brand films, case studies, founding stories, product demos, social-first video. Content creation, cinematography, motion graphics and editing — a creative and strategic approach so your video stands out.</p>
@@ -627,7 +607,7 @@ footer {
       </div>
 
       <div class="service-card service-pod reveal">
-        <div class="service-label">POD<span class="bd"></span></div>
+        <div class="service-label">POD<span class="dot">.</span></div>
         <div class="service-body">
           <h3>Podcast production</h3>
           <p>End-to-end branded podcast production. From show ideation, host and guest selection, artwork, intros and website — through to recording, editing, show notes, distribution and promotion. One team, every stage.</p>
@@ -649,7 +629,7 @@ footer {
   <div class="wrap work-inner">
     <div class="reveal">
       <div class="section-eyebrow">Video production</div>
-      <h2 class="section-title">VID<span class="bd"></span></h2>
+      <h2 class="section-title">VID<span class="dot">.</span></h2>
       <p class="section-intro">Selected video work. Brand films, founding stories, case studies, and long-form content built to live everywhere — from homepage heroes to social cutdowns.</p>
     </div>
 
@@ -692,7 +672,7 @@ footer {
   <div class="wrap work-inner">
     <div class="reveal">
       <div class="section-eyebrow">Podcast production</div>
-      <h2 class="section-title">POD<span class="bd"></span></h2>
+      <h2 class="section-title">POD<span class="dot">.</span></h2>
       <p class="section-intro">High-end branded podcast production. End-to-end — concept, recording, editing, show notes, distribution, promotion. One team, every stage.</p>
     </div>
 
@@ -734,7 +714,7 @@ footer {
   <div class="wrap contact-inner">
     <div class="reveal">
       <div class="section-eyebrow">Start a project</div>
-      <h2>Let's tell<br>your story<span class="bd"></span></h2>
+      <h2>Let's tell<br>your story<span class="dot">.</span></h2>
       <p>Ready to bring your video or podcast idea to life? Get in touch and we'll happily guide you through the process, tailoring our approach to your unique needs.</p>
       <a href="mailto:tommy@vidpod.com.au?subject=Project%20enquiry" class="email-big">tommy@vidpod.com.au</a>
       <div class="contact-phone">Or give us a call — <a href="tel:+61401576859">0401 576 859</a></div>
@@ -745,7 +725,7 @@ footer {
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-left">
-      <span class="footer-logo">VIDPOD<span class="bd"></span></span>
+      <span class="footer-logo">VIDPOD<span class="dot">.</span></span>
       <span class="footer-copy">© 2026 VIDPOD Pty Ltd · Melbourne, Australia</span>
     </div>
     <div class="socials">
