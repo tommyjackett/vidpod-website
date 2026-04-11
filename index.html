@@ -97,6 +97,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
+}
+html[data-theme="dark"] .nav {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.4);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; }
 .logo {
@@ -110,24 +114,28 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .nav-links { display: flex; gap: 34px; align-items: center; }
 .nav-links a {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
-  transition: color 0.2s var(--ease);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  transition: opacity 0.2s var(--ease);
+  opacity: 0.78;
 }
-.nav-links a:hover { color: var(--fg); }
+.nav-links a:hover { opacity: 1; }
 .nav-cta {
   padding: 11px 22px;
   background: var(--fg);
   color: var(--bg) !important;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 100px;
   transition: all 0.2s var(--ease);
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   border: 0;
   cursor: pointer;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .nav-cta:hover { transform: translateY(-1px); }
 .theme-toggle {
@@ -1028,7 +1036,7 @@ footer {
   <div class="wrap nav-inner">
     <a href="#" class="logo">VIDPOD<span class="dot"></span></a>
     <div class="nav-links">
-      <a href="#what">What we do</a>
+      <a href="#founder">About</a>
       <a href="#work-vid">Video</a>
       <a href="#work-pod">Podcast</a>
       <a href="#contact">Contact</a>
@@ -1063,8 +1071,8 @@ footer {
 <section class="services" id="what">
   <div class="wrap">
     <div class="reveal">
-      <h2 class="section-title">What we do<span class="dot"></span></h2>
-      <p class="section-intro">People ask me what my business is like. I tell them — <strong>oh, VIDPOD</strong>. Because we don't forget: we're good at video, and we're great at podcast. Simple as that. Melbourne-based, 10+ years in, thousands of podcast episodes and hundreds of videos produced. One team, end-to-end — idea, shoot, edit, publish, promote.</p>
+      <h2 class="section-title">What we're<br>great at<span class="dot"></span></h2>
+      <p class="section-intro">Two things, done properly. <strong>Video</strong> and <strong>podcast</strong> production, end-to-end. Melbourne-based, 10+ years in, thousands of podcast episodes and hundreds of videos produced. One team, one point of contact — idea, shoot, edit, publish, promote.</p>
     </div>
 
     <div class="services-grid">
@@ -1307,10 +1315,10 @@ footer {
   <div class="wrap">
     <div class="founder-compact">
       <div class="founder-text reveal">
-        <div class="section-eyebrow">The founder</div>
+        <div class="section-eyebrow">About</div>
         <h2>Hey, I'm<br>Tommy Jackett<span class="dot"></span></h2>
-        <p><strong>Creator and storyteller at heart.</strong> Over a decade living and breathing video and podcast — in front of the camera, behind it, on the mic, in the edit, chasing the idea nobody else bothered to chase.</p>
-        <p>VIDPOD is where that instinct goes to work for brands.</p>
+        <p>People ask me what my business is like and I always say — <strong>oh, VIDPOD</strong>. Because we don't forget: we're good at video, and we're great at podcast. Simple as that.</p>
+        <p>I'm a creator and storyteller at heart. Over a decade living and breathing this stuff — in front of the camera, behind it, on the mic, in the edit, chasing the idea nobody else bothered to chase. VIDPOD is where that instinct goes to work for brands.</p>
         <div class="founder-actions">
           <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
         </div>
