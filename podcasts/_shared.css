@@ -313,6 +313,112 @@ body {
   color: var(--fg);
 }
 
+/* TIMELINE */
+.timeline {
+  position: relative;
+  margin-top: 20px;
+  padding-left: 22px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: var(--line);
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 38px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -22px; top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--brand, var(--green));
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--line);
+}
+.tl-year {
+  font-family: var(--font-head);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+.tl-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+.tl-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+/* EMBED (BTS or trailer) */
+.pod-embed {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0A0A0A;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.22);
+  margin-top: 18px;
+}
+.pod-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* SOCIAL TILES */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+@media (max-width: 900px) { .social-grid { grid-template-columns: repeat(2, 1fr); } }
+.social-tile {
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0A0A0A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--line);
+}
+
+/* LISTEN STRIP */
+.listen {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.listen a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.2s var(--ease);
+}
+.listen a:hover { border-color: var(--fg); transform: translateY(-2px); }
+
 /* FOOTER */
 footer {
   padding: 60px 0 50px;
