@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=3">
+<link rel="stylesheet" href="_shared.css?v=4">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -57,24 +57,23 @@
   </div>
 </header>
 
-<!-- ABOUT THE SHOW — copy left, video right -->
+<!-- VIDPOD PRODUCTION SUPPORT — copy left, autoplay video right -->
 <section class="pod-sec">
   <div class="wrap">
-    <div class="section-eyebrow reveal">The show</div>
-    <h2 class="reveal">About the show<span class="dot"></span></h2>
+    <div class="section-eyebrow reveal">Our side of the story</div>
+    <h2 class="reveal">VIDPOD production<br>support<span class="dot"></span></h2>
 
     <div class="about-grid">
       <div class="about-copy reveal">
-        <p>Let's Talk Teaching is for educators, about educators, grounded in the real challenges of Australian classrooms.</p>
-        <p>Each episode, host Rebecca Cooper sits down with Monash researchers and practising teachers to unpack a single topic in depth. From trauma-informed practice to AI in education, game-based learning to the manosphere, feedback to play in the early years.</p>
-        <p>Warm, practical, peer-to-peer. Published by Monash University Faculty of Education.</p>
+        <p>We've been the production partner for Let's Talk Teaching since day one. Studio recording with Bec and her guests, full edit in DaVinci Resolve, episode descriptions and show notes, artwork, social cutdowns, and distribution across Spotify, Apple and Amazon.</p>
+        <p>Alongside Monash's content team, we help shape each season's line-up and lock in the format. Warm, practical, peer-to-peer — from trauma-informed practice to AI in education, game-based learning to the manosphere.</p>
       </div>
-      <div class="about-media reveal">
+      <div class="about-media is-bg reveal">
         <iframe
-          src="https://www.youtube.com/embed/NR7SMqi2RmE"
+          src="https://www.youtube.com/embed/NR7SMqi2RmE?autoplay=1&mute=1&loop=1&playlist=NR7SMqi2RmE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
           title="Let's Talk Teaching Behind The Scenes"
           frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="autoplay; encrypted-media; picture-in-picture"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen></iframe>
       </div>
@@ -82,17 +81,8 @@
   </div>
 </section>
 
-<!-- VIDPOD SUPPORT — inline prose, no process strip -->
-<section class="pod-sec" style="background: var(--bg-2);">
-  <div class="wrap">
-    <div class="section-eyebrow reveal">Our side of the story</div>
-    <h2 class="reveal">VIDPOD production<br>support<span class="dot"></span></h2>
-    <p class="reveal">We've been the production partner for Let's Talk Teaching since day one. Studio recording with Bec and her guests, full edit in DaVinci Resolve, episode descriptions and show notes, artwork, social cutdowns, and distribution across Spotify, Apple and Amazon. Alongside Monash's content team, we help shape each season's line-up and lock in the format.</p>
-  </div>
-</section>
-
 <!-- THE JOURNEY — dot line across Seasons -->
-<section class="pod-sec">
+<section class="pod-sec" style="background: var(--bg-2);">
   <div class="wrap">
     <div class="section-eyebrow reveal">The journey</div>
     <h2 class="reveal">Four years in<span class="dot"></span></h2>
@@ -119,29 +109,29 @@
   </div>
 </section>
 
-<!-- BEHIND THE SCENES — real carousel -->
-<section class="pod-sec" style="background: var(--bg-2);">
+<!-- BEHIND THE SCENES — auto-scrolling marquee, pause on hover, click to zoom -->
+<section class="pod-sec">
   <div class="wrap">
     <div class="section-eyebrow reveal">Behind the scenes</div>
     <h2 class="reveal">In the studio<span class="dot"></span></h2>
     <p class="reveal">Every episode is recorded live in our Melbourne studio with host Rebecca Cooper and her guests.</p>
-    <div class="bts-hint reveal">← Drag to scroll</div>
 
-    <div class="bts-carousel-wrap reveal">
-      <div class="bts-carousel" id="btsCarousel">
-        <div class="bts-item is-portrait">
-          <iframe
-            src="https://www.youtube.com/embed/NR7SMqi2RmE"
-            title="Let's Talk Teaching Behind The Scenes"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
-        </div>
+    <div class="bts-marquee-viewport reveal">
+      <div class="bts-marquee" id="btsMarquee">
+        <!-- set A -->
         <div class="bts-item is-portrait"><img src="../img/podcasts/ltt.jpg" alt="Behind the scenes still 1"></div>
         <div class="bts-item is-landscape"><img src="../img/podcasts/ltt.jpg" alt="Behind the scenes still 2"></div>
         <div class="bts-item is-portrait"><img src="../img/podcasts/ltt.jpg" alt="Behind the scenes still 3"></div>
         <div class="bts-item is-square"><img src="../img/podcasts/ltt.jpg" alt="Behind the scenes still 4"></div>
+        <div class="bts-item is-portrait"><img src="../img/podcasts/ltt.jpg" alt="Behind the scenes still 5"></div>
+        <div class="bts-item is-landscape"><img src="../img/podcasts/ltt.jpg" alt="Behind the scenes still 6"></div>
+        <!-- set B (duplicate for seamless loop) -->
+        <div class="bts-item is-portrait" aria-hidden="true"><img src="../img/podcasts/ltt.jpg" alt=""></div>
+        <div class="bts-item is-landscape" aria-hidden="true"><img src="../img/podcasts/ltt.jpg" alt=""></div>
+        <div class="bts-item is-portrait" aria-hidden="true"><img src="../img/podcasts/ltt.jpg" alt=""></div>
+        <div class="bts-item is-square" aria-hidden="true"><img src="../img/podcasts/ltt.jpg" alt=""></div>
+        <div class="bts-item is-portrait" aria-hidden="true"><img src="../img/podcasts/ltt.jpg" alt=""></div>
+        <div class="bts-item is-landscape" aria-hidden="true"><img src="../img/podcasts/ltt.jpg" alt=""></div>
       </div>
     </div>
   </div>
@@ -194,6 +184,12 @@
   </div>
 </section>
 
+<!-- BTS lightbox overlay -->
+<div class="bts-lightbox" id="btsLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="bts-lightbox-inner" id="btsLightboxInner"></div>
+  <button class="bts-lightbox-close" id="btsLightboxClose" aria-label="Close">&times;</button>
+</div>
+
 <footer>
   <div class="wrap">
     <p>© 2026 VIDPOD Pty Ltd · Melbourne, Australia</p>
@@ -209,28 +205,44 @@ var io = new IntersectionObserver(function(entries) {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 
-// BTS carousel: mouse drag support on desktop (native touch on mobile)
+// BTS click-to-zoom lightbox
 (function() {
-  var c = document.getElementById('btsCarousel');
-  if (!c) return;
-  var isDown = false, startX = 0, startLeft = 0, moved = 0;
-  c.addEventListener('mousedown', function(e) {
-    isDown = true; moved = 0;
-    startX = e.pageX; startLeft = c.scrollLeft;
-    c.classList.add('dragging');
-    e.preventDefault();
+  var marquee = document.getElementById('btsMarquee');
+  var lb = document.getElementById('btsLightbox');
+  var inner = document.getElementById('btsLightboxInner');
+  var closeBtn = document.getElementById('btsLightboxClose');
+  if (!marquee || !lb || !inner) return;
+
+  function open(item) {
+    inner.innerHTML = '';
+    var media = item.querySelector('img, video, iframe');
+    if (!media) return;
+    var clone = media.cloneNode(true);
+    clone.removeAttribute('style');
+    inner.appendChild(clone);
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(function() { inner.innerHTML = ''; }, 300);
+  }
+
+  marquee.addEventListener('click', function(e) {
+    var item = e.target.closest('.bts-item');
+    if (!item) return;
+    open(item);
   });
-  window.addEventListener('mouseup', function() { isDown = false; c.classList.remove('dragging'); });
-  window.addEventListener('mousemove', function(e) {
-    if (!isDown) return;
-    var dx = e.pageX - startX;
-    moved = Math.abs(dx);
-    c.scrollLeft = startLeft - dx;
+  closeBtn.addEventListener('click', close);
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) close();
   });
-  // prevent iframe click-jacking the drag
-  c.addEventListener('click', function(e) {
-    if (moved > 8) { e.preventDefault(); e.stopPropagation(); }
-  }, true);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+  });
 })();
 </script>
 </body>
