@@ -947,55 +947,171 @@ a.pod-art-item .pod-art-label { color: #fff; }
 /* ===== CONTACT ===== */
 .contact {
   border-top: 1px solid var(--line);
-  text-align: center;
   position: relative;
   overflow: hidden;
   background: var(--bg);
+  padding: 120px 0 140px;
 }
 .contact::before {
   content: '';
   position: absolute;
-  bottom: -300px; left: 50%;
-  transform: translateX(-50%);
-  width: 1100px; height: 700px;
-  background: radial-gradient(ellipse, var(--green) 0%, rgba(0,255,170,0.3) 28%, transparent 62%);
-  opacity: 0.35;
-  filter: blur(50px);
+  inset: -20% -10% -20% -10%;
+  background:
+    radial-gradient(60% 50% at 20% 30%, rgba(0,255,170,0.55) 0%, transparent 60%),
+    radial-gradient(55% 55% at 80% 20%, rgba(0,200,140,0.45) 0%, transparent 60%),
+    radial-gradient(70% 60% at 60% 85%, rgba(0,140,100,0.5) 0%, transparent 65%),
+    radial-gradient(60% 60% at 10% 90%, rgba(0,80,60,0.5) 0%, transparent 60%);
+  filter: blur(60px);
+  animation: contact-drift 18s ease-in-out infinite alternate;
   pointer-events: none;
+  z-index: 0;
 }
-html[data-theme="dark"] .contact::before { opacity: 0.22; }
-.contact-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.contact::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.25) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+html[data-theme="dark"] .contact::before { opacity: 0.85; }
+html[data-theme="dark"] .contact::after { background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.55) 100%); }
+@keyframes contact-drift {
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(-2%, 1%) scale(1.04); }
+  100% { transform: translate(2%, -1%) scale(1.02); }
+}
+.contact-inner { max-width: 980px; margin: 0 auto; position: relative; z-index: 1; }
+.contact-card {
+  position: relative;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 28px;
+  padding: 64px 72px 72px;
+  backdrop-filter: blur(26px) saturate(140%);
+  -webkit-backdrop-filter: blur(26px) saturate(140%);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.25),
+    0 2px 0 rgba(255,255,255,0.35) inset,
+    0 -1px 0 rgba(0,0,0,0.15) inset;
+}
+html[data-theme="dark"] .contact-card {
+  background: rgba(20,20,22,0.55);
+  border-color: rgba(255,255,255,0.14);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.55),
+    0 2px 0 rgba(255,255,255,0.08) inset,
+    0 -1px 0 rgba(0,0,0,0.3) inset;
+}
+.contact-card .section-eyebrow { margin-bottom: 10px; }
 .contact h2 {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(46px, 7vw, 108px);
+  font-size: clamp(44px, 6.5vw, 92px);
   line-height: 0.9;
   letter-spacing: -0.015em;
-  margin-bottom: 36px;
+  margin: 6px 0 18px;
   text-transform: uppercase;
 }
-.contact p {
-  font-size: clamp(17px, 1.5vw, 20px);
+.contact-lead {
+  font-size: clamp(16px, 1.4vw, 19px);
   color: var(--muted);
-  margin: 0 auto 44px;
-  max-width: 580px;
+  max-width: 620px;
+  margin: 0 0 40px;
 }
-.email-big {
-  display: inline-block;
-  font-family: var(--font-logo);
-  font-weight: 900;
-  font-size: clamp(22px, 3vw, 38px);
+.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.contact-form .full { grid-column: 1 / -1; }
+.contact-form label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
   color: var(--fg);
-  padding: 28px 46px;
-  background: var(--bg);
-  border: 2px solid var(--fg);
-  border-radius: 100px;
-  transition: all 0.3s var(--ease);
-  letter-spacing: -0.01em;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  outline: none;
+  transition: all 0.2s var(--ease);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
-.email-big:hover { background: var(--fg); color: var(--bg); transform: translateY(-2px); }
-.contact-phone { margin-top: 26px; font-size: 15px; color: var(--muted); }
-.contact-phone a { color: var(--fg); font-weight: 600; border-bottom: 1px solid var(--line); }
+html[data-theme="dark"] .contact-form input,
+html[data-theme="dark"] .contact-form textarea,
+html[data-theme="dark"] .contact-form select {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+}
+.contact-form textarea { min-height: 140px; resize: vertical; }
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(0,255,170,0.18);
+  background: rgba(255,255,255,0.8);
+}
+html[data-theme="dark"] .contact-form input:focus,
+html[data-theme="dark"] .contact-form textarea:focus,
+html[data-theme="dark"] .contact-form select:focus {
+  background: rgba(255,255,255,0.1);
+}
+.contact-submit {
+  margin-top: 8px;
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.contact-submit .small {
+  font-size: 13px;
+  color: var(--muted);
+}
+.contact-submit button {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 18px 32px;
+  border-radius: 100px;
+  transition: all 0.25s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.contact-submit button:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
+.contact-submit button .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(0,255,170,0.8);
+  animation: contact-pulse 2s infinite;
+}
+@keyframes contact-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0,255,170,0.8); }
+  70%  { box-shadow: 0 0 0 10px rgba(0,255,170,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,255,170,0); }
+}
+@media (max-width: 720px) {
+  .contact { padding: 80px 0 100px; }
+  .contact-card { padding: 40px 26px 48px; border-radius: 22px; }
+  .contact-form { grid-template-columns: 1fr; }
+}
 
 /* ===== FOOTER ===== */
 footer {
@@ -1036,7 +1152,7 @@ footer {
   <div class="wrap nav-inner">
     <a href="#" class="logo">VIDPOD<span class="dot"></span></a>
     <div class="nav-links">
-      <a href="#founder">About</a>
+      <a href="#what">About</a>
       <a href="#work-vid">Video</a>
       <a href="#work-pod">Podcast</a>
       <a href="#contact">Contact</a>
@@ -1072,7 +1188,7 @@ footer {
   <div class="wrap">
     <div class="reveal">
       <h2 class="section-title">What we're<br>great at<span class="dot"></span></h2>
-      <p class="section-intro">Two things, done properly. <strong>Video</strong> and <strong>podcast</strong> production, end-to-end. Melbourne-based, 10+ years in, thousands of podcast episodes and hundreds of videos produced. One team, one point of contact — idea, shoot, edit, publish, promote.</p>
+      <p class="section-intro">Two things, done properly. <strong>Video</strong> and <strong>podcast</strong> production, end-to-end. Melbourne-based, more than a decade in the game, thousands of podcast episodes and thousands of videos produced. From the first idea to the final cut — and everything in between.</p>
     </div>
 
     <div class="services-grid">
@@ -1332,12 +1448,41 @@ footer {
 
 <section class="contact" id="contact">
   <div class="wrap contact-inner">
-    <div class="reveal">
+    <div class="contact-card reveal">
       <div class="section-eyebrow">Contact</div>
       <h2>Let's make<br>something<span class="dot"></span></h2>
-      <p>Ready to bring your video or podcast idea to life? Get in touch with us, and we'll happily guide you through the process, tailoring our approach to your unique needs. Let VIDPOD help you create content that leaves a lasting impression on your audience.</p>
-      <a href="mailto:tommy@vidpod.com.au?subject=Project%20enquiry" class="email-big">tommy@vidpod.com.au</a>
-      <div class="contact-phone">Or give us a call — <a href="tel:+61401576859">0401 576 859</a></div>
+      <p class="contact-lead">Tell us what you've got in mind. A brand film, a new podcast, a one-off shoot, a full series — no brief too rough. We'll read it, reply, and set up a call.</p>
+      <form class="contact-form" action="https://formspree.io/f/REPLACE_ME" method="POST" id="contactForm">
+        <div>
+          <label for="cf-name">Your name</label>
+          <input type="text" id="cf-name" name="name" required placeholder="Jane Smith">
+        </div>
+        <div>
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" required placeholder="jane@company.com">
+        </div>
+        <div>
+          <label for="cf-company">Company</label>
+          <input type="text" id="cf-company" name="company" placeholder="Optional">
+        </div>
+        <div>
+          <label for="cf-type">What are you after?</label>
+          <select id="cf-type" name="project_type">
+            <option>Video production</option>
+            <option>Podcast production</option>
+            <option>Both</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="cf-message">Tell us about the project</label>
+          <textarea id="cf-message" name="message" required placeholder="The idea, the audience, the deadline, the budget ballpark — whatever you've got."></textarea>
+        </div>
+        <div class="contact-submit">
+          <span class="small">We usually reply within a day.</span>
+          <button type="submit"><span class="pulse"></span>Send it through →</button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
