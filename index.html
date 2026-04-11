@@ -75,8 +75,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 36px; }
 @media (max-width: 640px) { .wrap { padding: 0 22px; } }
 
-/* ===== BRAND MARK — the full stop IS the logo ===== */
-.dot { color: var(--green); }
+/* ===== BRAND MARK — a circular full stop, matching the VIDPOD logo ===== */
+.dot {
+  display: inline-block;
+  width: 0.25em;
+  height: 0.25em;
+  background: var(--green);
+  border-radius: 50%;
+  vertical-align: baseline;
+  margin-left: 0.05em;
+  transform: translateY(0.02em);
+  line-height: 0;
+}
 
 /* ===== NAV ===== */
 .nav {
@@ -312,13 +322,13 @@ section { padding: 140px 0; position: relative; }
   background: var(--green);
   color: #000;
 }
-.service-vid .dot { color: #000; }
+.service-vid .dot { background: #000; }
 .service-pod {
   background: #000;
   color: #fff;
 }
 .service-pod .service-label { color: var(--green); }
-.service-pod .dot { color: var(--green); }
+.service-pod .dot { background: var(--green); }
 .service-label {
   font-family: var(--font-head);
   font-weight: 400;
@@ -373,7 +383,7 @@ section { padding: 140px 0; position: relative; }
 }
 .work-vid .section-eyebrow { color: #000; }
 .work-vid .section-title { color: #000; }
-.work-vid .section-title .dot { color: #000; }
+.work-vid .section-title .dot { background: #000; }
 .work-vid .section-intro { color: rgba(0,0,0,0.72); }
 
 .work-pod {
@@ -384,7 +394,7 @@ section { padding: 140px 0; position: relative; }
 }
 .work-pod .section-eyebrow { color: #fff; }
 .work-pod .section-title { color: #fff; }
-.work-pod .section-title .dot { color: var(--green); }
+.work-pod .section-title .dot { background: var(--green); }
 .work-pod .section-intro { color: rgba(255,255,255,0.7); }
 
 .work-inner { position: relative; z-index: 1; }
@@ -474,6 +484,66 @@ section { padding: 140px 0; position: relative; }
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.14);
   color: #fff;
+}
+
+/* ===== MARQUEE — auto-scrolling photo strip (Podcast Mike pattern) ===== */
+.marquee {
+  padding: 90px 0 80px;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.marquee-header {
+  max-width: var(--max);
+  margin: 0 auto 44px;
+  padding: 0 36px;
+}
+@media (max-width: 640px) { .marquee-header { padding: 0 22px; } }
+.marquee-header .section-eyebrow { margin-bottom: 14px; }
+.marquee-header h2 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(32px, 4.2vw, 62px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+.marquee-viewport {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.marquee-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: marquee-scroll 60s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-item {
+  flex: 0 0 auto;
+  width: 420px;
+  aspect-ratio: 3 / 2;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0A0A0A;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+}
+.marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 640px) {
+  .marquee-item { width: 300px; }
+  .marquee-track { gap: 14px; animation-duration: 50s; }
+}
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 11px)); }
 }
 
 /* ===== CONTACT ===== */
@@ -566,7 +636,7 @@ footer {
 
 <nav class="nav">
   <div class="wrap nav-inner">
-    <a href="#" class="logo">VIDPOD<span class="dot">.</span></a>
+    <a href="#" class="logo">VIDPOD<span class="dot"></span></a>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -584,7 +654,7 @@ footer {
 <header class="hero">
   <div class="wrap hero-inner">
     <div class="hero-eyebrow reveal">Melbourne · Video &amp; Podcast Production</div>
-    <h1 class="reveal">We sell<br>your story<span class="dot">.</span></h1>
+    <h1 class="reveal">We sell<br>your story<span class="dot"></span></h1>
     <p class="hero-sub reveal">Story-first video and podcast production for brands that care about what their audience actually watches and hears. End-to-end, one point of contact, from brief to delivery.</p>
     <div class="hero-actions reveal">
       <a href="#work-vid" class="btn btn-primary">See the work →</a>
@@ -598,7 +668,7 @@ footer {
     <div class="about-grid">
       <div class="reveal">
         <div class="section-eyebrow">About</div>
-        <h2 class="section-title">Not guns<br>for hire<span class="dot">.</span></h2>
+        <h2 class="section-title">Not guns<br>for hire<span class="dot"></span></h2>
       </div>
       <div class="about-copy reveal">
         <p>Welcome to VIDPOD — your go-to video and podcast production company in Melbourne. <strong>We're passionate creators and problem solvers</strong>, with over a decade of experience crafting engaging content that resonates with your audience.</p>
@@ -606,11 +676,11 @@ footer {
         <p>We spend time understanding your brief, brand and audience first. Then we go to work.</p>
         <div class="stats">
           <div>
-            <div class="stat-num">1,500<span class="dot">.</span></div>
+            <div class="stat-num">1,500<span class="dot"></span></div>
             <div class="stat-label">Podcast episodes produced</div>
           </div>
           <div>
-            <div class="stat-num">10+ yrs<span class="dot">.</span></div>
+            <div class="stat-num">10+ yrs<span class="dot"></span></div>
             <div class="stat-label">Producing for brands</div>
           </div>
         </div>
@@ -623,13 +693,13 @@ footer {
   <div class="wrap">
     <div class="reveal">
       <div class="section-eyebrow">Services</div>
-      <h2 class="section-title">Two pillars<span class="dot">.</span><br>One partner<span class="dot">.</span></h2>
+      <h2 class="section-title">Two pillars<span class="dot"></span><br>One partner<span class="dot"></span></h2>
       <p class="section-intro">Everything we do lives under one of two labels. Whether it's a 60-second founder story or a 200-episode branded podcast, the thinking is the same — story first, craft second, tech last.</p>
     </div>
 
     <div class="services-grid">
       <div class="service-card service-vid reveal">
-        <div class="service-label">VID<span class="dot">.</span></div>
+        <div class="service-label">VID<span class="dot"></span></div>
         <div class="service-body">
           <h3>Video production</h3>
           <p>Brand films, case studies, founding stories, product demos, social-first video. Content creation, cinematography, motion graphics and editing — a creative and strategic approach so your video stands out.</p>
@@ -644,7 +714,7 @@ footer {
       </div>
 
       <div class="service-card service-pod reveal">
-        <div class="service-label">POD<span class="dot">.</span></div>
+        <div class="service-label">POD<span class="dot"></span></div>
         <div class="service-body">
           <h3>Podcast production</h3>
           <p>End-to-end branded podcast production. From show ideation, host and guest selection, artwork, intros and website — through to recording, editing, show notes, distribution and promotion. One team, every stage.</p>
@@ -666,7 +736,7 @@ footer {
   <div class="wrap work-inner">
     <div class="reveal">
       <div class="section-eyebrow">Video production</div>
-      <h2 class="section-title">VID<span class="dot">.</span></h2>
+      <h2 class="section-title">VID<span class="dot"></span></h2>
       <p class="section-intro">Selected video work. Brand films, founding stories, case studies, and long-form content built to live everywhere — from homepage heroes to social cutdowns.</p>
     </div>
 
@@ -716,12 +786,44 @@ footer {
   </div>
 </section>
 
+<!-- BTS MARQUEE — auto-scrolling photo strip -->
+<section class="marquee" id="bts">
+  <div class="marquee-header reveal">
+    <div class="section-eyebrow">Behind the scenes</div>
+    <h2>In the room<span class="dot"></span></h2>
+  </div>
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      <!-- Set 1 -->
+      <div class="marquee-item"><img src="img/marquee/m1.jpg" alt="Studio" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m2.jpg" alt="Studio" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m3.jpg" alt="Studio" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m4.jpg" alt="Let's Talk Teaching" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m5.jpg" alt="The Numbers Game" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m6.jpg" alt="The Numbers Game" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m7.jpg" alt="The Numbers Game" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m8.jpg" alt="The Numbers Game hosts" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/marquee/m9.jpg" alt="POD BTS" loading="lazy"></div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m1.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m2.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m3.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m4.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m5.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m6.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m7.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m8.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m9.jpg" alt="" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
 <!-- PODCAST BAND -->
 <section class="work-pod" id="work-pod">
   <div class="wrap work-inner">
     <div class="reveal">
       <div class="section-eyebrow">Podcast production</div>
-      <h2 class="section-title">POD<span class="dot">.</span></h2>
+      <h2 class="section-title">POD<span class="dot"></span></h2>
       <p class="section-intro">High-end branded podcast production. End-to-end — concept, recording, editing, show notes, distribution, promotion. One team, every stage.</p>
     </div>
 
@@ -775,7 +877,7 @@ footer {
   <div class="wrap contact-inner">
     <div class="reveal">
       <div class="section-eyebrow">Start a project</div>
-      <h2>Let's tell<br>your story<span class="dot">.</span></h2>
+      <h2>Let's tell<br>your story<span class="dot"></span></h2>
       <p>Ready to bring your video or podcast idea to life? Get in touch and we'll happily guide you through the process, tailoring our approach to your unique needs.</p>
       <a href="mailto:tommy@vidpod.com.au?subject=Project%20enquiry" class="email-big">tommy@vidpod.com.au</a>
       <div class="contact-phone">Or give us a call — <a href="tel:+61401576859">0401 576 859</a></div>
@@ -786,7 +888,7 @@ footer {
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-left">
-      <span class="footer-logo">VIDPOD<span class="dot">.</span></span>
+      <span class="footer-logo">VIDPOD<span class="dot"></span></span>
       <span class="footer-copy">© 2026 VIDPOD Pty Ltd · Melbourne, Australia</span>
     </div>
     <div class="socials">
