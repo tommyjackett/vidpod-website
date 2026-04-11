@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VIDPOD — Melbourne video and podcast production. Story-first, end-to-end. We sell your story.">
+<meta name="description" content="VIDPOD. Melbourne video and podcast production. Story-first, end-to-end. We sell your story.">
 <meta name="author" content="VIDPOD">
-<meta property="og:title" content="VIDPOD — We sell your story.">
+<meta property="og:title" content="VIDPOD. We sell your story.">
 <meta property="og:description" content="Melbourne video and podcast production. Story-first, end-to-end.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/">
-<title>VIDPOD — We sell your story.</title>
+<title>VIDPOD. We sell your story.</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,43 +154,120 @@ html[data-theme="light"] .theme-toggle .moon { display: block; }
 html[data-theme="light"] .theme-toggle .sun { display: none; }
 html[data-theme="dark"] .theme-toggle .moon { display: none; }
 html[data-theme="dark"] .theme-toggle .sun { display: block; }
-@media (max-width: 760px) {
-  .nav-links a:not(.nav-cta):not(.theme-toggle) { display: none; }
+/* Mobile hamburger */
+.nav-toggle {
+  display: none;
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 18px; height: 2px;
+  background: var(--fg);
+  position: relative;
+}
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: '';
+  position: absolute;
+  left: 0; width: 18px; height: 2px;
+  background: var(--fg);
+  transition: transform 0.25s var(--ease), top 0.25s var(--ease);
+}
+.nav-toggle span::before { top: -6px; }
+.nav-toggle span::after  { top: 6px; }
+.nav-toggle.open span { background: transparent; }
+.nav-toggle.open span::before { top: 0; transform: rotate(45deg); }
+.nav-toggle.open span::after  { top: 0; transform: rotate(-45deg); }
+
+@media (max-width: 860px) {
+  .nav-toggle { display: inline-flex; }
+  .nav-links { display: none; }
+  .nav-links.mobile-open {
+    display: flex;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 18px; right: 18px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px 22px 24px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+  }
+  html[data-theme="dark"] .nav-links.mobile-open {
+    box-shadow: 0 24px 70px rgba(0,0,0,0.6);
+  }
+  .nav-links.mobile-open a:not(.nav-cta) {
+    padding: 14px 6px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links.mobile-open a:last-of-type { border-bottom: 0; }
+  .nav-links.mobile-open .theme-toggle,
+  .nav-links.mobile-open .sayhi-wrap { align-self: flex-start; margin-top: 8px; }
+  .nav-links.mobile-open .sayhi-wrap { align-self: stretch; }
+  .nav-links.mobile-open .sayhi-wrap .nav-cta { width: 100%; text-align: center; }
+  .nav-links.mobile-open .sayhi-pop { position: static; margin-top: 10px; opacity: 1; pointer-events: auto; transform: none; }
 }
 
 /* ===== HERO ===== */
 .hero {
-  min-height: 94vh;
+  min-height: 92vh;
   display: flex;
   align-items: center;
   padding: 160px 0 100px;
   position: relative;
   overflow: hidden;
+  background: #000;
+  color: #fff;
 }
-.hero::before {
-  content: '';
+.hero-video {
   position: absolute;
-  top: -10%; right: -25%;
-  width: 1100px; height: 1100px;
-  background: radial-gradient(circle, var(--green) 0%, rgba(0,255,170,0.35) 30%, transparent 65%);
-  opacity: 0.55;
-  filter: blur(40px);
-  pointer-events: none;
+  inset: 0;
+  overflow: hidden;
   z-index: 0;
+  pointer-events: none;
 }
-html[data-theme="dark"] .hero::before { opacity: 0.28; }
-
-.hero-inner { position: relative; z-index: 1; }
+.hero-video iframe {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100vw;
+  height: 56.25vw;              /* 16:9 from width */
+  min-height: 100%;
+  min-width: 177.78vh;          /* 16:9 from height, fills both axes */
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+}
+.hero-video::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.72) 100%),
+    radial-gradient(ellipse at 75% 20%, rgba(0,255,170,0.18) 0%, transparent 55%);
+  z-index: 1;
+}
+.hero-inner { position: relative; z-index: 2; color: #fff; }
 .hero-eyebrow {
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--fg);
-  margin-bottom: 32px;
+  color: #fff;
+  margin-bottom: 24px;
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  opacity: 0.88;
 }
 .hero-eyebrow::before {
   content: '';
@@ -201,32 +278,49 @@ html[data-theme="dark"] .hero::before { opacity: 0.28; }
 .hero h1 {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(56px, 10vw, 152px);
-  line-height: 0.88;
+  font-size: clamp(40px, 6.4vw, 96px);
+  line-height: 0.9;
   letter-spacing: -0.015em;
-  margin-bottom: 22px;
-  color: var(--fg);
+  margin-bottom: 20px;
+  color: #fff;
   text-transform: uppercase;
-}
-.hero-tagline {
-  font-family: var(--font-head);
-  font-weight: 400;
-  font-size: clamp(20px, 2.2vw, 30px);
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-  color: var(--fg);
-  margin-bottom: 24px;
-  line-height: 1;
+  max-width: 12ch;
 }
 .hero-sub {
   font-family: var(--font-body);
-  font-size: clamp(18px, 1.6vw, 22px);
-  color: var(--muted);
-  max-width: 640px;
-  margin-bottom: 46px;
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: rgba(255,255,255,0.78);
+  max-width: 560px;
+  margin-bottom: 38px;
   line-height: 1.55;
 }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.hero .btn-vid,
+.hero .btn-pod {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 28px;
+  border-radius: 100px;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.25s var(--ease);
+  font-family: var(--font-body);
+}
+.hero .btn-vid { background: var(--green); color: #000; }
+.hero .btn-vid .label-mark { font-family: var(--font-logo); font-weight: 900; }
+.hero .btn-vid:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,255,170,0.35); }
+.hero .btn-pod { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+.hero .btn-pod .label-mark { font-family: var(--font-logo); font-weight: 900; color: var(--green); }
+.hero .btn-pod:hover { transform: translateY(-2px); border-color: var(--green); }
+@media (max-width: 600px) {
+  .hero { min-height: 86vh; padding: 140px 0 80px; }
+  .hero h1 { font-size: clamp(36px, 11vw, 56px); }
+  .hero-sub { font-size: 15px; margin-bottom: 28px; }
+  .hero .btn-vid, .hero .btn-pod { padding: 15px 22px; font-size: 13px; }
+}
 .btn {
   display: inline-flex;
   align-items: center;
@@ -270,6 +364,11 @@ section { padding: 140px 0; position: relative; }
   letter-spacing: -0.015em;
   margin-bottom: 28px;
   text-transform: uppercase;
+}
+.services-title {
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 0.95;
+  max-width: 18ch;
 }
 .section-intro {
   font-size: clamp(17px, 1.5vw, 20px);
@@ -343,6 +442,21 @@ html[data-theme="dark"] .sayhi-pop {
   transition: transform 0.2s;
 }
 .sayhi-pop-btn:hover { transform: translateY(-1px); }
+.sayhi-pop-call {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding: 11px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 0.2s var(--ease);
+}
+.sayhi-pop-call:hover { border-color: var(--fg); background: var(--fg); color: var(--bg); }
 
 /* ===== ABOUT ===== */
 .about { border-top: 1px solid var(--line); }
@@ -464,17 +578,23 @@ html[data-theme="dark"] .sayhi-pop {
   align-items: center;
 }
 @media (max-width: 900px) { .founder-compact { grid-template-columns: 1fr; gap: 36px; } }
-.founder-text .section-eyebrow { margin-bottom: 16px; }
-.founder-text h2 {
+.founder-eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.founder-name {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(36px, 4.6vw, 68px);
-  line-height: 0.9;
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 0.92;
   letter-spacing: -0.015em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   color: var(--fg);
-  max-width: 14ch;
 }
 .founder-text p {
   font-size: 16px;
@@ -1006,11 +1126,12 @@ html[data-theme="dark"] .contact-card {
 .contact h2 {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(44px, 6.5vw, 92px);
-  line-height: 0.9;
+  font-size: clamp(36px, 5.4vw, 80px);
+  line-height: 0.92;
   letter-spacing: -0.015em;
-  margin: 6px 0 18px;
+  margin: 0 0 18px;
   text-transform: uppercase;
+  max-width: 12ch;
 }
 .contact-lead {
   font-size: clamp(16px, 1.4vw, 19px);
@@ -1151,7 +1272,8 @@ footer {
 <nav class="nav">
   <div class="wrap nav-inner">
     <a href="#" class="logo">VIDPOD<span class="dot"></span></a>
-    <div class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+    <div class="nav-links" id="navLinks">
       <a href="#what">About</a>
       <a href="#work-vid">Video</a>
       <a href="#work-pod">Podcast</a>
@@ -1165,7 +1287,8 @@ footer {
         <div class="sayhi-pop" id="sayhiPop" role="dialog" aria-label="Get in touch">
           <div class="sayhi-pop-label">Ready to chat?</div>
           <div class="sayhi-pop-title">Get in<br>touch now<span class="dot"></span></div>
-          <a href="#contact" class="sayhi-pop-btn" id="sayhiGo">Jump to contact →</a>
+          <a href="#contact" class="sayhi-pop-btn" id="sayhiGo">Jump to contact</a>
+          <a href="tel:+61401576859" class="sayhi-pop-call">Call now, 0401 576 859</a>
         </div>
       </div>
     </div>
@@ -1173,13 +1296,20 @@ footer {
 </nav>
 
 <header class="hero">
+  <div class="hero-video" aria-hidden="true">
+    <iframe
+      src="https://www.youtube.com/embed/aq9WuolCUCU?autoplay=1&mute=1&loop=1&playlist=aq9WuolCUCU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
+      title="VIDPOD background reel"
+      frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      tabindex="-1"></iframe>
+  </div>
   <div class="wrap hero-inner">
     <h1 class="reveal">Hey, welcome<br>to VIDPOD<span class="dot"></span></h1>
-    <p class="hero-tagline reveal">Video and podcast production.</p>
-    <p class="hero-sub reveal">Melbourne-based. Over a decade of experience crafting engaging content that resonates with your audience.</p>
+    <p class="hero-sub reveal">Melbourne-based video and podcast production. Over a decade of making the stuff brands actually remember.</p>
     <div class="hero-actions reveal">
-      <a href="#work-vid" class="btn btn-primary">See the work →</a>
-      <a href="#contact" class="btn btn-ghost">Say Hi</a>
+      <a href="#work-vid" class="btn-vid">See our <span class="label-mark">VID</span> work</a>
+      <a href="#work-pod" class="btn-pod">See our <span class="label-mark">POD</span> work</a>
     </div>
   </div>
 </header>
@@ -1187,8 +1317,8 @@ footer {
 <section class="services" id="what">
   <div class="wrap">
     <div class="reveal">
-      <h2 class="section-title">What we're<br>great at<span class="dot"></span></h2>
-      <p class="section-intro">Two things, done properly. <strong>Video</strong> and <strong>podcast</strong> production, end-to-end. Melbourne-based, more than a decade in the game, thousands of podcast episodes and thousands of videos produced. From the first idea to the final cut — and everything in between.</p>
+      <h2 class="section-title services-title">Video and<br>podcast production<br>is our thing<span class="dot"></span></h2>
+      <p class="section-intro">Melbourne-based, more than a decade in the game, thousands of podcast episodes and videos produced. From first idea to final cut, and everything in between.</p>
     </div>
 
     <div class="services-grid">
@@ -1196,7 +1326,7 @@ footer {
         <div class="service-label">VID<span class="dot"></span></div>
         <div class="service-body">
           <h3>Video production</h3>
-          <p>At VIDPOD, we specialise in content creation, cinematography, motion graphics, and editing. Our creative and strategic approach ensures your video stands out. We cater to various types of content — founding stories, case studies, corporate, educational, product demos, vlogs, and social media.</p>
+          <p>Content creation, cinematography, motion graphics, editing. A creative approach that makes your video stand out. Founding stories, case studies, corporate, educational, product demos, social media, the lot.</p>
           <ul class="service-list">
             <li>Founding stories</li>
             <li>Case studies</li>
@@ -1212,7 +1342,7 @@ footer {
         <div class="service-label">POD<span class="dot"></span></div>
         <div class="service-body">
           <h3>Podcast production</h3>
-          <p>Thousands of episodes produced across numerous shows. We work closely with our brand partners to tailor an approach based on what assistance they require — from initial show ideation, host and guest selection, production schedule, pre-production, artwork, audio intros, podcast website, social media and SFX, all the way through to recording, editing, asset creation, show notes, distribution, promotion and analytics.</p>
+          <p>Thousands of episodes across dozens of shows. Audio and video podcasts, built the way you need them. Whatever support you need, we can provide it. Show ideation, guest selection, studio recording, editing, artwork, show notes, distribution, promotion, analytics.</p>
           <ul class="service-list">
             <li>Show ideation</li>
             <li>Host &amp; guest selection</li>
@@ -1232,7 +1362,7 @@ footer {
   <div class="wrap work-inner">
     <div class="reveal">
       <h2 class="section-title">VID<span class="dot"></span></h2>
-      <p class="section-intro">Selected video work. Brand films, founding stories, case studies, and long-form content built to live everywhere — from homepage heroes to social cutdowns.</p>
+      <p class="section-intro">Selected video work. Brand films, founding stories, case studies, long-form content. Built to live everywhere, from homepage heroes to social cutdowns.</p>
     </div>
 
     <div class="card-grid">
@@ -1292,7 +1422,7 @@ footer {
         <div class="pcard-body">
           <div class="pcard-eyebrow">Product video</div>
           <h4>Product video</h4>
-          <p class="pcard-desc">Show the thing. What it is, what it does, why anyone should care — in 60 seconds.</p>
+          <p class="pcard-desc">Show the thing. What it is, what it does, why anyone should care, in 60 seconds.</p>
         </div>
       </a>
 
@@ -1333,7 +1463,7 @@ footer {
   <div class="wrap work-inner">
     <div class="reveal">
       <h2 class="section-title">POD<span class="dot"></span></h2>
-      <p class="section-intro">High-end branded podcast production. End-to-end — concept, recording, editing, show notes, distribution, promotion. One team, every stage.</p>
+      <p class="section-intro">High-end branded podcast production. Concept, recording, editing, show notes, distribution, promotion. Whatever support you need, we can provide it.</p>
     </div>
 
     <div class="card-grid">
@@ -1372,7 +1502,7 @@ footer {
 
       <a class="pcard reveal" href="podcasts/unconventional-business.html">
         <div class="pcard-media media-square">
-          <img src="img/podcasts/unconventional.jpg" alt="Unconventional Business — HubSpot" loading="lazy">
+          <img src="img/podcasts/unconventional.jpg" alt="Unconventional Business, HubSpot" loading="lazy">
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">HubSpot Podcast Network</div>
@@ -1394,7 +1524,7 @@ footer {
 
       <a class="pcard reveal" href="podcasts/carlisle-homes.html">
         <div class="pcard-media media-square">
-          <img src="img/podcasts/carlisle-homes.jpg" alt="Home Files — Carlisle Homes" loading="lazy">
+          <img src="img/podcasts/carlisle-homes.jpg" alt="Home Files, Carlisle Homes" loading="lazy">
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Property · Branded</div>
@@ -1431,12 +1561,12 @@ footer {
   <div class="wrap">
     <div class="founder-compact">
       <div class="founder-text reveal">
-        <div class="section-eyebrow">About</div>
-        <h2>Hey, I'm<br>Tommy Jackett<span class="dot"></span></h2>
-        <p>People ask me what my business is like and I always say — <strong>oh, VIDPOD</strong>. Because we don't forget: we're good at video, and we're great at podcast. Simple as that.</p>
-        <p>I'm a creator and storyteller at heart. Over a decade living and breathing this stuff — in front of the camera, behind it, on the mic, in the edit, chasing the idea nobody else bothered to chase. VIDPOD is where that instinct goes to work for brands.</p>
+        <div class="founder-eyebrow">Meet our founder</div>
+        <h2 class="founder-name">Tommy Jackett</h2>
+        <p><strong>Hey. Thanks for stopping by.</strong></p>
+        <p>I'm a creator and storyteller at heart. I've been working in this industry for over 10 years. In front of the camera, behind it, on the mic, in the edit. VIDPOD is where that instinct goes to work for brands who want their story told properly.</p>
         <div class="founder-actions">
-          <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
+          <a href="story.html" class="btn btn-primary">See what I've been up to</a>
         </div>
       </div>
       <div class="founder-portrait reveal">
@@ -1449,9 +1579,8 @@ footer {
 <section class="contact" id="contact">
   <div class="wrap contact-inner">
     <div class="contact-card reveal">
-      <div class="section-eyebrow">Contact</div>
-      <h2>Let's make<br>something<span class="dot"></span></h2>
-      <p class="contact-lead">Tell us what you've got in mind. A brand film, a new podcast, a one-off shoot, a full series — no brief too rough. We'll read it, reply, and set up a call.</p>
+      <h2>Let's make<br>something</h2>
+      <p class="contact-lead">Tell us what you've got in mind. A brand film, a new podcast, a full series. No brief is too rough. We'd love to set up a call and have a chat.</p>
       <form class="contact-form" action="https://formspree.io/f/REPLACE_ME" method="POST" id="contactForm">
         <div>
           <label for="cf-name">Your name</label>
@@ -1476,7 +1605,7 @@ footer {
         </div>
         <div class="full">
           <label for="cf-message">Tell us about the project</label>
-          <textarea id="cf-message" name="message" required placeholder="The idea, the audience, the deadline, the budget ballpark — whatever you've got."></textarea>
+          <textarea id="cf-message" name="message" required placeholder="The idea, the audience, the deadline, the budget ballpark. Whatever you've got."></textarea>
         </div>
         <div class="contact-submit">
           <span class="small">We usually reply within a day.</span>
@@ -1526,6 +1655,21 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 window.addEventListener('load', function() {
   document.querySelectorAll('.hero .reveal').forEach(function(el) { el.classList.add('in'); });
 });
+
+// Mobile nav toggle
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var links  = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+  function close() { toggle.classList.remove('open'); links.classList.remove('mobile-open'); toggle.setAttribute('aria-expanded','false'); }
+  function open()  { toggle.classList.add('open');    links.classList.add('mobile-open');    toggle.setAttribute('aria-expanded','true');  }
+  toggle.addEventListener('click', function() {
+    if (links.classList.contains('mobile-open')) close(); else open();
+  });
+  links.querySelectorAll('a:not(.sayhi-pop-btn):not(.sayhi-pop-call)').forEach(function(a) {
+    a.addEventListener('click', function() { if (window.innerWidth <= 860) close(); });
+  });
+})();
 
 // Say Hi popup
 (function() {
