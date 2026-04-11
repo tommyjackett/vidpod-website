@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=5">
+<link rel="stylesheet" href="_shared.css?v=6">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -22,11 +22,27 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="../index.html" class="logo">VIDPOD<span class="dot"></span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="../index.html#what">About</a>
       <a href="../index.html#work-vid">Video</a>
       <a href="../index.html#work-pod">Podcast</a>
-      <a href="../index.html#contact" class="nav-cta">Say Hi</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <div class="sayhi-wrap">
+        <button type="button" class="nav-cta" id="sayhiBtn" aria-haspopup="true" aria-expanded="false">Say Hi</button>
+        <div class="sayhi-pop" id="sayhiPop" role="dialog" aria-label="Get in touch">
+          <div class="sayhi-pop-label">Ready to chat?</div>
+          <div class="sayhi-pop-title">Get in<br>touch now<span class="dot"></span></div>
+          <a href="../index.html#contact" class="sayhi-pop-btn" id="sayhiGo">Contact form</a>
+          <a href="tel:+61401576859" class="sayhi-pop-call">Call now</a>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </nav>
@@ -69,10 +85,12 @@
   <div class="wrap">
     <div class="about-grid">
       <div class="about-copy reveal">
-        <div class="section-eyebrow">Our side of the story</div>
         <h2>VIDPOD support<span class="dot"></span></h2>
         <p>We've been the production partner for Let's Talk Teaching since day one. Studio recording with Bec and her guests, full edit in DaVinci Resolve, episode descriptions and show notes, artwork, social cutdowns, and distribution across Spotify, Apple and Amazon.</p>
         <p>Alongside Monash's content team, we help shape each season's line-up and lock in the format. Warm, practical, peer-to-peer — built to actually sound like teachers talking to teachers.</p>
+        <div class="about-copy-image">
+          <img src="../img/podcasts/ltt/ltt-068A2603.jpg" alt="Let's Talk Teaching in the VIDPOD studio" loading="lazy">
+        </div>
       </div>
       <div class="about-media is-bg reveal">
         <iframe
@@ -215,6 +233,52 @@ var io = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+// Theme toggle
+(function() {
+  var tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.addEventListener('click', function() {
+    var cur = document.documentElement.dataset.theme || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('vidpod-theme', next); } catch(e) {}
+  });
+})();
+
+// Mobile hamburger
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+  function close() { toggle.classList.remove('open'); links.classList.remove('mobile-open'); toggle.setAttribute('aria-expanded','false'); }
+  function open()  { toggle.classList.add('open');    links.classList.add('mobile-open');    toggle.setAttribute('aria-expanded','true');  }
+  toggle.addEventListener('click', function() {
+    if (links.classList.contains('mobile-open')) close(); else open();
+  });
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', close);
+  });
+})();
+
+// Say Hi popup
+(function() {
+  var btn = document.getElementById('sayhiBtn');
+  var pop = document.getElementById('sayhiPop');
+  var go  = document.getElementById('sayhiGo');
+  if (!btn || !pop) return;
+  function close() { pop.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function open()  { pop.classList.add('open');    btn.setAttribute('aria-expanded','true');  }
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (pop.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e) {
+    if (!pop.contains(e.target) && e.target !== btn) close();
+  });
+  if (go) go.addEventListener('click', close);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+})();
 
 // BTS click-to-zoom lightbox
 (function() {
