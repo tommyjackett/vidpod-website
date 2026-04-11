@@ -589,7 +589,7 @@ html[data-theme="dark"] .sayhi-pop {
 .work-vid .pcard-desc { color: rgba(0,0,0,0.68); }
 .work-pod .pcard-desc { color: rgba(255,255,255,0.62); }
 
-/* ===== SCOPED BTS MARQUEE (per-section) ===== */
+/* ===== SCOPED BTS MARQUEE (per-section, mixed aspect) ===== */
 .bts-strip {
   margin-top: 80px;
   padding-top: 60px;
@@ -606,6 +606,20 @@ html[data-theme="dark"] .sayhi-pop {
 }
 .work-vid .bts-strip-label { color: rgba(0,0,0,0.55); }
 .work-pod .bts-strip-label { color: rgba(255,255,255,0.55); }
+/* Mixed-aspect marquee items: fixed height, natural width */
+.bts-strip .marquee-item {
+  width: auto;
+  height: 360px;
+  aspect-ratio: auto;
+}
+.bts-strip .marquee-item img {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 640px) {
+  .bts-strip .marquee-item { height: 260px; }
+}
 
 /* ===== SERVICES ===== */
 .services { border-top: 1px solid var(--line); background: var(--bg-2); }
@@ -1050,7 +1064,7 @@ footer {
   <div class="wrap">
     <div class="reveal">
       <h2 class="section-title">What we do<span class="dot"></span></h2>
-      <p class="section-intro">People ask me what my business is like. I always say — <strong>oh, VIDPOD</strong>. Because we don't forget: we're good at video, and we're great at podcast. Simple as that. We cover the vid, and we cover the pod.</p>
+      <p class="section-intro">People ask me what my business is like. I tell them — <strong>oh, VIDPOD</strong>. Because we don't forget: we're good at video, and we're great at podcast. Simple as that. Melbourne-based, 10+ years in, thousands of podcast episodes and hundreds of videos produced. One team, end-to-end — idea, shoot, edit, publish, promote.</p>
     </div>
 
     <div class="services-grid">
@@ -1176,12 +1190,14 @@ footer {
       <div class="bts-strip-label">Video · Behind the scenes</div>
       <div class="marquee-viewport">
         <div class="marquee-track">
-          <div class="marquee-item"><img src="img/marquee/m1.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m2.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m3.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m1.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m2.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m3.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt="" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -1269,18 +1285,18 @@ footer {
       <div class="bts-strip-label">Podcast · Behind the scenes</div>
       <div class="marquee-viewport">
         <div class="marquee-track">
-          <div class="marquee-item"><img src="img/marquee/m4.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m5.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m6.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m7.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m8.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/marquee/m9.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m4.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m5.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m6.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m7.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m8.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m9.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-02.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-03.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-02.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-03.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-01.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-01.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt="" loading="lazy"></div>
         </div>
       </div>
     </div>
