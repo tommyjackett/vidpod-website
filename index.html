@@ -365,9 +365,13 @@ section { padding: 140px 0; position: relative; }
   text-transform: uppercase;
 }
 .services-title {
-  font-size: clamp(32px, 4vw, 54px);
+  font-size: clamp(32px, 4.4vw, 62px);
   line-height: 0.95;
-  max-width: 18ch;
+  max-width: 22ch;
+}
+@media (max-width: 720px) {
+  .services-title br { display: none; }
+  .services-title { max-width: 16ch; }
 }
 .section-intro {
   font-size: clamp(17px, 1.5vw, 20px);
@@ -1318,7 +1322,7 @@ footer {
 <section class="services" id="what">
   <div class="wrap">
     <div class="reveal">
-      <h2 class="section-title services-title">Video and<br>podcast production<br>is our thing<span class="dot"></span></h2>
+      <h2 class="section-title services-title">Video and podcast production<br>is our thing<span class="dot"></span></h2>
       <p class="section-intro">Melbourne-based, more than a decade in the game, thousands of podcast episodes and videos produced. From first idea to final cut, and everything in between.</p>
     </div>
 

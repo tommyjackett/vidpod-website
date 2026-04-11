@@ -419,6 +419,27 @@ body {
 }
 .listen a:hover { border-color: var(--fg); transform: translateY(-2px); }
 
+/* LISTEN STRIP — full-width listen bar that sits below the hero */
+.listen-strip {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 26px 0;
+}
+.listen-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.listen-strip-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.listen-strip .listen { margin-top: 0; }
+
 /* FOOTER */
 footer {
   padding: 60px 0 50px;
@@ -439,19 +460,41 @@ footer p { font-size: 13px; color: var(--muted); }
 /* NEW COMPONENTS (v2 refined template)          */
 /* ============================================= */
 
-/* ABOUT GRID — two-column with media slot */
+/* ABOUT GRID — two-column with media slot, seamless height alignment */
 .about-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 70px;
-  align-items: center;
+  align-items: stretch;
   margin-top: 10px;
 }
 @media (max-width: 900px) {
-  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; align-items: center; }
 }
-.about-grid .about-copy { align-self: center; }
-.about-grid .about-copy p { max-width: none; font-size: 17px; }
+.about-grid .about-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding: 6px 0;
+}
+.about-grid .about-copy .section-eyebrow { margin-bottom: 6px; }
+.about-grid .about-copy h2 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.about-grid .about-copy p {
+  max-width: none;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
 .about-media {
   position: relative;
   aspect-ratio: 9 / 16;
