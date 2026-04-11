@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Let's Talk Teaching — the flagship podcast for Monash University, produced by VIDPOD.">
+<meta name="description" content="Let's Talk Teaching. The flagship podcast for Monash University Faculty of Education, produced by VIDPOD.">
 <title>Let's Talk Teaching · VIDPOD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="_shared.css">
+<style>
+  /* LTT brand accent */
+  :root { --brand: #E8734A; } /* warm orange ish placeholder. replace with real LTT brand colour when confirmed */
+</style>
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -23,109 +27,207 @@
   <div class="nav-inner">
     <a href="../index.html" class="logo">VIDPOD<span class="dot"></span></a>
     <div class="nav-links">
-      <a href="../index.html#about">About</a>
-      <a href="../index.html#services">Services</a>
+      <a href="../index.html#what">About</a>
       <a href="../index.html#work-vid">Video</a>
       <a href="../index.html#work-pod">Podcast</a>
-      <a href="../story.html">Story</a>
       <a href="../index.html#contact" class="nav-cta">Say Hi</a>
     </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <header class="pod-hero">
   <div class="wrap">
     <div class="pod-hero-grid">
       <div class="pod-hero-art reveal">
-        <img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching">
+        <img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching artwork">
       </div>
-      <div>
-        <div class="eyebrow">Podcast · Case study</div>
-        <h1 class="reveal">Let's Talk<br>Teaching<span class="dot"></span></h1>
-        <p class="tagline reveal"><strong>The flagship podcast for Monash University.</strong> A thoughtful, high-production-value show built to lift teaching practice across higher education.</p>
-        <div class="chips reveal">
-          <span>Education · Monash University</span>
-          <span>Ongoing</span>
-          <span>Branded podcast</span>
-          <span>Studio</span>
+      <div class="reveal">
+        <div class="eyebrow">Education · Monash University</div>
+        <h1>Let's Talk<br>Teaching</h1>
+        <p class="tagline"><strong>Teachers talking to teachers.</strong> Real conversations about the classroom, the research, and the challenges Australian educators face every day. Hosted by Associate Professor Rebecca Cooper from Monash University Faculty of Education.</p>
+        <div class="chips">
+          <span>4 seasons</span>
+          <span>24+ episodes</span>
+          <span>Since 2023</span>
+          <span>Monash University</span>
+        </div>
+        <div class="listen">
+          <a href="https://open.spotify.com/show/2dfpFkcbnIrIeMwuJAl0DE" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://podcasts.apple.com/us/podcast/lets-talk-teaching/id1677048729" target="_blank" rel="noopener">Apple Podcasts</a>
+          <a href="https://music.amazon.com.au/podcasts/10043942-85aa-4221-b19c-307319aafcc5/let%E2%80%99s-talk-teaching" target="_blank" rel="noopener">Amazon Music</a>
         </div>
       </div>
     </div>
   </div>
 </header>
 
+<!-- ABOUT THE SHOW (outward-facing) -->
 <section class="pod-sec">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">The show</div>
-      <h2>About<br>the show<span class="dot"></span></h2>
-      <p><strong>Let's Talk Teaching</strong> is the Monash Education Academy's flagship podcast — long-form, carefully crafted conversations with educators, researchers and thought leaders about what actually works in the classroom and the lecture theatre.</p>
-      <p>VIDPOD partners with Monash to produce the whole thing: studio recording, full edit, show notes, cover art, and publishing. The brief is high-quality and considered — every detail has to reflect the care Monash puts into its teaching practice.</p>
-      <p>It's one of our favourite shows to work on because the conversations genuinely change how people teach. That's the kind of work we like being part of.</p>
+    <div class="section-eyebrow reveal">The show</div>
+    <h2 class="reveal">About the show</h2>
+    <p class="reveal"><strong>Let's Talk Teaching</strong> is a podcast for educators, about educators, grounded in the real challenges of Australian classrooms. Each episode, host Associate Professor Rebecca Cooper sits down with Monash education researchers and practising teachers to unpack a single topic in depth, from trauma-informed practice to AI in education, arts learning to Indigenous perspectives.</p>
+    <p class="reveal">The tone is warm, practical, peer-to-peer. Not academic-heavy. Bec is the bridge between research and classroom, and the show is built to feel like a conversation between colleagues, not a lecture. Long-form interviews, typically 30 to 45 minutes, released in seasons.</p>
+    <p class="reveal">Published by Monash University Faculty of Education.</p>
+  </div>
+</section>
+
+<!-- VIDPOD SIDE (the production story) -->
+<section class="pod-sec" style="background: var(--bg-2);">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">Our side of the story</div>
+    <h2 class="reveal">What VIDPOD built</h2>
+    <p class="reveal">We've been the production partner for Let's Talk Teaching since day one. Four seasons in, the show is one of our longest-running partnerships, and one of our largest retainer clients.</p>
+    <p class="reveal">We handle the full production stack. Studio recording with host and guests, full episode edit, intro scripting, snippet selection for social, artwork and asset creation, distribution to Spotify, Apple Podcasts, and Amazon Music. We work alongside Monash's content team to shape each season's topics and guest line-up.</p>
+
+    <div class="scope-grid" style="margin-top: 40px;">
+      <div class="scope-card reveal">
+        <h3>Studio recording</h3>
+        <p>2-guest format with Bec, recorded in our Melbourne studio. Full production setup, multiple cameras, broadcast-grade audio.</p>
+      </div>
+      <div class="scope-card reveal">
+        <h3>Intro scripting</h3>
+        <p>An 8-beat intro framework we built specifically for the show. Snippet selection, topic setup, guest intros, all scripted and recorded with Bec.</p>
+      </div>
+      <div class="scope-card reveal">
+        <h3>Full edit &amp; delivery</h3>
+        <p>Every episode edited, mixed, and delivered through DaVinci Resolve. Music and SFX beds, intro/outro cuts, V1 and V2 sign-off with Monash.</p>
+      </div>
+      <div class="scope-card reveal">
+        <h3>Distribution &amp; hosting</h3>
+        <p>Simplecast hosting, published across Spotify, Apple, Amazon. Artwork, episode descriptions, social snippets, and show notes all handled end-to-end.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- TIMELINE -->
 <section class="pod-sec">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">What we did</div>
-      <h2>Full<br>production<span class="dot"></span></h2>
-      <p>One team, every stage of the build. From concept to publish, we handle the whole pipeline so the host can focus on what they do best — the conversation.</p>
-    </div>
-    <div class="scope-grid">
-      <div class="scope-card"><h3>Studio recording</h3><p>In-studio sessions with broadcast-quality audio and proper directing. Hosts just have to turn up.</p></div>
-      <div class="scope-card"><h3>Full edit</h3><p>Considered edit, audio mastered, every episode polished to Monash standards.</p></div>
-      <div class="scope-card"><h3>Show notes</h3><p>Deep, researched show notes — not auto-generated fluff. Built for academic readers.</p></div>
-      <div class="scope-card"><h3>Artwork</h3><p>Cover art designed in line with the Monash brand system. Every episode treated as a standalone piece.</p></div>
+    <div class="section-eyebrow reveal">Production journey</div>
+    <h2 class="reveal">Four years in</h2>
+    <p class="reveal">From a single-season pilot to a flagship Monash production. Here's how it's grown.</p>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-year">2023 · Season 1</div>
+        <div class="tl-title">Launch</div>
+        <div class="tl-desc">Six-episode debut season. VIDPOD built the show from the ground up with Monash Faculty of Education. Host Rebecca Cooper, full studio production, published across all major platforms.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024 · Season 2</div>
+        <div class="tl-title">The format locks in</div>
+        <div class="tl-desc">Six more episodes. Format and tone dialled in. Stronger guest curation, tighter snippet selection, snappier intro scripting.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025 · Season 3</div>
+        <div class="tl-title">The 8-beat framework</div>
+        <div class="tl-desc">We introduced a new 8-beat intro structure, a repeatable framework for every episode: acknowledgement, welcome, topic tease, setup, reinforcement, intro, guest intro, opening question. Became the show's signature.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025 to 2026 · Season 4</div>
+        <div class="tl-title">Two batches, twelve episodes</div>
+        <div class="tl-desc">Season 4 doubled the output with two production batches. Topics ranged from the Manosphere to AI in education, trauma-informed practice to science in the anthropocene. Edit pipeline migrated to DaVinci Resolve.</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- BEHIND THE SCENES -->
+<section class="pod-sec" style="background: var(--bg-2);">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">Behind the scenes</div>
+    <h2 class="reveal">In the studio</h2>
+    <p class="reveal">Every episode of Let's Talk Teaching is recorded live in our Melbourne studio with host Rebecca Cooper and two guests. Here's a look at how it comes together.</p>
+    <div class="pod-embed reveal">
+      <iframe
+        src="about:blank"
+        data-embed="REPLACE_WITH_LTT_BTS_YT_ID"
+        title="Let's Talk Teaching behind the scenes"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL SNIPPETS -->
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">Social cutdowns</div>
+    <h2 class="reveal">Built for the feed</h2>
+    <p class="reveal">We select and cut three vertical social snippets per episode. Short, sharp, and drawn from the moments in the conversation that hit hardest. Built in-house, delivered alongside the full episode.</p>
+    <div class="social-grid reveal">
+      <div class="social-tile">Snippet 01</div>
+      <div class="social-tile">Snippet 02</div>
+      <div class="social-tile">Snippet 03</div>
+      <div class="social-tile">Snippet 04</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
 <section class="pod-sec pod-quote">
   <div class="wrap">
-    <blockquote class="reveal">"Monash cares about craft. That makes this show a joy to produce."</blockquote>
-    <div class="cite">Tommy Jackett · Founder, VIDPOD</div>
+    <blockquote class="reveal">"VIDPOD turn a room full of academics into a podcast that actually sounds like people. Four seasons in, and the bar keeps going up."</blockquote>
+    <div class="cite reveal">Monash University Faculty of Education</div>
   </div>
 </section>
 
-<section class="pod-sec">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">More shows</div>
-      <h2>Other shows<br>we've made<span class="dot"></span></h2>
-    </div>
-    <div class="other-shows reveal">
-      <a class="other-show" href="the-numbers-game.html"><div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy"></div><div class="label">The Numbers Game</div></a>
-      <a class="other-show" href="help-at-hand.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="Help at Hand" loading="lazy"></div><div class="label">Help at Hand</div></a>
-      <a class="other-show" href="unconventional-business.html"><div class="other-show-art"><img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business" loading="lazy"></div><div class="label">Unconventional Business</div></a>
-      <a class="other-show" href="the-daily-talk-show.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy"></div><div class="label">The Daily Talk Show</div></a>
-      <a class="other-show" href="carlisle-homes.html"><div class="other-show-art"><img src="../img/podcasts/carlisle-homes.jpg" alt="Carlisle Homes" loading="lazy"></div><div class="label">Carlisle Homes</div></a>
-    </div>
-  </div>
-</section>
-
+<!-- CTA -->
 <section class="cta-strip">
   <div class="wrap">
-    <h2>Let's build<br>your next show<span class="dot"></span></h2>
-    <p>Branded podcasts, founder shows, interview series — end-to-end production from a team that actually makes podcasts.</p>
-    <a href="../index.html#contact" class="btn btn-primary">Say Hi →</a>
+    <h2>Want a show like<br>this one<span class="dot"></span></h2>
+    <p>We build long-running branded podcasts end-to-end. From concept through to the millionth download.</p>
+    <a href="../index.html#contact" class="btn btn-primary">Say Hi</a>
+  </div>
+</section>
+
+<!-- OTHER SHOWS -->
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">More of our work</div>
+    <h2 class="reveal">Other shows we produce</h2>
+    <div class="other-shows reveal">
+      <a class="other-show" href="the-numbers-game.html">
+        <div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game"></div>
+        <div class="label">The Numbers Game</div>
+      </a>
+      <a class="other-show" href="help-at-hand.html">
+        <div class="other-show-art"><img src="../img/podcasts/help-at-hand.jpg" alt="Help at Hand"></div>
+        <div class="label">Help at Hand</div>
+      </a>
+      <a class="other-show" href="unconventional-business.html">
+        <div class="other-show-art"><img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business"></div>
+        <div class="label">Unconventional Business</div>
+      </a>
+      <a class="other-show" href="the-daily-talk-show.html">
+        <div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show"></div>
+        <div class="label">The Daily Talk Show</div>
+      </a>
+      <a class="other-show" href="carlisle-homes.html">
+        <div class="other-show-art"><img src="../img/podcasts/carlisle-homes.jpg" alt="Home Files"></div>
+        <div class="label">Home Files</div>
+      </a>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>© VIDPOD 2026 · Melbourne</p>
+    <p>© 2026 VIDPOD Pty Ltd · Melbourne, Australia</p>
   </div>
 </footer>
 
 <script>
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
+// Reveal on scroll
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 </script>
 </body>
 </html>
