@@ -442,22 +442,26 @@ footer p { font-size: 13px; color: var(--muted); }
 /* ABOUT GRID — two-column with media slot */
 .about-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 60px;
-  align-items: start;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 70px;
+  align-items: center;
   margin-top: 10px;
 }
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; gap: 36px; }
 }
-.about-grid .about-copy p { max-width: none; }
+.about-grid .about-copy { align-self: center; }
+.about-grid .about-copy p { max-width: none; font-size: 17px; }
 .about-media {
   position: relative;
-  aspect-ratio: 4 / 5;
-  border-radius: 20px;
+  aspect-ratio: 9 / 16;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 22px;
   overflow: hidden;
   background: #0A0A0A;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.22);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.28);
 }
 .about-media img,
 .about-media iframe,
@@ -466,6 +470,16 @@ footer p { font-size: 13px; color: var(--muted); }
   width: 100%; height: 100%;
   object-fit: cover;
   border: 0;
+  pointer-events: none;
+}
+/* YouTube background video trick — oversize the iframe so the player UI is cropped off the edges */
+.about-media.is-bg iframe {
+  width: 160%;
+  height: 160%;
+  left: -30%;
+  top: -30%;
+  inset: auto;
+  pointer-events: none;
 }
 .about-media-caption {
   position: absolute;
@@ -479,6 +493,7 @@ footer p { font-size: 13px; color: var(--muted); }
   backdrop-filter: blur(8px);
   padding: 8px 14px;
   border-radius: 100px;
+  z-index: 2;
 }
 
 /* PROCESS — VIDPOD-green dot journey strip */
@@ -623,37 +638,34 @@ footer p { font-size: 13px; color: var(--muted); }
   }
 }
 
-/* BTS CAROUSEL — horizontal scroll, supports mixed aspect ratios */
-.bts-carousel-wrap {
+/* BTS MARQUEE — auto-scrolling, pause on hover, mixed aspect ratios */
+.bts-marquee-viewport {
   position: relative;
   margin-top: 40px;
-  /* break out to screen edges on mobile so swipe feels natural */
   margin-left: -32px;
   margin-right: -32px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
 }
 @media (max-width: 720px) {
-  .bts-carousel-wrap { margin-left: -22px; margin-right: -22px; }
+  .bts-marquee-viewport { margin-left: -22px; margin-right: -22px; }
 }
-.bts-carousel {
+.bts-marquee {
   display: flex;
   gap: 18px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
-  scroll-padding-left: 32px;
-  padding: 6px 32px 24px;
-  touch-action: pan-x pan-y;
-  -ms-overflow-style: none;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
+  width: max-content;
+  padding: 6px 0 24px;
+  animation: bts-scroll 60s linear infinite;
+  will-change: transform;
 }
-@media (max-width: 720px) {
-  .bts-carousel { padding: 6px 22px 24px; scroll-padding-left: 22px; }
+.bts-marquee-viewport:hover .bts-marquee {
+  animation-play-state: paused;
 }
-.bts-carousel::-webkit-scrollbar { height: 8px; }
-.bts-carousel::-webkit-scrollbar-track { background: transparent; }
-.bts-carousel::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+@keyframes bts-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
 .bts-item {
   flex: 0 0 auto;
@@ -662,11 +674,15 @@ footer p { font-size: 13px; color: var(--muted); }
   overflow: hidden;
   background: #0A0A0A;
   box-shadow: 0 18px 60px rgba(0,0,0,0.2);
-  scroll-snap-align: start;
   position: relative;
-  /* default (portrait 9/16) */
   aspect-ratio: 9 / 16;
   width: auto;
+  cursor: zoom-in;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.bts-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 70px rgba(0,0,0,0.28);
 }
 .bts-item img,
 .bts-item video,
@@ -676,23 +692,19 @@ footer p { font-size: 13px; color: var(--muted); }
   object-fit: cover;
   border: 0;
   display: block;
-  pointer-events: auto;
+  pointer-events: none;
 }
-/* aspect ratio variants — width auto, height fixed */
 .bts-item.is-portrait  { aspect-ratio: 9 / 16; }
 .bts-item.is-square    { aspect-ratio: 1 / 1; }
 .bts-item.is-landscape { aspect-ratio: 16 / 9; }
 .bts-item.is-wide      { aspect-ratio: 21 / 9; }
 
-/* Let iframe pointer events pass through when the user is dragging */
-.bts-carousel.dragging .bts-item iframe,
-.bts-carousel.dragging .bts-item video { pointer-events: none; }
-
 @media (max-width: 720px) {
-  .bts-item { height: 380px; }
+  .bts-item { height: 340px; }
+  .bts-marquee { animation-duration: 45s; }
 }
 @media (max-width: 480px) {
-  .bts-item { height: 340px; }
+  .bts-item { height: 280px; }
 }
 
 /* Hint strip */
@@ -703,3 +715,72 @@ footer p { font-size: 13px; color: var(--muted); }
   color: var(--muted);
   margin-top: 10px;
 }
+
+/* BTS LIGHTBOX — click to zoom */
+.bts-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 8, 0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  cursor: zoom-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.bts-lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bts-lightbox-inner {
+  position: relative;
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0A0A0A;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+  transform: scale(.94);
+  transition: transform .3s cubic-bezier(.2,.9,.3,1);
+}
+.bts-lightbox.is-open .bts-lightbox-inner {
+  transform: scale(1);
+}
+.bts-lightbox-inner img,
+.bts-lightbox-inner video,
+.bts-lightbox-inner iframe {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+  border: 0;
+}
+.bts-lightbox-inner iframe {
+  width: min(1100px, 92vw);
+  aspect-ratio: 9 / 16;
+  max-height: 88vh;
+}
+.bts-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.bts-lightbox-close:hover { background: rgba(0,0,0,0.8); }
