@@ -497,6 +497,56 @@ section { padding: 140px 0; position: relative; }
   background: #fff;
   border: 1px solid rgba(0,0,0,0.08);
 }
+.pod-artwork {
+  margin: 48px 0 70px;
+  padding-top: 50px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.pod-artwork-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 26px;
+}
+.pod-artwork-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 22px;
+}
+.pod-art-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0A0A0A;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  transition: transform 0.3s var(--ease);
+}
+.pod-art-item:hover { transform: translateY(-4px); }
+.pod-art-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pod-art-item .pod-art-label {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 18px 16px 14px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.pod-art-item:hover .pod-art-label { opacity: 1; transform: translateY(0); }
+
 .work-pod .work-item {
   background: #111;
   border: 1px solid #222;
@@ -778,10 +828,10 @@ footer {
       </div>
       <div class="founder-copy reveal">
         <div class="section-eyebrow">About the founder</div>
-        <h2>Hey, I'm<br>Tommy<span class="dot"></span></h2>
-        <p><strong>I'm not just helping brands tell their stories — I'm living it.</strong> I've been making video and podcasts for over a decade. In front of the camera, behind it, on the mic, cutting the edit, chasing the idea nobody else bothered to chase.</p>
-        <p>I started in breakfast radio in regional Victoria — up at 4:30am, 15 hours of live radio a week. Since then I've hosted TV, appeared on The Project, co-hosted <strong>The Daily Talk Show</strong> for 1,000+ episodes with Josh Janssen, and built a body of work that's been covered by the ABC, The Age, News.com.au, Herald Sun, Pedestrian, Mashable — even Wikipedia.</p>
-        <p>I fished seven oBikes out of the Yarra. I proved the $3 coffee cup fits inside the $2 one. I counted every step on the 1,000 Steps. I've spent years finding stories nobody else saw and turning them into content people actually watched.</p>
+        <h2>Hey, I'm<br>Tommy<br>Jackett<span class="dot"></span></h2>
+        <p><strong>I'm a creator and storyteller at heart.</strong> I've been living and breathing this stuff for over a decade — in front of the camera, behind it, on the mic, cutting the edit, chasing the idea nobody else bothered to chase.</p>
+        <p>I started in breakfast radio in regional Victoria — up at 4:30am, 15 hours of live radio a week. Since then I've hosted TV, appeared on The Project, co-hosted <strong>The Daily Talk Show</strong> for 1,000+ episodes with Josh Janssen, and built a body of work covered by the ABC, The Age, News.com.au, Herald Sun, Pedestrian and Mashable.</p>
+        <p>I fished oBikes out of the river. I proved the $3 coffee cup fits inside the $2 one. I counted every step on the 1,000 Steps. I've spent years finding stories nobody else saw and turning them into content people actually watched.</p>
         <p><strong>VIDPOD is where that instinct goes to work for brands.</strong> Same eye for a good idea, same obsession with the craft, now aimed at helping you tell your story properly.</p>
         <div class="founder-actions">
           <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
@@ -943,6 +993,28 @@ footer {
       <div class="section-eyebrow">Podcast production</div>
       <h2 class="section-title">POD<span class="dot"></span></h2>
       <p class="section-intro">High-end branded podcast production. End-to-end — concept, recording, editing, show notes, distribution, promotion. One team, every stage.</p>
+    </div>
+
+    <div class="pod-artwork reveal">
+      <div class="pod-artwork-eyebrow">Shows we've produced</div>
+      <div class="pod-artwork-grid">
+        <div class="pod-art-item">
+          <img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy">
+          <div class="pod-art-label">The Numbers Game</div>
+        </div>
+        <div class="pod-art-item">
+          <img src="img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy">
+          <div class="pod-art-label">Let's Talk Teaching</div>
+        </div>
+        <div class="pod-art-item">
+          <img src="img/podcasts/unconventional.jpg" alt="Unconventional Business — HubSpot" loading="lazy">
+          <div class="pod-art-label">Unconventional Business · HubSpot</div>
+        </div>
+        <div class="pod-art-item">
+          <img src="img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy">
+          <div class="pod-art-label">The Daily Talk Show</div>
+        </div>
+      </div>
     </div>
 
     <div class="work-grid">

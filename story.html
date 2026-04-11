@@ -190,24 +190,119 @@ section.story-sec {
   margin-bottom: 56px;
 }
 
-/* VIRAL GRID */
+/* FEATURED VIDEO */
+.featured-video {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--line);
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 70px;
+  align-items: center;
+}
+@media (max-width: 900px) { .featured-grid { grid-template-columns: 1fr; gap: 40px; } }
+.featured-copy h2 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(40px, 5.5vw, 76px);
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 14px 0 28px;
+  color: var(--fg);
+}
+.featured-copy p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.featured-copy p strong { color: var(--fg); font-weight: 600; font-size: 20px; }
+.featured-note {
+  font-size: 14px !important;
+  color: var(--muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 22px !important;
+}
+
+/* VIDEO EMBEDS */
+.video-embed {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0A0A0A;
+  text-decoration: none;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  transition: transform 0.3s var(--ease);
+}
+.video-embed:hover { transform: translateY(-3px); }
+.video-thumb {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+.play-btn {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+  transition: transform 0.3s var(--ease);
+}
+.video-embed:hover .play-btn { transform: scale(1.1); }
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #FAFAF7;
+  text-align: center;
+  padding: 24px;
+}
+.video-placeholder-label {
+  font-family: var(--font-head);
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+.video-placeholder-sub {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* VIRAL VIDEO GRID */
 .viral-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  gap: 40px 28px;
 }
-@media (max-width: 820px) { .viral-grid { grid-template-columns: 1fr; gap: 18px; } }
-.viral-card {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 36px 34px;
-  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
-}
-.viral-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--fg);
-}
+@media (max-width: 820px) { .viral-grid { grid-template-columns: 1fr; gap: 32px; } }
+.viral-card { display: block; }
+.viral-card .video-embed { margin-bottom: 20px; }
 .viral-card .meta {
   display: flex;
   justify-content: space-between;
@@ -216,7 +311,7 @@ section.story-sec {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 .viral-card h3 {
   font-family: var(--font-head);
@@ -225,40 +320,22 @@ section.story-sec {
   letter-spacing: -0.005em;
   line-height: 1.1;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: var(--fg);
 }
 .viral-card p {
   font-size: 16px;
   color: var(--muted);
-  line-height: 1.65;
-  margin-bottom: 18px;
-}
-.viral-card .coverage {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-.viral-card .coverage span {
-  font-size: 11px;
-  padding: 6px 12px;
-  background: var(--bg-2);
-  border-radius: 100px;
-  color: var(--muted);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  line-height: 1.6;
 }
 .viral-card .viral-stat {
   font-family: var(--font-head);
   font-weight: 400;
-  color: var(--fg);
-  font-size: 15px;
+  color: var(--green);
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  margin-bottom: 14px;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
 }
 
 /* TIMELINE */
@@ -473,78 +550,29 @@ footer p {
   <div class="wrap">
     <div class="eyebrow">The story so far</div>
     <h1 class="reveal">I've been<br>having a<br>crack<span class="dot"></span></h1>
-    <p class="lede reveal"><strong>10+ years of video, audio, and human connection.</strong> Breakfast radio at 4:30am. 1,000+ podcast episodes. Viral moments that ended up on Wikipedia. A body of work built on one simple idea — go do the thing nobody else bothered to do.</p>
+    <p class="lede reveal"><strong>Creator and storyteller at heart.</strong> I've been living and breathing this stuff for over a decade — chasing ideas, picking up cameras, pressing record, and doing the thing nobody else bothered to do.</p>
   </div>
 </header>
 
-<section class="story-sec">
+<section class="featured-video">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">Viral moments</div>
-      <h2 class="section-title">The stuff<br>that travelled<span class="dot"></span></h2>
-      <p class="section-intro">Spot something everyone noticed but no one acted on. Actually do the thing. Film it simply. Let the internet find it. Here's what that looks like.</p>
-    </div>
-
-    <div class="viral-grid">
-      <div class="viral-card reveal">
-        <div class="meta"><span>Consumer exposé</span><span>Sept 2017</span></div>
-        <h3>Fishing oBikes out of the Yarra</h3>
-        <div class="viral-stat">66K+ views · ended up on Wikipedia</div>
-        <p>Melbourne flooded with abandoned share bikes. I bought a hook from Bunnings, walked the Yarra, pulled out seven. First person to actually do something about it. Parks Victoria ended up forcing oBike to hire contractors to recover the rest.</p>
-        <div class="coverage">
-          <span>ABC Radio</span><span>The Age</span><span>News.com.au</span><span>Pedestrian</span><span>Hit Network</span><span>Business Insider</span>
-        </div>
+    <div class="featured-grid reveal">
+      <div class="featured-copy">
+        <div class="section-eyebrow">The philosophy</div>
+        <h2>Having<br>a crack<span class="dot"></span></h2>
+        <p><strong>"I've been having a crack for years. Many cracks, in fact."</strong></p>
+        <p>Personal training. Radio. Production. Business ventures that worked, and plenty that didn't. Every crack built something. This is the closest thing I have to a manifesto, and probably the most honest thing I've ever said on camera.</p>
+        <p class="featured-note">The video that says it best. Watch it below.</p>
       </div>
-
-      <div class="viral-card reveal">
-        <div class="meta"><span>Consumer exposé</span><span>Sept 2018</span></div>
-        <h3>7-Eleven's $3 coffee rip-off</h3>
-        <div class="viral-stat">96K+ Facebook views</div>
-        <p>Showed that the "large" $3 super cup fits entirely inside the $2 cup. Simple, visual, undeniable. The whole video is one pour.</p>
-        <div class="coverage">
-          <span>Star 104.5 FM</span><span>3AW</span><span>Multiple outlets</span>
+      <a class="video-embed featured-embed" data-video-id="REPLACE_WITH_HAVING_A_CRACK_ID" href="#" target="_blank" rel="noopener">
+        <div class="video-thumb">
+          <div class="video-placeholder">
+            <div class="video-placeholder-label">Having a Crack</div>
+            <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
+          </div>
+          <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
         </div>
-      </div>
-
-      <div class="viral-card reveal">
-        <div class="meta"><span>Consumer exposé</span><span>March 2016</span></div>
-        <h3>Counting every step on the 1,000 Steps</h3>
-        <div class="viral-stat">Parks Victoria responded publicly</div>
-        <p>Melbourne's famous "1,000 Steps" trail. Nobody had actually counted. I did. Turns out it's not 1,000. The whole story told itself.</p>
-        <div class="coverage">
-          <span>Mashable</span><span>Herald Sun</span><span>News.com.au</span>
-        </div>
-      </div>
-
-      <div class="viral-card reveal">
-        <div class="meta"><span>Consumer exposé</span><span>TikTok</span></div>
-        <h3>Domino's 100 pepperoni challenge</h3>
-        <div class="viral-stat">Strong TikTok performance</div>
-        <p>Domino's said their new pizza was "topped to the edge with 100 pieces of pepperoni." So I counted. Spoiler: it wasn't 100.</p>
-        <div class="coverage">
-          <span>TikTok</span><span>Instagram</span>
-        </div>
-      </div>
-
-      <div class="viral-card reveal">
-        <div class="meta"><span>e-Scooter sequel</span><span>2022</span></div>
-        <h3>The oBike sequel — e-scooters</h3>
-        <div class="viral-stat">5 scooters in under 2 hours</div>
-        <p>Same formula, new target. E-scooters dumped in the river. Found five in under two hours. Went live on 3AW with Neil Mitchell that afternoon.</p>
-        <div class="coverage">
-          <span>3AW</span><span>Neil Mitchell live</span>
-        </div>
-      </div>
-
-      <div class="viral-card reveal">
-        <div class="meta"><span>Cheeky corporate</span><span>LinkedIn</span></div>
-        <h3>The Nando's hidden menu</h3>
-        <div class="viral-stat">LinkedIn break-out</div>
-        <p>The "thing the brand doesn't want you to know" format, applied to hot chicken. A LinkedIn hit in a sea of posts nobody reads.</p>
-        <div class="coverage">
-          <span>LinkedIn</span>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -552,38 +580,87 @@ footer p {
 <section class="story-sec">
   <div class="wrap">
     <div class="reveal">
-      <div class="section-eyebrow">Shows</div>
-      <h2 class="section-title">Things I've<br>made &amp; hosted<span class="dot"></span></h2>
-      <p class="section-intro">Decade-long podcasts, interview shows, and regular TV spots. The stuff that keeps the muscle warm.</p>
+      <div class="section-eyebrow">The stuff that travelled</div>
+      <h2 class="section-title">The stuff<br>that travelled<span class="dot"></span></h2>
+      <p class="section-intro">Stories that found an audience. Click any thumbnail to watch.</p>
     </div>
 
-    <div class="shows-grid">
-      <div class="show-card reveal">
-        <div class="label">Podcast · Co-host</div>
-        <h3>The Daily Talk Show</h3>
-        <div class="count">1,000+ episodes</div>
-        <p>Raw, honest, story-driven daily podcast co-hosted with Josh Janssen. Real life, family, business, relationships, growth. Ten years on the mic. Notable guests include Hamish Blake, Sam Mac, and Christian O'Connell. Completed run.</p>
+    <div class="viral-grid">
+      <div class="viral-card reveal">
+        <a class="video-embed" href="https://www.youtube.com/watch?v=Xuwl6vKiTLU" target="_blank" rel="noopener">
+          <div class="video-thumb">
+            <img src="https://i.ytimg.com/vi/Xuwl6vKiTLU/hqdefault.jpg" alt="Fishing for oBikes">
+            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
+          </div>
+        </a>
+        <div class="meta"><span>YouTube</span><span>Sept 2017</span></div>
+        <h3>Fishing for oBikes</h3>
+        <div class="viral-stat">66K+ views · 107K across the oBike series</div>
+        <p>Melbourne flooded with abandoned share bikes. I bought a hook from Bunnings, went for a walk, and actually did something about it.</p>
       </div>
 
-      <div class="show-card reveal">
-        <div class="label">Podcast · Solo / interview</div>
-        <h3>Tomversation</h3>
-        <div class="count">26+ episodes</div>
-        <p>A collection of conversations with great people. Self-improvement, creativity, parenting, identity, flow states. The podcast I make when I want to ask better questions.</p>
+      <div class="viral-card reveal">
+        <a class="video-embed" data-video-id="REPLACE_WITH_7ELEVEN_ID" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb">
+            <div class="video-placeholder">
+              <div class="video-placeholder-label">7-Eleven $3 Coffee Rip-Off</div>
+              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
+            </div>
+            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
+          </div>
+        </a>
+        <div class="meta"><span>YouTube</span><span>Sept 2018</span></div>
+        <h3>The $3 coffee rip-off</h3>
+        <div class="viral-stat">96K+ views</div>
+        <p>Showed that the "large" $3 super cup fits entirely inside the $2 cup. Simple, visual, undeniable. The whole video is one pour.</p>
       </div>
 
-      <div class="show-card reveal">
-        <div class="label">TV · Guest</div>
-        <h3>The Project</h3>
-        <div class="count">Network 10</div>
-        <p>Multiple appearances on The Project across the oBike and 7-Eleven stories. When a piece of content punches through, the national shows come looking.</p>
+      <div class="viral-card reveal">
+        <a class="video-embed" data-video-id="REPLACE_WITH_1000_STEPS_ID" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb">
+            <div class="video-placeholder">
+              <div class="video-placeholder-label">1,000 Steps</div>
+              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
+            </div>
+            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
+          </div>
+        </a>
+        <div class="meta"><span>YouTube</span><span>March 2016</span></div>
+        <h3>Counting every step on the 1,000 Steps</h3>
+        <div class="viral-stat">Parks Victoria responded publicly</div>
+        <p>Melbourne's famous "1,000 Steps" trail. Nobody had actually counted. I did. Turns out it's not 1,000.</p>
       </div>
 
-      <div class="show-card reveal">
-        <div class="label">Radio · Host</div>
-        <h3>Breakfast Radio — Star FM</h3>
-        <div class="count">2013–2014 · Shepparton</div>
-        <p>Two years hosting breakfast radio in regional Victoria. Up at 4:30am, five days a week, 15 hours of live radio. Where I learned to talk to anyone, about anything, without a script.</p>
+      <div class="viral-card reveal">
+        <a class="video-embed" data-video-id="REPLACE_WITH_DOMINOS_ID" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb">
+            <div class="video-placeholder">
+              <div class="video-placeholder-label">Domino's 100 Pepperoni</div>
+              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
+            </div>
+            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
+          </div>
+        </a>
+        <div class="meta"><span>TikTok</span><span>2023</span></div>
+        <h3>Domino's 100 pepperoni challenge</h3>
+        <div class="viral-stat">Strong TikTok performance</div>
+        <p>Domino's said their new pizza was "topped to the edge with 100 pieces of pepperoni." So I counted.</p>
+      </div>
+
+      <div class="viral-card reveal">
+        <a class="video-embed" data-video-id="REPLACE_WITH_ESCOOTER_ID" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb">
+            <div class="video-placeholder">
+              <div class="video-placeholder-label">The e-Scooter Sequel</div>
+              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
+            </div>
+            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
+          </div>
+        </a>
+        <div class="meta"><span>YouTube</span><span>2022</span></div>
+        <h3>The oBike sequel — e-scooters</h3>
+        <div class="viral-stat">5 scooters pulled out in under 2 hours</div>
+        <p>Same formula, new target. E-scooters dumped in the river. Went live on 3AW with Neil Mitchell that afternoon.</p>
       </div>
     </div>
   </div>
@@ -609,7 +686,6 @@ footer p {
       <span>Star 104.5</span>
       <span>Radio Today</span>
       <span>Business Insider</span>
-      <span>Wikipedia</span>
     </div>
   </div>
 </section>
@@ -633,24 +709,14 @@ footer p {
         <div class="tl-desc">Josh Janssen and I started recording a daily podcast about our real lives. 1,000+ episodes later we'd built one of Australia's longest-running independent shows. Hamish Blake, Sam Mac, Christian O'Connell all passed through.</div>
       </div>
       <div class="tl-item reveal">
-        <div class="tl-year">2016 — 2018</div>
-        <div class="tl-title">The viral years</div>
-        <div class="tl-desc">Counted the 1,000 Steps. Fished the oBikes. Poured the $3 cup inside the $2 cup. Multiple appearances on The Project. Covered by the ABC, News.com.au, Mashable. The "do the thing nobody else bothered to do" formula became a signature.</div>
-      </div>
-      <div class="tl-item reveal">
         <div class="tl-year">2018 — now</div>
         <div class="tl-title">VIDPOD · building the business</div>
-        <div class="tl-desc">Turned a personal brand and a network into a production company. Clients across education, finance, fitness, and tech. Word-of-mouth only. Running lean, running sharp, and making work I'd actually watch.</div>
-      </div>
-      <div class="tl-item reveal">
-        <div class="tl-year">2022</div>
-        <div class="tl-title">The e-scooter sequel</div>
-        <div class="tl-desc">Same format, five years later. Pulled five dumped e-scooters out of the river in under two hours. Went live on 3AW with Neil Mitchell. Proof that a good idea doesn't expire.</div>
+        <div class="tl-desc">Turned a personal brand and a network into a video and podcast production company. Clients across education, finance, fitness, and tech. Word-of-mouth only. Running lean, running sharp, and making work I'd actually watch.</div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-year">Now</div>
-        <div class="tl-title">Producing The Numbers Game + AI at the edge</div>
-        <div class="tl-desc">Producing The Numbers Game podcast and a slate of brand work. Currently building at the intersection of AI and production — the next "1,000 Steps" is whatever nobody's thought to count yet.</div>
+        <div class="tl-title">Still having a crack</div>
+        <div class="tl-desc">Building VIDPOD into the production partner I wish I'd had when I started. Working on the shows, the films, and the brand work that shape how I think. Currently building at the edge of AI and production — the next "1,000 Steps" is whatever nobody's thought to count yet.</div>
       </div>
     </div>
   </div>
