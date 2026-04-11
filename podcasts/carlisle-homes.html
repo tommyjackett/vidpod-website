@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Carlisle Homes podcast — produced by VIDPOD.">
-<title>Carlisle Homes · VIDPOD</title>
+<meta name="description" content="Home Files. Carlisle Homes' branded podcast, produced by VIDPOD. Expert insights for new home buyers and knockdown rebuilds.">
+<title>Home Files · VIDPOD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="_shared.css">
+<style>
+  /* Home Files / Carlisle Homes brand accent — pulled from carlislehomes.com.au --brand-teal */
+  :root { --brand: #0082a8; --brand-shade: #083c4d; }
+</style>
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -23,103 +27,200 @@
   <div class="nav-inner">
     <a href="../index.html" class="logo">VIDPOD<span class="dot"></span></a>
     <div class="nav-links">
-      <a href="../index.html#about">About</a>
-      <a href="../index.html#services">Services</a>
+      <a href="../index.html#what">About</a>
       <a href="../index.html#work-vid">Video</a>
       <a href="../index.html#work-pod">Podcast</a>
-      <a href="../story.html">Story</a>
       <a href="../index.html#contact" class="nav-cta">Say Hi</a>
     </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <header class="pod-hero">
   <div class="wrap">
     <div class="pod-hero-grid">
       <div class="pod-hero-art reveal">
-        <img src="../img/podcasts/carlisle-homes.jpg" alt="Carlisle Homes">
+        <img src="../img/podcasts/carlisle-homes.jpg" alt="Home Files artwork">
       </div>
-      <div>
-        <div class="eyebrow">Podcast · Case study</div>
-        <h1 class="reveal">Carlisle<br>Homes<span class="dot"></span></h1>
-        <p class="tagline reveal"><strong>A branded podcast for Carlisle Homes.</strong> Conversations about building, design, and the real stories behind Australian homes.</p>
-        <div class="chips reveal">
-          <span>Branded · Property</span>
+      <div class="reveal">
+        <div class="eyebrow">Branded · Carlisle Homes</div>
+        <h1>Home<br>Files</h1>
+        <p class="tagline"><strong>Your essential podcast guide to building a new home.</strong> Home Files is the Carlisle Homes podcast, walking buyers through every phase of the journey, from choosing the right builder to designing and styling the finished place. Industry experts, real customers, and a few notable names.</p>
+        <div class="chips">
+          <span>2 seasons</span>
+          <span>Knockdown Rebuild + First Home Buyer</span>
           <span>Branded podcast</span>
           <span>Full production</span>
+        </div>
+        <div class="listen">
+          <a href="https://www.carlislehomes.com.au/home-files/podcast/" target="_blank" rel="noopener">Home Files on Carlisle</a>
         </div>
       </div>
     </div>
   </div>
 </header>
 
+<!-- ABOUT THE SHOW (outward-facing) -->
 <section class="pod-sec">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">The show</div>
-      <h2>About<br>the show<span class="dot"></span></h2>
-      <p><strong>Carlisle Homes</strong> is one of Victoria\u2019s most respected home builders. Their podcast gives buyers, designers and industry people an inside look at what actually goes into building a great home.</p>
-      <p>VIDPOD produces the show end-to-end — planning, recording, editing, publishing, and all the content assets that go around it. A strong example of branded podcasting done with care.</p>
-      <p>Content like this is where branded podcasts earn their keep — useful, trusted, long-lasting conversations that sit next to a brand\u2019s best work.</p>
+    <div class="section-eyebrow reveal">The show</div>
+    <h2 class="reveal">About the show</h2>
+    <p class="reveal"><strong>Home Files</strong> is Carlisle Homes' branded podcast for anyone thinking about building. Whether you're knocking down an existing home to rebuild, or stepping into the property market for the first time, the show is designed to take the guesswork out of the journey.</p>
+    <p class="reveal">Across two seasons, Home Files sits down with industry experts, Carlisle's own specialists, and real customers to unpack each phase of the build, from assessing your block and setting a budget, through to choosing a design and styling the finished place. Season 2 is hosted by <strong>Caitlin Judd</strong>, guiding first home buyers through the whole process with a warm, practical tone.</p>
+    <p class="reveal">Published by Carlisle Homes.</p>
+  </div>
+</section>
+
+<!-- VIDPOD SIDE (the production story) -->
+<section class="pod-sec" style="background: var(--bg-2);">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">Our side of the story</div>
+    <h2 class="reveal">What VIDPOD built</h2>
+    <p class="reveal">Home Files is a proper branded podcast project. A national home builder with a clear audience problem: buyers feel lost in the build process. The answer was a long-form show that earns trust by being genuinely useful, episode after episode.</p>
+    <p class="reveal">VIDPOD handled the full production stack. Studio recording with hosts and guest experts, full episode edit, music and audio mastering, artwork direction, episode descriptions, and distribution across Carlisle's channels and the major podcast platforms. Season 2 brought a new host format and a tighter first-home-buyer focus.</p>
+
+    <div class="scope-grid" style="margin-top: 40px;">
+      <div class="scope-card reveal">
+        <h3>Studio recording</h3>
+        <p>Host-led recording sessions with Carlisle's experts, industry guests, and real customers. Full production setup in our Melbourne studio.</p>
+      </div>
+      <div class="scope-card reveal">
+        <h3>Full edit &amp; mastering</h3>
+        <p>Every episode cut, mixed, and mastered. Music beds, intro/outro, tight pacing so the advice lands cleanly.</p>
+      </div>
+      <div class="scope-card reveal">
+        <h3>Episode copy &amp; artwork</h3>
+        <p>Episode titles, descriptions, and artwork built to match Carlisle's brand and to surface well across discovery platforms.</p>
+      </div>
+      <div class="scope-card reveal">
+        <h3>Distribution</h3>
+        <p>Published on Carlisle's own podcast hub plus all major audio platforms. Buyers can listen wherever they already are.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- TIMELINE -->
 <section class="pod-sec">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">What we did</div>
-      <h2>Full<br>production<span class="dot"></span></h2>
-      <p>One team, every stage of the build. From concept to publish, we handle the whole pipeline so the host can focus on what they do best — the conversation.</p>
-    </div>
-    <div class="scope-grid">
-      <div class="scope-card"><h3>Recording</h3><p>Studio and remote recording sessions with Carlisle\u2019s team and guests.</p></div>
-      <div class="scope-card"><h3>Edit</h3><p>Full edit and mastering on every episode.</p></div>
-      <div class="scope-card"><h3>Show notes</h3><p>Research-backed notes and descriptions.</p></div>
-      <div class="scope-card"><h3>Distribution</h3><p>Published across all major audio platforms plus Carlisle channels.</p></div>
+    <div class="section-eyebrow reveal">Production journey</div>
+    <h2 class="reveal">Two seasons, two audiences</h2>
+    <p class="reveal">A branded podcast that evolved from knockdown rebuild stories to a dedicated first home buyer series.</p>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-year">Season 1 · Knockdown Rebuild</div>
+        <div class="tl-title">Launching the show</div>
+        <div class="tl-desc">Six episodes built around the knockdown rebuild audience. Designing the home you want, making finance less scary, insta-worthy interiors, sustainable builds that save money, and a real customer's Affinity home journey. VIDPOD set the format, the sound, and the production pipeline.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Season 2 · First Home Buyer</div>
+        <div class="tl-title">New host, new audience</div>
+        <div class="tl-desc">Host Caitlin Judd took the mic for a dedicated first home buyer series. Teaser plus five episodes walking buyers through choosing to build, affordability and finance, maximising your block, styling on a budget, and a step-by-step guide to the whole building process. Tighter focus, same production bar.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Ongoing</div>
+        <div class="tl-title">Live on the Carlisle hub</div>
+        <div class="tl-desc">Both seasons live on Carlisle's own podcast page at carlislehomes.com.au, plus major audio platforms. Content that keeps doing work long after it's published.</div>
+      </div>
     </div>
   </div>
 </section>
 
-
-
-<section class="pod-sec">
+<!-- BEHIND THE SCENES -->
+<section class="pod-sec" style="background: var(--bg-2);">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">More shows</div>
-      <h2>Other shows<br>we've made<span class="dot"></span></h2>
-    </div>
-    <div class="other-shows reveal">
-      <a class="other-show" href="the-numbers-game.html"><div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy"></div><div class="label">The Numbers Game</div></a>
-      <a class="other-show" href="lets-talk-teaching.html"><div class="other-show-art"><img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy"></div><div class="label">Let's Talk Teaching</div></a>
-      <a class="other-show" href="help-at-hand.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="Help at Hand" loading="lazy"></div><div class="label">Help at Hand</div></a>
-      <a class="other-show" href="unconventional-business.html"><div class="other-show-art"><img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business" loading="lazy"></div><div class="label">Unconventional Business</div></a>
-      <a class="other-show" href="the-daily-talk-show.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy"></div><div class="label">The Daily Talk Show</div></a>
+    <div class="section-eyebrow reveal">Behind the scenes</div>
+    <h2 class="reveal">In the studio</h2>
+    <p class="reveal">Home Files is recorded in our Melbourne studio. Host, guests, and Carlisle's team in the room together. Here's a look at how it comes together.</p>
+    <div class="pod-embed reveal">
+      <iframe
+        src="about:blank"
+        data-embed="REPLACE_WITH_HOMEFILES_BTS_YT_ID"
+        title="Home Files behind the scenes"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
   </div>
 </section>
 
+<!-- SOCIAL SNIPPETS -->
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">Social cutdowns</div>
+    <h2 class="reveal">Built for the feed</h2>
+    <p class="reveal">Short, sharp vertical snippets pulled from the moments that matter. Built in-house and delivered alongside each full episode.</p>
+    <div class="social-grid reveal">
+      <div class="social-tile">Snippet 01</div>
+      <div class="social-tile">Snippet 02</div>
+      <div class="social-tile">Snippet 03</div>
+      <div class="social-tile">Snippet 04</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="pod-sec pod-quote">
+  <div class="wrap">
+    <blockquote class="reveal">"A branded podcast that actually helps the audience make decisions. That's the bar. Home Files clears it."</blockquote>
+    <div class="cite reveal">VIDPOD · Home Files production team</div>
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="cta-strip">
   <div class="wrap">
-    <h2>Let's build<br>your next show<span class="dot"></span></h2>
-    <p>Branded podcasts, founder shows, interview series — end-to-end production from a team that actually makes podcasts.</p>
-    <a href="../index.html#contact" class="btn btn-primary">Say Hi →</a>
+    <h2>Want a show like<br>this one<span class="dot"></span></h2>
+    <p>We build long-running branded podcasts end-to-end. From concept through to the millionth download.</p>
+    <a href="../index.html#contact" class="btn btn-primary">Say Hi</a>
+  </div>
+</section>
+
+<!-- OTHER SHOWS -->
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">More of our work</div>
+    <h2 class="reveal">Other shows we produce</h2>
+    <div class="other-shows reveal">
+      <a class="other-show" href="lets-talk-teaching.html">
+        <div class="other-show-art"><img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching"></div>
+        <div class="label">Let's Talk Teaching</div>
+      </a>
+      <a class="other-show" href="the-numbers-game.html">
+        <div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game"></div>
+        <div class="label">The Numbers Game</div>
+      </a>
+      <a class="other-show" href="help-at-hand.html">
+        <div class="other-show-art"><img src="../img/podcasts/help-at-hand.jpg" alt="Help at Hand"></div>
+        <div class="label">Help at Hand</div>
+      </a>
+      <a class="other-show" href="unconventional-business.html">
+        <div class="other-show-art"><img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business"></div>
+        <div class="label">Unconventional Business</div>
+      </a>
+      <a class="other-show" href="the-daily-talk-show.html">
+        <div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show"></div>
+        <div class="label">The Daily Talk Show</div>
+      </a>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>© VIDPOD 2026 · Melbourne</p>
+    <p>© 2026 VIDPOD Pty Ltd · Melbourne, Australia</p>
   </div>
 </footer>
 
 <script>
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
+// Reveal on scroll
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 </script>
 </body>
 </html>
