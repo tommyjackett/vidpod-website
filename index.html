@@ -364,11 +364,25 @@ section { padding: 140px 0; position: relative; }
   margin-bottom: 28px;
   text-transform: uppercase;
 }
+.services-head {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 60px;
+}
+@media (max-width: 860px) {
+  .services-head { grid-template-columns: 1fr; gap: 22px; margin-bottom: 40px; align-items: start; }
+}
 .services-title {
-  font-size: clamp(30px, 3.6vw, 52px);
-  line-height: 0.95;
-  max-width: 16ch;
-  margin-bottom: 22px;
+  font-size: clamp(32px, 4.2vw, 60px);
+  line-height: 0.92;
+  max-width: 14ch;
+  margin-bottom: 0;
+}
+.services-head .section-intro {
+  margin: 0;
+  padding-bottom: 6px;
 }
 .section-intro {
   font-size: clamp(17px, 1.5vw, 20px);
@@ -1318,7 +1332,7 @@ footer {
 
 <section class="services" id="what">
   <div class="wrap">
-    <div class="reveal">
+    <div class="services-head reveal">
       <h2 class="section-title services-title">Video and podcast production is our thing<span class="dot"></span></h2>
       <p class="section-intro">Melbourne-based, more than a decade in the game, thousands of podcast episodes and videos produced. From first idea to final cut, and everything in between.</p>
     </div>
