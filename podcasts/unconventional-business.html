@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Unconventional Business — a HubSpot Podcast Network show.">
+<title>Unconventional Business · VIDPOD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css">
+<script>
+(function() {
+  var saved = localStorage.getItem('vidpod-theme');
+  if (!saved) saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  document.documentElement.dataset.theme = saved;
+})();
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">VIDPOD<span class="dot"></span></a>
+    <div class="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#work-vid">Video</a>
+      <a href="../index.html#work-pod">Podcast</a>
+      <a href="../story.html">Story</a>
+      <a href="../index.html#contact" class="nav-cta">Say Hi</a>
+    </div>
+  </div>
+</nav>
+
+<header class="pod-hero">
+  <div class="wrap">
+    <div class="pod-hero-grid">
+      <div class="pod-hero-art reveal">
+        <img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business">
+      </div>
+      <div>
+        <div class="eyebrow">Podcast · Case study</div>
+        <h1 class="reveal">Unconventional<br>Business<span class="dot"></span></h1>
+        <p class="tagline reveal"><strong>Part of the HubSpot Podcast Network.</strong> Conversations with founders, operators and builders doing business their own way.</p>
+        <div class="chips reveal">
+          <span>HubSpot Podcast Network</span>
+          <span>Business</span>
+          <span>Interview series</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">The show</div>
+      <h2>About<br>the show<span class="dot"></span></h2>
+      <p><strong>Unconventional Business</strong> sits inside the HubSpot Podcast Network — a show about founders, operators and business builders who skipped the playbook and figured it out their own way.</p>
+      <p>VIDPOD is involved in the production side of the show — helping shape the format, running the sessions, and keeping the whole pipeline moving so the hosts can focus on the conversations.</p>
+      <p>Being part of the HubSpot network is a privilege. The brief is high-quality, the audience is serious, and the stories are worth telling.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">What we did</div>
+      <h2>Full<br>production<span class="dot"></span></h2>
+      <p>One team, every stage of the build. From concept to publish, we handle the whole pipeline so the host can focus on what they do best — the conversation.</p>
+    </div>
+    <div class="scope-grid">
+      <div class="scope-card"><h3>Production</h3><p>Session management, recording setup, and production workflow for every episode.</p></div>
+      <div class="scope-card"><h3>Edit</h3><p>Full edit delivered on schedule — clean, paced, and ready for the HubSpot network to publish.</p></div>
+      <div class="scope-card"><h3>Show notes</h3><p>Research-backed episode notes and descriptions that do the guest and the topic justice.</p></div>
+      <div class="scope-card"><h3>Content support</h3><p>Additional assets, clips and promo material to support the show\u2019s launch and growth.</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="pod-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">More shows</div>
+      <h2>Other shows<br>we've made<span class="dot"></span></h2>
+    </div>
+    <div class="other-shows reveal">
+      <a class="other-show" href="the-numbers-game.html"><div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy"></div><div class="label">The Numbers Game</div></a>
+      <a class="other-show" href="lets-talk-teaching.html"><div class="other-show-art"><img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy"></div><div class="label">Let's Talk Teaching</div></a>
+      <a class="other-show" href="help-at-hand.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="Help at Hand" loading="lazy"></div><div class="label">Help at Hand</div></a>
+      <a class="other-show" href="the-daily-talk-show.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy"></div><div class="label">The Daily Talk Show</div></a>
+      <a class="other-show" href="carlisle-homes.html"><div class="other-show-art"><img src="../img/podcasts/carlisle-homes.jpg" alt="Carlisle Homes" loading="lazy"></div><div class="label">Carlisle Homes</div></a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="wrap">
+    <h2>Let's build<br>your next show<span class="dot"></span></h2>
+    <p>Branded podcasts, founder shows, interview series — end-to-end production from a team that actually makes podcasts.</p>
+    <a href="../index.html#contact" class="btn btn-primary">Say Hi →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© VIDPOD 2026 · Melbourne</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

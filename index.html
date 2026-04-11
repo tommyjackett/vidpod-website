@@ -391,13 +391,24 @@ section { padding: 140px 0; position: relative; }
   border-radius: 28px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.4s var(--ease);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
   min-height: 540px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 .service-card:hover { transform: translateY(-6px); }
+/* Theme-aware glow/shadow on hover */
+html[data-theme="light"] .service-card:hover {
+  box-shadow: 0 30px 80px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,0,0,0.04);
+}
+html[data-theme="dark"] .service-card:hover {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 30px 90px rgba(255,255,255,0.14), 0 0 120px rgba(255,255,255,0.08);
+}
+html[data-theme="dark"] .service-vid:hover {
+  box-shadow: 0 0 0 1px rgba(0,255,170,0.3), 0 30px 90px rgba(0,255,170,0.22), 0 0 140px rgba(0,255,170,0.18);
+}
 .service-vid {
   background: var(--green);
   color: #000;
@@ -492,7 +503,12 @@ section { padding: 140px 0; position: relative; }
   transition: all 0.35s var(--ease);
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
+.work-item, .work-item * { color: inherit; }
+a.pod-art-item { text-decoration: none; color: inherit; display: block; }
+a.pod-art-item .pod-art-label { color: #fff; }
 .work-vid .work-item {
   background: #fff;
   border: 1px solid rgba(0,0,0,0.08);
@@ -998,27 +1014,31 @@ footer {
     <div class="pod-artwork reveal">
       <div class="pod-artwork-eyebrow">Shows we've produced</div>
       <div class="pod-artwork-grid">
-        <div class="pod-art-item">
+        <a class="pod-art-item" href="podcasts/the-numbers-game.html">
           <img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy">
           <div class="pod-art-label">The Numbers Game</div>
-        </div>
-        <div class="pod-art-item">
+        </a>
+        <a class="pod-art-item" href="podcasts/lets-talk-teaching.html">
           <img src="img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy">
           <div class="pod-art-label">Let's Talk Teaching</div>
-        </div>
-        <div class="pod-art-item">
+        </a>
+        <a class="pod-art-item" href="podcasts/unconventional-business.html">
           <img src="img/podcasts/unconventional.jpg" alt="Unconventional Business — HubSpot" loading="lazy">
           <div class="pod-art-label">Unconventional Business · HubSpot</div>
-        </div>
-        <div class="pod-art-item">
+        </a>
+        <a class="pod-art-item" href="podcasts/the-daily-talk-show.html">
           <img src="img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy">
           <div class="pod-art-label">The Daily Talk Show</div>
-        </div>
+        </a>
+        <a class="pod-art-item" href="podcasts/carlisle-homes.html">
+          <img src="img/podcasts/carlisle-homes.jpg" alt="Carlisle Homes podcast" loading="lazy">
+          <div class="pod-art-label">Carlisle Homes</div>
+        </a>
       </div>
     </div>
 
     <div class="work-grid">
-      <div class="work-item reveal">
+      <a class="work-item reveal" href="podcasts/lets-talk-teaching.html">
         <div class="work-img">
           <img src="img/work/monash-ltt.jpg" alt="Monash University — Let's Talk Teaching">
         </div>
@@ -1030,9 +1050,9 @@ footer {
             <li>Branded podcast</li><li>Studio</li><li>Edit &amp; publish</li><li>Artwork</li>
           </ul>
         </div>
-      </div>
+      </a>
 
-      <div class="work-item reveal">
+      <a class="work-item reveal" href="podcasts/the-numbers-game.html">
         <div class="work-img">
           <img src="img/work/tng.jpg" alt="The Numbers Game podcast">
         </div>
@@ -1044,9 +1064,9 @@ footer {
             <li>Video podcast</li><li>Full production</li><li>Show notes</li><li>Social</li>
           </ul>
         </div>
-      </div>
+      </a>
 
-      <div class="work-item reveal">
+      <a class="work-item reveal" href="podcasts/help-at-hand.html">
         <div class="work-img">
           <img src="img/work/help-at-hand.jpg" alt="Help at Hand — high-end branded podcast">
         </div>
@@ -1058,7 +1078,7 @@ footer {
             <li>Branded series</li><li>Remote recording</li><li>Cinematic</li>
           </ul>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
