@@ -267,6 +267,75 @@ section { padding: 140px 0; position: relative; }
 
 /* ===== ABOUT ===== */
 .about { border-top: 1px solid var(--line); }
+
+/* ===== FOUNDER ===== */
+.founder {
+  border-top: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 900px) { .founder-grid { grid-template-columns: 1fr; gap: 40px; } }
+.founder-photo {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #0A0A0A;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.founder-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.founder-copy .section-eyebrow { margin-bottom: 14px; }
+.founder-copy h2 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(40px, 5.2vw, 76px);
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  color: var(--fg);
+}
+.founder-copy p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.founder-copy p strong { color: var(--fg); font-weight: 600; }
+.founder-meta {
+  display: flex;
+  gap: 28px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.founder-meta-item {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.founder-meta-item strong {
+  display: block;
+  color: var(--fg);
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -692,6 +761,38 @@ footer {
           <div>
             <div class="stat-num">10+ yrs<span class="dot"></span></div>
             <div class="stat-label">Producing for brands</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder" id="founder">
+  <div class="wrap">
+    <div class="founder-grid">
+      <div class="founder-photo reveal">
+        <img src="img/about/tommy.jpg" alt="Tommy Jackett, founder of VIDPOD" loading="lazy">
+      </div>
+      <div class="founder-copy reveal">
+        <div class="section-eyebrow">About the founder</div>
+        <h2>Tommy<br>Jackett<span class="dot"></span></h2>
+        <p><strong>Filmmaker, podcast host, storyteller — husband and father.</strong> Tommy has spent over a decade at the intersection of video, audio and human connection, helping brands understand, capture and share their story.</p>
+        <p>He started in breakfast radio in regional Victoria — up at 4:30am, hosting 15 hours of live radio a week. That instinct for conversation, community and telling stories on the fly became the foundation for everything that followed: TV, podcasts, and the business he runs today.</p>
+        <p>Tommy co-created and produced <strong>The Daily Talk Show</strong> — 1,000+ episodes with Josh Janssen — and now produces <strong>The Numbers Game</strong> podcast alongside a roster of brand partners across education, finance, fitness and tech.</p>
+        <p>VIDPOD is the working expression of that whole arc: a video and podcast production company built on relationships, genuine curiosity, and the ability to spot a good story before anyone else does.</p>
+        <div class="founder-meta">
+          <div class="founder-meta-item">
+            <strong>10+ yrs</strong>
+            Video &amp; podcast production
+          </div>
+          <div class="founder-meta-item">
+            <strong>1,000+</strong>
+            Podcast episodes
+          </div>
+          <div class="founder-meta-item">
+            <strong>Melbourne</strong>
+            Based &amp; raised
           </div>
         </div>
       </div>
