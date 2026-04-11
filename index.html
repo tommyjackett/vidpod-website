@@ -123,6 +123,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 700;
   border-radius: 100px;
   transition: all 0.2s var(--ease);
+  font-family: inherit;
+  font-size: 14px;
+  border: 0;
+  cursor: pointer;
+  letter-spacing: 0;
 }
 .nav-cta:hover { transform: translateY(-1px); }
 .theme-toggle {
@@ -264,6 +269,72 @@ section { padding: 140px 0; position: relative; }
   max-width: 680px;
   line-height: 1.6;
 }
+.section-intro strong { color: var(--fg); font-weight: 700; }
+
+/* ===== SAY HI POPUP ===== */
+.sayhi-wrap { position: relative; }
+.sayhi-pop {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  min-width: 260px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,255,170,0.08);
+  padding: 22px 22px 20px;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+  z-index: 120;
+}
+html[data-theme="dark"] .sayhi-pop {
+  box-shadow: 0 24px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,255,170,0.18);
+}
+.sayhi-pop.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.sayhi-pop::before {
+  content: '';
+  position: absolute;
+  top: -6px; right: 22px;
+  width: 12px; height: 12px;
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+.sayhi-pop-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.sayhi-pop-title {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  color: var(--fg);
+}
+.sayhi-pop-btn {
+  display: block;
+  text-align: center;
+  background: var(--green);
+  color: #000;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s;
+}
+.sayhi-pop-btn:hover { transform: translateY(-1px); }
 
 /* ===== ABOUT ===== */
 .about { border-top: 1px solid var(--line); }
@@ -946,12 +1017,19 @@ footer {
       <a href="#what">What we do</a>
       <a href="#work-vid">Video</a>
       <a href="#work-pod">Podcast</a>
-      <a href="#founder">Founder</a>
+      <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
-      <a href="#contact" class="nav-cta">Say Hi</a>
+      <div class="sayhi-wrap">
+        <button type="button" class="nav-cta" id="sayhiBtn" aria-haspopup="true" aria-expanded="false">Say Hi</button>
+        <div class="sayhi-pop" id="sayhiPop" role="dialog" aria-label="Get in touch">
+          <div class="sayhi-pop-label">Ready to chat?</div>
+          <div class="sayhi-pop-title">Get in<br>touch now<span class="dot"></span></div>
+          <a href="#contact" class="sayhi-pop-btn" id="sayhiGo">Jump to contact →</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -972,7 +1050,7 @@ footer {
   <div class="wrap">
     <div class="reveal">
       <h2 class="section-title">What we do<span class="dot"></span></h2>
-      <p class="section-intro">Melbourne-based. 10+ years. Thousands of podcast episodes and hundreds of videos produced — one team that handles the whole thing. Idea, shoot, edit, publish, promote. Built for brands that actually care how their story lands.</p>
+      <p class="section-intro">People ask me what my business is like. I always say — <strong>oh, VIDPOD</strong>. Because we don't forget: we're good at video, and we're great at podcast. Simple as that. We cover the vid, and we cover the pod.</p>
     </div>
 
     <div class="services-grid">
@@ -1279,6 +1357,25 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 window.addEventListener('load', function() {
   document.querySelectorAll('.hero .reveal').forEach(function(el) { el.classList.add('in'); });
 });
+
+// Say Hi popup
+(function() {
+  var btn = document.getElementById('sayhiBtn');
+  var pop = document.getElementById('sayhiPop');
+  var go  = document.getElementById('sayhiGo');
+  if (!btn || !pop) return;
+  function close() { pop.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function open()  { pop.classList.add('open');    btn.setAttribute('aria-expanded','true');  }
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (pop.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e) {
+    if (!pop.contains(e.target) && e.target !== btn) close();
+  });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  go && go.addEventListener('click', function() { setTimeout(close, 150); });
+})();
 </script>
 </body>
 </html>
