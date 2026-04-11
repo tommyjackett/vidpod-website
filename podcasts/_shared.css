@@ -490,6 +490,8 @@ footer p { font-size: 13px; color: var(--muted); }
   position: relative;
   padding: 10px 0 0;
 }
+.process.process-3 { grid-template-columns: repeat(3, 1fr); }
+.process.process-4 { grid-template-columns: repeat(4, 1fr); }
 .process::before {
   content: '';
   position: absolute;
@@ -536,18 +538,22 @@ footer p { font-size: 13px; color: var(--muted); }
     margin-left: -22px;
     margin-right: -22px;
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
+    touch-action: pan-x pan-y;
     padding: 10px 0 24px;
   }
   .process {
-    grid-template-columns: repeat(5, 200px);
+    grid-template-columns: repeat(5, 220px);
     width: max-content;
     padding: 10px 22px 0;
   }
+  .process.process-3 { grid-template-columns: repeat(3, 240px); }
+  .process.process-4 { grid-template-columns: repeat(4, 220px); }
   .process::before {
-    left: calc(22px + 100px);
-    right: calc(22px + 100px);
+    left: calc(22px + 110px);
+    right: calc(22px + 110px);
   }
   .process-step { scroll-snap-align: center; }
 }
@@ -617,32 +623,50 @@ footer p { font-size: 13px; color: var(--muted); }
   }
 }
 
-/* BTS CAROUSEL — simple horizontal-scroll */
+/* BTS CAROUSEL — horizontal scroll, supports mixed aspect ratios */
+.bts-carousel-wrap {
+  position: relative;
+  margin-top: 40px;
+  /* break out to screen edges on mobile so swipe feels natural */
+  margin-left: -32px;
+  margin-right: -32px;
+}
+@media (max-width: 720px) {
+  .bts-carousel-wrap { margin-left: -22px; margin-right: -22px; }
+}
 .bts-carousel {
   display: flex;
   gap: 18px;
-  margin-top: 40px;
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  padding: 6px 0 18px;
-  margin-left: -22px;
-  margin-right: -22px;
-  padding-left: 22px;
-  padding-right: 22px;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: 32px;
+  padding: 6px 32px 24px;
+  touch-action: pan-x pan-y;
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+@media (max-width: 720px) {
+  .bts-carousel { padding: 6px 22px 24px; scroll-padding-left: 22px; }
 }
 .bts-carousel::-webkit-scrollbar { height: 8px; }
+.bts-carousel::-webkit-scrollbar-track { background: transparent; }
 .bts-carousel::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
 .bts-item {
   flex: 0 0 auto;
-  width: 340px;
-  aspect-ratio: 4 / 5;
+  height: 440px;
   border-radius: 16px;
   overflow: hidden;
   background: #0A0A0A;
   box-shadow: 0 18px 60px rgba(0,0,0,0.2);
   scroll-snap-align: start;
   position: relative;
+  /* default (portrait 9/16) */
+  aspect-ratio: 9 / 16;
+  width: auto;
 }
 .bts-item img,
 .bts-item video,
@@ -651,9 +675,31 @@ footer p { font-size: 13px; color: var(--muted); }
   width: 100%; height: 100%;
   object-fit: cover;
   border: 0;
+  display: block;
+  pointer-events: auto;
 }
-.bts-item.bts-video { aspect-ratio: 16 / 9; width: 540px; }
-@media (max-width: 560px) {
-  .bts-item { width: 260px; }
-  .bts-item.bts-video { width: 320px; }
+/* aspect ratio variants — width auto, height fixed */
+.bts-item.is-portrait  { aspect-ratio: 9 / 16; }
+.bts-item.is-square    { aspect-ratio: 1 / 1; }
+.bts-item.is-landscape { aspect-ratio: 16 / 9; }
+.bts-item.is-wide      { aspect-ratio: 21 / 9; }
+
+/* Let iframe pointer events pass through when the user is dragging */
+.bts-carousel.dragging .bts-item iframe,
+.bts-carousel.dragging .bts-item video { pointer-events: none; }
+
+@media (max-width: 720px) {
+  .bts-item { height: 380px; }
+}
+@media (max-width: 480px) {
+  .bts-item { height: 340px; }
+}
+
+/* Hint strip */
+.bts-hint {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 10px;
 }
