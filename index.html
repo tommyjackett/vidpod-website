@@ -377,6 +377,182 @@ section { padding: 140px 0; position: relative; }
   font-weight: 600;
 }
 
+/* ===== FOUNDER (simplified) — full-width image ===== */
+.founder-simple { max-width: var(--max); margin: 0 auto; padding: 0 36px; }
+@media (max-width: 640px) { .founder-simple { padding: 0 22px; } }
+.founder-simple .section-eyebrow { margin-bottom: 18px; }
+.founder-simple h2 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(44px, 6.2vw, 96px);
+  line-height: 0.88;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  color: var(--fg);
+  max-width: 14ch;
+}
+.founder-simple .founder-lede {
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 62ch;
+  margin-bottom: 44px;
+}
+.founder-simple .founder-lede strong { color: var(--fg); font-weight: 600; }
+.founder-fullphoto {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0A0A0A;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+}
+@media (max-width: 900px) { .founder-fullphoto { aspect-ratio: 4 / 5; border-radius: 18px; } }
+.founder-fullphoto img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+.founder-simple .founder-actions { margin: 36px 0 0; display: flex; gap: 14px; flex-wrap: wrap; }
+.founder-simple .founder-meta {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.founder-simple .founder-meta-item {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.founder-simple .founder-meta-item strong {
+  display: block;
+  color: var(--fg);
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+/* ===== PRODUCT / SHOW CARD GRID (shared 3×2) ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+}
+@media (max-width: 1000px) { .card-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+@media (max-width: 520px) { .card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+.pcard {
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  position: relative;
+}
+.pcard:hover { transform: translateY(-4px); }
+
+.work-vid .pcard { background: #fff; border: 1px solid rgba(0,0,0,0.08); }
+.work-vid .pcard:hover { box-shadow: 0 20px 48px rgba(0,0,0,0.15); }
+.work-pod .pcard { background: #111; border: 1px solid #222; }
+.work-pod .pcard:hover { border-color: var(--green); box-shadow: 0 20px 48px rgba(0,255,170,0.12); }
+
+.pcard-media {
+  position: relative;
+  overflow: hidden;
+  background: #0A0A0A;
+}
+.pcard-media.media-video { aspect-ratio: 16 / 9; }
+.pcard-media.media-square { aspect-ratio: 1 / 1; }
+.pcard-media img, .pcard-media iframe {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 0;
+  transition: transform 0.6s var(--ease);
+}
+.pcard:hover .pcard-media img { transform: scale(1.04); }
+.pcard-media .pcard-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.pcard-media .pcard-play svg {
+  width: 54px; height: 54px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+  opacity: 0.92;
+  transition: transform 0.3s var(--ease);
+}
+.pcard:hover .pcard-play svg { transform: scale(1.08); }
+.pcard-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pcard-body { padding: 18px 20px 22px; }
+@media (max-width: 520px) { .pcard-body { padding: 14px 14px 18px; } }
+.pcard-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.work-vid .pcard-eyebrow { color: rgba(0,0,0,0.5); }
+.work-pod .pcard-eyebrow { color: rgba(255,255,255,0.5); }
+.pcard h4 {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+@media (max-width: 520px) { .pcard h4 { font-size: 16px; } }
+.work-vid .pcard h4 { color: #000; }
+.work-pod .pcard h4 { color: #fff; }
+.pcard-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+@media (max-width: 520px) { .pcard-desc { font-size: 12.5px; } }
+.work-vid .pcard-desc { color: rgba(0,0,0,0.68); }
+.work-pod .pcard-desc { color: rgba(255,255,255,0.62); }
+
+/* ===== SCOPED BTS MARQUEE (per-section) ===== */
+.bts-strip {
+  margin-top: 80px;
+  padding-top: 60px;
+  position: relative;
+}
+.work-vid .bts-strip { border-top: 1px solid rgba(0,0,0,0.12); }
+.work-pod .bts-strip { border-top: 1px solid rgba(255,255,255,0.1); }
+.bts-strip-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.work-vid .bts-strip-label { color: rgba(0,0,0,0.55); }
+.work-pod .bts-strip-label { color: rgba(255,255,255,0.55); }
+
 /* ===== SERVICES ===== */
 .services { border-top: 1px solid var(--line); background: var(--bg-2); }
 .services-grid {
@@ -413,7 +589,7 @@ html[data-theme="dark"] .service-vid:hover {
   background: var(--green);
   color: #000;
 }
-.service-vid .dot { background: #000; }
+.service-vid .dot { background: #fff; }
 .service-pod {
   background: #000;
   color: #fff;
@@ -837,35 +1013,23 @@ footer {
 </section>
 
 <section class="founder" id="founder">
-  <div class="wrap">
-    <div class="founder-grid">
-      <div class="founder-photo reveal">
-        <img src="img/about/tommy.jpg" alt="Tommy Jackett, founder of VIDPOD" loading="lazy">
+  <div class="founder-simple">
+    <div class="reveal">
+      <div class="section-eyebrow">About the founder</div>
+      <h2>Hey, I'm<br>Tommy Jackett<span class="dot"></span></h2>
+      <p class="founder-lede"><strong>Creator and storyteller at heart.</strong> Over a decade living and breathing video and podcast — in front of the camera, behind it, on the mic, in the edit. Now I help brands tell their stories properly.</p>
+    </div>
+    <div class="founder-fullphoto reveal">
+      <img src="img/about/tommy.jpg" alt="Tommy Jackett, founder of VIDPOD" loading="lazy">
+    </div>
+    <div class="reveal">
+      <div class="founder-actions">
+        <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
       </div>
-      <div class="founder-copy reveal">
-        <div class="section-eyebrow">About the founder</div>
-        <h2>Hey, I'm<br>Tommy<br>Jackett<span class="dot"></span></h2>
-        <p><strong>I'm a creator and storyteller at heart.</strong> I've been living and breathing this stuff for over a decade — in front of the camera, behind it, on the mic, cutting the edit, chasing the idea nobody else bothered to chase.</p>
-        <p>I started in breakfast radio in regional Victoria — up at 4:30am, 15 hours of live radio a week. Since then I've hosted TV, appeared on The Project, co-hosted <strong>The Daily Talk Show</strong> for 1,000+ episodes with Josh Janssen, and built a body of work covered by the ABC, The Age, News.com.au, Herald Sun, Pedestrian and Mashable.</p>
-        <p>I fished oBikes out of the river. I proved the $3 coffee cup fits inside the $2 one. I counted every step on the 1,000 Steps. I've spent years finding stories nobody else saw and turning them into content people actually watched.</p>
-        <p><strong>VIDPOD is where that instinct goes to work for brands.</strong> Same eye for a good idea, same obsession with the craft, now aimed at helping you tell your story properly.</p>
-        <div class="founder-actions">
-          <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
-        </div>
-        <div class="founder-meta">
-          <div class="founder-meta-item">
-            <strong>10+ yrs</strong>
-            Doing the work
-          </div>
-          <div class="founder-meta-item">
-            <strong>1,000+</strong>
-            Podcast episodes
-          </div>
-          <div class="founder-meta-item">
-            <strong>Melbourne</strong>
-            Based &amp; raised
-          </div>
-        </div>
+      <div class="founder-meta">
+        <div class="founder-meta-item"><strong>10+ yrs</strong>Doing the work</div>
+        <div class="founder-meta-item"><strong>1,500+</strong>Episodes produced</div>
+        <div class="founder-meta-item"><strong>Melbourne</strong>Based &amp; raised</div>
       </div>
     </div>
   </div>
@@ -921,83 +1085,96 @@ footer {
     <div class="reveal">
       <div class="section-eyebrow">Video production</div>
       <h2 class="section-title">VID<span class="dot"></span></h2>
-      <p class="section-intro">Selected video work. Brand films, founding stories, case studies, and long-form content built to live everywhere — from homepage heroes to social cutdowns.</p>
+      <p class="section-intro">Six things we make. Click any one to see the case studies.</p>
     </div>
 
-    <div class="work-grid">
-      <div class="work-item reveal">
-        <div class="work-img">
-          <img src="img/work/barefoot.jpg" alt="Barefoot — 10-part course">
+    <div class="card-grid">
+      <a class="pcard reveal" href="video/founding-story.html">
+        <div class="pcard-media media-video">
+          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
+          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
         </div>
-        <div class="work-body">
-          <div class="work-meta"><span>Education · Course</span><span>2025</span></div>
-          <h4>Barefoot</h4>
-          <p>A 10-part educational course anchored by a cinematic trailer that launched the series.</p>
-          <ul class="work-tags">
-            <li>Course series</li><li>Trailer</li><li>Scripting</li><li>Studio</li>
-          </ul>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Founding story</div>
+          <h4>Founding story</h4>
+          <p class="pcard-desc">Why the brand exists. The founder, on camera, the way people actually remember you.</p>
         </div>
-      </div>
+      </a>
 
-      <div class="work-item reveal">
-        <div class="work-img">
-          <img src="img/work/pilates.jpg" alt="Pilates — full video suite">
+      <a class="pcard reveal" href="video/brand-film.html">
+        <div class="pcard-media media-video">
+          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
+          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
         </div>
-        <div class="work-body">
-          <div class="work-meta"><span>Franchise · Brand suite</span><span>Ongoing</span></div>
-          <h4>Pilates</h4>
-          <p>A full suite across franchise sales — founding story, brand hero, and a library of case study videos.</p>
-          <ul class="work-tags">
-            <li>Founder story</li><li>Brand film</li><li>Case studies</li><li>Social</li>
-          </ul>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Brand film</div>
+          <h4>Brand film</h4>
+          <p class="pcard-desc">A hero film for the top of the site, the pitch deck, the launch. Built to work everywhere.</p>
         </div>
-      </div>
+      </a>
 
-      <div class="work-item reveal">
-        <div class="work-img">
-          <img src="img/work/brava.jpg" alt="Brava — brand film">
+      <a class="pcard reveal" href="video/case-study.html">
+        <div class="pcard-media media-video">
+          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
+          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
         </div>
-        <div class="work-body">
-          <div class="work-meta"><span>Brand · Film</span><span>2024</span></div>
-          <h4>Brava</h4>
-          <p>Story-led brand film designed to live anywhere — from a pitch deck to a homepage hero.</p>
-          <ul class="work-tags">
-            <li>Brand film</li><li>Story</li><li>Cinematography</li>
-          </ul>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Case study</div>
+          <h4>Case study</h4>
+          <p class="pcard-desc">Real customers, real outcomes. Filmed like a story, not a testimonial.</p>
         </div>
-      </div>
+      </a>
+
+      <a class="pcard reveal" href="video/social-content.html">
+        <div class="pcard-media media-video">
+          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
+          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Social content</div>
+          <h4>Social content</h4>
+          <p class="pcard-desc">Short, sharp, built for the feed. Packs that punch above their runtime.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="video/product-video.html">
+        <div class="pcard-media media-video">
+          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
+          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Product video</div>
+          <h4>Product video</h4>
+          <p class="pcard-desc">Show the thing. What it is, what it does, why anyone should care — in 60 seconds.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="video/event-film.html">
+        <div class="pcard-media media-video">
+          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
+          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Event film</div>
+          <h4>Event film</h4>
+          <p class="pcard-desc">Conference, launch, offsite. Capture it properly so it actually gets used afterwards.</p>
+        </div>
+      </a>
     </div>
-  </div>
-</section>
 
-<!-- BTS MARQUEE — auto-scrolling photo strip -->
-<section class="marquee" id="bts">
-  <div class="marquee-header reveal">
-    <div class="section-eyebrow">Behind the scenes</div>
-    <h2>In the room<span class="dot"></span></h2>
-  </div>
-  <div class="marquee-viewport">
-    <div class="marquee-track">
-      <!-- Set 1 -->
-      <div class="marquee-item"><img src="img/marquee/m1.jpg" alt="Studio" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m2.jpg" alt="Studio" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m3.jpg" alt="Studio" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m4.jpg" alt="Let's Talk Teaching" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m5.jpg" alt="The Numbers Game" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m6.jpg" alt="The Numbers Game" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m7.jpg" alt="The Numbers Game" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m8.jpg" alt="The Numbers Game hosts" loading="lazy"></div>
-      <div class="marquee-item"><img src="img/marquee/m9.jpg" alt="POD BTS" loading="lazy"></div>
-      <!-- Set 2 (duplicate for seamless loop) -->
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m1.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m2.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m3.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m4.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m5.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m6.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m7.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m8.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m9.jpg" alt="" loading="lazy"></div>
+    <!-- VIDEO BTS -->
+    <div class="bts-strip reveal">
+      <div class="bts-strip-label">Video · Behind the scenes</div>
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          <div class="marquee-item"><img src="img/marquee/m1.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m2.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m3.jpg" alt="Video BTS" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m1.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m2.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m3.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1008,77 +1185,96 @@ footer {
     <div class="reveal">
       <div class="section-eyebrow">Podcast production</div>
       <h2 class="section-title">POD<span class="dot"></span></h2>
-      <p class="section-intro">High-end branded podcast production. End-to-end — concept, recording, editing, show notes, distribution, promotion. One team, every stage.</p>
+      <p class="section-intro">Six shows we've produced. Branded, flagship, long-running. Click any one for the full case study.</p>
     </div>
 
-    <div class="pod-artwork reveal">
-      <div class="pod-artwork-eyebrow">Shows we've produced</div>
-      <div class="pod-artwork-grid">
-        <a class="pod-art-item" href="podcasts/the-numbers-game.html">
+    <div class="card-grid">
+      <a class="pcard reveal" href="podcasts/the-numbers-game.html">
+        <div class="pcard-media media-square">
           <img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy">
-          <div class="pod-art-label">The Numbers Game</div>
-        </a>
-        <a class="pod-art-item" href="podcasts/lets-talk-teaching.html">
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Finance · Flagship</div>
+          <h4>The Numbers Game</h4>
+          <p class="pcard-desc">Australia's #1 finance podcast. Full production partner.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="podcasts/lets-talk-teaching.html">
+        <div class="pcard-media media-square">
           <img src="img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy">
-          <div class="pod-art-label">Let's Talk Teaching</div>
-        </a>
-        <a class="pod-art-item" href="podcasts/unconventional-business.html">
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Education · Monash</div>
+          <h4>Let's Talk Teaching</h4>
+          <p class="pcard-desc">Flagship podcast for Monash University. Studio, edit, artwork, publish.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="podcasts/help-at-hand.html">
+        <div class="pcard-media media-square">
+          <img src="img/podcasts/tdts.jpg" alt="Help at Hand" loading="lazy">
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Branded · High-end</div>
+          <h4>Help at Hand</h4>
+          <p class="pcard-desc">Considered, cinematic branded podcast built for a brand that cares about craft.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="podcasts/unconventional-business.html">
+        <div class="pcard-media media-square">
           <img src="img/podcasts/unconventional.jpg" alt="Unconventional Business — HubSpot" loading="lazy">
-          <div class="pod-art-label">Unconventional Business · HubSpot</div>
-        </a>
-        <a class="pod-art-item" href="podcasts/the-daily-talk-show.html">
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">HubSpot Podcast Network</div>
+          <h4>Unconventional Business</h4>
+          <p class="pcard-desc">Interview series exploring how great businesses get built the hard way.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="podcasts/the-daily-talk-show.html">
+        <div class="pcard-media media-square">
           <img src="img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy">
-          <div class="pod-art-label">The Daily Talk Show</div>
-        </a>
-        <a class="pod-art-item" href="podcasts/carlisle-homes.html">
-          <img src="img/podcasts/carlisle-homes.jpg" alt="Carlisle Homes podcast" loading="lazy">
-          <div class="pod-art-label">Carlisle Homes</div>
-        </a>
-      </div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Independent · 1,000+ eps</div>
+          <h4>The Daily Talk Show</h4>
+          <p class="pcard-desc">1,000+ episodes, daily, co-hosted with Josh Janssen. A masterclass in consistency.</p>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="podcasts/carlisle-homes.html">
+        <div class="pcard-media media-square">
+          <img src="img/podcasts/carlisle-homes.jpg" alt="Home Files — Carlisle Homes" loading="lazy">
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-eyebrow">Property · Branded</div>
+          <h4>Home Files</h4>
+          <p class="pcard-desc">Branded podcast for Carlisle Homes. Property, design, and the people behind the build.</p>
+        </div>
+      </a>
     </div>
 
-    <div class="work-grid">
-      <a class="work-item reveal" href="podcasts/lets-talk-teaching.html">
-        <div class="work-img">
-          <img src="img/work/monash-ltt.jpg" alt="Monash University — Let's Talk Teaching">
+    <!-- PODCAST BTS -->
+    <div class="bts-strip reveal">
+      <div class="bts-strip-label">Podcast · Behind the scenes</div>
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          <div class="marquee-item"><img src="img/marquee/m4.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m5.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m6.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m7.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m8.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/marquee/m9.jpg" alt="Podcast BTS" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m4.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m5.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m6.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m7.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m8.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marquee/m9.jpg" alt="" loading="lazy"></div>
         </div>
-        <div class="work-body">
-          <div class="work-meta"><span>Education · Branded series</span><span>Ongoing</span></div>
-          <h4>Monash · Let's Talk Teaching</h4>
-          <p>Flagship podcast for Monash University. Thoughtful, high production value, built to lift teaching practice.</p>
-          <ul class="work-tags">
-            <li>Branded podcast</li><li>Studio</li><li>Edit &amp; publish</li><li>Artwork</li>
-          </ul>
-        </div>
-      </a>
-
-      <a class="work-item reveal" href="podcasts/the-numbers-game.html">
-        <div class="work-img">
-          <img src="img/work/tng.jpg" alt="The Numbers Game podcast">
-        </div>
-        <div class="work-body">
-          <div class="work-meta"><span>Finance · Flagship</span><span>Ongoing</span></div>
-          <h4>The Numbers Game</h4>
-          <p>Australia's #1 finance podcast. Full production partner — recording, editing, show notes, thumbnails, distribution.</p>
-          <ul class="work-tags">
-            <li>Video podcast</li><li>Full production</li><li>Show notes</li><li>Social</li>
-          </ul>
-        </div>
-      </a>
-
-      <a class="work-item reveal" href="podcasts/help-at-hand.html">
-        <div class="work-img">
-          <img src="img/work/help-at-hand.jpg" alt="Help at Hand — high-end branded podcast">
-        </div>
-        <div class="work-body">
-          <div class="work-meta"><span>Branded · High-end</span><span>2024</span></div>
-          <h4>Help at Hand</h4>
-          <p>High-value branded podcast — considered, cinematic, built for a brand that cares about craft.</p>
-          <ul class="work-tags">
-            <li>Branded series</li><li>Remote recording</li><li>Cinematic</li>
-          </ul>
-        </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
