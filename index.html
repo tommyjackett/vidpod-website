@@ -191,9 +191,19 @@ html[data-theme="dark"] .hero::before { opacity: 0.28; }
   font-size: clamp(56px, 10vw, 152px);
   line-height: 0.88;
   letter-spacing: -0.015em;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
   color: var(--fg);
   text-transform: uppercase;
+}
+.hero-tagline {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(20px, 2.2vw, 30px);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 24px;
+  line-height: 1;
 }
 .hero-sub {
   font-family: var(--font-body);
@@ -653,8 +663,8 @@ footer {
 
 <header class="hero">
   <div class="wrap hero-inner">
-    <div class="hero-eyebrow reveal">Hey! Welcome to</div>
-    <h1 class="reveal">Video &amp;<br>podcast<br>production<span class="dot"></span></h1>
+    <h1 class="reveal">Hey, welcome<br>to VIDPOD<span class="dot"></span></h1>
+    <p class="hero-tagline reveal">Video and podcast production.</p>
     <p class="hero-sub reveal">Melbourne-based. Over a decade of experience crafting engaging content that resonates with your audience.</p>
     <div class="hero-actions reveal">
       <a href="#work-vid" class="btn btn-primary">See the work →</a>
