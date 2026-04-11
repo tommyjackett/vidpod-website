@@ -470,8 +470,8 @@ html[data-theme="dark"] .sayhi-pop {
   aspect-ratio: 1 / 1;
   border-radius: 14px;
   overflow: hidden;
-  background: #0A0A0A;
-  box-shadow: 0 14px 40px rgba(0,0,0,0.2);
+  background: var(--bg-2);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.18);
   transition: transform 0.3s var(--ease);
   margin-bottom: 12px;
 }
@@ -481,6 +481,29 @@ html[data-theme="dark"] .sayhi-pop {
   font-size: 13px;
   font-weight: 600;
   color: var(--fg);
+}
+
+/* Other shows — horizontal swipe carousel on mobile */
+@media (max-width: 760px) {
+  .other-shows {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 16px;
+    margin-left: -22px;
+    margin-right: -22px;
+    padding: 4px 22px 24px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .other-shows::-webkit-scrollbar { display: none; }
+  .other-show {
+    flex: 0 0 62%;
+    max-width: 240px;
+    scroll-snap-align: start;
+  }
 }
 
 /* TIMELINE */
@@ -579,15 +602,21 @@ html[data-theme="dark"] .sayhi-pop {
   gap: 10px;
   padding: 14px 22px;
   border-radius: 100px;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--fg);
+  border: 1px solid transparent;
+  background: var(--green);
+  color: #000;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   transition: all 0.2s var(--ease);
+  box-shadow: 0 12px 30px rgba(0,255,170,0.22);
 }
-.listen a:hover { border-color: var(--fg); transform: translateY(-2px); }
+.listen a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0,255,170,0.32);
+}
 
 /* LISTEN STRIP — full-width listen bar that sits below the hero */
 .listen-strip {
@@ -640,6 +669,9 @@ footer p { font-size: 13px; color: var(--muted); }
 }
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; gap: 36px; align-items: center; }
+  /* On mobile the autoplay YouTube background video is heavy and fiddly.
+     The studio photo under the copy does the same job for less weight. */
+  .about-grid .about-media { display: none; }
 }
 .about-grid .about-copy {
   display: flex;
@@ -868,7 +900,7 @@ footer p { font-size: 13px; color: var(--muted); }
   }
 }
 
-/* BTS MARQUEE — auto-scrolling, pause on hover, mixed aspect ratios */
+/* BTS CAROUSEL — native horizontal scroll, JS auto-scroll loop, click to zoom */
 .bts-marquee-viewport {
   position: relative;
   margin-top: 40px;
@@ -881,30 +913,21 @@ footer p { font-size: 13px; color: var(--muted); }
   .bts-marquee-viewport { margin-left: -22px; margin-right: -22px; margin-top: 28px; }
 }
 .bts-marquee {
-  display: inline-flex;
+  display: flex;
   flex-wrap: nowrap;
   gap: 18px;
-  padding: 6px 0 24px;
-  width: max-content;
-  -webkit-animation: bts-scroll 60s linear infinite;
-          animation: bts-scroll 60s linear infinite;
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  padding: 6px 32px 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-@media (hover: hover) {
-  .bts-marquee-viewport:hover .bts-marquee {
-    -webkit-animation-play-state: paused;
-            animation-play-state: paused;
-  }
-}
-@-webkit-keyframes bts-scroll {
-  0%   { -webkit-transform: translate3d(0, 0, 0); }
-  100% { -webkit-transform: translate3d(-50%, 0, 0); }
-}
-@keyframes bts-scroll {
-  0%   { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
+.bts-marquee::-webkit-scrollbar { display: none; }
+@media (max-width: 720px) {
+  .bts-marquee { padding: 6px 22px 24px; }
 }
 
 .bts-item {
@@ -941,10 +964,6 @@ footer p { font-size: 13px; color: var(--muted); }
 
 @media (max-width: 720px) {
   .bts-item { height: 300px; }
-  .bts-marquee {
-    -webkit-animation-duration: 40s;
-            animation-duration: 40s;
-  }
 }
 @media (max-width: 480px) {
   .bts-item { height: 240px; }
