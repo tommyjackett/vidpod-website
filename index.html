@@ -377,64 +377,47 @@ section { padding: 140px 0; position: relative; }
   font-weight: 600;
 }
 
-/* ===== FOUNDER (simplified) — full-width image ===== */
-.founder-simple { max-width: var(--max); margin: 0 auto; padding: 0 36px; }
-@media (max-width: 640px) { .founder-simple { padding: 0 22px; } }
-.founder-simple .section-eyebrow { margin-bottom: 18px; }
-.founder-simple h2 {
+/* ===== FOUNDER — text left, photo right, compact ===== */
+.founder-compact {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 900px) { .founder-compact { grid-template-columns: 1fr; gap: 36px; } }
+.founder-text .section-eyebrow { margin-bottom: 16px; }
+.founder-text h2 {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(44px, 6.2vw, 96px);
-  line-height: 0.88;
+  font-size: clamp(36px, 4.6vw, 68px);
+  line-height: 0.9;
   letter-spacing: -0.015em;
   text-transform: uppercase;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
   color: var(--fg);
   max-width: 14ch;
 }
-.founder-simple .founder-lede {
-  font-size: clamp(17px, 1.5vw, 21px);
-  line-height: 1.6;
+.founder-text p {
+  font-size: 16px;
+  line-height: 1.65;
   color: var(--muted);
-  max-width: 62ch;
-  margin-bottom: 44px;
+  margin-bottom: 16px;
+  max-width: 50ch;
 }
-.founder-simple .founder-lede strong { color: var(--fg); font-weight: 600; }
-.founder-fullphoto {
-  width: 100%;
-  aspect-ratio: 21 / 9;
-  border-radius: 24px;
+.founder-text p strong { color: var(--fg); font-weight: 600; }
+.founder-text .founder-actions { margin-top: 22px; display: flex; gap: 14px; flex-wrap: wrap; }
+.founder-portrait {
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
   overflow: hidden;
   background: #0A0A0A;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  max-width: 440px;
+  justify-self: end;
+  width: 100%;
 }
-@media (max-width: 900px) { .founder-fullphoto { aspect-ratio: 4 / 5; border-radius: 18px; } }
-.founder-fullphoto img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
-.founder-simple .founder-actions { margin: 36px 0 0; display: flex; gap: 14px; flex-wrap: wrap; }
-.founder-simple .founder-meta {
-  display: flex;
-  gap: 40px;
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-  flex-wrap: wrap;
-}
-.founder-simple .founder-meta-item {
-  font-size: 12px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-.founder-simple .founder-meta-item strong {
-  display: block;
-  color: var(--fg);
-  font-family: var(--font-head);
-  font-weight: 400;
-  font-size: 22px;
-  letter-spacing: -0.005em;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-}
+@media (max-width: 900px) { .founder-portrait { justify-self: stretch; max-width: none; } }
+.founder-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ===== PRODUCT / SHOW CARD GRID (shared 3×2) ===== */
 .card-grid {
@@ -589,7 +572,7 @@ html[data-theme="dark"] .service-vid:hover {
   background: var(--green);
   color: #000;
 }
-.service-vid .dot { background: #fff; }
+.service-vid .dot { background: #000; }
 .service-pod {
   background: #000;
   color: #fff;
@@ -960,8 +943,8 @@ footer {
   <div class="wrap nav-inner">
     <a href="#" class="logo">VIDPOD<span class="dot"></span></a>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
+      <a href="#what">What we do</a>
+      <a href="#founder">Founder</a>
       <a href="#work-vid">Video</a>
       <a href="#work-pod">Podcast</a>
       <a href="story.html">Story</a>
@@ -986,61 +969,31 @@ footer {
   </div>
 </header>
 
-<section class="about" id="about">
+<section class="founder" id="founder">
   <div class="wrap">
-    <div class="about-grid">
-      <div class="reveal">
-        <div class="section-eyebrow">About</div>
-        <h2 class="section-title">About<br>VIDPOD<span class="dot"></span></h2>
-      </div>
-      <div class="about-copy reveal">
-        <p>Welcome to VIDPOD, your go-to video and podcast production company in Melbourne.</p>
-        <p><strong>We're passionate creators and problem solvers</strong>, with over a decade of experience in crafting engaging content that resonates with your audience.</p>
-        <p>We offer video and podcast production services, ensuring your message is heard loud and clear.</p>
-        <div class="stats">
-          <div>
-            <div class="stat-num">1,500<span class="dot"></span></div>
-            <div class="stat-label">Podcast episodes produced</div>
-          </div>
-          <div>
-            <div class="stat-num">10+ yrs<span class="dot"></span></div>
-            <div class="stat-label">Producing for brands</div>
-          </div>
+    <div class="founder-compact">
+      <div class="founder-text reveal">
+        <div class="section-eyebrow">The founder</div>
+        <h2>Hey, I'm<br>Tommy Jackett<span class="dot"></span></h2>
+        <p><strong>Creator and storyteller at heart.</strong> Over a decade living and breathing video and podcast — in front of the camera, behind it, on the mic, in the edit, chasing the idea nobody else bothered to chase.</p>
+        <p>VIDPOD is where that instinct goes to work for brands.</p>
+        <div class="founder-actions">
+          <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="founder" id="founder">
-  <div class="founder-simple">
-    <div class="reveal">
-      <div class="section-eyebrow">About the founder</div>
-      <h2>Hey, I'm<br>Tommy Jackett<span class="dot"></span></h2>
-      <p class="founder-lede"><strong>Creator and storyteller at heart.</strong> Over a decade living and breathing video and podcast — in front of the camera, behind it, on the mic, in the edit. Now I help brands tell their stories properly.</p>
-    </div>
-    <div class="founder-fullphoto reveal">
-      <img src="img/about/tommy.jpg" alt="Tommy Jackett, founder of VIDPOD" loading="lazy">
-    </div>
-    <div class="reveal">
-      <div class="founder-actions">
-        <a href="story.html" class="btn btn-primary">See what I've been up to →</a>
-      </div>
-      <div class="founder-meta">
-        <div class="founder-meta-item"><strong>10+ yrs</strong>Doing the work</div>
-        <div class="founder-meta-item"><strong>1,500+</strong>Episodes produced</div>
-        <div class="founder-meta-item"><strong>Melbourne</strong>Based &amp; raised</div>
+      <div class="founder-portrait reveal">
+        <img src="img/about/tommy.jpg" alt="Tommy Jackett, founder of VIDPOD" loading="lazy">
       </div>
     </div>
   </div>
 </section>
 
-<section class="services" id="services">
+<section class="services" id="what">
   <div class="wrap">
     <div class="reveal">
-      <div class="section-eyebrow">Services</div>
-      <h2 class="section-title">What we do<span class="dot"></span></h2>
-      <p class="section-intro">Video and podcast production, end to end. One team, one point of contact, tailored to what you actually need.</p>
+      <div class="section-eyebrow">What we do</div>
+      <h2 class="section-title">Video &amp;<br>podcast<br>production<span class="dot"></span></h2>
+      <p class="section-intro">Melbourne-based. 10+ years. Thousands of episodes, hundreds of films, one team that handles the whole thing — idea, shoot, edit, publish, promote. Built for brands that actually care how their story lands.</p>
     </div>
 
     <div class="services-grid">
@@ -1083,9 +1036,8 @@ footer {
 <section class="work-vid" id="work-vid">
   <div class="wrap work-inner">
     <div class="reveal">
-      <div class="section-eyebrow">Video production</div>
       <h2 class="section-title">VID<span class="dot"></span></h2>
-      <p class="section-intro">Six things we make. Click any one to see the case studies.</p>
+      <p class="section-intro">Selected video work. Brand films, founding stories, case studies, and long-form content built to live everywhere — from homepage heroes to social cutdowns.</p>
     </div>
 
     <div class="card-grid">
@@ -1183,9 +1135,8 @@ footer {
 <section class="work-pod" id="work-pod">
   <div class="wrap work-inner">
     <div class="reveal">
-      <div class="section-eyebrow">Podcast production</div>
       <h2 class="section-title">POD<span class="dot"></span></h2>
-      <p class="section-intro">Six shows we've produced. Branded, flagship, long-running. Click any one for the full case study.</p>
+      <p class="section-intro">High-end branded podcast production. End-to-end — concept, recording, editing, show notes, distribution, promotion. One team, every stage.</p>
     </div>
 
     <div class="card-grid">
@@ -1213,7 +1164,7 @@ footer {
 
       <a class="pcard reveal" href="podcasts/help-at-hand.html">
         <div class="pcard-media media-square">
-          <img src="img/podcasts/tdts.jpg" alt="Help at Hand" loading="lazy">
+          <img src="img/podcasts/help-at-hand.jpg" alt="Help at Hand" loading="lazy">
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Branded · High-end</div>
