@@ -880,7 +880,7 @@ html[data-theme="dark"] .service-vid:hover {
   overflow: hidden;
 }
 .work-vid .section-eyebrow { color: #000; }
-.work-vid .section-title { color: #fff; }
+.work-vid .section-title { color: #000; }
 .work-vid .section-title .mark { color: #000; }
 .work-vid .section-title .dot { background: #000; }
 .work-vid .section-intro { color: rgba(0,0,0,0.72); }
@@ -901,27 +901,25 @@ html[data-theme="dark"] .service-vid:hover {
 .vid-categories {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-top: 32px;
 }
 .vid-cat-btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 100px;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  background: #000;
+  border: 1px solid rgba(0,0,0,0.18);
+  color: var(--green);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .vid-cat-btn:hover {
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.4);
   transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
 .work-inner { position: relative; z-index: 1; }
@@ -1552,11 +1550,11 @@ footer {
     </div>
 
     <div class="vid-categories reveal">
-      <a href="video/case-study.html" class="vid-cat-btn">Case studies</a>
-      <a href="video/founding-story.html" class="vid-cat-btn">Founder story</a>
-      <a href="video/social-content.html" class="vid-cat-btn">Social content</a>
-      <a href="video/event-film.html" class="vid-cat-btn">Education</a>
-      <a href="video/brand-film.html" class="vid-cat-btn">Motion graphics</a>
+      <a href="#" class="vid-cat-btn">Case studies</a>
+      <a href="#" class="vid-cat-btn">Founder story</a>
+      <a href="#" class="vid-cat-btn">Social content</a>
+      <a href="#" class="vid-cat-btn">Education</a>
+      <a href="#" class="vid-cat-btn">Motion graphics</a>
     </div>
 
     <div class="card-grid">
