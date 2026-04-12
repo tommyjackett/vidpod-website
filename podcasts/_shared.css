@@ -475,7 +475,7 @@ html[data-theme="light"] .pod-hero { background: #fff; }
 .cta-strip h2 {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(36px, 5.4vw, 80px);
+  font-size: clamp(29px, 3.7vw, 51px);
   line-height: 0.9;
   letter-spacing: -0.015em;
   text-transform: uppercase;
@@ -485,7 +485,6 @@ html[data-theme="light"] .pod-hero { background: #fff; }
 .cta-strip .dot { background: #0A0A0A; }
 .cta-strip p {
   font-size: 18px;
-  max-width: 560px;
   margin: 0 auto 30px;
   color: #0A0A0A;
 }
