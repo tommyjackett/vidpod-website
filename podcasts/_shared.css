@@ -1149,6 +1149,9 @@ html[data-theme="dark"] .scroll-hint { color: var(--green); }
   cursor: zoom-in;
   transition: transform .35s ease, box-shadow .35s ease;
 }
+html[data-theme="light"] .sec-white .bts-item {
+  box-shadow: none;
+}
 .bts-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 26px 70px rgba(0,0,0,0.2);
