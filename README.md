@@ -6,6 +6,45 @@
 
 ---
 
+## Copy Management — Notion → Live Site
+
+All website copy lives in Notion. Tommy edits there, then tells Claude to push.
+
+**Hub page:** `3401425b-8960-8147-b538-d310995b76aa` — 🌐 Website Copy
+
+**Child pages (fetch by ID, pull copy, update HTML):**
+
+| Page | Notion ID | HTML file |
+|------|-----------|-----------|
+| Homepage | `3401425b-8960-81dc-877a-ebe1d11fb5d1` | `index.html` |
+| The Numbers Game | `3401425b-8960-8101-be65-d123a93c3db4` | `podcasts/the-numbers-game.html` |
+| Let's Talk Teaching | `3401425b-8960-81e5-8445-df18489da92d` | `podcasts/lets-talk-teaching.html` |
+| Home Files | `3401425b-8960-8169-b6ea-e7d2b119ef8e` | `podcasts/carlisle-homes.html` |
+| Help at Hand | `3401425b-8960-8111-b032-ccdfa161d1ac` | `podcasts/help-at-hand.html` |
+| Unconventional Business | `3401425b-8960-8153-8cc5-d5c4545112d5` | `podcasts/unconventional-business.html` |
+| The Daily Talk Show | `3401425b-8960-81e0-8ea4-c95e69480974` | `podcasts/the-daily-talk-show.html` |
+| Meet Our Founder | `3401425b-8960-8166-aa81-c9cf8410d4a0` | `story.html` |
+| Founder Story (template) | `3401425b-8960-8114-83a1-f52eb3be9da8` | `video/founding-story.html` |
+| Brand Film (template) | `3401425b-8960-81b3-87f2-dffeb757a081` | `video/brand-film.html` |
+| Case Study (template) | `3401425b-8960-8183-a276-f7c3b9de0c04` | `video/case-study.html` |
+| Social Content (template) | `3401425b-8960-81aa-8634-ec598ee0a28a` | `video/social-content.html` |
+| Product Video (template) | `3401425b-8960-81f0-a697-e4c3091d2a0e` | `video/product-video.html` |
+| Event Film (template) | `3401425b-8960-817d-bed6-e0ed5a8513a9` | `video/event-film.html` |
+
+**Workflow:**
+1. Tommy edits copy in Notion (each page has section-by-section layout + action checklists)
+2. Tommy says: "push the copy from [page name]"
+3. Claude fetches the Notion page by ID, extracts the updated text
+4. Claude finds the matching HTML elements in the corresponding file and updates them
+5. Commit and push — live in ~30 seconds
+
+**Rules:**
+- Notion is the source of truth for copy. Don't edit copy directly in HTML without updating Notion.
+- Structure/layout changes still happen in HTML. Notion only holds the words.
+- YouTube embed codes can be pasted directly into Notion pages — Claude extracts the video ID.
+
+---
+
 ## Design Rules — Locked In
 
 These have been iterated and approved. Don't deviate.
