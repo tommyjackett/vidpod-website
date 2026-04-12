@@ -680,9 +680,16 @@ footer p { font-size: 13px; color: var(--muted); }
 .about-grid .about-copy {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 18px;
-  padding: 6px 0;
+  padding: 0;
+  height: 100%;
+}
+/* Push the studio photo to the bottom of the copy column so it aligns with
+   the bottom edge of the video on the right — copy starts at the top, image
+   ends at the bottom, gap between is auto-filled */
+.about-grid .about-copy .about-copy-image {
+  margin-top: auto;
 }
 .about-grid .about-copy .section-eyebrow { margin-bottom: 6px; }
 .about-grid .about-copy h2 {
