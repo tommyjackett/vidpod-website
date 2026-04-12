@@ -1141,18 +1141,33 @@ a.pod-art-item .pod-art-label { color: #fff; }
 .img-lightbox.is-open img { transform: scale(1); }
 .img-lightbox-close {
   position: fixed;
-  top: 20px; right: 20px;
-  width: 44px; height: 44px;
+  top: 24px; right: 24px;
+  width: 56px; height: 56px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.7);
   color: #fff;
-  font-size: 22px;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 10001;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.img-lightbox-close:hover,
+.img-lightbox-close:focus {
+  background: rgba(0,0,0,0.92);
+  border-color: rgba(255,255,255,0.9);
+  transform: scale(1.08);
+  outline: none;
+}
+@media (max-width: 640px) {
+  .img-lightbox-close { top: 16px; right: 16px; width: 52px; height: 52px; font-size: 28px; }
 }
 
 /* ===== CONTACT ===== */
@@ -1788,103 +1803,129 @@ document.addEventListener('DOMContentLoaded', function() {
   var lb = document.getElementById('imgLightbox');
   var inner = document.getElementById('imgLightboxInner');
   var closeBtn = document.getElementById('imgLightboxClose');
-  if (!tracks.length || !lb || !inner) return;
+  if (!tracks.length || !lb || !inner || !closeBtn) return;
 
+  // ---------- Lightbox ----------
+  var lightboxOpen = false;
   function openLb(item) {
     inner.innerHTML = '';
     var media = item.querySelector('img, video, iframe');
     if (!media) return;
     var clone = media.cloneNode(true);
     clone.removeAttribute('style');
+    clone.removeAttribute('loading');
     inner.appendChild(clone);
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    lightboxOpen = true;
   }
   function closeLb() {
     lb.classList.remove('is-open');
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lightboxOpen = false;
     setTimeout(function() { inner.innerHTML = ''; }, 300);
   }
-  closeBtn.addEventListener('click', closeLb);
-  lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
+  // Close button — works on click AND touchend (iOS Safari sometimes suppresses click)
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    closeLb();
+  });
+  closeBtn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    closeLb();
+  }, { passive: false });
+  // Click anywhere on the backdrop (but not on the image itself) also closes
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb || e.target === inner) closeLb();
+  });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+    if (e.key === 'Escape' && lightboxOpen) closeLb();
   });
 
+  // ---------- Per-track auto-scroll ----------
   tracks.forEach(function(marquee) {
-    var speed = 0.66;
-    var pausedUntil = 0;
-    var userInteracting = false;
-    var lastScrollLeft = marquee.scrollLeft;
+    var speed = 0.66;                 // px per frame (~40 px/s at 60fps)
     var rafId = null;
     var halfWidth = 0;
-    var programmaticScroll = false;
+    var resumeAt = 0;                 // timestamp to resume auto-scroll
+    var lastProgrammaticTime = 0;     // used to ignore our own scroll events
+    var isVisible = true;             // only animate when in viewport
 
     function computeHalf() { halfWidth = Math.max(1, marquee.scrollWidth / 2); }
-    computeHalf();
-    window.addEventListener('resize', computeHalf);
-    window.addEventListener('load', computeHalf);
 
-    // Recompute whenever the track resizes (e.g. lazy images finish loading)
-    if (typeof ResizeObserver !== 'undefined') {
-      var ro = new ResizeObserver(function() { computeHalf(); });
-      ro.observe(marquee);
-    }
-    // Also trigger recompute on every image load inside this track + force eager load
+    // Force eager loading + recompute whenever each image lands
     marquee.querySelectorAll('img').forEach(function(img) {
       img.loading = 'eager';
-      if (img.complete) {
-        computeHalf();
+      if (img.complete && img.naturalWidth > 0) {
+        // already loaded
       } else {
         img.addEventListener('load', computeHalf, { once: true });
         img.addEventListener('error', computeHalf, { once: true });
       }
     });
 
+    computeHalf();
+    window.addEventListener('resize', computeHalf);
+    window.addEventListener('load', computeHalf);
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(computeHalf).observe(marquee);
+    }
+
+    // Only animate when the marquee is in the viewport (saves CPU + avoids init glitches)
+    if (typeof IntersectionObserver !== 'undefined') {
+      isVisible = false;
+      new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) { isVisible = entry.isIntersecting; });
+      }, { threshold: 0.05 }).observe(marquee);
+    }
+
     function step() {
       var now = performance.now();
-      if (!userInteracting && now > pausedUntil && marquee.scrollWidth > marquee.clientWidth) {
-        programmaticScroll = true;
+      if (!lightboxOpen && isVisible && now > resumeAt && marquee.scrollWidth > marquee.clientWidth) {
+        lastProgrammaticTime = now;
         marquee.scrollLeft += speed;
-        if (marquee.scrollLeft >= halfWidth) marquee.scrollLeft -= halfWidth;
-        lastScrollLeft = marquee.scrollLeft;
-        programmaticScroll = false;
+        if (marquee.scrollLeft >= halfWidth) {
+          marquee.scrollLeft -= halfWidth;
+        }
       }
       rafId = requestAnimationFrame(step);
     }
     rafId = requestAnimationFrame(step);
 
-    function pauseFor(ms) { pausedUntil = performance.now() + ms; }
+    function pauseFor(ms) {
+      var target = performance.now() + ms;
+      if (target > resumeAt) resumeAt = target;
+    }
 
-    marquee.addEventListener('mouseenter', function() { userInteracting = true; });
-    marquee.addEventListener('mouseleave', function() { userInteracting = false; pauseFor(300); });
-    marquee.addEventListener('touchstart', function() { userInteracting = true; }, { passive: true });
-    marquee.addEventListener('touchend',   function() { userInteracting = false; pauseFor(2500); }, { passive: true });
-    marquee.addEventListener('pointerdown', function() { userInteracting = true; });
-    marquee.addEventListener('pointerup',   function() { userInteracting = false; pauseFor(2500); });
-    marquee.addEventListener('pointercancel', function() { userInteracting = false; pauseFor(1500); });
+    // Desktop hover pauses
+    marquee.addEventListener('mouseenter', function() { pauseFor(60 * 60 * 1000); });
+    marquee.addEventListener('mouseleave', function() { resumeAt = performance.now() + 500; });
+    // Touch pauses briefly
+    marquee.addEventListener('touchstart', function() { pauseFor(60 * 60 * 1000); }, { passive: true });
+    marquee.addEventListener('touchend',   function() { resumeAt = performance.now() + 2500; }, { passive: true });
+    marquee.addEventListener('touchcancel', function() { resumeAt = performance.now() + 1500; }, { passive: true });
     marquee.addEventListener('wheel', function() { pauseFor(2000); }, { passive: true });
+
+    // If a scroll event arrives that we didn't cause, pause briefly
     marquee.addEventListener('scroll', function() {
-      if (programmaticScroll) return;
-      var delta = Math.abs(marquee.scrollLeft - lastScrollLeft);
-      if (delta > speed * 3) pauseFor(2500);
-      lastScrollLeft = marquee.scrollLeft;
+      // Ignore scroll events that came from (or right after) our own programmatic updates
+      if (performance.now() - lastProgrammaticTime < 120) return;
+      pauseFor(2500);
+      // Seamless wrap for user-driven scroll
       if (marquee.scrollLeft >= halfWidth) {
-        programmaticScroll = true;
+        lastProgrammaticTime = performance.now();
         marquee.scrollLeft -= halfWidth;
-        lastScrollLeft = marquee.scrollLeft;
-        programmaticScroll = false;
       } else if (marquee.scrollLeft < 0) {
-        programmaticScroll = true;
+        lastProgrammaticTime = performance.now();
         marquee.scrollLeft += halfWidth;
-        lastScrollLeft = marquee.scrollLeft;
-        programmaticScroll = false;
       }
     });
 
-    // Click vs drag detection
+    // Click vs drag detection for lightbox
     var downX = 0, downY = 0, downT = 0;
     marquee.addEventListener('pointerdown', function(e) {
       downX = e.clientX; downY = e.clientY; downT = performance.now();
@@ -1899,12 +1940,6 @@ document.addEventListener('DOMContentLoaded', function() {
       openLb(item);
     });
   });
-
-  // Pause all auto-scrolls while lightbox is open (via body overflow flag)
-  var mo = new MutationObserver(function() {
-    // nothing to do — each track uses its own interaction state; lightbox already pauses via body scroll lock
-  });
-  mo.observe(lb, { attributes: true, attributeFilter: ['class'] });
 });
 </script>
 
