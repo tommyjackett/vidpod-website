@@ -289,12 +289,13 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   if (!marquee || !lb || !inner) return;
 
   // ---------- auto-scroll loop ----------
-  var speed = 0.45;           // pixels per frame (~27px/s at 60fps)
+  var speed = 1.1;            // pixels per frame (~66px/s at 60fps)
   var pausedUntil = 0;        // timestamp to resume auto-scroll
   var userInteracting = false;
   var lastScrollLeft = marquee.scrollLeft;
   var rafId = null;
   var halfWidth = 0;
+  var programmaticScroll = false;
 
   function computeHalf() {
     halfWidth = Math.max(1, marquee.scrollWidth / 2);
@@ -306,12 +307,14 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   function step() {
     var now = performance.now();
     if (!userInteracting && now > pausedUntil) {
+      programmaticScroll = true;
       marquee.scrollLeft += speed;
       // seamless loop: once we've scrolled past the first set, jump back
       if (marquee.scrollLeft >= halfWidth) {
         marquee.scrollLeft -= halfWidth;
       }
       lastScrollLeft = marquee.scrollLeft;
+      programmaticScroll = false;
     }
     rafId = requestAnimationFrame(step);
   }
@@ -336,17 +339,22 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   // Wheel / scroll pauses briefly
   marquee.addEventListener('wheel', function() { pauseFor(2000); }, { passive: true });
   marquee.addEventListener('scroll', function() {
+    if (programmaticScroll) return; // ignore our own auto-scroll and wrap jumps
     // If the user manually scrolled (jump in scrollLeft beyond our speed), pause
     var delta = Math.abs(marquee.scrollLeft - lastScrollLeft);
     if (delta > speed * 3) pauseFor(2500);
     lastScrollLeft = marquee.scrollLeft;
     // If user scrolled to the end (of the duplicated set), wrap back seamlessly
     if (marquee.scrollLeft >= halfWidth) {
+      programmaticScroll = true;
       marquee.scrollLeft -= halfWidth;
       lastScrollLeft = marquee.scrollLeft;
+      programmaticScroll = false;
     } else if (marquee.scrollLeft < 0) {
+      programmaticScroll = true;
       marquee.scrollLeft += halfWidth;
       lastScrollLeft = marquee.scrollLeft;
+      programmaticScroll = false;
     }
   });
 
