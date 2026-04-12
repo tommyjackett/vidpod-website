@@ -364,21 +364,23 @@ section { padding: 140px 0; position: relative; }
   margin-bottom: 28px;
   text-transform: uppercase;
 }
-.services-head {
-  display: flex;
-  align-items: baseline;
-  gap: 40px;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
+.services-mini-head {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
 }
-.services-head .section-eyebrow { margin-bottom: 0; flex: 0 0 auto; }
-.services-head .section-intro {
-  margin: 0;
-  flex: 1 1 420px;
-  max-width: 720px;
-}
-@media (max-width: 860px) {
-  .services-head { gap: 18px; margin-bottom: 40px; }
+.services-mini-head .dot {
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-left: 4px;
+  vertical-align: baseline;
+  transform: translateY(-2px);
 }
 .section-intro {
   font-size: clamp(17px, 1.5vw, 20px);
@@ -811,24 +813,12 @@ html[data-theme="dark"] .service-vid:hover {
   text-transform: uppercase;
 }
 .service-body h3 {
-  font-family: var(--font-head);
-  font-weight: 400;
-  font-size: clamp(26px, 2.6vw, 38px);
-  line-height: 0.95;
+  font-family: var(--font-body);
+  font-size: 23px;
+  font-weight: 700;
+  margin-bottom: 14px;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
 }
-.service-body h3 .dot {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  margin-left: 4px;
-  vertical-align: baseline;
-  transform: translateY(-2px);
-}
-.service-vid .service-body h3 .dot { background: #000; }
-.service-pod .service-body h3 .dot { background: var(--green); }
 .service-body p {
   font-size: 16px;
   line-height: 1.65;
@@ -1340,17 +1330,14 @@ footer {
 
 <section class="services" id="what">
   <div class="wrap">
-    <div class="services-head reveal">
-      <div class="section-eyebrow">What we do</div>
-      <p class="section-intro">Melbourne-based, more than a decade in the game. Thousands of podcast episodes and videos produced. From first idea to final cut, and everything in between.</p>
-    </div>
+    <h2 class="services-mini-head reveal">What we do best<span class="dot"></span></h2>
 
     <div class="services-grid">
       <div class="service-card service-vid reveal">
         <div class="service-label">VID<span class="dot"></span></div>
         <div class="service-body">
-          <h3>Video production<br>is our thing<span class="dot"></span></h3>
-          <p>Content creation, cinematography, motion graphics, editing. A creative approach that makes your video stand out. Founding stories, case studies, corporate, educational, product demos, social media, the lot.</p>
+          <h3>Video production</h3>
+          <p>Melbourne-based, more than a decade in the game. Content creation, cinematography, motion graphics, editing — a creative approach that makes your video stand out. Founding stories, case studies, corporate, educational, product demos, social media, the lot.</p>
           <ul class="service-list">
             <li>Founding stories</li>
             <li>Case studies</li>
@@ -1365,7 +1352,7 @@ footer {
       <div class="service-card service-pod reveal">
         <div class="service-label">POD<span class="dot"></span></div>
         <div class="service-body">
-          <h3>Podcast production.<br>We're damn good at it<span class="dot"></span></h3>
+          <h3>Podcast production</h3>
           <p>Thousands of episodes across dozens of shows. Audio and video podcasts, built the way you need them. Whatever support you need, we can provide it. Show ideation, guest selection, studio recording, editing, artwork, show notes, distribution, promotion, analytics.</p>
           <ul class="service-list">
             <li>Show ideation</li>

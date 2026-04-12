@@ -669,9 +669,9 @@ footer p { font-size: 13px; color: var(--muted); }
 }
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; gap: 36px; align-items: center; }
-  /* On mobile the autoplay YouTube background video is heavy and fiddly.
-     The studio photo under the copy does the same job for less weight. */
-  .about-grid .about-media { display: none; }
+  /* On mobile, put the video at the top of the stack so it's the first
+     thing the eye lands on, then the copy, then the studio photo. */
+  .about-grid .about-media { order: -1; max-width: 520px; }
 }
 .about-grid .about-copy {
   display: flex;
