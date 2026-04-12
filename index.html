@@ -827,56 +827,46 @@ html[data-theme="dark"] .service-vid:hover {
   margin-bottom: 26px;
   max-width: 48ch;
 }
-.service-list {
-  list-style: none;
+/* Service marquee banner — continuous scrolling strip */
+.service-marquee {
+  margin-top: 24px;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
-.service-list li {
-  padding: 8px 14px;
-  border-radius: 100px;
-}
-.service-vid .service-list li {
-  background: rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.18);
-  color: #000;
-}
-.service-pod .service-list li {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
+.service-marquee-vid {
+  background: #000;
   color: #fff;
 }
-.service-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 28px;
-  padding: 14px 24px;
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  letter-spacing: -0.01em;
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-  align-self: flex-start;
-}
-.service-cta .dot { width: 9px; height: 9px; }
-.service-vid .service-cta {
-  background: #000;
-  color: var(--green);
-}
-.service-vid .service-cta .dot { background: var(--green); }
-.service-vid .service-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,0.35); }
-.service-pod .service-cta {
+.service-marquee-pod {
   background: var(--green);
   color: #000;
 }
-.service-pod .service-cta .dot { background: #000; }
-.service-pod .service-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,255,170,0.35); }
+.service-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  animation: service-scroll 18s linear infinite;
+}
+.service-marquee-track span {
+  flex-shrink: 0;
+}
+.service-marquee-track .sep {
+  margin: 0 14px;
+  opacity: 0.5;
+}
+@keyframes service-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 /* ===== WORK — two distinct bands, VID. (green) and POD. (black) ===== */
 .work-vid {
@@ -1476,15 +1466,22 @@ footer {
         <div class="service-body">
           <h3>Video production</h3>
           <p>Melbourne-based, more than a decade in the game. Content creation, cinematography, motion graphics, editing — a creative approach that makes your video stand out. Founding stories, case studies, corporate, educational, product demos, social media, the lot.</p>
-          <ul class="service-list">
-            <li>Founding stories</li>
-            <li>Case studies</li>
-            <li>Corporate</li>
-            <li>Educational</li>
-            <li>Product demos</li>
-            <li>Social media</li>
-          </ul>
-          <a href="#work-vid" class="service-cta">See our VID<span class="dot"></span></a>
+          <div class="service-marquee service-marquee-vid">
+            <div class="service-marquee-track">
+              <span>Founding stories</span><span class="sep">·</span>
+              <span>Case studies</span><span class="sep">·</span>
+              <span>Corporate</span><span class="sep">·</span>
+              <span>Educational</span><span class="sep">·</span>
+              <span>Product demos</span><span class="sep">·</span>
+              <span>Social media</span><span class="sep">·</span>
+              <span>Founding stories</span><span class="sep">·</span>
+              <span>Case studies</span><span class="sep">·</span>
+              <span>Corporate</span><span class="sep">·</span>
+              <span>Educational</span><span class="sep">·</span>
+              <span>Product demos</span><span class="sep">·</span>
+              <span>Social media</span><span class="sep">·</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1493,15 +1490,22 @@ footer {
         <div class="service-body">
           <h3>Podcast production</h3>
           <p>Thousands of episodes across dozens of shows. Audio and video podcasts, built the way you need them. Whatever support you need, we can provide it. Show ideation, guest selection, studio recording, editing, artwork, show notes, distribution, promotion, analytics.</p>
-          <ul class="service-list">
-            <li>Show ideation</li>
-            <li>Host &amp; guest selection</li>
-            <li>Studio recording</li>
-            <li>Edit &amp; publish</li>
-            <li>Show notes</li>
-            <li>Distribution</li>
-          </ul>
-          <a href="#work-pod" class="service-cta">See our POD<span class="dot"></span></a>
+          <div class="service-marquee service-marquee-pod">
+            <div class="service-marquee-track">
+              <span>Show ideation</span><span class="sep">·</span>
+              <span>Host &amp; guest selection</span><span class="sep">·</span>
+              <span>Studio recording</span><span class="sep">·</span>
+              <span>Edit &amp; publish</span><span class="sep">·</span>
+              <span>Show notes</span><span class="sep">·</span>
+              <span>Distribution</span><span class="sep">·</span>
+              <span>Show ideation</span><span class="sep">·</span>
+              <span>Host &amp; guest selection</span><span class="sep">·</span>
+              <span>Studio recording</span><span class="sep">·</span>
+              <span>Edit &amp; publish</span><span class="sep">·</span>
+              <span>Show notes</span><span class="sep">·</span>
+              <span>Distribution</span><span class="sep">·</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
