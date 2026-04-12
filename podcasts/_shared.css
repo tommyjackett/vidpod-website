@@ -731,7 +731,7 @@ html[data-theme="dark"] .dark-green h2,
 html[data-theme="dark"] .dark-green h3,
 html[data-theme="dark"] .dark-green p,
 html[data-theme="dark"] .dark-green blockquote { color: #000; }
-html[data-theme="dark"] .dark-green .dot { background: #000; }
+html[data-theme="dark"] .dark-green .dot { background: #fff; }
 html[data-theme="dark"] .dark-green .muted,
 html[data-theme="dark"] .dark-green .section-eyebrow { color: rgba(0,0,0,0.55); }
 html[data-theme="dark"] .dark-green .scroll-hint { color: #000; }
@@ -742,7 +742,7 @@ html[data-theme="dark"] .dark-green .listen a {
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 html[data-theme="dark"] .dark-green .process::before { background: rgba(0,0,0,0.15); }
-html[data-theme="dark"] .dark-green .process-step .dot { background: #000; box-shadow: 0 0 0 6px var(--green); }
+html[data-theme="dark"] .dark-green .process-step .dot { background: #fff; box-shadow: 0 0 0 6px var(--green); }
 html[data-theme="dark"] .dark-green .process-step h3 { color: #000; }
 html[data-theme="dark"] .dark-green .process-step p { color: rgba(0,0,0,0.6); }
 
@@ -926,6 +926,12 @@ footer p { font-size: 13px; color: var(--muted); }
   text-align: center;
   padding: 0 14px;
   z-index: 1;
+  transition: transform 0.35s cubic-bezier(.2,.9,.3,1);
+}
+@media (hover: hover) {
+  .process-step:hover {
+    transform: scale(1.08);
+  }
 }
 .process-step .dot {
   display: block;
@@ -935,6 +941,18 @@ footer p { font-size: 13px; color: var(--muted); }
   background: var(--green);
   border-radius: 50%;
   box-shadow: 0 0 0 6px var(--bg);
+  animation: journey-pulse 3.6s ease-in-out infinite;
+}
+/* Cascading delay — each dot pulses in sequence then a pause before repeating */
+.process-step:nth-child(1) .dot { animation-delay: 0s; }
+.process-step:nth-child(2) .dot { animation-delay: 0.5s; }
+.process-step:nth-child(3) .dot { animation-delay: 1.0s; }
+.process-step:nth-child(4) .dot { animation-delay: 1.5s; }
+.process-step:nth-child(5) .dot { animation-delay: 2.0s; }
+@keyframes journey-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 6px var(--bg); }
+  14%      { transform: scale(1.5); box-shadow: 0 0 0 4px var(--bg), 0 0 16px rgba(0,255,170,0.4); }
+  28%      { transform: scale(1); box-shadow: 0 0 0 6px var(--bg); }
 }
 .process-step h3 {
   font-family: var(--font-head);
