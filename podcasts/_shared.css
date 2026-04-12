@@ -1059,45 +1059,6 @@ footer p { font-size: 13px; color: var(--muted); }
   }
 }
 
-/* SCROLL HINT — cascading chevrons below horizontal carousels */
-.scroll-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 24px auto 4px;
-  padding: 10px 18px;
-  width: fit-content;
-  border-radius: 999px;
-  border: 1px solid currentColor;
-  opacity: 0.78;
-  color: #000;
-  transition: opacity 0.3s ease;
-}
-html[data-theme="dark"] .scroll-hint { color: var(--green); }
-.scroll-hint-chevrons {
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-}
-.scroll-hint .chev {
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-right: 2px solid currentColor;
-  border-top: 2px solid currentColor;
-  transform: rotate(45deg);
-  animation: scroll-hint-pulse 1.6s ease-in-out infinite;
-}
-.scroll-hint .chev:nth-child(1) { animation-delay: 0s; }
-.scroll-hint .chev:nth-child(2) { animation-delay: 0.2s; }
-.scroll-hint .chev:nth-child(3) { animation-delay: 0.4s; }
-@keyframes scroll-hint-pulse {
-  0%, 100% { opacity: 0.25; transform: translateX(0) rotate(45deg); }
-  50%      { opacity: 1;    transform: translateX(4px) rotate(45deg); }
-}
-@media (max-width: 640px) {
-  .scroll-hint { padding: 9px 14px; }
-}
 
 /* BTS CAROUSEL — CSS transform auto-scroll, click to zoom */
 .bts-marquee-viewport {
