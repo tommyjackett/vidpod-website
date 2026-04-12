@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=24">
+<link rel="stylesheet" href="_shared.css?v=25">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -293,7 +293,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
 })();
 
-// BTS carousel — native scroll, JS auto-loop, pause on interact, click to zoom
+// BTS carousel — cooldown-timestamp approach, IntersectionObserver, ResizeObserver
 (function() {
   var marquee = document.getElementById('btsMarquee');
   var lb = document.getElementById('btsLightbox');
@@ -301,73 +301,79 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   var closeBtn = document.getElementById('btsLightboxClose');
   if (!marquee || !lb || !inner) return;
 
+  var lightboxOpen = false;
+
   // ---------- auto-scroll loop ----------
-  var speed = 0.66;           // pixels per frame (~40px/s at 60fps, -40%)
-  var pausedUntil = 0;        // timestamp to resume auto-scroll
-  var userInteracting = false;
-  var lastScrollLeft = marquee.scrollLeft;
+  var speed = 0.66;
   var rafId = null;
   var halfWidth = 0;
-  var programmaticScroll = false;
+  var resumeAt = 0;
+  var lastProgrammaticTime = 0;
+  var isVisible = true;
 
-  function computeHalf() {
-    halfWidth = Math.max(1, marquee.scrollWidth / 2);
-  }
+  function computeHalf() { halfWidth = Math.max(1, marquee.scrollWidth / 2); }
+
+  // Force eager loading + recompute as images land
+  marquee.querySelectorAll('img').forEach(function(img) {
+    img.loading = 'eager';
+    if (!img.complete || img.naturalWidth === 0) {
+      img.addEventListener('load', computeHalf, { once: true });
+      img.addEventListener('error', computeHalf, { once: true });
+    }
+  });
+
   computeHalf();
   window.addEventListener('resize', computeHalf);
   window.addEventListener('load', computeHalf);
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(computeHalf).observe(marquee);
+  }
+
+  // Only animate when visible
+  if (typeof IntersectionObserver !== 'undefined') {
+    isVisible = false;
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { isVisible = entry.isIntersecting; });
+    }, { threshold: 0.05 }).observe(marquee);
+  }
 
   function step() {
     var now = performance.now();
-    if (!userInteracting && now > pausedUntil) {
-      programmaticScroll = true;
+    if (!lightboxOpen && isVisible && now > resumeAt && marquee.scrollWidth > marquee.clientWidth) {
+      lastProgrammaticTime = now;
       marquee.scrollLeft += speed;
-      // seamless loop: once we've scrolled past the first set, jump back
       if (marquee.scrollLeft >= halfWidth) {
         marquee.scrollLeft -= halfWidth;
       }
-      lastScrollLeft = marquee.scrollLeft;
-      programmaticScroll = false;
     }
     rafId = requestAnimationFrame(step);
   }
-  function start() { if (!rafId) rafId = requestAnimationFrame(step); }
-  function stop()  { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
-  start();
+  rafId = requestAnimationFrame(step);
 
-  // Pause auto-scroll for a few seconds whenever user interacts
-  function pauseFor(ms) { pausedUntil = performance.now() + ms; }
+  function pauseFor(ms) {
+    var target = performance.now() + ms;
+    if (target > resumeAt) resumeAt = target;
+  }
 
-  // Hover on desktop pauses
-  marquee.addEventListener('mouseenter', function() { userInteracting = true; });
-  marquee.addEventListener('mouseleave', function() { userInteracting = false; pauseFor(300); });
-
-  // Touch / pointer down pauses while held
-  marquee.addEventListener('touchstart', function() { userInteracting = true; }, { passive: true });
-  marquee.addEventListener('touchend',   function() { userInteracting = false; pauseFor(2500); }, { passive: true });
-  marquee.addEventListener('pointerdown', function() { userInteracting = true; });
-  marquee.addEventListener('pointerup',   function() { userInteracting = false; pauseFor(2500); });
-  marquee.addEventListener('pointercancel', function() { userInteracting = false; pauseFor(1500); });
-
-  // Wheel / scroll pauses briefly
+  // Desktop hover pauses
+  marquee.addEventListener('mouseenter', function() { pauseFor(60 * 60 * 1000); });
+  marquee.addEventListener('mouseleave', function() { resumeAt = performance.now() + 500; });
+  // Touch pauses
+  marquee.addEventListener('touchstart', function() { pauseFor(60 * 60 * 1000); }, { passive: true });
+  marquee.addEventListener('touchend',   function() { resumeAt = performance.now() + 2500; }, { passive: true });
+  marquee.addEventListener('touchcancel', function() { resumeAt = performance.now() + 1500; }, { passive: true });
   marquee.addEventListener('wheel', function() { pauseFor(2000); }, { passive: true });
+
+  // Scroll events — cooldown-timestamp approach
   marquee.addEventListener('scroll', function() {
-    if (programmaticScroll) return; // ignore our own auto-scroll and wrap jumps
-    // If the user manually scrolled (jump in scrollLeft beyond our speed), pause
-    var delta = Math.abs(marquee.scrollLeft - lastScrollLeft);
-    if (delta > speed * 3) pauseFor(2500);
-    lastScrollLeft = marquee.scrollLeft;
-    // If user scrolled to the end (of the duplicated set), wrap back seamlessly
+    if (performance.now() - lastProgrammaticTime < 120) return;
+    pauseFor(2500);
     if (marquee.scrollLeft >= halfWidth) {
-      programmaticScroll = true;
+      lastProgrammaticTime = performance.now();
       marquee.scrollLeft -= halfWidth;
-      lastScrollLeft = marquee.scrollLeft;
-      programmaticScroll = false;
     } else if (marquee.scrollLeft < 0) {
-      programmaticScroll = true;
+      lastProgrammaticTime = performance.now();
       marquee.scrollLeft += halfWidth;
-      lastScrollLeft = marquee.scrollLeft;
-      programmaticScroll = false;
     }
   });
 
@@ -382,15 +388,23 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    lightboxOpen = true;
   }
   function closeLb() {
     lb.classList.remove('is-open');
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lightboxOpen = false;
     setTimeout(function() { inner.innerHTML = ''; }, 300);
   }
 
-  // Distinguish click from drag — only open lightbox on clean tap
+  // Close button — click + touchend for iOS Safari
+  closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); closeLb(); });
+  closeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); closeLb(); }, { passive: false });
+  lb.addEventListener('click', function(e) { if (e.target === lb || e.target === inner) closeLb(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && lightboxOpen) closeLb(); });
+
+  // Click vs drag detection
   var downX = 0, downY = 0, downT = 0;
   marquee.addEventListener('pointerdown', function(e) {
     downX = e.clientX; downY = e.clientY; downT = performance.now();
@@ -399,23 +413,11 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     var dx = Math.abs(e.clientX - downX);
     var dy = Math.abs(e.clientY - downY);
     var dt = performance.now() - downT;
-    if (dx > 8 || dy > 8 || dt > 600) return; // was a drag/scroll, not a click
+    if (dx > 8 || dy > 8 || dt > 600) return;
     var item = e.target.closest('.bts-item');
     if (!item) return;
     openLb(item);
   });
-
-  closeBtn.addEventListener('click', closeLb);
-  lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
-  });
-
-  // Pause auto-scroll while lightbox is open
-  var mo = new MutationObserver(function() {
-    userInteracting = lb.classList.contains('is-open');
-  });
-  mo.observe(lb, { attributes: true, attributeFilter: ['class'] });
 })();
 </script>
 </body>
