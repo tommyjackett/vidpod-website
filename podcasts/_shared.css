@@ -680,27 +680,41 @@ html[data-theme="dark"] .sayhi-pop {
 .sec-black .process-step h3 { color: #fff; }
 .sec-black .process-step p { color: rgba(255,255,255,0.55); }
 
-.sec-white {
+/* sec-white only applies in LIGHT mode — in dark mode these sections stay dark */
+html[data-theme="light"] .sec-white {
   background: #fff !important;
   color: #0A0A0A !important;
   border-color: rgba(0,0,0,0.08) !important;
 }
-.sec-white .section-eyebrow,
-.sec-white h2,
-.sec-white h3,
-.sec-white p,
-.sec-white blockquote { color: #0A0A0A; }
-.sec-white .cite-name { color: #0A0A0A; }
-.sec-white .cite-role { color: rgba(0,0,0,0.5); }
-.sec-white .dot { background: var(--green); }
-.sec-white .muted,
-.sec-white .section-eyebrow { color: rgba(0,0,0,0.5); }
-.sec-white .about-grid .about-copy p { color: rgba(0,0,0,0.68); }
-.sec-white .scroll-hint { color: #000; }
-.sec-white .process::before { background: rgba(0,0,0,0.1); }
-.sec-white .process-step .dot { box-shadow: 0 0 0 6px #fff; }
-.sec-white .process-step h3 { color: #0A0A0A; }
-.sec-white .process-step p { color: rgba(0,0,0,0.5); }
+html[data-theme="light"] .sec-white .section-eyebrow,
+html[data-theme="light"] .sec-white h2,
+html[data-theme="light"] .sec-white h3,
+html[data-theme="light"] .sec-white p,
+html[data-theme="light"] .sec-white blockquote { color: #0A0A0A; }
+html[data-theme="light"] .sec-white .cite-name { color: #0A0A0A; }
+html[data-theme="light"] .sec-white .cite-role { color: rgba(0,0,0,0.5); }
+html[data-theme="light"] .sec-white .dot { background: var(--green); }
+html[data-theme="light"] .sec-white .muted,
+html[data-theme="light"] .sec-white .section-eyebrow { color: rgba(0,0,0,0.5); }
+html[data-theme="light"] .sec-white .about-grid .about-copy p { color: rgba(0,0,0,0.68); }
+html[data-theme="light"] .sec-white .scroll-hint { color: #000; }
+html[data-theme="light"] .sec-white .process::before { background: rgba(0,0,0,0.1); }
+html[data-theme="light"] .sec-white .process-step .dot { box-shadow: 0 0 0 6px #fff; }
+html[data-theme="light"] .sec-white .process-step h3 { color: #0A0A0A; }
+html[data-theme="light"] .sec-white .process-step p { color: rgba(0,0,0,0.5); }
+
+/* In dark mode, listen strip goes GREEN instead of black */
+html[data-theme="dark"] .listen-strip.sec-black {
+  background: var(--green) !important;
+  color: #000 !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+html[data-theme="dark"] .listen-strip.sec-black .listen-strip-label { color: rgba(0,0,0,0.6); }
+html[data-theme="dark"] .listen-strip.sec-black .listen a {
+  background: #000;
+  color: var(--green);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
 
 .listen-strip {
   background: var(--bg);
