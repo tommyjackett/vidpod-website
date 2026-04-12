@@ -1080,6 +1080,7 @@ footer p { font-size: 13px; color: var(--muted); }
   padding: 6px 32px 24px;
   width: max-content;
   animation: bts-scroll 40s linear infinite;
+  cursor: grab;
 }
 .bts-marquee.paused {
   animation-play-state: paused;
