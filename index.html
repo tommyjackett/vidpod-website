@@ -897,6 +897,33 @@ html[data-theme="dark"] .service-vid:hover {
 .work-pod .section-title .dot { background: var(--green); }
 .work-pod .section-intro { color: rgba(255,255,255,0.7); }
 
+/* Video category filter buttons */
+.vid-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+.vid-cat-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.vid-cat-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-1px);
+}
+
 .work-inner { position: relative; z-index: 1; }
 .work-grid {
   display: grid;
@@ -1522,6 +1549,14 @@ footer {
     <div class="reveal">
       <h2 class="section-title">Our <span class="mark">VID<span class="dot"></span></span> work</h2>
       <p class="section-intro">Selected video work. Brand films, founding stories, case studies, long-form content. Built to live everywhere, from homepage heroes to social cutdowns.</p>
+    </div>
+
+    <div class="vid-categories reveal">
+      <a href="video/case-study.html" class="vid-cat-btn">Case studies</a>
+      <a href="video/founding-story.html" class="vid-cat-btn">Founder story</a>
+      <a href="video/social-content.html" class="vid-cat-btn">Social content</a>
+      <a href="video/event-film.html" class="vid-cat-btn">Education</a>
+      <a href="video/brand-film.html" class="vid-cat-btn">Motion graphics</a>
     </div>
 
     <div class="card-grid">
