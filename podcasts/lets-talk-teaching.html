@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=27">
+<link rel="stylesheet" href="_shared.css?v=28">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -332,10 +332,9 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     var now = performance.now();
     if (!lightboxOpen && now > resumeAt && marquee.scrollWidth > marquee.clientWidth) {
       lastProgrammaticTime = now;
-      marquee.scrollLeft += speed;
-      if (marquee.scrollLeft >= halfWidth) {
-        marquee.scrollLeft -= halfWidth;
-      }
+      var next = marquee.scrollLeft + speed;
+      if (next >= halfWidth) next -= halfWidth;
+      marquee.scrollTo(next, 0);
     }
     rafId = requestAnimationFrame(step);
   }
@@ -365,10 +364,10 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     pauseFor(2500);
     if (marquee.scrollLeft >= halfWidth) {
       lastProgrammaticTime = performance.now();
-      marquee.scrollLeft -= halfWidth;
+      marquee.scrollTo(marquee.scrollLeft - halfWidth, 0);
     } else if (marquee.scrollLeft < 0) {
       lastProgrammaticTime = performance.now();
-      marquee.scrollLeft += halfWidth;
+      marquee.scrollTo(marquee.scrollLeft + halfWidth, 0);
     }
   });
 
