@@ -1536,14 +1536,14 @@ footer {
       <div class="bts-strip-label">Video · Behind the scenes</div>
       <div class="marquee-viewport">
         <div class="marquee-track">
-          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS"></div>
+          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt=""></div>
         </div>
       </div>
     </div>
@@ -1631,18 +1631,18 @@ footer {
       <div class="bts-strip-label">Podcast · Behind the scenes</div>
       <div class="marquee-viewport">
         <div class="marquee-track">
-          <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-pod/pod-02.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-pod/pod-03.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-pod/pod-02.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item"><img src="img/bts-pod/pod-03.jpg" alt="Podcast BTS" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-01.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-01.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt="" loading="lazy"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt="" loading="lazy"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-02.jpg" alt="Podcast BTS"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-03.jpg" alt="Podcast BTS"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-02.jpg" alt="Podcast BTS"></div>
+          <div class="marquee-item"><img src="img/bts-pod/pod-03.jpg" alt="Podcast BTS"></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-01.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-01.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt=""></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt=""></div>
         </div>
       </div>
     </div>
@@ -1827,9 +1827,25 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', computeHalf);
     window.addEventListener('load', computeHalf);
 
+    // Recompute whenever the track resizes (e.g. lazy images finish loading)
+    if (typeof ResizeObserver !== 'undefined') {
+      var ro = new ResizeObserver(function() { computeHalf(); });
+      ro.observe(marquee);
+    }
+    // Also trigger recompute on every image load inside this track + force eager load
+    marquee.querySelectorAll('img').forEach(function(img) {
+      img.loading = 'eager';
+      if (img.complete) {
+        computeHalf();
+      } else {
+        img.addEventListener('load', computeHalf, { once: true });
+        img.addEventListener('error', computeHalf, { once: true });
+      }
+    });
+
     function step() {
       var now = performance.now();
-      if (!userInteracting && now > pausedUntil) {
+      if (!userInteracting && now > pausedUntil && marquee.scrollWidth > marquee.clientWidth) {
         programmaticScroll = true;
         marquee.scrollLeft += speed;
         if (marquee.scrollLeft >= halfWidth) marquee.scrollLeft -= halfWidth;
