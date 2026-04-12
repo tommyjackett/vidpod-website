@@ -1099,14 +1099,14 @@ html[data-theme="dark"] .scroll-hint { color: var(--green); }
   .scroll-hint { padding: 9px 14px; }
 }
 
-/* BTS CAROUSEL — native horizontal scroll, JS auto-scroll loop, click to zoom */
+/* BTS CAROUSEL — CSS transform auto-scroll, click to zoom */
 .bts-marquee-viewport {
   position: relative;
   margin-top: 40px;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   width: 100vw;
-  overflow: clip;
+  overflow: hidden;
   background: transparent;
 }
 @media (max-width: 720px) {
@@ -1117,12 +1117,15 @@ html[data-theme="dark"] .scroll-hint { color: var(--green); }
   flex-wrap: nowrap;
   gap: 18px;
   padding: 6px 32px 24px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  touch-action: pan-x pan-y;
-  scroll-behavior: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  width: max-content;
+  animation: bts-scroll 40s linear infinite;
+}
+.bts-marquee.paused {
+  animation-play-state: paused;
+}
+@keyframes bts-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 .bts-marquee::-webkit-scrollbar { display: none; }
 @media (max-width: 720px) {

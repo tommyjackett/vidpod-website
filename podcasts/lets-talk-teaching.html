@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=28">
+<link rel="stylesheet" href="_shared.css?v=29">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -293,7 +293,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
 })();
 
-// BTS carousel — cooldown-timestamp approach, ResizeObserver, no visibility gate
+// BTS carousel — CSS transform animation, pause on interact, click to zoom
 (function() {
   var marquee = document.getElementById('btsMarquee');
   var lb = document.getElementById('btsLightbox');
@@ -302,74 +302,23 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   if (!marquee || !lb || !inner) return;
 
   var lightboxOpen = false;
+  var pauseTimer = null;
 
-  // ---------- auto-scroll loop ----------
-  var speed = 0.66;
-  var rafId = null;
-  var halfWidth = 0;
-  var resumeAt = 0;
-  var lastProgrammaticTime = 0;
-
-  function computeHalf() { halfWidth = Math.max(1, marquee.scrollWidth / 2); }
-
-  // Force eager loading + recompute as images land
-  marquee.querySelectorAll('img').forEach(function(img) {
-    img.loading = 'eager';
-    if (!img.complete || img.naturalWidth === 0) {
-      img.addEventListener('load', computeHalf, { once: true });
-      img.addEventListener('error', computeHalf, { once: true });
-    }
-  });
-
-  computeHalf();
-  window.addEventListener('resize', computeHalf);
-  window.addEventListener('load', computeHalf);
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(computeHalf).observe(marquee);
-  }
-
-  function step() {
-    var now = performance.now();
-    if (!lightboxOpen && now > resumeAt && marquee.scrollWidth > marquee.clientWidth) {
-      lastProgrammaticTime = now;
-      var next = marquee.scrollLeft + speed;
-      if (next >= halfWidth) next -= halfWidth;
-      marquee.scrollTo(next, 0);
-    }
-    rafId = requestAnimationFrame(step);
-  }
-  // Delay start to let images load and layout settle
-  setTimeout(function() {
-    computeHalf();
-    rafId = requestAnimationFrame(step);
-  }, 800);
-
+  function pause() { marquee.classList.add('paused'); }
+  function resume() { marquee.classList.remove('paused'); }
   function pauseFor(ms) {
-    var target = performance.now() + ms;
-    if (target > resumeAt) resumeAt = target;
+    pause();
+    clearTimeout(pauseTimer);
+    pauseTimer = setTimeout(resume, ms);
   }
 
-  // Desktop hover pauses
-  marquee.addEventListener('mouseenter', function() { pauseFor(60 * 60 * 1000); });
-  marquee.addEventListener('mouseleave', function() { resumeAt = performance.now() + 500; });
-  // Touch pauses
-  marquee.addEventListener('touchstart', function() { pauseFor(60 * 60 * 1000); }, { passive: true });
-  marquee.addEventListener('touchend',   function() { resumeAt = performance.now() + 2500; }, { passive: true });
-  marquee.addEventListener('touchcancel', function() { resumeAt = performance.now() + 1500; }, { passive: true });
-  marquee.addEventListener('wheel', function() { pauseFor(2000); }, { passive: true });
-
-  // Scroll events — cooldown-timestamp approach
-  marquee.addEventListener('scroll', function() {
-    if (performance.now() - lastProgrammaticTime < 120) return;
-    pauseFor(2500);
-    if (marquee.scrollLeft >= halfWidth) {
-      lastProgrammaticTime = performance.now();
-      marquee.scrollTo(marquee.scrollLeft - halfWidth, 0);
-    } else if (marquee.scrollLeft < 0) {
-      lastProgrammaticTime = performance.now();
-      marquee.scrollTo(marquee.scrollLeft + halfWidth, 0);
-    }
-  });
+  // Desktop hover
+  marquee.addEventListener('mouseenter', pause);
+  marquee.addEventListener('mouseleave', function() { pauseFor(500); });
+  // Touch — pause while touching, resume 2.5s after release
+  marquee.addEventListener('touchstart', pause, { passive: true });
+  marquee.addEventListener('touchend', function() { pauseFor(2500); }, { passive: true });
+  marquee.addEventListener('touchcancel', function() { pauseFor(1500); }, { passive: true });
 
   // ---------- click to zoom lightbox ----------
   function openLb(item) {
@@ -383,12 +332,14 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     lightboxOpen = true;
+    pause();
   }
   function closeLb() {
     lb.classList.remove('is-open');
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     lightboxOpen = false;
+    resume();
     setTimeout(function() { inner.innerHTML = ''; }, 300);
   }
 
