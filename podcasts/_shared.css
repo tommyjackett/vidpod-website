@@ -268,9 +268,10 @@ html[data-theme="dark"] .sayhi-pop {
 /* POD HERO */
 .pod-hero {
   padding: 160px 0 90px;
-  background: var(--bg-2);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
+html[data-theme="light"] .pod-hero { background: #fff; }
 .pod-hero-grid {
   display: grid;
   grid-template-columns: 360px 1fr;
