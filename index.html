@@ -639,7 +639,7 @@ html[data-theme="dark"] .sayhi-pop {
   margin-top: 56px;
 }
 @media (max-width: 1000px) { .card-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
-@media (max-width: 520px) { .card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+@media (max-width: 520px) { .card-grid { grid-template-columns: 1fr; gap: 18px; } }
 
 .pcard {
   border-radius: 16px;
@@ -1882,6 +1882,18 @@ footer {
   </div>
 </footer>
 
+<!-- Video lightbox for video work cards -->
+<div class="vid-lightbox" id="vidLightbox" aria-hidden="true">
+  <button class="vid-lightbox-close" id="vidLightboxClose" aria-label="Close">×</button>
+  <div class="vid-lightbox-wrap" id="vidLightboxWrap"></div>
+</div>
+
+<!-- Shared image lightbox for homepage marquee carousels -->
+<div class="img-lightbox" id="imgLightbox" aria-hidden="true">
+  <button class="img-lightbox-close" id="imgLightboxClose" aria-label="Close">×</button>
+  <div class="img-lightbox-inner" id="imgLightboxInner"></div>
+</div>
+
 <script>
 // Theme toggle
 document.getElementById('themeToggle').addEventListener('click', function() {
@@ -2142,16 +2154,5 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
-<!-- Shared image lightbox for homepage marquee carousels -->
-<div class="img-lightbox" id="imgLightbox" aria-hidden="true">
-  <button class="img-lightbox-close" id="imgLightboxClose" aria-label="Close">×</button>
-  <div class="img-lightbox-inner" id="imgLightboxInner"></div>
-</div>
-
-<!-- Video lightbox for video work cards -->
-<div class="vid-lightbox" id="vidLightbox" aria-hidden="true">
-  <button class="vid-lightbox-close" id="vidLightboxClose" aria-label="Close">×</button>
-  <div class="vid-lightbox-wrap" id="vidLightboxWrap"></div>
-</div>
 </body>
 </html>
