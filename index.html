@@ -653,7 +653,7 @@ html[data-theme="dark"] .sayhi-pop {
 }
 .pcard:hover { transform: translateY(-4px); }
 
-.work-vid .pcard { background: #fff; border: 0; outline: 1px solid transparent; outline-offset: 0; transition: transform 0.4s var(--ease), outline-color 0.3s var(--ease), box-shadow 0.4s var(--ease); }
+.work-vid .pcard { background: #fff; border: 0; outline: 1px solid transparent; outline-offset: 0; transition: transform 0.4s var(--ease), outline-color 0.3s var(--ease), box-shadow 0.4s var(--ease); cursor: pointer; }
 .work-vid .pcard:hover { outline-color: #fff; box-shadow: 0 20px 48px rgba(0,0,0,0.18); }
 .work-pod .pcard { background: #111; border: 1px solid #222; }
 .work-pod .pcard:hover { border-color: var(--green); box-shadow: 0 20px 48px rgba(0,255,170,0.12); }
@@ -681,13 +681,22 @@ html[data-theme="dark"] .sayhi-pop {
   justify-content: center;
   pointer-events: none;
 }
-.pcard-media .pcard-play svg {
-  width: 54px; height: 54px;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
-  opacity: 0.92;
-  transition: transform 0.3s var(--ease);
+.pcard-media .pcard-play span {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
 }
-.pcard:hover .pcard-play svg { transform: scale(1.08); }
+.pcard-media .pcard-play span svg {
+  width: 18px; height: 18px;
+  margin-left: 3px;
+  fill: #0A0A0A;
+}
+.pcard:hover .pcard-play span { transform: scale(1.1); background: #fff; }
 .pcard-placeholder {
   width: 100%; height: 100%;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -1212,6 +1221,69 @@ a.pod-art-item .pod-art-label { color: #fff; }
   .img-lightbox-close { top: 16px; right: 16px; width: 52px; height: 52px; font-size: 28px; }
 }
 
+/* ===== VIDEO LIGHTBOX ===== */
+.vid-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,8,0.94);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  cursor: zoom-out;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.vid-lightbox.is-open { opacity: 1; pointer-events: auto; }
+.vid-lightbox-wrap {
+  position: relative;
+  width: min(1100px, 92vw);
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+  background: #000;
+  transform: scale(.94);
+  transition: transform .3s cubic-bezier(.2,.9,.3,1);
+}
+.vid-lightbox.is-open .vid-lightbox-wrap { transform: scale(1); }
+.vid-lightbox-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+.vid-lightbox-close {
+  position: fixed;
+  top: 24px; right: 24px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.vid-lightbox-close:hover,
+.vid-lightbox-close:focus {
+  background: rgba(0,0,0,0.92);
+  border-color: rgba(255,255,255,0.9);
+  transform: scale(1.08);
+  outline: none;
+}
+@media (max-width: 640px) {
+  .vid-lightbox { padding: 16px; }
+  .vid-lightbox-close { top: 16px; right: 16px; width: 52px; height: 52px; font-size: 28px; }
+}
+
 /* ===== CONTACT ===== */
 .contact {
   border-top: 1px solid var(--line);
@@ -1540,77 +1612,77 @@ footer {
     </div>
 
     <div class="card-grid">
-      <a class="pcard reveal" href="video/founding-story.html">
+      <div class="pcard reveal" data-yt-id="oSlSom4mKNs">
         <div class="pcard-media media-video">
-          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
-          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+          <img src="https://i.ytimg.com/vi/oSlSom4mKNs/maxresdefault.jpg" alt="Barefoot Investor — Book Launch Video" loading="lazy">
+          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">Founding story</div>
-          <h4>Founding story</h4>
-          <p class="pcard-desc">Why the brand exists. The founder, on camera, the way people actually remember you.</p>
+          <div class="pcard-eyebrow">Book launch video</div>
+          <h4>Barefoot Investor</h4>
+          <p class="pcard-desc">The Barefoot Kids book launch — captured the energy of Scott Pape's live event and turned it into a piece that lives well beyond the day.</p>
         </div>
-      </a>
+      </div>
 
-      <a class="pcard reveal" href="video/brand-film.html">
+      <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
-          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
-          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+          <div class="pcard-placeholder">Video placeholder</div>
+          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Brand film</div>
           <h4>Brand film</h4>
           <p class="pcard-desc">A hero film for the top of the site, the pitch deck, the launch. Built to work everywhere.</p>
         </div>
-      </a>
+      </div>
 
-      <a class="pcard reveal" href="video/case-study.html">
+      <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
-          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
-          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+          <div class="pcard-placeholder">Video placeholder</div>
+          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Case study</div>
           <h4>Case study</h4>
           <p class="pcard-desc">Real customers, real outcomes. Filmed like a story, not a testimonial.</p>
         </div>
-      </a>
+      </div>
 
-      <a class="pcard reveal" href="video/social-content.html">
+      <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
-          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
-          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+          <div class="pcard-placeholder">Video placeholder</div>
+          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Social content</div>
           <h4>Social content</h4>
           <p class="pcard-desc">Short, sharp, built for the feed. Packs that punch above their runtime.</p>
         </div>
-      </a>
+      </div>
 
-      <a class="pcard reveal" href="video/product-video.html">
+      <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
-          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
-          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+          <div class="pcard-placeholder">Video placeholder</div>
+          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Product video</div>
           <h4>Product video</h4>
           <p class="pcard-desc">Show the thing. What it is, what it does, why anyone should care, in 60 seconds.</p>
         </div>
-      </a>
+      </div>
 
-      <a class="pcard reveal" href="video/event-film.html">
+      <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
-          <div class="pcard-placeholder" data-video-id="REPLACE_WITH_YT_ID">Video placeholder</div>
-          <div class="pcard-play"><svg viewBox="0 0 68 48"><path fill="#FF0000" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg></div>
+          <div class="pcard-placeholder">Video placeholder</div>
+          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Event film</div>
           <h4>Event film</h4>
           <p class="pcard-desc">Conference, launch, offsite. Capture it properly so it actually gets used afterwards.</p>
         </div>
-      </a>
+      </div>
     </div>
 
     <!-- VIDEO BTS -->
@@ -2029,12 +2101,57 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Video lightbox — click video card to play in overlay
+(function() {
+  var lb = document.getElementById('vidLightbox');
+  var wrap = document.getElementById('vidLightboxWrap');
+  var closeBtn = document.getElementById('vidLightboxClose');
+  if (!lb || !wrap || !closeBtn) return;
+
+  function openVid(ytId) {
+    if (!ytId) return;
+    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVid() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    wrap.innerHTML = '';
+  }
+
+  // Click any video pcard
+  document.querySelectorAll('.work-vid .pcard[data-yt-id]').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var id = card.getAttribute('data-yt-id');
+      if (id) openVid(id);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeVid);
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) closeVid();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeVid();
+  });
+})();
 </script>
 
 <!-- Shared image lightbox for homepage marquee carousels -->
 <div class="img-lightbox" id="imgLightbox" aria-hidden="true">
   <button class="img-lightbox-close" id="imgLightboxClose" aria-label="Close">×</button>
   <div class="img-lightbox-inner" id="imgLightboxInner"></div>
+</div>
+
+<!-- Video lightbox for video work cards -->
+<div class="vid-lightbox" id="vidLightbox" aria-hidden="true">
+  <button class="vid-lightbox-close" id="vidLightboxClose" aria-label="Close">×</button>
+  <div class="vid-lightbox-wrap" id="vidLightboxWrap"></div>
 </div>
 </body>
 </html>
