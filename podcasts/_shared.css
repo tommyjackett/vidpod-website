@@ -658,6 +658,50 @@ html[data-theme="dark"] .sayhi-pop {
 }
 
 /* LISTEN STRIP — full-width listen bar that sits below the hero */
+/* Fixed-colour section overrides — force black or white regardless of theme */
+.sec-black {
+  background: #0A0A0A !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.sec-black .section-eyebrow,
+.sec-black h2,
+.sec-black h3,
+.sec-black p,
+.sec-black blockquote { color: #fff; }
+.sec-black .cite-name { color: #fff; }
+.sec-black .cite-role { color: rgba(255,255,255,0.55); }
+.sec-black .dot { background: var(--green); }
+.sec-black .muted,
+.sec-black .section-eyebrow { color: rgba(255,255,255,0.5); }
+.sec-black .scroll-hint { color: var(--green); }
+.sec-black .process::before { background: rgba(255,255,255,0.12); }
+.sec-black .process-step .dot { box-shadow: 0 0 0 6px #0A0A0A; }
+.sec-black .process-step h3 { color: #fff; }
+.sec-black .process-step p { color: rgba(255,255,255,0.55); }
+
+.sec-white {
+  background: #fff !important;
+  color: #0A0A0A !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+.sec-white .section-eyebrow,
+.sec-white h2,
+.sec-white h3,
+.sec-white p,
+.sec-white blockquote { color: #0A0A0A; }
+.sec-white .cite-name { color: #0A0A0A; }
+.sec-white .cite-role { color: rgba(0,0,0,0.5); }
+.sec-white .dot { background: var(--green); }
+.sec-white .muted,
+.sec-white .section-eyebrow { color: rgba(0,0,0,0.5); }
+.sec-white .about-grid .about-copy p { color: rgba(0,0,0,0.68); }
+.sec-white .scroll-hint { color: #000; }
+.sec-white .process::before { background: rgba(0,0,0,0.1); }
+.sec-white .process-step .dot { box-shadow: 0 0 0 6px #fff; }
+.sec-white .process-step h3 { color: #0A0A0A; }
+.sec-white .process-step p { color: rgba(0,0,0,0.5); }
+
 .listen-strip {
   background: var(--bg);
   border-bottom: 1px solid var(--line);
@@ -666,6 +710,7 @@ html[data-theme="dark"] .sayhi-pop {
 .listen-strip-inner {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 26px;
   flex-wrap: wrap;
 }
@@ -676,6 +721,7 @@ html[data-theme="dark"] .sayhi-pop {
   text-transform: uppercase;
   color: var(--muted);
 }
+.sec-black .listen-strip-label { color: rgba(255,255,255,0.5); }
 .listen-strip .listen { margin-top: 0; }
 
 /* FOOTER */
