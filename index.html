@@ -886,7 +886,8 @@ html[data-theme="dark"] .service-vid:hover {
   overflow: hidden;
 }
 .work-vid .section-eyebrow { color: #000; }
-.work-vid .section-title { color: #000; }
+.work-vid .section-title { color: #fff; }
+.work-vid .section-title .mark { color: #000; }
 .work-vid .section-title .dot { background: #000; }
 .work-vid .section-intro { color: rgba(0,0,0,0.72); }
 
@@ -898,6 +899,7 @@ html[data-theme="dark"] .service-vid:hover {
 }
 .work-pod .section-eyebrow { color: #fff; }
 .work-pod .section-title { color: #fff; }
+.work-pod .section-title .mark { color: var(--green); }
 .work-pod .section-title .dot { background: var(--green); }
 .work-pod .section-intro { color: rgba(255,255,255,0.7); }
 
@@ -1516,7 +1518,7 @@ footer {
 <section class="work-vid" id="work-vid">
   <div class="wrap work-inner">
     <div class="reveal">
-      <h2 class="section-title">Our VID<span class="dot"></span> work</h2>
+      <h2 class="section-title">Our <span class="mark">VID<span class="dot"></span></span> work</h2>
       <p class="section-intro">Selected video work. Brand films, founding stories, case studies, long-form content. Built to live everywhere, from homepage heroes to social cutdowns.</p>
     </div>
 
@@ -1623,7 +1625,7 @@ footer {
 <section class="work-pod" id="work-pod">
   <div class="wrap work-inner">
     <div class="reveal">
-      <h2 class="section-title">Our POD<span class="dot"></span> work</h2>
+      <h2 class="section-title">Our <span class="mark">POD<span class="dot"></span></span> work</h2>
       <p class="section-intro">High-end branded podcast production. Concept, recording, editing, show notes, distribution, promotion. Whatever support you need, we can provide it.</p>
     </div>
 
