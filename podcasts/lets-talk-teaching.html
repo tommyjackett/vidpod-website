@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=29">
+<link rel="stylesheet" href="_shared.css?v=30">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -293,7 +293,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
 })();
 
-// BTS carousel — CSS transform animation, pause on interact, click to zoom
+// BTS carousel — CSS transform animation + touch swipe + click to zoom
 (function() {
   var marquee = document.getElementById('btsMarquee');
   var lb = document.getElementById('btsLightbox');
@@ -303,6 +303,35 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 
   var lightboxOpen = false;
   var pauseTimer = null;
+  var DURATION = 40; // must match CSS animation duration in seconds
+
+  // Get current translateX from computed transform matrix
+  function getCurrentX() {
+    var style = window.getComputedStyle(marquee);
+    var matrix = style.transform || style.webkitTransform;
+    if (!matrix || matrix === 'none') return 0;
+    var m = matrix.match(/matrix.*\((.+)\)/);
+    if (!m) return 0;
+    var values = m[1].split(',');
+    return parseFloat(values[4]) || 0;
+  }
+
+  // Resume CSS animation from a given translateX position
+  function resumeFrom(currentX) {
+    var halfWidth = marquee.scrollWidth / 2;
+    if (halfWidth <= 0) halfWidth = 1;
+    // Wrap into valid range: 0 to -halfWidth
+    currentX = currentX % halfWidth;
+    if (currentX > 0) currentX -= halfWidth;
+    // Calculate progress (0 to 1)
+    var progress = Math.abs(currentX) / halfWidth;
+    // Set negative delay to start animation from this point
+    marquee.style.animation = 'none';
+    // Force reflow
+    void marquee.offsetHeight;
+    marquee.style.animation = '';
+    marquee.style.animationDelay = '-' + (progress * DURATION) + 's';
+  }
 
   function pause() { marquee.classList.add('paused'); }
   function resume() { marquee.classList.remove('paused'); }
@@ -315,10 +344,45 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   // Desktop hover
   marquee.addEventListener('mouseenter', pause);
   marquee.addEventListener('mouseleave', function() { pauseFor(500); });
-  // Touch — pause while touching, resume 2.5s after release
-  marquee.addEventListener('touchstart', pause, { passive: true });
-  marquee.addEventListener('touchend', function() { pauseFor(2500); }, { passive: true });
-  marquee.addEventListener('touchcancel', function() { pauseFor(1500); }, { passive: true });
+
+  // ---------- Touch swipe ----------
+  var touchStartX = 0;
+  var touchCurrentX = 0;
+  var baseX = 0;
+  var isSwiping = false;
+
+  marquee.addEventListener('touchstart', function(e) {
+    clearTimeout(pauseTimer);
+    pause();
+    touchStartX = e.touches[0].clientX;
+    baseX = getCurrentX();
+    isSwiping = true;
+    marquee.style.animation = 'none';
+    marquee.style.transform = 'translateX(' + baseX + 'px)';
+  }, { passive: true });
+
+  marquee.addEventListener('touchmove', function(e) {
+    if (!isSwiping) return;
+    var deltaX = e.touches[0].clientX - touchStartX;
+    touchCurrentX = baseX + deltaX;
+    marquee.style.transform = 'translateX(' + touchCurrentX + 'px)';
+  }, { passive: true });
+
+  marquee.addEventListener('touchend', function() {
+    if (!isSwiping) return;
+    isSwiping = false;
+    var finalX = touchCurrentX || baseX;
+    resumeFrom(finalX);
+    pauseFor(2500);
+  }, { passive: true });
+
+  marquee.addEventListener('touchcancel', function() {
+    if (!isSwiping) return;
+    isSwiping = false;
+    var finalX = touchCurrentX || baseX;
+    resumeFrom(finalX);
+    pauseFor(1500);
+  }, { passive: true });
 
   // ---------- click to zoom lightbox ----------
   function openLb(item) {
