@@ -1783,7 +1783,7 @@ window.addEventListener('load', function() {
 })();
 
 // Homepage marquee carousels — native scroll, JS auto-loop, pause on interact, click to zoom
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var tracks = document.querySelectorAll('.marquee-track');
   var lb = document.getElementById('imgLightbox');
   var inner = document.getElementById('imgLightboxInner');
@@ -1814,7 +1814,7 @@ window.addEventListener('load', function() {
   });
 
   tracks.forEach(function(marquee) {
-    var speed = 1.1;
+    var speed = 0.66;
     var pausedUntil = 0;
     var userInteracting = false;
     var lastScrollLeft = marquee.scrollLeft;
@@ -1889,7 +1889,7 @@ window.addEventListener('load', function() {
     // nothing to do — each track uses its own interaction state; lightbox already pauses via body scroll lock
   });
   mo.observe(lb, { attributes: true, attributeFilter: ['class'] });
-})();
+});
 </script>
 
 <!-- Shared image lightbox for homepage marquee carousels -->

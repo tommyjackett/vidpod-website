@@ -289,7 +289,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   if (!marquee || !lb || !inner) return;
 
   // ---------- auto-scroll loop ----------
-  var speed = 1.1;            // pixels per frame (~66px/s at 60fps)
+  var speed = 0.66;           // pixels per frame (~40px/s at 60fps, -40%)
   var pausedUntil = 0;        // timestamp to resume auto-scroll
   var userInteracting = false;
   var lastScrollLeft = marquee.scrollLeft;
