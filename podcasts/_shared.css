@@ -900,6 +900,52 @@ footer p { font-size: 13px; color: var(--muted); }
   }
 }
 
+/* SCROLL HINT — cascading chevrons below horizontal carousels */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px auto 4px;
+  padding: 10px 20px;
+  width: fit-content;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  opacity: 0.78;
+  color: #000;
+  transition: opacity 0.3s ease;
+}
+html[data-theme="dark"] .scroll-hint { color: var(--green); }
+.scroll-hint-chevrons {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+.scroll-hint .chev {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: scroll-hint-pulse 1.6s ease-in-out infinite;
+}
+.scroll-hint .chev:nth-child(1) { animation-delay: 0s; }
+.scroll-hint .chev:nth-child(2) { animation-delay: 0.2s; }
+.scroll-hint .chev:nth-child(3) { animation-delay: 0.4s; }
+@keyframes scroll-hint-pulse {
+  0%, 100% { opacity: 0.25; transform: translateX(0) rotate(45deg); }
+  50%      { opacity: 1;    transform: translateX(4px) rotate(45deg); }
+}
+@media (max-width: 640px) {
+  .scroll-hint { font-size: 10px; padding: 9px 16px; gap: 12px; }
+}
+
 /* BTS CAROUSEL — native horizontal scroll, JS auto-scroll loop, click to zoom */
 .bts-marquee-viewport {
   position: relative;
