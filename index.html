@@ -673,33 +673,7 @@ html[data-theme="dark"] .sayhi-pop {
   transition: transform 0.6s var(--ease);
 }
 .pcard:hover .pcard-media img { transform: scale(1.04); }
-.pcard-media .pcard-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-.pcard-media .pcard-play span {
-  width: 56px; height: 56px;
-  border-radius: 16px;
-  background: rgba(0, 255, 170, 0.35);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
-}
-.pcard-media .pcard-play span svg {
-  width: 20px; height: 20px;
-  margin-left: 2px;
-  fill: #fff;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
-}
-.pcard:hover .pcard-play span { transform: scale(1.1); background: rgba(0, 255, 170, 0.55); }
+/* play button removed — thumbnails stand alone */
 .pcard-placeholder {
   width: 100%; height: 100%;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -1618,7 +1592,7 @@ footer {
       <div class="pcard reveal" data-yt-id="oSlSom4mKNs">
         <div class="pcard-media media-video">
           <img src="https://i.ytimg.com/vi/oSlSom4mKNs/maxresdefault.jpg" alt="Barefoot Investor — Book Launch Video" loading="lazy">
-          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
+
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Book launch video</div>
@@ -1630,7 +1604,7 @@ footer {
       <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
           <div class="pcard-placeholder">Video placeholder</div>
-          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
+
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Brand film</div>
@@ -1642,7 +1616,7 @@ footer {
       <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
           <div class="pcard-placeholder">Video placeholder</div>
-          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
+
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Case study</div>
@@ -1654,7 +1628,7 @@ footer {
       <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
           <div class="pcard-placeholder">Video placeholder</div>
-          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
+
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Social content</div>
@@ -1666,7 +1640,7 @@ footer {
       <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
           <div class="pcard-placeholder">Video placeholder</div>
-          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
+
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Product video</div>
@@ -1678,7 +1652,7 @@ footer {
       <div class="pcard reveal" data-yt-id="">
         <div class="pcard-media media-video">
           <div class="pcard-placeholder">Video placeholder</div>
-          <div class="pcard-play"><span><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span></div>
+
         </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">Event film</div>
