@@ -1115,7 +1115,6 @@ a.pod-art-item .pod-art-label { color: #fff; }
   gap: 22px;
   overflow-x: auto;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
   touch-action: pan-x pan-y;
   scroll-behavior: auto;
   scrollbar-width: none;
@@ -1999,10 +1998,9 @@ document.addEventListener('DOMContentLoaded', function() {
       var now = performance.now();
       if (!lightboxOpen && isVisible && now > resumeAt && marquee.scrollWidth > marquee.clientWidth) {
         lastProgrammaticTime = now;
-        marquee.scrollLeft += speed;
-        if (marquee.scrollLeft >= halfWidth) {
-          marquee.scrollLeft -= halfWidth;
-        }
+        var next = marquee.scrollLeft + speed;
+        if (next >= halfWidth) next -= halfWidth;
+        marquee.scrollTo(next, 0);
       }
       rafId = requestAnimationFrame(step);
     }
@@ -2030,10 +2028,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // Seamless wrap for user-driven scroll
       if (marquee.scrollLeft >= halfWidth) {
         lastProgrammaticTime = performance.now();
-        marquee.scrollLeft -= halfWidth;
+        marquee.scrollTo(marquee.scrollLeft - halfWidth, 0);
       } else if (marquee.scrollLeft < 0) {
         lastProgrammaticTime = performance.now();
-        marquee.scrollLeft += halfWidth;
+        marquee.scrollTo(marquee.scrollLeft + halfWidth, 0);
       }
     });
 
