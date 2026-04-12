@@ -1103,13 +1103,14 @@ html[data-theme="dark"] .scroll-hint { color: var(--green); }
 .bts-marquee-viewport {
   position: relative;
   margin-top: 40px;
-  margin-left: -32px;
-  margin-right: -32px;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
   overflow: hidden;
   background: transparent;
 }
 @media (max-width: 720px) {
-  .bts-marquee-viewport { margin-left: -22px; margin-right: -22px; margin-top: 28px; }
+  .bts-marquee-viewport { margin-top: 28px; }
 }
 .bts-marquee {
   display: flex;
