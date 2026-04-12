@@ -396,27 +396,62 @@ html[data-theme="dark"] .sayhi-pop {
   margin: 0;
 }
 
-/* QUOTE BLOCK */
+/* QUOTE BLOCK — oversized decorative marks */
 .pod-quote {
   background: var(--bg-2);
+  text-align: center;
+}
+.pod-quote .quote-inner {
+  position: relative;
+  display: inline-block;
+  max-width: 900px;
+  padding: 40px 0 0;
+}
+/* Giant decorative opening quotation mark */
+.pod-quote .quote-mark {
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(140px, 18vw, 220px);
+  line-height: 0.6;
+  color: var(--green);
+  margin: 0 auto -20px;
+  user-select: none;
+  opacity: 0.85;
 }
 .pod-quote blockquote {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(28px, 3.4vw, 44px);
-  line-height: 1.15;
+  font-size: clamp(26px, 3.2vw, 42px);
+  line-height: 1.2;
   letter-spacing: -0.01em;
   text-transform: none;
   color: var(--fg);
-  max-width: 900px;
+  margin: 0;
+  padding: 0;
 }
 .pod-quote .cite {
+  margin-top: 36px;
+}
+.pod-quote .cite-name {
+  display: block;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+}
+.pod-quote .cite-role {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
   color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 28px;
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+}
+@media (max-width: 640px) {
+  .pod-quote .quote-inner { padding: 20px 0 0; }
+  .pod-quote .quote-mark { margin-bottom: -10px; }
+  .pod-quote .cite { margin-top: 28px; }
 }
 
 /* CTA */
