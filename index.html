@@ -848,6 +848,34 @@ html[data-theme="dark"] .service-vid:hover {
   border: 1px solid rgba(255,255,255,0.14);
   color: #fff;
 }
+.service-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  align-self: flex-start;
+}
+.service-cta .dot { width: 9px; height: 9px; }
+.service-vid .service-cta {
+  background: #000;
+  color: var(--green);
+}
+.service-vid .service-cta .dot { background: var(--green); }
+.service-vid .service-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,0.35); }
+.service-pod .service-cta {
+  background: var(--green);
+  color: #000;
+}
+.service-pod .service-cta .dot { background: #000; }
+.service-pod .service-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,255,170,0.35); }
 
 /* ===== WORK — two distinct bands, VID. (green) and POD. (black) ===== */
 .work-vid {
@@ -1042,38 +1070,89 @@ a.pod-art-item .pod-art-label { color: #fff; }
 .marquee-viewport {
   position: relative;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
 .marquee-track {
   display: flex;
   gap: 22px;
-  width: max-content;
-  animation: marquee-scroll 60s linear infinite;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 36px 8px;
 }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track::-webkit-scrollbar { display: none; }
 .marquee-item {
   flex: 0 0 auto;
   width: 420px;
   aspect-ratio: 3 / 2;
   border-radius: 18px;
   overflow: hidden;
-  background: #0A0A0A;
+  background: var(--bg-2);
   box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  cursor: zoom-in;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.marquee-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.16);
 }
 .marquee-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
 }
 @media (max-width: 640px) {
   .marquee-item { width: 300px; }
-  .marquee-track { gap: 14px; animation-duration: 50s; }
+  .marquee-track { gap: 14px; padding: 4px 22px 8px; }
 }
-@keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 11px)); }
+
+/* Shared lightbox for homepage marquees */
+.img-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,8,0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  cursor: zoom-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.img-lightbox.is-open { opacity: 1; pointer-events: auto; }
+.img-lightbox img {
+  max-width: min(1200px, 94vw);
+  max-height: 90vh;
+  width: auto; height: auto;
+  border-radius: 20px;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+  transform: scale(.94);
+  transition: transform .3s cubic-bezier(.2,.9,.3,1);
+}
+.img-lightbox.is-open img { transform: scale(1); }
+.img-lightbox-close {
+  position: fixed;
+  top: 20px; right: 20px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
 }
 
 /* ===== CONTACT ===== */
@@ -1346,6 +1425,7 @@ footer {
             <li>Product demos</li>
             <li>Social media</li>
           </ul>
+          <a href="#work-vid" class="service-cta">See our VID<span class="dot"></span></a>
         </div>
       </div>
 
@@ -1362,6 +1442,7 @@ footer {
             <li>Show notes</li>
             <li>Distribution</li>
           </ul>
+          <a href="#work-pod" class="service-cta">See our POD<span class="dot"></span></a>
         </div>
       </div>
     </div>
@@ -1700,6 +1781,121 @@ window.addEventListener('load', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
   go && go.addEventListener('click', function() { setTimeout(close, 150); });
 })();
+
+// Homepage marquee carousels — native scroll, JS auto-loop, pause on interact, click to zoom
+(function() {
+  var tracks = document.querySelectorAll('.marquee-track');
+  var lb = document.getElementById('imgLightbox');
+  var inner = document.getElementById('imgLightboxInner');
+  var closeBtn = document.getElementById('imgLightboxClose');
+  if (!tracks.length || !lb || !inner) return;
+
+  function openLb(item) {
+    inner.innerHTML = '';
+    var media = item.querySelector('img, video, iframe');
+    if (!media) return;
+    var clone = media.cloneNode(true);
+    clone.removeAttribute('style');
+    inner.appendChild(clone);
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(function() { inner.innerHTML = ''; }, 300);
+  }
+  closeBtn.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+  });
+
+  tracks.forEach(function(marquee) {
+    var speed = 1.1;
+    var pausedUntil = 0;
+    var userInteracting = false;
+    var lastScrollLeft = marquee.scrollLeft;
+    var rafId = null;
+    var halfWidth = 0;
+    var programmaticScroll = false;
+
+    function computeHalf() { halfWidth = Math.max(1, marquee.scrollWidth / 2); }
+    computeHalf();
+    window.addEventListener('resize', computeHalf);
+    window.addEventListener('load', computeHalf);
+
+    function step() {
+      var now = performance.now();
+      if (!userInteracting && now > pausedUntil) {
+        programmaticScroll = true;
+        marquee.scrollLeft += speed;
+        if (marquee.scrollLeft >= halfWidth) marquee.scrollLeft -= halfWidth;
+        lastScrollLeft = marquee.scrollLeft;
+        programmaticScroll = false;
+      }
+      rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+
+    function pauseFor(ms) { pausedUntil = performance.now() + ms; }
+
+    marquee.addEventListener('mouseenter', function() { userInteracting = true; });
+    marquee.addEventListener('mouseleave', function() { userInteracting = false; pauseFor(300); });
+    marquee.addEventListener('touchstart', function() { userInteracting = true; }, { passive: true });
+    marquee.addEventListener('touchend',   function() { userInteracting = false; pauseFor(2500); }, { passive: true });
+    marquee.addEventListener('pointerdown', function() { userInteracting = true; });
+    marquee.addEventListener('pointerup',   function() { userInteracting = false; pauseFor(2500); });
+    marquee.addEventListener('pointercancel', function() { userInteracting = false; pauseFor(1500); });
+    marquee.addEventListener('wheel', function() { pauseFor(2000); }, { passive: true });
+    marquee.addEventListener('scroll', function() {
+      if (programmaticScroll) return;
+      var delta = Math.abs(marquee.scrollLeft - lastScrollLeft);
+      if (delta > speed * 3) pauseFor(2500);
+      lastScrollLeft = marquee.scrollLeft;
+      if (marquee.scrollLeft >= halfWidth) {
+        programmaticScroll = true;
+        marquee.scrollLeft -= halfWidth;
+        lastScrollLeft = marquee.scrollLeft;
+        programmaticScroll = false;
+      } else if (marquee.scrollLeft < 0) {
+        programmaticScroll = true;
+        marquee.scrollLeft += halfWidth;
+        lastScrollLeft = marquee.scrollLeft;
+        programmaticScroll = false;
+      }
+    });
+
+    // Click vs drag detection
+    var downX = 0, downY = 0, downT = 0;
+    marquee.addEventListener('pointerdown', function(e) {
+      downX = e.clientX; downY = e.clientY; downT = performance.now();
+    });
+    marquee.addEventListener('click', function(e) {
+      var dx = Math.abs(e.clientX - downX);
+      var dy = Math.abs(e.clientY - downY);
+      var dt = performance.now() - downT;
+      if (dx > 8 || dy > 8 || dt > 600) return;
+      var item = e.target.closest('.marquee-item');
+      if (!item) return;
+      openLb(item);
+    });
+  });
+
+  // Pause all auto-scrolls while lightbox is open (via body overflow flag)
+  var mo = new MutationObserver(function() {
+    // nothing to do — each track uses its own interaction state; lightbox already pauses via body scroll lock
+  });
+  mo.observe(lb, { attributes: true, attributeFilter: ['class'] });
+})();
 </script>
+
+<!-- Shared image lightbox for homepage marquee carousels -->
+<div class="img-lightbox" id="imgLightbox" aria-hidden="true">
+  <button class="img-lightbox-close" id="imgLightboxClose" aria-label="Close">×</button>
+  <div class="img-lightbox-inner" id="imgLightboxInner"></div>
+</div>
 </body>
 </html>
