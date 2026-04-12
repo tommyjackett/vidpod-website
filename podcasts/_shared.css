@@ -1106,7 +1106,6 @@ html[data-theme="dark"] .scroll-hint { color: var(--green); }
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   width: 100vw;
-  overflow: hidden;
   background: transparent;
 }
 @media (max-width: 720px) {
@@ -1117,7 +1116,7 @@ html[data-theme="dark"] .scroll-hint { color: var(--green); }
   flex-wrap: nowrap;
   gap: 18px;
   padding: 6px 32px 24px;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x pan-y;
