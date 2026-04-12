@@ -747,6 +747,19 @@ html[data-theme="dark"] .sayhi-pop {
 }
 .work-vid .bts-strip-label { color: rgba(0,0,0,0.55); }
 .work-pod .bts-strip-label { color: rgba(255,255,255,0.55); }
+.bts-heading {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(29px, 3.7vw, 51px);
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.work-vid .bts-heading { color: #000; }
+.work-vid .bts-heading .dot { background: var(--green); }
+.work-pod .bts-heading { color: #fff; }
+.work-pod .bts-heading .dot { background: var(--green); }
 /* Mixed-aspect marquee items: fixed height, natural width */
 .bts-strip .marquee-item {
   width: auto;
@@ -912,6 +925,7 @@ html[data-theme="dark"] .service-vid:hover {
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
   background: #000;
   border: 1px solid rgba(0,0,0,0.18);
   color: var(--green);
@@ -1550,11 +1564,11 @@ footer {
     </div>
 
     <div class="vid-categories reveal">
-      <a href="#" class="vid-cat-btn">Case studies</a>
-      <a href="#" class="vid-cat-btn">Founder story</a>
-      <a href="#" class="vid-cat-btn">Social content</a>
-      <a href="#" class="vid-cat-btn">Education</a>
-      <a href="#" class="vid-cat-btn">Motion graphics</a>
+      <button class="vid-cat-btn">Case studies</button>
+      <button class="vid-cat-btn">Founder story</button>
+      <button class="vid-cat-btn">Social content</button>
+      <button class="vid-cat-btn">Education</button>
+      <button class="vid-cat-btn">Motion graphics</button>
     </div>
 
     <div class="card-grid">
@@ -1633,7 +1647,7 @@ footer {
 
     <!-- VIDEO BTS -->
     <div class="bts-strip reveal">
-      <div class="bts-strip-label">Video · Behind the scenes</div>
+      <h2 class="bts-heading">BTS<span class="dot"></span></h2>
       <div class="marquee-viewport">
         <div class="marquee-track">
           <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS"></div>
@@ -1733,7 +1747,7 @@ footer {
 
     <!-- PODCAST BTS -->
     <div class="bts-strip reveal">
-      <div class="bts-strip-label">Podcast · Behind the scenes</div>
+      <h2 class="bts-heading">BTS<span class="dot"></span></h2>
       <div class="marquee-viewport">
         <div class="marquee-track">
           <div class="marquee-item"><img src="img/bts-pod/pod-01.jpg" alt="Podcast BTS"></div>
