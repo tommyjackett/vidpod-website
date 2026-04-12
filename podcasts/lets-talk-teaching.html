@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=25">
+<link rel="stylesheet" href="_shared.css?v=26">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -296,6 +296,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 // BTS carousel — cooldown-timestamp approach, IntersectionObserver, ResizeObserver
 (function() {
   var marquee = document.getElementById('btsMarquee');
+  var viewport = marquee ? marquee.closest('.bts-marquee-viewport') : null;
   var lb = document.getElementById('btsLightbox');
   var inner = document.getElementById('btsLightboxInner');
   var closeBtn = document.getElementById('btsLightboxClose');
@@ -329,12 +330,13 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     new ResizeObserver(computeHalf).observe(marquee);
   }
 
-  // Only animate when visible
+  // Only animate when viewport wrapper is visible (observe wrapper, not inner marquee,
+  // because the marquee is inside a .reveal that starts at opacity:0)
   if (typeof IntersectionObserver !== 'undefined') {
     isVisible = false;
     new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) { isVisible = entry.isIntersecting; });
-    }, { threshold: 0.05 }).observe(marquee);
+    }, { threshold: 0 }).observe(viewport || marquee);
   }
 
   function step() {
@@ -348,7 +350,11 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     }
     rafId = requestAnimationFrame(step);
   }
-  rafId = requestAnimationFrame(step);
+  // Delay start slightly to let images load and reveal animation kick in
+  setTimeout(function() {
+    computeHalf();
+    rafId = requestAnimationFrame(step);
+  }, 500);
 
   function pauseFor(ms) {
     var target = performance.now() + ms;
