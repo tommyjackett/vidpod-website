@@ -1959,7 +1959,30 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.key === 'Escape' && lightboxOpen) closeLb();
   });
 
-  // ---------- Per-track CSS animation pause/resume + click to zoom ----------
+  // ---------- Per-track CSS animation + touch swipe + click to zoom ----------
+  var HP_DURATION = 40; // must match CSS animation duration
+
+  function getTrackX(el) {
+    var style = window.getComputedStyle(el);
+    var matrix = style.transform || style.webkitTransform;
+    if (!matrix || matrix === 'none') return 0;
+    var m = matrix.match(/matrix.*\((.+)\)/);
+    if (!m) return 0;
+    return parseFloat(m[1].split(',')[4]) || 0;
+  }
+
+  function resumeTrackFrom(el, currentX) {
+    var halfWidth = el.scrollWidth / 2;
+    if (halfWidth <= 0) halfWidth = 1;
+    currentX = currentX % halfWidth;
+    if (currentX > 0) currentX -= halfWidth;
+    var progress = Math.abs(currentX) / halfWidth;
+    el.style.animation = 'none';
+    void el.offsetHeight;
+    el.style.animation = '';
+    el.style.animationDelay = '-' + (progress * HP_DURATION) + 's';
+  }
+
   tracks.forEach(function(marquee) {
     var pauseTimer = null;
 
@@ -1974,10 +1997,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Desktop hover
     marquee.addEventListener('mouseenter', pause);
     marquee.addEventListener('mouseleave', function() { pauseFor(500); });
-    // Touch
-    marquee.addEventListener('touchstart', pause, { passive: true });
-    marquee.addEventListener('touchend', function() { pauseFor(2500); }, { passive: true });
-    marquee.addEventListener('touchcancel', function() { pauseFor(1500); }, { passive: true });
+
+    // Touch swipe
+    var touchStartX = 0, touchCurrentX = 0, baseX = 0, isSwiping = false;
+
+    marquee.addEventListener('touchstart', function(e) {
+      clearTimeout(pauseTimer);
+      pause();
+      touchStartX = e.touches[0].clientX;
+      baseX = getTrackX(marquee);
+      isSwiping = true;
+      marquee.style.animation = 'none';
+      marquee.style.transform = 'translateX(' + baseX + 'px)';
+    }, { passive: true });
+
+    marquee.addEventListener('touchmove', function(e) {
+      if (!isSwiping) return;
+      var deltaX = e.touches[0].clientX - touchStartX;
+      touchCurrentX = baseX + deltaX;
+      marquee.style.transform = 'translateX(' + touchCurrentX + 'px)';
+    }, { passive: true });
+
+    marquee.addEventListener('touchend', function() {
+      if (!isSwiping) return;
+      isSwiping = false;
+      resumeTrackFrom(marquee, touchCurrentX || baseX);
+      pauseFor(2500);
+    }, { passive: true });
+
+    marquee.addEventListener('touchcancel', function() {
+      if (!isSwiping) return;
+      isSwiping = false;
+      resumeTrackFrom(marquee, touchCurrentX || baseX);
+      pauseFor(1500);
+    }, { passive: true });
 
     // Click vs drag detection for lightbox
     var downX = 0, downY = 0, downT = 0;
