@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=9">
+<link rel="stylesheet" href="_shared.css?v=10">
 <script>
 (function() {
   var saved = localStorage.getItem('vidpod-theme');
@@ -21,7 +21,10 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="../index.html" class="logo">VIDPOD<span class="dot"></span></a>
+    <a href="../index.html" class="logo" aria-label="VIDPOD home">
+      <img class="logo-light" src="../img/brand/vidpod-logo-light.png" alt="VIDPOD">
+      <img class="logo-dark"  src="../img/brand/vidpod-logo-dark.png"  alt="VIDPOD">
+    </a>
     <div class="nav-links" id="navLinks">
       <a href="../index.html#what">About</a>
       <a href="../index.html#work-vid">Video</a>
