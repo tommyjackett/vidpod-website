@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Help at Hand — a high-value branded podcast produced by VIDPOD.">
+<meta name="description" content="Help at Hand — a high-value branded podcast. Considered, cinematic, built for a brand that cares about craft. Produced by VIDPOD.">
 <title>Help at Hand · VIDPOD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=30">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css?v=34">
 <script>
 // Podcast pages always run in dark mode
 document.documentElement.dataset.theme = 'dark';
@@ -22,31 +22,44 @@ document.documentElement.dataset.theme = 'dark';
       <img class="logo-light" src="../img/brand/vidpod-logo-light.png" alt="VIDPOD">
       <img class="logo-dark"  src="../img/brand/vidpod-logo-dark.png"  alt="VIDPOD">
     </a>
-    <div class="nav-links">
-      <a href="../index.html#about">About</a>
-      <a href="../index.html#services">Services</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html#what">About</a>
       <a href="../index.html#work-vid">Video</a>
       <a href="../index.html#work-pod">Podcast</a>
-      <a href="../story.html">Story</a>
-      <a href="../index.html#contact" class="nav-cta">Let's chat</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="display:none">
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <div class="sayhi-wrap">
+        <button type="button" class="nav-cta" id="sayhiBtn" aria-haspopup="true" aria-expanded="false">Let's chat</button>
+        <div class="sayhi-pop" id="sayhiPop" role="dialog" aria-label="Get in touch">
+          <div class="sayhi-pop-label">Ready to chat?</div>
+          <div class="sayhi-pop-title">Get in<br>touch now<span class="dot"></span></div>
+          <a href="../index.html#contact" class="sayhi-pop-btn" id="sayhiGo">Contact form</a>
+          <a href="tel:+61401576859" class="sayhi-pop-call">Call now</a>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </nav>
 
+<!-- HERO — artwork left, about copy right (no big headline — art has it) -->
 <header class="pod-hero">
   <div class="wrap">
     <div class="pod-hero-grid">
       <div class="pod-hero-art reveal">
-        <img src="../img/podcasts/tdts.jpg" alt="Help at Hand">
+        <img src="../img/podcasts/help-at-hand.jpg" alt="Help at Hand artwork">
       </div>
-      <div>
-        <div class="eyebrow">Podcast · Case study</div>
-        <h1 class="reveal">Help at<br>Hand<span class="dot"></span></h1>
-        <p class="tagline reveal"><strong>A high-value branded podcast.</strong> Considered, cinematic, built for a brand that cares about craft.</p>
-        <div class="chips reveal">
-          <span>Branded · High-end</span>
-          <span>2024</span>
-          <span>Remote recording</span>
+      <div class="reveal">
+        <p class="tagline"><strong>A high-value branded podcast.</strong> Considered, cinematic, built for a brand that cares about craft.</p>
+        <p class="tagline">Help at Hand is a branded podcast series focused on telling real, useful stories. Remote recording with a cinematic treatment — every episode is built to feel like a show, not an ad.</p>
+        <div class="chips">
+          <span>1 season</span>
+          <span>Branded series</span>
           <span>Cinematic</span>
         </div>
       </div>
@@ -54,78 +67,371 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </header>
 
-<section class="pod-sec">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">The show</div>
-      <h2>About<br>the show<span class="dot"></span></h2>
-      <p><strong>Help at Hand</strong> is a branded podcast series built to do one thing properly: tell real, useful stories about the people and moments that matter. It's the kind of show you make when you want the content to outlast the campaign.</p>
-      <p>VIDPOD produced the series end-to-end — pre-production planning, remote recording setups across multiple locations, full edit, cinematic treatment, and the whole publishing pipeline.</p>
-      <p>This is the kind of branded podcast we love: a client who cares about the craft as much as we do, and a show that's built to actually mean something to its audience.</p>
+<!-- LISTEN STRIP -->
+<section class="listen-strip sec-black dark-green">
+  <div class="wrap listen-strip-inner">
+    <span class="listen-strip-label">Listen on</span>
+    <div class="listen">
+      <a href="#" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</a>
+      <a href="#" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392l.04.23c.04.272-.16.527-.432.567a.505.505 0 01-.567-.431l-.04-.213c-.312-1.57-.92-2.747-2.004-3.867-1.428-1.496-3.293-2.294-5.393-2.294-2.1 0-3.966.798-5.394 2.294-1.084 1.12-1.692 2.298-2.004 3.867l-.04.213a.507.507 0 01-.567.431.504.504 0 01-.432-.567l.04-.23c.352-1.773 1.04-3.12 2.264-4.392 1.608-1.685 3.72-2.587 6.056-2.587h.153zm.136 3.033c1.74 0 3.312.67 4.527 1.934.883.916 1.394 1.93 1.663 3.253l.04.23a.505.505 0 01-.431.567.503.503 0 01-.567-.432l-.04-.212c-.23-1.112-.659-1.97-1.396-2.732-1.052-1.1-2.404-1.672-3.9-1.672s-2.849.572-3.901 1.672c-.737.762-1.167 1.62-1.396 2.732l-.04.212a.503.503 0 01-.567.432.505.505 0 01-.432-.567l.04-.23c.27-1.323.78-2.337 1.664-3.253 1.215-1.264 2.787-1.934 4.527-1.934h.21zm-.078 3.05c1.092 0 2.091.424 2.89 1.22.582.58.924 1.245 1.107 2.15l.04.218a.501.501 0 01-.424.568.499.499 0 01-.568-.424l-.04-.198c-.146-.724-.413-1.253-.871-1.716-.63-.63-1.398-.957-2.226-.957s-1.595.328-2.225.957c-.459.463-.726.992-.871 1.716l-.04.198a.499.499 0 01-.568.424.501.501 0 01-.424-.568l.04-.219c.183-.904.525-1.569 1.106-2.149.8-.796 1.799-1.22 2.89-1.22h.184zM12 14.07a2.477 2.477 0 012.48 2.478A2.477 2.477 0 0112 19.024a2.477 2.477 0 01-2.48-2.477A2.477 2.477 0 0112 14.07z"/></svg>Apple</a>
     </div>
   </div>
 </section>
 
-<section class="pod-sec">
+<!-- VIDPOD SUPPORT — copy left (seamless stack), autoplay video right -->
+<section class="pod-sec sec-white dark-alt">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">What we did</div>
-      <h2>Full<br>production<span class="dot"></span></h2>
-      <p>One team, every stage of the build. From concept to publish, we handle the whole pipeline so the host can focus on what they do best — the conversation.</p>
-    </div>
-    <div class="scope-grid">
-      <div class="scope-card"><h3>Pre-production</h3><p>Concept, format, guest briefing, and episode planning — all before we press record.</p></div>
-      <div class="scope-card"><h3>Remote recording</h3><p>Broadcast-quality remote sessions with guests anywhere in the country.</p></div>
-      <div class="scope-card"><h3>Cinematic edit</h3><p>Considered sound design, music, and pacing. A podcast that feels produced, not posted.</p></div>
-      <div class="scope-card"><h3>Distribution</h3><p>Full publishing across audio platforms plus branded assets for the client to share.</p></div>
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <h2>VIDPOD support<span class="dot"></span></h2>
+        <p>From pre-production through to distribution, we handled the full pipeline. Remote recording setup, cinematic edit, sound design, and a polished final product that elevates the brand.</p>
+        <p>Branded podcasts should feel like shows, not ads. That's the standard we held Help at Hand to — every episode crafted to deliver genuine value while reinforcing the brand's credibility.</p>
+        <div class="about-copy-image">
+          <img src="../img/podcasts/help-at-hand.jpg" alt="Help at Hand behind the scenes" loading="lazy">
+        </div>
+      </div>
+      <div class="about-media is-bg reveal">
+        <!-- PLACEHOLDER: Replace with Help at Hand behind-the-scenes video -->
+        <img src="../img/podcasts/help-at-hand.jpg" alt="Help at Hand behind the scenes" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
     </div>
   </div>
 </section>
 
-<section class="pod-sec pod-quote">
+<!-- THE JOURNEY — dot line across Process Steps -->
+<section class="pod-sec sec-black dark-green">
   <div class="wrap">
-    <blockquote class="reveal">"Branded podcasts should feel like shows, not ads. That\u2019s what we build."</blockquote>
-    <div class="cite">Tommy Jackett · Founder, VIDPOD</div>
+    <h2 class="reveal">The journey<span class="dot"></span></h2>
+
+    <div class="process-wrap reveal">
+      <div class="process process-4">
+        <div class="process-step">
+          <span class="dot"></span>
+          <h3>Pre-production</h3>
+          <p>Concept development, guest curation, and format design with the client.</p>
+        </div>
+        <div class="process-step">
+          <span class="dot"></span>
+          <h3>Recording</h3>
+          <p>Remote recording sessions with cinematic audio direction.</p>
+        </div>
+        <div class="process-step">
+          <span class="dot"></span>
+          <h3>Post-production</h3>
+          <p>Full edit, sound design, and mastering to broadcast standard.</p>
+        </div>
+        <div class="process-step">
+          <span class="dot"></span>
+          <h3>Distribution</h3>
+          <p>Published across all major platforms with supporting assets.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="pod-sec">
+<!-- BEHIND THE SCENES — auto-scrolling marquee, pause on hover, click to zoom -->
+<section class="pod-sec sec-white">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">More shows</div>
-      <h2>Other shows<br>we've made<span class="dot"></span></h2>
-    </div>
-    <div class="other-shows reveal">
-      <a class="other-show" href="the-numbers-game.html"><div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy"></div><div class="label">The Numbers Game</div></a>
-      <a class="other-show" href="lets-talk-teaching.html"><div class="other-show-art"><img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy"></div><div class="label">Let's Talk Teaching</div></a>
-      <a class="other-show" href="unconventional-business.html"><div class="other-show-art"><img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business" loading="lazy"></div><div class="label">Unconventional Business</div></a>
-      <a class="other-show" href="the-daily-talk-show.html"><div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy"></div><div class="label">The Daily Talk Show</div></a>
-      <a class="other-show" href="carlisle-homes.html"><div class="other-show-art"><img src="../img/podcasts/carlisle-homes.jpg" alt="Carlisle Homes" loading="lazy"></div><div class="label">Carlisle Homes</div></a>
+    <h2 class="reveal">BTS<span class="dot"></span></h2>
+
+    <div class="bts-marquee-viewport reveal">
+      <div class="bts-marquee" id="btsMarquee">
+        <!-- set A -->
+        <div class="bts-item is-portrait"><img src="../img/podcasts/help-at-hand.jpg" alt="Behind the scenes still 1"></div>
+        <div class="bts-item is-landscape"><img src="../img/podcasts/help-at-hand.jpg" alt="Behind the scenes still 2"></div>
+        <div class="bts-item is-portrait"><img src="../img/podcasts/help-at-hand.jpg" alt="Behind the scenes still 3"></div>
+        <div class="bts-item is-square"><img src="../img/podcasts/help-at-hand.jpg" alt="Behind the scenes still 4"></div>
+        <div class="bts-item is-portrait"><img src="../img/podcasts/help-at-hand.jpg" alt="Behind the scenes still 5"></div>
+        <div class="bts-item is-landscape"><img src="../img/podcasts/help-at-hand.jpg" alt="Behind the scenes still 6"></div>
+        <!-- set B (duplicate for seamless loop) -->
+        <div class="bts-item is-portrait" aria-hidden="true"><img src="../img/podcasts/help-at-hand.jpg" alt=""></div>
+        <div class="bts-item is-landscape" aria-hidden="true"><img src="../img/podcasts/help-at-hand.jpg" alt=""></div>
+        <div class="bts-item is-portrait" aria-hidden="true"><img src="../img/podcasts/help-at-hand.jpg" alt=""></div>
+        <div class="bts-item is-square" aria-hidden="true"><img src="../img/podcasts/help-at-hand.jpg" alt=""></div>
+        <div class="bts-item is-portrait" aria-hidden="true"><img src="../img/podcasts/help-at-hand.jpg" alt=""></div>
+        <div class="bts-item is-landscape" aria-hidden="true"><img src="../img/podcasts/help-at-hand.jpg" alt=""></div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- QUOTE -->
+<section class="pod-sec pod-quote sec-black dark-alt">
+  <div class="wrap">
+    <div class="quote-inner reveal">
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      <blockquote>Branded podcasts should feel like shows, not ads. That's what we build.</blockquote>
+      <div class="cite">
+        <span class="cite-name">Tommy Jackett</span>
+        <span class="cite-role">Founder, VIDPOD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="cta-strip">
   <div class="wrap">
-    <h2>Let's build<br>your next show<span class="dot"></span></h2>
-    <p>Branded podcasts, founder shows, interview series — end-to-end production from a team that actually makes podcasts.</p>
+    <h2>Want a show<br>like this one?</h2>
+    <p>We build long-running branded podcasts end-to-end. Concept to distribution.</p>
     <a href="../index.html#contact" class="btn btn-primary">Let's chat</a>
   </div>
 </section>
 
+<!-- OTHER SHOWS -->
+<section class="pod-sec sec-white">
+  <div class="wrap">
+    <h2 class="reveal">Other shows we produce<span class="dot"></span></h2>
+    <div class="other-shows reveal">
+      <a class="other-show" href="the-numbers-game.html">
+        <div class="other-show-art"><img src="../img/podcasts/tng.jpg" alt="The Numbers Game"></div>
+        <div class="label">The Numbers Game</div>
+      </a>
+      <a class="other-show" href="lets-talk-teaching.html">
+        <div class="other-show-art"><img src="../img/podcasts/ltt.jpg" alt="Let's Talk Teaching"></div>
+        <div class="label">Let's Talk Teaching</div>
+      </a>
+      <a class="other-show" href="carlisle-homes.html">
+        <div class="other-show-art"><img src="../img/podcasts/carlisle-homes.jpg" alt="Home Files"></div>
+        <div class="label">Home Files</div>
+      </a>
+      <a class="other-show" href="unconventional-business.html">
+        <div class="other-show-art"><img src="../img/podcasts/unconventional.jpg" alt="Unconventional Business"></div>
+        <div class="label">Unconventional Business</div>
+      </a>
+      <a class="other-show" href="the-daily-talk-show.html">
+        <div class="other-show-art"><img src="../img/podcasts/tdts.jpg" alt="The Daily Talk Show"></div>
+        <div class="label">The Daily Talk Show</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BTS lightbox overlay -->
+<div class="bts-lightbox" id="btsLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="bts-lightbox-inner" id="btsLightboxInner"></div>
+  <button class="bts-lightbox-close" id="btsLightboxClose" aria-label="Close">&times;</button>
+</div>
+
 <footer>
   <div class="wrap">
-    <p>© VIDPOD 2026 · Melbourne</p>
+    <p>© 2026 VIDPOD Pty Ltd · Melbourne, Australia</p>
   </div>
 </footer>
 
 <script>
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
+// Reveal on scroll
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+// Theme toggle
+(function() {
+  var tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.addEventListener('click', function() {
+    var cur = document.documentElement.dataset.theme || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('vidpod-theme', next); } catch(e) {}
+  });
+})();
+
+// Mobile hamburger
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+  function close() { toggle.classList.remove('open'); links.classList.remove('mobile-open'); toggle.setAttribute('aria-expanded','false'); }
+  function open()  { toggle.classList.add('open');    links.classList.add('mobile-open');    toggle.setAttribute('aria-expanded','true');  }
+  toggle.addEventListener('click', function() {
+    if (links.classList.contains('mobile-open')) close(); else open();
+  });
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', close);
+  });
+})();
+
+// Say Hi popup
+(function() {
+  var btn = document.getElementById('sayhiBtn');
+  var pop = document.getElementById('sayhiPop');
+  var go  = document.getElementById('sayhiGo');
+  if (!btn || !pop) return;
+  function close() { pop.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function open()  { pop.classList.add('open');    btn.setAttribute('aria-expanded','true');  }
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (pop.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e) {
+    if (!pop.contains(e.target) && e.target !== btn) close();
+  });
+  if (go) go.addEventListener('click', close);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+})();
+
+// BTS carousel — CSS transform animation + touch swipe + click to zoom
+(function() {
+  var marquee = document.getElementById('btsMarquee');
+  var lb = document.getElementById('btsLightbox');
+  var inner = document.getElementById('btsLightboxInner');
+  var closeBtn = document.getElementById('btsLightboxClose');
+  if (!marquee || !lb || !inner) return;
+
+  var lightboxOpen = false;
+  var pauseTimer = null;
+  var DURATION = 40; // must match CSS animation duration in seconds
+
+  // Get current translateX from computed transform matrix
+  function getCurrentX() {
+    var style = window.getComputedStyle(marquee);
+    var matrix = style.transform || style.webkitTransform;
+    if (!matrix || matrix === 'none') return 0;
+    var m = matrix.match(/matrix.*\((.+)\)/);
+    if (!m) return 0;
+    var values = m[1].split(',');
+    return parseFloat(values[4]) || 0;
+  }
+
+  // Resume CSS animation from a given translateX position
+  function resumeFrom(currentX) {
+    var halfWidth = marquee.scrollWidth / 2;
+    if (halfWidth <= 0) halfWidth = 1;
+    // Wrap into valid range: 0 to -halfWidth
+    currentX = currentX % halfWidth;
+    if (currentX > 0) currentX -= halfWidth;
+    // Calculate progress (0 to 1)
+    var progress = Math.abs(currentX) / halfWidth;
+    // Set negative delay to start animation from this point
+    marquee.style.animation = 'none';
+    // Force reflow
+    void marquee.offsetHeight;
+    marquee.style.animation = '';
+    marquee.style.animationDelay = '-' + (progress * DURATION) + 's';
+  }
+
+  function pause() { marquee.classList.add('paused'); }
+  function resume() { marquee.classList.remove('paused'); }
+  function pauseFor(ms) {
+    pause();
+    clearTimeout(pauseTimer);
+    pauseTimer = setTimeout(resume, ms);
+  }
+
+  // Shared drag state
+  var dragStartX = 0, dragCurrentX = 0, dragBaseX = 0, isDragging = false;
+
+  // Desktop hover (only when not dragging)
+  marquee.addEventListener('mouseenter', function() { if (!isDragging) pause(); });
+  marquee.addEventListener('mouseleave', function() { if (!isDragging) pauseFor(500); });
+
+  // ---------- Touch swipe ----------
+  marquee.addEventListener('touchstart', function(e) {
+    clearTimeout(pauseTimer);
+    pause();
+    dragStartX = e.touches[0].clientX;
+    dragBaseX = getCurrentX();
+    isDragging = true;
+    marquee.style.animation = 'none';
+    marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
+  }, { passive: true });
+
+  marquee.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    dragCurrentX = dragBaseX + (e.touches[0].clientX - dragStartX);
+    marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
+  }, { passive: true });
+
+  marquee.addEventListener('touchend', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    resumeFrom(dragCurrentX || dragBaseX);
+    pauseFor(2500);
+  }, { passive: true });
+
+  marquee.addEventListener('touchcancel', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    resumeFrom(dragCurrentX || dragBaseX);
+    pauseFor(1500);
+  }, { passive: true });
+
+  // ---------- Mouse drag (desktop) ----------
+  marquee.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    clearTimeout(pauseTimer);
+    pause();
+    dragStartX = e.clientX;
+    dragBaseX = getCurrentX();
+    isDragging = true;
+    marquee.style.animation = 'none';
+    marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
+    marquee.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    dragCurrentX = dragBaseX + (e.clientX - dragStartX);
+    marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    marquee.style.cursor = '';
+    resumeFrom(dragCurrentX || dragBaseX);
+    pauseFor(2500);
+  });
+
+  // ---------- click to zoom lightbox ----------
+  function openLb(item) {
+    inner.innerHTML = '';
+    var media = item.querySelector('img, video, iframe');
+    if (!media) return;
+    var clone = media.cloneNode(true);
+    clone.removeAttribute('style');
+    inner.appendChild(clone);
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lightboxOpen = true;
+    pause();
+  }
+  function closeLb() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lightboxOpen = false;
+    resume();
+    setTimeout(function() { inner.innerHTML = ''; }, 300);
+  }
+
+  // Close button — click + touchend for iOS Safari
+  closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); closeLb(); });
+  closeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); closeLb(); }, { passive: false });
+  lb.addEventListener('click', function(e) { if (e.target === lb || e.target === inner) closeLb(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && lightboxOpen) closeLb(); });
+
+  // Click vs drag detection
+  var downX = 0, downY = 0, downT = 0;
+  marquee.addEventListener('pointerdown', function(e) {
+    downX = e.clientX; downY = e.clientY; downT = performance.now();
+  });
+  marquee.addEventListener('click', function(e) {
+    var dx = Math.abs(e.clientX - downX);
+    var dy = Math.abs(e.clientY - downY);
+    var dt = performance.now() - downT;
+    if (dx > 8 || dy > 8 || dt > 600) return;
+    var item = e.target.closest('.bts-item');
+    if (!item) return;
+    openLb(item);
+  });
+})();
 </script>
 </body>
 </html>
