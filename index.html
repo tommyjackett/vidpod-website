@@ -830,8 +830,9 @@ html[data-theme="dark"] .service-vid:hover {
 /* Service marquee banner — continuous scrolling strip */
 .service-marquee {
   margin-top: 24px;
+  margin-left: -56px;
+  margin-right: -56px;
   overflow: hidden;
-  border-radius: 8px;
   padding: 12px 0;
   font-family: var(--font-body);
   font-size: 13px;
@@ -852,7 +853,7 @@ html[data-theme="dark"] .service-vid:hover {
   display: inline-flex;
   align-items: center;
   gap: 0;
-  animation: service-scroll 36s linear infinite;
+  animation: service-scroll 50s linear infinite;
 }
 .service-marquee-track span {
   flex-shrink: 0;
@@ -862,12 +863,16 @@ html[data-theme="dark"] .service-vid:hover {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: currentColor;
   margin: 0 18px;
-  opacity: 0.7;
   font-size: 0;
   line-height: 0;
   vertical-align: middle;
+}
+.service-marquee-vid .sep {
+  background: var(--green);
+}
+.service-marquee-pod .sep {
+  background: #fff;
 }
 @keyframes service-scroll {
   0%   { transform: translateX(0); }
