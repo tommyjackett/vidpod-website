@@ -55,7 +55,9 @@ body {
   -webkit-backdrop-filter: blur(18px);
   background: var(--nav-bg);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
+html[data-theme="dark"] .nav { box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -657,30 +659,36 @@ html[data-theme="dark"] .sayhi-pop {
   box-shadow: 0 18px 40px rgba(0,255,170,0.32);
 }
 
-/* LISTEN STRIP — full-width listen bar that sits below the hero */
-/* Fixed-colour section overrides — force black or white regardless of theme */
-.sec-black {
+/* ═══════ SECTION COLOUR SYSTEM ═══════
+   Light mode:  sec-black = #0A0A0A    sec-white = #fff
+   Dark mode:   dark-green = green     dark-alt = #111     (default = #0A0A0A)
+   Combine: e.g. class="sec-black dark-green" = black in light, green in dark
+   ═══════════════════════════════════════ */
+
+/* --- LIGHT: sec-black (black sections in light mode) --- */
+html[data-theme="light"] .sec-black {
   background: #0A0A0A !important;
   color: #fff !important;
   border-color: rgba(255,255,255,0.08) !important;
 }
-.sec-black .section-eyebrow,
-.sec-black h2,
-.sec-black h3,
-.sec-black p,
-.sec-black blockquote { color: #fff; }
-.sec-black .cite-name { color: #fff; }
-.sec-black .cite-role { color: rgba(255,255,255,0.55); }
-.sec-black .dot { background: var(--green); }
-.sec-black .muted,
-.sec-black .section-eyebrow { color: rgba(255,255,255,0.5); }
-.sec-black .scroll-hint { color: var(--green); }
-.sec-black .process::before { background: rgba(255,255,255,0.12); }
-.sec-black .process-step .dot { box-shadow: 0 0 0 6px #0A0A0A; }
-.sec-black .process-step h3 { color: #fff; }
-.sec-black .process-step p { color: rgba(255,255,255,0.55); }
+html[data-theme="light"] .sec-black .section-eyebrow,
+html[data-theme="light"] .sec-black h2,
+html[data-theme="light"] .sec-black h3,
+html[data-theme="light"] .sec-black p,
+html[data-theme="light"] .sec-black blockquote { color: #fff; }
+html[data-theme="light"] .sec-black .cite-name { color: #fff; }
+html[data-theme="light"] .sec-black .cite-role { color: rgba(255,255,255,0.55); }
+html[data-theme="light"] .sec-black .dot { background: var(--green); }
+html[data-theme="light"] .sec-black .muted,
+html[data-theme="light"] .sec-black .section-eyebrow { color: rgba(255,255,255,0.5); }
+html[data-theme="light"] .sec-black .scroll-hint { color: var(--green); }
+html[data-theme="light"] .sec-black .process::before { background: rgba(255,255,255,0.12); }
+html[data-theme="light"] .sec-black .process-step .dot { box-shadow: 0 0 0 6px #0A0A0A; }
+html[data-theme="light"] .sec-black .process-step h3 { color: #fff; }
+html[data-theme="light"] .sec-black .process-step p { color: rgba(255,255,255,0.55); }
+html[data-theme="light"] .sec-black .listen-strip-label { color: rgba(255,255,255,0.5); }
 
-/* sec-white only applies in LIGHT mode — in dark mode these sections stay dark */
+/* --- LIGHT: sec-white (white sections in light mode) --- */
 html[data-theme="light"] .sec-white {
   background: #fff !important;
   color: #0A0A0A !important;
@@ -703,17 +711,36 @@ html[data-theme="light"] .sec-white .process-step .dot { box-shadow: 0 0 0 6px #
 html[data-theme="light"] .sec-white .process-step h3 { color: #0A0A0A; }
 html[data-theme="light"] .sec-white .process-step p { color: rgba(0,0,0,0.5); }
 
-/* In dark mode, listen strip goes GREEN instead of black */
-html[data-theme="dark"] .listen-strip.sec-black {
+/* --- DARK: dark-green (green sections in dark mode) --- */
+html[data-theme="dark"] .dark-green {
   background: var(--green) !important;
   color: #000 !important;
   border-color: rgba(0,0,0,0.1) !important;
 }
-html[data-theme="dark"] .listen-strip.sec-black .listen-strip-label { color: rgba(0,0,0,0.6); }
-html[data-theme="dark"] .listen-strip.sec-black .listen a {
+html[data-theme="dark"] .dark-green .section-eyebrow,
+html[data-theme="dark"] .dark-green h2,
+html[data-theme="dark"] .dark-green h3,
+html[data-theme="dark"] .dark-green p,
+html[data-theme="dark"] .dark-green blockquote { color: #000; }
+html[data-theme="dark"] .dark-green .dot { background: #000; }
+html[data-theme="dark"] .dark-green .muted,
+html[data-theme="dark"] .dark-green .section-eyebrow { color: rgba(0,0,0,0.55); }
+html[data-theme="dark"] .dark-green .scroll-hint { color: #000; }
+html[data-theme="dark"] .dark-green .listen-strip-label { color: rgba(0,0,0,0.6); }
+html[data-theme="dark"] .dark-green .listen a {
   background: #000;
   color: var(--green);
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+html[data-theme="dark"] .dark-green .process::before { background: rgba(0,0,0,0.15); }
+html[data-theme="dark"] .dark-green .process-step .dot { background: #000; box-shadow: 0 0 0 6px var(--green); }
+html[data-theme="dark"] .dark-green .process-step h3 { color: #000; }
+html[data-theme="dark"] .dark-green .process-step p { color: rgba(0,0,0,0.6); }
+
+/* --- DARK: dark-alt (slightly lighter black #111 in dark mode) --- */
+html[data-theme="dark"] .dark-alt {
+  background: #111 !important;
+  border-color: rgba(255,255,255,0.06) !important;
 }
 
 .listen-strip {
