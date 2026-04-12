@@ -1139,6 +1139,50 @@ a.pod-art-item .pod-art-label { color: #fff; }
   transition: transform .3s cubic-bezier(.2,.9,.3,1);
 }
 .img-lightbox.is-open img { transform: scale(1); }
+/* Scroll hint — cascading chevrons below the BTS strips */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 28px auto 4px;
+  padding: 10px 20px;
+  width: fit-content;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  opacity: 0.82;
+}
+.work-vid .scroll-hint { color: #000; }
+.work-pod .scroll-hint { color: var(--green); }
+.scroll-hint-chevrons {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+.scroll-hint .chev {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: scroll-hint-pulse 1.6s ease-in-out infinite;
+}
+.scroll-hint .chev:nth-child(2) { animation-delay: 0.2s; }
+.scroll-hint .chev:nth-child(3) { animation-delay: 0.4s; }
+@keyframes scroll-hint-pulse {
+  0%, 100% { opacity: 0.25; transform: translateX(0) rotate(45deg); }
+  50%      { opacity: 1;    transform: translateX(4px) rotate(45deg); }
+}
+@media (max-width: 640px) {
+  .scroll-hint { font-size: 10px; padding: 9px 16px; gap: 12px; margin-top: 22px; }
+}
+
 .img-lightbox-close {
   position: fixed;
   top: 24px; right: 24px;
@@ -1561,6 +1605,12 @@ footer {
           <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt=""></div>
         </div>
       </div>
+      <div class="scroll-hint reveal" aria-hidden="true">
+        <span>Swipe</span>
+        <span class="scroll-hint-chevrons">
+          <span class="chev"></span><span class="chev"></span><span class="chev"></span>
+        </span>
+      </div>
     </div>
   </div>
 </section>
@@ -1659,6 +1709,12 @@ footer {
           <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-02.jpg" alt=""></div>
           <div class="marquee-item" aria-hidden="true"><img src="img/bts-pod/pod-03.jpg" alt=""></div>
         </div>
+      </div>
+      <div class="scroll-hint reveal" aria-hidden="true">
+        <span>Swipe</span>
+        <span class="scroll-hint-chevrons">
+          <span class="chev"></span><span class="chev"></span><span class="chev"></span>
+        </span>
       </div>
     </div>
   </div>
