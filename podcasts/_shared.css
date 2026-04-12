@@ -274,11 +274,19 @@ html[data-theme="dark"] .sayhi-pop {
 html[data-theme="light"] .pod-hero { background: #fff; }
 .pod-hero-grid {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 80px;
-  align-items: center;
+  grid-template-columns: 440px 1fr;
+  gap: 70px;
+  align-items: stretch;
 }
-@media (max-width: 900px) { .pod-hero-grid { grid-template-columns: 1fr; gap: 40px; } .pod-hero-art { max-width: 360px; } }
+/* Text column: top-align content, let it fill the artwork height */
+.pod-hero-grid > div:not(.pod-hero-art) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+@media (max-width: 1060px) { .pod-hero-grid { grid-template-columns: 380px 1fr; gap: 50px; } }
+@media (max-width: 900px) { .pod-hero-grid { grid-template-columns: 1fr; gap: 40px; } .pod-hero-art { max-width: 400px; } }
 .pod-hero-art {
   border-radius: 22px;
   overflow: hidden;
