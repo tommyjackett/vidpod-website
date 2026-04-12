@@ -57,7 +57,7 @@ html[data-theme="dark"] {
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--fg);
@@ -1116,6 +1116,7 @@ a.pod-art-item .pod-art-label { color: #fff; }
   padding: 4px 36px 8px;
   width: max-content;
   animation: hp-bts-scroll 40s linear infinite;
+  cursor: grab;
 }
 .marquee-track.paused {
   animation-play-state: paused;
@@ -1947,43 +1948,70 @@ document.addEventListener('DOMContentLoaded', function() {
       pauseTimer = setTimeout(resumeAnim, ms);
     }
 
-    // Desktop hover
-    marquee.addEventListener('mouseenter', pause);
-    marquee.addEventListener('mouseleave', function() { pauseFor(500); });
+    // Shared drag state
+    var dragStartX = 0, dragCurrentX = 0, dragBaseX = 0, isDragging = false;
+
+    // Desktop hover (only when not dragging)
+    marquee.addEventListener('mouseenter', function() { if (!isDragging) pause(); });
+    marquee.addEventListener('mouseleave', function() { if (!isDragging) pauseFor(500); });
 
     // Touch swipe
-    var touchStartX = 0, touchCurrentX = 0, baseX = 0, isSwiping = false;
-
     marquee.addEventListener('touchstart', function(e) {
       clearTimeout(pauseTimer);
       pause();
-      touchStartX = e.touches[0].clientX;
-      baseX = getTrackX(marquee);
-      isSwiping = true;
+      dragStartX = e.touches[0].clientX;
+      dragBaseX = getTrackX(marquee);
+      isDragging = true;
       marquee.style.animation = 'none';
-      marquee.style.transform = 'translateX(' + baseX + 'px)';
+      marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
     }, { passive: true });
 
     marquee.addEventListener('touchmove', function(e) {
-      if (!isSwiping) return;
-      var deltaX = e.touches[0].clientX - touchStartX;
-      touchCurrentX = baseX + deltaX;
-      marquee.style.transform = 'translateX(' + touchCurrentX + 'px)';
+      if (!isDragging) return;
+      dragCurrentX = dragBaseX + (e.touches[0].clientX - dragStartX);
+      marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
     }, { passive: true });
 
     marquee.addEventListener('touchend', function() {
-      if (!isSwiping) return;
-      isSwiping = false;
-      resumeTrackFrom(marquee, touchCurrentX || baseX);
+      if (!isDragging) return;
+      isDragging = false;
+      resumeTrackFrom(marquee, dragCurrentX || dragBaseX);
       pauseFor(2500);
     }, { passive: true });
 
     marquee.addEventListener('touchcancel', function() {
-      if (!isSwiping) return;
-      isSwiping = false;
-      resumeTrackFrom(marquee, touchCurrentX || baseX);
+      if (!isDragging) return;
+      isDragging = false;
+      resumeTrackFrom(marquee, dragCurrentX || dragBaseX);
       pauseFor(1500);
     }, { passive: true });
+
+    // Mouse drag (desktop)
+    marquee.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      clearTimeout(pauseTimer);
+      pause();
+      dragStartX = e.clientX;
+      dragBaseX = getTrackX(marquee);
+      isDragging = true;
+      marquee.style.animation = 'none';
+      marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
+      marquee.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      dragCurrentX = dragBaseX + (e.clientX - dragStartX);
+      marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      marquee.style.cursor = '';
+      resumeTrackFrom(marquee, dragCurrentX || dragBaseX);
+      pauseFor(2500);
+    });
 
     // Click vs drag detection for lightbox
     var downX = 0, downY = 0, downT = 0;
