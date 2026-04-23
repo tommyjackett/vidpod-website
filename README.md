@@ -203,4 +203,15 @@ Card 1 (Barefoot Investor) is done. Cards 2–6 need:
 
 ---
 
+## Pre-Launch Checklist
+
+- [ ] Run site through [SchemaReports.com](https://schemareports.com) for SEO audit and structured data review
+- [ ] Add JSON-LD structured data (LocalBusiness, Podcast schema, etc.) based on findings
+- [ ] Set up Formspree (or alternative) for contact form
+- [ ] Final copy review pass (all pages via Notion)
+- [ ] Replace all placeholder BTS photos and video embeds
+- [ ] Test all pages on mobile (iOS Safari + Android Chrome)
+
+---
+
 *Last updated: April 12, 2026*
