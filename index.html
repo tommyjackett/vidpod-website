@@ -815,20 +815,19 @@ html[data-theme="dark"] .sayhi-pop {
 .services-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 26px;
-  margin-top: 68px;
+  gap: 18px;
+  margin-top: 56px;
 }
-@media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; gap: 14px; } }
 .service-card {
-  padding: 64px 56px;
-  border-radius: 28px;
+  padding: 40px 40px 36px;
+  border-radius: 24px;
   position: relative;
   overflow: hidden;
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  min-height: 540px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 24px;
   box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 .service-card:hover { transform: translateY(-6px); }
@@ -856,30 +855,30 @@ html[data-theme="dark"] .service-vid:hover {
 .service-label {
   font-family: var(--font-head);
   font-weight: 400;
-  font-size: clamp(64px, 9vw, 124px);
-  line-height: 0.82;
+  font-size: clamp(48px, 6.4vw, 86px);
+  line-height: 0.85;
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 .service-body h3 {
   font-family: var(--font-body);
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 700;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   letter-spacing: -0.01em;
 }
 .service-body p {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.55;
   opacity: 0.82;
-  margin-bottom: 26px;
+  margin-bottom: 18px;
   max-width: 48ch;
 }
 /* Service marquee banner — continuous scrolling strip */
 .service-marquee {
-  margin-top: 24px;
+  margin-top: 14px;
   overflow: hidden;
-  padding: 8px 0;
+  padding: 6px 0;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
