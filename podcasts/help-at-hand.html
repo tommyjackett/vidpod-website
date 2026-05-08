@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=37">
+<link rel="stylesheet" href="_shared.css?v=38">
 <script>
 // Podcast pages always run in dark mode
 document.documentElement.dataset.theme = 'dark';
@@ -125,11 +125,14 @@ document.documentElement.dataset.theme = 'dark';
   if (!lb || !wrap || !rail) return;
 
   // ---------- Lightbox ----------
+  // Order matters for iOS: show the lightbox FIRST, force a layout flush, THEN insert
+  // the iframe so the user-gesture autoplay token applies to a fully-visible container.
   function openLb(id) {
-    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    void lb.offsetHeight; // force reflow
+    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   }
   function closeLb() {
     wrap.innerHTML = '';
