@@ -1225,3 +1225,117 @@ html[data-theme="light"] .sec-white .bts-item {
   z-index: 2;
 }
 .bts-lightbox-close:hover { background: rgba(0,0,0,0.8); }
+
+/* ============================================
+   SNIPPETS — vertical podcast snippets carousel
+   ============================================ */
+.snippets-strip { position: relative; }
+.snippets-strip::before {
+  content: '';
+  position: absolute; top: 0; left: 50%;
+  width: 64px; height: 2px;
+  background: var(--green);
+  transform: translateX(-50%);
+}
+.snippets-marquee-viewport {
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+.snippets-marquee {
+  display: flex;
+  gap: 22px;
+  padding: 4px 36px 8px;
+  width: max-content;
+  animation: snip-scroll 80s linear infinite;
+  cursor: grab;
+}
+.snippets-marquee:hover { animation-play-state: paused; }
+@keyframes snip-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.snippet-item {
+  flex: 0 0 auto;
+  width: 270px;
+  height: 480px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #141414;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.snippet-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.snippet-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.snippet-play-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+.snippet-play-btn {
+  width: 64px; height: 64px;
+  background: rgba(0, 255, 170, 0.92);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(0,255,170,0.4);
+  transition: transform 0.2s ease;
+}
+.snippet-item:hover .snippet-play-btn { transform: scale(1.1); }
+.snippet-play-btn::after {
+  content: '';
+  width: 0; height: 0;
+  border-left: 18px solid #000;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  margin-left: 6px;
+}
+
+/* Snippets video lightbox */
+.snip-vid-lb {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.snip-vid-lb.is-open { opacity: 1; pointer-events: auto; }
+.snip-vid-lb-wrap {
+  width: 90vmin; max-width: 360px;
+  aspect-ratio: 9/16;
+  max-height: 90vh;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.snip-vid-lb-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.snip-vid-lb-close {
+  position: absolute; top: 24px; right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(10px);
+}
+.snip-vid-lb-close:hover { background: rgba(255,255,255,0.2); }
+@media (max-width: 720px) {
+  .snippets-marquee { animation-duration: 50s; gap: 14px; padding: 4px 22px 8px; }
+  .snippet-item { width: 200px; height: 356px; }
+  .snippet-play-btn { width: 52px; height: 52px; }
+}
