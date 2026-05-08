@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=34">
+<link rel="stylesheet" href="_shared.css?v=35">
 <script>
 // Podcast pages always run in dark mode
 document.documentElement.dataset.theme = 'dark';
@@ -85,6 +85,60 @@ document.documentElement.dataset.theme = 'dark';
     </div>
   </div>
 </section>
+
+<!-- SNIPPETS — vertical podcast snippets carousel -->
+<section class="pod-sec snippets-strip">
+  <div class="wrap">
+    <h2 class="reveal">SNIPPETS<span class="dot"></span></h2>
+  </div>
+  <div class="snippets-marquee-viewport reveal">
+    <div class="snippets-marquee" id="snippetsMarquee">
+      <div class="snippet-item" data-yt-id="gnX6yYos30Q"><img src="https://i.ytimg.com/vi/gnX6yYos30Q/maxresdefault.jpg" alt="Help at Hand snippet — Claire Maule, Support Wear" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="AIjg80SysUU"><img src="https://i.ytimg.com/vi/AIjg80SysUU/maxresdefault.jpg" alt="Help at Hand snippet — Bianca Burge, Postnatal Depression Journey" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg"><img src="https://i.ytimg.com/vi/2xT2Fp9_Qpg/maxresdefault.jpg" alt="Help at Hand snippet — Isabelle Sayers, Brushing Once a Day at Night" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="v9etvIOxSOA"><img src="https://i.ytimg.com/vi/v9etvIOxSOA/maxresdefault.jpg" alt="Help at Hand snippet — Olivia McArthur, Choking vs Gagging" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="cEVWgN8-jEA"><img src="https://i.ytimg.com/vi/cEVWgN8-jEA/maxresdefault.jpg" alt="Help at Hand snippet — Felicity Conlan, OWL: Observe, Wait, Listen" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="gnX6yYos30Q" aria-hidden="true"><img src="https://i.ytimg.com/vi/gnX6yYos30Q/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="AIjg80SysUU" aria-hidden="true"><img src="https://i.ytimg.com/vi/AIjg80SysUU/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg" aria-hidden="true"><img src="https://i.ytimg.com/vi/2xT2Fp9_Qpg/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="v9etvIOxSOA" aria-hidden="true"><img src="https://i.ytimg.com/vi/v9etvIOxSOA/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+      <div class="snippet-item" data-yt-id="cEVWgN8-jEA" aria-hidden="true"><img src="https://i.ytimg.com/vi/cEVWgN8-jEA/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Snippets video lightbox -->
+<div class="snip-vid-lb" id="snipVidLb" aria-hidden="true">
+  <button class="snip-vid-lb-close" id="snipVidLbClose" aria-label="Close">×</button>
+  <div class="snip-vid-lb-wrap" id="snipVidLbWrap"></div>
+</div>
+
+<script>
+(function() {
+  var lb = document.getElementById('snipVidLb');
+  var wrap = document.getElementById('snipVidLbWrap');
+  var closeBtn = document.getElementById('snipVidLbClose');
+  if (!lb || !wrap) return;
+  function openLb(id) {
+    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    wrap.innerHTML = '';
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.snippet-item').forEach(function(item) {
+    item.addEventListener('click', function() { openLb(item.getAttribute('data-yt-id')); });
+  });
+  closeBtn.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb(); });
+})();
+</script>
 
 <!-- CTA -->
 <section class="cta-strip">
