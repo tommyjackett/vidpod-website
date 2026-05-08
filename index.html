@@ -2218,11 +2218,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Mobile-only "back to top of videos" — smooth-scroll back to the category chips
+  // Mobile-only "back to top of videos" — smooth-scroll back to the top of the
+  // work-vid section so the heading + intro + category chips are all visible.
   var backBtn = document.querySelector('.back-to-vid-top');
   if (backBtn) {
     backBtn.addEventListener('click', function() {
-      row.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var section = document.getElementById('work-vid');
+      (section || row).scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 });
