@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=34">
+<link rel="stylesheet" href="_shared.css?v=38">
 <script>
 // Podcast pages always run in dark mode
 document.documentElement.dataset.theme = 'dark';
@@ -102,6 +102,100 @@ document.documentElement.dataset.theme = 'dark';
     </div>
   </div>
 </section>
+
+<!-- SNIPPETS — vertical podcast snippets carousel -->
+<section class="pod-sec snippets-strip">
+  <div class="wrap">
+    <h2 class="reveal">SNIPPETS<span class="dot"></span></h2>
+  </div>
+  <div class="snippets-rail reveal" id="snippetsRail">
+    <div class="snippet-item" data-yt-id="E5zQn7dhk48"><img src="https://i.ytimg.com/vi/E5zQn7dhk48/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="5gvZf8BntUU"><img src="https://i.ytimg.com/vi/5gvZf8BntUU/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="fj_bWMYKn7E"><img src="https://i.ytimg.com/vi/fj_bWMYKn7E/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="bXwfIc0kbZA"><img src="https://i.ytimg.com/vi/bXwfIc0kbZA/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="PIvj-QbPCS8"><img src="https://i.ytimg.com/vi/PIvj-QbPCS8/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="j8vIjZOr2BQ"><img src="https://i.ytimg.com/vi/j8vIjZOr2BQ/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="XSAUHEZpZjM"><img src="https://i.ytimg.com/vi/XSAUHEZpZjM/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="fmsOqLg4CDE"><img src="https://i.ytimg.com/vi/fmsOqLg4CDE/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="Uu9draqAV5o"><img src="https://i.ytimg.com/vi/Uu9draqAV5o/maxresdefault.jpg" alt="Unconventional Business snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+  </div>
+  <div class="wrap">
+    <nav class="snippets-nav reveal">
+      <button class="snippets-nav-btn" data-dir="-1" aria-label="Previous snippets" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="snippets-nav-btn" data-dir="1" aria-label="Next snippets" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
+  </div>
+</section>
+
+<!-- Snippets video lightbox -->
+<div class="snip-vid-lb" id="snipVidLb" aria-hidden="true">
+  <button class="snip-vid-lb-close" id="snipVidLbClose" aria-label="Close">×</button>
+  <div class="snip-vid-lb-wrap" id="snipVidLbWrap"></div>
+</div>
+
+<script>
+(function() {
+  var lb = document.getElementById('snipVidLb');
+  var wrap = document.getElementById('snipVidLbWrap');
+  var closeBtn = document.getElementById('snipVidLbClose');
+  var rail = document.getElementById('snippetsRail');
+  if (!lb || !wrap || !rail) return;
+
+  // Lightbox — order matters for iOS autoplay: show lightbox first, force reflow, then insert iframe.
+  function openLb(id) {
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    void lb.offsetHeight;
+    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  }
+  function closeLb() {
+    wrap.innerHTML = '';
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb(); });
+
+  rail.querySelectorAll('.snippet-item').forEach(function(item) {
+    item.addEventListener('click', function() { openLb(item.getAttribute('data-yt-id')); });
+  });
+
+  // Arrow buttons → scroll rail by one card width; disable at edges
+  var navButtons = Array.prototype.slice.call(document.querySelectorAll('.snippets-nav-btn'));
+  var prevBtn = navButtons.filter(function(b) { return b.getAttribute('data-dir') === '-1'; })[0];
+  var nextBtn = navButtons.filter(function(b) { return b.getAttribute('data-dir') === '1'; })[0];
+  function scrollAmount() {
+    var card = rail.querySelector('.snippet-item');
+    if (!card) return 280;
+    var styles = window.getComputedStyle(rail);
+    var gap = parseFloat(styles.columnGap || styles.gap) || 22;
+    return card.offsetWidth + gap;
+  }
+  function updateNavState() {
+    var canScroll = rail.scrollWidth > rail.clientWidth + 1;
+    var atStart = rail.scrollLeft <= 1;
+    var atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 1;
+    if (prevBtn) prevBtn.disabled = !canScroll || atStart;
+    if (nextBtn) nextBtn.disabled = !canScroll || atEnd;
+  }
+  navButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var dir = parseInt(btn.getAttribute('data-dir'), 10) || 1;
+      rail.scrollBy({ left: dir * scrollAmount(), behavior: 'smooth' });
+    });
+  });
+  rail.addEventListener('scroll', updateNavState, { passive: true });
+  window.addEventListener('resize', updateNavState);
+  requestAnimationFrame(updateNavState);
+})();
+</script>
 
 <!-- CTA -->
 <section class="cta-strip">
