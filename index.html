@@ -2261,7 +2261,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ---------- Per-track CSS animation + touch swipe + click to zoom ----------
-  var HP_DURATION = 40; // must match CSS animation duration
+  // Visual speed locked to ~120 px/sec across all marquees (pod BTS speed).
+  // Each track gets its own animation-duration based on width so adding/removing
+  // items doesn't change perceived scroll speed.
+  var TARGET_SPEED = 120; // px/sec
 
   function getTrackX(el) {
     var style = window.getComputedStyle(el);
@@ -2272,19 +2275,31 @@ document.addEventListener('DOMContentLoaded', function() {
     return parseFloat(m[1].split(',')[4]) || 0;
   }
 
+  function trackDuration(el) {
+    return parseFloat(el.dataset.duration) || 40;
+  }
+
   function resumeTrackFrom(el, currentX) {
     var halfWidth = el.scrollWidth / 2;
     if (halfWidth <= 0) halfWidth = 1;
     currentX = currentX % halfWidth;
     if (currentX > 0) currentX -= halfWidth;
     var progress = Math.abs(currentX) / halfWidth;
+    var duration = trackDuration(el);
     el.style.animation = 'none';
     void el.offsetHeight;
     el.style.animation = '';
-    el.style.animationDelay = '-' + (progress * HP_DURATION) + 's';
+    el.style.animationDuration = duration + 's';
+    el.style.animationDelay = '-' + (progress * duration) + 's';
   }
 
   tracks.forEach(function(marquee) {
+    // Lock per-track duration so visual speed = TARGET_SPEED for every marquee
+    var halfWidth = marquee.scrollWidth / 2;
+    var duration = Math.max(20, Math.round(halfWidth / TARGET_SPEED));
+    marquee.dataset.duration = duration;
+    marquee.style.animationDuration = duration + 's';
+
     var pauseTimer = null;
 
     function pause() { marquee.classList.add('paused'); }
