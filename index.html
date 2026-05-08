@@ -986,30 +986,41 @@ html[data-theme="dark"] .service-vid:hover {
   }
 }
 
-/* Video category filter buttons */
+/* Video category filter buttons — black tag with white Archivo Black caps; active state inverts to cream/dark */
 .vid-categories {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-top: 32px;
+  margin-bottom: 36px;
 }
 .vid-cat-btn {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 100px;
-  font-family: var(--font-body);
+  display: inline-flex;
+  align-items: center;
+  background: #0A0A0A;
+  color: #fff;
+  font-family: var(--font-head);
   font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 6px;
   cursor: pointer;
-  background: #000;
-  border: 1px solid rgba(0,0,0,0.18);
-  color: var(--green);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), background-color 0.15s ease, color 0.15s ease;
 }
 .vid-cat-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.22);
+}
+.vid-cat-btn.is-active {
+  background: #F5F5F2;
+  color: #0A0A0A;
+}
+@media (max-width: 720px) {
+  .vid-categories { gap: 8px; margin-bottom: 28px; }
+  .vid-cat-btn { font-size: 12px; padding: 10px 14px; }
 }
 
 .work-inner { position: relative; z-index: 1; }
@@ -1670,46 +1681,53 @@ footer {
       <p class="section-intro">Selected video work. Brand films, founding stories, case studies, long-form content. Built to live everywhere, from homepage heroes to social cutdowns.</p>
     </div>
 
-    <!-- vid-categories filter row removed — future feature -->
+    <!-- Category filters — order: Featured / Case study / Brand videos / Social content / Explainer -->
+    <div class="vid-categories reveal" id="vidCategories">
+      <button type="button" class="vid-cat-btn is-active" data-category="featured">Featured</button>
+      <button type="button" class="vid-cat-btn" data-category="case-study">Case study</button>
+      <button type="button" class="vid-cat-btn" data-category="brand-videos">Brand videos</button>
+      <button type="button" class="vid-cat-btn" data-category="social-content">Social content</button>
+      <button type="button" class="vid-cat-btn" data-category="explainer">Explainer</button>
+    </div>
 
     <div class="card-grid">
       <!-- 1. Top-left — Barefoot Investor · Book launch -->
-      <div class="pcard reveal" data-yt-id="oSlSom4mKNs" data-aspect="wide">
+      <div class="pcard reveal" data-yt-id="oSlSom4mKNs" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
           <img src="https://i.ytimg.com/vi/oSlSom4mKNs/maxresdefault.jpg?v=2026-05-08-3" alt="Barefoot Investor — Book launch video" loading="lazy">
         </div>
       </div>
 
       <!-- 2. Top-middle — @Pilates · Founding story -->
-      <div class="pcard reveal" data-yt-id="fsJkJAmqskQ" data-aspect="wide">
+      <div class="pcard reveal" data-yt-id="fsJkJAmqskQ" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
           <img src="https://i.ytimg.com/vi/fsJkJAmqskQ/maxresdefault.jpg?v=2026-05-08-3" alt="@Pilates — Founding story" loading="lazy">
         </div>
       </div>
 
       <!-- 3. Top-right — Brava · Brand video / creative concept -->
-      <div class="pcard reveal" data-yt-id="GCbtI7zRI4A" data-aspect="wide">
+      <div class="pcard reveal" data-yt-id="GCbtI7zRI4A" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
           <img src="https://i.ytimg.com/vi/GCbtI7zRI4A/maxresdefault.jpg?v=2026-05-08-3" alt="Brava — Brand video / creative concept" loading="lazy">
         </div>
       </div>
 
       <!-- 4. Bottom-left — @Pilates · Sales / franchise video -->
-      <div class="pcard reveal" data-yt-id="SXORkm2BG3U" data-aspect="wide">
+      <div class="pcard reveal" data-yt-id="SXORkm2BG3U" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
           <img src="https://i.ytimg.com/vi/SXORkm2BG3U/maxresdefault.jpg?v=2026-05-08-3" alt="@Pilates — Sales / franchise video" loading="lazy">
         </div>
       </div>
 
       <!-- 5. Bottom-middle — Nando's · Social content (Taste test) -->
-      <div class="pcard reveal" data-yt-id="NyWZ61PCJLI" data-aspect="wide">
+      <div class="pcard reveal" data-yt-id="NyWZ61PCJLI" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
           <img src="https://i.ytimg.com/vi/NyWZ61PCJLI/maxresdefault.jpg?v=2026-05-08-3" alt="Nando's — Social content (Taste test)" loading="lazy">
         </div>
       </div>
 
       <!-- 6. Bottom-right — Wunder W · Founding story -->
-      <div class="pcard reveal" data-yt-id="zyJLmbsxy9Y" data-aspect="wide">
+      <div class="pcard reveal" data-yt-id="zyJLmbsxy9Y" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
           <img src="https://i.ytimg.com/vi/zyJLmbsxy9Y/maxresdefault.jpg?v=2026-05-08-3" alt="Wunder W — Founding story" loading="lazy">
         </div>
@@ -2021,6 +2039,27 @@ window.addEventListener('load', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
   go && go.addEventListener('click', function() { setTimeout(close, 150); });
 })();
+
+// VID work — category filter chips. Click a chip => swap active class + show only
+// matching pcards. A pcard's data-category can be space-separated for multi-tagging
+// (e.g. data-category="featured case-study"). "Featured" is the default active filter.
+document.addEventListener('DOMContentLoaded', function() {
+  var row = document.getElementById('vidCategories');
+  if (!row) return;
+  var grid = row.parentElement.querySelector('.card-grid');
+  if (!grid) return;
+  row.addEventListener('click', function(e) {
+    var btn = e.target.closest('.vid-cat-btn');
+    if (!btn) return;
+    var cat = btn.getAttribute('data-category');
+    row.querySelectorAll('.vid-cat-btn').forEach(function(b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    grid.querySelectorAll('.pcard').forEach(function(card) {
+      var cats = (card.getAttribute('data-category') || '').split(/\s+/);
+      card.style.display = cats.indexOf(cat) !== -1 ? '' : 'none';
+    });
+  });
+});
 
 // VID BTS marquee — shuffle visible items per page load, sync the aria-hidden clones
 // so the seamless -50% wrap stays seamless. Runs BEFORE the marquee setup below.
