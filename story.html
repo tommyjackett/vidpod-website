@@ -298,7 +298,12 @@ html[data-theme="dark"] .sayhi-pop {
   gap: 70px;
   align-items: start;
 }
-@media (max-width: 900px) { .story-hero-grid { grid-template-columns: 1fr; gap: 50px; } }
+@media (max-width: 900px) {
+  .story-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .story-hero-grid .story-hero-photo { order: 1; max-width: 50%; margin: 0 auto; justify-self: center; width: 100%; }
+  .story-hero-grid .story-hero-text { order: 2; }
+  .story-hero-grid .story-hero-text p { max-width: none; }
+}
 .story-hero .lede { margin-bottom: 40px; }
 .story-hero-photo {
   position: relative;
