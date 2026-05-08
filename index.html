@@ -1716,19 +1716,48 @@ footer {
       </div>
     </div>
 
-    <!-- VIDEO BTS -->
+    <!-- VIDEO BTS — 18 unique photos + 18 aria-hidden clones for seamless -50% wrap.
+         JS at page load shuffles visible items + matches clones, so each visit shows a different order. -->
     <div class="bts-strip reveal">
       <h2 class="bts-heading">BTS<span class="dot"></span></h2>
       <div class="marquee-viewport">
-        <div class="marquee-track">
-          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS"></div>
-          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS"></div>
-          <div class="marquee-item"><img src="img/bts-vid/vid-01.jpg" alt="Video BTS"></div>
-          <div class="marquee-item"><img src="img/bts-vid/vid-02.jpg" alt="Video BTS"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt=""></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt=""></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-01.jpg" alt=""></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/vid-02.jpg" alt=""></div>
+        <div class="marquee-track" id="btsVidMarquee">
+      <div class="marquee-item"><img src="img/bts-vid/bts-01.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-02.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-03.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-04.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-05.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-06.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-07.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-08.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-09.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-10.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-11.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-12.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-13.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-14.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-15.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-16.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-17.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item"><img src="img/bts-vid/bts-18.jpg" alt="VIDPOD video production behind the scenes" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-01.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-02.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-03.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-04.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-05.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-06.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-07.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-08.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-09.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-10.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-11.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-12.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-13.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-14.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-15.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-16.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-17.jpg" alt="" loading="lazy"></div>
+      <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-18.jpg" alt="" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -1978,6 +2007,25 @@ window.addEventListener('load', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
   go && go.addEventListener('click', function() { setTimeout(close, 150); });
 })();
+
+// VID BTS marquee — shuffle visible items per page load, sync the aria-hidden clones
+// so the seamless -50% wrap stays seamless. Runs BEFORE the marquee setup below.
+document.addEventListener('DOMContentLoaded', function() {
+  var track = document.getElementById('btsVidMarquee');
+  if (!track) return;
+  var visible = Array.from(track.querySelectorAll('.marquee-item:not([aria-hidden])'));
+  var hidden  = Array.from(track.querySelectorAll('.marquee-item[aria-hidden]'));
+  if (visible.length < 2 || hidden.length !== visible.length) return;
+  // Fisher-Yates: build a shuffled index list once, apply it to both halves.
+  var order = visible.map(function(_, i) { return i; });
+  for (var i = order.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+  }
+  // Re-append visible items in shuffled order, then hidden items in same order.
+  order.forEach(function(idx) { track.appendChild(visible[idx]); });
+  order.forEach(function(idx) { track.appendChild(hidden[idx]); });
+});
 
 // Homepage marquee carousels — native scroll, JS auto-loop, pause on interact, click to zoom
 document.addEventListener('DOMContentLoaded', function() {
