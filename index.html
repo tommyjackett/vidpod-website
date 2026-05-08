@@ -2087,7 +2087,10 @@ footer {
     <div class="contact-card reveal">
       <h2>Let's make<br>something<span class="dot"></span></h2>
       <p class="contact-lead">Tell us what you've got in mind. A brand film, a new podcast, a full series. No brief is too rough. We'd love to set up a call and have a chat.</p>
-      <form class="contact-form" action="https://formspree.io/f/REPLACE_ME" method="POST" id="contactForm">
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+        <input type="hidden" name="access_key" value="74ea7078-f72d-4999-b468-b67dbda53fe7">
+        <input type="hidden" name="subject" value="New VIDPOD enquiry from the website">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
         <div>
           <label for="cf-name">Your name</label>
           <input type="text" id="cf-name" name="name" required placeholder="Jane Smith">
