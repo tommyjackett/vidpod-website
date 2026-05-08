@@ -878,7 +878,9 @@ footer p { font-size: 13px; color: var(--muted); }
   border: 0;
   pointer-events: none;
 }
-/* YouTube background video trick — oversize the iframe so the player UI is cropped off the edges */
+/* YouTube background video trick — oversize the iframe so the player UI is cropped off the edges.
+   This works for vertically-filmed 16:9 videos (like LTT). For YouTube Shorts (9:16 player),
+   add the .is-short modifier to keep the iframe at natural 100% sizing instead. */
 .about-media.is-bg iframe {
   width: 160%;
   height: 160%;
@@ -886,6 +888,13 @@ footer p { font-size: 13px; color: var(--muted); }
   top: -30%;
   inset: auto;
   pointer-events: none;
+}
+.about-media.is-bg.is-short iframe {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  inset: 0;
 }
 .about-media-caption {
   position: absolute;
