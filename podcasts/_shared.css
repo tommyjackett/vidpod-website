@@ -1228,6 +1228,7 @@ html[data-theme="light"] .sec-white .bts-item {
 
 /* ============================================
    SNIPPETS — vertical podcast snippets carousel
+   (native horizontal scroll + arrow buttons; no auto-scroll)
    ============================================ */
 .snippets-strip { position: relative; }
 .snippets-strip::before {
@@ -1237,24 +1238,45 @@ html[data-theme="light"] .sec-white .bts-item {
   background: var(--green);
   transform: translateX(-50%);
 }
-.snippets-marquee-viewport {
-  overflow: hidden;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-}
-.snippets-marquee {
+.snippets-rail {
   display: flex;
   gap: 22px;
   padding: 4px 36px 8px;
-  width: max-content;
-  animation: snip-scroll 80s linear infinite;
-  cursor: grab;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 36px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.snippets-marquee:hover { animation-play-state: paused; }
-@keyframes snip-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.snippets-rail::-webkit-scrollbar { display: none; }
+.snippets-rail .snippet-item { scroll-snap-align: start; }
+
+/* Arrow buttons */
+.snippets-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
 }
+.snippets-nav-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .15s ease, border-color .15s ease, color .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.snippets-nav-btn:hover { border-color: var(--green); color: var(--green); }
+.snippets-nav-btn:active { transform: scale(0.92); }
+.snippets-nav-btn svg { display: block; }
 .snippet-item {
   flex: 0 0 auto;
   width: 270px;
@@ -1335,7 +1357,9 @@ html[data-theme="light"] .sec-white .bts-item {
 }
 .snip-vid-lb-close:hover { background: rgba(255,255,255,0.2); }
 @media (max-width: 720px) {
-  .snippets-marquee { animation-duration: 50s; gap: 14px; padding: 4px 22px 8px; }
+  .snippets-rail { gap: 14px; padding: 4px 22px 8px; scroll-padding-inline: 22px; }
   .snippet-item { width: 200px; height: 356px; }
   .snippet-play-btn { width: 52px; height: 52px; }
+  .snippets-nav { margin-top: 22px; }
+  .snippets-nav-btn { width: 44px; height: 44px; }
 }

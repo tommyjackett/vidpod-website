@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=35">
+<link rel="stylesheet" href="_shared.css?v=36">
 <script>
 // Podcast pages always run in dark mode
 document.documentElement.dataset.theme = 'dark';
@@ -91,19 +91,22 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap">
     <h2 class="reveal">SNIPPETS<span class="dot"></span></h2>
   </div>
-  <div class="snippets-marquee-viewport reveal">
-    <div class="snippets-marquee" id="snippetsMarquee">
-      <div class="snippet-item" data-yt-id="gnX6yYos30Q"><img src="https://i.ytimg.com/vi/gnX6yYos30Q/maxresdefault.jpg" alt="Help at Hand snippet — Claire Maule, Support Wear" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="AIjg80SysUU"><img src="https://i.ytimg.com/vi/AIjg80SysUU/maxresdefault.jpg" alt="Help at Hand snippet — Bianca Burge, Postnatal Depression Journey" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg"><img src="https://i.ytimg.com/vi/2xT2Fp9_Qpg/maxresdefault.jpg" alt="Help at Hand snippet — Isabelle Sayers, Brushing Once a Day at Night" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="v9etvIOxSOA"><img src="https://i.ytimg.com/vi/v9etvIOxSOA/maxresdefault.jpg" alt="Help at Hand snippet — Olivia McArthur, Choking vs Gagging" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="cEVWgN8-jEA"><img src="https://i.ytimg.com/vi/cEVWgN8-jEA/maxresdefault.jpg" alt="Help at Hand snippet — Felicity Conlan, OWL: Observe, Wait, Listen" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="gnX6yYos30Q" aria-hidden="true"><img src="https://i.ytimg.com/vi/gnX6yYos30Q/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="AIjg80SysUU" aria-hidden="true"><img src="https://i.ytimg.com/vi/AIjg80SysUU/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg" aria-hidden="true"><img src="https://i.ytimg.com/vi/2xT2Fp9_Qpg/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="v9etvIOxSOA" aria-hidden="true"><img src="https://i.ytimg.com/vi/v9etvIOxSOA/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-      <div class="snippet-item" data-yt-id="cEVWgN8-jEA" aria-hidden="true"><img src="https://i.ytimg.com/vi/cEVWgN8-jEA/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    </div>
+  <div class="snippets-rail reveal" id="snippetsRail">
+    <div class="snippet-item" data-yt-id="gnX6yYos30Q"><img src="https://i.ytimg.com/vi/gnX6yYos30Q/maxresdefault.jpg" alt="Help at Hand snippet — Claire Maule, Support Wear" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="AIjg80SysUU"><img src="https://i.ytimg.com/vi/AIjg80SysUU/maxresdefault.jpg" alt="Help at Hand snippet — Bianca Burge, Postnatal Depression Journey" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg"><img src="https://i.ytimg.com/vi/2xT2Fp9_Qpg/maxresdefault.jpg" alt="Help at Hand snippet — Isabelle Sayers, Brushing Once a Day at Night" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="v9etvIOxSOA"><img src="https://i.ytimg.com/vi/v9etvIOxSOA/maxresdefault.jpg" alt="Help at Hand snippet — Olivia McArthur, Choking vs Gagging" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="cEVWgN8-jEA"><img src="https://i.ytimg.com/vi/cEVWgN8-jEA/maxresdefault.jpg" alt="Help at Hand snippet — Felicity Conlan, OWL: Observe, Wait, Listen" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+  </div>
+  <div class="wrap">
+    <nav class="snippets-nav reveal">
+      <button class="snippets-nav-btn" data-dir="-1" aria-label="Previous snippets" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="snippets-nav-btn" data-dir="1" aria-label="Next snippets" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
   </div>
 </section>
 
@@ -118,8 +121,8 @@ document.documentElement.dataset.theme = 'dark';
   var lb = document.getElementById('snipVidLb');
   var wrap = document.getElementById('snipVidLbWrap');
   var closeBtn = document.getElementById('snipVidLbClose');
-  var marquee = document.getElementById('snippetsMarquee');
-  if (!lb || !wrap || !marquee) return;
+  var rail = document.getElementById('snippetsRail');
+  if (!lb || !wrap || !rail) return;
 
   // ---------- Lightbox ----------
   function openLb(id) {
@@ -138,96 +141,23 @@ document.documentElement.dataset.theme = 'dark';
   lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb(); });
 
-  // ---------- Marquee drag/swipe (mouse + touch) ----------
-  var pauseTimer = null;
-  var dragStartX = 0, dragCurrentX = 0, dragBaseX = 0, isDragging = false, hasMoved = false;
+  // ---------- Card click → open lightbox ----------
+  rail.querySelectorAll('.snippet-item').forEach(function(item) {
+    item.addEventListener('click', function() { openLb(item.getAttribute('data-yt-id')); });
+  });
 
-  function getTrackX(el) {
-    var matrix = window.getComputedStyle(el).transform;
-    if (!matrix || matrix === 'none') return 0;
-    var m = matrix.match(/matrix.*\((.+)\)/);
-    if (!m) return 0;
-    return parseFloat(m[1].split(',')[4]) || 0;
+  // ---------- Arrow buttons → scroll rail by one card width ----------
+  function scrollAmount() {
+    var card = rail.querySelector('.snippet-item');
+    if (!card) return 280;
+    var styles = window.getComputedStyle(rail);
+    var gap = parseFloat(styles.columnGap || styles.gap) || 22;
+    return card.offsetWidth + gap;
   }
-  function getDuration() { return window.matchMedia('(max-width: 720px)').matches ? 50 : 80; }
-  function pauseAnim() { marquee.classList.add('paused'); }
-  function resumeAnim() { marquee.classList.remove('paused'); }
-  function pauseFor(ms) { pauseAnim(); clearTimeout(pauseTimer); pauseTimer = setTimeout(resumeAnim, ms); }
-
-  function resumeFrom(currentX) {
-    var halfWidth = marquee.scrollWidth / 2;
-    if (halfWidth <= 0) halfWidth = 1;
-    currentX = currentX % halfWidth;
-    if (currentX > 0) currentX -= halfWidth;
-    var progress = Math.abs(currentX) / halfWidth;
-    var dur = getDuration();
-    marquee.style.animation = 'none';
-    void marquee.offsetHeight;
-    marquee.style.animation = '';
-    marquee.style.transform = '';
-    marquee.style.animationDelay = '-' + (progress * dur) + 's';
-  }
-
-  marquee.addEventListener('touchstart', function(e) {
-    clearTimeout(pauseTimer); pauseAnim();
-    dragStartX = e.touches[0].clientX;
-    dragBaseX = getTrackX(marquee);
-    isDragging = true; hasMoved = false;
-    marquee.style.animation = 'none';
-    marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
-  }, { passive: true });
-  marquee.addEventListener('touchmove', function(e) {
-    if (!isDragging) return;
-    var delta = e.touches[0].clientX - dragStartX;
-    if (Math.abs(delta) > 5) hasMoved = true;
-    dragCurrentX = dragBaseX + delta;
-    marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
-  }, { passive: true });
-  marquee.addEventListener('touchend', function() {
-    if (!isDragging) return;
-    isDragging = false;
-    resumeFrom(dragCurrentX || dragBaseX);
-    pauseFor(2500);
-  }, { passive: true });
-
-  marquee.addEventListener('mousedown', function(e) {
-    e.preventDefault();
-    clearTimeout(pauseTimer); pauseAnim();
-    dragStartX = e.clientX;
-    dragBaseX = getTrackX(marquee);
-    isDragging = true; hasMoved = false;
-    marquee.style.animation = 'none';
-    marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
-    marquee.style.cursor = 'grabbing';
-  });
-  document.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    var delta = e.clientX - dragStartX;
-    if (Math.abs(delta) > 5) hasMoved = true;
-    dragCurrentX = dragBaseX + delta;
-    marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
-  });
-  document.addEventListener('mouseup', function() {
-    if (!isDragging) return;
-    isDragging = false;
-    marquee.style.cursor = '';
-    resumeFrom(dragCurrentX || dragBaseX);
-    pauseFor(1500);
-  });
-
-  // Suppress card click after a drag (capture phase, before snippet-item click handler runs)
-  marquee.addEventListener('click', function(e) {
-    if (hasMoved) {
-      e.preventDefault();
-      e.stopPropagation();
-      hasMoved = false;
-    }
-  }, true);
-
-  // Card click → open lightbox (only when not dragged)
-  document.querySelectorAll('.snippet-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-      if (!hasMoved) openLb(item.getAttribute('data-yt-id'));
+  document.querySelectorAll('.snippets-nav-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var dir = parseInt(btn.getAttribute('data-dir'), 10) || 1;
+      rail.scrollBy({ left: dir * scrollAmount(), behavior: 'smooth' });
     });
   });
 })();
