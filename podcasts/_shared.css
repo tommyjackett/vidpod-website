@@ -1246,6 +1246,7 @@ html[data-theme="light"] .sec-white .bts-item {
   margin-left: calc(50% - 50vw);
   overflow-x: auto;
   overflow-y: hidden;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 36px;
   scroll-behavior: smooth;
@@ -1255,6 +1256,9 @@ html[data-theme="light"] .sec-white .bts-item {
 }
 .snippets-rail::-webkit-scrollbar { display: none; }
 .snippets-rail .snippet-item { scroll-snap-align: start; }
+/* Auto-center when content fits in the viewport; auto-margins resolve to 0 when content overflows so scroll still works */
+.snippets-rail .snippet-item:first-child { margin-inline-start: auto; }
+.snippets-rail .snippet-item:last-child { margin-inline-end: auto; }
 
 /* Arrow buttons */
 .snippets-nav {
@@ -1277,6 +1281,12 @@ html[data-theme="light"] .sec-white .bts-item {
 .snippets-nav-btn:hover { border-color: var(--green); color: var(--green); }
 .snippets-nav-btn:active { transform: scale(0.92); }
 .snippets-nav-btn svg { display: block; }
+.snippets-nav-btn:disabled,
+.snippets-nav-btn[disabled] {
+  opacity: 0.28;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .snippet-item {
   flex: 0 0 auto;
   width: 270px;

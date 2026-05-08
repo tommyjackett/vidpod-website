@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_shared.css?v=36">
+<link rel="stylesheet" href="_shared.css?v=37">
 <script>
 // Podcast pages always run in dark mode
 document.documentElement.dataset.theme = 'dark';
@@ -146,7 +146,11 @@ document.documentElement.dataset.theme = 'dark';
     item.addEventListener('click', function() { openLb(item.getAttribute('data-yt-id')); });
   });
 
-  // ---------- Arrow buttons → scroll rail by one card width ----------
+  // ---------- Arrow buttons → scroll rail by one card width; disable at edges ----------
+  var navButtons = Array.prototype.slice.call(document.querySelectorAll('.snippets-nav-btn'));
+  var prevBtn = navButtons.filter(function(b) { return b.getAttribute('data-dir') === '-1'; })[0];
+  var nextBtn = navButtons.filter(function(b) { return b.getAttribute('data-dir') === '1'; })[0];
+
   function scrollAmount() {
     var card = rail.querySelector('.snippet-item');
     if (!card) return 280;
@@ -154,12 +158,23 @@ document.documentElement.dataset.theme = 'dark';
     var gap = parseFloat(styles.columnGap || styles.gap) || 22;
     return card.offsetWidth + gap;
   }
-  document.querySelectorAll('.snippets-nav-btn').forEach(function(btn) {
+  function updateNavState() {
+    var canScroll = rail.scrollWidth > rail.clientWidth + 1;
+    var atStart = rail.scrollLeft <= 1;
+    var atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 1;
+    if (prevBtn) prevBtn.disabled = !canScroll || atStart;
+    if (nextBtn) nextBtn.disabled = !canScroll || atEnd;
+  }
+  navButtons.forEach(function(btn) {
     btn.addEventListener('click', function() {
       var dir = parseInt(btn.getAttribute('data-dir'), 10) || 1;
       rail.scrollBy({ left: dir * scrollAmount(), behavior: 'smooth' });
     });
   });
+  rail.addEventListener('scroll', updateNavState, { passive: true });
+  window.addEventListener('resize', updateNavState);
+  // Wait a frame so layout has settled before computing initial state
+  requestAnimationFrame(updateNavState);
 })();
 </script>
 
