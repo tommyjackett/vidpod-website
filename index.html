@@ -2357,13 +2357,36 @@ document.addEventListener('DOMContentLoaded', function() {
     el.style.animationDelay = '-' + (progress * duration) + 's';
   }
 
-  tracks.forEach(function(marquee) {
-    // Lock per-track duration so visual speed = TARGET_SPEED for every marquee
+  // Speed-lock: compute per-track animation-duration from scrollWidth so
+  // visual speed = TARGET_SPEED px/sec for every marquee. Re-run after
+  // images + fonts settle so the duration converges to the steady-state value
+  // regardless of when DOMContentLoaded fires.
+  function lockSpeed(marquee) {
     var halfWidth = marquee.scrollWidth / 2;
+    if (halfWidth <= 0) return;
     var duration = Math.max(20, Math.round(halfWidth / TARGET_SPEED));
     marquee.dataset.duration = duration;
     marquee.style.animationDuration = duration + 's';
+  }
+  function lockAll() { tracks.forEach(lockSpeed); }
+  // Initial lock now (uses CSS-based widths, usually accurate)
+  lockAll();
+  // Re-lock once images + fonts have loaded — this is the authoritative pass
+  if (document.readyState === 'complete') {
+    requestAnimationFrame(lockAll);
+  } else {
+    window.addEventListener('load', function() {
+      requestAnimationFrame(lockAll);
+    });
+  }
+  // Re-lock on viewport resize (debounced) since item widths can change at breakpoints
+  var resizeTimer = null;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(lockAll, 200);
+  });
 
+  tracks.forEach(function(marquee) {
     var pauseTimer = null;
 
     function pause() { marquee.classList.add('paused'); }
