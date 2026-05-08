@@ -2216,7 +2216,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function openVid(ytId) {
     if (!ytId) return;
-    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" title="Video" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" title="Video" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
