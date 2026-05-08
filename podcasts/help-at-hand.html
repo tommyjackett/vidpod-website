@@ -118,7 +118,10 @@ document.documentElement.dataset.theme = 'dark';
   var lb = document.getElementById('snipVidLb');
   var wrap = document.getElementById('snipVidLbWrap');
   var closeBtn = document.getElementById('snipVidLbClose');
-  if (!lb || !wrap) return;
+  var marquee = document.getElementById('snippetsMarquee');
+  if (!lb || !wrap || !marquee) return;
+
+  // ---------- Lightbox ----------
   function openLb(id) {
     wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     lb.classList.add('is-open');
@@ -131,12 +134,102 @@ document.documentElement.dataset.theme = 'dark';
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
-  document.querySelectorAll('.snippet-item').forEach(function(item) {
-    item.addEventListener('click', function() { openLb(item.getAttribute('data-yt-id')); });
-  });
   closeBtn.addEventListener('click', closeLb);
   lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb(); });
+
+  // ---------- Marquee drag/swipe (mouse + touch) ----------
+  var pauseTimer = null;
+  var dragStartX = 0, dragCurrentX = 0, dragBaseX = 0, isDragging = false, hasMoved = false;
+
+  function getTrackX(el) {
+    var matrix = window.getComputedStyle(el).transform;
+    if (!matrix || matrix === 'none') return 0;
+    var m = matrix.match(/matrix.*\((.+)\)/);
+    if (!m) return 0;
+    return parseFloat(m[1].split(',')[4]) || 0;
+  }
+  function getDuration() { return window.matchMedia('(max-width: 720px)').matches ? 50 : 80; }
+  function pauseAnim() { marquee.classList.add('paused'); }
+  function resumeAnim() { marquee.classList.remove('paused'); }
+  function pauseFor(ms) { pauseAnim(); clearTimeout(pauseTimer); pauseTimer = setTimeout(resumeAnim, ms); }
+
+  function resumeFrom(currentX) {
+    var halfWidth = marquee.scrollWidth / 2;
+    if (halfWidth <= 0) halfWidth = 1;
+    currentX = currentX % halfWidth;
+    if (currentX > 0) currentX -= halfWidth;
+    var progress = Math.abs(currentX) / halfWidth;
+    var dur = getDuration();
+    marquee.style.animation = 'none';
+    void marquee.offsetHeight;
+    marquee.style.animation = '';
+    marquee.style.transform = '';
+    marquee.style.animationDelay = '-' + (progress * dur) + 's';
+  }
+
+  marquee.addEventListener('touchstart', function(e) {
+    clearTimeout(pauseTimer); pauseAnim();
+    dragStartX = e.touches[0].clientX;
+    dragBaseX = getTrackX(marquee);
+    isDragging = true; hasMoved = false;
+    marquee.style.animation = 'none';
+    marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
+  }, { passive: true });
+  marquee.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    var delta = e.touches[0].clientX - dragStartX;
+    if (Math.abs(delta) > 5) hasMoved = true;
+    dragCurrentX = dragBaseX + delta;
+    marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
+  }, { passive: true });
+  marquee.addEventListener('touchend', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    resumeFrom(dragCurrentX || dragBaseX);
+    pauseFor(2500);
+  }, { passive: true });
+
+  marquee.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    clearTimeout(pauseTimer); pauseAnim();
+    dragStartX = e.clientX;
+    dragBaseX = getTrackX(marquee);
+    isDragging = true; hasMoved = false;
+    marquee.style.animation = 'none';
+    marquee.style.transform = 'translateX(' + dragBaseX + 'px)';
+    marquee.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var delta = e.clientX - dragStartX;
+    if (Math.abs(delta) > 5) hasMoved = true;
+    dragCurrentX = dragBaseX + delta;
+    marquee.style.transform = 'translateX(' + dragCurrentX + 'px)';
+  });
+  document.addEventListener('mouseup', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    marquee.style.cursor = '';
+    resumeFrom(dragCurrentX || dragBaseX);
+    pauseFor(1500);
+  });
+
+  // Suppress card click after a drag (capture phase, before snippet-item click handler runs)
+  marquee.addEventListener('click', function(e) {
+    if (hasMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+      hasMoved = false;
+    }
+  }, true);
+
+  // Card click → open lightbox (only when not dragged)
+  document.querySelectorAll('.snippet-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      if (!hasMoved) openLb(item.getAttribute('data-yt-id'));
+    });
+  });
 })();
 </script>
 
