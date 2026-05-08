@@ -350,6 +350,119 @@ html[data-theme="dark"] .sayhi-pop {
 }
 .story-hero .lede strong { color: var(--fg); font-weight: 600; }
 
+/* New hero text — bold lead + body paragraphs (no h1) */
+.story-hero-text p { color: var(--muted); font-size: 16.5px; line-height: 1.65; margin-bottom: 18px; max-width: 600px; }
+.story-hero-text p:last-child { margin-bottom: 0; }
+.story-hero-lead { font-size: clamp(20px, 1.6vw, 22px) !important; color: var(--fg) !important; line-height: 1.4 !important; margin-bottom: 24px !important; }
+.story-hero-lead strong { color: var(--fg); font-weight: 700; }
+
+/* WATCH section — small framed video */
+.story-watch {
+  padding: 70px 0;
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--line);
+}
+.story-watch-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.story-watch-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.story-watch-eyebrow::before, .story-watch-eyebrow::after {
+  content: ''; width: 28px; height: 1px; background: rgba(255,255,255,0.18);
+}
+html[data-theme="light"] .story-watch-eyebrow::before, html[data-theme="light"] .story-watch-eyebrow::after { background: rgba(0,0,0,0.18); }
+.story-watch .featured-embed-wrap { box-shadow: 0 22px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06); }
+
+/* JOURNEY section — chapters with main player + thumbnail rail */
+.story-journey { background: var(--bg); }
+.journey-chapter { padding: 80px 0; border-bottom: 1px solid var(--line); }
+.journey-lead {
+  font-size: 17px; line-height: 1.55; color: var(--muted);
+  max-width: 720px; margin-bottom: 32px;
+}
+.journey-player {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
+}
+.journey-player img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.journey-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.journey-play {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+.journey-play::after {
+  content: ''; width: 84px; height: 60px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="68" height="48" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z" fill="%23f00"/><path d="M45 24 27 14v20" fill="%23fff"/></svg>');
+  background-repeat: no-repeat; background-size: contain; background-position: center;
+}
+.journey-now-playing {
+  margin-top: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+}
+.np-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); font-weight: 700; }
+.np-title { font-size: 15px; font-weight: 600; color: var(--fg); margin-top: 2px; }
+.np-counter { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.journey-rail {
+  margin-top: 26px;
+  display: grid;
+  gap: 14px;
+}
+.journey-rail[data-rail-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+.journey-rail[data-rail-cols="5"] { grid-template-columns: repeat(5, 1fr); }
+.journey-rail .thumb {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: #000;
+  transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+  opacity: 0.55;
+}
+.journey-rail .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.journey-rail .thumb:hover { opacity: 0.85; transform: translateY(-2px); }
+.journey-rail .thumb.is-active {
+  opacity: 1;
+  box-shadow: 0 0 0 2px var(--green), 0 8px 22px rgba(0,255,170,0.25);
+}
+.journey-rail .thumb .num {
+  position: absolute; top: 6px; left: 6px;
+  background: rgba(0,0,0,0.7); color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  padding: 3px 7px; border-radius: 4px;
+}
+.journey-rail .thumb.is-active .num { background: var(--green); color: #000; }
+
+@media (max-width: 900px) {
+  .journey-chapter { padding: 50px 0; }
+  .story-watch { padding: 50px 0; }
+  .story-watch-eyebrow::before, .story-watch-eyebrow::after { width: 22px; }
+  .journey-rail {
+    margin: 18px -22px 0;
+    padding: 4px 22px 14px;
+    grid-template-columns: none !important;
+    grid-auto-flow: column;
+    grid-auto-columns: 200px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .journey-rail::-webkit-scrollbar { display: none; }
+  .journey-rail .thumb { scroll-snap-align: start; }
+}
+
 /* SECTIONS */
 section.story-sec {
   padding: 100px 0;
@@ -767,12 +880,10 @@ footer p {
 <header class="story-hero">
   <div class="wrap">
     <div class="story-hero-grid">
-      <div>
-        <h1 class="reveal">I've always had a crack<span class="dot"></span></h1>
-        <p class="lede reveal">A consistent thread throughout my career — turns out the successes are in the cracks you take. Call it a philosophy I've stuck by.</p>
-        <div class="featured-embed-wrap reveal">
-          <iframe src="https://www.youtube.com/embed/e5zuDN_oNRE?rel=0&modestbranding=1&playsinline=1" title="Having a Crack — Tommy Jackett" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+      <div class="story-hero-text">
+        <p class="story-hero-lead reveal"><strong>Hi, I'm Tommy &mdash; the creator and storyteller behind VIDPOD.</strong></p>
+        <p class="reveal">I've spent over a decade having a crack at ideas and businesses, for myself and for the brands I work with. Personal training, radio, podcasting, production, ventures that landed and plenty that didn't. Every one was a crack, and every crack built something.</p>
+        <p class="reveal">VIDPOD is the natural home for everything I've learned. Cameras, mics, edits, and the willingness to keep having a crack &mdash; for the brands who want their story told properly.</p>
       </div>
       <div class="story-hero-photo reveal">
         <img src="img/about/tommy-2.jpg" srcset="img/about/tommy-2-sm.jpg 800w, img/about/tommy-2.jpg 1600w" sizes="(max-width: 900px) 100vw, 520px" alt="Tommy Jackett" loading="lazy" decoding="async" style="object-position: 85% 50%;">
@@ -781,90 +892,63 @@ footer p {
   </div>
 </header>
 
-<section class="story-sec">
+<section class="story-watch">
   <div class="wrap">
-    <div class="reveal">
-      <div class="section-eyebrow">The stuff that travelled</div>
-      <h2 class="section-title">The stuff<br>that travelled<span class="dot"></span></h2>
-      <p class="section-intro">Stories that found an audience. Click any thumbnail to watch.</p>
+    <div class="story-watch-inner">
+      <div class="story-watch-eyebrow"><span>Watch</span></div>
+      <div class="featured-embed-wrap reveal">
+        <iframe src="https://www.youtube.com/embed/e5zuDN_oNRE?rel=0&modestbranding=1&playsinline=1" title="Having a Crack — Tommy Jackett" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="viral-grid">
-      <div class="viral-card reveal">
-        <a class="video-embed" href="https://www.youtube.com/watch?v=Xuwl6vKiTLU" target="_blank" rel="noopener">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/Xuwl6vKiTLU/hqdefault.jpg" alt="Fishing for oBikes">
-            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
-          </div>
-        </a>
-        <div class="meta"><span>YouTube</span><span>Sept 2017</span></div>
-        <h3>Fishing for oBikes</h3>
-        <div class="viral-stat">66K+ views · 107K across the oBike series</div>
-        <p>Melbourne flooded with abandoned share bikes. I bought a hook from Bunnings, went for a walk, and actually did something about it.</p>
+<section class="story-journey">
+  <div class="journey-chapter">
+    <div class="wrap">
+      <h3 class="section-title reveal">Nothing I love more<span class="dot"></span></h3>
+      <p class="journey-lead reveal">Some of my favourite videos aren't for clients. They're the ones I make with my son. Silly, heartfelt, the reason I picked up a camera in the first place.</p>
+      <div class="journey-player reveal">
+        <img src="https://i.ytimg.com/vi/7Aa3Jxa0SmA/maxresdefault.jpg" alt="">
+        <div class="journey-play"></div>
       </div>
-
-      <div class="viral-card reveal">
-        <a class="video-embed" data-video-id="REPLACE_WITH_7ELEVEN_ID" href="#" target="_blank" rel="noopener">
-          <div class="video-thumb">
-            <div class="video-placeholder">
-              <div class="video-placeholder-label">7-Eleven $3 Coffee Rip-Off</div>
-              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
-            </div>
-            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
-          </div>
-        </a>
-        <div class="meta"><span>YouTube</span><span>Sept 2018</span></div>
-        <h3>The $3 coffee rip-off</h3>
-        <div class="viral-stat">96K+ views</div>
-        <p>Showed that the "large" $3 super cup fits entirely inside the $2 cup. Simple, visual, undeniable. The whole video is one pour.</p>
+      <div class="journey-now-playing reveal">
+        <div>
+          <div class="np-label">Now playing</div>
+          <div class="np-title">How My 6-Year-Old Created a Will Sparks-Inspired Banga!</div>
+        </div>
+        <div class="np-counter">1 / 4</div>
       </div>
-
-      <div class="viral-card reveal">
-        <a class="video-embed" data-video-id="REPLACE_WITH_1000_STEPS_ID" href="#" target="_blank" rel="noopener">
-          <div class="video-thumb">
-            <div class="video-placeholder">
-              <div class="video-placeholder-label">1,000 Steps</div>
-              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
-            </div>
-            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
-          </div>
-        </a>
-        <div class="meta"><span>YouTube</span><span>March 2016</span></div>
-        <h3>Counting every step on the 1,000 Steps</h3>
-        <div class="viral-stat">Parks Victoria responded publicly</div>
-        <p>Melbourne's famous "1,000 Steps" trail. Nobody had actually counted. I did. Turns out it's not 1,000.</p>
+      <div class="journey-rail reveal" data-rail-cols="4">
+        <div class="thumb is-active" data-yt-id="7Aa3Jxa0SmA" data-title="How My 6-Year-Old Created a Will Sparks-Inspired Banga!"><span class="num">01</span><img src="https://i.ytimg.com/vi/7Aa3Jxa0SmA/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="bWfKXkV5vvs" data-title="From Voice Memo to A Spotify Hit!"><span class="num">02</span><img src="https://i.ytimg.com/vi/bWfKXkV5vvs/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="maMe-epgpUo" data-title="Will Sparks Surprises Kid DJ Fan!"><span class="num">03</span><img src="https://i.ytimg.com/vi/maMe-epgpUo/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="8XlNCE0Oyhw" data-title="Bodhi's Surprise LIVE on The Today Show!"><span class="num">04</span><img src="https://i.ytimg.com/vi/8XlNCE0Oyhw/maxresdefault.jpg" alt=""></div>
       </div>
+    </div>
+  </div>
 
-      <div class="viral-card reveal">
-        <a class="video-embed" data-video-id="REPLACE_WITH_DOMINOS_ID" href="#" target="_blank" rel="noopener">
-          <div class="video-thumb">
-            <div class="video-placeholder">
-              <div class="video-placeholder-label">Domino's 100 Pepperoni</div>
-              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
-            </div>
-            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
-          </div>
-        </a>
-        <div class="meta"><span>TikTok</span><span>2023</span></div>
-        <h3>Domino's 100 pepperoni challenge</h3>
-        <div class="viral-stat">Strong TikTok performance</div>
-        <p>Domino's said their new pizza was "topped to the edge with 100 pieces of pepperoni." So I counted.</p>
+  <div class="journey-chapter">
+    <div class="wrap">
+      <h3 class="section-title reveal">Sometimes the city hands you the story<span class="dot"></span></h3>
+      <p class="journey-lead reveal">Born and raised in Melbourne. I've got a knack for noticing what's bubbling away in culture and grabbing a camera. The oBike saga. 7-Eleven. Domino's. The ones that travelled.</p>
+      <div class="journey-player reveal">
+        <img src="https://i.ytimg.com/vi/933kvR6miMI/maxresdefault.jpg" alt="">
+        <div class="journey-play"></div>
       </div>
-
-      <div class="viral-card reveal">
-        <a class="video-embed" data-video-id="REPLACE_WITH_ESCOOTER_ID" href="#" target="_blank" rel="noopener">
-          <div class="video-thumb">
-            <div class="video-placeholder">
-              <div class="video-placeholder-label">The e-Scooter Sequel</div>
-              <div class="video-placeholder-sub">Paste YouTube URL to embed</div>
-            </div>
-            <div class="play-btn"><svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74,0.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/><polygon points="45,24 27,14 27,34" fill="#fff"/></svg></div>
-          </div>
-        </a>
-        <div class="meta"><span>YouTube</span><span>2022</span></div>
-        <h3>The oBike sequel — e-scooters</h3>
-        <div class="viral-stat">5 scooters pulled out in under 2 hours</div>
-        <p>Same formula, new target. E-scooters dumped in the river. Went live on 3AW with Neil Mitchell that afternoon.</p>
+      <div class="journey-now-playing reveal">
+        <div>
+          <div class="np-label">Now playing</div>
+          <div class="np-title">Domino's Promise 100 Pieces Of Pepperoni, So I Counted Them!</div>
+        </div>
+        <div class="np-counter">1 / 5</div>
+      </div>
+      <div class="journey-rail reveal" data-rail-cols="5">
+        <div class="thumb is-active" data-yt-id="933kvR6miMI" data-title="Domino's Promise 100 Pieces Of Pepperoni, So I Counted Them!"><span class="num">01</span><img src="https://i.ytimg.com/vi/933kvR6miMI/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="AM-oMVi1gZ4" data-title="7-Eleven Coffee Rip-Off"><span class="num">02</span><img src="https://i.ytimg.com/vi/AM-oMVi1gZ4/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="nCeRyqBdGWs" data-title="Fishing For Lime Scooters In The Yarra River"><span class="num">03</span><img src="https://i.ytimg.com/vi/nCeRyqBdGWs/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="j5e-fhUCxmk" data-title="The O Bike Rabbit Hole"><span class="num">04</span><img src="https://i.ytimg.com/vi/j5e-fhUCxmk/maxresdefault.jpg" alt=""></div>
+        <div class="thumb" data-yt-id="srm2qRimaPc" data-title="The REAL Number Of Steps At The 1000 Steps"><span class="num">05</span><img src="https://i.ytimg.com/vi/srm2qRimaPc/maxresdefault.jpg" alt=""></div>
       </div>
     </div>
   </div>
@@ -995,6 +1079,44 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
   go && go.addEventListener('click', function() { setTimeout(close, 150); });
+})();
+
+// Journey player — click thumbnail (or main poster) to load that video into the main iframe with autoplay
+(function() {
+  document.querySelectorAll('.journey-chapter').forEach(function(chapter) {
+    var player = chapter.querySelector('.journey-player');
+    var npTitle = chapter.querySelector('.np-title');
+    var npCounter = chapter.querySelector('.np-counter');
+    var thumbs = Array.prototype.slice.call(chapter.querySelectorAll('.thumb'));
+    if (!player || !thumbs.length) return;
+    var total = thumbs.length;
+
+    function loadVid(idx) {
+      thumbs.forEach(function(t, i) { t.classList.toggle('is-active', i === idx); });
+      var thumb = thumbs[idx];
+      var ytId = thumb.getAttribute('data-yt-id');
+      var title = thumb.getAttribute('data-title') || '';
+      // iOS-friendly: clear, force reflow, then insert iframe so autoplay token transfers
+      player.innerHTML = '';
+      void player.offsetHeight;
+      player.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+      if (npTitle) npTitle.textContent = title;
+      if (npCounter) npCounter.textContent = (idx + 1) + ' / ' + total;
+    }
+
+    thumbs.forEach(function(thumb, i) {
+      thumb.addEventListener('click', function() { loadVid(i); });
+    });
+
+    player.addEventListener('click', function() {
+      if (player.querySelector('iframe')) return; // already playing
+      var activeIdx = 0;
+      for (var i = 0; i < thumbs.length; i++) {
+        if (thumbs[i].classList.contains('is-active')) { activeIdx = i; break; }
+      }
+      loadVid(activeIdx);
+    });
+  });
 })();
 </script>
 </body>
