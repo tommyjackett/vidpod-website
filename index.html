@@ -272,8 +272,8 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
 .hero {
   min-height: 92vh;
   display: flex;
-  align-items: center;
-  padding: 160px 0 100px;
+  align-items: flex-end;
+  padding: 180px 0 70px;
   position: relative;
   overflow: hidden;
   background: #000;
@@ -336,15 +336,15 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
   max-width: 12ch;
 }
 .hero .hero-sub {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: clamp(22px, 2.4vw, 30px);
-  color: rgba(255,255,255,0.92);
-  max-width: 720px;
-  margin-bottom: 38px;
-  line-height: 1.35;
-  text-transform: none;
-  letter-spacing: 0;
+  font-family: var(--font-head);
+  font-weight: 400; /* Archivo Black is already heavy */
+  font-size: clamp(44px, 6vw, 84px);
+  color: #fff;
+  max-width: 11ch; /* forces 2-line break — poster look */
+  margin-bottom: 28px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .hero .btn-vid,
@@ -368,9 +368,9 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
 .hero .btn-pod .label-mark { font-family: var(--font-logo); font-weight: 900; color: var(--green); }
 .hero .btn-pod:hover { transform: translateY(-2px); border-color: var(--green); }
 @media (max-width: 600px) {
-  .hero { min-height: 86vh; padding: 140px 0 80px; }
+  .hero { min-height: 86vh; padding: 140px 0 60px; }
   .hero h1 { font-size: clamp(36px, 11vw, 56px); }
-  .hero .hero-sub { font-size: 22px; margin-bottom: 28px; }
+  .hero .hero-sub { font-size: 42px; max-width: 9ch; margin-bottom: 24px; }
   .hero .btn-vid, .hero .btn-pod { padding: 15px 22px; font-size: 13px; }
 }
 .btn {
@@ -1641,7 +1641,7 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
       tabindex="-1"></iframe>
   </div>
   <div class="wrap hero-inner">
-    <p class="hero-sub reveal">Video & Podcast Production Melbourne.</p>
+    <p class="hero-sub reveal">Video &amp; Podcast<br>Production Melbourne</p>
     <div class="hero-actions reveal">
       <a href="#work-vid" class="btn-vid">See our <span class="label-mark">VID</span> work</a>
       <a href="#work-pod" class="btn-pod">See our <span class="label-mark">POD</span> work</a>
