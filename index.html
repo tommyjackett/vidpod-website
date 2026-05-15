@@ -445,7 +445,7 @@ section { padding: 140px 0; position: relative; }
    Stats text right-aligned with right-bar so it hits the same right edge as the video/podcast cards below. */
 .work-head-3col {
   display: grid;
-  grid-template-columns: 1fr 320px 280px;
+  grid-template-columns: 1fr 360px 280px;
   column-gap: 32px;
   row-gap: 0;
   align-items: start;
@@ -465,24 +465,34 @@ section { padding: 140px 0; position: relative; }
 .work-head-3col > .col-services { grid-column: 2; }
 .work-head-3col > .col-stats    { grid-column: 3; }
 
-/* MIDDLE — solid services card (320px wide, centred between paragraph and stats) */
+/* MIDDLE — solid services card. Items use the same Archivo Black face/weight as the stats on the right. */
 .col-services .info-card {
   border-radius: 16px;
-  padding: 22px 26px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
+}
+.info-card .card-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+  opacity: 0.55;
 }
 .info-card .items {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 .info-card .item {
-  font-size: clamp(17px, 1.5vw, 20px);
-  font-weight: 500;
-  line-height: 1.5;
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
   text-align: left;
-  padding: 4px 0;
+  padding: 0;
 }
 .work-vid .col-services .info-card { background: #000; color: #fff; }
 .work-pod .col-services .info-card { background: var(--green); color: #000; }
@@ -1825,6 +1835,7 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
       <p class="section-intro">We've got you covered at all stages of the video production process: ideation, creative concept development, pre-production planning, scripting, filming, and editing. Below is a selection of work we've created across different brands and video types. Have a browse and see if there's a project in the direction of what you're after.</p>
       <div class="col-services">
         <div class="info-card">
+          <p class="card-eyebrow">Services</p>
           <div class="items">
             <div class="item">Pre-production</div>
             <div class="item">Cinematography</div>
@@ -2104,6 +2115,7 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
       <p class="section-intro">These days, how a podcast looks matters just as much as how it sounds - and we've got you on both fronts. We've produced thousands of episodes over the years, helping shows reach far and wide and connect deeply with their audiences. We can support you across every stage: brand-led messaging, show producing, hosting coaching, podcast artwork, recording (in a studio or wherever you are), editing, and crafting social snippets that get the most out of your long-form content. Below you'll find a selection of our work.</p>
       <div class="col-services">
         <div class="info-card">
+          <p class="card-eyebrow">Services</p>
           <div class="items">
             <div class="item">Show development</div>
             <div class="item">Multi-mic recording</div>
