@@ -441,97 +441,7 @@ section { padding: 140px 0; position: relative; }
 }
 .section-intro strong { color: var(--fg); font-weight: 700; }
 
-/* Work section head — 3 columns: 1fr (paragraph) + 320px (services card centred between) + 280px (stats flush right).
-   Stats text right-aligned with right-bar so it hits the same right edge as the video/podcast cards below. */
-.work-head-3col {
-  display: grid;
-  grid-template-columns: 1fr 360px 280px;
-  column-gap: 32px;
-  row-gap: 0;
-  align-items: start;
-}
-.work-head-3col > .section-title { grid-column: 1; grid-row: 1; margin: 0 0 28px; }
-.work-head-3col > .section-intro {
-  grid-column: 1; grid-row: 2;
-  font-size: clamp(17px, 1.5vw, 20px);
-  line-height: 1.6;
-  margin: 0;
-}
-.work-head-3col > .col-services,
-.work-head-3col > .col-stats {
-  grid-row: 2;
-  align-self: start;
-}
-.work-head-3col > .col-services { grid-column: 2; }
-.work-head-3col > .col-stats    { grid-column: 3; }
 
-/* MIDDLE — solid services card. Items use the same Archivo Black face/weight as the stats on the right. */
-.col-services .info-card {
-  border-radius: 16px;
-  padding: 22px 24px;
-  display: flex;
-  flex-direction: column;
-}
-.info-card .card-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin: 0 0 18px;
-  opacity: 0.55;
-}
-.info-card .items {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.info-card .item {
-  font-family: var(--font-head);
-  font-weight: 400;
-  font-size: clamp(16px, 1.4vw, 20px);
-  line-height: 1.15;
-  letter-spacing: -0.005em;
-  text-align: left;
-  padding: 0;
-}
-.work-vid .col-services .info-card { background: #000; color: #fff; }
-.work-pod .col-services .info-card { background: var(--green); color: #000; }
-
-/* RIGHT — stat tiles flush to right edge of wrap. Right-bar + right-aligned text. */
-.col-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-.cred-tile {
-  border-right: 3px solid currentColor;
-  padding: 4px 14px 4px 0;
-  text-align: right;
-}
-.cred-tile .stat {
-  display: block;
-  font-family: var(--font-head);
-  font-weight: 400;
-  font-size: clamp(22px, 1.9vw, 30px);
-  line-height: 1;
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
-}
-.cred-tile .label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.5;
-  opacity: 0.78;
-}
-.work-vid .cred-tile { color: #000; }
-.work-pod .cred-tile { color: #fff; }
-
-/* Mobile — services + stats hidden, section reads as heading + paragraph + cards (current behaviour) */
-@media (max-width: 900px) {
-  .work-head-3col { grid-template-columns: 1fr; gap: 24px; }
-  .col-services, .col-stats { display: none; }
-}
 
 /* ===== SAY HI POPUP ===== */
 .sayhi-wrap { position: relative; }
@@ -1830,35 +1740,9 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
 <!-- VIDEO BAND -->
 <section class="work-vid" id="work-vid">
   <div class="wrap work-inner">
-    <div class="work-head-3col reveal">
+    <div class="reveal">
       <h2 class="section-title"><span class="mark">VID<span class="dot"></span></span> work</h2>
       <p class="section-intro">We've got you covered at all stages of the video production process: ideation, creative concept development, pre-production planning, scripting, filming, and editing. Below is a selection of work we've created across different brands and video types. Have a browse and see if there's a project in the direction of what you're after.</p>
-      <div class="col-services">
-        <div class="info-card">
-          <p class="card-eyebrow">Services</p>
-          <div class="items">
-            <div class="item">Pre-production</div>
-            <div class="item">Cinematography</div>
-            <div class="item">Drone &amp; aerial</div>
-            <div class="item">Editing &amp; colour grading</div>
-            <div class="item">Motion graphics &amp; animation</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-stats" aria-label="At a glance">
-        <div class="cred-tile">
-          <span class="stat">10+ years</span>
-          <span class="label">Producing video for Australian brands.</span>
-        </div>
-        <div class="cred-tile">
-          <span class="stat">End-to-end</span>
-          <span class="label">Concept, script, shoot, edit — in-house.</span>
-        </div>
-        <div class="cred-tile">
-          <span class="stat">Melbourne</span>
-          <span class="label">Based here. Working Australia-wide.</span>
-        </div>
-      </div>
     </div>
 
     <!-- Category filters — order: Featured / Case study / Brand videos / Social content / Explainer -->
@@ -2110,35 +1994,9 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
 <!-- PODCAST BAND -->
 <section class="work-pod" id="work-pod">
   <div class="wrap work-inner">
-    <div class="work-head-3col reveal">
+    <div class="reveal">
       <h2 class="section-title"><span class="mark">POD<span class="dot"></span></span> work</h2>
       <p class="section-intro">These days, how a podcast looks matters just as much as how it sounds - and we've got you on both fronts. We've produced thousands of episodes over the years, helping shows reach far and wide and connect deeply with their audiences. We can support you across every stage: brand-led messaging, show producing, hosting coaching, podcast artwork, recording (in a studio or wherever you are), editing, and crafting social snippets that get the most out of your long-form content. Below you'll find a selection of our work.</p>
-      <div class="col-services">
-        <div class="info-card">
-          <p class="card-eyebrow">Services</p>
-          <div class="items">
-            <div class="item">Show development</div>
-            <div class="item">Multi-mic recording</div>
-            <div class="item">Video podcast production</div>
-            <div class="item">Editing &amp; mix</div>
-            <div class="item">Artwork &amp; social cutdowns</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-stats" aria-label="At a glance">
-        <div class="cred-tile">
-          <span class="stat">1,000+ eps</span>
-          <span class="label">Branded, founder-led, and internal shows.</span>
-        </div>
-        <div class="cred-tile">
-          <span class="stat">Audio + video</span>
-          <span class="label">One recording, two outputs.</span>
-        </div>
-        <div class="cred-tile">
-          <span class="stat">Studio to you</span>
-          <span class="label">Recorded in your space — Melbourne and Australia-wide.</span>
-        </div>
-      </div>
     </div>
 
     <div class="card-grid">
