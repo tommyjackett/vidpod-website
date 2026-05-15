@@ -441,11 +441,11 @@ section { padding: 140px 0; position: relative; }
 }
 .section-intro strong { color: var(--fg); font-weight: 700; }
 
-/* Work section head — 3 equal columns. Left = heading + paragraph. Middle = solid services card with 5 items.
-   Right = 3 left-bar stat tiles. Both right cols use natural height so VID and POD render identically. */
+/* Work section head — 3 columns: 1fr (paragraph) + 320px (services card centred between) + 280px (stats flush right).
+   Stats text right-aligned with right-bar so it hits the same right edge as the video/podcast cards below. */
 .work-head-3col {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 320px 280px;
   column-gap: 32px;
   row-gap: 0;
   align-items: start;
@@ -465,7 +465,7 @@ section { padding: 140px 0; position: relative; }
 .work-head-3col > .col-services { grid-column: 2; }
 .work-head-3col > .col-stats    { grid-column: 3; }
 
-/* MIDDLE — services card */
+/* MIDDLE — solid services card (320px wide, centred between paragraph and stats) */
 .col-services .info-card {
   border-radius: 16px;
   padding: 22px 26px;
@@ -487,15 +487,16 @@ section { padding: 140px 0; position: relative; }
 .work-vid .col-services .info-card { background: #000; color: #fff; }
 .work-pod .col-services .info-card { background: var(--green); color: #000; }
 
-/* RIGHT — left-bar stat tiles */
+/* RIGHT — stat tiles flush to right edge of wrap. Right-bar + right-aligned text. */
 .col-stats {
   display: flex;
   flex-direction: column;
   gap: 22px;
 }
 .cred-tile {
-  border-left: 3px solid currentColor;
-  padding: 4px 0 4px 18px;
+  border-right: 3px solid currentColor;
+  padding: 4px 14px 4px 0;
+  text-align: right;
 }
 .cred-tile .stat {
   display: block;
