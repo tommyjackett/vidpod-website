@@ -441,6 +441,48 @@ section { padding: 140px 0; position: relative; }
 }
 .section-intro strong { color: var(--fg); font-weight: 700; }
 
+/* Work section head — heading+intro on left, optional creds tiles on right (desktop only).
+   The grid is left-aligned inside .wrap so the creds sit next to the paragraph, not pinned to the far right edge. */
+.work-head-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 680px) auto;
+  column-gap: 56px;
+  align-items: start;
+}
+.creds-col {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-top: 18px;     /* drops first tile to align with paragraph top */
+  width: 280px;
+}
+.cred-tile {
+  border-left: 3px solid currentColor;
+  padding: 4px 0 4px 20px;
+}
+.cred-tile .stat {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(28px, 2.4vw, 38px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.cred-tile .label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+.work-vid .cred-tile { color: #000; }
+.work-pod .cred-tile { color: #fff; }
+@media (max-width: 900px) {
+  .work-head-grid { display: block; }
+  .creds-col { display: none; }
+}
+
 /* ===== SAY HI POPUP ===== */
 .sayhi-wrap { position: relative; }
 .sayhi-pop {
@@ -1738,9 +1780,25 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
 <!-- VIDEO BAND -->
 <section class="work-vid" id="work-vid">
   <div class="wrap work-inner">
-    <div class="reveal">
-      <h2 class="section-title"><span class="mark">VID<span class="dot"></span></span> work</h2>
-      <p class="section-intro">We've got you covered at all stages of the video production process: ideation, creative concept development, pre-production planning, scripting, filming, and editing. Below is a selection of work we've created across different brands and video types. Have a browse and see if there's a project in the direction of what you're after.</p>
+    <div class="work-head-grid">
+      <div class="reveal">
+        <h2 class="section-title"><span class="mark">VID<span class="dot"></span></span> work</h2>
+        <p class="section-intro">We've got you covered at all stages of the video production process: ideation, creative concept development, pre-production planning, scripting, filming, and editing. Below is a selection of work we've created across different brands and video types. Have a browse and see if there's a project in the direction of what you're after.</p>
+      </div>
+      <aside class="reveal creds-col" aria-label="At a glance">
+        <div class="cred-tile">
+          <span class="stat">10+ years</span>
+          <span class="label">Producing video content for Australian brands.</span>
+        </div>
+        <div class="cred-tile">
+          <span class="stat">End-to-end</span>
+          <span class="label">Concept, script, shoot, edit — one team in-house.</span>
+        </div>
+        <div class="cred-tile">
+          <span class="stat">Melbourne</span>
+          <span class="label">Based in Melbourne. Working with clients Australia-wide.</span>
+        </div>
+      </aside>
     </div>
 
     <!-- Category filters — order: Featured / Case study / Brand videos / Social content / Explainer -->
@@ -1992,9 +2050,25 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
 <!-- PODCAST BAND -->
 <section class="work-pod" id="work-pod">
   <div class="wrap work-inner">
-    <div class="reveal">
-      <h2 class="section-title"><span class="mark">POD<span class="dot"></span></span> work</h2>
-      <p class="section-intro">These days, how a podcast looks matters just as much as how it sounds - and we've got you on both fronts. We've produced thousands of episodes over the years, helping shows reach far and wide and connect deeply with their audiences. We can support you across every stage: brand-led messaging, show producing, hosting coaching, podcast artwork, recording (in a studio or wherever you are), editing, and crafting social snippets that get the most out of your long-form content. Below you'll find a selection of our work.</p>
+    <div class="work-head-grid">
+      <div class="reveal">
+        <h2 class="section-title"><span class="mark">POD<span class="dot"></span></span> work</h2>
+        <p class="section-intro">These days, how a podcast looks matters just as much as how it sounds - and we've got you on both fronts. We've produced thousands of episodes over the years, helping shows reach far and wide and connect deeply with their audiences. We can support you across every stage: brand-led messaging, show producing, hosting coaching, podcast artwork, recording (in a studio or wherever you are), editing, and crafting social snippets that get the most out of your long-form content. Below you'll find a selection of our work.</p>
+      </div>
+      <aside class="reveal creds-col" aria-label="At a glance">
+        <div class="cred-tile">
+          <span class="stat">1,000+ episodes</span>
+          <span class="label">Branded, founder-led, and internal podcasts produced.</span>
+        </div>
+        <div class="cred-tile">
+          <span class="stat">Audio + video</span>
+          <span class="label">Built for both formats. One recording, two outputs.</span>
+        </div>
+        <div class="cred-tile">
+          <span class="stat">Studio to you</span>
+          <span class="label">Recorded in your space — Melbourne and across Australia.</span>
+        </div>
+      </aside>
     </div>
 
     <div class="card-grid">
