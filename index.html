@@ -875,6 +875,36 @@ html[data-theme="dark"] .service-vid:hover {
   margin-bottom: 18px;
   max-width: 48ch;
 }
+/* Anchor marquee to bottom of card so VID + POD strips line up regardless of paragraph length */
+.service-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.service-body .service-marquee { margin-top: auto; }
+
+/* "Learn more" CTA pill on service cards (secondary to hero CTAs) */
+.service-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 14px 22px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.service-cta::after { content: '\2192'; font-weight: 800; }
+.service-cta:hover { transform: translateY(-2px); }
+.service-vid .service-cta { background: #000; color: var(--green); }
+.service-vid .service-cta:hover { box-shadow: 0 14px 30px rgba(0,0,0,0.35); }
+.service-pod .service-cta { background: var(--green); color: #000; }
+.service-pod .service-cta:hover { box-shadow: 0 14px 30px rgba(0,255,170,0.35); }
 /* Service marquee banner — continuous scrolling strip */
 .service-marquee {
   margin-top: 14px;
@@ -1657,6 +1687,7 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
         <div class="service-body">
           <h3>Video Production</h3>
           <p>We're passionate creators and problem solvers with over a decade of experience helping brands get to the heart of their story and connect with their audience through video content. Got an idea ready to roll, or just something you want to talk through? We'd love to chat about your project.</p>
+          <a href="#work-vid" class="service-cta">Learn more</a>
           <div class="service-marquee service-marquee-vid">
             <div class="service-marquee-track">
               <span>Founding stories</span><span class="sep">·</span>
@@ -1681,6 +1712,7 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
         <div class="service-body">
           <h3>Podcast Production</h3>
           <p>Podcasts give you the ability to connect deeply with your audience. That might be sharing customer stories, building authority in your niche, or creating internal shows for learning and development. We've built and produced thousands of episodes and can support you in all areas of building your show from the ground up.</p>
+          <a href="#work-pod" class="service-cta">Learn more</a>
           <div class="service-marquee service-marquee-pod">
             <div class="service-marquee-track">
               <span>Show ideation</span><span class="sep">·</span>
