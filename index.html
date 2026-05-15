@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="VIDPOD. Melbourne video and podcast production. Your end-to-end production partner.">
 <meta name="author" content="VIDPOD">
-<meta property="og:title" content="Video & Podcast Produciton. Made in Melbourne.">
+<meta property="og:title" content="Video & Podcast Production. Made in Melbourne.">
 <meta property="og:description" content="Melbourne video and podcast production. Your end-to-end production partner.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/">
@@ -335,13 +335,16 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
   text-transform: uppercase;
   max-width: 12ch;
 }
-.hero-sub {
+.hero .hero-sub {
   font-family: var(--font-body);
-  font-size: clamp(16px, 1.4vw, 19px);
-  color: rgba(255,255,255,0.78);
-  max-width: 560px;
+  font-weight: 600;
+  font-size: clamp(22px, 2.4vw, 30px);
+  color: rgba(255,255,255,0.92);
+  max-width: 720px;
   margin-bottom: 38px;
-  line-height: 1.55;
+  line-height: 1.35;
+  text-transform: none;
+  letter-spacing: 0;
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .hero .btn-vid,
@@ -367,7 +370,7 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
 @media (max-width: 600px) {
   .hero { min-height: 86vh; padding: 140px 0 80px; }
   .hero h1 { font-size: clamp(36px, 11vw, 56px); }
-  .hero-sub { font-size: 15px; margin-bottom: 28px; }
+  .hero .hero-sub { font-size: 22px; margin-bottom: 28px; }
   .hero .btn-vid, .hero .btn-pod { padding: 15px 22px; font-size: 13px; }
 }
 .btn {
@@ -1638,8 +1641,7 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
       tabindex="-1"></iframe>
   </div>
   <div class="wrap hero-inner">
-    <h1 class="reveal">Hey! Welcome to VIDPOD<span class="dot"></span></h1>
-    <p class="hero-sub reveal">Video & Podcast Production Melbourne.</p>
+    <h1 class="hero-sub reveal">Video and podcast production Melbourne<span class="dot"></span></h1>
     <div class="hero-actions reveal">
       <a href="#work-vid" class="btn-vid">See our <span class="label-mark">VID</span> work</a>
       <a href="#work-pod" class="btn-pod">See our <span class="label-mark">POD</span> work</a>
