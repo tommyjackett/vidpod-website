@@ -453,6 +453,11 @@ html[data-theme="light"] .story-watch-eyebrow::before, html[data-theme="light"] 
 }
 .journey-rail .thumb.is-active .num { background: var(--green); color: #000; }
 
+/* Desktop-only width cap — focuses the player + rail. Mobile keeps existing rail-scroll. */
+@media (min-width: 901px) {
+  .story-journey .wrap { max-width: 880px; }
+}
+
 @media (max-width: 900px) {
   .journey-chapter { padding: 50px 0; }
   .story-watch { padding: 50px 0; }
