@@ -453,9 +453,11 @@ html[data-theme="light"] .story-watch-eyebrow::before, html[data-theme="light"] 
 }
 .journey-rail .thumb.is-active .num { background: var(--green); color: #000; }
 
-/* Desktop-only width cap — focuses the player + rail. Mobile keeps existing rail-scroll. */
+/* Desktop-only unified width — hero + watch + journey share a 960px content frame. Mobile (≤900px) untouched. */
 @media (min-width: 901px) {
-  .story-journey .wrap { max-width: 880px; }
+  .story-hero .wrap,
+  .story-watch .wrap,
+  .story-journey .wrap { max-width: 960px; }
 }
 
 @media (max-width: 900px) {
