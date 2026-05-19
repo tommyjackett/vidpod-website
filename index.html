@@ -759,6 +759,40 @@ html[data-theme="dark"] .sayhi-pop {
 .work-vid .pcard-desc { color: rgba(0,0,0,0.68); }
 .work-pod .pcard-desc { color: rgba(255,255,255,0.62); }
 
+/* POD card CTA — outlined green pill, fills on hover. Pinned to bottom-left of card body. */
+.work-pod .pcard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+.work-pod .pcard-cta {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 9px 16px;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.work-pod .pcard-cta span {
+  margin-left: 6px;
+  transition: transform 0.2s var(--ease);
+  display: inline-block;
+}
+.work-pod .pcard:hover .pcard-cta {
+  background: var(--green);
+  color: #000;
+}
+.work-pod .pcard:hover .pcard-cta span {
+  transform: translateX(3px);
+}
+
 /* ===== SCOPED BTS MARQUEE (per-section, mixed aspect) ===== */
 .bts-strip {
   margin-top: 80px;
@@ -1996,9 +2030,8 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
           <img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy">
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">Finance · Flagship</div>
-          <h4>The Numbers Game</h4>
           <p class="pcard-desc">A weekly video podcast on money, business, and strategy. 5 years of consistency and 280+ episodes deep.</p>
+          <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
 
@@ -2007,9 +2040,8 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
           <img src="img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy">
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">Education</div>
-          <h4>Let's Talk Teaching</h4>
           <p class="pcard-desc">Flagship podcast for Monash University’s Faculty of Education.</p>
+          <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
 
@@ -2018,9 +2050,8 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
           <img src="img/podcasts/help-at-hand.jpg" alt="Help at Hand" loading="lazy">
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">Branded · Education</div>
-          <h4>Help at Hand</h4>
           <p class="pcard-desc">Built as a learning resource for members of the Help at Hand Education platform.</p>
+          <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
 
@@ -2029,9 +2060,8 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
           <img src="img/podcasts/unconventional.jpg" alt="Unconventional Business, HubSpot" loading="lazy">
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">HubSpot Podcast Network</div>
-          <h4>Unconventional Business</h4>
           <p class="pcard-desc">A HubSpot ANZ Podcast on the businesses doing something unconventional.</p>
+          <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
 
@@ -2040,9 +2070,8 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
           <img src="img/podcasts/tdts.jpg" alt="The Daily Talk Show" loading="lazy">
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">Independent · 1,000+ eps</div>
-          <h4>The Daily Talk Show</h4>
           <p class="pcard-desc">1,000+ episodes, daily, co-hosted by Josh Janssen and Tommy Jackett. The power of showing up daily.</p>
+          <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
 
@@ -2051,9 +2080,8 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
           <img src="img/podcasts/carlisle-homes.jpg" alt="Home Files, Carlisle Homes" loading="lazy">
         </div>
         <div class="pcard-body">
-          <div class="pcard-eyebrow">Property · Branded</div>
-          <h4>Home Files</h4>
           <p class="pcard-desc">The essential guide to building a new home. A branded podcast by Australia's No. 1 Home Builder.</p>
+          <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
     </div>
