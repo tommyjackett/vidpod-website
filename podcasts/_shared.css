@@ -348,6 +348,25 @@ html[data-theme="light"] .pod-hero { background: #fff; }
   border: 1px solid var(--line);
 }
 
+/* Mobile (≤600px): keep all 3 chips on a single line. Tighter padding + smaller font + nowrap.
+   Horizontal scroll as safety net for the narrowest phones if content still overflows. */
+@media (max-width: 600px) {
+  .pod-hero .chips {
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .pod-hero .chips::-webkit-scrollbar { display: none; }
+  .pod-hero .chips span {
+    font-size: 10px;
+    padding: 6px 10px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
 /* SECTION */
 .pod-sec { padding: 100px 0; border-bottom: 1px solid var(--line); }
 .pod-sec .section-eyebrow {
