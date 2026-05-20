@@ -276,13 +276,13 @@ html[data-theme="light"] .pod-hero { background: #fff; }
   display: grid;
   grid-template-columns: 440px 1fr;
   gap: 70px;
-  align-items: stretch;
+  align-items: start;
 }
-/* Text column: top-align content, let it fill the artwork height */
+/* Text column: top-align content, expand naturally if longer than artwork */
 .pod-hero-grid > div:not(.pod-hero-art) {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 16px;
 }
 @media (max-width: 1060px) { .pod-hero-grid { grid-template-columns: 380px 1fr; gap: 50px; } }
