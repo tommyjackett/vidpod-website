@@ -1019,6 +1019,12 @@ html[data-theme="dark"] .service-vid:hover {
 .work-pod .section-title .dot { background: var(--green); }
 .work-pod .section-intro { color: rgba(255,255,255,0.7); }
 
+/* Desktop only: stretch VID + POD work paragraphs to the full wrap width (matches pill row end). Mobile keeps the comfortable 680px reading width. */
+@media (min-width: 901px) {
+  .work-vid .section-intro,
+  .work-pod .section-intro { max-width: none; }
+}
+
 /* ===== WORK-VID filmstrip — native-aspect tiles, no body text ===== */
 /* Tiles are constant height, widths derive from data-aspect (wide vs vertical).
    Wraps to a new line when row exceeds container. Mobile collapses to single column. */
