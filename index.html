@@ -286,7 +286,7 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
   z-index: 0;
   pointer-events: none;
 }
-.hero-video iframe {
+.hero-video video {
   position: absolute;
   top: 50%; left: 50%;
   width: 100vw;
@@ -296,6 +296,7 @@ html[data-theme="dark"] .theme-toggle .sun { display: block; }
   transform: translate(-50%, -50%);
   border: 0;
   pointer-events: none;
+  object-fit: cover;            /* ensure self-hosted video crops, not letterboxes */
 }
 .hero-video::after {
   content: '';
@@ -1723,12 +1724,10 @@ html[data-theme="dark"] .footer-logo .logo-dark { display: block; }
 
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
-    <iframe
-      src="https://www.youtube.com/embed/aq9WuolCUCU?autoplay=1&mute=1&loop=1&playlist=aq9WuolCUCU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
-      title="VIDPOD background reel"
-      frameborder="0"
-      allow="autoplay; encrypted-media; picture-in-picture"
-      tabindex="-1"></iframe>
+    <video
+      src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4"
+      autoplay muted loop playsinline preload="auto"
+      tabindex="-1"></video>
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video &amp; Podcast<br>Production <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
