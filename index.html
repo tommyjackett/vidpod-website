@@ -1019,10 +1019,10 @@ html[data-theme="dark"] .service-vid:hover {
 .work-pod .section-title .dot { background: var(--green); }
 .work-pod .section-intro { color: rgba(255,255,255,0.7); }
 
-/* Desktop only: stretch VID + POD work paragraphs to the full wrap width (matches pill row end). Mobile keeps the comfortable 680px reading width. */
+/* Desktop only: stretch VID + POD work paragraphs to roughly the end of the pill row (~6 pills wide). Mobile keeps the comfortable 680px reading width. */
 @media (min-width: 901px) {
   .work-vid .section-intro,
-  .work-pod .section-intro { max-width: none; }
+  .work-pod .section-intro { max-width: 880px; }
 }
 
 /* ===== WORK-VID filmstrip — native-aspect tiles, no body text ===== */
