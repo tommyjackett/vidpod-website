@@ -1466,11 +1466,14 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:0}
 .footer-sitemap-inner{padding:60px 0 80px}
 .footer-sitemap-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:60px;
+  grid-template-columns:repeat(4,1fr);
+  gap:40px;
 }
-@media (max-width:780px){
-  .footer-sitemap-grid{grid-template-columns:1fr;gap:40px}
+@media (max-width:1000px){
+  .footer-sitemap-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+}
+@media (max-width:600px){
+  .footer-sitemap-grid{grid-template-columns:1fr;gap:32px}
   .footer-sitemap-inner{padding:40px 0 50px}
 }
 .sitemap-col h4{
