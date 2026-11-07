@@ -1,0 +1,264 @@
+{
+ "source": {
+  "film": "The Jackett Ranch",
+  "clip": "DJI_20261015084808_0226_D.MP4 (15 Oct 2026 rooftop pieces to camera, take 0226, DJI Osmo 4K 25 fps, skyline edge)",
+  "folder": "Desktop/TOMMY JACKETT VIDEO CONTENT/2023/USA Trip 2023/CAPTURE/USA Property Pt 3_2026/Footage/Rooftop PTC_15102026/",
+  "in": 0.8,
+  "out": 11.32,
+  "grade": "none (Osmo standard colour, Rec.709)",
+  "crop": "1215x2160 window that follows his face (Vision face track, smoothed 0.5 s) from 3840x2160, scaled to 1080x1920",
+  "audio": "camera sound (the DJI Mic sent into the Osmo), stereo, loudnorm -15 LUFS"
+ },
+ "label": "Rooftop walk",
+ "video": "media/clips/rooftop-walk/base.mp4",
+ "poster": "media/clips/rooftop-walk/base.jpg",
+ "duration": 10.52,
+ "cuts": [],
+ "words": [
+  {
+   "t": 1.067,
+   "end": 1.148,
+   "text": "If"
+  },
+  {
+   "t": 1.148,
+   "end": 1.278,
+   "text": "you're"
+  },
+  {
+   "t": 1.278,
+   "end": 1.423,
+   "text": "new"
+  },
+  {
+   "t": 1.569,
+   "end": 1.909,
+   "text": "here,"
+  },
+  {
+   "t": 2.459,
+   "end": 2.637,
+   "text": "back"
+  },
+  {
+   "t": 2.702,
+   "end": 2.75,
+   "text": "in"
+  },
+  {
+   "t": 2.783,
+   "end": 2.863,
+   "text": "the"
+  },
+  {
+   "t": 2.863,
+   "end": 3.705,
+   "text": "'70s"
+  },
+  {
+   "t": 3.705,
+   "end": 3.915,
+   "text": "my"
+  },
+  {
+   "t": 3.915,
+   "end": 4.206,
+   "text": "dad"
+  },
+  {
+   "t": 4.401,
+   "end": 4.579,
+   "text": "bought"
+  },
+  {
+   "t": 4.579,
+   "end": 4.708,
+   "text": "a"
+  },
+  {
+   "t": 4.708,
+   "end": 4.967,
+   "text": "block"
+  },
+  {
+   "t": 4.967,
+   "end": 5.113,
+   "text": "of"
+  },
+  {
+   "t": 5.129,
+   "end": 5.371,
+   "text": "land"
+  },
+  {
+   "t": 5.371,
+   "end": 5.533,
+   "text": "for"
+  },
+  {
+   "t": 5.533,
+   "end": 6.666,
+   "text": "$5,000"
+  },
+  {
+   "t": 6.682,
+   "end": 6.795,
+   "text": "in"
+  },
+  {
+   "t": 6.828,
+   "end": 7.54,
+   "text": "Colorado,"
+  },
+  {
+   "t": 7.863,
+   "end": 8.219,
+   "text": "USA,"
+  },
+  {
+   "t": 8.769,
+   "end": 8.834,
+   "text": "and"
+  },
+  {
+   "t": 8.85,
+   "end": 8.947,
+   "text": "now"
+  },
+  {
+   "t": 9.239,
+   "end": 9.417,
+   "text": "we're"
+  },
+  {
+   "t": 9.417,
+   "end": 9.659,
+   "text": "giving"
+  },
+  {
+   "t": 9.659,
+   "end": 9.724,
+   "text": "it"
+  },
+  {
+   "t": 9.724,
+   "end": 9.821,
+   "text": "away"
+  },
+  {
+   "t": 9.902,
+   "end": 10.048,
+   "text": "for"
+  },
+  {
+   "t": 10.048,
+   "end": 10.226,
+   "text": "free."
+  }
+ ],
+ "phrases": [
+  0,
+  4,
+  8,
+  11,
+  15,
+  17,
+  20,
+  26
+ ],
+ "emphasis": [
+  7,
+  14,
+  16,
+  18,
+  27
+ ],
+ "hook_text": "Now we're giving it away\n*for free*",
+ "hook_label": "Tommy Jackett, founder of VIDPOD",
+ "name": "Tommy Jackett",
+ "role": "Founder, VIDPOD",
+ "name_at": 2.0,
+ "protect_case": [
+  "'70s",
+  "USA",
+  "VIDPOD"
+ ],
+ "proper": [
+  "I",
+  "Colorado",
+  "USA",
+  "Tommy",
+  "Jackett",
+  "VIDPOD"
+ ],
+ "depth": {
+  "video": "media/clips/rooftop-walk/depth.mp4",
+  "duration": 10.52,
+  "note": "top half colour, bottom half person matte (Apple Vision), 720x1280 each"
+ },
+ "face": null,
+ "face_note": "null: he pops up from behind a wall, walks at the lens and leaves frame left at the end. Settled stretch 4.5 to 9.0 s: face centre about x 500, y 860 (x 420 to 575, y 780 to 920), hair top y 310 to 600",
+ "card_frames": [
+  {
+   "t": 0.6,
+   "src": "media/clips/rooftop-walk/cards/f_0_6.jpg"
+  },
+  {
+   "t": 2.0,
+   "src": "media/clips/rooftop-walk/cards/f_2_0.jpg"
+  },
+  {
+   "t": 4.0,
+   "src": "media/clips/rooftop-walk/cards/f_4_0.jpg"
+  },
+  {
+   "t": 6.0,
+   "src": "media/clips/rooftop-walk/cards/f_6_0.jpg"
+  },
+  {
+   "t": 8.0,
+   "src": "media/clips/rooftop-walk/cards/f_8_0.jpg"
+  },
+  {
+   "t": 9.6,
+   "src": "media/clips/rooftop-walk/cards/f_9_6.jpg"
+  }
+ ],
+ "card_cutout": {
+  "src": "media/clips/rooftop-walk/cards/cutout_7_0.png",
+  "t": 7.0
+ },
+ "moves_suggested": {
+  "word": "LAND",
+  "word_y": 830,
+  "word_size": 400,
+  "small": "$5,000",
+  "at": 5.13,
+  "small_at": 5.53,
+  "side": {
+   "lead": "Back in the '70s",
+   "big": "Colorado",
+   "small": "a block of land"
+  }
+ },
+ "words_extra_suggested": {
+  "list": [
+   "Back in the '70s",
+   "A block of land for $5,000",
+   "Now we're giving it away"
+  ],
+  "quote": {
+   "text": "Now we're giving it away for free.",
+   "label": "Tommy Jackett, founder of VIDPOD"
+  },
+  "quote_card": {
+   "text": "Back in the '70s my dad bought a block of land for $5,000 in Colorado, USA.",
+   "name": "Tommy Jackett",
+   "role": "Founder, VIDPOD"
+  },
+  "place": {
+   "name": "Colorado",
+   "sub": "USA"
+  }
+ }
+}

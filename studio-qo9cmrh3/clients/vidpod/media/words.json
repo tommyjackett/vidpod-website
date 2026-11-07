@@ -1,0 +1,331 @@
+{
+ "source": {
+  "film": "The Jackett Ranch",
+  "clip": "A_0014C998A261010_1757501B_CANON.MXF (10 Oct 2026 sit-down, A cam front, C200 4K, Canon Log 3)",
+  "in": 102.5,
+  "out": 118.5,
+  "grade": "Canon C-Log3 to Rec.709 LUT (Resolve LUT folder, C200)",
+  "crop": "1215x2160 at x 1312 from 3840x2160, scaled to 1080x1920",
+  "audio": "channel 1 (lav), loudnorm -15 LUFS"
+ },
+ "video": "media/base.mp4",
+ "poster": "media/base.jpg",
+ "duration": 16.0,
+ "cuts": [],
+ "words": [
+  {
+   "t": 0.176,
+   "end": 0.273,
+   "text": "I've"
+  },
+  {
+   "t": 0.273,
+   "end": 0.514,
+   "text": "been"
+  },
+  {
+   "t": 0.514,
+   "end": 0.916,
+   "text": "down"
+  },
+  {
+   "t": 0.916,
+   "end": 1.157,
+   "text": "quite"
+  },
+  {
+   "t": 1.157,
+   "end": 1.173,
+   "text": "a"
+  },
+  {
+   "t": 1.222,
+   "end": 1.366,
+   "text": "few"
+  },
+  {
+   "t": 1.398,
+   "end": 1.704,
+   "text": "rabbit"
+  },
+  {
+   "t": 1.704,
+   "end": 2.01,
+   "text": "holes."
+  },
+  {
+   "t": 2.669,
+   "end": 2.717,
+   "text": "I"
+  },
+  {
+   "t": 3.409,
+   "end": 3.505,
+   "text": "was"
+  },
+  {
+   "t": 3.553,
+   "end": 3.859,
+   "text": "fishing"
+  },
+  {
+   "t": 3.955,
+   "end": 4.438,
+   "text": "oBikes"
+  },
+  {
+   "t": 4.438,
+   "end": 4.55,
+   "text": "out"
+  },
+  {
+   "t": 4.55,
+   "end": 4.598,
+   "text": "of"
+  },
+  {
+   "t": 4.598,
+   "end": 4.679,
+   "text": "the"
+  },
+  {
+   "t": 4.679,
+   "end": 4.936,
+   "text": "Yarra"
+  },
+  {
+   "t": 4.936,
+   "end": 5.306,
+   "text": "River."
+  },
+  {
+   "t": 5.805,
+   "end": 5.981,
+   "text": "I"
+  },
+  {
+   "t": 6.528,
+   "end": 6.753,
+   "text": "was"
+  },
+  {
+   "t": 6.946,
+   "end": 7.236,
+   "text": "trying"
+  },
+  {
+   "t": 7.284,
+   "end": 7.38,
+   "text": "to"
+  },
+  {
+   "t": 7.413,
+   "end": 8.249,
+   "text": "uncover"
+  },
+  {
+   "t": 8.458,
+   "end": 8.57,
+   "text": "one"
+  },
+  {
+   "t": 8.57,
+   "end": 8.635,
+   "text": "of"
+  },
+  {
+   "t": 8.635,
+   "end": 8.779,
+   "text": "the"
+  },
+  {
+   "t": 8.795,
+   "end": 9.037,
+   "text": "biggest"
+  },
+  {
+   "t": 9.037,
+   "end": 9.6,
+   "text": "scams"
+  },
+  {
+   "t": 9.616,
+   "end": 9.696,
+   "text": "in"
+  },
+  {
+   "t": 9.696,
+   "end": 10.291,
+   "text": "Australian"
+  },
+  {
+   "t": 11.047,
+   "end": 11.368,
+   "text": "coffee"
+  },
+  {
+   "t": 11.433,
+   "end": 11.819,
+   "text": "history"
+  },
+  {
+   "t": 11.931,
+   "end": 12.076,
+   "text": "at"
+  },
+  {
+   "t": 12.076,
+   "end": 12.783,
+   "text": "7-Eleven."
+  },
+  {
+   "t": 13.443,
+   "end": 13.845,
+   "text": "I've"
+  },
+  {
+   "t": 13.861,
+   "end": 14.038,
+   "text": "done"
+  },
+  {
+   "t": 14.086,
+   "end": 14.263,
+   "text": "a"
+  },
+  {
+   "t": 14.279,
+   "end": 14.89,
+   "text": "Domino's"
+  },
+  {
+   "t": 14.906,
+   "end": 15.147,
+   "text": "deep"
+  },
+  {
+   "t": 15.147,
+   "end": 15.646,
+   "text": "dive."
+  }
+ ],
+ "phrases": [
+  0,
+  3,
+  8,
+  12,
+  17,
+  22,
+  27,
+  31,
+  33,
+  37
+ ],
+ "emphasis": [
+  6,
+  7,
+  11,
+  15,
+  26,
+  32,
+  36,
+  37
+ ],
+ "hook_text": "I've been down quite a few\n*rabbit holes*",
+ "hook_label": "Tommy Jackett, founder of VIDPOD",
+ "name": "Tommy Jackett",
+ "role": "Founder, VIDPOD",
+ "name_at": 2.7,
+ "protect_case": [
+  "oBikes",
+  "7-Eleven",
+  "VIDPOD"
+ ],
+ "proper": [
+  "I",
+  "I've",
+  "oBikes",
+  "Yarra",
+  "River",
+  "Australian",
+  "7-Eleven",
+  "Domino's",
+  "Tommy",
+  "Jackett",
+  "VIDPOD"
+ ],
+ "depth": {
+  "video": "media/depth.mp4",
+  "duration": 16.0,
+  "note": "top half colour, bottom half person matte (Apple Vision), 720x1280 each"
+ },
+ "face": {
+  "x": 547,
+  "y": 490,
+  "r": 380,
+  "note": "head centre and ring radius on the 1080x1920 frame, from the person matte (head x moves 490 to 613 across the clip; hair top y 105 to 154)"
+ },
+ "card_frames": [
+  {
+   "t": 0,
+   "src": "media/cards/f_1_0.jpg"
+  },
+  {
+   "t": 3.0,
+   "src": "media/cards/f_3_0.jpg"
+  },
+  {
+   "t": 6.0,
+   "src": "media/cards/f_6_0.jpg"
+  },
+  {
+   "t": 9.0,
+   "src": "media/cards/f_9_0.jpg"
+  },
+  {
+   "t": 12.0,
+   "src": "media/cards/f_12_0.jpg"
+  },
+  {
+   "t": 15.0,
+   "src": "media/cards/f_15_0.jpg"
+  }
+ ],
+ "card_cutout": {
+  "src": "media/cards/cutout_9_0.png",
+  "t": 9.0
+ },
+ "moves_suggested": {
+  "word": "SCAMS",
+  "word_y": 400,
+  "word_size": 400,
+  "small": "7-Eleven",
+  "at": 9.04,
+  "small_at": 12.08,
+  "side": {
+   "lead": "I've been down",
+   "big": "Rabbit holes",
+   "small": "quite a few"
+  }
+ },
+ "words_extra_suggested": {
+  "list": [
+   "oBikes out of the Yarra",
+   "Coffee scams at 7-Eleven",
+   "A Domino's deep dive"
+  ],
+  "quote": {
+   "text": "I've been down quite a few rabbit holes.",
+   "label": "Tommy Jackett, founder of VIDPOD"
+  },
+  "quote_card": {
+   "text": "I was trying to uncover one of the biggest scams in Australian coffee history.",
+   "name": "Tommy Jackett",
+   "role": "Founder, VIDPOD"
+  },
+  "place": {
+   "name": "The Yarra River",
+   "sub": "Melbourne"
+  }
+ }
+}

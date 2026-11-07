@@ -1,0 +1,251 @@
+{
+ "source": {
+  "film": "The Jackett Ranch",
+  "clip": "DJI_20261007214552_0007_D_G04.MP4 (8 Oct 2026, arriving at the accountant, handheld DJI selfie, 2688x1512 25 fps; walks from the timber lobby out into the sun)",
+  "folder": "Desktop/TOMMY JACKETT VIDEO CONTENT/2023/USA Trip 2023/CAPTURE/USA Property Pt 3_2026/Footage/Meeting with accountant_scene/",
+  "in": 26.8,
+  "out": 37.0,
+  "grade": "none (standard colour, Rec.709)",
+  "crop": "850x1512 window that follows his face (smoothed 1.0 s), scaled up 1.27x to 1080x1920 (a little softer than the others)",
+  "audio": "camera mic, mono to both channels, loudnorm -15 LUFS"
+ },
+ "label": "Selfie walk",
+ "video": "media/clips/selfie-walk/base.mp4",
+ "poster": "media/clips/selfie-walk/base.jpg",
+ "duration": 10.2,
+ "cuts": [],
+ "words": [
+  {
+   "t": 0.611,
+   "end": 0.868,
+   "text": "Alright,"
+  },
+  {
+   "t": 1.078,
+   "end": 1.657,
+   "text": "I'm"
+  },
+  {
+   "t": 1.721,
+   "end": 1.818,
+   "text": "here"
+  },
+  {
+   "t": 1.818,
+   "end": 1.898,
+   "text": "to"
+  },
+  {
+   "t": 1.898,
+   "end": 2.124,
+   "text": "see"
+  },
+  {
+   "t": 2.124,
+   "end": 2.269,
+   "text": "my"
+  },
+  {
+   "t": 2.269,
+   "end": 2.88,
+   "text": "accountant"
+  },
+  {
+   "t": 3.492,
+   "end": 3.894,
+   "text": "so"
+  },
+  {
+   "t": 3.974,
+   "end": 4.216,
+   "text": "that"
+  },
+  {
+   "t": 4.216,
+   "end": 4.232,
+   "text": "I"
+  },
+  {
+   "t": 4.296,
+   "end": 4.441,
+   "text": "can"
+  },
+  {
+   "t": 4.441,
+   "end": 4.65,
+   "text": "ask"
+  },
+  {
+   "t": 4.682,
+   "end": 4.795,
+   "text": "him"
+  },
+  {
+   "t": 4.795,
+   "end": 4.924,
+   "text": "if"
+  },
+  {
+   "t": 4.94,
+   "end": 5.036,
+   "text": "there's"
+  },
+  {
+   "t": 5.036,
+   "end": 5.31,
+   "text": "any"
+  },
+  {
+   "t": 5.744,
+   "end": 6.05,
+   "text": "tax"
+  },
+  {
+   "t": 6.05,
+   "end": 6.678,
+   "text": "implications"
+  },
+  {
+   "t": 6.694,
+   "end": 6.774,
+   "text": "for"
+  },
+  {
+   "t": 6.774,
+   "end": 6.871,
+   "text": "my"
+  },
+  {
+   "t": 6.951,
+   "end": 7.241,
+   "text": "dad"
+  },
+  {
+   "t": 8.48,
+   "end": 8.625,
+   "text": "if"
+  },
+  {
+   "t": 8.625,
+   "end": 8.722,
+   "text": "we"
+  },
+  {
+   "t": 8.722,
+   "end": 8.883,
+   "text": "give"
+  },
+  {
+   "t": 8.883,
+   "end": 9.043,
+   "text": "this"
+  },
+  {
+   "t": 9.043,
+   "end": 9.349,
+   "text": "property"
+  },
+  {
+   "t": 9.349,
+   "end": 9.526,
+   "text": "away."
+  }
+ ],
+ "phrases": [
+  0,
+  1,
+  7,
+  13,
+  16,
+  18,
+  21
+ ],
+ "emphasis": [
+  6,
+  16,
+  17,
+  20,
+  25
+ ],
+ "hook_text": "I'm here to see\n*my accountant*",
+ "hook_label": "Tommy Jackett, founder of VIDPOD",
+ "name": "Tommy Jackett",
+ "role": "Founder, VIDPOD",
+ "name_at": 3.0,
+ "protect_case": [
+  "VIDPOD"
+ ],
+ "proper": [
+  "I",
+  "I'm",
+  "Tommy",
+  "Jackett",
+  "VIDPOD"
+ ],
+ "depth": {
+  "video": "media/clips/selfie-walk/depth.mp4",
+  "duration": 10.2,
+  "note": "top half colour, bottom half person matte (Apple Vision), 720x1280 each"
+ },
+ "face": {
+  "x": 535,
+  "y": 690,
+  "r": 500,
+  "note": "handheld selfie close-up: face centre x 420 to 750 and y 720 to 910 across the clip, chin y 960 to 1240, hair often cut by the top edge, so a word behind the head has almost no room; ring is large"
+ },
+ "card_frames": [
+  {
+   "t": 1.0,
+   "src": "media/clips/selfie-walk/cards/f_1_0.jpg"
+  },
+  {
+   "t": 3.0,
+   "src": "media/clips/selfie-walk/cards/f_3_0.jpg"
+  },
+  {
+   "t": 5.0,
+   "src": "media/clips/selfie-walk/cards/f_5_0.jpg"
+  },
+  {
+   "t": 7.0,
+   "src": "media/clips/selfie-walk/cards/f_7_0.jpg"
+  },
+  {
+   "t": 9.0,
+   "src": "media/clips/selfie-walk/cards/f_9_0.jpg"
+  }
+ ],
+ "card_cutout": {
+  "src": "media/clips/selfie-walk/cards/cutout_1_0.png",
+  "t": 1.0
+ },
+ "moves_suggested": {
+  "word": "TAX",
+  "word_y": 330,
+  "word_size": 400,
+  "small": "implications",
+  "at": 5.74,
+  "small_at": 6.05,
+  "side": {
+   "lead": "I'm here to see",
+   "big": "My accountant",
+   "small": "tax implications"
+  }
+ },
+ "words_extra_suggested": {
+  "list": [
+   "See the accountant",
+   "Ask about the tax",
+   "Give the property away"
+  ],
+  "quote": {
+   "text": "I'm here to see my accountant.",
+   "label": "Tommy Jackett, founder of VIDPOD"
+  },
+  "quote_card": {
+   "text": "I'm here to see my accountant so that I can ask him if there's any tax implications for my dad if we give this property away.",
+   "name": "Tommy Jackett",
+   "role": "Founder, VIDPOD"
+  }
+ }
+}

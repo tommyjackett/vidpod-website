@@ -1,0 +1,302 @@
+{
+ "source": {
+  "film": "The Jackett Ranch",
+  "clip": "DJI_20261015085349_0232_D.MP4 (15 Oct 2026 rooftop pieces to camera, take 0232, DJI Osmo 4K 25 fps, seated by the building with a handheld mic)",
+  "folder": "Desktop/TOMMY JACKETT VIDEO CONTENT/2023/USA Trip 2023/CAPTURE/USA Property Pt 3_2026/Footage/Rooftop PTC_15102026/",
+  "in": 0.0,
+  "out": 10.8,
+  "grade": "none (Osmo standard colour, Rec.709)",
+  "crop": "1215x2160 window that follows his face (smoothed 0.5 s) from 3840x2160, scaled to 1080x1920; the camera arcs in on him over the first 2 s",
+  "audio": "camera sound (the DJI Mic sent into the Osmo), stereo, loudnorm -15 LUFS"
+ },
+ "label": "Mic in hand",
+ "video": "media/clips/rooftop-mic/base.mp4",
+ "poster": "media/clips/rooftop-mic/base.jpg",
+ "duration": 10.8,
+ "cuts": [],
+ "words": [
+  {
+   "t": 0.339,
+   "end": 0.5,
+   "text": "Here's"
+  },
+  {
+   "t": 0.5,
+   "end": 0.581,
+   "text": "the"
+  },
+  {
+   "t": 0.581,
+   "end": 0.726,
+   "text": "thing"
+  },
+  {
+   "t": 0.758,
+   "end": 0.952,
+   "text": "about"
+  },
+  {
+   "t": 1.0,
+   "end": 1.065,
+   "text": "when"
+  },
+  {
+   "t": 1.081,
+   "end": 1.226,
+   "text": "you're"
+  },
+  {
+   "t": 1.226,
+   "end": 1.404,
+   "text": "giving"
+  },
+  {
+   "t": 1.404,
+   "end": 1.614,
+   "text": "something"
+  },
+  {
+   "t": 1.63,
+   "end": 1.727,
+   "text": "away"
+  },
+  {
+   "t": 1.791,
+   "end": 1.904,
+   "text": "for"
+  },
+  {
+   "t": 1.904,
+   "end": 2.276,
+   "text": "free."
+  },
+  {
+   "t": 2.615,
+   "end": 2.986,
+   "text": "Initially"
+  },
+  {
+   "t": 3.018,
+   "end": 3.099,
+   "text": "you"
+  },
+  {
+   "t": 3.099,
+   "end": 3.277,
+   "text": "think"
+  },
+  {
+   "t": 3.277,
+   "end": 3.422,
+   "text": "it's"
+  },
+  {
+   "t": 3.422,
+   "end": 3.583,
+   "text": "got"
+  },
+  {
+   "t": 3.583,
+   "end": 3.793,
+   "text": "no"
+  },
+  {
+   "t": 3.825,
+   "end": 4.326,
+   "text": "value,"
+  },
+  {
+   "t": 4.697,
+   "end": 4.762,
+   "text": "and"
+  },
+  {
+   "t": 4.778,
+   "end": 4.955,
+   "text": "then"
+  },
+  {
+   "t": 4.955,
+   "end": 5.101,
+   "text": "when"
+  },
+  {
+   "t": 5.117,
+   "end": 5.294,
+   "text": "lots"
+  },
+  {
+   "t": 5.294,
+   "end": 5.359,
+   "text": "of"
+  },
+  {
+   "t": 5.359,
+   "end": 5.601,
+   "text": "people"
+  },
+  {
+   "t": 5.666,
+   "end": 5.908,
+   "text": "want"
+  },
+  {
+   "t": 5.908,
+   "end": 6.166,
+   "text": "it,"
+  },
+  {
+   "t": 6.715,
+   "end": 6.747,
+   "text": "you"
+  },
+  {
+   "t": 6.747,
+   "end": 7.022,
+   "text": "start"
+  },
+  {
+   "t": 7.054,
+   "end": 7.345,
+   "text": "thinking,"
+  },
+  {
+   "t": 8.184,
+   "end": 8.426,
+   "text": "maybe"
+  },
+  {
+   "t": 8.426,
+   "end": 8.507,
+   "text": "we"
+  },
+  {
+   "t": 8.523,
+   "end": 8.668,
+   "text": "should"
+  },
+  {
+   "t": 8.668,
+   "end": 8.749,
+   "text": "be"
+  },
+  {
+   "t": 8.749,
+   "end": 9.12,
+   "text": "charging"
+  },
+  {
+   "t": 9.153,
+   "end": 9.314,
+   "text": "for"
+  },
+  {
+   "t": 9.314,
+   "end": 9.443,
+   "text": "this."
+  }
+ ],
+ "phrases": [
+  0,
+  3,
+  7,
+  11,
+  14,
+  18,
+  24,
+  26,
+  29,
+  32
+ ],
+ "emphasis": [
+  10,
+  16,
+  17,
+  23,
+  33
+ ],
+ "hook_text": "Maybe we should be\n*charging for this*",
+ "hook_label": "Tommy Jackett, founder of VIDPOD",
+ "name": "Tommy Jackett",
+ "role": "Founder, VIDPOD",
+ "name_at": 2.4,
+ "protect_case": [
+  "VIDPOD"
+ ],
+ "proper": [
+  "I",
+  "Tommy",
+  "Jackett",
+  "VIDPOD"
+ ],
+ "depth": {
+  "video": "media/clips/rooftop-mic/depth.mp4",
+  "duration": 10.8,
+  "note": "top half colour, bottom half person matte (Apple Vision), 720x1280 each"
+ },
+ "face": {
+  "x": 536,
+  "y": 605,
+  "r": 280,
+  "note": "head centre and ring radius on the 1080x1920 frame, from Vision face and person matte, held from 2.0 s (before that the camera is still arcing in: face x 670 to 520). Face x 505 to 610 after 2 s, hair top y 270 to 435, chin about y 845"
+ },
+ "card_frames": [
+  {
+   "t": 1.0,
+   "src": "media/clips/rooftop-mic/cards/f_1_0.jpg"
+  },
+  {
+   "t": 3.0,
+   "src": "media/clips/rooftop-mic/cards/f_3_0.jpg"
+  },
+  {
+   "t": 5.0,
+   "src": "media/clips/rooftop-mic/cards/f_5_0.jpg"
+  },
+  {
+   "t": 7.0,
+   "src": "media/clips/rooftop-mic/cards/f_7_0.jpg"
+  },
+  {
+   "t": 9.0,
+   "src": "media/clips/rooftop-mic/cards/f_9_0.jpg"
+  },
+  {
+   "t": 10.5,
+   "src": "media/clips/rooftop-mic/cards/f_10_5.jpg"
+  }
+ ],
+ "card_cutout": {
+  "src": "media/clips/rooftop-mic/cards/cutout_5_0.png",
+  "t": 5.0
+ },
+ "moves_suggested": {
+  "word": "VALUE",
+  "word_y": 640,
+  "word_size": 380,
+  "small": "charging",
+  "at": 3.83,
+  "small_at": 8.75,
+  "side": {
+   "lead": "Giving something",
+   "big": "Away for free",
+   "small": "here's the thing"
+  }
+ },
+ "words_extra_suggested": {
+  "list": [
+   "Free feels worthless",
+   "Then everyone wants it",
+   "Now you want to charge"
+  ],
+  "quote": {
+   "text": "Maybe we should be charging for this.",
+   "label": "Tommy Jackett, founder of VIDPOD"
+  },
+  "quote_card": {
+   "text": "Initially you think it's got no value, and then when lots of people want it, you start thinking, maybe we should be charging for this.",
+   "name": "Tommy Jackett",
+   "role": "Founder, VIDPOD"
+  }
+ }
+}

@@ -1,0 +1,2982 @@
+{
+ "board": {
+  "version": 4,
+  "product": "VidPod Studio",
+  "updated": "2026-11-07",
+  "made_by": "VIDPOD"
+ },
+ "client": {
+  "id": "atpilates",
+  "name": "@pilates",
+  "person": "Alisha",
+  "logo": "assets/clients/atpilates/logo-dark.png",
+  "logo_on_dark": "assets/clients/atpilates/logo-light.png",
+  "logo_alt": "@pilates 24/7",
+  "intro": "Every style plays live on your own footage, in your brand. Tap a look, make it yours, then send your picks."
+ },
+ "brand": {
+  "font": {
+   "label": "Your brand font",
+   "sub": "Söhne",
+   "faces": [
+    {
+     "family": "Brand Sans",
+     "src": "fonts/Sohne-Buch.otf",
+     "weight": 300
+    },
+    {
+     "family": "Brand Sans",
+     "src": "fonts/Sohne-Halbfett.otf",
+     "weight": 700
+    },
+    {
+     "family": "Brand Display",
+     "src": "fonts/Tangerine.otf",
+     "weight": 400
+    }
+   ],
+   "family": "Brand Sans",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Brand Display",
+   "w_display": 400,
+   "scale": 1
+  },
+  "swatches": [
+   {
+    "id": "white",
+    "label": "White",
+    "hex": "#FFFFFF"
+   },
+   {
+    "id": "dark",
+    "label": "Base Dark",
+    "hex": "#423E3E"
+   },
+   {
+    "id": "primary",
+    "label": "Primary",
+    "hex": "#BCA28F"
+   },
+   {
+    "id": "taupe",
+    "label": "Taupe",
+    "hex": "#72696B"
+   }
+  ],
+  "accent": "#BCA28F",
+  "taupe": "#72696B",
+  "ink": "#423E3E",
+  "base": "#8B8484",
+  "light": "#F9F7F5",
+  "ground": "#FFFFFF",
+  "shadow": "0 2px 14px rgba(35, 31, 32, .55), 0 1px 2px rgba(35, 31, 32, .35)",
+  "logo_file": "media/logo.png",
+  "logo_aspect": 3.057,
+  "cream": "#F9F7F5",
+  "warm": "#E6DDD3",
+  "twin_circle": "assets/clients/atpilates/twin-circle-dark.svg",
+  "shape": {
+   "kind": "arch",
+   "note": "round-topped doorway, border-radius = width/2 on the top corners (tokens.css --arch-width 780)"
+  },
+  "radius_card": 28,
+  "card_shadow": "0 18px 44px rgba(35,31,32,.16), 0 2px 6px rgba(35,31,32,.08)",
+  "arch_shadow": "0 30px 70px rgba(35,31,32,.22)",
+  "flare": {
+   "wash": "#F8E9DA",
+   "band": "255,241,226",
+   "note": "from the approved Alisha vertical option 1"
+  },
+  "leak": [
+   "#FFC9A0",
+   "#F2B48A",
+   "#FFE2BF"
+  ],
+  "twin_geom": {
+   "vb": [
+    4820.5,
+    2751.1
+   ],
+   "circles": [
+    [
+     1386.2,
+     1383,
+     1184.3
+    ],
+    [
+     3434.3,
+     1383,
+     1184.3
+    ]
+   ]
+  },
+  "tokens": "hyperframes/style-library/03-atpilates/tokens.css",
+  "logo_backgrounds": [
+   {
+    "id": "white",
+    "label": "White",
+    "key": "ground"
+   },
+   {
+    "id": "brand",
+    "label": "Brand colour",
+    "key": "accent"
+   },
+   {
+    "id": "dark",
+    "label": "Dark",
+    "key": "ink"
+   }
+  ]
+ },
+ "fonts": [
+  {
+   "id": "brand",
+   "label": "Your brand font",
+   "sub": "Söhne"
+  },
+  {
+   "id": "gabarito",
+   "label": "Gabarito",
+   "family": "Gabarito",
+   "w_bold": 800,
+   "w_light": 400,
+   "display": "Gabarito",
+   "w_display": 900,
+   "scale": 1.0
+  },
+  {
+   "id": "montserrat",
+   "label": "Montserrat",
+   "family": "Montserrat",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Montserrat",
+   "w_display": 800,
+   "scale": 0.94
+  },
+  {
+   "id": "poppins",
+   "label": "Poppins",
+   "family": "Poppins",
+   "w_bold": 600,
+   "w_light": 300,
+   "display": "Poppins",
+   "w_display": 700,
+   "scale": 0.94
+  },
+  {
+   "id": "tiktok-sans",
+   "label": "TikTok Sans",
+   "family": "TikTok Sans",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "TikTok Sans",
+   "w_display": 800,
+   "scale": 1.0
+  },
+  {
+   "id": "inter",
+   "label": "Inter",
+   "family": "Inter",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Inter",
+   "w_display": 800,
+   "scale": 0.98
+  },
+  {
+   "id": "anton",
+   "label": "Anton",
+   "family": "Anton",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "Anton",
+   "w_display": 400,
+   "scale": 1.08,
+   "light_alpha": 0.6
+  },
+  {
+   "id": "oswald",
+   "label": "Oswald",
+   "family": "Oswald",
+   "w_bold": 600,
+   "w_light": 300,
+   "display": "Oswald",
+   "w_display": 700,
+   "scale": 1.08
+  },
+  {
+   "id": "bebas-neue",
+   "label": "Bebas Neue",
+   "family": "Bebas Neue",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "Bebas Neue",
+   "w_display": 400,
+   "scale": 1.24,
+   "light_alpha": 0.6
+  },
+  {
+   "id": "playfair",
+   "label": "Playfair Display",
+   "family": "Playfair Display",
+   "w_bold": 700,
+   "w_light": 400,
+   "display": "Playfair Display",
+   "w_display": 800,
+   "scale": 0.96
+  },
+  {
+   "id": "dm-serif",
+   "label": "DM Serif Display",
+   "family": "DM Serif Display",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "DM Serif Display",
+   "w_display": 400,
+   "scale": 0.98,
+   "light_alpha": 0.7
+  }
+ ],
+ "base": {
+  "video": "media/alisha-base.mp4",
+  "poster": "media/alisha-base.jpg",
+  "duration": 16.68,
+  "cuts": [
+   6.68,
+   11.64
+  ],
+  "words": [
+   {
+    "t": 0.144,
+    "end": 0.192,
+    "text": "I"
+   },
+   {
+    "t": 0.347,
+    "end": 0.603,
+    "text": "really"
+   },
+   {
+    "t": 0.603,
+    "end": 0.924,
+    "text": "felt"
+   },
+   {
+    "t": 0.924,
+    "end": 1.597,
+    "text": "confident"
+   },
+   {
+    "t": 1.87,
+    "end": 1.934,
+    "text": "in"
+   },
+   {
+    "t": 2.207,
+    "end": 2.463,
+    "text": "the"
+   },
+   {
+    "t": 2.527,
+    "end": 2.848,
+    "text": "area"
+   },
+   {
+    "t": 2.912,
+    "end": 2.992,
+    "text": "that"
+   },
+   {
+    "t": 2.992,
+    "end": 3.072,
+    "text": "I"
+   },
+   {
+    "t": 3.072,
+    "end": 3.137,
+    "text": "was"
+   },
+   {
+    "t": 3.233,
+    "end": 3.361,
+    "text": "putting"
+   },
+   {
+    "t": 3.393,
+    "end": 3.425,
+    "text": "the"
+   },
+   {
+    "t": 3.425,
+    "end": 4.692,
+    "text": "studio,"
+   },
+   {
+    "t": 5.013,
+    "end": 5.221,
+    "text": "that"
+   },
+   {
+    "t": 5.479,
+    "end": 5.559,
+    "text": "there"
+   },
+   {
+    "t": 5.559,
+    "end": 5.671,
+    "text": "was"
+   },
+   {
+    "t": 5.719,
+    "end": 5.864,
+    "text": "going"
+   },
+   {
+    "t": 5.896,
+    "end": 5.976,
+    "text": "to"
+   },
+   {
+    "t": 5.976,
+    "end": 6.072,
+    "text": "be"
+   },
+   {
+    "t": 6.072,
+    "end": 6.136,
+    "text": "a"
+   },
+   {
+    "t": 6.136,
+    "end": 6.585,
+    "text": "demand"
+   },
+   {
+    "t": 6.877,
+    "end": 7.072,
+    "text": "Hi,"
+   },
+   {
+    "t": 7.382,
+    "end": 7.545,
+    "text": "my"
+   },
+   {
+    "t": 7.545,
+    "end": 7.871,
+    "text": "name's"
+   },
+   {
+    "t": 7.953,
+    "end": 8.507,
+    "text": "Alisha"
+   },
+   {
+    "t": 8.524,
+    "end": 8.589,
+    "text": "and"
+   },
+   {
+    "t": 8.833,
+    "end": 8.899,
+    "text": "I'm"
+   },
+   {
+    "t": 8.931,
+    "end": 9.094,
+    "text": "the"
+   },
+   {
+    "t": 9.094,
+    "end": 9.339,
+    "text": "owner"
+   },
+   {
+    "t": 9.486,
+    "end": 9.649,
+    "text": "of"
+   },
+   {
+    "t": 9.681,
+    "end": 10.562,
+    "text": "@pilates Kew"
+   },
+   {
+    "t": 10.741,
+    "end": 10.856,
+    "text": "in"
+   },
+   {
+    "t": 10.888,
+    "end": 11.394,
+    "text": "Victoria."
+   },
+   {
+    "t": 11.958,
+    "end": 12.151,
+    "text": "I'm"
+   },
+   {
+    "t": 12.295,
+    "end": 12.616,
+    "text": "definitely"
+   },
+   {
+    "t": 12.616,
+    "end": 12.825,
+    "text": "very"
+   },
+   {
+    "t": 12.841,
+    "end": 13.034,
+    "text": "proud"
+   },
+   {
+    "t": 13.034,
+    "end": 13.098,
+    "text": "of"
+   },
+   {
+    "t": 13.098,
+    "end": 13.178,
+    "text": "the"
+   },
+   {
+    "t": 13.178,
+    "end": 13.516,
+    "text": "studio."
+   }
+  ],
+  "phrases": [
+   0,
+   4,
+   7,
+   11,
+   13,
+   17,
+   21,
+   25,
+   29,
+   31
+  ],
+  "emphasis": [
+   3,
+   6,
+   12,
+   20,
+   24,
+   30,
+   32
+  ],
+  "name": "Alisha",
+  "role": "Owner of @pilates Kew",
+  "logo_label": "Kew, Victoria",
+  "name_at": 7.75,
+  "protect_case": [
+   "@pilates"
+  ],
+  "depth": {
+   "video": "media/alisha-depth.mp4",
+   "duration": 11.64,
+   "note": "top half colour, bottom half person matte (Apple Vision), 720x1280 each"
+  },
+  "studio": {
+   "video": "media/kew/studio-class.mp4",
+   "poster": "media/kew/studio-class.jpg",
+   "label": "@pilates Kew",
+   "sub": "Victoria",
+   "source": "Kew_IG_12_Today_was_fun.mp4 6 to 10 s, picture only"
+  },
+  "photos": [
+   {
+    "src": "media/kew/kew-launch.jpg",
+    "caption": "Launch day"
+   },
+   {
+    "src": "media/kew/kew-arches.jpg",
+    "caption": "The arches"
+   },
+   {
+    "src": "media/kew/kew-class.jpg",
+    "caption": "A full class"
+   },
+   {
+    "src": "media/kew/kew-alisha.jpg",
+    "caption": "Alisha"
+   },
+   {
+    "src": "media/kew/kew-delivery.jpg",
+    "caption": "Delivery day"
+   }
+  ],
+  "hook_text": "I really felt *confident*\nthere was going to be a *demand*",
+  "hook_label": "Alisha, owner of @pilates Kew",
+  "card_frames": [
+   {
+    "t": 0,
+    "src": "media/cards/f_1_0.jpg"
+   },
+   {
+    "t": 6.68,
+    "src": "media/cards/f_7_2.jpg"
+   },
+   {
+    "t": 11.64,
+    "src": "media/cards/f_12_6.jpg"
+   },
+   {
+    "t": 13.9,
+    "src": "media/cards/f_16_0.jpg"
+   }
+  ],
+  "card_cutout": {
+   "src": "media/cards/cutout_1_0.png",
+   "t": 1.0
+  },
+  "words_extra": {
+   "stat": {
+    "big": "500 or 600",
+    "line": "people expressed interest before opening"
+   },
+   "roll": {
+    "from": 200,
+    "to": 220,
+    "before": "member goal",
+    "after": "members, 8 months later"
+   },
+   "list": [
+    "Confident in the area",
+    "There was going to be a demand",
+    "Very proud of the studio"
+   ],
+   "section": {
+    "num": "01",
+    "title": "The studio",
+    "kicker": "Part 01"
+   },
+   "place": {
+    "name": "@pilates Kew",
+    "sub": "Victoria"
+   },
+   "quote": {
+    "text": "There was going to be a demand.",
+    "label": "Alisha, owner of @pilates Kew"
+   },
+   "quote_card": {
+    "text": "I really felt confident in the area that I was putting the studio, that there was going to be a demand.",
+    "name": "Alisha",
+    "role": "Owner, @pilates Kew"
+   }
+  },
+  "face": {
+   "x": 540,
+   "y": 480,
+   "r": 330,
+   "note": "head centre and ring radius on the 1080x1920 frame, from the person matte; top = top of her hair at rest (y px)",
+   "top": 268
+  },
+  "moves": {
+   "word": "Kew",
+   "word_y": 450,
+   "word_size": 430,
+   "small": "@pilates",
+   "at": 9.68,
+   "small_at": 9.6,
+   "side": {
+    "lead": "I really felt",
+    "big": "Confident",
+    "small": "in the area"
+   }
+  },
+  "proper": [
+   "I",
+   "I'm",
+   "Alisha",
+   "Kew",
+   "Victoria",
+   "@pilates"
+  ]
+ },
+ "safe": {
+  "x0": 135,
+  "x1": 945,
+  "y0": 250,
+  "y1": 1500,
+  "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+ },
+ "sections": [
+  {
+   "id": "subtitles",
+   "tab": "Subtitles",
+   "code": "SUB",
+   "question": "How should your words look on screen?",
+   "help": "These run under everything you say. Always centred. One line by default.",
+   "segment": [
+    0,
+    11.64
+   ],
+   "controls": [
+    "font",
+    "size",
+    "position",
+    "lines",
+    "wpl",
+    "case",
+    "punct",
+    "highlight",
+    "colour",
+    "outline",
+    "backing",
+    "motion",
+    "anim"
+   ],
+   "size_range": [
+    40,
+    96
+   ],
+   "styles": [
+    {
+     "id": "cap-weight-shift",
+     "code": "SUB-01",
+     "label": "Weight shift",
+     "best_for": "Calm and easy. Each word goes bold as she says it.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 64,
+      "y": 1400,
+      "colour": "white",
+      "case": "spoken",
+      "lines": 1
+     },
+     "registry": "caption-weight-shift",
+     "source": "style-board/REFERENCE-SPEC.md S6",
+     "how": "Words wait in the light weight at 62 % opacity; on each spoken word fontWeight light to bold and opacity to 1 over 0.1 s power2.out. Group enters scale 0.92 to 1, 0.12 s power3.out.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-weight-shift']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-per-word-rise",
+     "code": "SUB-02",
+     "label": "Word rise",
+     "best_for": "Soft and premium. Each word settles into place.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 64,
+      "y": 1400,
+      "colour": "white",
+      "case": "spoken",
+      "lines": 1
+     },
+     "registry": "per-word-rise",
+     "source": "registry per-word-rise",
+     "how": "Each word y +0.55em, blur 0.24em to 0, landing 0.12 s after it is spoken; rise 0.74 s on the registry's piecewise landing ease (78 % split, 7 % settle tail).",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-per-word-rise']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-box-word",
+     "code": "SUB-03",
+     "label": "Moving box",
+     "best_for": "A soft brand box slides from word to word.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 62,
+      "y": 1400,
+      "colour": "primary",
+      "case": "spoken",
+      "lines": 1
+     },
+     "registry": "cap.highlight-box",
+     "source": "style-board/REFERENCE-SPEC.md S3",
+     "how": "One rounded box per line group; x/y/width/height tween to the spoken word over 0.12 s power2.out; the word under it switches to the box's ink colour.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-box-word']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-karaoke",
+     "code": "SUB-04",
+     "label": "Karaoke dim",
+     "best_for": "The whole line shows, unspoken words dimmed.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 64,
+      "y": 1400,
+      "colour": "white",
+      "case": "spoken",
+      "lines": 1
+     },
+     "registry": "cap.karaoke-fill / caption-pill-karaoke",
+     "source": "style-board/REFERENCE-SPEC.md S4",
+     "how": "Line appears 0.1 s; each word opacity 0.35 to 1 over 0.08 s linear on its timestamp.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-karaoke']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-editorial",
+     "code": "SUB-05",
+     "label": "Editorial",
+     "best_for": "The key word switches to your display face.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 58,
+      "y": 1400,
+      "colour": "white",
+      "case": "spoken",
+      "lines": 1
+     },
+     "registry": "caption-editorial-emphasis",
+     "source": "style-board/REFERENCE-SPEC.md S5/S6 ; trailer playbook TRL-03/04 (key word coloured or swapped to serif)",
+     "how": "Light weight line; emphasis words in the display face at 1.32em in the hero colour, scale 1.25 to 1 and y 10 to 0 over 0.3 s expo.out; other words fade 0.1 s.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-editorial']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-colour-pop",
+     "code": "SUB-06",
+     "label": "Colour pop",
+     "best_for": "Louder: the spoken word takes your colour.",
+     "energy": 4,
+     "defaults": {
+      "font": "brand",
+      "size": 66,
+      "y": 1400,
+      "colour": "white",
+      "case": "upper",
+      "lines": 1
+     },
+     "registry": "cap.hormozi-pop",
+     "source": "style-board/REFERENCE-SPEC.md S2",
+     "how": "Bold caps; spoken word colour to hero and scale 1.08 over 0.08 s power2.out, back when the next word starts.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-colour-pop']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-pill-karaoke",
+     "code": "SUB-07",
+     "label": "Soft pill",
+     "best_for": "A clean card keeps every word readable.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 58,
+      "y": 1400,
+      "colour": "white",
+      "case": "spoken",
+      "lines": 1
+     },
+     "registry": "caption-pill-karaoke",
+     "source": "registry caption-pill-karaoke",
+     "how": "Pill per phrase; words fill from 55 % mix to ink 0.1 s before each spoken word.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-pill-karaoke']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "cap-clip-wipe",
+     "code": "SUB-08",
+     "label": "Clip wipe",
+     "best_for": "Punchier. Words wipe in, key words take your colour.",
+     "energy": 4,
+     "defaults": {
+      "font": "brand",
+      "size": 58,
+      "y": 1400,
+      "colour": "white",
+      "case": "upper",
+      "lines": 1
+     },
+     "registry": "caption-clip-wipe",
+     "source": "registry caption-clip-wipe",
+     "how": "clip-path inset wipes each word left to right 0.28 s power2.out on its timestamp; emphasis words to accent; group wipes out 0.22 s stagger 0.03.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['cap-clip-wipe']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    }
+   ],
+   "scope": "any"
+  },
+  {
+   "id": "hook",
+   "tab": "Hook",
+   "code": "HOOK",
+   "question": "How should the opening grab people?",
+   "help": "Type your opening line in the box first. Then pick how it looks.",
+   "segment": [
+    0,
+    6.68
+   ],
+   "controls": [
+    "hooktext",
+    "font",
+    "size",
+    "position",
+    "colour",
+    "case",
+    "outline",
+    "backing",
+    "motion"
+   ],
+   "size_range": [
+    60,
+    280
+   ],
+   "styles": [
+    {
+     "id": "hook-bars",
+     "code": "HOOK-01",
+     "label": "Highlight bars",
+     "best_for": "The Numbers Game look: her line on solid bars that holds for the whole hook.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 96,
+      "y": 1200,
+      "colour": "white",
+      "case": "spoken"
+     },
+     "kind": "Holding",
+     "registry": "inline-highlight / hook.headline-bar",
+     "source": "style-board/REFERENCE-SPEC.md H3 (TNG reels)",
+     "how": "Each line's bar scaleX 0 to 1 from the left over 0.28 s power4.out, its text rises in a mask yPercent 105 to 0 over 0.24 s, lines stagger 0.16 s; holds; fades 0.24 s at the end.",
+     "use_cases": [
+      "podcast-snippet",
+      "trailer",
+      "case-study",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['hook-bars']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "hook-mixed",
+     "code": "HOOK-02",
+     "label": "Mixed scale",
+     "best_for": "Small words orbit one huge word, over her chest.",
+     "energy": 4,
+     "defaults": {
+      "font": "brand",
+      "size": 220,
+      "y": 1150,
+      "colour": "white",
+      "case": "spoken"
+     },
+     "kind": "Kinetic",
+     "registry": "caption-editorial-emphasis + cap.stack-build",
+     "source": "style-board/REFERENCE-SPEC.md H1 (Pinterest reference) ; trailer playbook TRL-01 (stepped lines, one key word huge)",
+     "how": "Per line: lead words top-left of the hero, follow words bottom-right; small words y 12 to 0 over 0.16 s power2.out; hero scale 1.12 to 1, blur 8 to 0 over 0.2 s expo.out with a hero-colour glow; stacks hard-cut line to line.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['hook-mixed']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "hook-behind",
+     "code": "HOOK-03",
+     "label": "Behind her",
+     "best_for": "One huge word sits high, tucked behind the top of her head; the whole line plays small in front.",
+     "energy": 4,
+     "defaults": {
+      "font": "brand",
+      "size": 240,
+      "y": 300,
+      "colour": "white",
+      "case": "upper"
+     },
+     "kind": "Kinetic",
+     "registry": "caption-parallax-layers / hook.behind-subject",
+     "source": "style-board/REFERENCE-SPEC.md H2",
+     "how": "Layers: plate, giant word, person matte, small front line. The giant word is placed by base.face.top: its bottom edge tucks 36 % of its height behind the top of her head, so most of it reads above her. Each giant word scale 1.08 to 1, opacity 0 to 1 over 0.32 s expo.out on its spoken word; stack drifts 1 to 1.03 linear; front line karaoke 0.3 to 1.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['hook-behind']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video (depth: colour half of media/alisha-depth.mp4)",
+       "text layer",
+       "person matte (bottom half of alisha-depth.mp4)",
+       "front layer"
+      ],
+      "needs_matte": true,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     },
+     "no_position": true
+    },
+    {
+     "id": "hook-quote",
+     "code": "HOOK-04",
+     "label": "Quote box",
+     "best_for": "Her words on a cream card with a stacked label.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 76,
+      "y": 1250,
+      "colour": "primary",
+      "case": "spoken"
+     },
+     "kind": "Holding",
+     "registry": "testimonial-proof-card / cap.boxed-line",
+     "source": "style-board/REFERENCE-SPEC.md H4",
+     "how": "Card scaleY 0 to 1 over 0.24 s power3.out; label lines y 14 to 0 stagger 0.08; quote words type on from 18 % to full on their timestamps.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['hook-quote']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "hook-wordbyword",
+     "code": "HOOK-05",
+     "label": "Word by word",
+     "best_for": "The whole line builds as she says it.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 112,
+      "y": 1180,
+      "colour": "white",
+      "case": "spoken"
+     },
+     "kind": "Kinetic",
+     "registry": "hook.word-by-word",
+     "source": "style-board/REFERENCE-SPEC.md H6 (full-hook variant)",
+     "how": "Every word y 16 to 0 and opacity in over 0.14 s power2.out on its timestamp; emphasis words scale 1.15 to 1 expo.out in the hero colour; holds.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['hook-wordbyword']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "hook-serif",
+     "code": "HOOK-06",
+     "label": "Calm title",
+     "best_for": "A quiet serif title card that holds.",
+     "energy": 1,
+     "defaults": {
+      "font": "brand",
+      "size": 132,
+      "y": 1180,
+      "colour": "white",
+      "case": "spoken"
+     },
+     "kind": "Holding",
+     "registry": "titlecard-lockup / hook.title-card-fade",
+     "source": "style-board/REFERENCE-SPEC.md H5",
+     "how": "Lines opacity, y 22 to 0, letter-spacing 0.06em to 0 and blur 10 to 0 over 1.1 s power2.out, 0.28 s apart; accent rule scaleX 0 to 1 over 0.7 s.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['hook-serif']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    }
+   ],
+   "scope": "type"
+  },
+  {
+   "id": "moves",
+   "tab": "Moves",
+   "code": "MOVE",
+   "multi": true,
+   "question": "How should the picture move?",
+   "help": "Camera and layout moves on her clip. Pick as many as you like.",
+   "segment": [
+    6.68,
+    11.64
+   ],
+   "controls": [],
+   "styles": [
+    {
+     "id": "move-behind",
+     "code": "MOVE-01",
+     "label": "Text behind her",
+     "best_for": "A word sits between her and the wall.",
+     "energy": 4,
+     "defaults": {},
+     "segment": [
+      6.68,
+      11.64
+     ],
+     "registry": "caption-parallax-layers",
+     "source": "style-board/REFERENCE-SPEC.md layout A",
+     "how": "Plate, word, matte, front. Word scale 1.08 to 1 over 0.32 s expo.out on 'Kew', then drift 1 to 1.03 linear.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-behind']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video (depth: colour half of media/alisha-depth.mp4)",
+       "text layer",
+       "person matte (bottom half of alisha-depth.mp4)",
+       "front layer"
+      ],
+      "needs_matte": true,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-front",
+     "code": "MOVE-02",
+     "label": "Text in front",
+     "best_for": "The same word, over her. Compare with MOVE-01.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      6.68,
+      11.64
+     ],
+     "registry": "overlay",
+     "source": "style-board/REFERENCE-SPEC.md layout B",
+     "how": "As MOVE-01 with the word on the front layer and a soft shadow.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-front']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-side",
+     "code": "MOVE-03",
+     "label": "Side panel",
+     "best_for": "She slides left, studio footage comes in beside her.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      6.68,
+      11.64
+     ],
+     "registry": "left-glass-popout (Nate kit) reframe",
+     "source": "style-board/REFERENCE-SPEC.md layout D",
+     "how": "Plate wrapper x -282 px and scale 0.7 about 50% 45% over 0.6 s power3.inOut, corners round to 5 %; brand ground behind; studio window x +140 to 0 over 0.55 s power3.out; reverse at the end.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-side']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "studio clip"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-punch",
+     "code": "MOVE-04",
+     "label": "Punch-in",
+     "best_for": "A 108 % punch at the jump cut, plus a slow push.",
+     "energy": 2,
+     "defaults": {},
+     "segment": [
+      5.0,
+      8.8
+     ],
+     "registry": "Jackett engine cut zoom",
+     "source": "usa-property-shared/engine.py (footage cuts alternate 1.0 / 1.08, +0.03 drift)",
+     "how": "Scale 1 to 1.03 linear to the cut, an instant set to 1.08 on the cut frame, then 1.08 to 1.11 linear; origin on her face (50% 28%).",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-punch']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-zoom",
+     "code": "MOVE-05",
+     "label": "Zoom through",
+     "best_for": "Push through her into the studio and back.",
+     "energy": 4,
+     "defaults": {},
+     "segment": [
+      4.6,
+      10.4
+     ],
+     "registry": "zoom-through-transition / cut-the-curve",
+     "source": "style-board/REFERENCE-SPEC.md T5, cut-the-curve mirrored power3",
+     "how": "Her scale 1 to 2.4 with blur 0 to 14 over 0.6 s power3.in into the cut; studio scale 1.6 to 1, blur 14 to 0 over 0.6 s power3.out; back the same way 2.8 s later.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-zoom']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "studio clip"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-split",
+     "code": "MOVE-06",
+     "label": "Split screen",
+     "best_for": "Her on top, the studio below.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      6.68,
+      11.64
+     ],
+     "registry": "split-screen",
+     "source": "style-board/REFERENCE-SPEC.md layout E",
+     "how": "Studio half yPercent 100 to 0 over 0.5 s power3.out, an 8 px brand line scaleX 0 to 1 over 0.4 s; reverse 0.45 s power3.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-split']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "studio clip"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-world",
+     "code": "MOVE-07",
+     "label": "Into the world",
+     "best_for": "The camera pushes through brand arches into the studio, then a stat, then back to her.",
+     "energy": 5,
+     "defaults": {},
+     "segment": [
+      0,
+      11.64
+     ],
+     "registry": "pilates-alisha-option1-vertical-v2 arch push + 8-arch travel",
+     "source": "hyperframes/compositions/pilates-alisha-option1-vertical-v2/build.py (arch push 22.8 to 25.36, 8-arch travel 41.6 to 45.45)",
+     "how": "Pure function of time. Front arch (780 wide, top 170, radius 390) rises y 1500 to 0 over 1.15 s power3.out while she frames to 0.86 about the bottom centre. Camera z 0 to 4.75 over 2.75 s sine.inOut; arch j at depth 0.55j scales 1/(1+depth-z) about (540,640), hidden past 7; walls are box-shadow spreads stepping cream to warm. She rides the push and leaves left (power2.in, 0.6 s). Studio window at depth 4.83, stat card at 5.83 (push 1.1 s power2.inOut), odometer roll 0.9 s power2.inOut, warm flare back to her.",
+     "use_cases": [
+      "case-study",
+      "teaser",
+      "trailer"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-world']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "studio clip",
+       "brand shape"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "move-reframe",
+     "code": "MOVE-08",
+     "label": "Reframe and side text",
+     "best_for": "She slides right, her words take the open side.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "reframe",
+     "source": "style-board/REFERENCE-SPEC.md layout F reframe + C ; trailer playbook TRL-16 (speaker to one side, text on the open half)",
+     "how": "Plate x +190 px, scale 1.1 over 0.64 s power3.inOut; text lines x -90 to 0 over 0.3 s power3.out stagger 0.13 (Jackett stacked-lines entry).",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['move-reframe']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    }
+   ],
+   "scope": "type"
+  },
+  {
+   "id": "graphics",
+   "tab": "Graphics",
+   "code": "GFX",
+   "multi": true,
+   "question": "Which graphics fit your videos?",
+   "help": "From our card library and board style, in your brand, on her real words. Pick as many as you like.",
+   "segment": [
+    0,
+    6.68
+   ],
+   "controls": [],
+   "styles": [
+    {
+     "id": "gfx-stat",
+     "code": "GFX-01",
+     "label": "Big stat",
+     "best_for": "A tilted card for one number she says.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "03-atpilates/cards/tier2/t2-stat-card",
+     "source": "style-library 03-atpilates t2-stat-card",
+     "how": "Card y 420 to 0, rotation -6 to -2 over 0.7 s power3.out; number parts back.out(1.5) 0.28 s apart; line and rule fade up; card falls 0.4 s power2.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-stat']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-roll",
+     "code": "GFX-02",
+     "label": "Rolling number",
+     "best_for": "The number rolls from 200 to 220 over her.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "02-kallaway t1-stat-odometer",
+     "source": "pilates-alisha-option1-vertical-v2 odometer (strip y to -2em, 0.9 s power2.inOut)",
+     "how": "Rule scaleX in 0.5 s; number y 40 to 0 over 0.6 s power3.out; changing digits are vertical strips that roll 0.9 s power2.inOut while the label swaps.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-roll']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-quote",
+     "code": "GFX-03",
+     "label": "Arch quote",
+     "best_for": "Her line inside a cream arch.",
+     "energy": 2,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "01-vox-explainer t2-lb-pullquote",
+     "source": "tokens.css arch + v2 arch rise",
+     "how": "Arch (brand shape) y 1100 to 0 over 1.25 s power3.out; quote mark, line and label fade up stagger 0.14; arch drops 0.6 s power3.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-quote']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-section",
+     "code": "GFX-04",
+     "label": "Section marker",
+     "best_for": "A clean chapter card between parts.",
+     "energy": 2,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "01-vox-explainer t1-section-numeral",
+     "source": "style-library t1-section-numeral",
+     "how": "Pane clip-path wipes up 0.6 s power3.inOut; ghost numeral scale 1.12 to 1 over 2.4 s; title rises in a mask 0.6 s power4.out; rule expo.inOut.",
+     "use_cases": [
+      "case-study",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-section']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-board",
+     "code": "GFX-05",
+     "label": "Photo board",
+     "best_for": "Kew photos pin up while the camera drifts.",
+     "energy": 4,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "01-vox-explainer t1-section-classified + Jackett board",
+     "source": "usa-property-shared/template.tpl camera (translate(540,960) rotate(r) scale(z) translate(-cx,-cy)) + usa-property-pt2/gfx/OPEN_dad pushpins",
+     "how": "One board world, camera {cx,cy,z,r}: 0.7 s power2.inOut moves between pins at z 0.92 with r = -tilt*0.6, linear hold drift (+0.035 z); each photo pins in scale 1.7 rot +10 to 1 over 0.22 s power4.in, pushpin and shadow 16 26 40; pulls back to z 0.42.",
+     "use_cases": [
+      "case-study",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-board']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-studio",
+     "code": "GFX-06",
+     "label": "Studio card",
+     "best_for": "A studio clip card beside her.",
+     "energy": 3,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "custom live-footage window",
+     "source": "usa-property-v5 WIDE_B footage window + tokens --card-tilt",
+     "how": "Card scale 0.6 to 1, y 80 to 0, rotation 4 to -3 over 0.6 s back.out(1.4); live studio clip inside; slow 1 to 1.02 drift; out 0.35 s.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-studio']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "studio clip"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-list",
+     "code": "GFX-07",
+     "label": "List card",
+     "best_for": "Three of her points tick on, one by one.",
+     "energy": 2,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "02-kallaway t1-overview-checklist",
+     "source": "style-library t1-overview-checklist",
+     "how": "Card scaleY in 0.45 s; each row x -30 to 0, dot back.out(1.6), tick path dashoffset 1 to 0 over 0.3 s, rows 0.7 s apart.",
+     "use_cases": [
+      "case-study",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-list']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-map",
+     "code": "GFX-08",
+     "label": "Map pin",
+     "best_for": "A pin drops on Kew.",
+     "energy": 2,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "02-kallaway t2-lt-geopin",
+     "source": "usa-property-v5/gfx/GFX_02_map route dash draw + pin pop",
+     "how": "Streets draw (dashoffset) 0.8 s staggered; route draws linear 1.0 s; pin y -140 to 0 back.out(1.3); ripple ring; map leans in 1 to 1.18 over 2.2 s power2.inOut.",
+     "use_cases": [
+      "case-study",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-map']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-taped",
+     "code": "GFX-09",
+     "label": "Taped photos",
+     "best_for": "Photos slam on and get taped at the corners.",
+     "energy": 4,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "Jackett tape + slam",
+     "source": "usa-property-shared/template.tpl tape (230x70 at -38 deg) + slam (scale 2.0 to 1, 0.18 s power4.in)",
+     "how": "Each photo scale 2 to 1 with rotation over 0.18 s power4.in, 0.55 s apart; tape strips on opposite corners at -38 deg; exit drops y 1900 with rotation 0.5 s power2.in.",
+     "use_cases": [
+      "teaser",
+      "case-study"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-taped']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-travel",
+     "code": "GFX-10",
+     "label": "Board travel",
+     "best_for": "She becomes one slot on a board; the camera travels and comes back.",
+     "energy": 5,
+     "defaults": {},
+     "segment": [
+      0,
+      6.68
+     ],
+     "registry": "Jackett Ranch board engine",
+     "source": "usa-property-shared/engine.py (snake grid cx=900+1450*col, moves 0.8 s power2.inOut, footage z 1.0, graphics z 0.84, hold drift +0.035)",
+     "how": "Pure function of time: world transform translate(540,960) rotate(r) scale(z) translate(-cx,-cy); her video is slot 0, given the same camera transform so board and footage move as one. Pull to z 0.84 and travel to the studio slot, then the stat slot, then back and push to z 1.",
+     "use_cases": [
+      "case-study",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-travel']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "studio clip"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "gfx-quotecard",
+     "code": "GFX-11",
+     "label": "Quote pull",
+     "best_for": "Her words line by line, the picture darkened and soft behind.",
+     "energy": 2,
+     "defaults": {},
+     "registry": "01-vox-explainer t2-lb-pullquote / testimonial-proof-card",
+     "source": "style-board/REFERENCE-SPEC.md H4 + podcast quote pulls",
+     "how": "Plate brightness to 0.5 and blur 16 over 0.5 s; opening quote mark scale 0.9 to 1 with y 30 to 0 over 0.5 s power3.out; each line rises in a mask 0.5 s power4.out, 0.32 s apart; closing mark, rule (expo.inOut), name and role follow.",
+     "use_cases": [
+      "podcast-snippet",
+      "trailer",
+      "case-study"
+     ],
+     "segment": [
+      0,
+      6.68
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-quotecard']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    },
+    {
+     "id": "gfx-quoteground",
+     "code": "GFX-12",
+     "label": "Quote on brand",
+     "best_for": "The same quote on your Base Dark ground.",
+     "energy": 2,
+     "defaults": {},
+     "registry": "02-kallaway t1-section-quoteopen",
+     "source": "style-board/REFERENCE-SPEC.md H4",
+     "how": "As GFX-11 on a full brand ground that fades in 0.45 s and out 0.4 s.",
+     "use_cases": [
+      "podcast-snippet",
+      "trailer",
+      "teaser",
+      "case-study"
+     ],
+     "segment": [
+      0,
+      6.68
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-quoteground']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    },
+    {
+     "id": "gfx-progress",
+     "code": "GFX-13",
+     "label": "Progress bar",
+     "best_for": "A fine bar fills as the clip plays.",
+     "energy": 1,
+     "defaults": {},
+     "registry": "custom",
+     "source": "podcast snippet convention",
+     "how": "A 10 px rounded track at the bottom of the safe area; the accent fill scaleX 0 to 1 linear over the whole clip.",
+     "use_cases": [
+      "podcast-snippet",
+      "trailer"
+     ],
+     "segment": [
+      0,
+      11.64
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['gfx-progress']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    }
+   ],
+   "scope": "type"
+  },
+  {
+   "id": "name",
+   "tab": "Name",
+   "code": "NAME",
+   "question": "How should we introduce people?",
+   "help": "Her name and role the first time she speaks. Name cards may sit left or centre.",
+   "segment": [
+    6.68,
+    11.64
+   ],
+   "controls": [
+    "font",
+    "size",
+    "position",
+    "align",
+    "colour",
+    "case",
+    "motion"
+   ],
+   "size_range": [
+    52,
+    130
+   ],
+   "styles": [
+    {
+     "id": "lt-clean-bar",
+     "code": "NAME-01",
+     "label": "Clean card",
+     "best_for": "A white card with a slim tab in your colour. Calm and clear on any footage.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 68,
+      "y": 1380,
+      "colour": "primary",
+      "case": "spoken",
+      "align": "left"
+     },
+     "registry": "lt-clean-bar",
+     "source": "HyperFrames registry lt-clean-bar (npx hyperframes@0.7.102 add lt-clean-bar), skinned in board.json brand colours and fonts",
+     "how": "Card clip-path inset(0 100% 0 0) to 0 over 0.55 s power3.out; tab scaleY 0 to 1 over 0.45 s power2.out at +0.18 s; name and role y 22 to 0, opacity in, 0.5 s power3.out at +0.24 and +0.34 s. Exit: card y 18, opacity 0 over 0.35 s power2.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['lt-clean-bar']",
+      "params": "defaults + the client's picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "lt-soft-pill",
+     "code": "NAME-02",
+     "label": "Soft pill",
+     "best_for": "A rounded white pill with a dot in your colour. Friendly and modern.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 62,
+      "y": 1380,
+      "colour": "primary",
+      "case": "spoken",
+      "align": "left"
+     },
+     "registry": "lt-soft-pill",
+     "source": "HyperFrames registry lt-soft-pill (npx hyperframes@0.7.102 add lt-soft-pill), skinned in board.json brand colours and fonts",
+     "how": "Pill scale 0.88 to 1, y 18 to 0, opacity in over 0.55 s back.out(1.7); dot scale 0 to 1 over 0.4 s back.out(3) at +0.3 s; name then role x -10 to 0 over 0.45 s power3.out at +0.32 and +0.4 s. Exit: pill scale 0.94, y 14, opacity 0 over 0.35 s power2.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['lt-soft-pill']",
+      "params": "defaults + the client's picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "lt-dark-card",
+     "code": "NAME-03",
+     "label": "Dark card",
+     "best_for": "A dark card with a line drawn in your colour. Stands out on bright footage.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 66,
+      "y": 1380,
+      "colour": "primary",
+      "case": "spoken",
+      "align": "left"
+     },
+     "registry": "lt-dark-card",
+     "source": "HyperFrames registry lt-dark-card (npx hyperframes@0.7.102 add lt-dark-card), skinned in board.json brand colours and fonts",
+     "how": "Card y 60 to 0, opacity in over 0.5 s power3.out; name y 14 to 0 over 0.45 s at +0.16 s; underline scaleX 0 to 1 over 0.5 s power4.out at +0.32 s; role fades in 0.45 s at +0.46 s. Exit: card y 24, opacity 0 over 0.35 s power2.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['lt-dark-card']",
+      "params": "defaults + the client's picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "lt-accent-underline",
+     "code": "NAME-04",
+     "label": "Accent underline",
+     "best_for": "No box. Her name over the footage with one fine rule in your colour.",
+     "energy": 1,
+     "defaults": {
+      "font": "brand",
+      "size": 92,
+      "y": 1380,
+      "colour": "primary",
+      "case": "upper",
+      "align": "left"
+     },
+     "registry": "lt-accent-underline",
+     "source": "HyperFrames registry lt-accent-underline (npx hyperframes@0.7.102 add lt-accent-underline), skinned in board.json brand colours and fonts",
+     "how": "Name y 28 to 0 over 0.55 s power3.out; rule scaleX 0 to 1 over 0.5 s power4.out at +0.2 s; role y 16 to 0 at +0.36 s. Exit: role fades, rule retracts, name lifts 16 px, power2.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['lt-accent-underline']",
+      "params": "defaults + the client's picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "lt-mask-reveal",
+     "code": "NAME-05",
+     "label": "Mask reveal",
+     "best_for": "A line in your colour sweeps across and reveals her name. Bold, no box.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 92,
+      "y": 1380,
+      "colour": "primary",
+      "case": "spoken",
+      "align": "left"
+     },
+     "registry": "lt-mask-reveal",
+     "source": "HyperFrames registry lt-mask-reveal (npx hyperframes@0.7.102 add lt-mask-reveal), skinned in board.json brand colours and fonts",
+     "how": "Sweep opacity in 0.12 s, then x 0 to the name width over 0.55 s power2.inOut; name clip-path inset(0 100% 0 0) to 0 over 0.5 s power2.inOut behind it; sweep fades at +0.5 s; role y 14 to 0 over 0.5 s at +0.45 s. Exit: name un-wipes to the right 0.4 s power2.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['lt-mask-reveal']",
+      "params": "defaults + the client's picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "lt-stack-bars",
+     "code": "NAME-06",
+     "label": "Stacked bars",
+     "best_for": "Two bars: her name on dark, her role on your colour. Strong and graphic.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 70,
+      "y": 1380,
+      "colour": "primary",
+      "case": "upper",
+      "align": "left"
+     },
+     "registry": "lt-stack-bars",
+     "source": "HyperFrames registry lt-stack-bars (npx hyperframes@0.7.102 add lt-stack-bars), skinned in board.json brand colours and fonts",
+     "how": "Name bar clip-path wipes in from the left over 0.5 s power4.out; role bar wipes in from the right over 0.5 s power4.out at +0.24 s. Exit: role bar then name bar wipe back out, power3.in.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks.js R['lt-stack-bars']",
+      "params": "defaults + the client's picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    }
+   ],
+   "scope": "any"
+  },
+  {
+   "id": "logo",
+   "tab": "Logo",
+   "code": "LOGO",
+   "question": "How should your logo appear?",
+   "help": "Your logo on a plain background, so the motion is the focus. Choose the background, size and speed under Customise.",
+   "segment": [
+    0,
+    3.6
+   ],
+   "controls": [
+    "bg",
+    "size",
+    "speed",
+    "label"
+   ],
+   "size_range": [
+    300,
+    900
+   ],
+   "styles": [
+    {
+     "id": "logo-pop-bounce",
+     "code": "LOGO-01",
+     "label": "Pop and bounce",
+     "best_for": "Starts small, pops up to full size with a bounce.",
+     "energy": 3,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "Scale 0.12 to 1 over 0.8 s back.out(2.6), opacity in over 0.12 s; hold 1 s; fade out 0.3 s; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-pop-bounce']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-scale-up",
+     "code": "LOGO-02",
+     "label": "Scale up",
+     "best_for": "Grows smoothly from small to full size.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "Scale 0.45 to 1 and opacity 0 to 1 over 1.3 s power3.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-scale-up']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-slide-left",
+     "code": "LOGO-03",
+     "label": "Slide in from left",
+     "best_for": "Glides in from the left edge and settles.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "x from off the left edge to 0 over 1.1 s expo.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-slide-left']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-slide-right",
+     "code": "LOGO-04",
+     "label": "Slide in from right",
+     "best_for": "Glides in from the right edge and settles.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "x from off the right edge to 0 over 1.1 s expo.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-slide-right']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-slide-down",
+     "code": "LOGO-05",
+     "label": "Slide down from top",
+     "best_for": "Drops in from the top and settles.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "y from above the frame to 0 over 1.1 s expo.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-slide-down']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-slide-up",
+     "code": "LOGO-06",
+     "label": "Slide up from bottom",
+     "best_for": "Rises in from the bottom and settles.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "y from below the frame to 0 over 1.1 s expo.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-slide-up']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-fade",
+     "code": "LOGO-07",
+     "label": "Fade in",
+     "best_for": "A calm fade. Nothing else moves.",
+     "energy": 1,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "Opacity 0 to 1 over 1.4 s sine.inOut; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-fade']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-blur-in",
+     "code": "LOGO-08",
+     "label": "Blur to sharp",
+     "best_for": "Comes into focus, soft to sharp.",
+     "energy": 1,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "Blur 36 px to 0, scale 1.06 to 1, opacity 0 to 1 over 1.4 s power2.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-blur-in']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-spin-in",
+     "code": "LOGO-09",
+     "label": "Spin in",
+     "best_for": "Spins in from small and lands square.",
+     "energy": 3,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "Rotation -270 to 0, scale 0.2 to 1, opacity in over 1.3 s power3.out; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-spin-in']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-draw-on",
+     "code": "LOGO-10",
+     "label": "Draw on",
+     "best_for": "Your mark draws itself on as a line, then fills in.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "logo-outro (draw-on idea), VIDPOD build",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "SVG mark (brand.twin_circle): every path gets pathLength 1 and a stroke in the logo colour; stroke-dashoffset 1 to 0 over 1.8 s power1.inOut, 0.08 s stagger; fill fades in over 0.5 s at +1.6 s while the stroke fades. PNG-only logo: clip-path wipe left to right over 1.6 s power2.inOut with a thin leading line.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-draw-on']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    },
+    {
+     "id": "logo-mask-wipe",
+     "code": "LOGO-11",
+     "label": "Mask wipe",
+     "best_for": "A soft edge sweeps across and reveals the logo.",
+     "energy": 2,
+     "defaults": {
+      "size": 680,
+      "bg": "white",
+      "speed": "normal",
+      "label": false
+     },
+     "registry": "custom",
+     "source": "VIDPOD logo set v4 (Tommy, 7 Nov 2026: plain background, simple moves)",
+     "how": "CSS mask: linear-gradient(100deg, opaque 45 %, clear 55 %), mask-size 300 %, mask-position x 100 % to 0 % over 1.3 s power2.inOut; logo x 30 to 0 with it; hold; fade out; loop.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['logo-mask-wipe']",
+      "params": "defaults + picks (bg, size, speed, label)",
+      "layers": [
+       "plain background (brand.logo_backgrounds)",
+       "logo"
+      ],
+      "needs_matte": false,
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+     }
+    }
+   ],
+   "scope": "any",
+   "clock": "loop"
+  },
+  {
+   "id": "transitions",
+   "tab": "Transitions",
+   "code": "TR",
+   "question": "How should we move between moments?",
+   "help": "Each plays at the join between her opening line and her name. Tap Replay to feel it again.",
+   "segment": [
+    5.4,
+    8.4
+   ],
+   "controls": [
+    "flash"
+   ],
+   "styles": [
+    {
+     "id": "tr-cut",
+     "code": "TR-01",
+     "label": "Clean cut",
+     "best_for": "No effect. The edit does the work.",
+     "energy": 1,
+     "defaults": {},
+     "registry": null,
+     "source": "-",
+     "how": "None.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-cut']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-lens",
+     "code": "TR-02",
+     "label": "Lens flash",
+     "best_for": "An anamorphic streak and bloom across the cut.",
+     "energy": 4,
+     "defaults": {
+      "flash": "warm"
+     },
+     "registry": "editorial-flash-overlay + 02-kallaway t2-lt-lensbar",
+     "source": "style-board/REFERENCE-SPEC.md T1",
+     "how": "16 frames, cut on frame 5. Footage brightness 1 to 3.2, contrast to 0.78, saturation to 0.6 over 4 f power2.in; incoming 3.0 back to 1 over 10 f expo.out. Streak (core 2400x14, halo 2600x80, 360 px hot spot, screen blend) scaleX 0.15 to 1.1 over 3 f, then fades 10 f while creeping to 1.25 and sliding 80 px; 4 ghosts on the line through the centre; wash 0 to 0.55 to 0.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-lens']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-flare",
+     "code": "TR-03",
+     "label": "Warm flare",
+     "best_for": "The soft warm band from your first vertical.",
+     "energy": 2,
+     "defaults": {},
+     "registry": "light-flare (03-atpilates)",
+     "source": "hyperframes/compositions/pilates-alisha-option1-vertical index.html (#wash + #sweep)",
+     "how": "Warm wash 0 to 0.5 over 0.28 s sine.in into the cut, 0.5 s sine.out after; a 3240 px 100 deg light band x -2020 to -140 over 0.76 s sine.inOut, peak 0.55.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-flare']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-white",
+     "code": "TR-04",
+     "label": "Flash frame",
+     "best_for": "Two quick frames of warm white.",
+     "energy": 3,
+     "defaults": {},
+     "registry": "flash-through-white (retimed)",
+     "source": "style-board/REFERENCE-SPEC.md T3",
+     "how": "Warm white 0 to 0.92 over 2 f, decay 9 f expo.out; footage brightness to 2.2 and back.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-white']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-push",
+     "code": "TR-05",
+     "label": "Push",
+     "best_for": "The old shot is pushed off as the new one pushes in.",
+     "energy": 3,
+     "defaults": {},
+     "registry": "transitions push (catalog)",
+     "source": "freeze frame + plate wrapper",
+     "how": "Pure function of time: the last frame before the cut is held as a still; from the cut the still x 0 to -1080 and the plate x +1080 to 0 over 0.42 s power3.inOut with a fine brand edge between them.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-push']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "freeze frame of the outgoing shot"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    },
+    {
+     "id": "tr-brandwipe",
+     "code": "TR-06",
+     "label": "Brand wipe",
+     "best_for": "A band in your colour sweeps across the cut.",
+     "energy": 4,
+     "defaults": {},
+     "registry": "custom (brand splash)",
+     "source": "client accent from tokens",
+     "how": "A skewed (-14 deg) accent band with cream edges x -2200 to -320 over 0.3 s power3.in, covers the cut, then exits x 1700 over 0.38 s power3.out.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-brandwipe']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    },
+    {
+     "id": "tr-whip",
+     "code": "TR-07",
+     "label": "Whip pan",
+     "best_for": "A fast sideways whip, matched either side.",
+     "energy": 4,
+     "defaults": {},
+     "registry": "whip-pan-cut",
+     "source": "style-board/REFERENCE-SPEC.md T6",
+     "how": "x 0 to -200 px with scale 1.4 and blur 22 over 0.16 s power3.in; cut; +200 to 0 over 0.2 s power3.out.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-whip']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-zoom",
+     "code": "TR-08",
+     "label": "Zoom through",
+     "best_for": "Push in, cut, settle out.",
+     "energy": 4,
+     "defaults": {},
+     "registry": "zoom-through-transition",
+     "source": "style-board/REFERENCE-SPEC.md T5",
+     "how": "Scale 1 to 1.25, blur 0 to 12 over 0.22 s power4.in; cut; 1.25 to 1 over 0.3 s power4.out (mirrored eases match speed).",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-zoom']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-dissolve",
+     "code": "TR-09",
+     "label": "Blur dissolve",
+     "best_for": "The old shot softens and melts into the new one.",
+     "energy": 2,
+     "defaults": {},
+     "registry": "blur cross-dissolve",
+     "source": "freeze frame + plate blur",
+     "how": "Plate blurs 0 to 8 px over the last 0.2 s; from the cut the held still fades 1 to 0 while blurring 8 to 22 px and the new shot sharpens 16 to 0 px, 0.55 s sine.inOut.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-dissolve']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer",
+       "freeze frame of the outgoing shot"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    },
+    {
+     "id": "tr-dip",
+     "code": "TR-10",
+     "label": "Dip to brand",
+     "best_for": "The frame dips to your colour, a flash of the logo, and back.",
+     "energy": 2,
+     "defaults": {},
+     "registry": "dip-to-color",
+     "source": "client accent + logo from board",
+     "how": "Accent field 0 to 1 over 0.26 s sine.in into the cut, logo shows for 0.24 s, field back to 0 over 0.34 s sine.out.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-dip']",
+      "params": "defaults + picks",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+     }
+    },
+    {
+     "id": "tr-leak",
+     "code": "TR-11",
+     "label": "Light leak",
+     "best_for": "Layered warm light drifts across the join.",
+     "energy": 3,
+     "defaults": {},
+     "registry": "light-leak / organic-light-leak-overlay",
+     "source": "style-board/REFERENCE-SPEC.md T2",
+     "how": "Three radial blobs (screen) enter from the top right and drift 30 f sine.inOut at different speeds, peak 0.7 to 0.85 at the cut (frame 12); footage brightness 1.4 at the peak.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-leak']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    },
+    {
+     "id": "tr-slats",
+     "code": "TR-12",
+     "label": "Slat wipe",
+     "best_for": "Fine slats close like blinds and open on the new shot.",
+     "energy": 3,
+     "defaults": {},
+     "registry": "grid-pixelate-wipe (adapted)",
+     "source": "style-board/REFERENCE-SPEC.md T4",
+     "how": "40 slats scaleX 0 to 1 from the left, 4 f power3.inOut, staggered across 7 f; cut; close from the right; old shot dims to 60 %.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-looks-2.js R['tr-slats']",
+      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "layers": [
+       "plate video",
+       "overlay layer"
+      ],
+      "needs_matte": false,
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+     }
+    }
+   ],
+   "scope": "type"
+  }
+ ],
+ "apps": [
+  {
+   "id": "instagram-reels",
+   "label": "Reels",
+   "name": "Reels",
+   "img": "assets/mock-ui/instagram-reels.png",
+   "covered": [
+    [
+     0,
+     0,
+     1080,
+     215,
+     "top bar"
+    ],
+    [
+     915,
+     1215,
+     1080,
+     1500,
+     "buttons"
+    ],
+    [
+     0,
+     1500,
+     1080,
+     1920,
+     "name and caption"
+    ]
+   ]
+  },
+  {
+   "id": "tiktok",
+   "label": "TikTok",
+   "name": "TikTok",
+   "img": "assets/mock-ui/tiktok.png",
+   "covered": [
+    [
+     0,
+     0,
+     1080,
+     225,
+     "top bar"
+    ],
+    [
+     925,
+     900,
+     1080,
+     1545,
+     "buttons"
+    ],
+    [
+     0,
+     1545,
+     1080,
+     1920,
+     "name and caption"
+    ]
+   ]
+  },
+  {
+   "id": "youtube-shorts",
+   "label": "Shorts",
+   "name": "Shorts",
+   "img": "assets/mock-ui/youtube-shorts.png",
+   "covered": [
+    [
+     0,
+     0,
+     1080,
+     215,
+     "top bar"
+    ],
+    [
+     935,
+     985,
+     1080,
+     1560,
+     "buttons"
+    ],
+    [
+     0,
+     1560,
+     1080,
+     1920,
+     "name and caption"
+    ]
+   ]
+  }
+ ],
+ "snaps": [
+  {
+   "y": 420,
+   "label": "Top"
+  },
+  {
+   "y": 960,
+   "label": "Centre"
+  },
+  {
+   "y": 1150,
+   "label": "Chest"
+  },
+  {
+   "y": 1400,
+   "label": "Lower"
+  }
+ ],
+ "video_types": [
+  {
+   "id": "case-study",
+   "label": "Case study",
+   "order": [
+    "subtitles",
+    "hook",
+    "name",
+    "moves",
+    "graphics",
+    "transitions",
+    "logo"
+   ]
+  },
+  {
+   "id": "podcast-snippet",
+   "label": "Podcast snippet",
+   "order": [
+    "subtitles",
+    "hook",
+    "name",
+    "graphics",
+    "transitions",
+    "moves",
+    "logo"
+   ]
+  },
+  {
+   "id": "trailer",
+   "label": "Trailer",
+   "order": [
+    "hook",
+    "subtitles",
+    "transitions",
+    "moves",
+    "graphics",
+    "name",
+    "logo"
+   ]
+  },
+  {
+   "id": "teaser",
+   "label": "Teaser",
+   "order": [
+    "hook",
+    "graphics",
+    "moves",
+    "transitions",
+    "subtitles",
+    "logo",
+    "name"
+   ]
+  }
+ ],
+ "project": {
+  "id": "conference-2026-case-studies",
+  "label": "@pilates Conference 2026 case studies"
+ },
+ "sfx": {
+  "source": "Epidemic Sound (licensed), Conference Hype Reel 2026 ASSETS/SFX, trimmed and compressed",
+  "files": {
+   "whoosh": {
+    "src": "media/sfx/whoosh.mp3",
+    "peak": 0.608,
+    "from": "ES_211772 Swooshes, Whoosh, Short, Deep, Dry"
+   },
+   "swish": {
+    "src": "media/sfx/swish.mp3",
+    "peak": 0.045,
+    "from": "ES_223066 Swooshes, Swish, Fly Swat"
+   },
+   "pop": {
+    "src": "media/sfx/pop.mp3",
+    "peak": 0.091,
+    "from": "ES_236166 Cartoon, Pop, Various"
+   },
+   "riser": {
+    "src": "media/sfx/riser.mp3",
+    "peak": 1.91,
+    "from": "ES_244317 Designed, Riser, Low Risers"
+   },
+   "shimmer": {
+    "src": "media/sfx/shimmer.mp3",
+    "peak": 0.66,
+    "from": "ES_203378 Magic, Shimmer"
+   }
+  }
+ },
+ "scope_notes": {
+  "any": "House style: the same on every video, whatever the type.",
+  "type": "Changes with the type of video."
+ }
+}
