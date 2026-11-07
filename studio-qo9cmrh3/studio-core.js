@@ -381,6 +381,7 @@
     addOns(r, L, lookSeg(st, sd));
     if (!isOwn()) ensureMain();
     live = r; buildSfx(sd, st, r);
+    demoBuild(L, sd, st);
     if (isOwn()) { releaseMain(); $("t-end").textContent = fmt(seg()[1]); }
     setDepth(!!r.depth);
     place();
@@ -540,6 +541,7 @@
     if (!own && !video.paused && (t >= s[1] - 0.04 || t < s[0] - 0.3)) { video.currentTime = s[0]; t = s[0]; }
     if (live && live.tl) live.tl.seek(Math.max(s[0], t), false);
     if (live && live.pre) preSync(t);
+    demoTick(own && live && live.pre ? DM.off + (live.pre.currentTime || 0) : t);
     if (!own) drawDepth(t); sfxTick(t);
     studioRegs.forEach(function (r) {
       var lt = t - r.t0, v = r.el, dur = v.duration || 4;
@@ -1678,6 +1680,7 @@
     document.body.classList.toggle("cu-off", !CU.want);
     $("cu-toggle").textContent = CU.want ? "Hide" : "Show close-up";
     if (dock && cu.offsetHeight) document.body.style.setProperty("--cu-h", cu.offsetHeight + "px");
+    if (typeof demoFit === "function" && DM && DM.r) demoFit();
   }
   function cuShown() { return CU.ok && CU.want && !$("cu-slot").hidden; }
   function initCloseup() {
@@ -1685,7 +1688,11 @@
     // dock only when the slot has scrolled up out of view (not when it is below the fold)
     if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { var rc = en.boundingClientRect; CU.slotSeen = en.isIntersecting || rc.top > 0 || rc.height === 0; }); cuSync(); }, { threshold: 0, rootMargin: "-60px 0px 0px 0px" }).observe($("cu-slot"));
     if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { CU.onScreen = en.isIntersecting; if (en.isIntersecting) CU.last = 0; }); }, { threshold: 0 }).observe($("closeup"));
-    window.addEventListener("resize", cuSync);
+    window.addEventListener("resize", function () { cuSync(); demoFit(); });
+    $("dm-custom").addEventListener("click", function () {
+      if (!S.adjust) { S.adjust = true; showAdjust(); rebuild(); }
+      setTimeout(function () { var a = $("adjust"); if (a && !a.hidden) a.scrollIntoView({ behavior: "smooth", block: "start" }); }, 80);
+    });
     CU.ok = true; cuSync();
   }
   function cuRect() {
@@ -1719,7 +1726,48 @@
     } catch (e) { return null; }
   }
   function cuSrc(mp, sx, sy, w, h) { if (!mp) return [sx, sy, w, h]; return [mp.ox + (sx - mp.e - mp.ox) / mp.a, mp.oy + (sy - mp.f - mp.oy) / mp.d, w / mp.a, h / mp.d]; }
+  /* ---- subtitles: "How it works" (8 Nov, Tommy). The same renderer and settings as the clip above, drawn on its own plain
+     stage, big and sharp, on the clip's clock; it replaces the video close-up for subtitles (that copy lagged on phones).
+     Customise opens Adjust right there. ---- */
+  var DM = { r: null, off: 0, y: 1400, k: 0.4 };
+  var dmStage = { card: false, media: $("dm-media"), backdrop: $("dm-backdrop"), under: $("dm-under"), over: $("dm-over"), scale: function () { return DM.k; } };
+  function demoOn() { return S.sec === "subtitles"; }
+  function demoTear() {
+    if (DM.r) { try { if (DM.r.tl) DM.r.tl.kill(); if (DM.r.teardown) DM.r.teardown(); } catch (e) {} }
+    DM.r = null; ["dm-under", "dm-over", "dm-backdrop", "dm-media"].forEach(function (id) { $(id).innerHTML = ""; });
+  }
+  function demoBuild(L, sd, st) {
+    demoTear();
+    var on = demoOn() && !!st && !fin(st) && !!R[L.style];
+    $("dm-view").hidden = !on; $("cu-view").hidden = on; $("cu-title").textContent = on ? "How it works" : "Close-up";
+    $("dm-custom").hidden = !(on && canAdj(st));
+    if (!on) return;
+    var r; try { r = R[L.style](makeCtx(L, sd, st, dmStage)); } catch (e) { console.error(e); return; }
+    if (!r || !r.tl) return;
+    if (r.block) {
+      r.block.classList.add("block"); (r.blockUnder ? $("dm-under") : $("dm-over")).appendChild(r.block);
+      var h = 0; Array.prototype.forEach.call(r.block.querySelectorAll(".inner"), function (c) { h = Math.max(h, c.offsetHeight); }); if (!h) h = r.block.offsetHeight || 100;
+      var z = B.safe, y = L.y == null ? 1400 : L.y;
+      r.block.style.left = z.x0 + "px"; r.block.style.width = (z.x1 - z.x0) + "px"; r.block.style.height = h + "px"; r.block.style.top = Math.round(y - h / 2) + "px";
+    }
+    addOns(r, L, lookSeg(st, sd));
+    if (r.after) try { r.after(); } catch (e) {}
+    DM.r = r; DM.y = L.y == null ? 1400 : L.y;
+    DM.off = st.preview && st.preview.loop ? Math.max(0, (sd.segment || [0, 0])[1] - st.preview.loop) : 0;
+    demoFit();
+  }
+  function demoFit() {
+    var v = $("dm-view"), vw = v.clientWidth, vh = v.clientHeight; if (!vw || !vh) return;
+    var z = B.safe, k = vw / (z.x1 - z.x0 + 60); DM.k = k;
+    $("dm-stage").style.transform = "translate(" + (-(z.x0 - 30) * k).toFixed(1) + "px," + (vh / 2 - DM.y * k).toFixed(1) + "px) scale(" + k.toFixed(4) + ")";
+  }
+  function demoTick(t) {
+    if (!DM.r || !cuShown() || !CU.onScreen) return;
+    if ($("dm-stage").style.transform === "" || !DM.k) demoFit();
+    DM.r.tl.seek(t, false);
+  }
   function cuRender(now) {
+    if (demoOn() && DM.r) return;   // subtitles: the demo draws itself
     // a low-rate copy of the main frame: 15 a second on desktop, 5 on a phone, 4 while paused; only while it is on screen
     var gap = !playing() ? 250 : LITE ? 200 : 66;
     if (!cuShown() || !CU.onScreen || now - CU.last < gap) return;

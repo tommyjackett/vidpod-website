@@ -173,6 +173,13 @@ body.cu-docked { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom,
 .closeup.docked .cu-view { height: 104px; }
 @media (max-width: 979px) { .cu-view { height: 120px; } .closeup.docked .cu-view { height: 120px; } }
 .cu-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cu-view[hidden], .dm-view[hidden] { display: none; }
+.cu-acts { display: flex; gap: 14px; align-items: center; }
+/* subtitles: the words drawn by the same renderer as the clip, on a plain background, big and sharp (no video copy) */
+.dm-view { position: relative; height: 128px; border-radius: 12px; overflow: hidden; background: radial-gradient(120% 140% at 50% 40%, #3a332e 0%, #231f1c 70%); contain: strict; }
+.dm-stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
+.dm-stage > .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+.closeup.docked .dm-view { height: 120px; }
 .cu-layers { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
 .cu-layers > .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: none !important; }
 body.cu-off .cu-view { display: none; }
@@ -708,8 +715,9 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
     <div class="step" id="step" hidden><button type="button" class="st-arrow" id="st-prev" aria-label="Previous option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><div class="st-mid" aria-live="polite"><b id="st-name"></b><small id="st-n"></small></div><button type="button" class="st-arrow" id="st-next" aria-label="Next option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><button type="button" class="opick" id="st-pick" aria-pressed="false" aria-label="Pick this"></button></div>
     <div class="cu-slot" id="cu-slot" hidden>
       <div class="closeup" id="closeup" aria-label="Close-up of the words">
-        <div class="cu-head"><b>Close-up</b><button type="button" class="link" id="cu-toggle">Hide</button></div>
+        <div class="cu-head"><b id="cu-title">Close-up</b><span class="cu-acts"><button type="button" class="link" id="dm-custom" hidden>Customise</button><button type="button" class="link" id="cu-toggle">Hide</button></span></div>
         <div class="cu-view" id="cu-view"><canvas id="cu-canvas"></canvas><div class="cu-layers" id="cu-layers"></div><canvas id="cu-fg"></canvas></div>
+        <div class="dm-view" id="dm-view" hidden><div class="dm-stage" id="dm-stage"><div class="layer" id="dm-backdrop"></div><div class="layer" id="dm-media"></div><div class="layer" id="dm-under"></div><div class="layer" id="dm-over"></div></div></div>
       </div>
     </div>
     <p class="check-note" id="check-note" aria-live="polite"></p>
@@ -863,6 +871,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r6b"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7i"></script>
+<script src="studio-core.js?v=r7j"></script>
 
 </html>
