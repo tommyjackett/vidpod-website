@@ -44,7 +44,7 @@
   --gut-r: max(16px, env(safe-area-inset-right, 0px));
   --bar-h: 64px;
   --head-h: 52px;
-  --tabs-h: 48px;
+  --tabs-h: 54px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -62,6 +62,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { overflow-x: hidden; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--tabs-h) + 8px); }
 body {
   margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
@@ -89,11 +90,15 @@ img { max-width: 100%; display: block; }
 .top .sep { width: 1px; height: 20px; background: var(--line); }
 .made-for { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .made-for img { height: 24px; width: auto; }
+.hlinks { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.hlink { border: 0; background: transparent; padding: 6px 0; font-size: 12px; font-weight: 600; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.hlink:hover { color: var(--fg); }
 
 /* ===== layout ===== */
 .wrap { display: block; }
-.stage { padding: 10px var(--gut-r) 12px var(--gut-l); background: var(--bg-2); display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.stage-row { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+.stage { padding: 8px var(--gut-r) 10px var(--gut-l); background: var(--bg-2); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.stage-row { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; }
+.side.l, .side.r { gap: 6px; }
 .side { display: flex; flex-direction: column; gap: 10px; flex: 0 0 auto; }
 .ibtn {
   width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg); display: grid; place-items: center; padding: 0;
@@ -101,10 +106,10 @@ img { max-width: 100%; display: block; }
 }
 .ibtn svg { width: 18px; height: 18px; }
 .ibtn[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.ibtn-l { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: center; margin-top: 3px; }
+.ibtn-l { white-space: nowrap; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: center; margin-top: 3px; }
 
-.phone { position: relative; border-radius: 22px; background: #000; padding: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 20px 60px rgba(0,0,0,.20); --ph: min(55svh, 620px); flex: 0 0 auto; }
-@supports not (height: 1svh) { .phone { --ph: min(56vh, 620px); } }
+.phone { position: relative; border-radius: 22px; background: #000; padding: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 20px 60px rgba(0,0,0,.20); --ph: min(36svh, 620px); flex: 0 0 auto; }
+@supports not (height: 1svh) { .phone { --ph: min(36vh, 620px); } }
 .screen-slot { height: var(--ph); aspect-ratio: 9 / 16; position: relative; }
 .screen { position: absolute; inset: 0; border-radius: 17px; overflow: hidden; background: #111; user-select: none; -webkit-user-select: none; touch-action: pan-y; contain: layout paint; }
 .screen > video.main, .screen > canvas, .screen > .media-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -142,41 +147,35 @@ img { max-width: 100%; display: block; }
 .loading-veil { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 13px; z-index: 9; background: #111; }
 .studio-v { display: none; }
 
-/* PiP: when the preview scrolls away on a phone, the same live screen docks small in the corner */
-/* now-playing dock: when the big preview scrolls away on a phone, the live screen docks small under the tabs,
-   inside the sticky header, so it never sits on top of options (they scroll under the header like any app) */
-.screen.pip { position: fixed; inset: auto; left: var(--gut-l); top: calc(var(--tabs-h) + 8px); height: var(--pip-h, 124px); width: auto; aspect-ratio: 9 / 16; z-index: 45; border-radius: 10px; box-shadow: 0 0 0 2px #000; touch-action: pan-y; }
-.pip-handle { display: none; position: absolute; right: 3px; bottom: 3px; z-index: 12; width: 30px; height: 30px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.94); color: #000; place-items: center; touch-action: none; cursor: nwse-resize; box-shadow: 0 1px 6px rgba(0,0,0,.35); }
-.pip-handle svg { width: 16px; height: 16px; }
-.screen.pip .pip-handle { display: grid; }
-.sticky { position: sticky; top: 0; z-index: 40; }
-.dock { display: none; position: absolute; left: 0; right: 0; top: 100%; height: calc(var(--pip-h, 124px) + 16px); align-items: center; gap: 12px; padding: 0 var(--gut-r) 0 calc(var(--gut-l) + var(--pip-h, 124px) * 9 / 16 + 14px); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
-body.pip-on .dock { display: flex; }
-.dock .now { flex: 1 1 auto; min-width: 0; }
-.dock .now small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
-.dock .now b { display: block; font-size: 15px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dock .acts { display: flex; gap: 8px; flex: 0 0 auto; }
-body.pip-on { scroll-padding-top: calc(var(--tabs-h) + var(--pip-h, 124px) + 26px); }
-body.pip-big .dock { flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px; }
-body.pip-big .dock .now { flex: 0 0 auto; width: 100%; }
-body.pip-big .dock .now b { white-space: normal; font-size: 13px; }
-body.pip-big .dock .acts { flex-direction: column; }
-.dock .size-hint { display: block; font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
-body.pip-big .dock .size-hint { white-space: normal; }
-
-/* close-up: a magnified live view of the text being edited, pinned above the Send bar while Customise is on screen */
-.closeup { position: fixed; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 58; padding: 8px var(--gut-r) 8px var(--gut-l); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-top: 1px solid var(--line); display: none; }
-body.cu-show .closeup { display: block; }
-body.cu-show { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 24px + var(--cu-h, 168px)); }
-.cu-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
-.cu-head b { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.cu-head .link { border: 0; background: transparent; padding: 4px 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
-.cu-view { position: relative; height: 120px; border-radius: 12px; overflow: hidden; background: #111; contain: strict; }
+/* close-up: a magnified live view of the text being edited. It sits under the preview (in its slot) while the
+   preview is on screen, and docks above the Send bar once the preview scrolls away (phone). */
+.cu-slot { width: min(100%, 460px); }
+.cu-slot[hidden] { display: none; }
+.closeup { padding: 0; }
+.closeup.docked { position: fixed; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 58; padding: 8px var(--gut-r) 8px var(--gut-l); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-top: 1px solid var(--line); }
+body.cu-docked { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 24px + var(--cu-h, 132px)); }
+.cu-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.cu-head b { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.cu-head .link { border: 0; background: transparent; padding: 2px 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.cu-view { position: relative; height: 96px; border-radius: 12px; overflow: hidden; background: #111; contain: strict; }
+.closeup.docked .cu-view { height: 104px; }
 .cu-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cu-layers { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
 .cu-layers > .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: none !important; }
 body.cu-off .cu-view { display: none; }
 body.cu-off .cu-head { margin-bottom: 0; }
+
+/* safe zones and clip: round rail buttons with a small drop-down */
+.rail-menu { position: relative; display: flex; flex-direction: column; align-items: center; }
+.pop { position: absolute; z-index: 30; top: 0; min-width: 150px; background: var(--bg); color: var(--fg); border: 1px solid var(--line-strong); border-radius: 14px; box-shadow: var(--shadow); padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+.pop[hidden] { display: none; }
+.side.l .pop { left: calc(100% + 8px); }
+.side.r .pop { right: calc(100% + 8px); }
+.pop button { border: 0; background: transparent; text-align: left; padding: 9px 12px; border-radius: 9px; font-size: 14px; font-weight: 650; display: flex; align-items: center; justify-content: space-between; gap: 10px; white-space: nowrap; min-height: 40px; }
+.pop button[aria-checked="true"] { background: var(--fg); color: var(--bg); }
+.pop button small { font-size: 11px; font-weight: 600; opacity: .7; }
+.ibtn .tag { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px var(--bg); }
+.ibtn { position: relative; }
 
 /* sign-in */
 .gate { position: fixed; inset: 0; z-index: 200; background: var(--bg); display: grid; place-items: center; padding: 24px var(--gut-r) 24px var(--gut-l); overflow-y: auto; }
@@ -190,12 +189,6 @@ body.cu-off .cu-head { margin-bottom: 0; }
 .gate-small { font-size: 12px !important; }
 .who-line { font-size: 12px; color: var(--muted); }
 .who-line .link, .foot-note .link { border: 0; background: transparent; padding: 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
-.ourrow { display: flex; align-items: center; gap: 12px; padding: 10px var(--gut-r) 10px var(--gut-l); border-bottom: 1px solid var(--line); }
-.ourrow span { font-size: 12px; color: var(--muted); line-height: 1.35; }
-.ourrow:has(#our-picks[hidden]) { display: none; }
-.card .our { font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--on-green); background: var(--green); border-radius: 100px; padding: 2px 7px; align-self: flex-start; margin-top: 2px; }
-.bar .btn.ghost.sm { flex: 0 0 auto; }
-@media (max-width: 400px) { .bar { gap: 8px; } .bar .btn { padding-left: 14px; padding-right: 14px; letter-spacing: .03em; } .bar .count { font-size: 12px; } }
 .voice { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 16px; background: var(--bg-2); }
 .voice[hidden], .voice-take[hidden], .voice-words[hidden] { display: none; }
 .rec-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border: 0; border-radius: 100px; background: var(--fg); color: var(--bg); font-size: 15px; font-weight: 800; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
@@ -212,8 +205,7 @@ body.cu-off .cu-head { margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) { .rec-btn[aria-pressed="true"] i { animation: none; } }
 .toast { position: fixed; left: 50%; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 12px); transform: translate(-50%, 8px); z-index: 70; background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 100px; opacity: 0; pointer-events: none; transition: opacity .25s var(--ease), transform .25s var(--ease); width: max-content; max-width: calc(100vw - 32px); text-align: center; line-height: 1.3; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
-body.cu-show .toast { bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + var(--cu-h, 168px) + 12px); }
-@media (min-width: 980px) { .closeup { display: none !important; } body.cu-show { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 24px); } }
+body.cu-docked .toast { bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + var(--cu-h, 132px) + 12px); }
 
 .transport { display: flex; align-items: center; gap: 10px; width: min(100%, 460px); }
 .scrub { flex: 1 1 auto; min-width: 0; }
@@ -235,7 +227,7 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 
 /* full screen preview */
 .stage.full { position: fixed; inset: 0; z-index: 80; background: #000; padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); justify-content: center; }
-.stage.full .side, .stage.full .transport, .stage.full .check, .stage.full .check-note { display: none; }
+.stage.full .side, .stage.full .transport, .stage.full .check, .stage.full .check-note, .stage.full .cu-slot { display: none; }
 .check[hidden] { display: none; }
 #clips { overflow-x: auto; scrollbar-width: none; }
 #clips::-webkit-scrollbar { display: none; }
@@ -247,46 +239,51 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 /* ===== panel ===== */
 .panel { min-width: 0; background: var(--bg); }
 .tabs {
-  display: flex; gap: 2px; padding: 0 var(--gut-r) 0 var(--gut-l); height: var(--tabs-h); align-items: stretch;
+  display: flex; gap: 0; padding: 0 var(--gut-r) 0 var(--gut-l); height: var(--tabs-h); align-items: stretch;
   background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity;
 }
 .tabs::-webkit-scrollbar { display: none; }
-.tab { position: relative; flex: 0 0 auto; border: 0; background: transparent; padding: 0 11px; font-size: 14px; font-weight: 700; color: var(--muted); white-space: nowrap; scroll-snap-align: start; }
+.tgrp { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: flex-end; scroll-snap-align: start; padding-right: 8px; margin-right: 8px; border-right: 1px solid var(--line); }
+.tgrp:last-child { border-right: 0; margin-right: 0; }
+.tgrp-l { font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 6px 9px 0; white-space: nowrap; }
+.tgrp-t { display: flex; flex: 1 1 auto; align-items: stretch; }
+.tab { position: relative; flex: 0 0 auto; border: 0; background: transparent; padding: 0 9px; font-size: 14px; font-weight: 700; color: var(--muted); white-space: nowrap; }
 .tab[aria-selected="true"] { color: var(--fg); }
-.tab[aria-selected="true"]::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 3px; background: var(--fg); border-radius: 3px 3px 0 0; }
+.tab[aria-selected="true"]::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 0; height: 3px; background: var(--fg); border-radius: 3px 3px 0 0; }
 .tab .pk { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-left: 5px; vertical-align: 2px; visibility: hidden; }
 .tab.picked .pk { visibility: visible; }
 
-.sec-head { padding: 16px var(--gut-r) 4px var(--gut-l); }
-.sec-q { margin: 0; font-size: 17px; font-weight: 750; line-height: 1.25; letter-spacing: -.01em; }
-.sec-help { margin: 3px 0 0; font-size: 13px; color: var(--muted); }
+.sec-head { padding: 10px var(--gut-r) 0 var(--gut-l); }
+.sec-q { margin: 0; font-size: 15px; font-weight: 750; line-height: 1.25; letter-spacing: -.01em; }
+.sec-help { margin: 1px 0 0; font-size: 12px; color: var(--muted); }
 
-/* mini preview cards: a swipe row on phones, a grid on desktop */
+/* option pills: a compact row of static stills (each option at its best frame). Text options show a magnified
+   crop of the words so they read at this size; footage options (moves, graphics, transitions, logo) show the frame. */
 .cards {
-  display: flex; gap: 10px; overflow-x: auto; padding: 12px var(--gut-r) 14px var(--gut-l); scroll-snap-type: x mandatory; scroll-padding-left: var(--gut-l);
+  display: flex; gap: 8px; overflow-x: auto; padding: 10px var(--gut-r) 10px var(--gut-l); scroll-snap-type: x proximity; scroll-padding-left: var(--gut-l);
   scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
 }
 .cards::-webkit-scrollbar { display: none; }
-.card {
-  flex: 0 0 auto; width: 118px; scroll-snap-align: start; border: 0; padding: 0; background: transparent; text-align: left; display: flex; flex-direction: column; gap: 6px;
-}
-.card .mini { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; background: #222; box-shadow: 0 0 0 1px var(--line); transition: box-shadow .2s var(--ease), transform .2s var(--ease); contain: strict; }
-.card .mini img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; }
-.card .mini .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
-.card .mini .cut { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-.card[aria-checked="true"] .mini { box-shadow: 0 0 0 3px var(--fg), 0 8px 22px rgba(0,0,0,.18); }
-.card .picked-mark { position: absolute; top: 6px; right: 6px; z-index: 9; width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: #000; display: none; place-items: center; }
-.card .picked-mark svg { width: 13px; height: 13px; }
+.card { flex: 0 0 auto; width: 124px; scroll-snap-align: start; border: 0; padding: 0; background: transparent; text-align: left; display: flex; flex-direction: column; gap: 4px; }
+.card.port { width: 64px; }
+.card .mini { position: relative; width: 100%; height: 70px; border-radius: 10px; overflow: hidden; background: #1a1a1a; box-shadow: 0 0 0 1px var(--line); contain: strict; }
+.card.port .mini { height: auto; aspect-ratio: 9 / 16; }
+.card .frame { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+.card .frame > img.bg, .card .frame > img.cut { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; pointer-events: none; }
+.card .frame > .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; pointer-events: none; }
+.card[aria-checked="true"] .mini { box-shadow: 0 0 0 3px var(--fg); }
+.card .picked-mark { position: absolute; top: 4px; right: 4px; z-index: 9; width: 18px; height: 18px; border-radius: 50%; background: var(--green); color: #000; display: none; place-items: center; }
+.card .picked-mark svg { width: 11px; height: 11px; }
 .card.is-picked .picked-mark { display: grid; }
-.card .meta { display: flex; flex-direction: column; gap: 1px; padding: 0 2px; }
-.card .id { font-size: 10px; font-weight: 800; letter-spacing: .08em; color: var(--muted); font-variant-numeric: tabular-nums; }
-.card .nm { font-size: 13px; font-weight: 700; line-height: 1.2; }
-.card .kind { font-size: 11px; color: var(--muted); font-weight: 600; }
-.card:hover .mini { transform: translateY(-2px); }
+.card .meta { display: flex; flex-direction: column; gap: 0; padding: 0 2px; min-width: 0; }
+.card .id { font-size: 9px; font-weight: 800; letter-spacing: .06em; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card .nm { font-size: 12px; font-weight: 700; line-height: 1.15; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.card.port .nm { font-size: 11px; }
+.card .our { font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--on-green); background: var(--green); border-radius: 100px; padding: 1px 6px; align-self: flex-start; margin-top: 2px; white-space: nowrap; }
 
 /* selected strip + customise */
-.chosen { margin: 0 var(--gut-r) 0 var(--gut-l); padding: 14px; border-radius: 16px; background: var(--bg-2); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.chosen { margin: 0 var(--gut-r) 0 var(--gut-l); padding: 10px 12px; border-radius: 16px; background: var(--bg-2); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .chosen .txt { flex: 1 1 180px; min-width: 0; }
 .chosen .txt b { display: block; font-size: 15px; }
 .chosen .txt small { display: block; font-size: 13px; color: var(--muted); line-height: 1.35; }
@@ -336,7 +333,11 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
   padding: 10px var(--gut-r) calc(10px + env(safe-area-inset-bottom, 0px)) var(--gut-l); min-height: var(--bar-h);
   background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-top: 1px solid var(--line);
 }
-.bar .count { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 700; line-height: 1.3; }
+.bar .count { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 700; line-height: 1.3; white-space: nowrap; }
+.bar .count b { font-weight: 800; }
+.bar .btn { text-transform: none; letter-spacing: 0; font-size: 14px; padding: 10px 14px; min-height: 42px; }
+@media (max-width: 380px) { .bar { gap: 8px; } .bar .btn { padding: 10px 11px; font-size: 13px; } .bar .count { font-size: 12px; } }
+@media (max-width: 350px) { .bar .count span { display: none; } }
 .bar .count small { display: block; font-size: 12px; color: var(--muted); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .foot-note { padding: 28px var(--gut-r) 0 var(--gut-l); font-size: 12px; color: var(--muted); }
 
@@ -359,10 +360,10 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
 
 @media (max-width: 380px) {
   .made-for span, .top .sep { display: none; }
-  .card { width: 108px; }
+  .card { width: 116px; }
   .seg button { padding: 6px 10px; }
 }
-@media (max-height: 700px) and (max-width: 979px) { .phone { --ph: 52svh; } }
+@media (max-height: 700px) and (max-width: 979px) { .phone { --ph: 32svh; } }
 
 /* ===== desktop: preview left (sticky), panel right ===== */
 @media (min-width: 980px) {
@@ -372,16 +373,14 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   .made-for img { height: 30px; }
   .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(440px, 560px); align-items: start; }
   .stage { position: sticky; top: 0; height: calc(100vh - var(--head-h) - var(--bar-h)); justify-content: center; padding: 18px; gap: 12px; }
-  .phone { --ph: min(calc(100vh - var(--head-h) - var(--bar-h) - 170px), 860px); border-radius: 30px; padding: 8px; }
+  .phone { --ph: min(calc(100vh - var(--head-h) - var(--bar-h) - 290px), 860px); border-radius: 30px; padding: 8px; }
   .screen { border-radius: 23px; }
   .ibtn { width: 44px; height: 44px; }
   .panel { border-left: 1px solid var(--line); min-height: calc(100vh - var(--head-h)); }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); overflow: visible; padding-top: 14px; }
-  .card { width: auto; }
+  .cards { flex-wrap: wrap; overflow: visible; }
   .sec-head { padding-top: 20px; }
   .ctl-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .ctl-grid .wide { grid-column: 1 / -1; }
-  .screen.pip { display: none; }
 }
 
 /* video type, favourites, likes */
@@ -426,6 +425,37 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
 .ref-col input { width: 100%; font-size: 16px; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; padding: 9px 11px; color: var(--fg); }
 .ref-col .ok { font-size: 12px; color: var(--muted); font-weight: 600; }
 .hex-err { font-size: 12px; font-weight: 600; color: var(--fg); }
+/* sections: the Motion graphics area (studio-mograph.js renders into #mograph) */
+.mograph { padding: 14px var(--gut-r) 6px var(--gut-l); }
+.opener-slot { padding: 14px var(--gut-r) 6px var(--gut-l); }
+.mg-card { border: 1px dashed var(--line-strong); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.mg-card b { font-size: 15px; }
+.mg-card small { font-size: 13px; color: var(--muted); }
+/* templates */
+.field select { font-size: 16px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; width: 100%; color: var(--fg); }
+.field input + input, .field select + input { margin-top: 6px; }
+.tpl-save { display: flex; flex-direction: column; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.tpl-parent { font-size: 13px !important; color: var(--fg) !important; background: var(--bg-2); border-radius: 10px; padding: 8px 10px; }
+.tpl-h { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.tpl-sync { font-size: 12px !important; margin-top: -8px !important; }
+.tpl-sync:empty { display: none; }
+.tpl-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.tpl-list > li { border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.tpl-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.tpl-top b { display: block; font-size: 15px; line-height: 1.25; }
+.tpl-top small { display: block; font-size: 12px; color: var(--muted); }
+.tpl-st { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; border-radius: 100px; padding: 3px 8px; white-space: nowrap; background: var(--bg-3); color: var(--fg); }
+.tpl-st.locked { background: var(--fg); color: var(--bg); }
+.tpl-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.tpl-acts .chip { min-height: 34px; padding: 6px 11px; font-size: 12px; }
+.tpl-set { margin: 0; padding: 0; list-style: none; font-size: 13px; border-top: 1px solid var(--line); }
+.tpl-set li { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.tpl-set li > span:first-child { color: var(--muted); font-weight: 600; }
+.tpl-log { margin: 0; padding: 0 0 0 16px; font-size: 12px; color: var(--muted); }
+.tpl-rework { display: flex; gap: 6px; flex-wrap: wrap; }
+.tpl-rework input { flex: 1 1 160px; min-width: 0; font-size: 16px; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; padding: 8px 10px; color: var(--fg); }
+.tpl-empty { font-size: 13px; color: var(--muted); }
+.shadow-row { display: flex; flex-direction: column; gap: 4px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
 </style>
 
@@ -436,17 +466,18 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   </a>
   <span class="sep" aria-hidden="true"></span>
   <span class="name">Studio</span>
-  <a href="review.html#board" style="font-size:12px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px;white-space:nowrap">Mood board</a>
+  <nav class="hlinks" aria-label="More"><a class="hlink" href="review.html#board">Mood board</a><button type="button" class="hlink" id="fb-btn">Feedback</button></nav>
   <div class="made-for"><span>Made for</span><img class="only-light" id="client-logo" alt=""><img class="only-dark" id="client-logo-dark" alt=""></div>
 </header>
 
 <div class="wrap">
   <section class="stage" id="stage" aria-label="Live preview">
     <div class="stage-row">
-      <div class="side">
+      <div class="side l">
         <div><button type="button" class="ibtn" id="play" aria-label="Pause"></button><div class="ibtn-l" id="play-l">Pause</div></div>
         <div><button type="button" class="ibtn" id="mute" aria-label="Turn sound on" aria-pressed="false"></button><div class="ibtn-l">Sound</div></div>
         <div><button type="button" class="ibtn" id="sfx" aria-label="Sound effects off" aria-pressed="false"></button><div class="ibtn-l">SFX</div></div>
+        <div class="rail-menu"><button type="button" class="ibtn" id="sz-btn" aria-haspopup="true" aria-expanded="false" aria-controls="sz-menu" aria-label="Safe zones: check what each app covers"></button><div class="ibtn-l">Safe zones</div><div class="pop" id="sz-menu" role="menu" aria-label="Safe zones" hidden></div></div>
       </div>
       <div class="phone" id="phone">
         <div class="screen-slot" id="screen-slot">
@@ -461,13 +492,13 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
             <div class="grab" id="grab" hidden aria-hidden="true"></div>
             <div class="drag-hint" id="drag-hint">Drag the text to move it</div>
             <div class="loading-veil" id="veil">Loading the preview</div>
-            <button type="button" class="pip-handle" id="pip-handle" aria-label="Drag to resize the small preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20h11V9M20 20L11 11"/></svg></button>
           </div>
         </div>
       </div>
-      <div class="side">
+      <div class="side r">
         <div><button type="button" class="ibtn" id="replay" aria-label="Play from the start"></button><div class="ibtn-l">Replay</div></div>
         <div><button type="button" class="ibtn" id="full" aria-label="Full screen preview"></button><div class="ibtn-l">Full</div></div>
+        <div class="rail-menu" id="clip-wrap" hidden><button type="button" class="ibtn" id="clip-btn" aria-haspopup="true" aria-expanded="false" aria-controls="clip-menu" aria-label="Choose the footage"></button><div class="ibtn-l">Footage</div><div class="pop" id="clip-menu" role="menu" aria-label="Footage" hidden></div></div>
       </div>
     </div>
     <div class="transport">
@@ -475,51 +506,45 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
       <input type="range" class="scrub" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Scrub the preview">
       <span class="time" id="t-end">0:00</span>
     </div>
-    <div class="check">
-      <span class="check-l" id="check-l">Check against</span>
-      <div class="seg" id="check" role="radiogroup" aria-labelledby="check-l"></div>
-    </div>
     <p class="check-note" id="check-note" aria-live="polite"></p>
-    <div class="check" id="clips-row" hidden>
-      <span class="check-l" id="clips-l">Preview on</span>
-      <div class="seg" id="clips" role="radiogroup" aria-labelledby="clips-l"></div>
+    <div class="cu-slot" id="cu-slot" hidden>
+      <div class="closeup" id="closeup" aria-label="Close-up of the words">
+        <div class="cu-head"><b>Close-up</b><button type="button" class="link" id="cu-toggle">Hide</button></div>
+        <div class="cu-view" id="cu-view"><canvas id="cu-canvas"></canvas><div class="cu-layers" id="cu-layers"></div></div>
+      </div>
     </div>
     <button type="button" class="ibtn close-full" id="close-full" aria-label="Close full screen"></button>
   </section>
 
   <main class="panel" id="panel" aria-label="Choose your look">
-    <div class="ourrow" id="our-row"><button type="button" class="btn sm" id="our-picks" hidden>Use VIDPOD's picks</button><span>Our recommended look in every tab, in one tap. You can still change anything.</span></div>
-    <div class="vtype"><span class="vtype-l" id="vtype-l">Making a</span><div class="seg" id="vtype" role="radiogroup" aria-labelledby="vtype-l"></div></div>
     <div class="sticky" id="sticky">
       <nav class="tabs" role="tablist" id="tabs" aria-label="Sections"></nav>
-      <div class="dock" id="dock" aria-label="Now playing">
-        <div class="now"><small id="dock-code"></small><b id="dock-name"></b><span class="size-hint" id="dock-hint">Pinch or drag the corner to resize</span></div>
-        <div class="acts"><button type="button" class="ibtn" id="dock-play" aria-label="Play"></button><button type="button" class="ibtn" id="dock-full" aria-label="Full screen preview"></button><button type="button" class="ibtn" id="dock-up" aria-label="Back to the big preview"></button></div>
-      </div>
     </div>
     <div id="panel-body" role="tabpanel">
-      <div class="sec-head"><div><p class="sec-q" id="sec-q"></p><p class="sec-help" id="sec-help"></p></div><button type="button" class="chip fav-toggle" id="fav-toggle" aria-pressed="false">&#9825; My favourites</button></div>
-      <div class="lead" id="lead" hidden></div>
+      <div class="sec-head"><div><p class="sec-q" id="sec-q"></p><p class="sec-help" id="sec-help"></p></div></div>
       <div class="cards" id="cards" role="radiogroup" aria-label="Styles"></div>
-      <div class="ref" id="ref" hidden></div>
       <div class="chosen" id="chosen"></div>
+      <div class="lead" id="lead" hidden></div>
       <div class="custom" id="custom"></div>
+      <div class="ref" id="ref" hidden></div>
+      <div class="opener-slot" id="opener-slot" hidden></div>
     </div>
-    <p class="foot-note">Styles play on the real clip and words; logos play on their own. The small code on each card (for example HOOK-04) is how to ask VIDPOD for it.</p>
+    <div class="mograph" id="mograph-view" hidden>
+      <div id="mograph" class="mograph-root" data-hook="studio-mograph">
+        <div class="mg-card" id="mograph-placeholder"><b>Box style, from The Jackett Ranch, coming</b><small>Photo and footage boxes that move across one big board. This is where it lands.</small></div>
+      </div>
+    </div>
+    <p class="foot-note">Every look plays on real footage. The code on each option (for example HOOK-04) is how to ask VIDPOD for it.</p>
     <p class="foot-note who-line" id="who-foot"></p>
   </main>
 </div>
 
 
-<div class="closeup" id="closeup" aria-label="Close-up of the text you are editing">
-  <div class="cu-head"><b>Close-up</b><button type="button" class="link" id="cu-toggle">Hide</button></div>
-  <div class="cu-view" id="cu-view"><canvas id="cu-canvas"></canvas><div class="cu-layers" id="cu-layers"></div></div>
-</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="bar" id="bar">
   <div class="count" id="count" aria-live="polite"></div>
-  <button type="button" class="btn ghost sm" id="fb-btn">Feedback</button>
+  <button type="button" class="btn ghost" id="tpl-btn">Save template</button>
   <button type="button" class="btn" id="review-btn" disabled>Send to VIDPOD</button>
 </div>
 
@@ -579,6 +604,27 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   </form>
 </dialog>
 
+<dialog class="sheet" id="tpl" aria-labelledby="tpl-title">
+  <div class="sheet-body">
+    <h2 id="tpl-title">Templates<span class="dot"></span></h2>
+    <form class="tpl-save" id="tpl-form" novalidate>
+      <p id="tpl-intro">Save every setting you have now, so you can load it again or build on it.</p>
+      <p class="tpl-parent" id="tpl-parent" hidden></p>
+      <div class="field"><label for="tpl-name">Template name</label><input id="tpl-name" maxlength="80" placeholder="For example: Inovayt template" autocomplete="off"></div>
+      <div class="field"><label for="tpl-project">Project</label><select id="tpl-project"></select><input id="tpl-project-new" maxlength="80" placeholder="New project name" hidden autocomplete="off"></div>
+      <div class="field" id="tpl-note-f" hidden><label for="tpl-note">What changed? <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input id="tpl-note" maxlength="300" placeholder="For example: name card up, bigger subtitles" autocomplete="off"></div>
+      <p class="err" id="tpl-err" hidden></p>
+      <div class="sheet-actions"><button type="button" class="btn ghost" id="tpl-cancel" hidden>Start a new one instead</button><button type="submit" class="btn" id="tpl-save">Save as template</button></div>
+    </form>
+    <div class="tpl-mine">
+      <h3 class="tpl-h">My templates</h3>
+      <p class="tpl-sync" id="tpl-sync"></p>
+      <ul class="tpl-list" id="tpl-list"></ul>
+    </div>
+    <div class="sheet-actions"><button type="button" class="btn ghost" id="tpl-close">Close</button></div>
+  </div>
+</dialog>
+
 <div class="gate" id="gate" hidden>
   <form class="gate-card" id="gate-form" novalidate>
     <span class="vp-logo"><img class="only-light" src="assets/vidpod/vidpod-logo-light.png" alt="VIDPOD" width="67" height="24"><img class="only-dark" src="assets/vidpod/vidpod-logo-dark.png" alt="" width="67" height="24"></span>
@@ -593,7 +639,9 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
 </div>
 
 <script src="studio-looks.js"></script>
+<script src="studio-hooks.js"></script>
 <script src="studio-looks-2.js"></script>
+<script src="studio-mograph.js" defer onerror="this.remove()"></script>
 <script src="studio-core.js"></script>
 
 </html>

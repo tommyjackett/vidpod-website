@@ -576,7 +576,8 @@
    "y": 480,
    "r": 330,
    "note": "head centre and ring radius on the 1080x1920 frame, from the person matte; top = top of her hair at rest (y px)",
-   "top": 268
+   "top": 268,
+   "hook_top": 268
   },
   "moves": {
    "word": "Kew",
@@ -631,7 +632,8 @@
     "outline",
     "backing",
     "motion",
-    "anim"
+    "anim",
+    "shadow"
    ],
    "size_range": [
     40,
@@ -1145,7 +1147,8 @@
     "case",
     "outline",
     "backing",
-    "motion"
+    "motion",
+    "shadow"
    ],
    "size_range": [
     60,
@@ -1153,83 +1156,21 @@
    ],
    "styles": [
     {
-     "id": "hook-bars",
+     "id": "hk-behind-head",
      "code": "HOOK-01",
-     "label": "Highlight bars",
-     "best_for": "The Numbers Game look: her line on solid bars that holds for the whole hook.",
-     "energy": 3,
-     "defaults": {
-      "font": "brand",
-      "size": 96,
-      "y": 1200,
-      "colour": "white",
-      "case": "spoken"
-     },
-     "kind": "Holding",
-     "registry": "inline-highlight / hook.headline-bar",
-     "source": "style-board/REFERENCE-SPEC.md H3 (TNG reels)",
-     "how": "Each line's bar scaleX 0 to 1 from the left over 0.28 s power4.out, its text rises in a mask yPercent 105 to 0 over 0.24 s, lines stagger 0.16 s; holds; fades 0.24 s at the end.",
-     "use_cases": [
-      "podcast-snippet",
-      "trailer",
-      "case-study",
-      "teaser"
-     ],
-     "recipe": {
-      "renderer": "studio-looks.js R['hook-bars']",
-      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
-      "layers": [
-       "plate video",
-       "overlay layer"
-      ],
-      "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
-      "registry": "inline-highlight / hook.headline-bar",
-      "how": "Each line's bar scaleX 0 to 1 from the left over 0.28 s power4.out, its text rises in a mask yPercent 105 to 0 over 0.24 s, lines stagger 0.16 s; holds; fades 0.24 s at the end.",
-      "framing": {
-       "canvas": "1080x1920",
-       "safe_box": {
-        "x0": 135,
-        "x1": 945,
-        "y0": 250,
-        "y1": 1500,
-        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
-       },
-       "y_centre_px": 1200,
-       "size_px": 96,
-       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
-      },
-      "timings": {
-       "segment_s": [
-        0,
-        6.68
-       ],
-       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
-       "detail": "Each line's bar scaleX 0 to 1 from the left over 0.28 s power4.out, its text rises in a mask yPercent 105 to 0 over 0.24 s, lines stagger 0.16 s; holds; fades 0.24 s at the end."
-      },
-      "colour_roles": [
-       "Bar colour",
-       "Text colour"
-      ]
-     }
-    },
-    {
-     "id": "hook-mixed",
-     "code": "HOOK-02",
-     "label": "Mixed scale",
-     "best_for": "Small words orbit one huge word, over her chest.",
+     "label": "Word behind head",
+     "best_for": "The keyword in huge glowing caps behind the speaker's head, plain captions lower down.",
      "energy": 4,
      "defaults": {
       "font": "brand",
-      "size": 220,
-      "y": 1150,
+      "size": 250,
       "colour": "white",
-      "case": "spoken"
+      "case": "upper"
      },
      "kind": "Kinetic",
-     "registry": "caption-editorial-emphasis + cap.stack-build",
-     "source": "style-board/REFERENCE-SPEC.md H1 (Pinterest reference) ; trailer playbook TRL-01 (stepped lines, one key word huge)",
-     "how": "Per line: lead words top-left of the hero, follow words bottom-right; small words y 12 to 0 over 0.16 s power2.out; hero scale 1.12 to 1, blur 8 to 0 over 0.2 s expo.out with a hero-colour glow; stacks hard-cut line to line.",
+     "registry": "caption-parallax-layers / hook.behind-subject",
+     "source": "Pinterest 'AREN'T BORING' (4 Visual Hooks for Social Media); Tommy's Pin 4.8 s 'content'; REFERENCE-SPEC.md H2",
+     "how": "Each starred word gets its own line (two lines max, the 'AREN'T / BORING' stack), heavy caps (Archivo Black on VIDPOD, brand bold otherwise), tracking -0.02em, line pitch 1.3x cap height, widest line fitted to 920 px. The head (base.face.hook_top or top) covers the lower 55 % of the last line's caps. Fill in the picked colour with a three-step glow of the same colour (0.05em at 90 %, 0.2em at 55 %, 0.55em at 28 %). Each line lands on its spoken word: opacity 0 to 1, scale 1.07 to 1, blur 6 to 0 px over 0.32 s expo.out; the stack drifts 1 to 1.03 linear; a new hook line swaps the stack (0.14 s fade). Captions: the spoken words, lowercase, brand bold 84 px white with a soft shadow, centred at y 1330, three words at a time, each word on its timestamp. Headroom: if the clip is framed too tight for the layout, the plate and its person matte move down together by the amount needed (max 420 px) for the whole hook; the gap above is the plate's top rows above the head, flipped and stretched, blur 3 px. It eases back over 0.5 s power2.inOut, starting 0.55 s before the hook ends.",
      "use_cases": [
       "case-study",
       "podcast-snippet",
@@ -1237,36 +1178,167 @@
       "teaser"
      ],
      "recipe": {
-      "renderer": "studio-looks.js R['hook-mixed']",
-      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "renderer": "studio-hooks.js R['hk-behind-head']",
+      "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
       "layers": [
-       "plate video",
-       "overlay layer"
+       "plate video (colour half of the depth clip)",
+       "giant keyword (under layer)",
+       "person matte",
+       "captions (over layer)"
       ],
-      "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
-      "registry": "caption-editorial-emphasis + cap.stack-build",
-      "how": "Per line: lead words top-left of the hero, follow words bottom-right; small words y 12 to 0 over 0.16 s power2.out; hero scale 1.12 to 1, blur 8 to 0 over 0.2 s expo.out with a hero-colour glow; stacks hard-cut line to line.",
+      "needs_matte": true,
+      "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
+      "registry": "caption-parallax-layers / hook.behind-subject",
+      "how": "Each starred word gets its own line (two lines max, the 'AREN'T / BORING' stack), heavy caps (Archivo Black on VIDPOD, brand bold otherwise), tracking -0.02em, line pitch 1.3x cap height, widest line fitted to 920 px. The head (base.face.hook_top or top) covers the lower 55 % of the last line's caps. Fill in the picked colour with a three-step glow of the same colour (0.05em at 90 %, 0.2em at 55 %, 0.55em at 28 %). Each line lands on its spoken word: opacity 0 to 1, scale 1.07 to 1, blur 6 to 0 px over 0.32 s expo.out; the stack drifts 1 to 1.03 linear; a new hook line swaps the stack (0.14 s fade). Captions: the spoken words, lowercase, brand bold 84 px white with a soft shadow, centred at y 1330, three words at a time, each word on its timestamp. Headroom: if the clip is framed too tight for the layout, the plate and its person matte move down together by the amount needed (max 420 px) for the whole hook; the gap above is the plate's top rows above the head, flipped and stretched, blur 3 px. It eases back over 0.5 s power2.inOut, starting 0.55 s before the hook ends.",
       "framing": {
        "canvas": "1080x1920",
        "safe_box": {
         "x0": 135,
         "x1": 945,
         "y0": 250,
-        "y1": 1500,
-        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+        "y1": 1500
        },
-       "y_centre_px": 1150,
-       "size_px": 220,
-       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+       "placement": "Fixed by the renderer from base.face",
+       "keyword": "cap top of the last line = head top - 0.45 x cap height; first line cap top never above y 64",
+       "captions_y_px": 1330
       },
       "timings": {
+       "segment": "hook section segment",
+       "rule": "keywords on their spoken word; stack fades 0.2 s from 0.22 s before the end",
+       "in": "0.32 s expo.out",
+       "drift": "scale 1 to 1.03 linear",
+       "out": "opacity 0.2 s power2.in",
        "segment_s": [
         0,
         6.68
-       ],
-       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
-       "detail": "Per line: lead words top-left of the hero, follow words bottom-right; small words y 12 to 0 over 0.16 s power2.out; hero scale 1.12 to 1, blur 8 to 0 over 0.2 s expo.out with a hero-colour glow; stacks hard-cut line to line."
+       ]
+      },
+      "colour_roles": [
+       "Big word colour"
+      ]
+     },
+     "no_position": true
+    },
+    {
+     "id": "hk-quote-box",
+     "code": "HOOK-02",
+     "label": "Quote box, speaker in front",
+     "best_for": "Their line in a pale box at the top, the speaker's head coming up in front of its edge, a big stacked label beside them.",
+     "energy": 2,
+     "defaults": {
+      "font": "brand",
+      "size": 92,
+      "colour": "white",
+      "colour2": "dark",
+      "case": "spoken"
+     },
+     "kind": "Holding",
+     "registry": "testimonial-proof-card / cap.boxed-line",
+     "source": "Podcast reel 'Addictions are an effort to kill hope' (mattfradd); REFERENCE-SPEC.md H4",
+     "how": "The whole hook line in brand bold, sentence case, line-height 1.06, tracking -0.01em, left aligned, balanced over two lines (three when two would drop the type below 78 px), size up to 92 px. Box: the picked colour (White uses the brand's light paper), radius 0.07em, padding 0.2em 0.3em 0.24em, left edge x 54, hugging the text; soft shadow 0 14px 40px at 18 %. The box's lowest quarter sits behind the head (box top = head top + 0.24 x box height - box height, never above y 150). Label: the role half of hook_label (after the comma), white brand bold up to the quote size, stacked in 1 to 3 rows (whichever runs biggest, no lone short word), left x 60, starting 0.22em under the box, kept clear of the face (right edge <= face.x - 0.36 r), soft shadow. Motion: box scaleY 0 to 1 from the top over 0.3 s power3.out at +0.06 s; lines rise in masks (yPercent 105 to 0, 0.32 s power3.out, 0.06 s apart); label rows slide x -26 to 0 with opacity, 0.3 s power3.out, 0.07 s apart from +0.3 s; holds; fades out. Headroom: if the clip is framed too tight for the layout, the plate and its person matte move down together by the amount needed (max 420 px) for the whole hook; the gap above is the plate's top rows above the head, flipped and stretched, blur 3 px. It eases back over 0.5 s power2.inOut, starting 0.55 s before the hook ends.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-hooks.js R['hk-quote-box']",
+      "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
+      "layers": [
+       "plate video",
+       "quote box (under layer)",
+       "person matte",
+       "label (over layer)"
+      ],
+      "needs_matte": true,
+      "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
+      "registry": "testimonial-proof-card / cap.boxed-line",
+      "how": "The whole hook line in brand bold, sentence case, line-height 1.06, tracking -0.01em, left aligned, balanced over two lines (three when two would drop the type below 78 px), size up to 92 px. Box: the picked colour (White uses the brand's light paper), radius 0.07em, padding 0.2em 0.3em 0.24em, left edge x 54, hugging the text; soft shadow 0 14px 40px at 18 %. The box's lowest quarter sits behind the head (box top = head top + 0.24 x box height - box height, never above y 150). Label: the role half of hook_label (after the comma), white brand bold up to the quote size, stacked in 1 to 3 rows (whichever runs biggest, no lone short word), left x 60, starting 0.22em under the box, kept clear of the face (right edge <= face.x - 0.36 r), soft shadow. Motion: box scaleY 0 to 1 from the top over 0.3 s power3.out at +0.06 s; lines rise in masks (yPercent 105 to 0, 0.32 s power3.out, 0.06 s apart); label rows slide x -26 to 0 with opacity, 0.3 s power3.out, 0.07 s apart from +0.3 s; holds; fades out. Headroom: if the clip is framed too tight for the layout, the plate and its person matte move down together by the amount needed (max 420 px) for the whole hook; the gap above is the plate's top rows above the head, flipped and stretched, blur 3 px. It eases back over 0.5 s power2.inOut, starting 0.55 s before the hook ends.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500
+       },
+       "placement": "Fixed by the renderer from base.face",
+       "box": "left x 54, max width 972, top >= y 150",
+       "label": "left x 60, under the box"
+      },
+      "timings": {
+       "segment": "hook section segment",
+       "in": "box 0.3 s power3.out, lines 0.32 s, label 0.3 s",
+       "hold": "whole hook",
+       "out": "opacity 0.2 s power2.in, 0.22 s before the end",
+       "segment_s": [
+        0,
+        6.68
+       ]
+      },
+      "colour_roles": [
+       "Box colour",
+       "Text colour"
+      ]
+     },
+     "no_position": true
+    },
+    {
+     "id": "hk-mixed-stack",
+     "code": "HOOK-03",
+     "label": "Mixed-scale stack",
+     "best_for": "One huge glowing keyword over the chest, the small words tucked into its gaps, built as they speak.",
+     "energy": 4,
+     "defaults": {
+      "font": "brand",
+      "size": 230,
+      "colour": "white",
+      "case": "spoken",
+      "y": 1150
+     },
+     "kind": "Kinetic",
+     "registry": "caption-editorial-emphasis + cap.stack-build",
+     "source": "Tommy's Pin 0-1.7 s 'If the / Prospects / have to / meet you' (PaidPro Digital); REFERENCE-SPEC.md H1",
+     "how": "Per hook line with a *keyword*: the keyword in brand bold, tracking -0.03em, up to 230 px and fitted to 900 px; small words at 0.36x in brand bold white, tracking -0.01em, 94 % opacity, soft dark shadow. The keyword's glyphs are measured: lead words go top left, sitting down into the ascender zone over a run of x-height letters when one is wide enough (else their baseline kisses the cap line); more lead words (or long follow words) go top right the same way; follow words go under the right end where there are no descenders. Rows that would touch step a line up (above) or down (below). Glow: a blurred copy of the keyword (blur 0.09em, opacity 0.95 then 0.6) under the sharp word, plus a soft dark bloom (radial, 34 % at the centre) behind the stack so it reads on light clothes. Motion: small words opacity 0 to 0.94, y 10 to 0 over 0.14 s power2.out on their words; keyword scale 1.12 to 1, blur 8 to 0, opacity 0 to 1 over 0.22 s expo.out, glow pulse; stacks hard cut to the next line; a stack never appears more than 1.8 s before its keyword.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-hooks.js R['hk-mixed-stack']",
+      "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
+      "layers": [
+       "plate video",
+       "stack (over layer)"
+      ],
+      "needs_matte": false,
+      "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
+      "registry": "caption-editorial-emphasis + cap.stack-build",
+      "how": "Per hook line with a *keyword*: the keyword in brand bold, tracking -0.03em, up to 230 px and fitted to 900 px; small words at 0.36x in brand bold white, tracking -0.01em, 94 % opacity, soft dark shadow. The keyword's glyphs are measured: lead words go top left, sitting down into the ascender zone over a run of x-height letters when one is wide enough (else their baseline kisses the cap line); more lead words (or long follow words) go top right the same way; follow words go under the right end where there are no descenders. Rows that would touch step a line up (above) or down (below). Glow: a blurred copy of the keyword (blur 0.09em, opacity 0.95 then 0.6) under the sharp word, plus a soft dark bloom (radial, 34 % at the centre) behind the stack so it reads on light clothes. Motion: small words opacity 0 to 0.94, y 10 to 0 over 0.14 s power2.out on their words; keyword scale 1.12 to 1, blur 8 to 0, opacity 0 to 1 over 0.22 s expo.out, glow pulse; stacks hard cut to the next line; a stack never appears more than 1.8 s before its keyword.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500
+       },
+       "y_centre_px": 1150,
+       "size_px": 230,
+       "placement": "Position control (default chest height, y 1150)"
+      },
+      "timings": {
+       "segment": "hook section segment",
+       "in": "small 0.14 s power2.out, keyword 0.22 s expo.out",
+       "cut": "hard cut between stacks",
+       "out": "opacity 0.2 s power2.in, 0.22 s before the end",
+       "segment_s": [
+        0,
+        6.68
+       ]
       },
       "colour_roles": [
        "Big word colour",
@@ -1275,22 +1347,23 @@
      }
     },
     {
-     "id": "hook-behind",
-     "code": "HOOK-03",
-     "label": "Behind her",
-     "best_for": "One huge word sits high, tucked behind the top of her head; the whole line plays small in front.",
-     "energy": 4,
+     "id": "hk-highlight-bars",
+     "code": "HOOK-04",
+     "label": "Highlight bars",
+     "best_for": "The Numbers Game look: two to four short lines, each on a flat colour bar behind its lower half.",
+     "energy": 3,
      "defaults": {
       "font": "brand",
-      "size": 240,
-      "y": 300,
-      "colour": "white",
-      "case": "upper"
+      "size": 128,
+      "colour": "primary",
+      "colour2": "dark",
+      "case": "spoken",
+      "y": 1150
      },
-     "kind": "Kinetic",
-     "registry": "caption-parallax-layers / hook.behind-subject",
-     "source": "style-board/REFERENCE-SPEC.md H2",
-     "how": "Layers: plate, giant word, person matte, small front line. The giant word is placed by base.face.top: its bottom edge tucks 36 % of its height behind the top of her head, so most of it reads above her. Each giant word scale 1.08 to 1, opacity 0 to 1 over 0.32 s expo.out on its spoken word; stack drifts 1 to 1.03 linear; front line karaoke 0.3 to 1.",
+     "kind": "Holding",
+     "registry": "inline-highlight / hook.headline-bar",
+     "source": "The Numbers Game reels (thenumbersgamepodcast grid); REFERENCE-SPEC.md H3",
+     "how": "The whole hook line in brand bold, tracking -0.01em, balanced into lines of about 16 characters (2 to 4), up to 128 px, fitted to 920 px, centred, line pitch 1.02em. Text white with a dark edge (0 0.035em 0 and 0 0 0.04em at 60 % ink, soft drop shadow). Each bar is flat (no radius), from 0.86 x-height above the baseline to 0.25em below it, 0.12em wider than the line on the left and 0.14em on the right. Top half of the lines on the first colour, the rest on the second (2 lines 1/1, 3 lines 1/2, 4 lines 2/2). Motion: each bar scaleX 0 to 1 from the left over 0.3 s power4.out, lines 0.1 s apart; its text rises 0.18em with opacity over 0.26 s power3.out, 0.06 s after its bar; holds; fades out.",
      "use_cases": [
       "case-study",
       "podcast-snippet",
@@ -1298,184 +1371,123 @@
       "teaser"
      ],
      "recipe": {
-      "renderer": "studio-looks.js R['hook-behind']",
-      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "renderer": "studio-hooks.js R['hk-highlight-bars']",
+      "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
       "layers": [
-       "plate video (depth: colour half of media/alisha-depth.mp4)",
-       "text layer",
-       "person matte (bottom half of alisha-depth.mp4)",
-       "front layer"
+       "plate video",
+       "bars and text (over layer)"
       ],
-      "needs_matte": true,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
-      "registry": "caption-parallax-layers / hook.behind-subject",
-      "how": "Layers: plate, giant word, person matte, small front line. The giant word is placed by base.face.top: its bottom edge tucks 36 % of its height behind the top of her head, so most of it reads above her. Each giant word scale 1.08 to 1, opacity 0 to 1 over 0.32 s expo.out on its spoken word; stack drifts 1 to 1.03 linear; front line karaoke 0.3 to 1.",
+      "needs_matte": false,
+      "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
+      "registry": "inline-highlight / hook.headline-bar",
+      "how": "The whole hook line in brand bold, tracking -0.01em, balanced into lines of about 16 characters (2 to 4), up to 128 px, fitted to 920 px, centred, line pitch 1.02em. Text white with a dark edge (0 0.035em 0 and 0 0 0.04em at 60 % ink, soft drop shadow). Each bar is flat (no radius), from 0.86 x-height above the baseline to 0.25em below it, 0.12em wider than the line on the left and 0.14em on the right. Top half of the lines on the first colour, the rest on the second (2 lines 1/1, 3 lines 1/2, 4 lines 2/2). Motion: each bar scaleX 0 to 1 from the left over 0.3 s power4.out, lines 0.1 s apart; its text rises 0.18em with opacity over 0.26 s power3.out, 0.06 s after its bar; holds; fades out.",
       "framing": {
        "canvas": "1080x1920",
        "safe_box": {
         "x0": 135,
         "x1": 945,
         "y0": 250,
-        "y1": 1500,
-        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+        "y1": 1500
        },
-       "y_centre_px": 300,
-       "size_px": 240,
-       "placement": "Fixed by the renderer"
+       "y_centre_px": 1150,
+       "size_px": 128,
+       "placement": "Position control (default lower middle, y 1150)"
       },
       "timings": {
+       "segment": "hook section segment",
+       "in": "bars 0.3 s power4.out, 0.1 s stagger",
+       "hold": "whole hook",
+       "out": "opacity 0.2 s power2.in, 0.22 s before the end",
        "segment_s": [
         0,
         6.68
-       ],
-       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
-       "detail": "Layers: plate, giant word, person matte, small front line. The giant word is placed by base.face.top: its bottom edge tucks 36 % of its height behind the top of her head, so most of it reads above her. Each giant word scale 1.08 to 1, opacity 0 to 1 over 0.32 s expo.out on its spoken word; stack drifts 1 to 1.03 linear; front line karaoke 0.3 to 1."
+       ]
       },
       "colour_roles": [
-       "Big word colour",
-       "Text colour"
+       "Top bar colour",
+       "Bottom bar colour"
+      ]
+     }
+    },
+    {
+     "id": "hk-serif-keyword",
+     "code": "HOOK-05",
+     "label": "Serif keyword",
+     "best_for": "Editorial pair: the lead words in heavy caps, the keyword huge in a serif behind the speaker's head.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 260,
+      "colour": "white",
+      "case": "lower"
+     },
+     "kind": "Editorial",
+     "registry": "mk-emphasis-type + caption-parallax-layers",
+     "source": "Pinterest editorial reel 'THE HARDEST PART OF MAKING CONTENT ISN'T posting...' (jordanssarchives) and serif keyword reels (refs/hooks 02, 03)",
+     "how": "Per hook line with a *keyword*: the keyword in the brand's serif or script display face (Brand Display on @pilates; DM Serif Display where the brand display is a heavy sans), tracking -0.02em, up to 260 px fitted to 960 px, in the picked colour, soft shadow. Lead words in heavy caps (Archivo Black on VIDPOD), white (or the second colour), 0.46x the keyword size (64 to 124 px), one or two centred lines, pitch 1.22x cap height. The keyword's baseline sits 0.24 x-height below the head top so the hair clips the middle letters; the caps lines sit just above its ascenders (0.12 of the ascender zone tucked). Layers: keyword under the matte, caps in front. Motion: caps lines rise in masks (yPercent 105 to 0, 0.42 s expo.out) on their spoken words; the keyword opacity 0 to 1, blur 14 to 0 px, tracking 0.03em to -0.02em over 0.45 s power2.out on its word; a new line swaps the pair (0.16 s fade). Headroom: if the clip is framed too tight for the layout, the plate and its person matte move down together by the amount needed (max 420 px) for the whole hook; the gap above is the plate's top rows above the head, flipped and stretched, blur 3 px. It eases back over 0.5 s power2.inOut, starting 0.55 s before the hook ends.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-hooks.js R['hk-serif-keyword']",
+      "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
+      "layers": [
+       "plate video",
+       "serif keyword (under layer)",
+       "person matte",
+       "caps lines (over layer)"
+      ],
+      "needs_matte": true,
+      "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
+      "registry": "mk-emphasis-type + caption-parallax-layers",
+      "how": "Per hook line with a *keyword*: the keyword in the brand's serif or script display face (Brand Display on @pilates; DM Serif Display where the brand display is a heavy sans), tracking -0.02em, up to 260 px fitted to 960 px, in the picked colour, soft shadow. Lead words in heavy caps (Archivo Black on VIDPOD), white (or the second colour), 0.46x the keyword size (64 to 124 px), one or two centred lines, pitch 1.22x cap height. The keyword's baseline sits 0.24 x-height below the head top so the hair clips the middle letters; the caps lines sit just above its ascenders (0.12 of the ascender zone tucked). Layers: keyword under the matte, caps in front. Motion: caps lines rise in masks (yPercent 105 to 0, 0.42 s expo.out) on their spoken words; the keyword opacity 0 to 1, blur 14 to 0 px, tracking 0.03em to -0.02em over 0.45 s power2.out on its word; a new line swaps the pair (0.16 s fade). Headroom: if the clip is framed too tight for the layout, the plate and its person matte move down together by the amount needed (max 420 px) for the whole hook; the gap above is the plate's top rows above the head, flipped and stretched, blur 3 px. It eases back over 0.5 s power2.inOut, starting 0.55 s before the hook ends.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500
+       },
+       "placement": "Fixed by the renderer from base.face",
+       "caps_top_min_px": 150
+      },
+      "timings": {
+       "segment": "hook section segment",
+       "in": "caps 0.42 s expo.out, keyword 0.45 s power2.out",
+       "out": "opacity 0.2 s power2.in, 0.22 s before the end",
+       "segment_s": [
+        0,
+        6.68
+       ]
+      },
+      "colour_roles": [
+       "Keyword colour",
+       "Caps colour"
       ]
      },
      "no_position": true
     },
     {
-     "id": "hook-quote",
-     "code": "HOOK-04",
-     "label": "Quote box",
-     "best_for": "Her words on a cream card with a stacked label.",
-     "energy": 2,
-     "defaults": {
-      "font": "brand",
-      "size": 76,
-      "y": 1250,
-      "colour": "primary",
-      "case": "spoken"
-     },
-     "kind": "Holding",
-     "registry": "testimonial-proof-card / cap.boxed-line",
-     "source": "style-board/REFERENCE-SPEC.md H4",
-     "how": "Card scaleY 0 to 1 over 0.24 s power3.out; label lines y 14 to 0 stagger 0.08; quote words type on from 18 % to full on their timestamps.",
-     "use_cases": [
-      "case-study",
-      "podcast-snippet",
-      "trailer",
-      "teaser"
-     ],
-     "recipe": {
-      "renderer": "studio-looks.js R['hook-quote']",
-      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
-      "layers": [
-       "plate video",
-       "overlay layer"
-      ],
-      "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
-      "registry": "testimonial-proof-card / cap.boxed-line",
-      "how": "Card scaleY 0 to 1 over 0.24 s power3.out; label lines y 14 to 0 stagger 0.08; quote words type on from 18 % to full on their timestamps.",
-      "framing": {
-       "canvas": "1080x1920",
-       "safe_box": {
-        "x0": 135,
-        "x1": 945,
-        "y0": 250,
-        "y1": 1500,
-        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
-       },
-       "y_centre_px": 1250,
-       "size_px": 76,
-       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
-      },
-      "timings": {
-       "segment_s": [
-        0,
-        6.68
-       ],
-       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
-       "detail": "Card scaleY 0 to 1 over 0.24 s power3.out; label lines y 14 to 0 stagger 0.08; quote words type on from 18 % to full on their timestamps."
-      },
-      "colour_roles": [
-       "Key word colour",
-       "Card colour"
-      ]
-     }
-    },
-    {
-     "id": "hook-wordbyword",
-     "code": "HOOK-05",
-     "label": "Word by word",
-     "best_for": "The whole line builds as she says it.",
+     "id": "hk-headline-band",
+     "code": "HOOK-06",
+     "label": "Headline band, head pops out",
+     "best_for": "A solid band across the top holds the line in heavy caps; the speaker's head breaks up through it.",
      "energy": 3,
      "defaults": {
       "font": "brand",
-      "size": 112,
-      "y": 1180,
-      "colour": "white",
-      "case": "spoken"
-     },
-     "kind": "Kinetic",
-     "registry": "hook.word-by-word",
-     "source": "style-board/REFERENCE-SPEC.md H6 (full-hook variant)",
-     "how": "Every word y 16 to 0 and opacity in over 0.14 s power2.out on its timestamp; emphasis words scale 1.15 to 1 expo.out in the hero colour; holds.",
-     "use_cases": [
-      "case-study",
-      "podcast-snippet",
-      "trailer",
-      "teaser"
-     ],
-     "recipe": {
-      "renderer": "studio-looks.js R['hook-wordbyword']",
-      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
-      "layers": [
-       "plate video",
-       "overlay layer"
-      ],
-      "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
-      "registry": "hook.word-by-word",
-      "how": "Every word y 16 to 0 and opacity in over 0.14 s power2.out on its timestamp; emphasis words scale 1.15 to 1 expo.out in the hero colour; holds.",
-      "framing": {
-       "canvas": "1080x1920",
-       "safe_box": {
-        "x0": 135,
-        "x1": 945,
-        "y0": 250,
-        "y1": 1500,
-        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
-       },
-       "y_centre_px": 1180,
-       "size_px": 112,
-       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
-      },
-      "timings": {
-       "segment_s": [
-        0,
-        6.68
-       ],
-       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
-       "detail": "Every word y 16 to 0 and opacity in over 0.14 s power2.out on its timestamp; emphasis words scale 1.15 to 1 expo.out in the hero colour; holds."
-      },
-      "colour_roles": [
-       "Text colour"
-      ]
-     }
-    },
-    {
-     "id": "hook-serif",
-     "code": "HOOK-06",
-     "label": "Calm title",
-     "best_for": "A quiet serif title card that holds.",
-     "energy": 1,
-     "defaults": {
-      "font": "brand",
-      "size": 132,
-      "y": 1180,
-      "colour": "white",
-      "case": "spoken"
+      "size": 150,
+      "colour": "dark",
+      "colour2": "white",
+      "case": "upper"
      },
      "kind": "Holding",
-     "registry": "titlecard-lockup / hook.title-card-fade",
-     "source": "style-board/REFERENCE-SPEC.md H5",
-     "how": "Lines opacity, y 22 to 0, letter-spacing 0.06em to 0 and blur 10 to 0 over 1.1 s power2.out, 0.28 s apart; accent rule scaleX 0 to 1 over 0.7 s.",
+     "registry": "hook.stamp-box / out-of-frame pop",
+     "source": "Pinterest out-of-frame podcast reel 'IS IT POSSIBLE TO PREDICT THE NEXT' (crystfilm)",
+     "how": "The whole hook line in heavy caps (Archivo Black on VIDPOD), tracking -0.02em, left aligned at x 64, balanced into 3 lines (2 for four words or fewer); each line as big as fits 952 px up to 150 px, so lines vary in size like the reference; line gap 0.2x cap. Band: full width from the top of frame to 46 px under the text, the second colour, soft shadow. The plate and matte move down so the head top lands 65 % into the last line's caps (hair over its lower third); band and plate arrive together (band yPercent -101 to 0, plate 0 to its offset, 0.5 s power3.out) so the gap is always under the band. Lines rise in masks (yPercent 108 to 0, 0.4 s expo.out) on their first spoken word, at least 0.09 s apart. Out: band, text and plate return together over 0.36 s power2.in, 0.38 s before the hook ends.",
      "use_cases": [
       "case-study",
       "podcast-snippet",
@@ -1483,41 +1495,45 @@
       "teaser"
      ],
      "recipe": {
-      "renderer": "studio-looks.js R['hook-serif']",
-      "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
+      "renderer": "studio-hooks.js R['hk-headline-band']",
+      "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
       "layers": [
-       "plate video",
-       "overlay layer"
+       "plate video (moved down)",
+       "band and headline (under layer)",
+       "person matte (moved with the plate)"
       ],
-      "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
-      "registry": "titlecard-lockup / hook.title-card-fade",
-      "how": "Lines opacity, y 22 to 0, letter-spacing 0.06em to 0 and blur 10 to 0 over 1.1 s power2.out, 0.28 s apart; accent rule scaleX 0 to 1 over 0.7 s.",
+      "needs_matte": true,
+      "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
+      "registry": "hook.stamp-box / out-of-frame pop",
+      "how": "The whole hook line in heavy caps (Archivo Black on VIDPOD), tracking -0.02em, left aligned at x 64, balanced into 3 lines (2 for four words or fewer); each line as big as fits 952 px up to 150 px, so lines vary in size like the reference; line gap 0.2x cap. Band: full width from the top of frame to 46 px under the text, the second colour, soft shadow. The plate and matte move down so the head top lands 65 % into the last line's caps (hair over its lower third); band and plate arrive together (band yPercent -101 to 0, plate 0 to its offset, 0.5 s power3.out) so the gap is always under the band. Lines rise in masks (yPercent 108 to 0, 0.4 s expo.out) on their first spoken word, at least 0.09 s apart. Out: band, text and plate return together over 0.36 s power2.in, 0.38 s before the hook ends.",
       "framing": {
        "canvas": "1080x1920",
        "safe_box": {
         "x0": 135,
         "x1": 945,
         "y0": 250,
-        "y1": 1500,
-        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+        "y1": 1500
        },
-       "y_centre_px": 1180,
-       "size_px": 132,
-       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+       "placement": "Fixed by the renderer from base.face",
+       "text_left_px": 64,
+       "text_top_px": "196 (150 minimum)"
       },
       "timings": {
+       "segment": "hook section segment",
+       "in": "band + plate 0.5 s power3.out",
+       "lines": "0.4 s expo.out on their words",
+       "out": "0.36 s power2.in, 0.38 s before the end",
        "segment_s": [
         0,
         6.68
-       ],
-       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
-       "detail": "Lines opacity, y 22 to 0, letter-spacing 0.06em to 0 and blur 10 to 0 over 1.1 s power2.out, 0.28 s apart; accent rule scaleX 0 to 1 over 0.7 s."
+       ]
       },
       "colour_roles": [
-       "Text colour"
+       "Text colour",
+       "Band colour"
       ]
-     }
+     },
+     "no_position": true
     }
    ],
    "scope": "type"
@@ -2657,7 +2673,8 @@
     "align",
     "colour",
     "case",
-    "motion"
+    "motion",
+    "shadow"
    ],
    "size_range": [
     52,
@@ -4465,14 +4482,6 @@
    "case": "spoken",
    "lines": 1
   },
-  "hook": {
-   "style": "hook-serif",
-   "font": "brand",
-   "size": 132,
-   "y": 1180,
-   "colour": "white",
-   "case": "spoken"
-  },
   "moves": [
    {
     "style": "move-punch"
@@ -4501,6 +4510,13 @@
   },
   "transitions": {
    "style": "tr-dissolve"
+  },
+  "hook": {
+   "style": "hk-serif-keyword",
+   "font": "brand",
+   "size": 260,
+   "colour": "white",
+   "case": "lower"
   }
  }
 }

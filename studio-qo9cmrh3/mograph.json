@@ -1,0 +1,337 @@
+{
+  "version": "1 (7 Nov 2026)",
+  "what": "Motion graphics STYLES for VidPod Studio: whole ways of making graphics, not single looks. Each style says what it is, which VIDPOD jobs it suits, what it needs from the client, what pieces we can make with it, how it is built, and the motion rules measured from a published build. Rendered by studio-mograph.js (window.VidPodMograph). How to add a style: MOGRAPH.md.",
+  "source": "The Jackett Ranch, Part 1 (published 5 Oct 2026, EXPORTS/USA Property_V5.4_EDIT.mp4) and Part 2 (published 7 Oct 2026, EXPORTS/USA Property_Part 2_Intro_V5.1.mp4). Learnings read: Brain/Tommy/Tommy Jackett Content/The Jackett Ranch/Learnings/ (RETRO + STYLE NOTES, RETRO - PART 2 UPDATE, STORY MECHANISM, BOARD STYLE samples menu, BRAND BOARD). Code read: hyperframes/compositions/usa-property-shared (engine.py, template.tpl), usa-property-pt2 (gen_gfx.py, gfx/OPEN_dad, DRIVE_fifty, BETH_quote, TITLE_ranch, END_ranch3), usa-property-v5/gfx/GFX_01_offer.",
+  "fps": 25,
+  "canvas": "1080x1920 (vertical). Wide versions follow Tools/Video Production/VERTICAL-TO-WIDE.md.",
+  "skin": {
+    "note": "Every style is built in the Ranch's roles and re-skinned per client from board.json brand. Override any role per client with an optional board.json brand.mograph object (same keys).",
+    "roles": {
+      "ground": { "ranch": "#16284a navy board", "default": "brand.ink", "use": "the board, the sky" },
+      "ground2": { "ranch": "#0e1b33 deep navy", "default": "ground darkened 35 %", "use": "shadow side, hills, night" },
+      "grid": { "ranch": "cream lines at 7 % (240 px) and 3.5 % (48 px)", "default": "brand.light at the same opacities", "use": "the board grid" },
+      "strip": { "ranch": "#efe5cd cream strip, #17140f ink text", "default": "brand.light strip, brand.ink text", "use": "most strips, paper, subtitles" },
+      "hot": { "ranch": "#c5352b red strip, cream text", "default": "brand.accent strip, readable ink", "use": "the key strip, one hot word" },
+      "inkstrip": { "ranch": "#17140f ink strip, cream text", "default": "brand.ink strip, brand.light text", "use": "dark strips" },
+      "mark": { "ranch": "#f6c915 yellow", "default": "brand.accent (brands with a second colour set brand.mograph.mark)", "use": "tape, hand-drawn arrows, highlighter, small tags, the one big number" },
+      "display": { "ranch": "Anton, capitals", "default": "brand.font.display (Archivo Black on VIDPOD)", "use": "every strip, sign, subtitle and number" },
+      "hand": { "ranch": "Permanent Marker", "default": "brand.font.family bold italic (no handwriting face self-hosted yet)", "use": "handwriting and arrow labels only" },
+      "shadow": { "ranch": "hard offset 8 to 10 px right, 10 to 14 px down, black 40 to 45 %, no blur", "default": "same", "use": "every strip and card" }
+    }
+  },
+  "jobs": {
+    "case-study": "Client case study (e.g. @pilates conference, Inovayt): interview-led, vertical, facts and wins on screen.",
+    "podcast-snippet": "Podcast snippet or Short (e.g. The Numbers Game): talking heads, numbers and claims land on the words.",
+    "trailer": "Trailer or promo: fast setup, stacked payoff, title and end card.",
+    "brand-film": "Brand or story film (e.g. The Jackett Ranch itself): voice-over led, a world and a board the camera travels."
+  },
+  "styles": [
+    {
+      "id": "box-style",
+      "code": "MG-01",
+      "name": "Box style",
+      "tagline": "Words in hard-edged boxes that land on the spoken word.",
+      "what": "Heavy capitals set in flat, tight boxes (strips) with a hard offset shadow, stacked line by line from the top left as the words are said. One key box in the hot colour; a small tag can stamp on; the stack stays up, then drops away together. Over live footage, over a freeze-frame cut-out, or on the brand board. Tommy, 7 Nov 2026: \"the box style graphics worked really well.\"",
+      "proven_in": "Part 1 hook (offer stack, \"That's exactly what my dad did\" with the cut-out), Part 1 counter strips (\"250,000 ACRES\", \"ABOUT $50 AN ACRE\"), Part 2 open (\"In the 1970s\", \"$5,000\", \"He's never seen it\"), Part 2 Beth quote box, Part 2 subtitles (cream box, ink capitals).",
+      "when": [
+        { "job": "case-study", "fit": "strong", "how": "The client's win as a strip stack on the line that says it; the number as the hot box; a stacked payoff to close." },
+        { "job": "podcast-snippet", "fit": "strong", "how": "The claim or number lands in boxes over the talking head; box subtitles for the rest." },
+        { "job": "trailer", "fit": "strong", "how": "Freeze, cut-out, three facts on strips, stacked payoff, then the title." },
+        { "job": "brand-film", "fit": "strong", "how": "Voice-over facts on strips over cut-outs and the board; it is the base layer of the Ranch look." }
+      ],
+      "needs": [
+        { "item": "Words timed to the voice", "required": true, "note": "Word-by-word transcript (studio words.json or the transcription pipeline). Every box lands on its word." },
+        { "item": "Brand colours: a light, a dark and one hot colour", "required": true, "note": "From board.json brand (light, ink, accent). A second highlight colour is optional (brand.mograph.mark)." },
+        { "item": "A heavy display face", "required": true, "note": "Capitals that read in a box (Anton on the Ranch, Archivo Black on VIDPOD). Self-hosted in fonts/." },
+        { "item": "The footage (talking head or b-roll)", "required": true, "note": "Over a talking head the boxes sit low left (x 60, y 1110 to 1470, as the Ranch lower strips at y 1150); on the board or a freeze they stack top left (x 60, y 262)." },
+        { "item": "A person cut-out (for the freeze piece)", "required": false, "note": "From the clip's person matte (depth.mp4) at the freeze time, or a photo cut out with person_cutout.swift. Never Adobe." },
+        { "item": "Photos to pin (for the facts piece)", "required": false, "note": "Real, full-size photos of the thing being talked about. Real objects get real texture." },
+        { "item": "The words to put in boxes", "required": true, "note": "Short lines, 2 to 5 words, agreed in chat. Fewer words wins (Part 3 boards were \"too much text\")." }
+      ],
+      "creates": [
+        { "id": "strip-stack", "code": "MG-01.1", "name": "Strip stack", "what": "2 to 4 lines stacked on the left, each sliding in on its word; the key line slams on in the hot colour.", "ranch": "Part 1 0:02 offer stack; Part 2 0:04 \"In the 1970s\"", "demo_at": 0.1 },
+        { "id": "small-tag", "code": "MG-01.2", "name": "Small tag", "what": "A short tag in the mark colour stamps on beside a strip (scale 2 to 1).", "ranch": "Part 1 \"+ TAXES\", \"ABOUT $50 AN ACRE\"", "demo_at": 3.6 },
+        { "id": "cutout-freeze", "code": "MG-01.3", "name": "Freeze and cut-out", "what": "The picture freezes, the background drops to the brand board, the person lifts off with a hard offset shadow and steps aside, facts land on strips beside them, then it all drops away back to live footage.", "ranch": "Part 2 OPEN_dad (0:01 to 0:11); Part 1 \"That's exactly what my dad did\"", "demo_at": 6.6 },
+        { "id": "counter-strip", "code": "MG-01.4", "name": "Counter strip", "what": "A strip whose number counts up to the said figure, rounded as it rolls.", "ranch": "Part 1 \"64,000 / 247,000 / 250,000 ACRES\"; Part 2 \"1981 to 2026\"", "demo_at": null },
+        { "id": "stamp-tag", "code": "MG-01.5", "name": "Stamp", "what": "One word or number slams on, tilted a few degrees, in the mark colour.", "ranch": "Part 2 \"$5,000\"", "demo_at": 11.6 },
+        { "id": "stacked-payoff", "code": "MG-01.6", "name": "Stacked payoff", "what": "Three short boxes slam on one after another, each at its own small tilt, on the last words of the line.", "ranch": "Part 2 \"HE'S / NEVER / SEEN IT.\"", "demo_at": 13.9 },
+        { "id": "quote-box", "code": "MG-01.7", "name": "Quote box", "what": "A card sized to the text with a true 50 px margin all round, one big opening quote mark on its corner, a name tag across the speaker; one word picked out in the hot colour.", "ranch": "Part 2 BETH_quote (0:56)", "demo_at": null },
+        { "id": "box-subtitles", "code": "MG-01.8", "name": "Box subtitles", "what": "Subtitles as light strips with dark capitals, low centre, footage only.", "ranch": "Part 2 subtitles (cream strip, black Anton, Y -143 in Resolve)", "demo_at": null, "studio": "SUB-03 Moving box is the studio's nearest; a strip subtitle is the Ranch version" },
+        { "id": "end-card", "code": "MG-01.9", "name": "End card", "what": "A big strip question, three typewriter lines, two hot strips with the ask, the contact in the mark colour.", "ranch": "Part 2 END_what-now; Part 1 \"Your American dream is one email away\"", "demo_at": null }
+      ],
+      "build_path": {
+        "engine": [
+          "hyperframes/compositions/usa-property-pt2/gen_gfx.py: HEAD template + strip(name, lines) + card() + add(); helpers slam(), slide(), pop(), out()",
+          "hyperframes/compositions/usa-property-pt2/gfx/OPEN_dad/index.html: freeze, cut-out, strips, drop-away, stacked payoff",
+          "hyperframes/compositions/usa-property-v5/gfx/GFX_01_offer/index.html: the offer strip stack",
+          "hyperframes/compositions/usa-property-shared/template.tpl: .kin .ln strip lines, .tag, .slam, .strip classes"
+        ],
+        "registry": [
+          "lower-third-bild (tight-fit text boxes with a hard drop shadow: nearest registry piece)",
+          "lt-bold-block (dark block wipes in, name slams up)",
+          "freeze-frame-dressing (paper, tape and flash on a freeze or cut-out)",
+          "count-up / number-wheel (counter strip)",
+          "testimonial-proof-card (quote box base)"
+        ],
+        "studio": "studio-mograph.js renderers[\"box-style\"] (the demo re-skins the Ranch helpers 1:1)",
+        "render": "Each piece is its own short HyperFrames composition (1080x1920, 25 fps), alpha ProRes 4444 when it sits over footage, timed to word times; Tommy places it in Resolve."
+      },
+      "motion": [
+        { "move": "Strip slides in", "value": "x -140 to 0, opacity 0 to 1, 0.35 s (9 f), power2.out", "from": "gen_gfx.py slide(); OPEN_dad" },
+        { "move": "Strip line in (fast stack)", "value": "x -90 to 0, 0.22 s (5.5 f), power3.out, lines 0.13 s (3 f) apart", "from": "template.tpl events \"lines\"; GFX_01_offer h1/h2" },
+        { "move": "Slam (hot box, stamp)", "value": "scale 2.0 to 1 (2.2 to 2.6 on payoffs), held tilt -2 to -5 deg, 0.18 s (4.5 f), power4.in", "from": "gen_gfx.py slam(); OPEN_dad s4, n1-n3" },
+        { "move": "Pop (cards, handwriting)", "value": "scale 0.55 to 1, rotation -4 to 0 deg, 0.22 s (5.5 f), back.out(2)", "from": "gen_gfx.py pop()" },
+        { "move": "Stacked payoff", "value": "three slams 0.20 s and 0.31 s apart (5 f, 8 f), tilts -3, +2, -2 deg, scale 2.2", "from": "OPEN_dad n1, n2, n3" },
+        { "move": "Out (single box)", "value": "opacity to 0, y +40, 0.2 s (5 f), power2.in", "from": "gen_gfx.py out()" },
+        { "move": "Drop away (whole stack)", "value": "y +1900, rotation -12 / +14 deg alternating, 0.5 s (12.5 f), power2.in, 0.05 s (1 f) stagger", "from": "OPEN_dad step 3; DRIVE_fifty" },
+        { "move": "Freeze: background falls away", "value": "footage opacity to 0 over 0.3 s (7.5 f) power2.out; cut-out scale 1 to 1.08, 0.3 s back.out(1.8)", "from": "OPEN_dad step 1" },
+        { "move": "Cut-out steps aside", "value": "scale to 0.68, x +235, y +400, 0.45 s (11 f) power3.inOut", "from": "OPEN_dad step 2" },
+        { "move": "Hard offset shadow on the cut-out", "value": "masked copy offset 46 px right, 52 px down, black 60 %; scale it with the figure (15/17 px at 55 % on a 480 px pair)", "from": "Part 2 retro section 7" },
+        { "move": "Hand-drawn arrow", "value": "path stroke-dashoffset to 0 over 0.26 to 0.35 s power2.out; head 0.08 s after", "from": "OPEN_dad; GFX_01_offer" },
+        { "move": "Counter", "value": "proxy tween over the spoken figure, rounded to 10 / 100 / 1,000 so digits do not flicker", "from": "template.tpl apply()" },
+        { "move": "Timing", "value": "every box lands on its spoken word; the next graphic starts about 0.3 to 0.5 s after the last word (published cut averaged 0.31 s); any hold after that is a spare handle only", "from": "RETRO + STYLE NOTES section 2" }
+      ],
+      "look": {
+        "strip": "font-size 60 to 84 px (stack), 150 to 190 px (titles); padding 0.2 em top, 0.3 em sides, 5 px bottom; line pitch size x 1.32 + 14 px; left 60 px; top 262 px; odd/even lines indent 0 / 26 px in fast stacks",
+        "shadow": "8 px 10 px 0 rgba(0,0,0,.4) to 10 px 12 px 0 rgba(0,0,0,.45)",
+        "tilts": "headline strips -2 deg; stamps -5 deg; payoff -3 / +2 / -2 deg"
+      },
+      "rules": [
+        "Boxes land on the spoken word, never on a guess. Re-time to the recording before delivery.",
+        "One hot box per stack. The mark colour is for the one big number, tags, tape and arrows.",
+        "Fixed things stay fixed: text meant to sit still does not jitter.",
+        "Words and faces between y 250 and y 1470; about 60 px side margins.",
+        "Hand-drawn arrows and handwriting get a plain drop shadow, never a dark outline.",
+        "No yellow (mark) as a big text background; no big overlapping strips.",
+        "Build long graphics in stages with clean cut points so Tommy can trim in Resolve.",
+        "Subtle first: build the soft version, no rays or drips unless asked."
+      ],
+      "examples": [
+        { "src": "assets/mograph/ranch/box_p1_strip-stack.jpg", "caption": "Strip stack, the offer", "film": "Part 1", "at": "0:07.6" },
+        { "src": "assets/mograph/ranch/box_p1_cutout-handwriting.jpg", "caption": "Strips + cut-out + flag block", "film": "Part 1", "at": "0:15.5" },
+        { "src": "assets/mograph/ranch/box_p2_facts-pinned.jpg", "caption": "Facts on strips, pinned photo, $5,000 stamp", "film": "Part 2", "at": "0:07.6" },
+        { "src": "assets/mograph/ranch/box_p2_stacked-payoff.jpg", "caption": "Stacked payoff", "film": "Part 2", "at": "0:10.6" },
+        { "src": "assets/mograph/ranch/box_p1_counter-tag.jpg", "caption": "Counter strip + small tag", "film": "Part 1", "at": "1:04.5" },
+        { "src": "assets/mograph/ranch/box_p2_year-strips.jpg", "caption": "Year strips over footage", "film": "Part 2", "at": "0:18.5" },
+        { "src": "assets/mograph/ranch/box_p2_quote-box.jpg", "caption": "Quote box with name tag", "film": "Part 2", "at": "1:01" },
+        { "src": "assets/mograph/ranch/box_p2_subtitle-box.jpg", "caption": "Box subtitles", "film": "Part 2", "at": "0:26.5" }
+      ],
+      "demo": {
+        "renderer": "box-style", "clock": "video", "segment": [0, 16], "clip": "seated",
+        "assets": { "cutout": "assets/mograph/vidpod/seated_cutout_6.9.webp", "freeze": "assets/mograph/vidpod/seated_freeze_6.9.jpg", "freeze_at": 6.9, "how": "cut-out: base.mp4 colour + depth.mp4 person matte at 6.9 s (ffmpeg alphamerge, cwebp); freeze: base.mp4 frame at 6.9 s" },
+        "scripts_note": "Word indices into the clip's words (board.json base.words). A clip with no script here gets the generic script (sentences as strip stacks, emphasised line hot, last sentence as the payoff). lines: [first, last, kind]; kind light | hot | ink.",
+        "scripts": {
+          "seated": [
+            { "piece": "strip-stack", "lines": [[0, 2, "light"], [3, 5, "light"], [6, 7, "hot"]] },
+            { "piece": "small-tag", "tag": [10, 11], "strips": [[12, 15, "light"]] },
+            { "piece": "cutout-freeze", "at": 6.9, "step": 21, "lines": [[22, 25, "light"], [26, 26, "hot"], [28, 30, "ink"]], "cut": 10.67 },
+            { "piece": "stamp-tag", "words": [32], "out": 13.3 },
+            { "piece": "stacked-payoff", "words": [36, 37, 38], "out": 15.6 }
+          ]
+        }
+      }
+    },
+    {
+      "id": "board",
+      "code": "MG-02",
+      "name": "The board",
+      "tagline": "One big canvas; things are pinned, taped or put up on it and the camera travels between them.",
+      "what": "A single endless board in the brand ground with a fine grid. Footage sits on it as a taped photo, graphics are stations on the same board, and the camera moves between them on the cut (pull back, travel, push in). Paper notes write on as they are said, documents get a highlighter, photos are pinned or taped, and a pull-back shows the whole layout. A hybrid of a Vox-style explainer and a peel-on collage.",
+      "proven_in": "Part 1 graphics block 0:38 to 1:35 (magazine ad with highlighter, the lots, the financials note paper, \"my dad's block\" and the deed, the Forbes score pull-back); the Part 1 wide version (one seamless board).",
+      "when": [
+        { "job": "case-study", "fit": "good", "how": "The client's story as a board: their photos, a document or stat card, the footage window; travel on each beat." },
+        { "job": "podcast-snippet", "fit": "light", "how": "One station only (a note or a document) beside the talking head; anything more slows a snippet." },
+        { "job": "trailer", "fit": "good", "how": "A fast run of stations, then the pull-back to the whole board under the title." },
+        { "job": "brand-film", "fit": "strong", "how": "The spine of an explainer: every graphic is a place on one board." }
+      ],
+      "needs": [
+        { "item": "Words timed to the voice (voice-over preferred)", "required": true, "note": "Graphics follow the recorded voice; the camera moves on the cut." },
+        { "item": "Brand ground colour and a light colour", "required": true, "note": "The board is one colour everywhere: decide it before the first render." },
+        { "item": "Photos and documents, full size", "required": true, "note": "Originals, not 720 px frame grabs. Documents get a zoomed privacy check (addresses, account numbers)." },
+        { "item": "The footage", "required": true, "note": "Sits on the board as a taped photo (vertical) or a window with a light drop shadow (wide, no tape, no tilt)." },
+        { "item": "Paper and tape textures", "required": false, "note": "In the engine (paper noise SVG, torn edge, tape 230x70 at -38 deg)." },
+        { "item": "A handwriting face", "required": false, "note": "For note paper and arrows (Permanent Marker on the Ranch)." }
+      ],
+      "creates": [
+        { "id": "footage-photo", "code": "MG-02.1", "name": "Footage as a taped photo", "what": "Live footage in a light frame, taped on two corners, on the board.", "ranch": "engine.py stations (.photo, .tape)", "demo_at": 0.2 },
+        { "id": "board-travel", "code": "MG-02.2", "name": "Camera travel", "what": "Pull back, travel to the next station, push in, centred on the cut, with a whoosh.", "ranch": "engine.py write(); Part 1 wide", "demo_at": 3.0 },
+        { "id": "note-paper", "code": "MG-02.3", "name": "Note paper", "what": "Lined paper pinned to the board; lines write on as they are said.", "ranch": "Part 1 \"The financials\"", "demo_at": 3.9 },
+        { "id": "highlighter", "code": "MG-02.4", "name": "Highlighter over real text", "what": "A mark-colour bar wipes over a line of a real document, placed from the document's own coordinates.", "ranch": "Part 1 magazine ad (Forbes Wagon Creek)", "demo_at": 9.1 },
+        { "id": "pinned-photo", "code": "MG-02.5", "name": "Pinned and taped photos", "what": "Photos slam on (scale 1.7 to 1) with a pin or two strips of tape.", "ranch": "Part 2 young-Dad photo; Part 1 deed", "demo_at": 14.0 },
+        { "id": "pull-back", "code": "MG-02.6", "name": "Pull-back reveal", "what": "The camera pulls right back to show the whole board laid out.", "ranch": "Part 1 graphic 10 (the score)", "demo_at": 15.0 },
+        { "id": "blocks-shape", "code": "MG-02.7", "name": "Shape built from blocks", "what": "A shape (the flag) assembles from small blocks, then empties out.", "ranch": "Part 1 graphic 8, Tommy's favourite", "demo_at": null }
+      ],
+      "build_path": {
+        "engine": [
+          "hyperframes/compositions/usa-property-shared/engine.py: class Build (stations on a snake grid cx = 900 + 1450 col, cy = 1300 + 2400 row; camera keys; footage blocks share a station; captions; sfx)",
+          "hyperframes/compositions/usa-property-shared/template.tpl: #world board, .photo/.tape, .pw/.paper torn paper, .hl highlighter, .redact, camera apply()",
+          "hyperframes/compositions/usa-property-v5/gfx (GFX_03_ad, GFX_06_finance, GFX_07_dad, GFX_10_score) and WIDE_G* for the wide board"
+        ],
+        "registry": [
+          "pull-back-reveal (the pull-back)",
+          "camera-rig-depth-stack (depth on a card stack)",
+          "marker-highlight / inline-highlight (highlighter)",
+          "paper-collage-reveal, torn-paper-rip (paper moves)",
+          "freeze-frame-dressing (paper and tape)"
+        ],
+        "studio": "studio-mograph.js renderers[\"board\"]; existing studio options that already use this engine: GFX-05 Photo board, GFX-09 Taped photos, GFX-10 Board travel",
+        "render": "One HyperFrames composition per run of stations (engine.py writes index.html + CUT-LIST.md); footage windows as holes for Resolve, or live footage for previews."
+      },
+      "motion": [
+        { "move": "Camera", "value": "world transform translate(540,960) rotate(r) scale(z) translate(-cx,-cy); one camera {cx, cy, z, r}", "from": "template.tpl apply()" },
+        { "move": "Travel between stations", "value": "0.6 s (15 f) power2.inOut, starting half the move before the cut; whoosh 0.38 s before arrival", "from": "engine.py write() MOVE = 0.6" },
+        { "move": "Zoom levels", "value": "footage z 1.0, graphics z 0.84, hold drift +0.035 z linear, first frame 1.1 to 1.0 over 0.7 s power2.out", "from": "engine.py" },
+        { "move": "Straight cuts inside footage", "value": "punch alternates z 1.0 / 1.08, then drifts +0.03", "from": "engine.py write()" },
+        { "move": "Camera rotation", "value": "camera r = minus the tilt of the station it rests on (stations tilt -2 to +2 deg)", "from": "engine.py" },
+        { "move": "Wide travel", "value": "0.48 s centred on the cut (6 f before, 6 f after); window at least 2,400 px from the graphic", "from": "VERTICAL-TO-WIDE.md" },
+        { "move": "Pin on", "value": "scale 1.7, rotation +8 to 1, -5 deg, 0.2 s (5 f) power4.in", "from": "OPEN_dad #ph" },
+        { "move": "Pin pop (labels)", "value": "scale 0.3 to 1, 0.28 s (7 f), back.out(2.4)", "from": "template.tpl pin" },
+        { "move": "Highlighter", "value": "scaleX 0 to 1 from the left, 0.5 s power2.inOut, multiply at 62 %", "from": "template.tpl wipe(), .hl" },
+        { "move": "Pull-back", "value": "to z 0.42 over about 1 s power2.inOut, then hold", "from": "Part 1 graphic 10; GFX-05" }
+      ],
+      "rules": [
+        "One board look for the whole film (same colour, same grid, no vignette).",
+        "Nothing floats on the screen across a camera move; things are pinned to the board or animated on.",
+        "Land the camera next to something; empty board reads as a mistake.",
+        "Every overlay on a document is placed from the document's coordinates and checked on a zoomed crop.",
+        "Real objects get real texture (photographed or cut out, never a CSS drawing).",
+        "A graphic that follows another opens on a frame rebuilt from the previous one's markup, never a screenshot."
+      ],
+      "examples": [
+        { "src": "assets/mograph/ranch/board_p1_note-paper.jpg", "caption": "Note paper, lines write on", "film": "Part 1", "at": "1:18.5" },
+        { "src": "assets/mograph/ranch/board_p1_highlighter.jpg", "caption": "Highlighter over the real ad", "film": "Part 1", "at": "0:47.5" },
+        { "src": "assets/mograph/ranch/board_p1_deed-handwriting.jpg", "caption": "Taped map, handwriting, deed", "film": "Part 1", "at": "1:33" },
+        { "src": "assets/mograph/ranch/board_p1_blocks.jpg", "caption": "Pinned map + blocks + counter", "film": "Part 1", "at": "1:09.5" }
+      ],
+      "demo": { "renderer": "board", "clock": "video", "segment": [0, 16], "clip": "seated" }
+    },
+    {
+      "id": "map-moment",
+      "code": "MG-03",
+      "name": "Map moment",
+      "tagline": "A real map card, a route that draws and a counter that keeps up.",
+      "what": "A map card (real map image, light frame, taped) comes up onto the board; a route draws in the hot colour while the camera follows its head and a distance strip counts up; the destination gets a pin and a label strip; then it drops away. Short form: a map card with one pin and a place strip.",
+      "proven_in": "Part 1 route Melbourne to Colorado (plane, 15-hour flight, 240 to 2,500 km, \"Dad's block, Colorado\"); Part 2 DRIVE_fifty (0:15 to 0:25, 20 to 2,500 km).",
+      "when": [
+        { "job": "case-study", "fit": "good", "how": "Where the client is, or how far people travelled (a conference, a franchise network)." },
+        { "job": "podcast-snippet", "fit": "light", "how": "Only when a place is the point of the story." },
+        { "job": "trailer", "fit": "good", "how": "The journey in two seconds: route and counter." },
+        { "job": "brand-film", "fit": "strong", "how": "Every journey beat." }
+      ],
+      "needs": [
+        { "item": "A real map image of the area", "required": true, "note": "Screenshot or export (e.g. OpenStreetMap); the Ranch used a printed road-atlas look. The studio demo draws a placeholder map." },
+        { "item": "The route or place points", "required": true, "note": "Pixel points on the map image, start and end names, the true distance." },
+        { "item": "Words timed to the voice", "required": true, "note": "The counter lands on the spoken figure; the pin on the place name." },
+        { "item": "Brand colours", "required": true, "note": "Route and pin in the hot colour, labels on light strips." }
+      ],
+      "creates": [
+        { "id": "map-card", "code": "MG-03.1", "name": "Taped map card", "what": "Map image in a light frame, taped, rising onto the board.", "ranch": "Part 1 taped Colorado card", "demo_at": 3.2 },
+        { "id": "route-draw", "code": "MG-03.2", "name": "Route that draws", "what": "Route line in the hot colour drawing on, camera following the head.", "ranch": "Part 2 DRIVE_fifty", "demo_at": 3.8 },
+        { "id": "distance-counter", "code": "MG-03.3", "name": "Distance counter", "what": "A strip whose km figure counts with the route.", "ranch": "Part 1 \"2,500 KM\"", "demo_at": 3.8 },
+        { "id": "place-pin", "code": "MG-03.4", "name": "Place pin and label", "what": "A pin pops on, a label strip slams beside it.", "ranch": "Part 1 \"DAD'S BLOCK, COLORADO\"", "demo_at": 4.7 },
+        { "id": "plane-trail", "code": "MG-03.5", "name": "Plane with a trail", "what": "A plane flies between two country shapes with a dashed trail.", "ranch": "Part 1 Melbourne to San Francisco", "demo_at": null }
+      ],
+      "build_path": {
+        "engine": [
+          "hyperframes/compositions/usa-property-pt2/gfx/DRIVE_fifty/index.html: map wrap rises, km strip, route getPointAtLength camera follow, destination slam",
+          "hyperframes/compositions/usa-property-shared/template.tpl: .mapw frame, .rbg/.rfg route strokes, .pin + .lbl, P.route proxy and km rounding",
+          "hyperframes/compositions/usa-property-v5/gfx/GFX_02_map"
+        ],
+        "registry": [ "nyc-paris-flight (plane between cities)", "us-map-flow (arcs between places)", "world-map (choropleth)", "count-up (distance)" ],
+        "studio": "studio-mograph.js renderers[\"map-moment\"]; studio option GFX-08 Map pin uses the same route and pin moves",
+        "render": "One composition per map moment, opaque (the board is part of it)."
+      },
+      "motion": [
+        { "move": "Map card rises", "value": "y +1950 to 0, 0.5 s (12.5 f), power3.out", "from": "DRIVE_fifty #mapwrap" },
+        { "move": "Distance strip in", "value": "x -140 to 0, 0.3 s (7.5 f), power2.out", "from": "DRIVE_fifty #km" },
+        { "move": "Route draws, camera follows the head", "value": "progress 0 to 1 over 3.5 s, power1.inOut (Part 2); linear across the segment in Part 1", "from": "DRIVE_fifty cam.r" },
+        { "move": "Counter", "value": "km = total x progress, rounded to 10", "from": "template.tpl apply()" },
+        { "move": "Destination", "value": "label slam scale 3 to 1, 0.18 s power4.in; caption y 40 to 0, 0.25 s power3.out; camera z to 1.3 over 0.9 s power2.inOut", "from": "DRIVE_fifty #dfg, #lfg" },
+        { "move": "Pin", "value": "scale 0.3 to 1, 0.28 s back.out(2.4); white ring 10 px; shadow 0 6 12 .5", "from": "template.tpl .pin" },
+        { "move": "Exit", "value": "drop away y +1900 with tilt, 0.45 s power2.in", "from": "DRIVE_fifty" }
+      ],
+      "rules": [
+        "Use a real map image; a drawn map is a placeholder only.",
+        "The figure on the counter is the true, checked number (Ranch: 2,490 to 2,500 km).",
+        "Labels sit on light strips, never straight on the map."
+      ],
+      "examples": [
+        { "src": "assets/mograph/ranch/map_p1_route-counter.jpg", "caption": "Route + counter + destination label", "film": "Part 1", "at": "0:29.5" },
+        { "src": "assets/mograph/ranch/map_p1_plane.jpg", "caption": "Plane and trail, 15-hour flight", "film": "Part 1", "at": "0:23.5" },
+        { "src": "assets/mograph/ranch/map_p1_taped-map.jpg", "caption": "Taped map card with the ranch marked", "film": "Part 1", "at": "1:00.5" },
+        { "src": "assets/mograph/ranch/map_p2_route.jpg", "caption": "Part 2 route recap", "film": "Part 2", "at": "0:23.5" }
+      ],
+      "demo": { "renderer": "map-moment", "clock": "video", "segment": [2.8, 7.5], "segment_note": "the renderer derives it from the place word: anchor - 1.8 s to anchor + 2.8 s (seated 2.88 to 7.48)", "clip": "seated", "place": "base.words_extra.place" }
+    },
+    {
+      "id": "world",
+      "code": "MG-04",
+      "name": "The world",
+      "tagline": "One drawn place that is the title and, played backwards, the ending.",
+      "what": "A flat drawn scene in the brand colours (sky with the board grid, a plain sun disc with two faint rings, ranges, hills, a sign whose letters are cut through so the light shows). Title: the scene rolls on through soft blobs of the ground colour, the sun rises behind the sign, the people rise into it, slow push in. Ending: the same scene played backwards into night, people gone, lights out one by one. Also a stage: facts can be revealed from behind the range.",
+      "proven_in": "Part 2 TITLE_ranch (1:03) and END_ranch (1:46); CUT_reveal and POST_internet reveal from behind the range (0:39, 0:49).",
+      "when": [
+        { "job": "case-study", "fit": "light", "how": "Only for a client who has a place or a mark worth building a world around; otherwise a logo sting does the job." },
+        { "job": "podcast-snippet", "fit": "light", "how": "A series title for a recurring show." },
+        { "job": "trailer", "fit": "good", "how": "The title and the end card in one asset." },
+        { "job": "brand-film", "fit": "strong", "how": "The series' own place: title, ending, and a stage for reveals." }
+      ],
+      "needs": [
+        { "item": "The brand's name or mark for the sign", "required": true, "note": "Short (one or two words) so the letters can be cut through the plate." },
+        { "item": "Brand colours (ground, a mid tone, light, hot, mark)", "required": true, "note": "Ranges, hills and the sun are built from them." },
+        { "item": "A cut-out of the people", "required": false, "note": "One photo of them together, cut out, hard offset shadow; they rise onto the road." },
+        { "item": "A sense of place", "required": false, "note": "What the world is (mountains for the Ranch). Agree it in chat before building." }
+      ],
+      "creates": [
+        { "id": "title", "code": "MG-04.1", "name": "Series title", "what": "Scene rolls on, sun rises behind the cut-out sign, people rise, slow push in.", "ranch": "Part 2 TITLE_ranch", "demo_at": 0 },
+        { "id": "ending", "code": "MG-04.2", "name": "Ending (title in reverse)", "what": "Same scene, pull out, sun sinks, people go, night, window lights out one at a time.", "ranch": "Part 2 END_ranch", "demo_at": null },
+        { "id": "range-reveal", "code": "MG-04.3", "name": "Reveal from behind the range", "what": "Strips or a phone card rise from behind the ranges.", "ranch": "Part 2 CUT_reveal, POST_internet", "demo_at": null },
+        { "id": "cloud-roll", "code": "MG-04.4", "name": "Coming on over a shot", "what": "Soft blobs of the ground colour roll in from both sides, then the scene fades up through them (about 1 s, no hard edge).", "ranch": "Part 2 title", "demo_at": 0 }
+      ],
+      "build_path": {
+        "engine": [
+          "hyperframes/compositions/usa-property-pt2/gfx/TITLE_ranch/index.html (scene layers far, mid, gate, front, sign, sun, mist)",
+          "hyperframes/compositions/usa-property-pt2/gfx/END_ranch3/index.html (the same, reversed into night)",
+          "hyperframes/compositions/usa-property-pt2/gfx/CUT_reveal, POST_internet (reveals behind the range)"
+        ],
+        "registry": [ "canopy-part-title (parting reveal)", "mk-background (soft blob ground)" ],
+        "studio": "studio-mograph.js renderers[\"world\"] (own loop clock, no footage)",
+        "render": "Alpha ProRes 4444 so it can roll on over the last shot."
+      },
+      "motion": [
+        { "move": "Cloud roll-in", "value": "blobs x -260 / +260 to 0, opacity 0 to 1, 0.5 s power2.out, staggered; scene fades up 0.55 s power1.inOut at 0.42 s", "from": "TITLE_ranch #mist, #scene" },
+        { "move": "Push in (title)", "value": "layers scale far 1.04, mid 1.1, gate 1.16, front 1.2 over 4.6 s linear", "from": "TITLE_ranch" },
+        { "move": "Sun", "value": "rises y +170 to -335 over 4.6 s power2.out; pulse about 4 %, 1.2 s sine yoyo; no rays", "from": "TITLE_ranch, OPEN_dad" },
+        { "move": "Sign swing", "value": "rotation -3.2 to +3.2 deg, 1.15 s sine.inOut yoyo", "from": "TITLE_ranch #sign" },
+        { "move": "People rise", "value": "y to 0, 0.7 s back.out(1.15) at 2.2 s", "from": "TITLE_ranch #pair" },
+        { "move": "Ending", "value": "layers scale back to 1 over 6.4 s; sun sinks y to +940 over 4.1 s power1.in; night 3.6 s; windows out 0.5 s apart", "from": "END_ranch3" }
+      ],
+      "rules": [
+        "Plain shapes, soft and slow. No rays, no gold, no slammed name card (all rejected on Part 2).",
+        "The sign carries the name; fewer words.",
+        "Light comes from inside the scene (sun, windows)."
+      ],
+      "examples": [
+        { "src": "assets/mograph/ranch/world_p2_title.jpg", "caption": "Title: the two arrive", "film": "Part 2", "at": "1:05.5" },
+        { "src": "assets/mograph/ranch/world_p2_ending.jpg", "caption": "Ending: dusk, lights on", "film": "Part 2", "at": "1:48.5" },
+        { "src": "assets/mograph/ranch/world_p2_reveal-range.jpg", "caption": "Reveal behind the range", "film": "Part 2", "at": "0:42.5" },
+        { "src": "assets/mograph/ranch/world_p2_post.jpg", "caption": "The post rises over the range", "film": "Part 2", "at": "0:52.5" }
+      ],
+      "demo": { "renderer": "world", "clock": "loop", "loop": 6.0 }
+    }
+  ],
+  "openers": [
+    {
+      "id": "opener-handover",
+      "code": "OPEN-01",
+      "name": "Opener into subtitles",
+      "tagline": "The first seconds as a dynamic hook, then a clean handover into the house subtitles.",
+      "what": "R2-14. The video starts with a dynamic title treatment on the opening line (a studio hook), and when the line is done the hook settles down towards the subtitle line and fades while the house subtitles take over on the very next spoken word. Tommy, 7 Nov 2026: \"you do the start of it as the dynamic ones and then transition.\"",
+      "hook": { "renderer": "hk-highlight-bars", "fallback": "hook-bars", "from": "studio-hooks.js (TNG highlight bars)" },
+      "subtitles": { "renderer": "board vidpod_pick.subtitles.style (cap-box-word on VIDPOD)", "from": "studio-looks.js" },
+      "handover": "See MECHANISMS.md, OPEN-01. Last hook word = the last transcript word inside the hook segment that matches the hook text. Handover H = min(next spoken word start, last hook word end + 0.6 s), and at least last hook word end + 0.2 s. The hook block eases down 22 % of the way to the subtitle centre, scales to 0.86 and fades over the 0.24 s (6 f) before H, power2.in. Subtitles start at H (first chunk enters with its own 0.14 s rise).",
+      "when": [ "podcast-snippet", "case-study", "trailer" ],
+      "demo": { "renderer": "opener-handover", "clock": "video", "segment": [0, 9.0], "clip": "seated" }
+    }
+  ]
+}

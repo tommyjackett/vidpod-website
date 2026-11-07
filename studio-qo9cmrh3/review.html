@@ -376,10 +376,10 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
   function yesLine(it) {
     var b = it.build || {}, brand = boardLabel();
     if (builtCode(it)) return "Built as " + optName(builtCode(it)) + " in VidPod Studio.";
-    if (b.match) return "matches " + optName(b.match) + ", we'll tune it to this.";
-    if (b.section === "CAROUSEL") return "goes in the carousel set for the carousel maker, built in " + brand + " brand.";
-    if (b.section === "THUMB") return "goes in the thumbnail set, built in " + brand + " brand.";
-    return "becomes a new " + (SEC_NAME[b.section] || "studio") + " option in VidPod Studio, built in " + brand + " brand.";
+    if (b.match) return "close to " + optName(b.match) + " in the studio, which could be tuned to this.";
+    if (b.section === "CAROUSEL") return "could become a carousel look in " + brand + " brand.";
+    if (b.section === "THUMB") return "could become a thumbnail look in " + brand + " brand.";
+    return "could become a new " + (SEC_NAME[b.section] || "studio") + " option in " + brand + " brand.";
   }
   function statusPill(it) {
     var c = builtCode(it);
@@ -412,7 +412,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
       '<div class="stamp yes">YES</div><div class="stamp no">NO</div><div class="stamp later">LATER</div>' +
       '<div class="info"><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span>' +
       '<div class="title">' + esc(it.title) + '</div>' +
-      '<p class="ifyes"><b>If yes:</b> ' + esc(yesLine(it)) + '</p>' +
+      '<p class="ifyes"><b>Could be built:</b> ' + esc(yesLine(it)) + '</p>' +
       '<div class="src"><button type="button" class="more">How we\'d build it</button>' + (it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</div></div>';
   }
   function renderSwipe() {
@@ -472,7 +472,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     card.querySelector(".stamp." + d).style.opacity = 1;
     requestAnimationFrame(function () { card.style.transform = "translate(" + tx + "px," + ty + "px) rotate(" + (d === "yes" ? 18 : d === "no" ? -18 : 0) + "deg)"; card.style.opacity = 0; });
     setTimeout(function () { busy = false; renderSwipe(); }, how === "key" ? 220 : 300);
-    if (d === "yes") toast("Added to your board. Next: built into the studio.");
+    if (d === "yes") toast("On your board. Nothing gets built until you say so.");
     if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
   }
   function undo() {
@@ -606,7 +606,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     p.innerHTML = '<div class="phead"><span><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span></span><button type="button" class="xbtn" data-close aria-label="Close">' + x + '</button></div>' +
       '<div class="dmedia" id="dMedia">' + media + '</div>' +
       '<div class="dmeta"><h3 id="dTitle">' + esc(it.title) + '</h3>' + (onBoard ? statusPill(it) + " " : "") +
-      '<p class="ifyes" style="margin-top:10px"><b>' + (onBoard ? "Yes means:" : "If yes:") + '</b> ' + esc(yesLine(it)) + '</p>' +
+      '<p class="ifyes" style="margin-top:10px"><b>' + (builtCode(it) ? "In the studio:" : "Could be built:") + '</b> ' + esc(yesLine(it)) + '</p>' +
       '<p class="dsrc">' + esc(it.source || "") + (it.link ? ' · <a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</p>' +
       (it.note && it.added ? '<p class="dsrc">Note: ' + esc(it.note) + '</p>' : "") + '</div>' +
       '<div class="sect"><h4>What\'s on screen</h4><p>' + esc(bd.onScreen || (it.added ? "Breakdown coming: Claude writes it when it files this find." : it.note || "")) + '</p></div>' +
@@ -634,7 +634,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
   // ---------- help ----------
   function showHelp() {
     $("hList").innerHTML = isAdmin()
-      ? "<li>Yes puts this look on your mood board.</li><li>VIDPOD builds every yes into VidPod Studio so you can try it on real footage in your brand.</li><li>No removes it. Later keeps it for another day.</li>"
+      ? "<li>Yes puts this look on your mood board. That's all it does.</li><li>Nothing gets built until you say \"build this\". Each card shows how it could be built if you do.</li><li>No removes it. Later keeps it for another day.</li>"
       : "<li>This is your mood board: looks VIDPOD picked for your videos.</li><li>Tap one to see it move and how we'd build it in your brand.</li><li>Heart the ones you love. VIDPOD sees every heart.</li>";
     $("help").classList.add("on");
   }

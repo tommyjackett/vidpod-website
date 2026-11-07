@@ -187,7 +187,7 @@
     var capBox = H.abs(ctx.over, "left:0;width:1080px;top:1330px;");
     chunks.forEach(function (c, k) {
       var line = el("div"); line.style.cssText = "position:absolute;left:0;width:1080px;text-align:center;white-space:nowrap;line-height:1;letter-spacing:-0.01em;visibility:hidden;";
-      setF(line, capF, cs, "#FFFFFF"); line.style.textShadow = shadowSoft(0.5);
+      setF(line, capF, cs, "#FFFFFF"); line.style.textShadow = ctx.L.shadow != null ? ctx.B.brand.shadow : shadowSoft(0.5);
       c.forEach(function (t, j) { var s = el("span", "", esc(K.caseText(t.text, "lower").replace(/[,.!?]$/, "")) + (j < c.length - 1 ? " " : "")); s.style.opacity = 0; line.appendChild(s); tl.to(s, { opacity: 1, duration: 0.06, ease: "none" }, Math.max(seg[0], t.t - 0.02)); });
       capBox.appendChild(line);
       tl.set(line, { visibility: "visible" }, Math.max(seg[0], c[0].t - 0.03));
@@ -241,7 +241,7 @@
     ls = Math.max(44, Math.floor(ls));
     var lab = H.abs(ctx.over, "left:" + lx + "px;top:" + Math.round(boxTop + boxH + sz * 0.22) + "px;");
     labRows.forEach(function (r, k) {
-      var d = el("div", "", esc(joinT(r))); setF(d, labF, ls, "#FFFFFF"); d.style.cssText += "white-space:nowrap;line-height:1.0;letter-spacing:-0.015em;"; d.style.textShadow = shadowSoft(0.55);
+      var d = el("div", "", esc(joinT(r))); setF(d, labF, ls, "#FFFFFF"); d.style.cssText += "white-space:nowrap;line-height:1.0;letter-spacing:-0.015em;"; d.style.textShadow = ctx.L.shadow != null ? ctx.B.brand.shadow : shadowSoft(0.55);
       lab.appendChild(d);
       tl.fromTo(d, { x: -26, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: true }, t0 + 0.24 + k * 0.07);
     });
@@ -421,33 +421,39 @@
   };
 
   /* ==================== HOOK: Headline band, head pops out ====================
-     Ref: a solid band across the top holds the whole line in heavy caps, left aligned, each line as big
-     as it fits; the speaker's head breaks up through the band in front of the last line. */
+     Ref (crystfilm pin, compare sheet compare_headline-band.jpg, left): a solid band holds a rounded window of the
+     footage; the heavy caps headline sits in the window, behind the speaker; the speaker's head breaks out over the
+     window's top edge onto the band. Here: the band (second colour) covers the top of the frame with a rounded window
+     cut into it; band and headline sit in the under layer, so the person matte (cut-out) is drawn in front of both.
+     The window's top edge is set just under the top of the head (base.face.hook_top), so the head pops out of it. */
   R["hk-headline-band"] = function (ctx) {
     var L = ctx.L, tl = H.tl(), seg = ctx.seg, b = ctx.B.brand, fc = face(ctx), fo = heavy(ctx);
-    var band = ctx.hex2 || b.ink || "#0A0A0A", ink = H.on(band, ctx.hex, ctx);
+    var band = ctx.hex2 || b.ink || "#0A0A0A", ink = ctx.hex || "#FFFFFF";
     var toks = H.allToks(ctx.hook()).map(function (t) { return { text: upper(t.text), t: t.t }; });
-    var left = 64, maxW = 1080 - left * 2, Smax = L.size || 150;
+    var M = 40, R0 = 30, pad = 46, left = M + pad, maxW = 1080 - left * 2, Smax = L.size || 150;
     var n = toks.length >= 5 ? 3 : 2, rr = rows(toks, n, fo, Smax);
-    var lines = rr.map(function (r) { var t = joinT(r), s = Math.min(Smax, Math.floor(Smax * maxW / tw(t, fo, Smax, -0.02))); return { r: r, text: t, s: s, m: met(fo, s) }; });
-    var gap = function (l) { return l.m.cap * 0.2; }, y = 0; lines.forEach(function (l) { l.capTop = y; y += l.m.cap + gap(l); });
-    var textH = y - gap(lines[lines.length - 1]), last = lines[lines.length - 1];
-    // the head comes up through the last line: its top 65 % into that line's caps (hair over the lower third)
-    var textTop0 = 196, headWant = textTop0 + last.capTop + last.m.cap * 0.65, D = Math.min(460, Math.max(0, headWant - fc.top));
-    var textTop = (fc.top + D) - last.capTop - last.m.cap * 0.65; textTop = Math.max(150, Math.min(textTop0, textTop));
-    var bandH = Math.round(textTop + textH + 46);
-    var bandEl = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + bandH + "px;background:" + band + ";box-shadow:0 18px 50px rgba(0,0,0,.22);");
-    var txtBox = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + bandH + "px;");
+    var lines = rr.map(function (r) { var t = joinT(r), s2 = Math.min(Smax, Math.floor(Smax * maxW / tw(t, fo, Smax, -0.02))); return { r: r, text: t, s: s2, m: met(fo, s2) }; });
+    var gap = function (l) { return l.m.cap * 0.22; }, y = 0; lines.forEach(function (l) { l.capTop = y; y += l.m.cap + gap(l); });
+    var textH = y - gap(lines[lines.length - 1]);
+    // headroom: a frame cut too tight gets the plate moved down so at least 70 px of hair shows above the window
+    var D = Math.max(0, 150 - fc.top), headTop = fc.top + D;
+    var winTop = Math.round(Math.max(170, Math.min(560, headTop + 74)));   // the head pops out over this edge
+    var textTop = winTop + 40, winBot = Math.round(textTop + textH + 44), bandBot = winBot + 26;
+    // band with a window: a clipped strip whose window carries a huge spread shadow in the band colour
+    var strip = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + bandBot + "px;overflow:hidden;");
+    var win = H.abs(strip, "left:" + M + "px;top:" + winTop + "px;width:" + (1080 - 2 * M) + "px;height:" + (winBot - winTop) + "px;border-radius:" + R0 + "px;box-shadow:0 0 0 2400px " + band + ";");
+    var txtBox = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + winBot + "px;");
     lines.forEach(function (l, k) {
       var blh = Math.round(l.s * 1.0), boff = capOff(fo, l.s, blh);
       var mk = el("div"); mk.style.cssText = "position:absolute;left:" + left + "px;overflow:hidden;top:" + Math.round(textTop + l.capTop - boff) + "px;height:" + blh + "px;";
       var d = el("div", "", esc(l.text)); setF(d, fo, l.s, ink); d.style.cssText += "white-space:nowrap;letter-spacing:-0.02em;line-height:" + blh + "px;";
+      if (ctx.L.shadow != null) d.style.textShadow = ctx.B.brand.shadow;
       mk.appendChild(d); txtBox.appendChild(mk);
-      tl.fromTo(d, { yPercent: 108 }, { yPercent: 0, duration: 0.4, ease: "expo.out", immediateRender: true }, Math.max(seg[0] + 0.22 + k * 0.09, l.r[0].t - 0.05));
+      tl.fromTo(d, { yPercent: 108 }, { yPercent: 0, duration: 0.4, ease: "expo.out", immediateRender: true }, Math.max(seg[0] + 0.3 + k * 0.09, l.r[0].t - 0.05));
     });
     var tIn = seg[0] + 0.02, dIn = 0.5;
-    tl.fromTo(bandEl, { yPercent: -101 }, { yPercent: 0, duration: dIn, ease: "power3.out", immediateRender: true }, tIn);
-    tl.to([bandEl, txtBox], { yPercent: -101, duration: 0.36, ease: "power2.in" }, seg[1] - 0.38);
+    tl.fromTo(strip, { yPercent: -101 }, { yPercent: 0, duration: dIn, ease: "power3.out", immediateRender: true }, tIn);
+    tl.to([strip, txtBox], { yPercent: -101, duration: 0.36, ease: "power2.in" }, seg[1] - 0.38);
     var P = plateDrive(ctx, tl, D, tIn, dIn, seg[1] - 0.38, 0.36);
     return { tl: tl, depth: true, fixed: true, teardown: function () { if (P) P.reset(); } };
   };
