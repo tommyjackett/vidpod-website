@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0A0A0A">
-<title>VIDPOD Swipe Review</title>
+<title>VIDPOD Mood Board</title>
 <style>
 @font-face { font-family: "Archivo Black"; src: url("fonts/ArchivoBlack-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Inter"; src: url("fonts/Inter-var.woff2") format("woff2"); font-weight: 300 800; font-display: swap; }
@@ -18,19 +18,30 @@
   --ease: cubic-bezier(.2, .7, .1, 1);
   --gut-l: max(16px, env(safe-area-inset-left, 0px));
   --gut-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font-family: var(--font-body); }
 body { overflow: hidden; overscroll-behavior: none; }
-.app { display: flex; flex-direction: column; height: 100vh; height: 100svh; padding: env(safe-area-inset-top, 0px) var(--gut-r) env(safe-area-inset-bottom, 0px) var(--gut-l); max-width: 560px; margin: 0 auto; }
-header { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 auto; }
-.brand { font-family: var(--font-head); font-size: 18px; letter-spacing: -.01em; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+.app { display: flex; flex-direction: column; height: 100vh; height: 100svh; padding-top: env(safe-area-inset-top, 0px); }
+header.top { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 auto; padding: 0 var(--gut-r) 0 var(--gut-l); border-bottom: 1px solid var(--line); }
+.brand { font-family: var(--font-head); font-size: 18px; letter-spacing: -.01em; text-decoration: none; color: var(--fg); }
 .brand i { font-style: normal; color: var(--green); }
-.sub { color: var(--muted); font-size: 13px; }
-.count { margin-left: auto; font-variant-numeric: tabular-nums; font-size: 13px; color: var(--muted); }
-.mode { border: 1px solid var(--line-strong); background: transparent; color: var(--fg); border-radius: 999px; padding: 6px 10px; font: 600 12px var(--font-body); }
-.mode[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
-.stage { position: relative; flex: 1 1 auto; min-height: 0; margin: 4px 0 10px; }
+.seg { display: flex; background: var(--bg-3); border-radius: 999px; padding: 3px; margin-left: auto; }
+.seg button { border: 0; background: transparent; color: var(--muted); border-radius: 999px; padding: 7px 12px; font: 700 13px var(--font-body); white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.qbtn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; font: 700 15px var(--font-body); flex: 0 0 auto; }
+.boardonly .seg { display: none; }
+.boardonly .qbtn { margin-left: auto; }
+.view { flex: 1 1 auto; min-height: 0; display: none; }
+.view.on { display: flex; }
+
+/* ---------- swipe ---------- */
+#swipe { flex-direction: column; width: 100%; max-width: 560px; margin: 0 auto; padding: 0 var(--gut-r) env(safe-area-inset-bottom, 0px) var(--gut-l); }
+.stage { position: relative; flex: 1 1 auto; min-height: 0; margin: 10px 0; }
 .card { position: absolute; inset: 0; border-radius: 22px; overflow: hidden; background: #000; box-shadow: 0 10px 40px rgba(0,0,0,.55), 0 0 0 1px var(--line); touch-action: none; user-select: none; -webkit-user-select: none; will-change: transform; }
 .card.back { transform: scale(.95) translateY(10px); opacity: .55; pointer-events: none; }
 .card.fly { transition: transform .32s var(--ease), opacity .32s var(--ease); }
@@ -39,127 +50,378 @@ header { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 
 .media img, .media video { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
 .media video.clip { position: absolute; inset: 0; opacity: 0; transition: opacity .2s; }
 .media video.clip.on { opacity: 1; }
-.playhint { position: absolute; top: 14px; right: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font: 600 12px/1 Inter, system-ui, sans-serif; pointer-events: none; }
-.info { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 16px 16px; background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.75) 55%, rgba(0,0,0,0) 100%); }
+.playhint { position: absolute; top: 14px; right: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font: 600 12px/1 var(--font-body); pointer-events: none; }
+.info { position: absolute; left: 0; right: 0; bottom: 0; padding: 70px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,.95) 0%, rgba(0,0,0,.82) 60%, rgba(0,0,0,0) 100%); }
 .chip { display: inline-block; font: 700 11px var(--font-body); text-transform: uppercase; letter-spacing: .06em; background: var(--green); color: var(--on-green); border-radius: 999px; padding: 4px 9px; }
 .chip.id { background: rgba(255,255,255,.14); color: var(--fg); margin-left: 6px; }
-.title { font-family: var(--font-head); font-size: 22px; line-height: 1.1; margin: 8px 0 6px; letter-spacing: -.01em; }
-.note { font-size: 14px; line-height: 1.35; color: #D8D8D2; margin: 0 0 8px; }
-.src { font-size: 12px; color: var(--muted); display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
-.src a { color: var(--green); text-decoration: none; font-weight: 600; padding: 6px 0; }
+.title { font-family: var(--font-head); font-size: 21px; line-height: 1.12; margin: 8px 0 6px; letter-spacing: -.01em; }
+.ifyes { font-size: 14px; line-height: 1.35; color: #E6E6E0; margin: 0 0 8px; }
+.ifyes b { color: var(--green); font-weight: 700; }
+.src { font-size: 12px; color: var(--muted); display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.src a, .src button { color: var(--green); text-decoration: none; font: 600 12px var(--font-body); padding: 6px 0; background: none; border: 0; }
 .stamp { position: absolute; top: 22px; padding: 6px 12px; border: 3px solid; border-radius: 10px; font-family: var(--font-head); font-size: 26px; opacity: 0; transform: rotate(-10deg); pointer-events: none; }
 .stamp.yes { left: 18px; color: var(--green); border-color: var(--green); }
 .stamp.no { right: 18px; color: var(--no); border-color: var(--no); transform: rotate(10deg); }
 .stamp.later { left: 50%; top: 40%; color: #fff; border-color: #fff; transform: translateX(-50%); }
-.actions { flex: 0 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; padding-bottom: 10px; }
-.btn { height: 60px; border-radius: 18px; border: 1px solid var(--line-strong); background: var(--bg-2); color: var(--fg); font: 700 15px var(--font-body); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+.actions { flex: 0 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; padding-bottom: 8px; }
+.btn { height: 56px; border-radius: 18px; border: 1px solid var(--line-strong); background: var(--bg-2); color: var(--fg); font: 700 15px var(--font-body); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; }
 .btn:active { transform: scale(.97); }
 .btn.no { color: var(--no); }
-.btn.yes { background: var(--green); color: var(--on-green); border-color: var(--green); }
+.btn.yes, .btn.go { background: var(--green); color: var(--on-green); border-color: var(--green); }
 .btn svg { width: 20px; height: 20px; }
-.foot { flex: 0 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); padding-bottom: 8px; min-height: 28px; }
-.link { background: none; border: 0; color: var(--fg); font: 600 12px var(--font-body); padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.foot { flex: 0 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); padding-bottom: 8px; min-height: 30px; gap: 8px; }
+.link { background: none; border: 0; color: var(--fg); font: 600 12px var(--font-body); padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; }
 .done { position: absolute; inset: 0; overflow: auto; padding: 8px 2px 20px; display: none; }
 .done.on { display: block; }
 .done h2 { font-family: var(--font-head); font-size: 26px; margin: 8px 0 4px; }
 .done p { color: var(--muted); margin: 0 0 14px; font-size: 14px; }
-.list h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
-.row { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
-.row img { width: 44px; height: 78px; object-fit: cover; border-radius: 8px; background: #000; flex: 0 0 auto; }
-.row b { display: block; font-size: 14px; }
-.row a { color: var(--green); font-size: 12px; text-decoration: none; }
-.row span { color: var(--muted); font-size: 12px; }
 .donebtns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.donebtns .btn { height: 46px; padding: 0 14px; font-size: 14px; flex: 1 1 auto; }
-.toast { position: fixed; left: 50%; bottom: calc(110px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%) translateY(10px); background: var(--fg); color: var(--bg); font: 600 13px var(--font-body); border-radius: 999px; padding: 8px 14px; opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; white-space: nowrap; }
-.toast.on { opacity: 1; transform: translateX(-50%); }
-.hint { position: absolute; inset: auto 0 0 0; text-align: center; color: var(--muted); font-size: 12px; }
-@media (min-width: 700px) { .title { font-size: 26px; } }
-@media (prefers-reduced-motion: reduce) { .card.fly, .card.snap { transition: none; } }
+.donebtns .btn { height: 46px; font-size: 14px; flex: 1 1 auto; }
+
+/* ---------- mood board ---------- */
+#board { flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.bwrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 14px var(--gut-r) calc(40px + env(safe-area-inset-bottom, 0px)) var(--gut-l); }
+.bhead { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.bhead h1 { font-family: var(--font-head); font-weight: 400; font-size: 30px; line-height: 1; margin: 0; letter-spacing: -.01em; }
+.bhead p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+.bhead .grow { flex: 1 1 200px; }
+.bctl { display: flex; gap: 8px; align-items: center; }
+.bctl select { background: var(--bg-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 9px 10px; font-size: 14px; }
+.bctl .btn { height: 42px; border-radius: 14px; font-size: 14px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 14px 0 6px; scrollbar-width: none; margin: 0 calc(-1 * var(--gut-r)) 0 calc(-1 * var(--gut-l)); padding-left: var(--gut-l); padding-right: var(--gut-r); }
+.chips::-webkit-scrollbar { display: none; }
+.fchip { flex: 0 0 auto; border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 8px 12px; font: 600 13px var(--font-body); white-space: nowrap; }
+.fchip span { color: var(--muted); margin-left: 4px; font-weight: 500; }
+.fchip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.fchip[aria-pressed="true"] span { color: #555; }
+.fchip:disabled { opacity: .35; cursor: default; }
+.gtitle { font: 700 12px var(--font-body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 22px 0 10px; }
+.masonry { column-count: 2; column-gap: 10px; }
+@media (min-width: 720px) { .masonry { column-count: 3; column-gap: 14px; } .bhead h1 { font-size: 38px; } }
+@media (min-width: 1020px) { .masonry { column-count: 4; } }
+.tile { break-inside: avoid; margin: 0 0 10px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: block; }
+@media (min-width: 720px) { .tile { margin-bottom: 14px; } }
+.tmedia { display: block; width: 100%; padding: 0; border: 0; background: #000; position: relative; }
+.tmedia img { width: 100%; height: auto; display: block; min-height: 60px; }
+.tmedia .ltile { padding: 26px 12px; text-align: left; color: var(--fg); font: 700 15px/1.25 var(--font-body); background: var(--bg-3); }
+.tmedia .ltile small { display: block; color: var(--muted); font-weight: 500; font-size: 12px; margin-top: 6px; word-break: break-all; }
+.tclip { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,.65); color: #fff; font: 700 10px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; padding: 5px 7px; border-radius: 999px; }
+.tbody { padding: 9px 10px 4px; }
+.tbody b { display: block; font-size: 13px; line-height: 1.3; font-weight: 700; margin-top: 6px; }
+.pill { display: inline-block; font: 700 10px/1 var(--font-body); letter-spacing: .04em; text-transform: uppercase; border-radius: 999px; padding: 5px 8px; background: var(--bg-3); color: var(--muted); }
+.pill.built { background: var(--green); color: var(--on-green); }
+.tacts { display: flex; justify-content: space-between; align-items: center; padding: 2px 4px 4px; }
+.ibtn { display: inline-flex; align-items: center; gap: 5px; min-width: 44px; height: 40px; border: 0; background: transparent; color: var(--muted); padding: 0 8px; border-radius: 10px; font: 600 12px var(--font-body); }
+.ibtn svg { width: 19px; height: 19px; }
+.ibtn.on { color: var(--no); }
+.ibtn.bin:hover, .ibtn.bin:active { color: var(--no); }
+.empty { color: var(--muted); font-size: 15px; padding: 40px 0; text-align: center; }
+.whoami { color: var(--muted); font-size: 12px; margin-top: 30px; text-align: center; }
+
+/* ---------- sheets: detail, add, help, gate ---------- */
+.sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: none; align-items: flex-end; justify-content: center; }
+.sheet.on { display: flex; }
+.panel { background: var(--bg-2); width: 100%; max-width: 680px; max-height: 94svh; overflow-y: auto; border-radius: 22px 22px 0 0; padding: 0 var(--gut-r) calc(24px + env(safe-area-inset-bottom, 0px)) var(--gut-l); overscroll-behavior: contain; }
+@media (min-width: 720px) { .sheet { align-items: center; } .panel { border-radius: 22px; padding: 0 24px 26px; } }
+.phead { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0 10px; background: var(--bg-2); }
+.phead h2 { font-family: var(--font-head); font-weight: 400; font-size: 20px; margin: 0; line-height: 1.1; }
+.xbtn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg-3); display: grid; place-items: center; flex: 0 0 auto; }
+.xbtn svg { width: 18px; height: 18px; }
+.dmedia { position: relative; background: #000; border-radius: 16px; overflow: hidden; display: flex; justify-content: center; min-height: 120px; max-height: 62svh; }
+.dmedia img, .dmedia video { max-width: 100%; max-height: 62svh; object-fit: contain; display: block; }
+.dmedia video.clip { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .2s; }
+.dmedia video.clip.on { opacity: 1; }
+.dmeta { margin: 12px 0 0; }
+.dmeta h3 { font-family: var(--font-head); font-weight: 400; font-size: 22px; line-height: 1.15; margin: 8px 0 8px; }
+.dmeta .ifyes { font-size: 15px; }
+.dsrc { font-size: 13px; color: var(--muted); }
+.dsrc a { color: var(--green); font-weight: 600; text-decoration: none; }
+.sect { border-top: 1px solid var(--line); padding: 14px 0 2px; margin-top: 14px; }
+.sect h4 { font: 700 12px var(--font-body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 8px; }
+.sect p { margin: 0 0 10px; font-size: 15px; line-height: 1.5; color: #E6E6E0; }
+.sect p b { color: var(--fg); }
+.recipe { background: var(--bg-3); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; }
+.recipe p:last-child { margin-bottom: 0; }
+.recipe .code { font-family: var(--font-head); font-size: 18px; color: var(--green); display: block; margin-bottom: 4px; }
+details { border: 1px solid var(--line-strong); border-radius: 14px; margin: 10px 0; }
+details summary { cursor: pointer; padding: 12px 14px; font: 700 14px var(--font-body); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: "+"; font-size: 18px; color: var(--muted); }
+details[open] summary::after { content: "\2212"; }
+details .inner { padding: 0 14px 14px; }
+details pre { white-space: pre-wrap; word-wrap: break-word; font: 13px/1.5 ui-monospace, Menlo, monospace; background: var(--bg); border-radius: 10px; padding: 12px; margin: 0 0 10px; color: #E6E6E0; }
+details img { width: 100%; border-radius: 10px; display: block; }
+table.beats { border-collapse: collapse; font-size: 12px; min-width: 560px; }
+table.beats th, table.beats td { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; color: #E6E6E0; }
+table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 10px; }
+.dacts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.dacts .btn { height: 48px; font-size: 14px; flex: 1 1 auto; }
+.btn.danger { color: var(--no); }
+.form { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+.field label { display: block; font: 600 13px var(--font-body); margin-bottom: 6px; }
+.field input, .field select, .field textarea { width: 100%; font-size: 16px; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 12px; padding: 11px 12px; color: var(--fg); }
+.field textarea { min-height: 70px; resize: vertical; }
+.drop { display: flex; align-items: center; gap: 12px; border: 1px dashed var(--line-strong); border-radius: 14px; padding: 12px; cursor: pointer; }
+.drop img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; background: var(--bg-3); }
+.drop span { font-size: 14px; color: var(--muted); }
+.drop b { display: block; color: var(--fg); font-size: 15px; }
+.small { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 0; }
+.err { color: var(--no); font-size: 13px; font-weight: 600; margin: 0; }
+.help .panel { max-width: 460px; }
+.help ol { margin: 4px 0 16px; padding-left: 20px; }
+.help li { font-size: 16px; line-height: 1.45; margin-bottom: 8px; }
+.gate { position: fixed; inset: 0; z-index: 80; background: var(--bg); display: none; place-items: center; padding: 24px var(--gut-r) 24px var(--gut-l); overflow-y: auto; }
+.gate.on { display: grid; }
+.gate form { width: min(100%, 380px); display: flex; flex-direction: column; gap: 16px; }
+.gate h1 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: 40px; line-height: .95; margin: 8px 0 0; }
+.gate p { margin: 0; color: var(--muted); font-size: 14px; }
+.toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%) translateY(10px); background: var(--fg); color: var(--bg); font: 600 13px/1.35 var(--font-body); border-radius: 16px; padding: 10px 14px; opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; max-width: min(92vw, 420px); display: flex; gap: 12px; align-items: center; z-index: 90; }
+.toast.on { opacity: 1; transform: translateX(-50%); pointer-events: auto; }
+.toast button { border: 0; background: none; color: #007a52; font: 800 13px var(--font-body); padding: 4px 0; text-decoration: underline; flex: 0 0 auto; }
+@media (min-width: 700px) { .title { font-size: 25px; } }
+@media (prefers-reduced-motion: reduce) { .card.fly, .card.snap, .toast { transition: none; } }
 </style>
 </head>
 <body>
-<div class="app">
-  <header>
-    <div class="brand">VIDPOD<i>.</i></div>
-    <div class="sub">Swipe review</div>
-    <div class="count" id="count">0 / 0</div>
-    <button class="mode" id="mode" aria-pressed="false" title="Show only items saved for later">Saved</button>
+<div class="app" id="app">
+  <header class="top">
+    <a class="brand" href="index.html" title="Back to VidPod Studio">VIDPOD<i>.</i></a>
+    <div class="seg" role="group" aria-label="View">
+      <button type="button" id="mSwipe" aria-pressed="true">Swipe</button>
+      <button type="button" id="mBoard" aria-pressed="false">Mood board</button>
+    </div>
+    <button type="button" class="qbtn" id="helpBtn" aria-label="How this works">?</button>
   </header>
-  <div class="stage" id="stage">
-    <div class="done" id="done"></div>
-  </div>
-  <div class="actions" id="actions">
-    <button class="btn no" id="bNo" aria-label="No (swipe left)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>No</button>
-    <button class="btn" id="bLater" aria-label="Save for later (swipe up)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Later</button>
-    <button class="btn yes" id="bYes" aria-label="Yes (swipe right)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Yes</button>
-  </div>
-  <div class="foot"><button class="link" id="undo">Undo</button><span id="status">Right yes, left no, up later</span><button class="link" id="summary">Results</button></div>
+
+  <section class="view on" id="swipe" aria-label="Swipe">
+    <div class="stage" id="stage"><div class="done" id="done"></div></div>
+    <div class="actions" id="actions">
+      <button class="btn no" id="bNo" aria-label="No (swipe left)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>No</button>
+      <button class="btn" id="bLater" aria-label="Later (swipe up)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Later</button>
+      <button class="btn yes" id="bYes" aria-label="Yes (swipe right)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Yes</button>
+    </div>
+    <div class="foot"><button class="link" id="undo">Undo</button><span id="count">0 / 0</span><button class="link" id="savedBtn">Saved</button></div>
+  </section>
+
+  <section class="view" id="board" aria-label="Mood board">
+    <div class="bwrap">
+      <div class="bhead">
+        <div class="grow"><h1>Mood board</h1><p id="bsub">Every look we said yes to.</p></div>
+        <div class="bctl" id="bctl"></div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by type"></div>
+      <div id="grid"></div>
+      <p class="whoami" id="who"></p>
+    </div>
+  </section>
 </div>
-<div class="toast" id="toast"></div>
+
+<div class="sheet" id="detail" role="dialog" aria-modal="true" aria-labelledby="dTitle"><div class="panel" id="dPanel"></div></div>
+<div class="sheet" id="add" role="dialog" aria-modal="true" aria-labelledby="aTitle"><div class="panel">
+  <div class="phead"><h2 id="aTitle">Add a find</h2><button type="button" class="xbtn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <form class="form" id="aForm" novalidate>
+    <label class="drop" for="aFile"><img id="aPrev" alt=""><span><b>Screenshot or photo</b>From your camera roll</span></label>
+    <input type="file" id="aFile" accept="image/*" hidden>
+    <div class="field"><label for="aLink">Or a link</label><input id="aLink" type="url" inputmode="url" placeholder="Instagram, TikTok, Pinterest, YouTube" autocomplete="off"></div>
+    <div class="field"><label for="aGroup">What kind of look</label><select id="aGroup"></select></div>
+    <div class="field"><label for="aName">Call it (a few words)</label><input id="aName" maxlength="80" placeholder="Yellow serif hook over a wide shot"></div>
+    <div class="field"><label for="aNote">Note (optional)</label><textarea id="aNote" maxlength="500" placeholder="What you like about it"></textarea></div>
+    <p class="err" id="aErr" hidden></p>
+    <button type="submit" class="btn go" id="aGo">Add to the board</button>
+    <p class="small"><b>Other ways to add:</b> email the link or screenshot to tommy+swipe@vidpod.com.au, or save it to the Pinterest board or Instagram collection "VIDPOD Swipe". The 7:08 am intake files them for you.</p>
+  </form>
+</div></div>
+<div class="sheet help" id="help" role="dialog" aria-modal="true" aria-labelledby="hTitle"><div class="panel">
+  <div class="phead"><h2 id="hTitle">How this works</h2><button type="button" class="xbtn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <ol id="hList"></ol>
+  <button type="button" class="btn go" id="hGo" style="width:100%">Got it</button>
+</div></div>
+<div class="gate" id="gate"><form id="gForm" novalidate>
+  <span class="brand">VIDPOD<i>.</i></span>
+  <h1>Mood board</h1>
+  <p>Pop in your name and the code VIDPOD gave you.</p>
+  <div class="field"><label for="gName">Your name</label><input id="gName" autocomplete="name" required></div>
+  <div class="field"><label for="gCode">Access code</label><input id="gCode" autocomplete="off" autocapitalize="characters" spellcheck="false" required></div>
+  <p class="err" id="gErr" hidden></p>
+  <button type="submit" class="btn go">Open the board</button>
+  <p class="small">No account needed. Your name just tells VIDPOD who is picking.</p>
+</form></div>
+<div class="toast" id="toast" role="status"><span id="toastT"></span><button type="button" id="toastB" hidden></button></div>
+
 <script>
 (function () {
   "use strict";
-  var KEY = "vidpod-review-v1";
-  var QUEUE = [], ITEMS = {}, LOG_URL = "", NAME = "Tommy", CODE = "", VERSION = "";
+  var KEY = "vidpod-review-v2", OLD = "vidpod-review-v1", HELP = "vidpod-review-help-v2", SIGNKEY = "vidpod-studio-signin";
+  var GROUPS = ["Subtitles", "Hooks", "Names", "Graphics", "Motion graphics", "Transitions", "Logos", "Thumbnails", "Carousels"];
+  var GROUP_SEC = { Subtitles: "SUB", Hooks: "HOOK", Names: "NAME", Graphics: "GFX", "Motion graphics": "GFX", Transitions: "TR", Logos: "LOGO", Thumbnails: "THUMB", Carousels: "CAROUSEL" };
+  var SEC_NAME = { SUB: "Subtitles", HOOK: "Hook", NAME: "Name", GFX: "Graphics", MOVE: "Moves", TR: "Transitions", LOGO: "Logo" };
+  var SEC_HASH = { SUB: "subtitles", HOOK: "hook", NAME: "name", GFX: "graphics", MOVE: "moves", TR: "transitions", LOGO: "logo" };
+  var QUEUE = [], ITEMS = {}, LOG_URL = "", VERSION = "", CODES = {}, BOARDS = {}, OPTS = {};
+  var SIGN = null, BOARD = "vidpod", MODE = "swipe", FILTER = "All", REMOTE = null, savedOnly = false, current = null, busy = false;
+  var $ = function (id) { return document.getElementById(id); };
+  var stage = $("stage"), doneEl = $("done");
   var state = load();
-  var savedOnly = false, current = null, busy = false;
-  var stage = document.getElementById("stage"), doneEl = document.getElementById("done");
 
   function local(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return null; } }
-  function load() { var s = null; try { s = JSON.parse(local(KEY) || "null"); } catch (e) {} return s && s.decisions ? s : { decisions: {}, history: [], outbox: [] }; }
+  function load() {
+    var s = null; try { s = JSON.parse(local(KEY) || "null"); } catch (e) {}
+    if (!s || !s.boards) {
+      s = { boards: { vidpod: {} }, history: [], outbox: [], added: {}, hearts: {} };
+      try { // carry over decisions made on the first swipe page (v1)
+        var o = JSON.parse(local(OLD) || "null");
+        if (o && o.decisions) { s.boards.vidpod = o.decisions; (o.outbox || []).forEach(function (r) { s.outbox.push({ tab: "Review", board: "vidpod", row: r }); }); }
+      } catch (e) {}
+    }
+    ["boards", "added", "hearts"].forEach(function (k) { s[k] = s[k] || {}; });
+    s.history = s.history || []; s.outbox = s.outbox || [];
+    return s;
+  }
   function save() { local(KEY, JSON.stringify(state)); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function toast(t) { var el = document.getElementById("toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("on"); }, 1400); }
-  function status(t) { document.getElementById("status").textContent = t; }
+  function toast(t, label, fn) {
+    var el = $("toast"), b = $("toastB"); $("toastT").textContent = t;
+    if (label) { b.textContent = label; b.hidden = false; b.onclick = function () { el.classList.remove("on"); fn(); }; } else b.hidden = true;
+    el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("on"); }, label ? 4200 : 2200);
+  }
+  function isAdmin() { return !!(SIGN && SIGN.admin); }
+  function boardLabel(b) { return (BOARDS[b || BOARD] || {}).label || "VIDPOD"; }
+  function decs() { return (state.boards[BOARD] = state.boards[BOARD] || {}); }
 
-  // ---------- data ----------
+  // ---------- load ----------
   Promise.all([
     fetch("review-queue.json", { cache: "no-store" }).then(function (r) { return r.json(); }),
     fetch("codes.json", { cache: "no-store" }).then(function (r) { return r.json(); }).catch(function () { return {}; })
   ]).then(function (res) {
     var q = res[0] || {}, cfg = res[1] || {};
     VERSION = q.version || "";
-    QUEUE = (q.items || []).filter(function (it) { return it && it.id && (it.image || it.video); });
+    QUEUE = (q.items || []).filter(function (it) { return it && it.id && !it.retired && (it.image || it.video); });
     QUEUE.forEach(function (it) { ITEMS[it.id] = it; });
     LOG_URL = /^https:\/\//.test(cfg.log_endpoint || "") ? cfg.log_endpoint : "";
-    try { var s = JSON.parse(local("vidpod-studio-signin") || "null"); if (s && s.name) { NAME = s.name; CODE = s.code || ""; } } catch (e) {}
-    flush();
-    render();
-  }).catch(function () {
+    Object.keys(cfg.codes || {}).forEach(function (k) { CODES[k.toUpperCase()] = cfg.codes[k]; BOARDS[cfg.codes[k].board] = cfg.codes[k]; });
+    return signIn();
+  }).then(function () {
+    BOARD = isAdmin() ? (local("vidpod-review-board") || "vidpod") : SIGN.board;
+    if (!BOARDS[BOARD]) BOARD = "vidpod";
+    document.title = "VIDPOD Mood Board";
+    if (!isAdmin()) $("app").classList.add("boardonly");
+    loadOptions(); flush(); fetchRemote();
+    setMode(!isAdmin() || /board/.test(location.hash) ? "board" : (local("vidpod-review-mode") || "swipe"));
+    if (!local(HELP)) showHelp();
+  }).catch(function (e) {
+    $("swipe").classList.add("on");
     doneEl.classList.add("on");
-    doneEl.innerHTML = "<h2>Could not load the queue</h2><p>Open this page from the site (or a local server), not as a file.</p>";
+    doneEl.innerHTML = "<h2>Could not load the board</h2><p>Open this page from the site (or a local server), not as a file.</p>";
+    if (window.console) console.error(e);
   });
 
-  function pending() {
-    return QUEUE.filter(function (it) {
-      var d = state.decisions[it.id];
-      return savedOnly ? (d && d.d === "later") : !d;
+  // ---------- sign-in (same name + code as the studio, remembered on the device) ----------
+  function signIn() {
+    var saved = null; try { saved = JSON.parse(local(SIGNKEY) || "null"); } catch (e) {}
+    var c = saved && saved.code ? String(saved.code).toUpperCase() : "";
+    if (saved && saved.name && CODES[c]) { SIGN = mk(saved.name, c); return Promise.resolve(); }
+    return new Promise(function (res) {
+      $("gate").classList.add("on");
+      $("gName").value = (saved && saved.name) || local("vidpod-studio-viewer") || "";
+      $("gForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nm = $("gName").value.trim(), cd = $("gCode").value.trim().toUpperCase(), er = $("gErr");
+        if (!nm) { er.textContent = "Add your name so VIDPOD knows who is picking."; er.hidden = false; return; }
+        if (!CODES[cd]) { er.textContent = cd ? "That code did not work. Check it with VIDPOD and try again." : "Add the access code VIDPOD gave you."; er.hidden = false; return; }
+        local(SIGNKEY, JSON.stringify({ name: nm, code: cd })); local("vidpod-studio-viewer", nm);
+        SIGN = mk(nm, cd); $("gate").classList.remove("on"); res();
+      });
     });
+    function mk(name, code) { return { name: name, code: code, board: CODES[code].board, admin: CODES[code].board === "vidpod" }; }
   }
-  function counts() { var c = { yes: 0, no: 0, later: 0 }; Object.keys(state.decisions).forEach(function (k) { var d = state.decisions[k].d; if (c[d] != null) c[d]++; }); return c; }
+  function switchUser() { local(SIGNKEY, null); location.reload(); }
 
-  // ---------- render ----------
+  // ---------- studio options (labels + which are built) ----------
+  function loadOptions() {
+    fetch("clients/vidpod/board.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (b) {
+      (b.sections || []).forEach(function (s) { (s.styles || []).forEach(function (o) { if (o.code) OPTS[o.code] = o.label || o.code; }); });
+      refresh();
+    }).catch(function () {});
+  }
+  function optName(code) { return code + (OPTS[code] ? " " + OPTS[code] : ""); }
+  function builtCode(it) { return it.built && OPTS[it.built] ? it.built : ""; }
+
+  // ---------- shared board state from the Sheet (doGet ?board=). Missing doGet = local only, quietly. ----------
+  function fetchRemote() {
+    if (!LOG_URL) return;
+    fetch(LOG_URL + (LOG_URL.indexOf("?") < 0 ? "?" : "&") + "board=" + encodeURIComponent(BOARD), { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (o) { if (o && o.ok && o.decisions && o.board === BOARD) { REMOTE = o; refresh(); } })
+      .catch(function () {});
+  }
+  function remoteFor(id) { return REMOTE && REMOTE.decisions ? REMOTE.decisions[id] : null; }
+  function dec(id) {
+    var l = decs()[id], r = remoteFor(id), d;
+    if (!l) d = r ? r.d : ""; else if (!r) d = l.d; else d = (String(r.at) > String(l.at) ? r : l).d;
+    return d === "none" ? "" : d;
+  }
+  function addedItems() {
+    var map = {};
+    (REMOTE && REMOTE.added || []).forEach(function (a) { map[a.id] = norm(a); });
+    (state.added[BOARD] || []).forEach(function (a) { var m = map[a.id]; map[a.id] = m ? Object.assign({}, norm(a), m, { image: m.image || a.image, fallback: a.image }) : norm(a); });
+    return Object.keys(map).map(function (k) { return map[k]; }).sort(function (a, b) { return String(b.at).localeCompare(String(a.at)); });
+    function norm(a) {
+      var g = GROUPS.indexOf(a.group) >= 0 ? a.group : "Graphics";
+      return { id: a.id, title: a.title || (g + " find"), group: g, type: g, note: a.note || "", link: a.link || "", image: a.image || "", fallback: a.fallback || "",
+        source: "Added by " + (a.by || "VIDPOD"), added: true, at: a.at || "", build: { section: GROUP_SEC[g], match: null, recipe: "" }, built: a.built || null };
+    }
+  }
+  function allItems() { var a = addedItems(); a.forEach(function (it) { ITEMS[it.id] = it; }); return a.concat(QUEUE); } // newest finds first
+
+  // ---------- copy: what a yes does ----------
+  function yesLine(it) {
+    var b = it.build || {}, brand = boardLabel();
+    if (builtCode(it)) return "Built as " + optName(builtCode(it)) + " in VidPod Studio.";
+    if (b.match) return "matches " + optName(b.match) + ", we'll tune it to this.";
+    if (b.section === "CAROUSEL") return "goes in the carousel set for the carousel maker, built in " + brand + " brand.";
+    if (b.section === "THUMB") return "goes in the thumbnail set, built in " + brand + " brand.";
+    return "becomes a new " + (SEC_NAME[b.section] || "studio") + " option in VidPod Studio, built in " + brand + " brand.";
+  }
+  function statusPill(it) {
+    var c = builtCode(it);
+    return c ? '<span class="pill built">Built: ' + esc(c) + '</span>' : '<span class="pill">On the board</span>';
+  }
+
+  // ---------- modes ----------
+  function setMode(m) {
+    MODE = isAdmin() ? m : "board";
+    local("vidpod-review-mode", MODE);
+    $("mSwipe").setAttribute("aria-pressed", MODE === "swipe"); $("mBoard").setAttribute("aria-pressed", MODE === "board");
+    $("swipe").classList.toggle("on", MODE === "swipe"); $("board").classList.toggle("on", MODE === "board");
+    if (MODE === "board" && !/board/.test(location.hash)) history.replaceState(null, "", "#board");
+    if (MODE === "swipe" && location.hash) history.replaceState(null, "", location.pathname + location.search);
+    refresh();
+    if (MODE === "board") fetchRemote();
+  }
+  function refresh() { if (MODE === "swipe") renderSwipe(); else renderBoard(); }
+  $("mSwipe").onclick = function () { setMode("swipe"); };
+  $("mBoard").onclick = function () { setMode("board"); };
+
+  // ---------- swipe ----------
+  function pending() { return QUEUE.filter(function (it) { var d = dec(it.id); return savedOnly ? d === "later" : !d; }); }
+  function counts() { var c = { yes: 0, no: 0, later: 0, removed: 0 }; allItems().forEach(function (it) { var d = dec(it.id); if (c[d] != null) c[d]++; }); return c; }
   function cardHTML(it) {
     // Still always shows; the clip only appears on tap and only once frames are really playing.
     var media = '<img alt="" src="' + esc(it.image || "") + '">' + (it.video
-      ? '<video class="clip" muted loop playsinline preload="none" data-src="' + esc(it.video) + '"></video><span class="playhint">Tap to play</span>'
-      : "");
+      ? '<video class="clip" muted loop playsinline preload="none" data-src="' + esc(it.video) + '"></video><span class="playhint">Tap to play</span>' : "");
     return '<div class="media">' + media + '</div>' +
       '<div class="stamp yes">YES</div><div class="stamp no">NO</div><div class="stamp later">LATER</div>' +
-      '<div class="info"><span class="chip">' + esc(it.type) + '</span><span class="chip id">' + esc(it.id) + '</span>' +
+      '<div class="info"><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span>' +
       '<div class="title">' + esc(it.title) + '</div>' +
-      (it.note ? '<p class="note">' + esc(it.note) + '</p>' : "") +
-      '<div class="src">' + esc(it.source || "") + (it.link ? ' <a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</div></div>';
+      '<p class="ifyes"><b>If yes:</b> ' + esc(yesLine(it)) + '</p>' +
+      '<div class="src"><button type="button" class="more">How we\'d build it</button>' + (it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</div></div>';
   }
-  function render() {
+  function renderSwipe() {
     Array.prototype.slice.call(stage.querySelectorAll(".card")).forEach(function (c) { c.remove(); });
-    var list = pending();
-    var total = savedOnly ? list.length : QUEUE.length;
-    var doneN = savedOnly ? 0 : QUEUE.length - list.length;
-    document.getElementById("count").textContent = savedOnly ? (list.length + " saved") : (Math.min(doneN + 1, total) + " / " + total);
+    var list = pending(), total = savedOnly ? list.length : QUEUE.length, doneN = savedOnly ? 0 : QUEUE.length - list.length;
+    $("count").textContent = savedOnly ? list.length + " saved" : Math.min(doneN + 1, total) + " / " + total;
+    $("savedBtn").textContent = savedOnly ? "All" : "Saved (" + counts().later + ")";
     var show = !!list.length;
-    document.getElementById("actions").style.visibility = show ? "visible" : "hidden";
+    $("actions").style.visibility = show ? "visible" : "hidden";
     if (!show) { current = null; showDone(); return; }
     doneEl.classList.remove("on");
     if (list[1]) stage.appendChild(makeCard(list[1], true));
@@ -167,108 +429,307 @@ header { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 
     stage.appendChild(current);
     bindDrag(current);
   }
-  function toggleClip(card, v) {
-    var hint = card.querySelector(".playhint");
-    if (!v.src) {
-      v.src = v.dataset.src;
-      v.addEventListener("timeupdate", function () { if (v.currentTime > 0.15) v.classList.add("on"); });
-    }
+  function toggleClip(box, v) {
+    var hint = box.querySelector(".playhint");
+    if (!v.src) { v.src = v.dataset.src; v.addEventListener("timeupdate", function () { if (v.currentTime > 0.15) v.classList.add("on"); }); }
     if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); if (hint) hint.textContent = "Tap to pause"; }
     else { v.pause(); if (hint) hint.textContent = "Tap to play"; }
   }
   function makeCard(it, back) {
     var c = document.createElement("div");
-    c.className = "card" + (back ? " back" : "");
-    c.dataset.id = it.id;
-    c.innerHTML = cardHTML(it);
+    c.className = "card" + (back ? " back" : ""); c.dataset.id = it.id; c.innerHTML = cardHTML(it);
+    var m = c.querySelector(".more"); if (m) m.addEventListener("click", function (e) { e.stopPropagation(); openDetail(it.id); });
     return c;
   }
   function showDone() {
     var c = counts();
-    var yes = QUEUE.filter(function (it) { return (state.decisions[it.id] || {}).d === "yes"; });
-    var later = QUEUE.filter(function (it) { return (state.decisions[it.id] || {}).d === "later"; });
-    function rows(arr) {
-      return arr.length ? arr.map(function (it) {
-        return '<div class="row"><img alt="" src="' + esc(it.image || "") + '"><div><b>' + esc(it.title) + '</b><span>' + esc(it.id + " · " + it.type) + '</span><br>' +
-          (it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</div></div>';
-      }).join("") : '<p>None yet.</p>';
-    }
-    var left = QUEUE.length - Object.keys(state.decisions).length;
-    doneEl.innerHTML = '<h2>' + (savedOnly && !pending().length ? "No saved items left" : left > 0 ? "Results so far" : "All done") + '</h2>' +
-      '<p>' + c.yes + ' yes, ' + c.no + ' no, ' + c.later + ' saved for later. ' + (LOG_URL ? "Sent to the VIDPOD sheet." : "Kept on this phone (the sheet link is not set yet).") + '</p>' +
-      '<div class="donebtns">' + (c.later ? '<button class="btn" id="dSaved">Go through saved</button>' : "") +
-      '<button class="btn" id="dCopy">Copy results</button><button class="btn" id="dReset">Start over</button></div>' +
-      '<div class="list"><h3>Yes</h3>' + rows(yes) + '<h3>Saved for later</h3>' + rows(later) + '</div>';
+    doneEl.innerHTML = '<h2>' + (savedOnly ? "No saved looks left" : "All done") + '</h2>' +
+      '<p>' + c.yes + ' on the board, ' + c.no + ' no, ' + c.later + ' saved for later. ' + (LOG_URL ? "Every swipe went to the VIDPOD sheet." : "Kept on this phone.") + '</p>' +
+      '<div class="donebtns"><button class="btn go" id="dBoard">Open the mood board</button>' + (c.later && !savedOnly ? '<button class="btn" id="dSaved">Go through saved</button>' : "") +
+      (savedOnly ? '<button class="btn" id="dAll">Back to all</button>' : "") + '<button class="btn" id="dCopy">Copy results</button><button class="btn" id="dReset">Start over</button></div>';
     doneEl.classList.add("on");
-    var s = document.getElementById("dSaved"); if (s) s.onclick = function () { setMode(true); };
-    document.getElementById("dCopy").onclick = copyResults;
-    document.getElementById("dReset").onclick = function () {
-      if (!confirm("Clear every decision on this phone and start again? Rows already sent to the sheet stay there.")) return;
-      state.decisions = {}; save(); setMode(false);
+    $("dBoard").onclick = function () { setMode("board"); };
+    var s = $("dSaved"); if (s) s.onclick = function () { savedOnly = true; renderSwipe(); };
+    var a = $("dAll"); if (a) a.onclick = function () { savedOnly = false; renderSwipe(); };
+    $("dCopy").onclick = copyResults;
+    $("dReset").onclick = function () {
+      if (!confirm("Clear every swipe on this phone and start again? Rows already sent to the sheet stay there.")) return;
+      var at = new Date().toISOString(), d = decs();
+      QUEUE.forEach(function (it) { if (dec(it.id)) d[it.id] = { d: "none", at: at }; });
+      save(); savedOnly = false; renderSwipe();
     };
   }
-
-  // ---------- decisions ----------
   function decide(d, how) {
     if (!current || busy) return;
     busy = true;
-    var card = current, id = card.dataset.id, it = ITEMS[id];
-    var at = new Date().toISOString();
-    var prev = state.decisions[id] ? state.decisions[id].d : "";
-    state.decisions[id] = { d: d, at: at };
-    state.history.push({ id: id, d: d, prev: prev, at: at });
+    var card = current, id = card.dataset.id, it = ITEMS[id], at = new Date().toISOString(), prev = dec(id);
+    decs()[id] = { d: d, at: at };
+    state.history.push({ board: BOARD, id: id, d: d, prev: prev, at: at });
     if (state.history.length > 500) state.history = state.history.slice(-500);
-    send(it, d, at, prev);
-    save();
-    var w = window.innerWidth;
-    var tx = d === "yes" ? w * 1.3 : d === "no" ? -w * 1.3 : 0, ty = d === "later" ? -window.innerHeight * 1.1 : 40;
-    var rot = d === "yes" ? 18 : d === "no" ? -18 : 0;
+    logDecision(it, d, at, prev, "");
+    var w = window.innerWidth, tx = d === "yes" ? w * 1.3 : d === "no" ? -w * 1.3 : 0, ty = d === "later" ? -window.innerHeight * 1.1 : 40;
     card.classList.remove("snap"); card.classList.add("fly");
     card.querySelector(".stamp." + d).style.opacity = 1;
-    requestAnimationFrame(function () { card.style.transform = "translate(" + tx + "px," + ty + "px) rotate(" + rot + "deg)"; card.style.opacity = 0; });
-    setTimeout(function () { busy = false; render(); }, how === "key" ? 220 : 300);
+    requestAnimationFrame(function () { card.style.transform = "translate(" + tx + "px," + ty + "px) rotate(" + (d === "yes" ? 18 : d === "no" ? -18 : 0) + "deg)"; card.style.opacity = 0; });
+    setTimeout(function () { busy = false; renderSwipe(); }, how === "key" ? 220 : 300);
+    if (d === "yes") toast("Added to your board. Next: built into the studio.");
     if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
   }
   function undo() {
-    var h = state.history.pop();
+    var h = null;
+    for (var i = state.history.length - 1; i >= 0; i--) if ((state.history[i].board || "vidpod") === BOARD) { h = state.history.splice(i, 1)[0]; break; }
     if (!h) { toast("Nothing to undo"); return; }
-    if (h.prev) state.decisions[h.id] = { d: h.prev, at: new Date().toISOString() }; else delete state.decisions[h.id];
-    save();
-    send(ITEMS[h.id], "undo", new Date().toISOString(), h.d);
-    if (savedOnly && h.prev !== "later") setMode(false); else render();
+    var at = new Date().toISOString();
+    decs()[h.id] = { d: h.prev || "none", at: at };
+    logDecision(ITEMS[h.id], "undo", at, h.d, h.prev || "");
+    if (savedOnly && h.prev !== "later") savedOnly = false;
+    refresh();
     toast("Undone: " + (ITEMS[h.id] ? ITEMS[h.id].title : h.id));
   }
-  function setMode(on) { savedOnly = on; document.getElementById("mode").setAttribute("aria-pressed", on ? "true" : "false"); render(); }
 
-  // ---------- logging: Google Sheet tab "Review" + local outbox ----------
-  function send(it, d, at, prev) {
-    if (!it) return;
-    var row = { section: it.type, optionCode: it.id, label: it.title,
-      settings: { decision: d, previous: prev || "", at: at, source: it.source || "", link: it.link || "" }, note: d };
-    state.outbox.push(row); save(); flush();
+  // ---------- board ----------
+  function boardItems() { return allItems().filter(function (it) { return dec(it.id) === "yes"; }); }
+  function renderBoard() {
+    var items = boardItems(), byG = {};
+    GROUPS.forEach(function (g) { byG[g] = []; });
+    items.forEach(function (it) { (byG[it.group] || byG.Graphics).push(it); });
+    $("bsub").textContent = items.length ? items.length + " look" + (items.length === 1 ? "" : "s") + " for " + boardLabel() + ". Tap one to see it move and how we'd build it." : "";
+    // controls
+    var ctl = "";
+    if (isAdmin()) {
+      var opts = Object.keys(BOARDS).map(function (b) { return '<option value="' + esc(b) + '"' + (b === BOARD ? " selected" : "") + '>' + esc(BOARDS[b].label) + '</option>'; }).join("");
+      ctl = '<select id="bSel" aria-label="Which board">' + opts + '</select><button type="button" class="btn go" id="bAdd">+ Add</button>';
+    }
+    $("bctl").innerHTML = ctl;
+    if (isAdmin()) {
+      $("bSel").onchange = function () { BOARD = this.value; local("vidpod-review-board", BOARD); REMOTE = null; FILTER = "All"; refresh(); fetchRemote(); };
+      $("bAdd").onclick = openAdd;
+    }
+    // chips
+    if (FILTER !== "All" && !byG[FILTER].length) FILTER = "All";
+    $("chips").innerHTML = ['<button type="button" class="fchip" data-g="All" aria-pressed="' + (FILTER === "All") + '">All<span>' + items.length + '</span></button>']
+      .concat(GROUPS.map(function (g) { return '<button type="button" class="fchip" data-g="' + esc(g) + '" aria-pressed="' + (FILTER === g) + '"' + (byG[g].length ? "" : " disabled") + '>' + esc(g) + '<span>' + byG[g].length + '</span></button>'; })).join("");
+    Array.prototype.forEach.call($("chips").querySelectorAll(".fchip"), function (b) { b.onclick = function () { FILTER = b.dataset.g; renderBoard(); }; });
+    // grid
+    var html = "";
+    if (!items.length) {
+      html = '<p class="empty">' + (isAdmin() ? "Nothing on this board yet. Swipe right on a look, or tap + Add." : "VIDPOD is putting your board together. Check back soon.") + '</p>';
+    } else {
+      GROUPS.forEach(function (g) {
+        if (!byG[g].length || (FILTER !== "All" && FILTER !== g)) return;
+        html += '<h2 class="gtitle">' + esc(g) + ' · ' + byG[g].length + '</h2><div class="masonry">' + byG[g].map(tileHTML).join("") + '</div>';
+      });
+    }
+    $("grid").innerHTML = html;
+    Array.prototype.forEach.call($("grid").querySelectorAll(".tile"), bindTile);
+    Array.prototype.forEach.call($("grid").querySelectorAll("img[data-fallback]"), function (im) { im.onerror = function () { if (im.dataset.fallback && im.src !== im.dataset.fallback) im.src = im.dataset.fallback; }; });
+    $("who").innerHTML = "Signed in as <b>" + esc(SIGN.name) + "</b> (" + esc(boardLabel(SIGN.board)) + "). " + '<button type="button" class="link" id="switchU">Not you? Switch</button>';
+    $("switchU").onclick = switchUser;
   }
+  function tileHTML(it) {
+    var hearted = !!((state.hearts[BOARD] || {})[it.id]), n = heartCount(it.id, hearted);
+    var media = it.image
+      ? '<img loading="lazy" alt="" src="' + esc(it.image) + '"' + (it.fallback ? ' data-fallback="' + esc(it.fallback) + '"' : "") + '>' + (it.video ? '<span class="tclip">Clip</span>' : "")
+      : '<div class="ltile">' + esc(it.title) + '<small>' + esc(host(it.link)) + '</small></div>';
+    return '<article class="tile" data-id="' + esc(it.id) + '"><button type="button" class="tmedia" aria-label="Open ' + esc(it.title) + '">' + media + '</button>' +
+      '<div class="tbody">' + statusPill(it) + '<b>' + esc(it.title) + '</b></div>' +
+      '<div class="tacts"><button type="button" class="ibtn heart' + (hearted ? " on" : "") + '" aria-pressed="' + hearted + '" aria-label="Love this">' + heartSVG(hearted) + (n ? "<span>" + n + "</span>" : "") + '</button>' +
+      (isAdmin() ? '<button type="button" class="ibtn bin" aria-label="Remove from the board"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button>' : "") +
+      '</div></article>';
+  }
+  function heartSVG(on) { return '<svg viewBox="0 0 24 24" fill="' + (on ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>'; }
+  function heartCount(id, mine) { var r = REMOTE && REMOTE.hearts ? REMOTE.hearts[id] || 0 : 0; return Math.max(r, mine ? 1 : 0); }
+  function host(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u || ""; } }
+  function bindTile(t) {
+    var id = t.dataset.id;
+    t.querySelector(".tmedia").onclick = function () { openDetail(id); };
+    t.querySelector(".heart").onclick = function () { heart(id); };
+    var b = t.querySelector(".bin"); if (b) b.onclick = function () { removeItem(id); };
+  }
+  function heart(id) {
+    var it = ITEMS[id], h = (state.hearts[BOARD] = state.hearts[BOARD] || {}), on = !h[id];
+    h[id] = on; save();
+    queue("Likes", { section: it.group, optionCode: id, label: it.title, settings: { kind: "moodboard", board: BOARD, hearted: on, at: new Date().toISOString() }, note: on ? "heart" : "unheart" });
+    if (on) toast("Loved. VIDPOD will see it.");
+    refresh(); if ($("detail").classList.contains("on")) openDetail(id);
+  }
+  function removeItem(id) {
+    var it = ITEMS[id], at = new Date().toISOString(), prev = dec(id);
+    decs()[id] = { d: "removed", at: at };
+    logDecision(it, "removed", at, prev, ""); closeSheets(); refresh();
+    toast("Removed: " + it.title, "Undo", function () {
+      var at2 = new Date().toISOString(); decs()[id] = { d: "yes", at: at2 }; logDecision(it, "undo", at2, "removed", "yes"); refresh();
+    });
+  }
+
+  // ---------- detail ----------
+  function openDetail(id) {
+    var it = ITEMS[id]; if (!it) return;
+    var bd = it.breakdown || {}, b = it.build || {}, onBoard = dec(id) === "yes", hearted = !!((state.hearts[BOARD] || {})[id]);
+    var x = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    var media = it.image ? '<img alt="" src="' + esc(it.image) + '"' + (it.fallback ? ' data-fallback="' + esc(it.fallback) + '"' : "") + '>' : '<div class="ltile" style="padding:30px 16px">' + esc(host(it.link)) + '</div>';
+    if (it.video) media += '<video class="clip" muted loop playsinline preload="none" data-src="' + esc(it.video) + '"></video><span class="playhint">Tap to play</span>';
+    var code = builtCode(it) || b.match || b.option;
+    var an = it.analysis || {}, mo = an.motion || {}, ly = an.layout || null, as = b.assets || {};
+    var PATH = { studio: "Studio option (tune only)", hyperframes: "HyperFrames registry", rebuild: "Rebuild" };
+    var how = '<div class="recipe"><span class="code">' + esc(builtCode(it) ? "Built: " + optName(builtCode(it)) : b.match ? "Closest: " + optName(b.match) : "New build") + '</span>' +
+      (b.path ? '<p><b>Path:</b> ' + esc(PATH[b.path] || b.path) + (b.engine ? ", " + esc(b.engine) : "") + (b.option ? ", from " + esc(optName(b.option)) : "") + '</p>' : "") +
+      (b.renderer ? '<p><b>Renderer:</b> ' + esc(b.renderer) + '</p>' : "") +
+      (b.registry && b.registry.length ? '<p><b>Registry:</b> ' + esc(b.registry.join(", ")) + '</p>' : "") +
+      (b.add ? '<p><b>What we add:</b> ' + esc(b.add) + '</p>' : (b.recipe ? '<p>' + esc(b.recipe) + '</p>' : "")) + '</div>' +
+      (b.motion ? '<p><b>Motion, our settings:</b> ' + esc(b.motion) + '</p>' : "") +
+      (b.style ? '<p><b>Keep:</b> ' + esc(b.style.keep || "") + '</p><p><b>Swap to brand:</b> ' + esc(b.style.swap || "") + '</p>' : (bd.brandMap ? '<p><b>In brand:</b> ' + esc(bd.brandMap) + '</p>' : "")) +
+      (as.fonts || as.clip ? '<details><summary>Assets we already have</summary><div class="inner">' +
+        (as.fonts && as.fonts.length ? '<p><b>Fonts:</b> ' + esc(as.fonts.join(", ")) + '</p>' : "") +
+        (as.sfx && as.sfx.length ? '<p><b>Sound:</b> ' + esc(as.sfx.join(", ")) + '</p>' : "") +
+        (as.colours ? '<p><b>Colours:</b> ' + esc(as.colours) + '</p>' : "") +
+        (as.clip ? '<p><b>Clip:</b> ' + esc(as.clip) + '</p>' : "") +
+        (as.matte ? '<p><b>Cut-out:</b> ' + esc(as.matte) + '</p>' : "") + '</div></details>' : "") +
+      (bd.prompt ? '<details><summary>Build prompt</summary><div class="inner"><pre id="dPrompt">' + esc(bd.prompt) + '</pre><button type="button" class="btn" id="dCopyP" style="width:100%">Copy prompt</button></div></details>' : "") +
+      (it.strip ? '<details><summary>Frame by frame (8 per second)</summary><div class="inner"><img loading="lazy" alt="Frames of the clip, left to right, 8 per second" src="' + esc(it.strip) + '"></div></details>' : "") +
+      (an.evidence ? '<details><summary>Measured frames (25 per second, 10 % grid)</summary><div class="inner"><img loading="lazy" alt="Entry and exit frames at 25 per second with a measuring grid" src="' + esc(an.evidence) + '"></div></details>' : "");
+    var beats = (mo.beats || []).map(function (x) {
+      var f = function (n) { return n == null ? "" : n + " f"; };
+      return '<tr><td>' + esc(x.element) + '</td><td>' + esc([x.entry, x.from, x.direction].filter(Boolean).join(", ")) + (x.overshoot ? " (overshoot" + (x.peakPct ? " " + x.peakPct + "%" : "") + ")" : "") +
+        '</td><td>' + esc(f(x.startFrame)) + '</td><td>' + esc(f(x.durationFrames)) + '</td><td>' + esc(x.easing || "") + '</td><td>' + esc(f(x.staggerFrames)) + '</td><td>' + esc(f(x.holdFrames)) + '</td><td>' + esc(x.exit || "") + (x.exitFrames ? " " + x.exitFrames + " f" : "") + '</td></tr>';
+    }).join("");
+    var beatsHTML = beats ? '<details><summary>Beats, frame by frame (25 fps)</summary><div class="inner" style="overflow-x:auto"><table class="beats"><thead><tr><th>Element</th><th>Entry</th><th>Starts</th><th>Takes</th><th>Ease</th><th>Stagger</th><th>Holds</th><th>Exit</th></tr></thead><tbody>' + beats + '</tbody></table>' + (mo.notes ? '<p class="small" style="margin-top:8px">' + esc(mo.notes) + '</p>' : "") + '</div></details>' : "";
+    var where = "";
+    if (ly && ly.box) {
+      var bx = ly.box, sf = ly.safe || {};
+      var rf = String(ly.relativeToFace || ""); rf = rf.charAt(0).toUpperCase() + rf.slice(1);
+      where = '<div class="sect"><h4>Where it sits</h4><p>' + esc(rf) + (ly.layer ? ", " + esc(ly.layer) : "") + (ly.align ? ", " + esc(ly.align) + " aligned" : "") + (ly.overlapsHead ? ", overlaps the head" : "") + '.</p>' +
+        '<p><b>Box on 1080x1920:</b> x ' + bx.x + ', y ' + bx.y + ', ' + bx.w + ' wide, ' + bx.h + ' tall' + (ly.measured === false ? " (our proposed placement)" : " (measured)") + '.</p>' +
+        '<p><b>Studio safe area' + (sf.inside ? " (inside)" : " (crosses it)") + ':</b> ' + esc(sf.note || (sf.inside ? "fits inside x 135 to 945, y 250 to 1500." : "")) + '</p></div>';
+    }
+    var p = $("dPanel");
+    p.innerHTML = '<div class="phead"><span><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span></span><button type="button" class="xbtn" data-close aria-label="Close">' + x + '</button></div>' +
+      '<div class="dmedia" id="dMedia">' + media + '</div>' +
+      '<div class="dmeta"><h3 id="dTitle">' + esc(it.title) + '</h3>' + (onBoard ? statusPill(it) + " " : "") +
+      '<p class="ifyes" style="margin-top:10px"><b>' + (onBoard ? "Yes means:" : "If yes:") + '</b> ' + esc(yesLine(it)) + '</p>' +
+      '<p class="dsrc">' + esc(it.source || "") + (it.link ? ' · <a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</p>' +
+      (it.note && it.added ? '<p class="dsrc">Note: ' + esc(it.note) + '</p>' : "") + '</div>' +
+      '<div class="sect"><h4>What\'s on screen</h4><p>' + esc(bd.onScreen || (it.added ? "Breakdown coming: Claude writes it when it files this find." : it.note || "")) + '</p></div>' +
+      (bd.motion ? '<div class="sect"><h4>How it moves</h4><p>' + esc(bd.motion) + '</p>' + beatsHTML + '</div>' : "") + where +
+      '<div class="sect"><h4>How we\'d build it</h4>' + how + '</div>' +
+      '<div class="dacts">' + (code && SEC_HASH[(code.split("-")[0])] && BOARD === "vidpod" ? '<a class="btn" href="index.html#' + SEC_HASH[code.split("-")[0]] + '" style="text-decoration:none">Try ' + esc(code) + ' in the studio</a>' : "") +
+      '<button type="button" class="btn" id="dHeart">' + heartSVG(hearted) + (hearted ? "Loved" : "Love it") + '</button>' +
+      (isAdmin() && onBoard ? '<button type="button" class="btn danger" id="dRemove">Remove from board</button>' : "") + '</div>';
+    $("detail").classList.add("on"); p.scrollTop = 0;
+    var im = p.querySelector("img[data-fallback]"); if (im) im.onerror = function () { if (im.src !== im.dataset.fallback) im.src = im.dataset.fallback; };
+    var v = p.querySelector("video"); if (v) $("dMedia").onclick = function () { toggleClip($("dMedia"), v); };
+    var cp = $("dCopyP"); if (cp) cp.onclick = function () { copyText(bd.prompt, "Prompt copied"); };
+    $("dHeart").onclick = function () { heart(id); };
+    var rm = $("dRemove"); if (rm) rm.onclick = function () { removeItem(id); };
+    p.querySelector("[data-close]").onclick = closeSheets;
+  }
+  function closeSheets() {
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet.on"), function (s) { s.classList.remove("on"); var v = s.querySelector("video"); if (v) v.pause(); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function (s) {
+    s.addEventListener("click", function (e) { if (e.target === s) closeSheets(); });
+    Array.prototype.forEach.call(s.querySelectorAll("[data-close]"), function (b) { b.onclick = closeSheets; });
+  });
+
+  // ---------- help ----------
+  function showHelp() {
+    $("hList").innerHTML = isAdmin()
+      ? "<li>Yes puts this look on your mood board.</li><li>VIDPOD builds every yes into VidPod Studio so you can try it on real footage in your brand.</li><li>No removes it. Later keeps it for another day.</li>"
+      : "<li>This is your mood board: looks VIDPOD picked for your videos.</li><li>Tap one to see it move and how we'd build it in your brand.</li><li>Heart the ones you love. VIDPOD sees every heart.</li>";
+    $("help").classList.add("on");
+  }
+  $("hGo").onclick = function () { local(HELP, "1"); closeSheets(); };
+  $("helpBtn").onclick = showHelp;
+
+  // ---------- add a find ----------
+  var addImg = null;
+  $("aGroup").innerHTML = GROUPS.map(function (g) { return '<option>' + esc(g) + '</option>'; }).join("");
+  function openAdd() { $("aForm").reset(); addImg = null; $("aPrev").removeAttribute("src"); $("aErr").hidden = true; $("aGo").disabled = false; $("aGo").textContent = "Add to the board"; $("add").classList.add("on"); }
+  $("aFile").onchange = function () {
+    var f = this.files && this.files[0]; if (!f) return;
+    shrink(f, 1400, 0.85).then(function (big) { return shrink(f, 480, 0.72).then(function (small) { addImg = { big: big, small: small, name: f.name || "screenshot.jpg" }; $("aPrev").src = small; }); })
+      .catch(function () { $("aErr").textContent = "That file would not open as an image. Try a screenshot (jpg or png)."; $("aErr").hidden = false; });
+  };
+  function shrink(file, max, qual) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () {
+        var s = Math.min(1, max / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement("canvas");
+        c.width = Math.round(im.naturalWidth * s); c.height = Math.round(im.naturalHeight * s);
+        c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url); res(c.toDataURL("image/jpeg", qual));
+      };
+      im.onerror = function () { URL.revokeObjectURL(url); rej(new Error("image")); };
+      im.src = url;
+    });
+  }
+  $("aForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var link = $("aLink").value.trim(), group = $("aGroup").value, title = $("aName").value.trim(), note = $("aNote").value.trim(), er = $("aErr");
+    if (!addImg && !/^https?:\/\/\S+\.\S+/.test(link)) { er.textContent = "Add a screenshot or paste a link."; er.hidden = false; return; }
+    er.hidden = true;
+    var id = "U" + Date.now().toString(36).toUpperCase(), at = new Date().toISOString();
+    title = title || (group + " find" + (link ? " from " + host(link) : ""));
+    var item = { id: id, group: group, title: title, note: note, link: link, image: addImg ? addImg.small : "", by: SIGN.name, at: at };
+    (state.added[BOARD] = state.added[BOARD] || []).push(item);
+    decs()[id] = { d: "yes", at: at }; save();
+    if (!addImg) {
+      queue("Review", { section: group, optionCode: id, label: title, settings: { board: BOARD, decision: "added", group: group, note: note, link: link, thumb: "", at: at, kind: "moodboard" }, note: "added" });
+      done("Added to the board.");
+      return;
+    }
+    $("aGo").disabled = true; $("aGo").textContent = "Uploading...";
+    var body = { tab: "References", name: SIGN.name, client: BOARD, project: "Mood board", code: SIGN.code, version: "moodboard " + VERSION,
+      rows: [{ section: group, optionCode: id, label: title, settings: { kind: "moodboard", board: BOARD, link: link, group: group, at: at }, note: note }],
+      image: { base64: addImg.big, contentType: "image/jpeg", filename: (addImg.name || "screenshot").replace(/\.[a-z0-9]+$/i, "") + ".jpg" },
+      moodboard: { board: BOARD, id: id, group: group, title: title, note: note, link: link } };
+    if (!LOG_URL) { done("Added on this phone (the sheet link is not set)."); return; }
+    fetch(LOG_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); })
+      .then(function (o) {
+        if (o && o.thumb) { item.image = o.thumb; item.fallback = addImg.small; save(); }
+        // older receiver (v1) saves the screenshot but writes no board row: log the add so the board still knows it
+        if (!o || !(o.version >= 2)) queue("Review", { section: group, optionCode: id, label: title, settings: { board: BOARD, decision: "added", group: group, note: note, link: link, thumb: "", file: o && o.file || "", at: at, kind: "moodboard" }, note: "added" });
+        done("Added to the board. Saved to VIDPOD's Drive.");
+      })
+      .catch(function () {
+        queue("Review", { section: group, optionCode: id, label: title, settings: { board: BOARD, decision: "added", group: group, note: note, link: link, thumb: "", at: at, kind: "moodboard" }, note: "added" });
+        done("Added to the board. The screenshot stays on this phone for now.");
+      });
+    function done(msg) { closeSheets(); FILTER = "All"; setMode("board"); toast(msg); fetchRemote(); }
+  });
+
+  // ---------- logging: Google Sheet (Review, Likes) via an on-device outbox ----------
+  function logDecision(it, d, at, prev, restored) {
+    if (!it) return;
+    queue("Review", { section: it.group || it.type, optionCode: it.id, label: it.title,
+      settings: { board: BOARD, decision: d, previous: prev || "", restored: restored || "", at: at, source: it.source || "", link: it.link || "" }, note: d });
+  }
+  function queue(tab, row) { state.outbox.push({ tab: tab, board: BOARD, row: row }); save(); flush(); }
   function flush() {
-    if (!LOG_URL || !state.outbox.length || flush.on) { if (!LOG_URL) status("Saved on this phone"); return; }
+    if (!LOG_URL || !state.outbox.length || flush.on) return;
     flush.on = true;
-    var rows = state.outbox.slice(0, 40);
-    var body = JSON.stringify({ tab: "Review", name: NAME, client: "VIDPOD", project: "Swipe review", code: CODE, version: "review " + VERSION, rows: rows });
+    var first = state.outbox[0], batch = [];
+    for (var i = 0; i < state.outbox.length && batch.length < 40; i++) { var o = state.outbox[i]; if (o.tab === first.tab && o.board === first.board) batch.push(o); else break; }
+    var body = JSON.stringify({ tab: first.tab, name: SIGN ? SIGN.name : "Tommy", client: first.board, project: "Mood board", code: SIGN ? SIGN.code : "", version: "moodboard " + VERSION, rows: batch.map(function (o) { return o.row; }) });
     var ok = false;
     fetch(LOG_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body })
-      .then(function () { ok = true; state.outbox = state.outbox.slice(rows.length); save(); status("Sent to VIDPOD"); })
-      .catch(function () { status("Offline, kept on this phone"); })
+      .then(function () { ok = true; state.outbox = state.outbox.slice(batch.length); save(); })
+      .catch(function () {})
       .then(function () { flush.on = false; if (ok && state.outbox.length) flush(); });
   }
   window.addEventListener("online", flush);
 
+  function copyText(t, msg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { toast(msg || "Copied"); }, function () { prompt("Copy:", t); });
+    else prompt("Copy:", t);
+  }
   function copyResults() {
-    var lines = ["VIDPOD swipe review, " + new Date().toLocaleString()];
+    var lines = ["VIDPOD mood board (" + boardLabel() + "), " + new Date().toLocaleString()];
     ["yes", "later", "no"].forEach(function (k) {
       lines.push("", k.toUpperCase());
-      QUEUE.forEach(function (it) { if ((state.decisions[it.id] || {}).d === k) lines.push(it.id + "  " + it.title + "  " + (it.link || "")); });
+      allItems().forEach(function (it) { if (dec(it.id) === k) lines.push(it.id + "  " + it.title + "  " + (it.link || "")); });
     });
-    var t = lines.join("\n");
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { toast("Copied"); }, function () { prompt("Copy:", t); });
-    else prompt("Copy:", t);
+    copyText(lines.join("\n"));
   }
 
   // ---------- gestures ----------
@@ -276,7 +737,7 @@ header { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 
     var sx = 0, sy = 0, dx = 0, dy = 0, down = false, moved = false, pid = null;
     var yes = card.querySelector(".stamp.yes"), no = card.querySelector(".stamp.no"), later = card.querySelector(".stamp.later");
     card.addEventListener("pointerdown", function (e) {
-      if (e.target.closest("a") || busy) return;
+      if (e.target.closest("a,button") || busy) return;
       down = true; moved = false; sx = e.clientX; sy = e.clientY; dx = dy = 0; pid = e.pointerId;
       try { card.setPointerCapture(pid); } catch (x) {}
       card.classList.remove("snap");
@@ -294,8 +755,7 @@ header { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 
     function end(e) {
       if (!down || (e && e.pointerId !== pid)) return;
       down = false;
-      var lim = Math.min(110, window.innerWidth * 0.26);
-      var up = dy < 0 && Math.abs(dy) > Math.abs(dx);
+      var lim = Math.min(110, window.innerWidth * 0.26), up = dy < 0 && Math.abs(dy) > Math.abs(dx);
       if (up && -dy > 110) return decide("later");
       if (!up && dx > lim) return decide("yes");
       if (!up && dx < -lim) return decide("no");
@@ -306,23 +766,20 @@ header { display: flex; align-items: center; gap: 10px; height: 52px; flex: 0 0 
     card.addEventListener("pointercancel", end);
   }
 
-  document.getElementById("bYes").onclick = function () { decide("yes"); };
-  document.getElementById("bNo").onclick = function () { decide("no"); };
-  document.getElementById("bLater").onclick = function () { decide("later"); };
-  document.getElementById("undo").onclick = undo;
-  document.getElementById("mode").onclick = function () { setMode(!savedOnly); };
-  document.getElementById("summary").onclick = function () {
-    Array.prototype.slice.call(stage.querySelectorAll(".card")).forEach(function (c) { c.remove(); });
-    current = null; document.getElementById("actions").style.visibility = "hidden"; showDone();
-    var back = document.createElement("button"); back.className = "btn"; back.textContent = "Back to swiping"; back.onclick = render;
-    doneEl.querySelector(".donebtns").prepend(back);
-  };
+  $("bYes").onclick = function () { decide("yes"); };
+  $("bNo").onclick = function () { decide("no"); };
+  $("bLater").onclick = function () { decide("later"); };
+  $("undo").onclick = undo;
+  $("savedBtn").onclick = function () { savedOnly = !savedOnly; renderSwipe(); };
   document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeSheets(); return; }
+    if (MODE !== "swipe" || document.querySelector(".sheet.on, .gate.on") || /INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || "")) return;
     if (e.key === "ArrowRight") decide("yes", "key");
     else if (e.key === "ArrowLeft") decide("no", "key");
     else if (e.key === "ArrowUp") { e.preventDefault(); decide("later", "key"); }
     else if ((e.key === "z" && (e.metaKey || e.ctrlKey)) || e.key === "Backspace") undo();
   });
+  window.addEventListener("hashchange", function () { if (/board/.test(location.hash) && MODE !== "board") setMode("board"); });
 })();
 </script>
 </body>
