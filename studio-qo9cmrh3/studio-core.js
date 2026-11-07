@@ -276,7 +276,24 @@
   function isOwn(id) {
     var s = sec(id || S.sec); if (s && s.clock === "loop") return true;
     if (!s || (id && id !== S.sec) || !S.looks[s.id]) return false;
-    var st = styleDef(s, S.looks[s.id].style); return !!(st && st.preview);
+    var st = styleDef(s, S.looks[s.id].style); return viewClip(st);
+  }
+  /* a finished effect (made by the effects kit): preview without engine "studio". A studio look can also carry a preview:
+     a finished clip of it on the client's own footage, played for VIEWING; the live engine still draws it for Adjust,
+     an edited hook line or changed settings, another demo clip, and renders. */
+  function fin(st) { return !!(st && st.preview && st.preview.engine !== "studio"); }
+  function canAdj(st) { return !!st && !fin(st) && !!(sec(S.sec).controls || []).length && !(S.sec === "transitions" && st.id !== "tr-lens"); }
+  function viewClip(st) {
+    if (!st || !st.preview) return false;
+    if (fin(st)) return true;
+    if (RENDER || (S.adjust && S.canAdjust && canAdj(st))) return false;
+    if (st.preview.clip_id && S.clip && S.clip !== st.preview.clip_id) return false;
+    var sd = B.sections.filter(function (x) { return x.styles.indexOf(st) >= 0; })[0], L = sd && S.looks[sd.id];
+    if (!L || L.style !== st.id) return false;
+    if (sd.id === "hook" && (isHeadline(L) ? S.headText != null : S.hookText != null)) return false;
+    if (Array.isArray(L.emph) || curFixes()) return false;   // edited emphasis words or name fixes: drawn live
+    var d = Object.assign({ style: st.id }, clone(st.defaults || {}));
+    return LOOK_KEYS.every(function (k) { return L[k] == null || d[k] == null ? L[k] == d[k] || k === "y" || k === "emphClip" : L[k] === d[k]; });
   }
   /* finished effects (board style with a `preview`): a preview loop rendered by VIDPOD, played instead of a live look */
   function preLook(st) {
@@ -308,7 +325,7 @@
   function seg() {
     if (isOwn()) return [0, (live && live.loop) || sec(S.sec).segment[1]];
     var st = curStyle(), sg = lookSeg(st, sec(S.sec));
-    if (S.sec === "hook" && st && !st.preview && !RENDER) return [sg[0], Math.min(B.base.duration || sg[1] + 3.5, sg[1] + 3.5)];
+    if (S.sec === "hook" && st && !viewClip(st) && !RENDER) return [sg[0], Math.min(B.base.duration || sg[1] + 3.5, sg[1] + 3.5)];
     return sg;
   }
   /* the opener hands over to the house subtitles: the subtitle pick (or the look on the Subtitles tab) starts when the hook
@@ -316,7 +333,7 @@
      gives the subtitle layer the hook window as its skip). */
   function handover(r, hookCtx) {
     var ssd = sec("subtitles"); if (!ssd) return;
-    var Ls = clone(S.picks.subtitles || S.looks.subtitles || {}), sst = styleDef(ssd, Ls.style); if (!sst || sst.preview || !R[Ls.style]) return;
+    var Ls = clone(S.picks.subtitles || S.looks.subtitles || {}), sst = styleDef(ssd, Ls.style); if (!sst || fin(sst) || !R[Ls.style]) return;
     var H0 = hookCtx.seg[1], end = Math.min(B.base.duration || H0 + 3.5, H0 + 3.5); if (end - H0 < 0.5) return;
     var keepC = CASE, keepP = PUNCT; CASE = Ls.case || "spoken"; PUNCT = !!Ls.punct;
     var c2 = makeCtx(Ls, ssd, sst, mainStage); c2.seg = [H0, end];
@@ -356,10 +373,10 @@
     var st = styleDef(sd, L.style);
     var ctx = makeCtx(L, sd, st, mainStage);
     var r;
-    if (st && st.preview) { releaseMain(); r = preLook(st); }
+    if (viewClip(st)) { releaseMain(); r = preLook(st); }
     else try { r = R[L.style](ctx); } catch (e) { console.error(e); r = { tl: gsap.timeline({ paused: true }) }; }
     if (r.block) { r.block.classList.add("block"); (r.blockUnder ? under : over).appendChild(r.block); }
-    if (sd.id === "hook" && !(st && st.preview) && !RENDER) handover(r, ctx);
+    if (sd.id === "hook" && !viewClip(st) && !RENDER) handover(r, ctx);
     under.style.filter = over.style.filter = layerShadow(sd, L);
     addOns(r, L, lookSeg(st, sd));
     if (!isOwn()) ensureMain();
@@ -798,10 +815,10 @@
       head.appendChild(pa);
     }
     box.appendChild(head);
-    var lastKind = null, anyFin = list.some(function (x) { return !!x.preview; }), anyLive = list.some(function (x) { return !x.preview; });
+    var lastKind = null, anyFin = list.some(function (x) { return fin(x); }), anyLive = list.some(function (x) { return !fin(x); });
     var split = anyFin && anyLive && (S.sec === "moves" || S.sec === "graphics"), grp = el("div", "ogrp"); box.appendChild(grp);
     list.forEach(function (st, i) {
-      var kind = st.preview ? "fin" : "live";
+      var kind = fin(st) ? "fin" : "live";
       if (split && kind !== lastKind) { if (lastKind) { grp = el("div", "ogrp"); box.appendChild(grp); } grp.appendChild(el("div", "osub", kind === "fin" ? (S.sec === "moves" ? "Effects" : "Effect graphics") : (S.sec === "moves" ? "Moves" : "Graphics"))); }
       lastKind = kind;
       var row = el("div", "orow"); row.dataset.style = st.id;
@@ -936,10 +953,10 @@
     var txt = el("div", "txt", "<b>" + esc(st.label) + '</b><span class="of">' + (i + 1 < 10 ? "0" : "") + (i + 1) + "/" + (list.length < 10 ? "0" : "") + list.length + "</span>");
     var acts = el("div", "acts");
     var ub = el("button", "btn", "Pick this"); ub.type = "button"; ub.id = "use-btn"; ub.addEventListener("click", function () { togglePick(st.id); });
-    var canAdjust = !st.preview && !!(sec(S.sec).controls || []).length && !(S.sec === "transitions" && st.id !== "tr-lens");
+    var canAdjust = canAdj(st);
     if (canAdjust) {
       var ab = el("button", "btn ghost adjust-btn", "Adjust"); ab.type = "button"; ab.id = "adjust-btn"; ab.setAttribute("aria-expanded", String(!!S.adjust)); ab.setAttribute("aria-controls", "adjust");
-      ab.addEventListener("click", function () { S.adjust = !S.adjust; showAdjust(); if (S.adjust) setTimeout(function () { var r = $("adjust").getBoundingClientRect(); if (r.top > window.innerHeight - 120) $("adjust").scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 60); });
+      ab.addEventListener("click", function () { S.adjust = !S.adjust; showAdjust(); if (curStyle() && curStyle().preview && !fin(curStyle())) rebuild(); if (S.adjust) setTimeout(function () { var r = $("adjust").getBoundingClientRect(); if (r.top > window.innerHeight - 120) $("adjust").scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 60); });
       acts.appendChild(ab);
     }
     acts.appendChild(ub);
@@ -970,7 +987,7 @@
   /* ---- the hook line: the first thing on the Hook tab, above the cards ---- */
   function renderLead() {
     var box = $("lead"); box.innerHTML = "";
-    if (!hasCtl("hooktext") || (curStyle() && curStyle().preview)) { box.hidden = true; return; }
+    if (!hasCtl("hooktext") || fin(curStyle())) { box.hidden = true; return; }
     box.hidden = false;
     var head = isHeadline(look()), who = speakerWords();
     var hb = el("div", "field lead-field");
@@ -1023,7 +1040,7 @@
   function renderCustom() {
     var s = sec(S.sec), L = look(), st = curStyle(), box = $("custom"); box.innerHTML = "";
     box.appendChild(el("h3", "custom-h", "Adjust<span class=\"dot\"></span>"));
-    if (st.preview) {
+    if (fin(st)) {
       var pb0 = el("div");
       pb0.appendChild(el("p", "none-note", "Set by VIDPOD to your brand. We make it on your clip, with your words and colours."));
       var rb0 = el("button", "btn ghost sm", I.replay.replace("<svg", "<svg width=\"16\" height=\"16\"") + " Replay"); rb0.type = "button"; rb0.style.marginTop = "12px";
@@ -1371,7 +1388,7 @@
   /* ---- picks bar + review ---- */
   function lookDetail(sid, p) {
     var s = sec(sid), d = styleDef(s, p.style), parts = [];
-    if (d && d.preview) return { label: d.code + " " + d.label, detail: "finished effect, set by VIDPOD to your brand" };
+    if (fin(d)) return { label: d.code + " " + d.label, detail: "finished effect, set by VIDPOD to your brand" };
     if (s.controls.indexOf("font") >= 0) { var fo = B.fonts.filter(function (x) { return x.id === p.font; })[0] || B.fonts[0]; parts.push(fo.id === "brand" ? fo.sub : fo.label); }
     if (s.controls.indexOf("size") >= 0) parts.push((sid === "logo" ? "width " : "") + p.size + " px");
     if (s.controls.indexOf("position") >= 0 && p.y != null && !(d && d.no_position)) parts.push("height y " + p.y);
@@ -1494,7 +1511,7 @@
       var full = doc.picks[it.s.id], one = Array.isArray(full) ? full.filter(function (x) { return x.style === it.d.id; })[0] : full;
       rows.push({ section: "make", optionCode: it.d.code, label: (TAB_LABEL[it.s.id] || it.s.tab) + ": " + it.d.label,
         settings: { client: B.client.id, project: j.project, video: j.video, section: it.s.id, code: it.d.code, at: jobAt(it), settings: strip(one),
-          where: atOf(it) || null, label: it.d.label, finished: !!(it.d.preview), ref: ((it.d.recipe || {}).ref) || null, batch: batch, clip: S.clip || null, by: S.viewer || (SIGN && SIGN.name) || "", sentAt: now.toISOString() },
+          where: atOf(it) || null, label: it.d.label, finished: fin(it.d), ref: ((it.d.recipe || {}).ref) || null, batch: batch, clip: S.clip || null, by: S.viewer || (SIGN && SIGN.name) || "", sentAt: now.toISOString() },
         note: "" });
     });
     btn.disabled = true; btn.textContent = "Sending";
@@ -1546,11 +1563,11 @@
     var picks = {};
     B.sections.forEach(function (s) {
       var p = S.picks[s.id];
-      if (multi(s.id)) { picks[s.id] = p && p.length ? p.map(function (x) { var d = styleDef(s, x.style); var o2 = { style: d.id, code: d.code, label: d.label, registry: d.registry || null, source: d.source || null }; if (d.preview) { o2.finished = true; o2.ref = (d.recipe || {}).ref || null; } if (x.at) o2.at = x.at; return o2; }) : null; return; }
+      if (multi(s.id)) { picks[s.id] = p && p.length ? p.map(function (x) { var d = styleDef(s, x.style); var o2 = { style: d.id, code: d.code, label: d.label, registry: d.registry || null, source: d.source || null }; if (fin(d)) { o2.finished = true; o2.ref = (d.recipe || {}).ref || null; } if (x.at) o2.at = x.at; return o2; }) : null; return; }
       if (!p) { picks[s.id] = null; return; }
       var d = styleDef(s, p.style), o = { style: p.style, code: d.code, label: d.label, registry: d.registry || null, scope: s.scope === "any" ? "house-style" : "per-video-type" };
       if (p.at) o.at = p.at;
-      if (d.preview) { o.finished = true; o.ref = (d.recipe || {}).ref || null; o.how = (d.recipe || {}).how || ""; picks[s.id] = o; return; }
+      if (fin(d)) { o.finished = true; o.ref = (d.recipe || {}).ref || null; o.how = (d.recipe || {}).how || ""; picks[s.id] = o; return; }
       if (s.controls.indexOf("font") >= 0) { var fo = fontDef(p.font); o.font = p.font; o.fontFamily = p.font === "brand" ? B.brand.font.sub : fo.family; }
       if (s.controls.indexOf("size") >= 0) o.sizePx = p.size;
       if (s.controls.indexOf("position") >= 0) o.yPx = p.y;

@@ -703,6 +703,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-09.jpg",
+      "video": "clients/atpilates/looks/SUB-09.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -769,6 +778,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-01.jpg",
+      "video": "clients/atpilates/looks/SUB-01.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -835,6 +853,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-02.jpg",
+      "video": "clients/atpilates/looks/SUB-02.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -902,6 +929,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-03.jpg",
+      "video": "clients/atpilates/looks/SUB-03.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -968,6 +1004,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-04.jpg",
+      "video": "clients/atpilates/looks/SUB-04.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1035,6 +1080,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-05.jpg",
+      "video": "clients/atpilates/looks/SUB-05.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1102,6 +1156,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-06.jpg",
+      "video": "clients/atpilates/looks/SUB-06.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1169,6 +1232,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-07.jpg",
+      "video": "clients/atpilates/looks/SUB-07.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1236,6 +1308,15 @@
        "words"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/SUB-08.jpg",
+      "video": "clients/atpilates/looks/SUB-08.mp4",
+      "loop": 6.76,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     }
    ],
@@ -1337,6 +1418,15 @@
        "cutout"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-01.jpg",
+      "video": "clients/atpilates/looks/HOOK-01.mp4",
+      "loop": 6.72,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1409,6 +1499,15 @@
        "cutout"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-02.jpg",
+      "video": "clients/atpilates/looks/HOOK-02.mp4",
+      "loop": 6.72,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1477,6 +1576,15 @@
        "line"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-03.jpg",
+      "video": "clients/atpilates/looks/HOOK-03.mp4",
+      "loop": 6.72,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1546,6 +1654,15 @@
        "line"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-04.jpg",
+      "video": "clients/atpilates/looks/HOOK-04.mp4",
+      "loop": 6.72,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1615,6 +1732,15 @@
        "cutout"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-05.jpg",
+      "video": "clients/atpilates/looks/HOOK-05.mp4",
+      "loop": 6.72,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1686,6 +1812,15 @@
        "cutout"
       ],
       "makes": "layer"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-06.jpg",
+      "video": "clients/atpilates/looks/HOOK-06.mp4",
+      "loop": 6.72,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1759,6 +1894,15 @@
        "headline"
       ],
       "makes": "layer+move"
+     },
+     "preview": {
+      "still": "clients/atpilates/looks/HOOK-09.jpg",
+      "video": "clients/atpilates/looks/HOOK-09.mp4",
+      "loop": 4.04,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {

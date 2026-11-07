@@ -261,7 +261,7 @@ img { display: block; max-width: 100%; }
       var hit = e.code ? styleOf(e.code) : (e.ref ? styleByRef(e.ref) : null);
       var name = e.name || (hit ? hit.st.label : key);
       return { key: key, name: name, good: e.good || (hit ? hit.st.best_for : ""), code: hit ? hit.st.code : (e.code || null), style: hit ? hit.st.id : null,
-               ref: e.ref || (hit && hit.st.recipe ? hit.st.recipe.ref || null : null), finished: !!(e.ref || (hit && hit.st.preview) || e.src),
+               ref: e.ref || (hit && hit.st.recipe ? hit.st.recipe.ref || null : null), finished: !!(e.ref || (hit && hit.st.preview && hit.st.preview.engine !== "studio") || e.src),
                mp4: "clients/" + CID + "/lookbook/" + key + ".mp4", jpg: "clients/" + CID + "/lookbook/" + key + ".jpg" };
     });
   }
