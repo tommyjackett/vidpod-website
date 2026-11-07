@@ -845,6 +845,30 @@
     }
     PA.last = t;
   }
+  /* ---- phones: step through the options under the window (prev / name / next / pick) ---- */
+  function stepList() { var s0 = sec(S.sec); return (s0 && s0.styles) || []; }
+  function stepSync() {
+    var box = $("step"); if (!box) return;
+    var list = stepList(), L = look(), i = list.findIndex(function (x) { return x.id === L.style; });
+    if (list.length < 2 || i < 0) { box.hidden = true; return; }
+    box.hidden = false;
+    var st = list[i], picked = isPicked(S.sec, st.id);
+    $("st-name").textContent = st.label;
+    $("st-n").textContent = (i + 1) + " of " + list.length + (isVidpodCode() ? "  ·  " + st.code : "") + (picked ? "  ·  picked" : "");
+    var pk = $("st-pick"); pk.setAttribute("aria-pressed", String(picked)); pk.setAttribute("aria-label", (picked ? "Remove " : "Pick ") + st.label);
+  }
+  function stepGo(d) {
+    var list = stepList(), i = list.findIndex(function (x) { return x.id === look().style; }); if (!list.length) return;
+    PA.on = false; var pb = $("playall"); if (pb) pb.setAttribute("aria-pressed", "false");
+    chooseStyle(list[(i + d + list.length) % list.length].id);
+  }
+  function initStep() {
+    if (!$("step")) return;
+    $("st-pick").innerHTML = I.tick;
+    $("st-prev").addEventListener("click", function () { stepGo(-1); });
+    $("st-next").addEventListener("click", function () { stepGo(1); });
+    $("st-pick").addEventListener("click", function () { togglePick(look().style); });
+  }
   /* ---- VIDPOD's pick: board.json vidpod_pick holds one recommended option (and its settings) per section ---- */
   function isOurPick(sid, styleId) { var p = (B.vidpod_pick || {})[sid]; if (!p) return false; return Array.isArray(p) ? p.some(function (x) { return x.style === styleId; }) : p.style === styleId; }
   function markCards() {
@@ -854,6 +878,7 @@
       c.btn.classList.toggle("cur", on); c.btn.querySelector(".oname").setAttribute("aria-checked", String(on));
       var pk = c.btn.querySelector(".opick"); pk.setAttribute("aria-pressed", String(picked)); pk.setAttribute("aria-label", (picked ? "Remove " : "Pick ") + c.st.label);
     });
+    stepSync();
   }
 
   /* ================= panel ================= */
@@ -861,7 +886,7 @@
      studio-mograph.js fills (window.VPMograph.render). Tab labels come from the board, except where noted here. */
   // Round 7 (8 Nov): House style, then one tab per kind of moment, in the order a video plays
   var GROUPS = [
-    { id: "house", label: "House style", tabs: ["subtitles", "name", "logo"] },
+    { id: "house", label: "Whole video", tabs: ["subtitles", "name", "logo"] },
     { id: "openers", label: "Openers", tabs: ["hook"] },
     { id: "graphics", label: "Graphics", tabs: ["graphics"] },
     { id: "fx", label: "Effects and moves", tabs: ["moves"] },
@@ -1462,7 +1487,7 @@
     if ($("mk-project") !== document.activeElement) $("mk-project").value = j.project;
     if ($("mk-video") !== document.activeElement) $("mk-video").value = j.video;
     if (!items.length) { box.appendChild(el("p", "mk-empty", "Nothing picked yet. Tap the round button beside a name to pick it.")); $("mk-msg").textContent = ""; return; }
-    var groups = [["House style, every video", items.filter(function (it) { return HOUSE.indexOf(it.s.id) >= 0; })], ["This video", items.filter(function (it) { return HOUSE.indexOf(it.s.id) < 0; })]];
+    var groups = [["Whole video", items.filter(function (it) { return HOUSE.indexOf(it.s.id) >= 0; })], ["This video", items.filter(function (it) { return HOUSE.indexOf(it.s.id) < 0; })]];
     groups.forEach(function (g) {
       if (!g[1].length) return;
       box.appendChild(el("p", "mk-sec", esc(g[0])));
@@ -1944,7 +1969,7 @@
     renderCheck(); renderClips(); renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); updateFoot();
     goSeg(true); rebuild(); requestAnimationFrame(frame);
     setTimeout(showHint, 1500);
-    whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); renderStageLine(); updateFoot();
+    whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); initStep(); stepSync(); renderStageLine(); updateFoot();
     // phones: the tabs stick just under the window
     if ("ResizeObserver" in window) new ResizeObserver(function () { document.documentElement.style.setProperty("--stage-h", (window.innerWidth < 980 ? $("stage").offsetHeight : 0) + "px"); }).observe($("stage"));
     $("home").addEventListener("click", goStart);

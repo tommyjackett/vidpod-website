@@ -523,6 +523,19 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
 .opick:hover { border-color: var(--fg); color: var(--muted); }
 .opick[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
 .opick:active { transform: scale(.92); }
+/* phones: flip through the options under the window without scrolling to the list */
+.step { display: none; }
+@media (max-width: 820px) {
+  .step:not([hidden]) { display: flex; align-items: center; gap: 8px; margin: 10px auto 2px; max-width: 420px; padding: 0 4px; }
+  .step .st-arrow { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line-strong); background: transparent; color: var(--fg); display: grid; place-items: center; padding: 0; }
+  .step .st-arrow svg { width: 20px; height: 20px; }
+  .step .st-mid { flex: 1 1 auto; min-width: 0; text-align: center; line-height: 1.2; }
+  .step .st-mid b { display: block; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .step .st-mid small { font-size: 12px; color: var(--muted); }
+  .step .opick { width: 44px; height: 44px; margin: 0; }
+  .step .opick svg { width: 20px; height: 20px; }
+}
+
 .ohead { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 4px 6px 10px; }
 .ohead .lbl { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .playall { border: 0; background: transparent; font-size: 12px; font-weight: 700; color: var(--fg); padding: 6px 4px; display: inline-flex; gap: 6px; align-items: center; }
@@ -690,6 +703,7 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
       <input type="range" class="scrub" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Scrub the preview">
       <span class="time" id="t-end">0:00</span>
     </div>
+    <div class="step" id="step" hidden><button type="button" class="st-arrow" id="st-prev" aria-label="Previous option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><div class="st-mid" aria-live="polite"><b id="st-name"></b><small id="st-n"></small></div><button type="button" class="st-arrow" id="st-next" aria-label="Next option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><button type="button" class="opick" id="st-pick" aria-pressed="false" aria-label="Pick this"></button></div>
     <p class="check-note" id="check-note" aria-live="polite"></p>
     <div class="needs" id="needs" aria-live="polite"></div>
     <button type="button" class="ibtn close-full" id="close-full" aria-label="Close full screen"></button>
@@ -847,6 +861,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r6b"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7f"></script>
+<script src="studio-core.js?v=r7g"></script>
 
 </html>
