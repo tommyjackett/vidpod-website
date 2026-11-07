@@ -4579,14 +4579,6 @@
   ],
   "graphics": [
    {
-    "code": "GFX-14",
-    "ref": "L18",
-    "name": "Glass stat card",
-    "good": "Good for member numbers and results.",
-    "src": "lookbook-src/atpilates/L18.mp4",
-    "still": 2.3
-   },
-   {
     "code": "GFX-03",
     "good": "Good for a quote in your arch shape."
    },
