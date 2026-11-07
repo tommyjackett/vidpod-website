@@ -93,11 +93,115 @@ window.VPLooks = function (K) {
   K.H = H;
 
   /* ================= SUBTITLES: one caption engine, many treatments ================= */
-  // chunks: one line (default) packs words greedily to the safe width; two lines balances each phrase
+  /* Caption rules, ported from the measured reference (MECHANISMS.md "Caption rules, from the measured reference"):
+     1 to 2 words and at most 13 characters per caption; two words share only if they are under 120 ms apart, nothing
+     like , . ; : ? ! sits between them, and one is a short function word (or 3 letters or fewer), or both are 4 letters
+     or fewer; a leading word ("into", "your", "the") joins the word after it; a caption cuts on exactly when its first
+     word is spoken and holds until the next one starts, but after a pause over 1 s it lingers 0.3 s and clears. */
+  var FUNC = {}, LEAD = {};
+  ("a an the and or but so if as at by for from in into of on onto to up with about it it's its is are was be been am i i'm i'll " +
+   "you you're your my me we our us they their them he his she her this that these those can do does will just now all any no not " +
+   "than then what who how when like even").split(" ").forEach(function (w) { FUNC[w] = 1; });
+  "a an the your my our their his her its this that these those to into on in at for from of with by about".split(" ").forEach(function (w) { LEAD[w] = 1; });
+  var BREAK = /[,.;:?!]["\u201d\u2019]?$/;
+  function wkey(raw) { return String(raw).toLowerCase().replace(/\u2019/g, "'").replace(/[^a-z0-9.']/g, "").replace(/\.+$/, ""); }
+  H.wkey = wkey; H.FUNC = FUNC;
+  function isF(i) { return !!FUNC[wkey(W(i).text)]; }
+  // the words a caption look may show: inside its segment, outside a skip window (the hook's, on a real edit), not emptied by a correction
+  H.capIdx = function (ctx) {
+    var s = ctx.seg, sk = ctx.L.skip, out = [];
+    K.board().base.words.forEach(function (w, i) { if (w.t >= s[0] - 0.01 && w.t < s[1] && String(w.text).trim() && !(sk && w.t >= sk[0] - 0.01 && w.t < sk[1])) out.push(i); });
+    return out;
+  };
+  function canPair(a, b) {
+    var A = W(a), Bw = W(b), ta = wt(a), tb = wt(b);
+    if (BREAK.test(String(A.text)) || Bw.t - A.end > 0.12 || ta.length + 1 + tb.length > 13) return false;
+    return isF(a) || isF(b) || ta.length <= 3 || tb.length <= 3 || (ta.length <= 4 && tb.length <= 4);
+  }
+  // beats: [{kind plain|emph, idx, first, last, st, en, setup?, punch?, pst?}]; emph = [{setup:[i], punch:[i]}] in spoken order
+  H.beats = function (ctx, emph) {
+    var idx = H.capIdx(ctx), pos = {}, out = [], gAt = {};
+    idx.forEach(function (i, k) { pos[i] = k; });
+    (emph || []).forEach(function (g) { var l = g.punch[g.punch.length - 1]; if (pos[g.setup[0]] != null && pos[l] != null) gAt[g.setup[0]] = g; });
+    var k = 0;
+    while (k < idx.length) {
+      var i = idx[k], g = gAt[i];
+      if (g) { var last = g.punch[g.punch.length - 1]; out.push({ kind: "emph", idx: g.setup.concat(g.punch), setup: g.setup, punch: g.punch, first: i, last: last }); k = pos[last] + 1; continue; }
+      var b = idx[k + 1], c = idx[k + 2], pair = b != null && !gAt[b] && canPair(i, b);
+      if (pair && c != null && !isF(i) && LEAD[wkey(W(b).text)] && !isF(c) && !gAt[c] && canPair(b, c)) pair = false;
+      out.push({ kind: "plain", idx: pair ? [i, b] : [i], first: i, last: pair ? b : i }); k += pair ? 2 : 1;
+    }
+    out.forEach(function (bt, n) {
+      var nx = out[n + 1], le = W(bt.last).end;
+      bt.st = Math.max(ctx.seg[0], W(bt.first).t);
+      if (bt.kind === "emph") bt.pst = Math.max(bt.st, W(bt.punch[0]).t);
+      if (nx && W(nx.first).t - le <= 1.0) bt.en = W(nx.first).t;
+      else { bt.en = le + 0.3; if (nx) bt.en = Math.min(bt.en, W(nx.first).t); }
+      bt.en = Math.max(bt.en, bt.st + 0.04);
+    });
+    return out;
+  };
+  // emphasis moments (the rare serif lead-in + accent keyword): strongest words, about one every 8 to 12 s, never more than 4 a minute
+  function wd(i) { return wt(i); }
+  H.emphCands = function (seg, skip) {
+    var b = K.board().base, ws = b.words, el2 = b.emphasis || [], prop = (b.proper || []).map(wkey), out = [];
+    ws.forEach(function (w, i) {
+      if (w.t < seg[0] + 0.3 || w.t >= seg[1] || !String(w.text).trim()) return;
+      if (skip && w.t >= skip[0] - 0.01 && w.t < skip[1]) return;
+      var k = wkey(w.text), txt = String(w.text).replace(/[^A-Za-z0-9@'\u2019-]/g, ""), num = /\d/.test(k);
+      if (!k || FUNC[k] || /^i('|$)/.test(k) || (!num && txt.length < 4)) return;
+      var sc = 0, prevStop = !i || /[.?!]["\u201d]?$/.test(String(ws[i - 1].text));
+      if (el2.indexOf(i) >= 0) sc += 3;
+      if (num) sc += 3;
+      if (prop.indexOf(k) >= 0 || (/^[A-Z]/.test(txt) && !prevStop)) sc += 2;
+      if (BREAK.test(String(w.text)) || !ws[i + 1] || ws[i + 1].t - w.end >= 0.25) sc += 1.5;
+      if (txt.length >= 6) sc += 1;
+      // the lead-in: the nearest content word before it in the same breath (up to 3 back); words between are absorbed
+      var s = -1;
+      for (var j = i - 1; j >= Math.max(0, i - 3); j--) {
+        if (BREAK.test(String(ws[j].text)) || ws[j + 1].t - ws[j].end > 0.6 || !String(ws[j].text).trim()) break;
+        if (!FUNC[wkey(ws[j].text)]) { s = j; break; }
+      }
+      if (s < 0) { if (i > 0 && String(ws[i - 1].text).trim() && !BREAK.test(String(ws[i - 1].text)) && w.t - ws[i - 1].end < 0.6) s = i - 1; else return; }
+      if (ws[s].t < seg[0] || (skip && ws[s].t >= skip[0] - 0.01 && ws[s].t < skip[1])) return;
+      var setup = [s];
+      if (s + 1 < i && wd(s).length + 1 + wd(s + 1).length <= 13) setup.push(s + 1);
+      var punch = [i], n2 = ws[i + 1];
+      if (n2 && n2.t - w.end < 0.12 && !BREAK.test(String(w.text)) && wd(i).length + 1 + wd(i + 1).length <= 13 && ((/^[A-Z]/.test(String(n2.text)) && prop.indexOf(wkey(n2.text)) >= 0 && !/^i('|$)/.test(wkey(n2.text))) || num)) punch.push(i + 1);
+      out.push({ setup: setup, punch: punch, key: i, t: w.t, score: sc });
+    });
+    return out;
+  };
+  H.emphPlan = function (seg, L, clipKey, skip) {
+    var c = H.emphCands(seg, skip), by = {}, chosen;
+    c.forEach(function (x) { by[x.key] = x; });
+    if (Array.isArray(L.emph) && L.emphClip === clipKey) chosen = L.emph.map(function (i) { return by[i]; }).filter(Boolean);
+    else {
+      var d = Math.max(1, seg[1] - seg[0]), n = Math.max(1, Math.min(Math.round(d / 10), Math.ceil(d / 15)));
+      chosen = [];
+      c.slice().sort(function (a, b) { return b.score - a.score || a.t - b.t; }).forEach(function (x) {
+        if (chosen.length < n && chosen.every(function (y) { return Math.abs(y.t - x.t) >= 8; })) chosen.push(x);
+      });
+    }
+    chosen.sort(function (a, b) { return a.t - b.t; });
+    // overlapping pairs: keep the earlier one
+    chosen = chosen.filter(function (x, k) { return !k || ws0(chosen[k - 1]) < x.setup[0]; });
+    function ws0(y) { return y.punch[y.punch.length - 1]; }
+    var used = {}; chosen.forEach(function (x) { used[x.key] = 1; });
+    var more = c.filter(function (x) { return !used[x.key]; }).sort(function (a, b) { return b.score - a.score || a.t - b.t; }).slice(0, 6).sort(function (a, b) { return a.t - b.t; });
+    return { chosen: chosen, more: more };
+  };
+  // default (1 line, words per line Auto or 2): the measured 1 to 2 word rule above; 2 lines or 3+ words per line: phrases packed to the safe width
   function chunks(ctx, weight, family, gapEm) {
     var L = ctx.L, size = L.size, maxW = H.maxW(ctx), out = [];
     var mw = function (idx, sz) { return H.lineW(idx.map(function (i) { return { text: wt(i) }; }), weight, sz, family, gapEm); };
-    K.phrases(ctx.seg).forEach(function (g) {
+    if (L.lines !== 2 && !(+L.wpl > 2)) {
+      H.beats(ctx).forEach(function (bt) { var w = mw(bt.idx, size); out.push({ lines: [bt.idx], fs: w > maxW ? Math.floor(size * maxW / w) : size, st: bt.st, en: bt.en }); });
+      return out;
+    }
+    K.phrases(ctx.seg).forEach(function (g0) {
+      var g = g0.filter(function (i) { return W(i).t >= ctx.seg[0] - 0.01 && String(W(i).text).trim() && !(L.skip && W(i).t >= L.skip[0] - 0.01 && W(i).t < L.skip[1]); });
+      if (!g.length) return;
       if (L.lines === 2 && g.length > 1 && (mw(g, size) > maxW * 0.62 || (+L.wpl && g.length > +L.wpl))) {
         var best = Math.ceil(g.length / 2), diff = Infinity;
         for (var s = 1; s < g.length; s++) { var a = mw(g.slice(0, s), size), b = mw(g.slice(s), size); if (Math.abs(a - b) < diff) { diff = Math.abs(a - b); best = s; } }
@@ -111,12 +215,19 @@ window.VPLooks = function (K) {
         if (cur.length) push();
       }
     });
+    // same timing rule as the default: cut on the first word, hold to the next, linger 0.3 s after a pause over 1 s
+    out.forEach(function (c, k) {
+      var nx = out[k + 1], fl = c.lines[c.lines.length - 1], le = W(fl[fl.length - 1]).end;
+      c.st = Math.max(ctx.seg[0], W(c.lines[0][0]).t);
+      c.en = nx && W(nx.lines[0][0]).t - le <= 1.0 ? W(nx.lines[0][0]).t : Math.min(le + 0.3, nx ? W(nx.lines[0][0]).t : 1e9);
+      c.en = Math.max(c.en, c.st + 0.04);
+    });
     return out;
   }
   function capBuild(ctx, o) {
     var f = ctx.f, weight = o.weight || f.w_bold, gapEm = o.gapEm == null ? 0.26 : o.gapEm;
     var block = H.block(), tl = H.tl(), ch = chunks(ctx, weight, f.family, gapEm), seg = ctx.seg;
-    var starts = ch.map(function (c) { return Math.max(seg[0], W(c.lines[0][0]).t - 0.06); });
+    var starts = ch.map(function (c) { return c.st; });
     ch.forEach(function (c, k) {
       var G = H.grp(block); G.g.style.visibility = "hidden";
       var spans = [], lineEls = [];
@@ -126,8 +237,7 @@ window.VPLooks = function (K) {
         G.inner.appendChild(le); lineEls.push(le);
       });
       if (o.decorate) o.decorate(G, c);
-      var st = starts[k], en = k < ch.length - 1 ? starts[k + 1] : seg[1] + 1;
-      if (k < ch.length - 1) en = Math.min(en, Math.max(st + 0.4, W(c.lines[c.lines.length - 1].slice(-1)[0]).end + (o.linger || 0.6)));
+      var st = starts[k], en = c.en;
       tl.set(G.g, { visibility: "visible" }, st);
       tl.set(G.g, { visibility: "hidden" }, en);
       if (ctx.L.case === "sentence" && spans.length && k === 0 || ctx.L.case === "sentence" && spans.length && /[.?!]$/.test(String(W(ch[k - 1].lines.slice(-1)[0].slice(-1)[0]).text))) { var fs0 = spans[0].s; fs0.textContent = fs0.textContent.charAt(0).toUpperCase() + fs0.textContent.slice(1); }
@@ -281,6 +391,83 @@ window.VPLooks = function (K) {
         if (en < ctx.seg[1]) tl.to(spans.map(function (x) { return x.s; }), { clipPath: "inset(-10% 0% -10% 100%)", duration: 0.22, stagger: 0.03, ease: "power2.in" }, Math.max(st + 0.3, en - 0.26));
       }
     });
+  };
+
+  // SUB-09 Chest punch: the measured reference look in the client's brand. Plain captions are 1 to 2 lowercase words in the
+  // bold brand sans (Inter 700 on VIDPOD, as measured), hard cut on the spoken word, centred on the chest (y 1325 = 69 %).
+  // About every 8 to 12 s an emphasis moment: a serif italic lead-in word settles from 117 %, then the keyword lands under
+  // it in the brand colour (light-to-brand gradient, rim glow, dark halo) with a five-beat flicker at 30 beats a second.
+  function mixHex(a, b, t) { var p = function (h, o) { return parseInt(String(h).replace("#", "").substr(o, 2), 16); }; return "#" + [0, 2, 4].map(function (o) { return ("0" + Math.round(p(a, o) * (1 - t) + p(b, o) * t).toString(16)).slice(-2); }).join(""); }
+  function rgbOf(h) { return [0, 2, 4].map(function (o) { return parseInt(String(h).replace("#", "").substr(o, 2), 16); }).join(","); }
+  H.mixHex = mixHex; H.rgbOf = rgbOf;
+  H.setupFace = function (ctx) { // the lead-in face: the brand's own script or serif display face, else DM Serif Display italic (as measured)
+    var f = ctx.f, faces = f.faces || [], disp = f.display || "";
+    var script = faces.some(function (x) { return x.family === disp && /tangerine|script|hand|brush|signature/i.test(String(x.src || "")); }) || /script|tangerine|hand/i.test(disp);
+    if (disp && script) return { family: disp, weight: f.w_display || 400, italic: false, scale: 1.55 };
+    if (disp && /serif|playfair|garamond|didot|caslon|dm serif/i.test(disp) && !/sans/i.test(disp)) return { family: disp, weight: f.w_display || 400, italic: true, scale: 1 };
+    return { family: "DM Serif Display", weight: 400, italic: true, scale: 1 };
+  };
+  R["cap-chest-punch"] = function (ctx) {
+    var L = ctx.L, f = ctx.f, k = (L.size || 95) / 95, tl = H.tl(), block = H.block();
+    var plan = H.emphPlan(ctx.seg, L, ctx.clipKey, L.skip), beats = H.beats(ctx, plan.chosen);
+    var sansW = /^inter$/i.test(f.family) ? 700 : f.w_bold, fam = H.fam(f), sf = H.setupFace(ctx);
+    var acc = H.c2(ctx, ctx.B.brand.accent), txt = ctx.hex, maxW = (ctx.safe.x1 - ctx.safe.x0);
+    var SH = ctx.L.shadow != null ? ctx.B.brand.shadow : "0 3px 18px rgba(0,0,0,.45), 0 1px 4px rgba(0,0,0,.35)";
+    if (ctx.L.fx === "stroke") SH = "none";
+    var lineH = Math.round(95 * k);
+    var fit = function (text, size, weight, family, ls) { var w = textW(text, weight, size, family) + ls * size * Math.max(0, text.length - 1); return w > maxW ? Math.floor(size * maxW / w) : size; };
+    var T = function (n) { return n / 30; }, FLICK = [0.3, 1, 0.08, 1, 0.5];
+    var punchG = "linear-gradient(180deg," + mixHex(acc, "#FFFFFF", 0.78) + " 0%," + mixHex(acc, "#FFFFFF", 0.78) + " 20%," + mixHex(acc, "#FFFFFF", 0.72) + " 35%," + mixHex(acc, "#FFFFFF", 0.54) + " 50%," + mixHex(acc, "#FFFFFF", 0.28) + " 65%," + acc + " 80%," + mixHex(acc, "#000000", 0.05) + " 100%)";
+    var halo = rgbOf(mixHex(acc, "#000000", 0.86));
+    var punchF = "drop-shadow(0 0 " + Math.round(12 * k) + "px rgba(" + rgbOf(acc) + ",.4)) drop-shadow(0 " + Math.round(4 * k) + "px " + Math.round(10 * k) + "px rgba(" + halo + ",.55)) drop-shadow(0 " + Math.round(10 * k) + "px " + Math.round(30 * k) + "px rgba(" + halo + ",.6))";
+    var dimG = "linear-gradient(180deg,#FFFFFF 0%,#F7F2EF 55%,#D5CBC6 80%,#A9A19C 100%)";
+    beats.forEach(function (bt) {
+      var G = H.grp(block); G.g.style.visibility = "hidden";
+      G.inner.style.cssText += "position:relative;height:" + lineH + "px;justify-content:center;";
+      if (bt.kind === "plain") {
+        var text = bt.idx.map(wt).join(" "), fs = fit(text, L.size || 95, sansW, f.family, -0.03);
+        var sp = el("span", "", esc(text));
+        sp.style.cssText = "font-family:" + fam + ";font-weight:" + sansW + ";font-size:" + fs + "px;letter-spacing:-0.03em;font-variation-settings:'opsz' 14;line-height:1;white-space:pre;color:" + txt + ";text-shadow:" + SH + ";font-synthesis:none;";
+        if (ctx.L.fx === "stroke") { sp.style.webkitTextStroke = "0.07em rgba(20,16,16,.9)"; sp.style.paintOrder = "stroke fill"; }
+        G.inner.appendChild(sp);
+        var an = L.anim || "style";
+        tl.set(G.g, { visibility: "visible" }, bt.st); tl.set(G.g, { visibility: "hidden" }, bt.en);
+        if (an === "pop") tl.fromTo(G.g, { scale: 0.82, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "back.out(2)", immediateRender: false }, bt.st);
+        else if (an === "rise") tl.fromTo(G.g, { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out", immediateRender: false }, bt.st);
+        else if (an === "fade") tl.fromTo(G.g, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power1.out", immediateRender: false }, bt.st);
+        return;
+      }
+      // emphasis pair: the lead-in centred on the caption line, the keyword under it, covering its lower half (74 px at 95)
+      var setupT = bt.setup.map(wt).join(" "), punchT = bt.punch.map(wt).join(" ");
+      var ss = fit(setupT, Math.round(108 * k * sf.scale), sf.weight, sf.family, -0.01), ps = fit(punchT, Math.round(135 * k), sansW, f.family, -0.03);
+      var sw = el("div"); sw.style.cssText = "position:absolute;left:-200px;right:-200px;top:50%;display:flex;justify-content:center;transform:translateY(-50%);";
+      var sIn = el("div"); sIn.style.cssText = "display:flex;justify-content:center;filter:drop-shadow(0 " + Math.round(3 * k) + "px " + Math.round(14 * k) + "px rgba(0,0,0,.4));";
+      var s1 = el("span", "", esc(setupT));
+      s1.style.cssText = "font-family:\"" + sf.family + "\",Georgia,serif;font-weight:" + sf.weight + ";font-style:" + (sf.italic ? "italic" : "normal") + ";font-size:" + ss + "px;letter-spacing:-0.01em;line-height:1.1;white-space:pre;padding:0.08em 0.18em;background-image:linear-gradient(#FFFFFF,#FFFFFF);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;";
+      sIn.appendChild(s1); sw.appendChild(sIn); G.inner.appendChild(sw);
+      var pw = el("div"); pw.style.cssText = "position:absolute;left:-200px;right:-200px;top:" + Math.round(lineH / 2 + 74 * k) + "px;display:flex;justify-content:center;transform:translateY(-50%);opacity:0;";
+      var pIn = el("div"); pIn.style.cssText = "display:flex;justify-content:center;filter:" + punchF + ";";
+      var p1 = el("span", "", esc(punchT));
+      p1.style.cssText = "font-family:" + fam + ";font-weight:" + sansW + ";font-size:" + ps + "px;letter-spacing:-0.03em;font-variation-settings:'opsz' 14;line-height:1.1;white-space:pre;padding:0.04em 0.08em;background-image:" + punchG + ";-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-synthesis:none;";
+      pIn.appendChild(p1); pw.appendChild(pIn); G.inner.appendChild(pw);
+      tl.set(G.g, { visibility: "visible" }, bt.st); tl.set(G.g, { visibility: "hidden" }, bt.en);
+      // lead-in: appears at 117 %, holds one beat, settles to 100 % over 16 beats (cubic ease-out, scaled in log space)
+      var o = { p: 0 }, apply = function () { sIn.style.transform = "scale(" + Math.exp(Math.log(1.17) * (1 - o.p)).toFixed(4) + ")"; };
+      tl.set(o, { p: 0, onComplete: apply }, Math.max(ctx.seg[0], bt.st - 0.001));
+      tl.fromTo(o, { p: 0 }, { p: 1, duration: T(16), ease: "power2.out", immediateRender: false, onUpdate: apply }, bt.st + T(1));
+      tl.set(s1, { backgroundImage: "linear-gradient(#FFFFFF,#FFFFFF)" }, Math.max(ctx.seg[0], bt.st - 0.001));
+      // keyword: a soft ghost beat, then on / almost off / on / half / on at 30 beats a second while it rises 22 px
+      var pst = bt.pst;
+      tl.set(pw, { opacity: 0 }, Math.max(ctx.seg[0], bt.st - 0.001));
+      tl.set(pw, { opacity: FLICK[0] }, pst);
+      tl.set(pIn, { y: 22 * k * 1.1, filter: punchF + " blur(" + (3 * k).toFixed(1) + "px)" }, pst);
+      for (var b = 1; b < FLICK.length; b++) tl.set(pw, { opacity: FLICK[b] }, pst + T(b));
+      tl.set(pw, { opacity: 1 }, pst + T(FLICK.length));
+      tl.set(pIn, { filter: punchF }, pst + T(1));
+      tl.fromTo(pIn, { y: 22 * k }, { y: 0, duration: T(4), ease: "power1.out", immediateRender: false }, pst + T(1));
+      tl.set(s1, { backgroundImage: dimG }, pst + T(1));
+    });
+    return { block: block, tl: tl };
   };
 
   /* ================= HOOKS: the whole opening line, from the editable hook text ================= */

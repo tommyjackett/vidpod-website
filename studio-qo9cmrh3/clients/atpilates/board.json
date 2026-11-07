@@ -641,6 +641,65 @@
    ],
    "styles": [
     {
+     "id": "cap-chest-punch",
+     "code": "SUB-09",
+     "label": "Chest punch",
+     "best_for": "Recommended. One or two words on the chest, cut on each word, with a rare serif lead-in and a keyword in your colour.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 95,
+      "y": 1325,
+      "colour": "white",
+      "colour2": "primary",
+      "case": "lower",
+      "lines": 1
+     },
+     "registry": "measured reference (internal): emphasis captions",
+     "source": "Measured reference (internal): frame-by-frame study of a top short-form talking-head video",
+     "how": "Ported from a measured reference. Plain captions: 1 to 2 words, at most 13 characters, lowercase except names, acronyms and I, in the brand bold sans (Inter 700 on VIDPOD) at 95 px, tracking -0.03em, white with a soft dark shadow, centred on the chest (y 1325, 69 % of the height), hard cut exactly on the first spoken word, held to the next caption (after a pause over 1 s: 0.3 s, then clear). About every 8 to 12 s (never more than 4 a minute) an emphasis moment from the strongest words: the lead-in word in a serif italic (DM Serif Display; the brand script on @pilates) at 108 px appears at 117 % and settles to 100 % over 16/30 s, then the keyword (135 px, the brand colour as a light-to-colour gradient with a rim glow and a dark halo) lands 74 px below, over the lead-in's lower half, with a five-beat flicker at 30 beats a second (0.3, 1, 0.08, 1, 0.5, then solid) while rising 22 px; the lead-in dims white to grey as it lands.",
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "recommended_for": [
+      "case-study",
+      "podcast-snippet"
+     ],
+     "recipe": {
+      "registry": "measured reference (internal): emphasis captions",
+      "how": "Ported from a measured reference. Plain captions: 1 to 2 words, at most 13 characters, lowercase except names, acronyms and I, in the brand bold sans (Inter 700 on VIDPOD) at 95 px, tracking -0.03em, white with a soft dark shadow, centred on the chest (y 1325, 69 % of the height), hard cut exactly on the first spoken word, held to the next caption (after a pause over 1 s: 0.3 s, then clear). About every 8 to 12 s (never more than 4 a minute) an emphasis moment from the strongest words: the lead-in word in a serif italic (DM Serif Display; the brand script on @pilates) at 108 px appears at 117 % and settles to 100 % over 16/30 s, then the keyword (135 px, the brand colour as a light-to-colour gradient with a rim glow and a dark halo) lands 74 px below, over the lead-in's lower half, with a five-beat flicker at 30 beats a second (0.3, 1, 0.08, 1, 0.5, then solid) while rising 22 px; the lead-in dims white to grey as it lands.",
+      "renderer": "studio-looks.js R['cap-chest-punch']",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1325,
+       "size_px": 95,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
+       "detail": "Ported from a measured reference. Plain captions: 1 to 2 words, at most 13 characters, lowercase except names, acronyms and I, in the brand bold sans (Inter 700 on VIDPOD) at 95 px, tracking -0.03em, white with a soft dark shadow, centred on the chest (y 1325, 69 % of the height), hard cut exactly on the first spoken word, held to the next caption (after a pause over 1 s: 0.3 s, then clear). About every 8 to 12 s (never more than 4 a minute) an emphasis moment from the strongest words: the lead-in word in a serif italic (DM Serif Display; the brand script on @pilates) at 108 px appears at 117 % and settles to 100 % over 16/30 s, then the keyword (135 px, the brand colour as a light-to-colour gradient with a rim glow and a dark halo) lands 74 px below, over the lead-in's lower half, with a five-beat flicker at 30 beats a second (0.3, 1, 0.08, 1, 0.5, then solid) while rising 22 px; the lead-in dims white to grey as it lands."
+      },
+      "colour_roles": [
+       "Text colour",
+       "Punch word colour"
+      ]
+     }
+    },
+    {
      "id": "cap-weight-shift",
      "code": "SUB-01",
      "label": "Weight shift",
@@ -692,7 +751,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "Words wait in the light weight at 62 % opacity; on each spoken word fontWeight light to bold and opacity to 1 over 0.1 s power2.out. Group enters scale 0.92 to 1, 0.12 s power3.out."
       },
       "colour_roles": [
@@ -752,7 +811,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "Each word y +0.55em, blur 0.24em to 0, landing 0.12 s after it is spoken; rise 0.74 s on the registry's piecewise landing ease (78 % split, 7 % settle tail)."
       },
       "colour_roles": [
@@ -812,7 +871,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "One rounded box per line group; x/y/width/height tween to the spoken word over 0.12 s power2.out; the word under it switches to the box's ink colour."
       },
       "colour_roles": [
@@ -873,7 +932,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "Line appears 0.1 s; each word opacity 0.35 to 1 over 0.08 s linear on its timestamp."
       },
       "colour_roles": [
@@ -933,7 +992,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "Light weight line; emphasis words in the display face at 1.32em in the hero colour, scale 1.25 to 1 and y 10 to 0 over 0.3 s expo.out; other words fade 0.1 s."
       },
       "colour_roles": [
@@ -994,7 +1053,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "Bold caps; spoken word colour to hero and scale 1.08 over 0.08 s power2.out, back when the next word starts."
       },
       "colour_roles": [
@@ -1055,7 +1114,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "Pill per phrase; words fill from 55 % mix to ink 0.1 s before each spoken word."
       },
       "colour_roles": [
@@ -1116,7 +1175,7 @@
         0,
         11.64
        ],
-       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "rule": "Caption rules (MECHANISMS.md, from the measured reference): 1 to 2 words and 13 characters per caption by default; cut on exactly when the first word is spoken; held until the next caption starts, or after a pause over 1 s 0.3 s past the last word; the corrections (Names to check, fixes.json) apply first.",
        "detail": "clip-path inset wipes each word left to right 0.28 s power2.out on its timestamp; emphasis words to accent; group wipes out 0.22 s stagger 0.03."
       },
       "colour_roles": [
@@ -1487,7 +1546,7 @@
      "kind": "Holding",
      "registry": "hook.stamp-box / out-of-frame pop",
      "source": "Pinterest out-of-frame podcast reel 'IS IT POSSIBLE TO PREDICT THE NEXT' (crystfilm)",
-     "how": "The whole hook line in heavy caps (Archivo Black on VIDPOD), tracking -0.02em, left aligned at x 64, balanced into 3 lines (2 for four words or fewer); each line as big as fits 952 px up to 150 px, so lines vary in size like the reference; line gap 0.2x cap. Band: full width from the top of frame to 46 px under the text, the second colour, soft shadow. The plate and matte move down so the head top lands 65 % into the last line's caps (hair over its lower third); band and plate arrive together (band yPercent -101 to 0, plate 0 to its offset, 0.5 s power3.out) so the gap is always under the band. Lines rise in masks (yPercent 108 to 0, 0.4 s expo.out) on their first spoken word, at least 0.09 s apart. Out: band, text and plate return together over 0.36 s power2.in, 0.38 s before the hook ends.",
+     "how": "The whole hook line in heavy caps (Archivo Black on VIDPOD), tracking -0.02em, left aligned at x 86, about 16 characters a line (1 to 4 lines), each line as big as fits 908 px up to the size, never more than 1.25x the smallest line. The words sit ON the band, top at y 200, never behind the face. The plate and matte move down so the head top lands 28 px under the words; the window's top edge sits 60 px under the head top, so the head pops out over that edge only (the gap the plate leaves is behind the solid band). From the first frame (default) everything is up on frame 1; 'As it is said' brings the band in (yPercent -101 to 0, 0.5 s power3.out) and lifts each line on its word (yPercent 108 to 0, 0.4 s expo.out). Out: band, text and plate return together over 0.36 s power2.in, 0.38 s before the hook ends; the house subtitles take over.",
      "use_cases": [
       "case-study",
       "podcast-snippet",
@@ -1505,7 +1564,7 @@
       "needs_matte": true,
       "final_render": "Load studio-hooks.js with studio-looks.js in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings; render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte looks composite: plate, under layer, person matte, over layer. When the recipe moves the plate (headroom), the plate and the matte move together and the gap is filled from the plate's own top rows.",
       "registry": "hook.stamp-box / out-of-frame pop",
-      "how": "The whole hook line in heavy caps (Archivo Black on VIDPOD), tracking -0.02em, left aligned at x 64, balanced into 3 lines (2 for four words or fewer); each line as big as fits 952 px up to 150 px, so lines vary in size like the reference; line gap 0.2x cap. Band: full width from the top of frame to 46 px under the text, the second colour, soft shadow. The plate and matte move down so the head top lands 65 % into the last line's caps (hair over its lower third); band and plate arrive together (band yPercent -101 to 0, plate 0 to its offset, 0.5 s power3.out) so the gap is always under the band. Lines rise in masks (yPercent 108 to 0, 0.4 s expo.out) on their first spoken word, at least 0.09 s apart. Out: band, text and plate return together over 0.36 s power2.in, 0.38 s before the hook ends.",
+      "how": "The whole hook line in heavy caps (Archivo Black on VIDPOD), tracking -0.02em, left aligned at x 86, about 16 characters a line (1 to 4 lines), each line as big as fits 908 px up to the size, never more than 1.25x the smallest line. The words sit ON the band, top at y 200, never behind the face. The plate and matte move down so the head top lands 28 px under the words; the window's top edge sits 60 px under the head top, so the head pops out over that edge only (the gap the plate leaves is behind the solid band). From the first frame (default) everything is up on frame 1; 'As it is said' brings the band in (yPercent -101 to 0, 0.5 s power3.out) and lifts each line on its word (yPercent 108 to 0, 0.4 s expo.out). Out: band, text and plate return together over 0.36 s power2.in, 0.38 s before the hook ends; the house subtitles take over.",
       "framing": {
        "canvas": "1080x1920",
        "safe_box": {
@@ -1515,13 +1574,13 @@
         "y1": 1500
        },
        "placement": "Fixed by the renderer from base.face",
-       "text_left_px": 64,
-       "text_top_px": "196 (150 minimum)"
+       "text_left_px": 86,
+       "text_top_px": "200; head top 28 px under the words; window top 60 px under the head top"
       },
       "timings": {
        "segment": "hook section segment",
-       "in": "band + plate 0.5 s power3.out",
-       "lines": "0.4 s expo.out on their words",
+       "in": "none by default (on screen from the first frame); 'As it is said': band + plate 0.5 s power3.out",
+       "lines": "from frame 1 (default) or 0.4 s expo.out on their words",
        "out": "0.36 s power2.in, 0.38 s before the end",
        "segment_s": [
         0,
@@ -1531,6 +1590,73 @@
       "colour_roles": [
        "Text colour",
        "Band colour"
+      ]
+     },
+     "no_position": true
+    },
+    {
+     "id": "hk-glow-intro",
+     "code": "HOOK-09",
+     "label": "Glow title, pull-back",
+     "best_for": "A two-line headline that glows in your colour while the whole shot pulls back. Up from the first frame, then your subtitles take over.",
+     "energy": 3,
+     "defaults": {
+      "font": "brand",
+      "size": 100,
+      "colour": "primary",
+      "colour2": "white",
+      "case": "upper",
+      "y": 1114,
+      "text": "Is there really\n*a demand?*"
+     },
+     "kind": "Opener",
+     "registry": "measured reference (internal): glow intro title",
+     "source": "Measured reference (internal): frame-by-frame fit of a finance Short's opener",
+     "hold": [
+      3,
+      5
+     ],
+     "how": "Two lines in heavy caps (Archivo Black on VIDPOD, the brand bold elsewhere): a near-white setup line (8.02 % of frame width, 87 px) over a punch line in the brand colour (9.28 %, 100 px), each shrunk only past 80 % of the frame width; line boxes hug the caps, gap 0.07x the punch size; block centred at y 1114 (58 %). Fills: setup white tinted 3 to 9 % toward the brand colour, top to baseline; punch the brand colour 3 % lighter at the cap top, 6 % darker at 68 %, 13 % darker at the baseline. Glow under both lines: 0.15em at 0.2, 1.1em at 0.6, 2.2em at 0.6 (setup) or 0.25 (punch). Dark grade under it (clear at 30 % of the height to 0.92 at the bottom, x 0.8), in over 0.3 s. Camera: the footage AND the title scale 1.25 to 1 on 1 + 0.0463 e^(-t/0.07 s) + 0.2038 e^(-t/1.11 s) about (50 %, 31.6 %), settled by 6 s; a few px of zoom blur on frames 1 to 4 only. Tracking +0.035em to 0 on the same curve. Title opacity 1 - e^(-t/0.17 s) from frame 0 (28 % on the first frame, solid by 0.65 s). Holds 3 to 5 s (to the first phrase start in that range, else 4 s), fades out over the last 0.25 s, grade over 0.3 s; the camera keeps settling and the house subtitles take over. The words are a headline about the topic (two lines: about 14 to 16 characters, then 10 to 12 ending in ?), not a quote.",
+     "use_cases": [
+      "podcast-snippet",
+      "case-study",
+      "trailer",
+      "teaser"
+     ],
+     "recipe": {
+      "renderer": "studio-hooks.js R['hk-glow-intro']",
+      "params": "defaults + the client's picks (font, size, colour = punch line, colour2 = setup line, y, hookText: line 1 / line 2, or *stars* round the punch words).",
+      "layers": [
+       "plate video (moved: the pull-back scales the footage)",
+       "dark grade + glowing title (over layer)"
+      ],
+      "needs_matte": false,
+      "final_render": "studio_render.sh: hook alpha .mov = title + grade (the title rides the curve). The pull-back moves the footage itself: add --finished hook for a finished MP4 section with the move, or key the same curve on the clip in Resolve (Zoom 1.25 to 1, anchor 50 % / 31.6 %).",
+      "registry": "measured reference (internal): glow intro title",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500
+       },
+       "placement": "Fixed by the renderer: centred, block centre y 1114 (58 %); max line width 864 px",
+       "pivot": "540, 607 (50 %, 31.6 %)"
+      },
+      "timings": {
+       "segment": "hook window start + 3 to 5 s (first phrase start in range, else 4 s)",
+       "camera": "1.25 to 1 over 6 s, double exponential",
+       "in": "opacity 1 - e^(-t/0.17 s) from frame 0; grade 0.3 s ease-out",
+       "out": "title 0.25 s ease-in, grade 0.3 s; the house subtitles take over",
+       "segment_s": [
+        0,
+        6.68
+       ]
+      },
+      "colour_roles": [
+       "Punch line colour",
+       "Top line colour"
       ]
      },
      "no_position": true
@@ -4474,13 +4600,21 @@
  },
  "vidpod_pick": {
   "subtitles": {
-   "style": "cap-weight-shift",
+   "style": "cap-chest-punch",
    "font": "brand",
-   "size": 64,
-   "y": 1400,
+   "size": 95,
+   "y": 1325,
    "colour": "white",
-   "case": "spoken",
+   "colour2": "primary",
+   "case": "lower",
    "lines": 1
+  },
+  "hook": {
+   "style": "hk-serif-keyword",
+   "font": "brand",
+   "size": 260,
+   "colour": "white",
+   "case": "lower"
   },
   "moves": [
    {
@@ -4510,13 +4644,6 @@
   },
   "transitions": {
    "style": "tr-dissolve"
-  },
-  "hook": {
-   "style": "hk-serif-keyword",
-   "font": "brand",
-   "size": 260,
-   "colour": "white",
-   "case": "lower"
   }
  },
  "lookbook": {

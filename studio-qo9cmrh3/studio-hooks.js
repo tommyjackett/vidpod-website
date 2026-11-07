@@ -122,6 +122,8 @@
       g.key.forEach(function (t) { t.show = Math.max(t.t, g.t0); });
       prevEnd = g.key[g.key.length - 1].end || kt + 0.3;
     });
+    // "From the first frame" (the default): the first stack is up, finished, on frame 1; later stacks still land on their words
+    if (ctx.frame1 && out[0]) { out[0].t0 = ctx.seg[0]; out[0].lead.concat(out[0].key, out[0].follow).forEach(function (t) { t.show = ctx.seg[0]; }); }
     return out;
   }
   // balanced rows: split tokens into n rows of near-even width
@@ -171,27 +173,23 @@
         d.style.textShadow = lum(col) > 0.08 ? glow(col, 0.9) + ", 0 0.03em 0.18em rgba(0,0,0,.16)" : "0 4px 30px rgba(0,0,0,.25)";
         grp.appendChild(d);
         var at = Math.max(seg[0] + 0.04, l.toks[0].show - 0.05);
-        tl.fromTo(d, { opacity: 0, scale: 1.07, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.32, ease: "expo.out", immediateRender: true }, at);
+        if (!(ctx.frame1 && gi === 0)) tl.fromTo(d, { opacity: 0, scale: 1.07, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.32, ease: "expo.out", immediateRender: true }, at);
       });
       var tIn = Math.max(seg[0], b.gp.t0 - 0.06), next = built[gi + 1];
+      if (ctx.frame1 && gi === 0) grp.style.visibility = "visible";
       tl.set(grp, { visibility: "visible" }, tIn);
       tl.fromTo(grp, { scale: 1 }, { scale: 1.03, duration: Math.max(0.5, (next ? next.gp.t0 : seg[1]) - tIn), ease: "none", immediateRender: false }, tIn);
       if (next) tl.to(grp, { opacity: 0, duration: 0.14, ease: "power2.in" }, Math.max(tIn + 0.3, next.gp.t0 - 0.16));
     });
     fadeOut(tl, under, ctx);
-    // plain lowercase captions in front, lower third (ref "they're just"): two or three words at a time as spoken
-    var capF = bold(ctx), cs = 84, chunks = [], cur = [];
-    var all = ctx.B.base.words.filter(function (w) { return w.t >= seg[0] - 0.02 && w.t < seg[1] - 0.25; }).map(function (w) { return { text: String(w.text), t: w.t }; });
-    all.forEach(function (t) { cur.push(t); if (cur.length >= 3 || /[,.!?]$/.test(t.text)) { chunks.push(cur); cur = []; } });
-    if (cur.length) chunks.push(cur);
-    var capBox = H.abs(ctx.over, "left:0;width:1080px;top:1330px;");
-    chunks.forEach(function (c, k) {
-      var line = el("div"); line.style.cssText = "position:absolute;left:0;width:1080px;text-align:center;white-space:nowrap;line-height:1;letter-spacing:-0.01em;visibility:hidden;";
+    // plain lowercase captions in front, lower third (ref "they're just"): the measured caption rules (1 to 2 words, hard cut on the word)
+    var capF = bold(ctx), cs = 84, capBox = H.abs(ctx.over, "left:0;width:1080px;top:1330px;");
+    H.beats({ seg: [seg[0], seg[1] - 0.25], L: {} }).forEach(function (bt) {
+      var line = el("div", "", esc(bt.idx.map(function (i) { return K.caseText(String(K.W(i).text), "lower").replace(/[,.;:]+(?=["\u201d\u2019]?$)/, ""); }).join(" ")));
+      line.style.cssText = "position:absolute;left:0;width:1080px;text-align:center;white-space:nowrap;line-height:1;letter-spacing:-0.01em;visibility:hidden;";
       setF(line, capF, cs, "#FFFFFF"); line.style.textShadow = ctx.L.shadow != null ? ctx.B.brand.shadow : shadowSoft(0.5);
-      c.forEach(function (t, j) { var s = el("span", "", esc(K.caseText(t.text, "lower").replace(/[,.!?]$/, "")) + (j < c.length - 1 ? " " : "")); s.style.opacity = 0; line.appendChild(s); tl.to(s, { opacity: 1, duration: 0.06, ease: "none" }, Math.max(seg[0], t.t - 0.02)); });
       capBox.appendChild(line);
-      tl.set(line, { visibility: "visible" }, Math.max(seg[0], c[0].t - 0.03));
-      if (k < chunks.length - 1) tl.set(line, { visibility: "hidden" }, Math.max(seg[0], chunks[k + 1][0].t - 0.03));
+      tl.set(line, { visibility: "visible" }, bt.st); tl.set(line, { visibility: "hidden" }, Math.min(bt.en, seg[1] - 0.25));
     });
     fadeOut(tl, capBox, ctx);
     var P = plateDrive(ctx, tl, D, seg[0], 0, seg[1] - 0.55, 0.5);
@@ -224,8 +222,8 @@
     });
     wrap.appendChild(box);
     var t0 = seg[0] + 0.06;
-    tl.fromTo(box, { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: true }, t0);
-    lineEls.forEach(function (ln, k) { tl.fromTo(ln, { yPercent: 105 }, { yPercent: 0, duration: 0.32, ease: "power3.out", immediateRender: true }, t0 + 0.1 + k * 0.06); });
+    if (!ctx.frame1) tl.fromTo(box, { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: true }, t0);
+    if (!ctx.frame1) lineEls.forEach(function (ln, k) { tl.fromTo(ln, { yPercent: 105 }, { yPercent: 0, duration: 0.32, ease: "power3.out", immediateRender: true }, t0 + 0.1 + k * 0.06); });
     fadeOut(tl, wrap, ctx);
     // the stacked label: the role half of hook_label ("founder of VIDPOD"), white, as big as the quote, beside the head
     var raw = String(ctx.B.base.hook_label || ctx.B.base.role || ""), part = raw.indexOf(",") > 0 ? raw.slice(raw.indexOf(",") + 1).trim() : raw;
@@ -243,7 +241,7 @@
     labRows.forEach(function (r, k) {
       var d = el("div", "", esc(joinT(r))); setF(d, labF, ls, "#FFFFFF"); d.style.cssText += "white-space:nowrap;line-height:1.0;letter-spacing:-0.015em;"; d.style.textShadow = ctx.L.shadow != null ? ctx.B.brand.shadow : shadowSoft(0.55);
       lab.appendChild(d);
-      tl.fromTo(d, { x: -26, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: true }, t0 + 0.24 + k * 0.07);
+      if (!ctx.frame1) tl.fromTo(d, { x: -26, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: true }, t0 + 0.24 + k * 0.07);
     });
     fadeOut(tl, lab, ctx);
     var P = plateDrive(ctx, tl, D, seg[0], 0, seg[1] - 0.55, 0.5);
@@ -259,8 +257,8 @@
     var hf = bold(ctx), sf = bold(ctx), block = H.block(), G = H.grp(block), stacks = [];
     var boxEl = el("div"); boxEl.style.cssText = "position:relative;"; G.inner.appendChild(boxEl);
     var W0 = 0, H0 = 0;
-    keyGroups(ctx).forEach(function (gp) {
-      var heroText = joinT(gp.key), S = L.size || 230, wmax = 900;
+    keyGroups(ctx).forEach(function (gp, gi) {
+      var F1 = ctx.frame1 && gi === 0, heroText = joinT(gp.key), S = L.size || 230, wmax = 900;
       var hw = tw(heroText, hf, S, -0.03); if (hw > wmax) { S = Math.floor(S * wmax / hw); hw = tw(heroText, hf, S, -0.03); }
       var m = met(hf, S), s = Math.round(S * 0.36), sm = met(sf, s);
       // glyph map of the hero: which x spans are short letters (room above), which have no descenders (room below)
@@ -313,15 +311,18 @@
       items.forEach(function (it) {
         var r = el("div"); r.style.cssText = "position:absolute;white-space:nowrap;left:" + Math.round(it.x) + "px;top:" + Math.round(it.base - sm.cap - capOff(sf, s, s * 1.2)) + "px;line-height:" + Math.round(s * 1.2) + "px;letter-spacing:-0.01em;";
         setF(r, sf, s, small); r.style.textShadow = lum(small) > 0.3 ? "0 2px 10px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.35)" : "none";
-        it.toks.forEach(function (t, j) { var sp = el("span", "", esc(t.text) + (j < it.toks.length - 1 ? " " : "")); sp.style.display = "inline-block"; sp.style.whiteSpace = "pre"; r.appendChild(sp); tl.fromTo(sp, { opacity: 0, y: 10 }, { opacity: 0.94, y: 0, duration: 0.14, ease: "power2.out", immediateRender: true }, Math.max(seg[0], t.show - 0.03)); });
+        it.toks.forEach(function (t, j) { var sp = el("span", "", esc(t.text) + (j < it.toks.length - 1 ? " " : "")); sp.style.display = "inline-block"; sp.style.whiteSpace = "pre"; r.appendChild(sp); if (!F1) tl.fromTo(sp, { opacity: 0, y: 10 }, { opacity: 0.94, y: 0, duration: 0.14, ease: "power2.out", immediateRender: true }, Math.max(seg[0], t.show - 0.03)); });
         st.appendChild(r);
         minY = Math.min(minY, it.base - sm.cap - 6); maxY = Math.max(maxY, it.base + sm.desc);
       });
       var at = Math.max(seg[0], gp.key[0].show - 0.04);
-      tl.fromTo(he, { opacity: 0, scale: 1.12, filter: "blur(8px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.22, ease: "expo.out", immediateRender: true }, at);
-      tl.fromTo(gl, { opacity: 0 }, { opacity: 0.95, duration: 0.12, ease: "power2.out", immediateRender: true }, at);
-      tl.fromTo(shade, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", immediateRender: true }, Math.max(seg[0], at - 0.1));
-      tl.to(gl, { opacity: 0.6, duration: 0.45, ease: "power2.inOut" }, at + 0.14);
+      if (F1) { gl.style.opacity = 0.6; st.style.visibility = "visible"; }
+      else {
+        tl.fromTo(he, { opacity: 0, scale: 1.12, filter: "blur(8px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.22, ease: "expo.out", immediateRender: true }, at);
+        tl.fromTo(gl, { opacity: 0 }, { opacity: 0.95, duration: 0.12, ease: "power2.out", immediateRender: true }, at);
+        tl.fromTo(shade, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", immediateRender: true }, Math.max(seg[0], at - 0.1));
+        tl.to(gl, { opacity: 0.6, duration: 0.45, ease: "power2.inOut" }, at + 0.14);
+      }
       boxEl.appendChild(st);
       stacks.push({ st: st, t: Math.max(seg[0], gp.t0 - 0.06), w: hw, minY: minY, maxY: maxY });
       W0 = Math.max(W0, hw); H0 = Math.max(H0, maxY - minY);
@@ -364,8 +365,8 @@
       t.style.textShadow = ink === "#FFFFFF" ? "0 0.035em 0 rgba(10,8,30,.6), 0 0 0.04em rgba(10,8,30,.6), 0 0 0.08em rgba(10,8,30,.35), 0 0.05em 0.16em rgba(0,0,0,.3)" : "none";
       stack.appendChild(bg); stack.appendChild(t);
       var at = seg[0] + 0.08 + k * 0.1;
-      tl.fromTo(bg, { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power4.out", immediateRender: true }, at);
-      tl.fromTo(t, { opacity: 0, y: S * 0.18 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out", immediateRender: true }, at + 0.06);
+      if (!ctx.frame1) tl.fromTo(bg, { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power4.out", immediateRender: true }, at);
+      if (!ctx.frame1) tl.fromTo(t, { opacity: 0, y: S * 0.18 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out", immediateRender: true }, at + 0.06);
     });
     G.inner.appendChild(stack);
     fadeOut(tl, G.inner, ctx);
@@ -388,7 +389,7 @@
       // keyword: its x-height top overlaps the last caps line a little; the head covers the bottom 35 % of its x-height
       var tuck = kf.script ? km.xh * 0.1 : km.xh * 0.18;
       var kBase = fc.top + km.xh * 0.24, sansTop = kBase - km.asc + (km.asc - km.xh) * 0.12 - sm.cap * 0.22 - sansH;
-      var need = Math.max(0, 150 - sansTop);
+      var need = Math.max(0, ((ctx.B.safe && ctx.B.safe.y0) ? ctx.B.safe.y0 + 20 : 150) - sansTop);   // keep the caps under the app's top bar (board safe area; was a fixed 150, found by the QA on Alisha V1, 7 Nov 2026)
       built.push({ gp: gp, kt: kt, KS: KS, km: km, lr: lr, ss: ss, sm: sm, spitch: spitch, sansH: sansH, tuck: tuck });
       maxD = Math.max(maxD, need);
     });
@@ -407,10 +408,11 @@
         var mk = el("div"); mk.style.cssText = "position:absolute;left:0;width:1080px;overflow:hidden;top:" + Math.round(sansTop + k * bd.spitch - soff) + "px;height:" + slh + "px;";
         var ln = el("div", "", esc(joinT(r))); setF(ln, sf, bd.ss, sansCol); ln.style.cssText += "text-align:center;white-space:nowrap;letter-spacing:-0.01em;line-height:" + slh + "px;"; ln.style.textShadow = lum(sansCol) > 0.3 ? "0 2px 14px rgba(0,0,0,.35)" : "none";
         mk.appendChild(ln); gO.appendChild(mk);
-        tl.fromTo(ln, { yPercent: 105 }, { yPercent: 0, duration: 0.42, ease: "expo.out", immediateRender: true }, Math.max(seg[0] + 0.04 + k * 0.07, r[0].show - 0.06));
+        if (!(ctx.frame1 && gi === 0)) tl.fromTo(ln, { yPercent: 105 }, { yPercent: 0, duration: 0.42, ease: "expo.out", immediateRender: true }, Math.max(seg[0] + 0.04 + k * 0.07, r[0].show - 0.06));
       });
       var at = Math.max(seg[0] + 0.1, bd.gp.key[0].show - 0.08);
-      tl.fromTo(kd, { opacity: 0, filter: "blur(14px)", letterSpacing: "0.03em" }, { opacity: 1, filter: "blur(0px)", letterSpacing: "-0.02em", duration: 0.45, ease: "power2.out", immediateRender: true }, at);
+      if (ctx.frame1 && gi === 0) { gU.style.visibility = gO.style.visibility = "visible"; }
+      else tl.fromTo(kd, { opacity: 0, filter: "blur(14px)", letterSpacing: "0.03em" }, { opacity: 1, filter: "blur(0px)", letterSpacing: "-0.02em", duration: 0.45, ease: "power2.out", immediateRender: true }, at);
       var tIn = Math.max(seg[0], bd.gp.t0 - 0.08), next = built[gi + 1];
       tl.set([gU, gO], { visibility: "visible" }, tIn);
       if (next) tl.to([gU, gO], { opacity: 0, duration: 0.16, ease: "power2.in" }, Math.max(tIn + 0.3, next.gp.t0 - 0.24));
@@ -427,34 +429,103 @@
      cut into it; band and headline sit in the under layer, so the person matte (cut-out) is drawn in front of both.
      The window's top edge is set just under the top of the head (base.face.hook_top), so the head pops out of it. */
   R["hk-headline-band"] = function (ctx) {
-    var L = ctx.L, tl = H.tl(), seg = ctx.seg, b = ctx.B.brand, fc = face(ctx), fo = heavy(ctx);
+    // Fix 7 Nov (make-a-look proof on Alisha: the head hid the middle of the words): the words sit ON the band, above the
+    // head, never behind the face. The window's top edge sits just under the top of the head, so the head still pops out
+    // over it, and only that edge is overlapped. The plate (footage + matte) moves down to make the room; the gap it
+    // leaves is behind the solid band, so it never shows.
+    var L = ctx.L, tl = H.tl(), seg = ctx.seg, b = ctx.B.brand, fc = face(ctx), fo = heavy(ctx), F1 = !!ctx.frame1;
     var band = ctx.hex2 || b.ink || "#0A0A0A", ink = ctx.hex || "#FFFFFF";
     var toks = H.allToks(ctx.hook()).map(function (t) { return { text: upper(t.text), t: t.t }; });
     var M = 40, R0 = 30, pad = 46, left = M + pad, maxW = 1080 - left * 2, Smax = L.size || 150;
-    var n = toks.length >= 5 ? 3 : 2, rr = rows(toks, n, fo, Smax);
-    var lines = rr.map(function (r) { var t = joinT(r), s2 = Math.min(Smax, Math.floor(Smax * maxW / tw(t, fo, Smax, -0.02))); return { r: r, text: t, s: s2, m: met(fo, s2) }; });
-    var gap = function (l) { return l.m.cap * 0.22; }, y = 0; lines.forEach(function (l) { l.capTop = y; y += l.m.cap + gap(l); });
+    var chars = joinT(toks).length, n = Math.max(1, Math.min(4, Math.ceil(chars / 16))), rr = rows(toks, n, fo, Smax);
+    var lines = rr.map(function (r) { var t = joinT(r), s2 = Math.min(Smax, Math.floor(Smax * maxW / tw(t, fo, Smax, -0.02))); return { r: r, text: t, s: s2 }; });
+    var sMin = Math.min.apply(null, lines.map(function (l) { return l.s; }));
+    lines.forEach(function (l) { l.s = Math.min(l.s, Math.round(sMin * 1.25)); l.m = met(fo, l.s); });
+    var gap = function (l) { return l.m.cap * 0.26; }, y = 0; lines.forEach(function (l) { l.capTop = y; y += l.m.cap + gap(l); });
     var textH = y - gap(lines[lines.length - 1]);
-    // headroom: a frame cut too tight gets the plate moved down so at least 70 px of hair shows above the window
-    var D = Math.max(0, 150 - fc.top), headTop = fc.top + D;
-    var winTop = Math.round(Math.max(170, Math.min(560, headTop + 74)));   // the head pops out over this edge
-    var textTop = winTop + 40, winBot = Math.round(textTop + textH + 44), bandBot = winBot + 26;
-    // band with a window: a clipped strip whose window carries a huge spread shadow in the band colour
+    var textTop = 200, textBot = textTop + textH;
+    // the head top must sit 28 px under the words; the window's top edge 60 px under the head top
+    var D = Math.min(420, Math.max(0, textBot + 28 - fc.top)), headTop = fc.top + D;
+    var winTop = Math.round(headTop + 60), winBot = winTop + 300, bandBot = winBot + 26;
     var strip = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + bandBot + "px;overflow:hidden;");
-    var win = H.abs(strip, "left:" + M + "px;top:" + winTop + "px;width:" + (1080 - 2 * M) + "px;height:" + (winBot - winTop) + "px;border-radius:" + R0 + "px;box-shadow:0 0 0 2400px " + band + ";");
-    var txtBox = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + winBot + "px;");
+    H.abs(strip, "left:" + M + "px;top:" + winTop + "px;width:" + (1080 - 2 * M) + "px;height:" + (winBot - winTop) + "px;border-radius:" + R0 + "px;box-shadow:0 0 0 2400px " + band + ";");
+    var txtBox = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + winTop + "px;");
     lines.forEach(function (l, k) {
       var blh = Math.round(l.s * 1.0), boff = capOff(fo, l.s, blh);
-      var mk = el("div"); mk.style.cssText = "position:absolute;left:" + left + "px;overflow:hidden;top:" + Math.round(textTop + l.capTop - boff) + "px;height:" + blh + "px;";
+      var mk = el("div"); mk.style.cssText = "position:absolute;left:" + left + "px;width:" + maxW + "px;overflow:hidden;top:" + Math.round(textTop + l.capTop - boff) + "px;height:" + blh + "px;";
       var d = el("div", "", esc(l.text)); setF(d, fo, l.s, ink); d.style.cssText += "white-space:nowrap;letter-spacing:-0.02em;line-height:" + blh + "px;";
       if (ctx.L.shadow != null) d.style.textShadow = ctx.B.brand.shadow;
       mk.appendChild(d); txtBox.appendChild(mk);
-      tl.fromTo(d, { yPercent: 108 }, { yPercent: 0, duration: 0.4, ease: "expo.out", immediateRender: true }, Math.max(seg[0] + 0.3 + k * 0.09, l.r[0].t - 0.05));
+      if (!F1) tl.fromTo(d, { yPercent: 108 }, { yPercent: 0, duration: 0.4, ease: "expo.out", immediateRender: true }, Math.max(seg[0] + 0.3 + k * 0.09, l.r[0].t - 0.05));
     });
-    var tIn = seg[0] + 0.02, dIn = 0.5;
-    tl.fromTo(strip, { yPercent: -101 }, { yPercent: 0, duration: dIn, ease: "power3.out", immediateRender: true }, tIn);
+    var tIn = seg[0] + 0.02, dIn = F1 ? 0 : 0.5;
+    if (!F1) tl.fromTo(strip, { yPercent: -101 }, { yPercent: 0, duration: dIn, ease: "power3.out", immediateRender: true }, tIn);
     tl.to([strip, txtBox], { yPercent: -101, duration: 0.36, ease: "power2.in" }, seg[1] - 0.38);
-    var P = plateDrive(ctx, tl, D, tIn, dIn, seg[1] - 0.38, 0.36);
+    var P = plateDrive(ctx, tl, D, F1 ? seg[0] : tIn, dIn, seg[1] - 0.38, 0.36);
     return { tl: tl, depth: true, fixed: true, teardown: function () { if (P) P.reset(); } };
+  };
+
+  /* ==================== HOOK: Glow title, pull-back ====================
+     Ported from the measured reference (MECHANISMS.md "Caption rules, from the measured reference", Glow title): a white
+     setup line over a punch line in the brand colour, heavy caps, a tight bloom plus two wide hazes. The whole frame
+     (footage and title) opens punched in 25 % and pulls back on one double-exponential curve around a point a third of the
+     way down; the title fades up as 1 - e^(-t/0.17 s) and holds 3 to 5 s (default 4) over a soft dark grade, then the
+     house subtitles take over. On screen from the first frame. The words are a headline, not a quote. */
+  var GZ = { fa: 0.0463, fs: 0.07, sa: 0.2038, ss: 1.11, win: 6, oy: 0.316 };
+  function gEx(t) { return GZ.fa * Math.exp(-t / GZ.fs) + GZ.sa * Math.exp(-t / GZ.ss); }
+  var GZ0 = 1 + GZ.fa + GZ.sa;
+  function gEase(p) { return (GZ0 - 1 - gEx(p * GZ.win)) / (GZ0 - 1 - gEx(GZ.win)); }
+  function gScale(t) { return t <= 0 ? GZ0 : t >= GZ.win ? 1 : GZ0 - (GZ0 - 1) * gEase(t / GZ.win); }
+  H.glowScale = gScale;
+  R["hk-glow-intro"] = function (ctx) {
+    var L = ctx.L, tl = H.tl(), seg = ctx.seg, fo = heavy(ctx), acc = ctx.hex;
+    if (/^montserrat$/i.test(fo.family)) fo = { family: fo.family, weight: 900 };   // the measured face: Montserrat Black
+    var hk = ctx.hook(), l1 = "", l2 = "";
+    if (hk.length >= 2) { l1 = joinT(hk[0]); l2 = joinT(H.allToks(hk.slice(1))); }
+    else if (hk.length) { var all = hk[0], k0 = -1; all.forEach(function (t, i) { if (t.emph && k0 < 0) k0 = i; }); if (k0 > 0) { l1 = joinT(all.slice(0, k0)); l2 = joinT(all.slice(k0)); } else l2 = joinT(all); }
+    l1 = upper(l1); l2 = upper(l2);
+    var Wd = 1080, ts = (L.size || 100) / 100.2, S1 = 0.0802 * Wd * ts, S2n = 0.0928 * Wd * ts, S2 = S2n, maxW = 0.8 * Wd;
+    if (l1 && tw(l1, fo, S1) > maxW) S1 *= maxW / tw(l1, fo, S1);
+    if (l2 && tw(l2, fo, S2) > maxW) S2 *= maxW / tw(l2, fo, S2);
+    var m1 = met(fo, S1), m2 = met(fo, S2), gap = 0.07 * S2n, cy = L.y || 1114;
+    var tot = (l1 ? m1.cap + gap : 0) + m2.cap, y1 = cy - tot / 2, y2 = y1 + (l1 ? m1.cap + gap : 0);
+    var top2 = ctx.hex2 && ctx.colour2Id !== "white" ? ctx.hex2 : null;
+    var setupFill = top2 || "linear-gradient(180deg," + H.mixHex("#FFFFFF", acc, 0.03) + " 21%," + H.mixHex("#FFFFFF", acc, 0.06) + " 50%," + H.mixHex("#FFFFFF", acc, 0.087) + " 79%)";
+    var punchFill = "linear-gradient(180deg," + H.mixHex(acc, "#FFFFFF", 0.03) + " 21%," + acc + " 50%," + H.mixHex(acc, "#000000", 0.06) + " 68%," + H.mixHex(acc, "#000000", 0.13) + " 79%)";
+    var glowSh = function (rgb, widest) { return "0 0 0.15em rgba(" + rgb + ",0.2), 0 0 1.1em rgba(" + rgb + ",0.6), 0 0 2.2em rgba(" + rgb + "," + widest + ")"; };
+    var lineSpec = [];
+    if (l1) lineSpec.push({ text: l1, S: S1, m: m1, top: y1, fill: setupFill, solid: top2 || H.mixHex("#FFFFFF", acc, 0.06), glow: H.rgbOf(H.mixHex(top2 || acc, "#FFFFFF", 0.9)), widest: 0.6 });
+    if (l2) lineSpec.push({ text: l2, S: S2, m: m2, top: y2, fill: punchFill, solid: acc, glow: H.rgbOf(H.mixHex(acc, "#FFFFFF", 0.15)), widest: 0.25 });
+    // dark grade under the title so the glow reads on bright footage (x 0.8)
+    var grade = H.abs(ctx.over, "left:0;top:0;width:1080px;height:1920px;opacity:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.6) 48%,rgba(0,0,0,.82) 62%,rgba(0,0,0,.92) 100%);");
+    var title = H.abs(ctx.over, "left:0;top:0;width:1080px;height:1920px;transform-origin:540px " + Math.round(1920 * GZ.oy) + "px;opacity:0;");
+    var spans = [];
+    ["glow", "face"].forEach(function (pass) {
+      lineSpec.forEach(function (l) {
+        var lh = Math.round(l.S), off = capOff(fo, l.S, lh);
+        var row = el("div"); row.style.cssText = "position:absolute;left:0;width:1080px;text-align:center;white-space:nowrap;top:" + Math.round(l.top - off) + "px;height:" + lh + "px;line-height:" + lh + "px;";
+        var sp = el("span", "", esc(l.text)); setF(sp, fo, Math.round(l.S * 100) / 100);
+        if (pass === "glow") { sp.style.color = l.solid; sp.style.textShadow = glowSh(l.glow, l.widest); }
+        else { sp.style.cssText += "padding:0.25em 0.1em;margin:-0.25em -0.1em;color:transparent;-webkit-text-fill-color:transparent;background-image:" + (/gradient/.test(l.fill) ? l.fill : "linear-gradient(" + l.fill + "," + l.fill + ")") + ";-webkit-background-clip:text;background-clip:text;"; }
+        row.appendChild(sp); title.appendChild(row); spans.push(sp);
+      });
+    });
+    // one clock drives the camera (footage + title), the tracking, the fade and the grade, so scrubbing and renders match
+    var m = ctx.media, d = seg[1] - seg[0], end = seg[0] + Math.max(d, GZ.win);
+    var o = { t: seg[0] };
+    var apply = function () {
+      var t = o.t - seg[0], sc = gScale(t), sPrev = gScale(Math.max(0, t - 0.02)), share = (sPrev - sc) / sc;
+      title.style.transform = "scale(" + sc.toFixed(5) + ")";
+      var ls = (0.035 * (1 - gEase(Math.min(1, Math.max(0, t / GZ.win))))).toFixed(4) + "em";
+      spans.forEach(function (sp) { sp.style.letterSpacing = ls; });
+      var fin = t >= 0.8 ? 1 : (1 - Math.exp(-t / 0.17)) / (1 - Math.exp(-0.8 / 0.17)), u = Math.max(0, Math.min(1, (seg[1] - o.t) / 0.25)), fout = 1 - (1 - u) * (1 - u);
+      title.style.opacity = (o.t >= seg[1] ? 0 : fin * fout).toFixed(3);
+      var gi = Math.min(1, t / 0.3), gIn = 1 - (1 - gi) * (1 - gi), gu = Math.max(0, Math.min(1, (seg[1] - o.t) / 0.3)), gOut = 1 - (1 - gu) * (1 - gu);
+      grade.style.opacity = (o.t >= seg[1] ? 0 : 0.8 * gIn * gOut).toFixed(3);
+      if (m && !ctx.card) { m.style.transformOrigin = "50% " + (GZ.oy * 100) + "%"; m.style.transform = sc > 1.0001 ? "scale(" + sc.toFixed(5) + ")" : ""; var bl = 1080 * share * 0.2; m.style.filter = bl > 0.3 ? "blur(" + bl.toFixed(2) + "px)" : ""; }
+    };
+    tl.fromTo(o, { t: seg[0] }, { t: end, duration: end - seg[0], ease: "none", immediateRender: true, onUpdate: apply }, seg[0]);
+    apply();
+    return { tl: tl, fixed: true, moves: true, teardown: function () { if (m) { m.style.transform = ""; m.style.filter = ""; m.style.transformOrigin = ""; } } };
   };
 });

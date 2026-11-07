@@ -48,7 +48,9 @@
 
   /* ================= state ================= */
   var B = null;
-  var S = { sec: null, view: null, looks: {}, picks: {}, app: "", viewer: "", hookText: null, likes: {}, favOnly: false, vtype: null };
+  var S = { sec: null, view: null, looks: {}, picks: {}, app: "", viewer: "", hookText: null, likes: {}, favOnly: false, vtype: null, fixes: {} };
+  /* headless renders (tools/studio_render.sh) sign in as "VIDPOD render": each section renders alone (no opener handover demo) */
+  var RENDER = (function () { try { return localStorage.getItem("vidpod-studio-viewer") === "VIDPOD render"; } catch (e) { return false; } })();
   var video = document.getElementById("video");
   var screenEl = document.getElementById("screen");
   var under = document.getElementById("under"), over = document.getElementById("layer"), ui = document.getElementById("ui");
@@ -97,7 +99,8 @@
     "lt-clean-bar": ["Tab colour", "Card colour", "white"], "lt-soft-pill": ["Dot colour", "Pill colour", "white"],
     "lt-dark-card": ["Line colour", "Card colour", "dark"], "lt-accent-underline": ["Line colour", "Text colour", "white"],
     "lt-mask-reveal": ["Sweep colour", "Text colour", "white"], "lt-stack-bars": ["Role bar colour", "Name bar colour", "dark"],
-    "hk-behind-head": ["Big word colour"], "hk-quote-box": ["Box colour", "Text colour", "dark"], "hk-mixed-stack": ["Big word colour", "Small words colour", "white"], "hk-highlight-bars": ["Top bar colour", "Bottom bar colour", "dark"], "hk-serif-keyword": ["Keyword colour", "Caps colour", "white"], "hk-headline-band": ["Text colour", "Band colour", "dark"]
+    "hk-behind-head": ["Big word colour"], "hk-quote-box": ["Box colour", "Text colour", "dark"], "hk-mixed-stack": ["Big word colour", "Small words colour", "white"], "hk-highlight-bars": ["Top bar colour", "Bottom bar colour", "dark"], "hk-serif-keyword": ["Keyword colour", "Caps colour", "white"], "hk-headline-band": ["Text colour", "Band colour", "dark"],
+    "cap-chest-punch": ["Text colour", "Punch word colour", "primary"], "hk-glow-intro": ["Punch line colour", "Top line colour", "white"]
   };
   function colourRole(styleId) { return COLOUR_ROLES[styleId] || ["Colour"]; }
   function colour2Of(L) { var r = colourRole(L.style); return r[1] ? (L.colour2 || r[2]) : null; }
@@ -109,14 +112,37 @@
 
   /* ================= words + hook text ================= */
   var CASE = "spoken", PUNCT = false;
+  // names kept as written in lowercase looks: the board's names plus every name fixed under "Names to check"
+  function nameWords() { var fx = curFixes() || {}, out = (B.base.proper || []).slice(); Object.keys(fx.casing || {}).forEach(function (k) { out.push(fx.casing[k]); }); (fx.replace || []).forEach(function (r) { if (/[A-Z]/.test(String(r.to || ""))) out.push(String(r.to)); }); return out; }
   function caseText(str, c) {
     var out = c === "upper" ? str.toUpperCase() : (c === "lower" || c === "sentence") ? str.toLowerCase() : str;
+    if (c === "lower") { nameWords().forEach(function (tok) { var re = new RegExp("(^|[^A-Za-z@'])(" + tok.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-z])", "gi"); out = out.replace(re, function (m, a) { return a + tok; }); }); out = out.replace(/(^|[^a-z'])i(?=$|[^a-z])/g, function (m, a) { return a + "I"; }); }
     if (c === "sentence") (B.base.proper || []).forEach(function (tok) { var re = new RegExp("(^|[^A-Za-z@'])(" + tok.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-z])", "gi"); out = out.replace(re, function (m, a) { return a + tok; }); });
     (B.base.protect_case || []).forEach(function (tok) { var re = new RegExp(tok.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi"); out = out.replace(re, tok); });
     return out;
   }
   function W(i) { return B.base.words[i]; }
-  function wt(i) { var t = String(W(i).text); return caseText(PUNCT ? t : t.replace(/[,.!?]$/, ""), CASE); }
+  // display text (caption rules): trailing commas and full stops go, ? ! quotes and apostrophes stay; acronyms stay in caps
+  function wt(i) { var t = String(W(i).text); t = PUNCT ? t : t.replace(/[,.;:]+(?=["\u201d\u2019]?$)/, ""); if (CASE === "lower" && /^[^a-z]*[A-Z][^a-z]*[A-Z][^a-z]*$/.test(t.replace(/['\u2019]s$/, ""))) return t; return caseText(t, CASE); }
+  /* corrections per clip ("Names to check"; the same shape as a job's fixes.json): {replace:[{from, to, punctuation?}], casing:{}}.
+     The words keep their count and timings: a fix lands on the first word it replaces, the rest go blank and are skipped. */
+  function fixKey() { return S.clip || B.base.clip_id || "base"; }
+  function curFixes() { return (S.fixes || {})[fixKey()] || null; }
+  function applyFixes() {
+    var b = B.base; if (!b) return; if (!b._orig) b._orig = b.words;
+    var fx = curFixes(), words = b._orig.map(function (w) { return Object.assign({}, w); }), key = function (x) { return String(x).toLowerCase().replace(/\u2019/g, "'").replace(/[^a-z0-9.'@-]/g, "").replace(/\.+$/, ""); };
+    ((fx && fx.replace) || []).forEach(function (r) {
+      var from = String(r.from || "").split(/\s+/).map(key).filter(Boolean); if (!from.length || r.to == null) return;
+      for (var i = 0; i + from.length <= words.length; i++) {
+        if (!from.every(function (k, j) { return key(b._orig[i + j].text) === k; })) continue;
+        var lastW = b._orig[i + from.length - 1], trail = r.punctuation != null ? r.punctuation : ((String(lastW.text).match(/[,.;:?!]+$/) || [""])[0]);
+        words[i].text = String(r.to) + trail; words[i].end = lastW.end;
+        for (var j = 1; j < from.length; j++) words[i + j].text = "";
+        i += from.length - 1;
+      }
+    });
+    b.words = words;
+  }
   function norm(s) { return String(s).toLowerCase().replace(/[^a-z0-9@']/g, ""); }
   // "I really felt *confident*\nthere was going to be a *demand*" -> lines of tokens, each timed to her spoken word
   function parseHook(txt, seg) {
@@ -161,14 +187,24 @@
     if (L.shadow == null) return B;
     var b2 = Object.create(B); b2.brand = Object.assign({}, B.brand, { shadow: shadowCss(L.shadow) }); return b2;
   }
+  /* a title look that holds for a set time (style.hold [min, max] s, e.g. the glow title 3 to 5 s): from the hook window's
+     start to the first word that starts a phrase inside that range, else the middle of it. studio_render.py: glow_seg(). */
+  function holdSeg(st, sd) {
+    var s0 = sd.segment[0], h = st.hold, ws = (B.base.words || []).filter(function (w) { return String(w.text).trim(); }), end = s0 + (h[0] + h[1]) / 2;
+    for (var i = 1; i < ws.length; i++) { var d = ws[i].t - s0; if (d >= h[0] && d <= h[1] && (/[,.;:?!]$/.test(String(ws[i - 1].text)) || ws[i].t - ws[i - 1].end >= 0.25)) { end = ws[i].t; break; } }
+    return [s0, Math.round(Math.min(B.base.duration || end, end) * 1000) / 1000];
+  }
+  function lookSeg(st, sd) { return st && st.hold ? holdSeg(st, sd) : (st && st.segment) || sd.segment; }
+  function hookTextFor(L) { return S.hookText != null ? S.hookText : (L && L.text) || B.base.hook_text; }
   function makeCtx(L, sd, styleObj, stage) {
     var f = fontDef(L.font || "brand"), sw = swatch(L.colour || "white"), c2 = colour2Of(L), sw2 = c2 ? swatch(c2) : null;
-    var segm = styleObj.segment || sd.segment, BB = boardFor(L);
+    var segm = lookSeg(styleObj, sd), BB = boardFor(L);
     return {
       L: L, f: f, hex: sw.hex, colourId: sw.id, hex2: sw2 ? sw2.hex : null, colour2Id: sw2 ? sw2.id : null, shadow: isLight(sw.hex) ? BB.brand.shadow : "none", seg: segm, card: stage.card, B: BB,
       media: stage.media, backdrop: stage.backdrop, under: stage.under, over: stage.over, safe: B.safe,
+      clipKey: fixKey(), frame1: sd.id === "hook" && (L.timing || "frame1") === "frame1",
       px: function (n) { return n * stage.scale(); },
-      hook: function () { return parseHook(S.hookText, segm); },
+      hook: function () { return parseHook(hookTextFor(L), segm); },
       // a still of the last frame before the cut, so pushes and dissolves can show both shots at once
       freeze: function (parent, css, at) {
         var cut = at == null ? B.base.cuts[0] : at, still = cardFrame(cut - 0.01);
@@ -196,7 +232,7 @@
       var p = B.base.phrases, out = [];
       for (var k = 0; k < p.length; k++) {
         var end = k + 1 < p.length ? p[k + 1] : B.base.words.length, idx = [];
-        for (var i = p[k]; i < end; i++) if (W(i).t < seg[1]) idx.push(i);
+        for (var i = p[k]; i < end; i++) if (W(i).t < seg[1] && String(W(i).text).trim()) idx.push(i);
         if (idx.length) out.push(idx);
       }
       return out;
@@ -262,7 +298,35 @@
   function togglePlay() { if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } ensureMain(); if (video.paused) video.play().catch(function () {}); else video.pause(); }
   function curStyle() { return styleDef(sec(S.sec), look().style); }
   function hasCtl(name) { return sec(S.sec).controls.indexOf(name) >= 0; }
-  function seg() { if (isOwn()) return [0, (live && live.loop) || sec(S.sec).segment[1]]; var st = curStyle(); return (st && st.segment) || sec(S.sec).segment; }
+  // the Hook tab plays the opener and then 3.5 s of the house subtitles taking over (OPENERS.md handover)
+  function seg() {
+    if (isOwn()) return [0, (live && live.loop) || sec(S.sec).segment[1]];
+    var st = curStyle(), sg = lookSeg(st, sec(S.sec));
+    if (S.sec === "hook" && st && !st.preview && !RENDER) return [sg[0], Math.min(B.base.duration || sg[1] + 3.5, sg[1] + 3.5)];
+    return sg;
+  }
+  /* the opener hands over to the house subtitles: the subtitle pick (or the look on the Subtitles tab) starts when the hook
+     clears, in its own place, on the same clock. Renders skip this (each section is its own layer; studio_render.py
+     gives the subtitle layer the hook window as its skip). */
+  function handover(r, hookCtx) {
+    var ssd = sec("subtitles"); if (!ssd) return;
+    var Ls = clone(S.picks.subtitles || S.looks.subtitles || {}), sst = styleDef(ssd, Ls.style); if (!sst || sst.preview || !R[Ls.style]) return;
+    var H0 = hookCtx.seg[1], end = Math.min(B.base.duration || H0 + 3.5, H0 + 3.5); if (end - H0 < 0.5) return;
+    var keepC = CASE, keepP = PUNCT; CASE = Ls.case || "spoken"; PUNCT = !!Ls.punct;
+    var c2 = makeCtx(Ls, ssd, sst, mainStage); c2.seg = [H0, end];
+    var r2; try { r2 = R[Ls.style](c2); } catch (e) { console.error(e); }
+    CASE = keepC; PUNCT = keepP;
+    if (!r2 || !r2.tl) return;
+    if (r2.block) {
+      r2.block.classList.add("block"); over.appendChild(r2.block);
+      var h = 0; Array.prototype.forEach.call(r2.block.querySelectorAll(".inner"), function (c) { h = Math.max(h, c.offsetHeight); }); if (!h) h = r2.block.offsetHeight || 100;
+      var z = B.safe, y = Ls.y == null ? 1325 : Ls.y;
+      r2.block.style.left = z.x0 + "px"; r2.block.style.width = (z.x1 - z.x0) + "px"; r2.block.style.height = h + "px"; r2.block.style.top = Math.round(y - h / 2) + "px";
+    }
+    if (r2.after) try { r2.after(); } catch (e) {}
+    r2.tl.paused(false); r.tl.add(r2.tl, 0);
+    var td = r.teardown; r.teardown = function () { if (td) td(); if (r2.teardown) try { r2.teardown(); } catch (e) {} };
+  }
   var buildToken = 0;
   function fontLoads(f) {
     if (!document.fonts) return Promise.resolve();
@@ -281,6 +345,7 @@
   }
   function mount(L, sd) {
     teardown(); CU.lastRect = null; CU.rectAt = 0;
+    applyFixes();
     CASE = L.case || "spoken"; PUNCT = !!L.punct;
     var st = styleDef(sd, L.style);
     var ctx = makeCtx(L, sd, st, mainStage);
@@ -288,8 +353,9 @@
     if (st && st.preview) { releaseMain(); r = preLook(st); }
     else try { r = R[L.style](ctx); } catch (e) { console.error(e); r = { tl: gsap.timeline({ paused: true }) }; }
     if (r.block) { r.block.classList.add("block"); (r.blockUnder ? under : over).appendChild(r.block); }
+    if (sd.id === "hook" && !(st && st.preview) && !RENDER) handover(r, ctx);
     under.style.filter = over.style.filter = layerShadow(sd, L);
-    addOns(r, L, (st && st.segment) || sd.segment);
+    addOns(r, L, lookSeg(st, sd));
     if (!isOwn()) ensureMain();
     live = r; buildSfx(sd, st, r);
     if (isOwn()) { releaseMain(); $("t-end").textContent = fmt(seg()[1]); }
@@ -827,13 +893,13 @@
     var hb = el("div", "field lead-field");
     hb.innerHTML = '<label for="hook-text">Your hook line</label><textarea id="hook-text" rows="3" spellcheck="true"></textarea><p class="hint">One line per row. Put *stars* round the big word. Every option updates as you type.</p>';
     box.appendChild(hb);
-    var ta = hb.querySelector("textarea"); ta.value = S.hookText == null ? B.base.hook_text : S.hookText;
+    var ta = hb.querySelector("textarea"); ta.value = hookTextFor(look());
     var hT = null; ta.addEventListener("input", function () { S.hookText = ta.value; clearTimeout(hT); hT = setTimeout(function () { changed(); }, 260); });
     var rs = el("div", "hook-chips");
     var b1 = el("button", "chip", "Words as said"); b1.type = "button";
     b1.addEventListener("click", function () { S.hookText = B.base.words.filter(function (w) { return w.t < sec("hook").segment[1]; }).map(function (w) { return w.text; }).join(" ").replace(/,\s*/g, "\n"); ta.value = S.hookText; changed(); });
     var b2 = el("button", "chip", "VIDPOD suggestion"); b2.type = "button";
-    b2.addEventListener("click", function () { S.hookText = null; ta.value = B.base.hook_text; changed(); });
+    b2.addEventListener("click", function () { S.hookText = null; ta.value = hookTextFor(look()); changed(); });
     rs.appendChild(b1); rs.appendChild(b2); hb.appendChild(rs);
   }
   /* ---- colour swatches: brand colours first, then Custom (colour picker plus a checked #RRGGBB field) ---- */
@@ -979,10 +1045,78 @@
       grid.appendChild(seg3("Flash colour", [["white", "White"], ["warm", "Warm"], ["brand", "Brand"]], L.flash || "warm", function (v) { L.flash = v; changed(); renderCustom(); replay(); }));
       var rb2 = el("button", "btn ghost sm", "Replay the join"); rb2.type = "button"; rb2.addEventListener("click", replay); grid.appendChild(rb2);
     }
+    if (S.sec === "hook" && !st.hold) {
+      grpH("Timing");
+      var tm = seg3("When it shows", [["frame1", "From the first frame"], ["spoken", "As it is said"]], L.timing || "frame1", function (v) { L.timing = v; redo(); });
+      tm.classList.add("wide"); tm.appendChild(el("p", "hint", "Top videos have the hook up on the very first frame. Your subtitles take over when it clears.")); grid.appendChild(tm);
+    }
+    if (S.sec === "subtitles" && st.id === "cap-chest-punch") renderEmph(grid, L, grpH);
+    if (S.sec === "subtitles") renderNames(grid, grpH);
     var rs2 = el("button", "reset", "Reset this look"); rs2.type = "button";
     rs2.addEventListener("click", function () { chooseStyle(L.style, true); });
     box.appendChild(rs2);
     syncPosSlider();
+  }
+  /* Emphasis words (SUB-09): the rare lead-in + keyword moments. Chosen from the words by strength (about one every 8 to 12 s);
+     tap one to drop it, tap a suggestion to add it. Kept per clip (emphClip), so a new clip starts from its own best words. */
+  function renderEmph(grid, L, grpH) {
+    var plan = R && K.H && K.H.emphPlan ? K.H.emphPlan(sec("subtitles").segment, L, fixKey(), L.skip) : null; if (!plan) return;
+    grpH("Emphasis words");
+    var box = el("div", "wide"), wrap = el("div", "chips emph-chips");
+    var label = function (x) { var keep = CASE; CASE = L.case || "lower"; var t = x.setup.map(wt).join(" ") + " / " + x.punch.map(wt).join(" "); CASE = keep; return t; };
+    var setList = function (list) { L.emph = list.map(function (x) { return x.key; }).sort(function (a, b) { return a - b; }); L.emphClip = fixKey(); changed(); renderCustom(); };
+    plan.chosen.forEach(function (x) {
+      var c = el("button", "chip on", esc(label(x)) + "<small>" + fmt(x.t) + " &middot; tap to remove</small>"); c.type = "button"; c.setAttribute("aria-pressed", "true");
+      c.addEventListener("click", function () { setList(plan.chosen.filter(function (y) { return y !== x; })); });
+      wrap.appendChild(c);
+    });
+    if (!plan.chosen.length) wrap.appendChild(el("p", "hint", "No emphasis moments. Add one below."));
+    box.appendChild(wrap);
+    if (plan.more.length) {
+      box.appendChild(el("p", "label", "Add one"));
+      var w2 = el("div", "chips");
+      plan.more.forEach(function (x) {
+        var c = el("button", "chip", "+ " + esc(label(x)) + "<small>" + fmt(x.t) + "</small>"); c.type = "button";
+        c.addEventListener("click", function () { setList(plan.chosen.concat([x])); });
+        w2.appendChild(c);
+      });
+      box.appendChild(w2);
+    }
+    box.appendChild(el("p", "hint", "About one every 8 to 12 seconds reads best. The keyword takes your brand colour."));
+    grid.appendChild(box);
+  }
+  /* Names to check: every name in the words (the board's names, capitalised words mid-sentence, @handles, mixed case).
+     Fix a misheard one here: every look (and the render) shows the fix. Saved per clip as the clip's corrections. */
+  function nameList() {
+    var b = B.base, orig = b._orig || b.words, seen = {}, out = [], prop = (b.proper || []).map(norm);
+    orig.forEach(function (w, i) {
+      var raw = String(w.text).replace(/[,.;:?!"\u201d\u2019]+$/, "").replace(/^["\u201c\u2018(]+/, ""); if (!raw || /^I(['\u2019]|$)/.test(raw)) return;
+      var afterStop = i === 0 || /[.?!]["\u201d]?$/.test(String(orig[i - 1].text));
+      var isName = prop.indexOf(norm(raw)) >= 0 || /@/.test(raw) || (/^[A-Z]/.test(raw) && !afterStop) || (/[A-Z]/.test(raw.slice(1)) && /[a-z]/.test(raw)) || (/\d/.test(raw) && /[A-Za-z]/.test(raw));
+      if (!isName || seen[norm(raw)]) return; seen[norm(raw)] = 1; out.push({ raw: raw, t: w.t });
+    });
+    return out;
+  }
+  function renderNames(grid, grpH) {
+    var list = nameList(); if (!list.length) return;
+    grpH("Names to check");
+    var box = el("div", "wide names-box"), fx = curFixes() || { replace: [], casing: {} };
+    list.forEach(function (n) {
+      var cur = (fx.replace || []).filter(function (r) { return r.from === n.raw; })[0];
+      var row = el("label", "name-row"); row.appendChild(el("small", "", fmt(n.t)));
+      var inp = el("input"); inp.type = "text"; inp.value = cur ? cur.to : n.raw; inp.spellcheck = false; inp.setAttribute("aria-label", "Spelling of " + n.raw);
+      var commit = function () {
+        var v = inp.value.trim(); if (!v) { inp.value = cur ? cur.to : n.raw; return; }
+        var F = S.fixes[fixKey()] = curFixes() || { replace: [], casing: {} }; F.replace = (F.replace || []).filter(function (r) { return r.from !== n.raw; }); F.casing = F.casing || {};
+        if (v !== n.raw) { F.replace.push({ from: n.raw, to: v }); F.casing[v.toLowerCase()] = v; } else delete F.casing[v.toLowerCase()];
+        if (!F.replace.length && !Object.keys(F.casing).length) delete S.fixes[fixKey()];
+        save(); changed(); toast(v !== n.raw ? "Fixed: " + n.raw + " is now " + v : "Back to " + n.raw);
+      };
+      inp.addEventListener("change", commit); inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); inp.blur(); } });
+      row.appendChild(inp); box.appendChild(row);
+    });
+    box.appendChild(el("p", "hint", "Check each name is spelt right. Fix one here and every look uses it."));
+    grid.appendChild(box);
   }
   function flashGuide(y) { activeSnap = y; dragging = true; refreshUI(); dragging = false; setTimeout(function () { activeSnap = null; refreshUI(); }, 900); }
   function paintRange(r) { var p = (r.value - r.min) / (r.max - r.min) * 100; r.style.setProperty("--p", p + "%"); }
@@ -994,8 +1128,8 @@
     $("out-pos").textContent = lab;
     Array.prototype.forEach.call(document.querySelectorAll("[data-y]"), function (c) { c.setAttribute("aria-pressed", String(clampY(+c.dataset.y) === L.y)); });
   }
-  var LOOK_KEYS = ["style", "font", "size", "y", "colour", "colour2", "case", "lines", "align", "flash", "wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "shadow", "anim", "backing", "motion", "bg", "speed", "label"];
-  function sameLook(a, b) { return a && b && LOOK_KEYS.every(function (k) { return a[k] === b[k]; }); }
+  var LOOK_KEYS = ["style", "font", "size", "y", "colour", "colour2", "case", "lines", "align", "flash", "wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "shadow", "anim", "backing", "motion", "bg", "speed", "label", "timing", "text", "emphClip"];
+  function sameLook(a, b) { return a && b && LOOK_KEYS.every(function (k) { return a[k] === b[k]; }) && JSON.stringify(a.emph || null) === JSON.stringify(b.emph || null); }
   function updateUse() {
     var ub = $("use-btn"); if (!ub) return;
     var p = S.picks[S.sec], L = look();
@@ -1031,7 +1165,7 @@
       var arr = S.picks[S.sec] || [], i = arr.findIndex(function (x) { return x.style === L.style; });
       if (i >= 0) arr.splice(i, 1); else arr.push({ style: L.style });
       S.picks[S.sec] = arr;
-    } else { S.picks[S.sec] = clone(L); delete S.picks[S.sec].fontTouched; if (S.sec === "hook") S.picks.hook.hookText = S.hookText == null ? B.base.hook_text : S.hookText; }
+    } else { S.picks[S.sec] = clone(L); delete S.picks[S.sec].fontTouched; if (S.sec === "hook") S.picks.hook.hookText = hookTextFor(L); }
     save(); renderTabs(); updateUse(); updateFoot(); markCards();
   }
   function switchSec(id, scroll) {
@@ -1213,6 +1347,8 @@
       if (p.shadow != null) { o.shadow = +p.shadow; o.shadowIs = "strength 0 to 100, soft drop shadow (0 = none)"; }
       if (p.flash && p.style === "tr-lens") o.flash = p.flash;
       if (p.hookText) o.hookText = p.hookText;
+      if (s.id === "hook") o.timing = p.timing || (d.hold ? "frame1" : "frame1");
+      if (s.id === "subtitles") { if (Array.isArray(p.emph)) { o.emph = p.emph; o.emphClip = p.emphClip || null; } if (curFixes()) o.fixes = curFixes(); }
       ["wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "anim", "backing", "motion"].forEach(function (k2) { if (s.controls.indexOf(k2 === "hlStyle" || k2 === "hlColour" || k2 === "hl" ? "highlight" : k2 === "fx" ? "outline" : k2) >= 0 && p[k2] != null) o[k2] = p[k2]; });
       if (o.hlColour) o.hlColourHex = swatch(o.hlColour).hex;
       if (s.controls.indexOf("bg") >= 0) { var bgd = logoBg(p.bg); o.background = p.bg || "white"; o.backgroundHex = bgd.hex; }
@@ -1223,7 +1359,7 @@
     var likes = Object.keys(S.likes).map(function (id) { var d = null; B.sections.forEach(function (s) { var x = styleDef(s, id); if (x) d = x; }); return d ? { style: id, code: d.code, note: S.likes[id].note || "" } : null; }).filter(Boolean);
     var sfx = { on: !!SFX.on, sounds: {} };
     B.sections.forEach(function (s) { var p = S.picks[s.id]; if (!p) return; var st = styleDef(s, (multi(s.id) ? (p[0] || {}).style : p.style)); if (!st) return; var keep = SFX.events, used = SFX.used; buildSfx(s, st, null); sfx.sounds[s.id] = SFX.used.map(function (n) { return { name: n, file: B.sfx.files[n].src, from: B.sfx.files[n].from }; }); SFX.events = keep; SFX.used = used; });
-    return Object.assign(baseFields(), { clip: S.clip || null, sfx: sfx, client: B.client.id, sentAt: new Date().toISOString(), viewer: S.viewer, accessCode: SIGN ? SIGN.code : null, note: $("viewer-note").value.trim(), canvas: "1080x1920", yIs: "centre of the text block, px on 1080x1920", picks: picks, likes: likes });
+    return Object.assign(baseFields(), { clip: S.clip || null, fixes: curFixes(), sfx: sfx, client: B.client.id, sentAt: new Date().toISOString(), viewer: S.viewer, accessCode: SIGN ? SIGN.code : null, note: $("viewer-note").value.trim(), canvas: "1080x1920", yIs: "centre of the text block, px on 1080x1920", picks: picks, likes: likes });
   }
   function finish(ok, text) {
     $("done-title").innerHTML = (ok ? "Sent" : "Saved") + '<span class="dot"></span>';
@@ -1250,7 +1386,7 @@
   $("sheet-close").addEventListener("click", closeReview);
   $("review-btn").addEventListener("click", openReview);
 
-  function save() { local("vidpod-studio-v3-" + B.client.id, JSON.stringify({ looks: S.looks, picks: S.picks, sec: S.sec, hookText: S.hookText, likes: S.likes, vtype: S.vtype, clip: S.clip })); }
+  function save() { local("vidpod-studio-v3-" + B.client.id, JSON.stringify({ looks: S.looks, picks: S.picks, sec: S.sec, hookText: S.hookText, likes: S.likes, vtype: S.vtype, clip: S.clip, fixes: S.fixes })); }
 
   /* ---- buttons ---- */
   $("play").addEventListener("click", togglePlay);
@@ -1317,6 +1453,16 @@
     for (var ch = n.firstChild; ch; ch = ch.nextSibling) { var t = ch.nodeName; if (t === "VIDEO" || t === "AUDIO" || t === "CANVAS" || t === "SCRIPT") continue; c.appendChild(cuClone(ch)); }
     return c;
   }
+  // a plate that a look moves (HOOK-06 headroom, HOOK-09 pull-back): its scale and shift about its origin, in 1080 px, so the
+  // close-up draws the frame where the big preview shows it
+  function cuMap(elm) {
+    try {
+      var cs = getComputedStyle(elm); if (!cs.transform || cs.transform === "none") return null;
+      var m = new DOMMatrix(cs.transform), k = 1080 / (elm.clientWidth || elm.offsetWidth || 1080), o = String(cs.transformOrigin).split(" ").map(parseFloat);
+      return { a: m.a || 1, d: m.d || 1, e: m.e * k, f: m.f * k, ox: (o[0] || 0) * k, oy: (o[1] || 0) * k };
+    } catch (e) { return null; }
+  }
+  function cuSrc(mp, sx, sy, w, h) { if (!mp) return [sx, sy, w, h]; return [mp.ox + (sx - mp.e - mp.ox) / mp.a, mp.oy + (sy - mp.f - mp.oy) / mp.d, w / mp.a, h / mp.d]; }
   function cuRender(now) {
     // a low-rate copy of the main frame: 15 a second on desktop, 5 on a phone, 4 while paused; only while it is on screen
     var gap = !playing() ? 250 : LITE ? 200 : 66;
@@ -1337,15 +1483,15 @@
     if (srcV && !(srcV.readyState >= 2 && srcV.videoWidth) && live && live.preStill && live.preStill.complete && live.preStill.naturalWidth) srcV = live.preStill;
     var srcW = srcV ? (srcV.videoWidth || srcV.naturalWidth || 0) : 0;
     if (srcV && srcW && (srcV.tagName === "IMG" || srcV.readyState >= 2)) {
-      var kv = srcW / 1080, sx = -ox / z, sy = -oy / z;
-      try { g.drawImage(srcV, sx * kv, sy * kv, (vw / z) * kv, (vh / z) * kv, 0, 0, cw, ch); } catch (e) {}
+      var kv = srcW / 1080, r0 = cuSrc(srcV === video ? cuMap(video) : null, -ox / z, -oy / z, vw / z, vh / z);
+      try { g.drawImage(srcV, r0[0] * kv, r0[1] * kv, r0[2] * kv, r0[3] * kv, 0, 0, cw, ch); } catch (e) {}
     }
     // the person cut-out in front of the words (hooks behind the head), as on the big preview
     var fg = $("cu-fg"), gf = fg.getContext("2d"); if (fg.width !== cw || fg.height !== ch) { fg.width = cw; fg.height = ch; }
     gf.clearRect(0, 0, cw, ch);
     if (depthOn && !dFg.hidden && dFg.style.visibility !== "hidden" && dFg.width) {
-      var kf = dFg.width / 1080, sx2 = -ox / z, sy2 = -oy / z;
-      try { gf.drawImage(dFg, sx2 * kf, sy2 * kf, (vw / z) * kf, (vh / z) * kf, 0, 0, cw, ch); } catch (e) {}
+      var kf = dFg.width / 1080, r1 = cuSrc(cuMap(dFg), -ox / z, -oy / z, vw / z, vh / z);
+      try { gf.drawImage(dFg, r1[0] * kf, r1[1] * kf, r1[2] * kf, r1[3] * kf, 0, 0, cw, ch); } catch (e) {}
     }
   }
 
@@ -1543,6 +1689,7 @@
     if (B.clips && B.clips.length) { B.clips[0].base = B.clips[0].base || B.base; S.clip = B.clips[0].id; if (saved.clip && saved.clip !== S.clip) useClip(saved.clip, true); }
     S.viewer = (SIGN && SIGN.name) || local("vidpod-studio-viewer") || "";
     S.hookText = saved.hookText == null ? null : saved.hookText;
+    S.fixes = saved.fixes && typeof saved.fixes === "object" ? saved.fixes : {};
     S.likes = saved.likes || {};
     S.vtype = saved.vtype || ((B.video_types || [])[0] || {}).id || null;
     B.sections.forEach(function (s) {

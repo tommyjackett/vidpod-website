@@ -309,6 +309,9 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 }
 .chip[aria-checked="true"], .chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .chip small { font-weight: 500; opacity: .7; margin-left: 3px; }
+.names-box .name-row { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; }
+.names-box .name-row small { flex: none; width: 34px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.names-box .name-row input { flex: 1; min-width: 0; font: inherit; font-size: 15px; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg); color: var(--fg); }
 .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
 .swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: transparent; padding: 0; font-size: 11px; font-weight: 600; color: var(--muted); min-width: 44px; }
 .swatch i { width: 38px; height: 38px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.14); display: block; }
@@ -658,10 +661,10 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   </form>
 </div>
 
-<script src="studio-looks.js?v=r4b"></script>
-<script src="studio-hooks.js?v=r4b"></script>
+<script src="studio-looks.js?v=r6"></script>
+<script src="studio-hooks.js?v=r6"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r5"></script>
+<script src="studio-core.js?v=r6"></script>
 
 </html>
