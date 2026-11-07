@@ -510,8 +510,8 @@
   var TEXT_SECS = ["subtitles", "hook", "name", "logo"];
   function cardFrame(t) { var fr = B.base.card_frames, src = fr[0].src; fr.forEach(function (f) { if (t >= f.t) src = f.src; }); return src; }
   function buildCard(sd, st) {
-    var land = TEXT_SECS.indexOf(sd.id) >= 0;
-    var btn = el("button", "card " + (land ? "land" : "port")); btn.type = "button"; btn.setAttribute("role", "radio"); btn.dataset.style = st.id;
+    var land = TEXT_SECS.indexOf(sd.id) >= 0, sq = sd.id === "graphics";
+    var btn = el("button", "card " + (land ? "land" : sq ? "sq" : "port")); btn.type = "button"; btn.setAttribute("role", "radio"); btn.dataset.style = st.id;
     btn.setAttribute("aria-label", st.code + " " + st.label);
     var mini = el("div", "mini"), fr = el("div", "frame");
     var bd = el("div", "layer"), img = el("img", "bg"), und = el("div", "layer"), cut = el("img", "cut"), ov = el("div", "layer");
@@ -520,7 +520,7 @@
     mini.appendChild(fr); mini.appendChild(el("span", "picked-mark", I.tick));
     btn.appendChild(mini);
     btn.appendChild(el("div", "meta", '<span class="id">' + esc(st.code) + '</span><span class="nm">' + esc(st.label) + "</span>" + (isOurPick(sd.id, st.id) ? '<span class="our">Our pick</span>' : "")));
-    var c = { btn: btn, mini: mini, fr: fr, img: img, und: und, ov: ov, cut: cut, bd: bd, sd: sd, st: st, tl: null, visible: false, land: land, built: false };
+    var c = { btn: btn, mini: mini, fr: fr, img: img, und: und, ov: ov, cut: cut, bd: bd, sd: sd, st: st, tl: null, visible: false, land: land, sq: sq, built: false };
     btn.addEventListener("click", function () { chooseStyle(st.id); });
     return c;
   }
@@ -600,15 +600,32 @@
     });
     return box;
   }
+  // a graphic: every visible element in the graphic layers that is not full-frame (cards, photos, text), as one box
+  function graphicBox(c, mr, k) {
+    var box = null;
+    [c.und, c.ov].forEach(function (Ly) {
+      Array.prototype.forEach.call(Ly.querySelectorAll("*"), function (n) {
+        var q = n.getBoundingClientRect(); if (q.width < 2 || q.height < 2) return;
+        var w = q.width / k, h = q.height / k; if (w > 1000 && h > 1700) return;
+        var cs = getComputedStyle(n); if (cs.visibility === "hidden" || +cs.opacity < 0.05) return;
+        var x0 = (q.left - mr.left) / k, y0 = (q.top - mr.top) / k, x1 = x0 + w, y1 = y0 + h;
+        if (x1 < 0 || y1 < 0 || x0 > 1080 || y0 > 1920) return;
+        box = box ? { x0: Math.min(box.x0, x0), y0: Math.min(box.y0, y0), x1: Math.max(box.x1, x1), y1: Math.max(box.y1, y1) } : { x0: x0, y0: y0, x1: x1, y1: y1 };
+      });
+    });
+    if (box) { box.x0 = Math.max(0, box.x0); box.y0 = Math.max(0, box.y0); box.x1 = Math.min(1080, box.x1); box.y1 = Math.min(1920, box.y1); }
+    return box;
+  }
   // frame the pill: text options zoom to the words; footage options show the full frame
   function cropCard(c) {
     var w0 = c.mini.clientWidth || (c.land ? 124 : 64), h0 = c.mini.clientHeight || (c.land ? 70 : 114), zFull = w0 / 1080;
-    if (!c.land) { c.fr.style.transform = "scale(" + zFull.toFixed(5) + ")"; return; }
+    if (!c.land && !c.sq) { c.fr.style.transform = "scale(" + zFull.toFixed(5) + ")"; return; }
     c.fr.style.transform = "scale(" + zFull.toFixed(5) + ")";
     var mr = c.mini.getBoundingClientRect(), box = textBox([c.und, c.ov], c.fr, mr.left, mr.top, zFull);
     if (!box) { box = { x0: 140, y0: 700, x1: 940, y1: 1220 }; }
-    var bw = Math.max(c.sd.id === "logo" ? 300 : 560, box.x1 - box.x0), bh = Math.max(60, box.y1 - box.y0), cx = (box.x0 + box.x1) / 2, cy = (box.y0 + box.y1) / 2;
-    var z = Math.max(zFull, Math.min(0.3, (w0 * 0.92) / bw, (h0 * 0.86) / bh));
+    if (c.sq) { var bb = graphicBox(c, mr, zFull); if (bb) box = bb; }
+    var bw = Math.max(c.sd.id === "logo" ? 300 : c.sq ? 420 : 560, box.x1 - box.x0), bh = Math.max(c.sq ? 420 : 60, box.y1 - box.y0), cx = (box.x0 + box.x1) / 2, cy = (box.y0 + box.y1) / 2;
+    var z = Math.max(zFull, Math.min(c.sq ? 0.36 : 0.3, (w0 * 0.92) / bw, (h0 * 0.86) / bh));
     var ox = Math.min(0, Math.max(w0 - 1080 * z, w0 / 2 - cx * z)), oy = Math.min(0, Math.max(h0 - 1920 * z, h0 / 2 - cy * z));
     c.fr.style.transform = "translate(" + ox.toFixed(1) + "px," + oy.toFixed(1) + "px) scale(" + z.toFixed(5) + ")";
   }
@@ -663,7 +680,7 @@
   var SEC_HELP = {
     subtitles: "Runs under everything said. Always centred.", hook: "The first line on screen. Change the words in the box below.",
     name: "Who is speaking, the first time they talk.", logo: "Your logo on a plain background.",
-    graphics: "Pick as many as you like.", moves: "Camera and layout moves. Pick as many as you like.", transitions: "Plays at the join between two moments."
+    graphics: "From VIDPOD's own card library, in your brand. Pick as many as you like.", moves: "Camera and layout moves. Pick as many as you like.", transitions: "Plays at the join between two moments."
   };
   function renderTabs() {
     var t = $("tabs"); t.innerHTML = "";
@@ -683,7 +700,19 @@
       gw.appendChild(row); t.appendChild(gw);
     });
     var sel = t.querySelector('[aria-selected="true"]'); if (sel && t.scrollWidth > t.clientWidth) { var gl = sel.closest(".tgrp"), x = gl ? gl.offsetLeft : sel.offsetLeft; if (x + (gl || sel).offsetWidth > t.scrollLeft + t.clientWidth || x < t.scrollLeft) t.scrollLeft = Math.max(0, x - 16); }
+    if (sel && sel.closest(".tgrp") === t.firstChild) t.scrollLeft = 0;
+    tabFade();
   }
+  /* back to the start: first section, top of the page, preview from the beginning, no safe zone, nothing open */
+  function goStart() {
+    closeMenus(); if ($("stage").classList.contains("full")) setFull(false);
+    S.app = ""; renderCheck(); refreshUI();
+    switchSec(orderedSections()[0].id, false);
+    $("tabs").scrollLeft = 0; tabFade();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  // the section row fades at an edge while there is more to scroll
+  function tabFade() { var t = $("tabs"); if (!t) return; t.classList.toggle("more-l", t.scrollLeft > 4); t.classList.toggle("more-r", t.scrollLeft + t.clientWidth < t.scrollWidth - 4); }
   /* Box style (Motion graphics): the preview keeps the last look; the panel shows the module's container */
   function showBox(on) { $("panel-body").hidden = on; $("mograph-view").hidden = !on; }
   function openBox() {
@@ -964,7 +993,7 @@
   (function () { try { if (window.claude && typeof window.claude.use === "function") Promise.resolve(window.claude.use("assets")).then(function (a) { ASSETS = a || null; renderRef(); }).catch(function () {}); } catch (e) {} })();
   function renderRef() {
     var box = $("ref"); if (!box || !B) return; box.innerHTML = "";
-    var show = (!!ASSETS || !!LOG_URL) && (S.sec === "subtitles" || S.sec === "hook"); box.hidden = !show; if (!show) return;
+    var show = false; box.hidden = true; if (!show) return; // Round 3: off the main path (screenshots go in through the mood board)
     var head = el("div", "ref-head", '<div><b>Seen a look you love?</b><small>Drop a screenshot so VIDPOD can see it. Nothing is built until you ask.</small></div>');
     var pick = el("label", "btn ghost sm ref-pick", "Add screenshot<input type=\"file\" accept=\"image/png,image/jpeg,image/webp,image/gif\" class=\"sr\">");
     head.appendChild(pick); box.appendChild(head);
@@ -1214,7 +1243,7 @@
     CU.last = now;
     var view = $("cu-view"), vw = view.clientWidth, vh = view.clientHeight; if (!vw || !vh) return;
     var big = ($("screen-slot").clientWidth || 260) / 1080, rc = cuRect();
-    var z = Math.max(big, Math.min(big * 2, (vw - 16) / Math.max(rc.w, 1)));
+    var z = Math.min(Math.max(big * 2, vw / 1080 * 1.2), (vw - 20) / Math.max(rc.w, 1), (vh - 14) / Math.max(rc.h, 1)); // the whole text block always fits
     var ox = vw / 2 - rc.x * z, oy = vh / 2 - rc.y * z;
     var lay = $("cu-layers"); lay.style.transform = "translate(" + ox.toFixed(1) + "px," + oy.toFixed(1) + "px) scale(" + z.toFixed(4) + ")";
     var frag = document.createDocumentFragment();
@@ -1452,9 +1481,11 @@
     goSeg(true); rebuild(); requestAnimationFrame(frame);
     setTimeout(showHint, 1500);
     whoLines(); initCloseup(); initFeedback(); initTemplates();
+    $("home").addEventListener("click", goStart);
+    $("tabs").addEventListener("scroll", tabFade, { passive: true }); window.addEventListener("resize", tabFade);
     $("sz-btn").addEventListener("click", function () { openMenu("sz"); }); $("clip-btn").addEventListener("click", function () { openMenu("clip"); });
     if (SIGN) post("Sign-ins", [{ section: "", optionCode: "", label: SIGN.fresh ? "Signed in" : "Came back", settings: { board: B.client.id, hash: location.hash || "", page: location.host || "claude", screen: window.innerWidth + "x" + window.innerHeight }, note: (navigator.userAgent || "").slice(0, 160) }]);
-    window.__studio = { S: S, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
+    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
   }
   /* ---- which board: #atpilates (or #atpilates/hook) opens that client's board; no hash opens the VIDPOD standard board ---- */
   var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions"];

@@ -86,6 +86,10 @@ img { max-width: 100%; display: block; }
   box-sizing: content-box; border-bottom: 1px solid var(--line); background: var(--bg);
 }
 .vp-logo img { height: 20px; width: auto; }
+.home { display: flex; align-items: center; gap: 12px; border: 0; background: transparent; padding: 6px 0; color: var(--fg); }
+.home .name { display: inline-flex; align-items: center; gap: 3px; }
+.home .name svg { width: 13px; height: 13px; opacity: .55; }
+.home:hover .name svg { opacity: 1; }
 .top .name { font-family: var(--font-head); text-transform: uppercase; font-size: 13px; letter-spacing: .01em; white-space: nowrap; }
 .top .sep { width: 1px; height: 20px; background: var(--line); }
 .made-for { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
@@ -98,7 +102,8 @@ img { max-width: 100%; display: block; }
 .wrap { display: block; }
 .stage { padding: 8px var(--gut-r) 10px var(--gut-l); background: var(--bg-2); display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .stage-row { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; }
-.side.l, .side.r { gap: 6px; }
+.side.l, .side.r { gap: 4px; }
+
 .side { display: flex; flex-direction: column; gap: 10px; flex: 0 0 auto; }
 .ibtn {
   width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg); display: grid; place-items: center; padding: 0;
@@ -108,8 +113,8 @@ img { max-width: 100%; display: block; }
 .ibtn[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .ibtn-l { white-space: nowrap; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: center; margin-top: 3px; }
 
-.phone { position: relative; border-radius: 22px; background: #000; padding: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 20px 60px rgba(0,0,0,.20); --ph: min(36svh, 620px); flex: 0 0 auto; }
-@supports not (height: 1svh) { .phone { --ph: min(36vh, 620px); } }
+.phone { position: relative; border-radius: 22px; background: #000; padding: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 20px 60px rgba(0,0,0,.20); --ph: min(28svh, 620px); flex: 0 0 auto; }
+@supports not (height: 1svh) { .phone { --ph: min(28vh, 620px); } }
 .screen-slot { height: var(--ph); aspect-ratio: 9 / 16; position: relative; }
 .screen { position: absolute; inset: 0; border-radius: 17px; overflow: hidden; background: #111; user-select: none; -webkit-user-select: none; touch-action: pan-y; contain: layout paint; }
 .screen > video.main, .screen > canvas, .screen > .media-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -244,6 +249,9 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
   border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity;
 }
 .tabs::-webkit-scrollbar { display: none; }
+.tabs.more-r { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+.tabs.more-l.more-r { -webkit-mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 36px), transparent); }
+.tabs.more-l:not(.more-r) { -webkit-mask-image: linear-gradient(to right, transparent, #000 28px); mask-image: linear-gradient(to right, transparent, #000 28px); }
 .tgrp { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: flex-end; scroll-snap-align: start; padding-right: 8px; margin-right: 8px; border-right: 1px solid var(--line); }
 .tgrp:last-child { border-right: 0; margin-right: 0; }
 .tgrp-l { font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 6px 9px 0; white-space: nowrap; }
@@ -266,7 +274,9 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 }
 .cards::-webkit-scrollbar { display: none; }
 .card { flex: 0 0 auto; width: 124px; scroll-snap-align: start; border: 0; padding: 0; background: transparent; text-align: left; display: flex; flex-direction: column; gap: 4px; }
-.card.port { width: 64px; }
+.card.port { width: 86px; }
+.card.sq { width: 150px; }
+.card.sq .mini { height: 150px; }
 .card .mini { position: relative; width: 100%; height: 70px; border-radius: 10px; overflow: hidden; background: #1a1a1a; box-shadow: 0 0 0 1px var(--line); contain: strict; }
 .card.port .mini { height: auto; aspect-ratio: 9 / 16; }
 .card .frame { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
@@ -363,7 +373,7 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   .card { width: 116px; }
   .seg button { padding: 6px 10px; }
 }
-@media (max-height: 700px) and (max-width: 979px) { .phone { --ph: 32svh; } }
+@media (max-height: 700px) and (max-width: 979px) { .phone { --ph: 27svh; } }
 
 /* ===== desktop: preview left (sticky), panel right ===== */
 @media (min-width: 980px) {
@@ -371,12 +381,15 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   .top .name { font-size: 15px; }
   .vp-logo img { height: 22px; }
   .made-for img { height: 30px; }
-  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(440px, 560px); align-items: start; }
+  .wrap { display: grid; grid-template-columns: minmax(400px, 34vw) minmax(0, 1fr); align-items: start; }
   .stage { position: sticky; top: 0; height: calc(100vh - var(--head-h) - var(--bar-h)); justify-content: center; padding: 18px; gap: 12px; }
-  .phone { --ph: min(calc(100vh - var(--head-h) - var(--bar-h) - 290px), 860px); border-radius: 30px; padding: 8px; }
+  .phone { --ph: min(calc(100vh - var(--head-h) - var(--bar-h) - 300px), 760px); border-radius: 30px; padding: 8px; }
+  .cu-view { height: 150px; }
+  .stage { overflow: hidden; }
   .screen { border-radius: 23px; }
   .ibtn { width: 44px; height: 44px; }
   .panel { border-left: 1px solid var(--line); min-height: calc(100vh - var(--head-h)); }
+  .panel > *, .panel #panel-body > * { max-width: 1100px; }
   .cards { flex-wrap: wrap; overflow: visible; }
   .sec-head { padding-top: 20px; }
   .ctl-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
@@ -456,16 +469,22 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
 .tpl-rework input { flex: 1 1 160px; min-width: 0; font-size: 16px; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; padding: 8px 10px; color: var(--fg); }
 .tpl-empty { font-size: 13px; color: var(--muted); }
 .shadow-row { display: flex; flex-direction: column; gap: 4px; }
+/* Round 3: slimmer rail on phones so it lines up with the smaller preview */
+@media (max-width: 979px) {
+  .ibtn { width: 34px; height: 34px; }
+  .ibtn svg { width: 15px; height: 15px; }
+  .ibtn-l { font-size: 8px; margin-top: 1px; letter-spacing: .06em; }
+  .tabs { scroll-snap-type: none; }
+}
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
 </style>
 
 <header class="top">
-  <a class="vp-logo" href="https://www.vidpod.com.au/" aria-label="VIDPOD">
-    <img class="only-light" src="assets/vidpod/vidpod-logo-light.png" alt="VIDPOD" width="61" height="22">
-    <img class="only-dark" src="assets/vidpod/vidpod-logo-dark.png" alt="" width="61" height="22">
-  </a>
-  <span class="sep" aria-hidden="true"></span>
-  <span class="name">Studio</span>
+  <button type="button" class="home" id="home" aria-label="Back to the start of the studio">
+    <span class="vp-logo"><img class="only-light" src="assets/vidpod/vidpod-logo-light.png" alt="VIDPOD" width="61" height="22"><img class="only-dark" src="assets/vidpod/vidpod-logo-dark.png" alt="" width="61" height="22"></span>
+    <span class="sep" aria-hidden="true"></span>
+    <span class="name"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Studio</span>
+  </button>
   <nav class="hlinks" aria-label="More"><a class="hlink" href="review.html#board">Mood board</a><button type="button" class="hlink" id="fb-btn">Feedback</button></nav>
   <div class="made-for"><span>Made for</span><img class="only-light" id="client-logo" alt=""><img class="only-dark" id="client-logo-dark" alt=""></div>
 </header>
@@ -534,7 +553,6 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
         <div class="mg-card" id="mograph-placeholder"><b>Box style, from The Jackett Ranch, coming</b><small>Photo and footage boxes that move across one big board. This is where it lands.</small></div>
       </div>
     </div>
-    <p class="foot-note">Every look plays on real footage. The code on each option (for example HOOK-04) is how to ask VIDPOD for it.</p>
     <p class="foot-note who-line" id="who-foot"></p>
   </main>
 </div>
