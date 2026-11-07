@@ -669,7 +669,33 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-weight-shift",
+      "how": "Words wait in the light weight at 62 % opacity; on each spoken word fontWeight light to bold and opacity to 1 over 0.1 s power2.out. Group enters scale 0.92 to 1, 0.12 s power3.out.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 64,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "Words wait in the light weight at 62 % opacity; on each spoken word fontWeight light to bold and opacity to 1 over 0.1 s power2.out. Group enters scale 0.92 to 1, 0.12 s power3.out."
+      },
+      "colour_roles": [
+       "Text colour"
+      ]
      }
     },
     {
@@ -703,7 +729,33 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "per-word-rise",
+      "how": "Each word y +0.55em, blur 0.24em to 0, landing 0.12 s after it is spoken; rise 0.74 s on the registry's piecewise landing ease (78 % split, 7 % settle tail).",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 64,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "Each word y +0.55em, blur 0.24em to 0, landing 0.12 s after it is spoken; rise 0.74 s on the registry's piecewise landing ease (78 % split, 7 % settle tail)."
+      },
+      "colour_roles": [
+       "Text colour"
+      ]
      }
     },
     {
@@ -737,7 +789,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "cap.highlight-box",
+      "how": "One rounded box per line group; x/y/width/height tween to the spoken word over 0.12 s power2.out; the word under it switches to the box's ink colour.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 62,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "One rounded box per line group; x/y/width/height tween to the spoken word over 0.12 s power2.out; the word under it switches to the box's ink colour."
+      },
+      "colour_roles": [
+       "Box colour",
+       "Text colour"
+      ]
      }
     },
     {
@@ -771,7 +850,33 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "cap.karaoke-fill / caption-pill-karaoke",
+      "how": "Line appears 0.1 s; each word opacity 0.35 to 1 over 0.08 s linear on its timestamp.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 64,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "Line appears 0.1 s; each word opacity 0.35 to 1 over 0.08 s linear on its timestamp."
+      },
+      "colour_roles": [
+       "Text colour"
+      ]
      }
     },
     {
@@ -805,7 +910,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-editorial-emphasis",
+      "how": "Light weight line; emphasis words in the display face at 1.32em in the hero colour, scale 1.25 to 1 and y 10 to 0 over 0.3 s expo.out; other words fade 0.1 s.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 58,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "Light weight line; emphasis words in the display face at 1.32em in the hero colour, scale 1.25 to 1 and y 10 to 0 over 0.3 s expo.out; other words fade 0.1 s."
+      },
+      "colour_roles": [
+       "Text colour",
+       "Key word colour"
+      ]
      }
     },
     {
@@ -839,7 +971,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "cap.hormozi-pop",
+      "how": "Bold caps; spoken word colour to hero and scale 1.08 over 0.08 s power2.out, back when the next word starts.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 66,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "Bold caps; spoken word colour to hero and scale 1.08 over 0.08 s power2.out, back when the next word starts."
+      },
+      "colour_roles": [
+       "Text colour",
+       "Spoken word colour"
+      ]
      }
     },
     {
@@ -873,7 +1032,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-pill-karaoke",
+      "how": "Pill per phrase; words fill from 55 % mix to ink 0.1 s before each spoken word.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 58,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "Pill per phrase; words fill from 55 % mix to ink 0.1 s before each spoken word."
+      },
+      "colour_roles": [
+       "Pill colour",
+       "Text colour"
+      ]
      }
     },
     {
@@ -907,7 +1093,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-clip-wipe",
+      "how": "clip-path inset wipes each word left to right 0.28 s power2.out on its timestamp; emphasis words to accent; group wipes out 0.22 s stagger 0.03.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1400,
+       "size_px": 58,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Per word on the transcript timestamps (words.json); a line group shows from 0.06 s before its first word until the next group (or 0.6 s after its last word).",
+       "detail": "clip-path inset wipes each word left to right 0.28 s power2.out on its timestamp; emphasis words to accent; group wipes out 0.22 s stagger 0.03."
+      },
+      "colour_roles": [
+       "Text colour",
+       "Key word colour"
+      ]
      }
     }
    ],
@@ -970,7 +1183,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "inline-highlight / hook.headline-bar",
+      "how": "Each line's bar scaleX 0 to 1 from the left over 0.28 s power4.out, its text rises in a mask yPercent 105 to 0 over 0.24 s, lines stagger 0.16 s; holds; fades 0.24 s at the end.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1200,
+       "size_px": 96,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
+       "detail": "Each line's bar scaleX 0 to 1 from the left over 0.28 s power4.out, its text rises in a mask yPercent 105 to 0 over 0.24 s, lines stagger 0.16 s; holds; fades 0.24 s at the end."
+      },
+      "colour_roles": [
+       "Bar colour",
+       "Text colour"
+      ]
      }
     },
     {
@@ -1004,7 +1244,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-editorial-emphasis + cap.stack-build",
+      "how": "Per line: lead words top-left of the hero, follow words bottom-right; small words y 12 to 0 over 0.16 s power2.out; hero scale 1.12 to 1, blur 8 to 0 over 0.2 s expo.out with a hero-colour glow; stacks hard-cut line to line.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1150,
+       "size_px": 220,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
+       "detail": "Per line: lead words top-left of the hero, follow words bottom-right; small words y 12 to 0 over 0.16 s power2.out; hero scale 1.12 to 1, blur 8 to 0 over 0.2 s expo.out with a hero-colour glow; stacks hard-cut line to line."
+      },
+      "colour_roles": [
+       "Big word colour",
+       "Small words colour"
+      ]
      }
     },
     {
@@ -1040,7 +1307,34 @@
        "front layer"
       ],
       "needs_matte": true,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-parallax-layers / hook.behind-subject",
+      "how": "Layers: plate, giant word, person matte, small front line. The giant word is placed by base.face.top: its bottom edge tucks 36 % of its height behind the top of her head, so most of it reads above her. Each giant word scale 1.08 to 1, opacity 0 to 1 over 0.32 s expo.out on its spoken word; stack drifts 1 to 1.03 linear; front line karaoke 0.3 to 1.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 300,
+       "size_px": 240,
+       "placement": "Fixed by the renderer"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
+       "detail": "Layers: plate, giant word, person matte, small front line. The giant word is placed by base.face.top: its bottom edge tucks 36 % of its height behind the top of her head, so most of it reads above her. Each giant word scale 1.08 to 1, opacity 0 to 1 over 0.32 s expo.out on its spoken word; stack drifts 1 to 1.03 linear; front line karaoke 0.3 to 1."
+      },
+      "colour_roles": [
+       "Big word colour",
+       "Text colour"
+      ]
      },
      "no_position": true
     },
@@ -1075,7 +1369,34 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "testimonial-proof-card / cap.boxed-line",
+      "how": "Card scaleY 0 to 1 over 0.24 s power3.out; label lines y 14 to 0 stagger 0.08; quote words type on from 18 % to full on their timestamps.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1250,
+       "size_px": 76,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
+       "detail": "Card scaleY 0 to 1 over 0.24 s power3.out; label lines y 14 to 0 stagger 0.08; quote words type on from 18 % to full on their timestamps."
+      },
+      "colour_roles": [
+       "Key word colour",
+       "Card colour"
+      ]
      }
     },
     {
@@ -1109,7 +1430,33 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "hook.word-by-word",
+      "how": "Every word y 16 to 0 and opacity in over 0.14 s power2.out on its timestamp; emphasis words scale 1.15 to 1 expo.out in the hero colour; holds.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1180,
+       "size_px": 112,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
+       "detail": "Every word y 16 to 0 and opacity in over 0.14 s power2.out on its timestamp; emphasis words scale 1.15 to 1 expo.out in the hero colour; holds."
+      },
+      "colour_roles": [
+       "Text colour"
+      ]
      }
     },
     {
@@ -1143,7 +1490,33 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "titlecard-lockup / hook.title-card-fade",
+      "how": "Lines opacity, y 22 to 0, letter-spacing 0.06em to 0 and blur 10 to 0 over 1.1 s power2.out, 0.28 s apart; accent rule scaleX 0 to 1 over 0.7 s.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1180,
+       "size_px": 132,
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Across the hook segment; words key off their spoken timestamps; the block fades out 0.3 s before the segment ends.",
+       "detail": "Lines opacity, y 22 to 0, letter-spacing 0.06em to 0 and blur 10 to 0 over 1.1 s power2.out, 0.28 s apart; accent rule scaleX 0 to 1 over 0.7 s."
+      },
+      "colour_roles": [
+       "Text colour"
+      ]
      }
     }
    ],
@@ -1192,7 +1565,28 @@
        "front layer"
       ],
       "needs_matte": true,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "caption-parallax-layers",
+      "how": "Plate, word, matte, front. Word scale 1.08 to 1 over 0.32 s expo.out on 'Kew', then drift 1 to 1.03 linear.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Plate, word, matte, front. Word scale 1.08 to 1 over 0.32 s expo.out on 'Kew', then drift 1 to 1.03 linear."
+      }
      }
     },
     {
@@ -1223,7 +1617,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "overlay",
+      "how": "As MOVE-01 with the word on the front layer and a soft shadow.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "As MOVE-01 with the word on the front layer and a soft shadow."
+      }
      }
     },
     {
@@ -1255,7 +1670,28 @@
        "studio clip"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "left-glass-popout (Nate kit) reframe",
+      "how": "Plate wrapper x -282 px and scale 0.7 about 50% 45% over 0.6 s power3.inOut, corners round to 5 %; brand ground behind; studio window x +140 to 0 over 0.55 s power3.out; reverse at the end.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Plate wrapper x -282 px and scale 0.7 about 50% 45% over 0.6 s power3.inOut, corners round to 5 %; brand ground behind; studio window x +140 to 0 over 0.55 s power3.out; reverse at the end."
+      }
      }
     },
     {
@@ -1286,7 +1722,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "Jackett engine cut zoom",
+      "how": "Scale 1 to 1.03 linear to the cut, an instant set to 1.08 on the cut frame, then 1.08 to 1.11 linear; origin on her face (50% 28%).",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.0,
+        8.8
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Scale 1 to 1.03 linear to the cut, an instant set to 1.08 on the cut frame, then 1.08 to 1.11 linear; origin on her face (50% 28%)."
+      }
      }
     },
     {
@@ -1318,7 +1775,28 @@
        "studio clip"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "zoom-through-transition / cut-the-curve",
+      "how": "Her scale 1 to 2.4 with blur 0 to 14 over 0.6 s power3.in into the cut; studio scale 1.6 to 1, blur 14 to 0 over 0.6 s power3.out; back the same way 2.8 s later.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        4.6,
+        10.4
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Her scale 1 to 2.4 with blur 0 to 14 over 0.6 s power3.in into the cut; studio scale 1.6 to 1, blur 14 to 0 over 0.6 s power3.out; back the same way 2.8 s later."
+      }
      }
     },
     {
@@ -1350,7 +1828,28 @@
        "studio clip"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "split-screen",
+      "how": "Studio half yPercent 100 to 0 over 0.5 s power3.out, an 8 px brand line scaleX 0 to 1 over 0.4 s; reverse 0.45 s power3.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Studio half yPercent 100 to 0 over 0.5 s power3.out, an 8 px brand line scaleX 0 to 1 over 0.4 s; reverse 0.45 s power3.in."
+      }
      }
     },
     {
@@ -1382,7 +1881,28 @@
        "brand shape"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "pilates-alisha-option1-vertical-v2 arch push + 8-arch travel",
+      "how": "Pure function of time. Front arch (780 wide, top 170, radius 390) rises y 1500 to 0 over 1.15 s power3.out while she frames to 0.86 about the bottom centre. Camera z 0 to 4.75 over 2.75 s sine.inOut; arch j at depth 0.55j scales 1/(1+depth-z) about (540,640), hidden past 7; walls are box-shadow spreads stepping cream to warm. She rides the push and leaves left (power2.in, 0.6 s). Studio window at depth 4.83, stat card at 5.83 (push 1.1 s power2.inOut), odometer roll 0.9 s power2.inOut, warm flare back to her.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Pure function of time. Front arch (780 wide, top 170, radius 390) rises y 1500 to 0 over 1.15 s power3.out while she frames to 0.86 about the bottom centre. Camera z 0 to 4.75 over 2.75 s sine.inOut; arch j at depth 0.55j scales 1/(1+depth-z) about (540,640), hidden past 7; walls are box-shadow spreads stepping cream to warm. She rides the push and leaves left (power2.in, 0.6 s). Studio window at depth 4.83, stat card at 5.83 (push 1.1 s power2.inOut), odometer roll 0.9 s power2.inOut, warm flare back to her."
+      }
      }
     },
     {
@@ -1413,7 +1933,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "reframe",
+      "how": "Plate x +190 px, scale 1.1 over 0.64 s power3.inOut; text lines x -90 to 0 over 0.3 s power3.out stagger 0.13 (Jackett stacked-lines entry).",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
+       "detail": "Plate x +190 px, scale 1.1 over 0.64 s power3.inOut; text lines x -90 to 0 over 0.3 s power3.out stagger 0.13 (Jackett stacked-lines entry)."
+      }
      }
     }
    ],
@@ -1460,7 +2001,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "03-atpilates/cards/tier2/t2-stat-card",
+      "how": "Card y 420 to 0, rotation -6 to -2 over 0.7 s power3.out; number parts back.out(1.5) 0.28 s apart; line and rule fade up; card falls 0.4 s power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Card y 420 to 0, rotation -6 to -2 over 0.7 s power3.out; number parts back.out(1.5) 0.28 s apart; line and rule fade up; card falls 0.4 s power2.in."
+      }
      }
     },
     {
@@ -1491,7 +2053,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "02-kallaway t1-stat-odometer",
+      "how": "Rule scaleX in 0.5 s; number y 40 to 0 over 0.6 s power3.out; changing digits are vertical strips that roll 0.9 s power2.inOut while the label swaps.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Rule scaleX in 0.5 s; number y 40 to 0 over 0.6 s power3.out; changing digits are vertical strips that roll 0.9 s power2.inOut while the label swaps."
+      }
      }
     },
     {
@@ -1522,7 +2105,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "01-vox-explainer t2-lb-pullquote",
+      "how": "Arch (brand shape) y 1100 to 0 over 1.25 s power3.out; quote mark, line and label fade up stagger 0.14; arch drops 0.6 s power3.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Arch (brand shape) y 1100 to 0 over 1.25 s power3.out; quote mark, line and label fade up stagger 0.14; arch drops 0.6 s power3.in."
+      }
      }
     },
     {
@@ -1552,7 +2156,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "01-vox-explainer t1-section-numeral",
+      "how": "Pane clip-path wipes up 0.6 s power3.inOut; ghost numeral scale 1.12 to 1 over 2.4 s; title rises in a mask 0.6 s power4.out; rule expo.inOut.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Pane clip-path wipes up 0.6 s power3.inOut; ghost numeral scale 1.12 to 1 over 2.4 s; title rises in a mask 0.6 s power4.out; rule expo.inOut."
+      }
      }
     },
     {
@@ -1581,7 +2206,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "01-vox-explainer t1-section-classified + Jackett board",
+      "how": "One board world, camera {cx,cy,z,r}: 0.7 s power2.inOut moves between pins at z 0.92 with r = -tilt*0.6, linear hold drift (+0.035 z); each photo pins in scale 1.7 rot +10 to 1 over 0.22 s power4.in, pushpin and shadow 16 26 40; pulls back to z 0.42.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "One board world, camera {cx,cy,z,r}: 0.7 s power2.inOut moves between pins at z 0.92 with r = -tilt*0.6, linear hold drift (+0.035 z); each photo pins in scale 1.7 rot +10 to 1 over 0.22 s power4.in, pushpin and shadow 16 26 40; pulls back to z 0.42."
+      }
      }
     },
     {
@@ -1613,7 +2259,28 @@
        "studio clip"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "custom live-footage window",
+      "how": "Card scale 0.6 to 1, y 80 to 0, rotation 4 to -3 over 0.6 s back.out(1.4); live studio clip inside; slow 1 to 1.02 drift; out 0.35 s.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Card scale 0.6 to 1, y 80 to 0, rotation 4 to -3 over 0.6 s back.out(1.4); live studio clip inside; slow 1 to 1.02 drift; out 0.35 s."
+      }
      }
     },
     {
@@ -1642,7 +2309,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "02-kallaway t1-overview-checklist",
+      "how": "Card scaleY in 0.45 s; each row x -30 to 0, dot back.out(1.6), tick path dashoffset 1 to 0 over 0.3 s, rows 0.7 s apart.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Card scaleY in 0.45 s; each row x -30 to 0, dot back.out(1.6), tick path dashoffset 1 to 0 over 0.3 s, rows 0.7 s apart."
+      }
      }
     },
     {
@@ -1671,7 +2359,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "02-kallaway t2-lt-geopin",
+      "how": "Streets draw (dashoffset) 0.8 s staggered; route draws linear 1.0 s; pin y -140 to 0 back.out(1.3); ripple ring; map leans in 1 to 1.18 over 2.2 s power2.inOut.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Streets draw (dashoffset) 0.8 s staggered; route draws linear 1.0 s; pin y -140 to 0 back.out(1.3); ripple ring; map leans in 1 to 1.18 over 2.2 s power2.inOut."
+      }
      }
     },
     {
@@ -1700,7 +2409,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "Jackett tape + slam",
+      "how": "Each photo scale 2 to 1 with rotation over 0.18 s power4.in, 0.55 s apart; tape strips on opposite corners at -38 deg; exit drops y 1900 with rotation 0.5 s power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Each photo scale 2 to 1 with rotation over 0.18 s power4.in, 0.55 s apart; tape strips on opposite corners at -38 deg; exit drops y 1900 with rotation 0.5 s power2.in."
+      }
      }
     },
     {
@@ -1730,7 +2460,28 @@
        "studio clip"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "Jackett Ranch board engine",
+      "how": "Pure function of time: world transform translate(540,960) rotate(r) scale(z) translate(-cx,-cy); her video is slot 0, given the same camera transform so board and footage move as one. Pull to z 0.84 and travel to the studio slot, then the stat slot, then back and push to z 1.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Pure function of time: world transform translate(540,960) rotate(r) scale(z) translate(-cx,-cy); her video is slot 0, given the same camera transform so board and footage move as one. Pull to z 0.84 and travel to the studio slot, then the stat slot, then back and push to z 1."
+      }
      }
     },
     {
@@ -1760,7 +2511,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "01-vox-explainer t2-lb-pullquote / testimonial-proof-card",
+      "how": "Plate brightness to 0.5 and blur 16 over 0.5 s; opening quote mark scale 0.9 to 1 with y 30 to 0 over 0.5 s power3.out; each line rises in a mask 0.5 s power4.out, 0.32 s apart; closing mark, rule (expo.inOut), name and role follow.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "Plate brightness to 0.5 and blur 16 over 0.5 s; opening quote mark scale 0.9 to 1 with y 30 to 0 over 0.5 s power3.out; each line rises in a mask 0.5 s power4.out, 0.32 s apart; closing mark, rule (expo.inOut), name and role follow."
+      }
      }
     },
     {
@@ -1791,7 +2563,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "02-kallaway t1-section-quoteopen",
+      "how": "As GFX-11 on a full brand ground that fades in 0.45 s and out 0.4 s.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        6.68
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "As GFX-11 on a full brand ground that fades in 0.45 s and out 0.4 s."
+      }
      }
     },
     {
@@ -1820,7 +2613,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "custom",
+      "how": "A 10 px rounded track at the bottom of the safe area; the accent fill scaleX 0 to 1 linear over the whole clip.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        11.64
+       ],
+       "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
+       "detail": "A 10 px rounded track at the bottom of the safe area; the accent fill scaleX 0 to 1 linear over the whole clip."
+      }
      }
     }
    ],
@@ -1881,7 +2695,35 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "lt-clean-bar",
+      "how": "Card clip-path inset(0 100% 0 0) to 0 over 0.55 s power3.out; tab scaleY 0 to 1 over 0.45 s power2.out at +0.18 s; name and role y 22 to 0, opacity in, 0.5 s power3.out at +0.24 and +0.34 s. Exit: card y 18, opacity 0 over 0.35 s power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1380,
+       "size_px": 68,
+       "align": "left",
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Enters at base.name_at (+0.1 s), holds, exits 0.75 s before the segment ends.",
+       "detail": "Card clip-path inset(0 100% 0 0) to 0 over 0.55 s power3.out; tab scaleY 0 to 1 over 0.45 s power2.out at +0.18 s; name and role y 22 to 0, opacity in, 0.5 s power3.out at +0.24 and +0.34 s. Exit: card y 18, opacity 0 over 0.35 s power2.in."
+      },
+      "colour_roles": [
+       "Tab colour",
+       "Card colour"
+      ]
      }
     },
     {
@@ -1915,7 +2757,35 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "lt-soft-pill",
+      "how": "Pill scale 0.88 to 1, y 18 to 0, opacity in over 0.55 s back.out(1.7); dot scale 0 to 1 over 0.4 s back.out(3) at +0.3 s; name then role x -10 to 0 over 0.45 s power3.out at +0.32 and +0.4 s. Exit: pill scale 0.94, y 14, opacity 0 over 0.35 s power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1380,
+       "size_px": 62,
+       "align": "left",
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Enters at base.name_at (+0.1 s), holds, exits 0.75 s before the segment ends.",
+       "detail": "Pill scale 0.88 to 1, y 18 to 0, opacity in over 0.55 s back.out(1.7); dot scale 0 to 1 over 0.4 s back.out(3) at +0.3 s; name then role x -10 to 0 over 0.45 s power3.out at +0.32 and +0.4 s. Exit: pill scale 0.94, y 14, opacity 0 over 0.35 s power2.in."
+      },
+      "colour_roles": [
+       "Dot colour",
+       "Pill colour"
+      ]
      }
     },
     {
@@ -1949,7 +2819,35 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "lt-dark-card",
+      "how": "Card y 60 to 0, opacity in over 0.5 s power3.out; name y 14 to 0 over 0.45 s at +0.16 s; underline scaleX 0 to 1 over 0.5 s power4.out at +0.32 s; role fades in 0.45 s at +0.46 s. Exit: card y 24, opacity 0 over 0.35 s power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1380,
+       "size_px": 66,
+       "align": "left",
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Enters at base.name_at (+0.1 s), holds, exits 0.75 s before the segment ends.",
+       "detail": "Card y 60 to 0, opacity in over 0.5 s power3.out; name y 14 to 0 over 0.45 s at +0.16 s; underline scaleX 0 to 1 over 0.5 s power4.out at +0.32 s; role fades in 0.45 s at +0.46 s. Exit: card y 24, opacity 0 over 0.35 s power2.in."
+      },
+      "colour_roles": [
+       "Line colour",
+       "Card colour"
+      ]
      }
     },
     {
@@ -1983,7 +2881,35 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "lt-accent-underline",
+      "how": "Name y 28 to 0 over 0.55 s power3.out; rule scaleX 0 to 1 over 0.5 s power4.out at +0.2 s; role y 16 to 0 at +0.36 s. Exit: role fades, rule retracts, name lifts 16 px, power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1380,
+       "size_px": 92,
+       "align": "left",
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Enters at base.name_at (+0.1 s), holds, exits 0.75 s before the segment ends.",
+       "detail": "Name y 28 to 0 over 0.55 s power3.out; rule scaleX 0 to 1 over 0.5 s power4.out at +0.2 s; role y 16 to 0 at +0.36 s. Exit: role fades, rule retracts, name lifts 16 px, power2.in."
+      },
+      "colour_roles": [
+       "Line colour",
+       "Text colour"
+      ]
      }
     },
     {
@@ -2017,7 +2943,35 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "lt-mask-reveal",
+      "how": "Sweep opacity in 0.12 s, then x 0 to the name width over 0.55 s power2.inOut; name clip-path inset(0 100% 0 0) to 0 over 0.5 s power2.inOut behind it; sweep fades at +0.5 s; role y 14 to 0 over 0.5 s at +0.45 s. Exit: name un-wipes to the right 0.4 s power2.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1380,
+       "size_px": 92,
+       "align": "left",
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Enters at base.name_at (+0.1 s), holds, exits 0.75 s before the segment ends.",
+       "detail": "Sweep opacity in 0.12 s, then x 0 to the name width over 0.55 s power2.inOut; name clip-path inset(0 100% 0 0) to 0 over 0.5 s power2.inOut behind it; sweep fades at +0.5 s; role y 14 to 0 over 0.5 s at +0.45 s. Exit: name un-wipes to the right 0.4 s power2.in."
+      },
+      "colour_roles": [
+       "Sweep colour",
+       "Text colour"
+      ]
      }
     },
     {
@@ -2051,7 +3005,35 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "lt-stack-bars",
+      "how": "Name bar clip-path wipes in from the left over 0.5 s power4.out; role bar wipes in from the right over 0.5 s power4.out at +0.24 s. Exit: role bar then name bar wipe back out, power3.in.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "y_centre_px": 1380,
+       "size_px": 70,
+       "align": "left",
+       "placement": "Block centred horizontally in the safe box at its centre y; the client can move it (snaps Top 420, Centre 960, Chest 1150, Lower 1400)"
+      },
+      "timings": {
+       "segment_s": [
+        6.68,
+        11.64
+       ],
+       "rule": "Enters at base.name_at (+0.1 s), holds, exits 0.75 s before the segment ends.",
+       "detail": "Name bar clip-path wipes in from the left over 0.5 s power4.out; role bar wipes in from the right over 0.5 s power4.out at +0.24 s. Exit: role bar then name bar wipe back out, power3.in."
+      },
+      "colour_roles": [
+       "Role bar colour",
+       "Name bar colour"
+      ]
      }
     }
    ],
@@ -2107,7 +3089,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "Scale 0.12 to 1 over 0.8 s back.out(2.6), opacity in over 0.12 s; hold 1 s; fade out 0.3 s; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "Scale 0.12 to 1 over 0.8 s back.out(2.6), opacity in over 0.12 s; hold 1 s; fade out 0.3 s; loop."
+      }
      }
     },
     {
@@ -2139,7 +3143,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "Scale 0.45 to 1 and opacity 0 to 1 over 1.3 s power3.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "Scale 0.45 to 1 and opacity 0 to 1 over 1.3 s power3.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2171,7 +3197,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "x from off the left edge to 0 over 1.1 s expo.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "x from off the left edge to 0 over 1.1 s expo.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2203,7 +3251,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "x from off the right edge to 0 over 1.1 s expo.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "x from off the right edge to 0 over 1.1 s expo.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2235,7 +3305,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "y from above the frame to 0 over 1.1 s expo.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "y from above the frame to 0 over 1.1 s expo.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2267,7 +3359,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "y from below the frame to 0 over 1.1 s expo.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "y from below the frame to 0 over 1.1 s expo.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2299,7 +3413,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "Opacity 0 to 1 over 1.4 s sine.inOut; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "Opacity 0 to 1 over 1.4 s sine.inOut; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2331,7 +3467,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "Blur 36 px to 0, scale 1.06 to 1, opacity 0 to 1 over 1.4 s power2.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "Blur 36 px to 0, scale 1.06 to 1, opacity 0 to 1 over 1.4 s power2.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2363,7 +3521,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "Rotation -270 to 0, scale 0.2 to 1, opacity in over 1.3 s power3.out; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "Rotation -270 to 0, scale 0.2 to 1, opacity in over 1.3 s power3.out; hold; fade out; loop."
+      }
      }
     },
     {
@@ -2395,7 +3575,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "logo-outro (draw-on idea), VIDPOD build",
+      "how": "SVG mark (brand.twin_circle): every path gets pathLength 1 and a stroke in the logo colour; stroke-dashoffset 1 to 0 over 1.8 s power1.inOut, 0.08 s stagger; fill fades in over 0.5 s at +1.6 s while the stroke fades. PNG-only logo: clip-path wipe left to right over 1.6 s power2.inOut with a thin leading line.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "SVG mark (brand.twin_circle): every path gets pathLength 1 and a stroke in the logo colour; stroke-dashoffset 1 to 0 over 1.8 s power1.inOut, 0.08 s stagger; fill fades in over 0.5 s at +1.6 s while the stroke fades. PNG-only logo: clip-path wipe left to right over 1.6 s power2.inOut with a thin leading line."
+      }
      }
     },
     {
@@ -2427,7 +3629,29 @@
        "logo"
       ],
       "needs_matte": false,
-      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold."
+      "final_render": "Render the renderer alone at 1080x1920 (or 1920x1080) on its plain background, or with --alpha over the end of the edit; speed scales every move (slow x1.5, fast x0.62), then a 1 s hold.",
+      "registry": "custom",
+      "how": "CSS mask: linear-gradient(100deg, opaque 45 %, clear 55 %), mask-size 300 %, mask-position x 100 % to 0 % over 1.3 s power2.inOut; logo x 30 to 0 with it; hold; fade out; loop.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "size_px": 680,
+       "placement": "Logo centred on its own background"
+      },
+      "timings": {
+       "segment_s": [
+        0,
+        3.6
+       ],
+       "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
+       "detail": "CSS mask: linear-gradient(100deg, opaque 45 %, clear 55 %), mask-size 300 %, mask-position x 100 % to 0 % over 1.3 s power2.inOut; logo x 30 to 0 with it; hold; fade out; loop."
+      }
      }
     }
    ],
@@ -2472,7 +3696,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": null,
+      "how": "None.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "None."
+      }
      }
     },
     {
@@ -2501,7 +3746,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "editorial-flash-overlay + 02-kallaway t2-lt-lensbar",
+      "how": "16 frames, cut on frame 5. Footage brightness 1 to 3.2, contrast to 0.78, saturation to 0.6 over 4 f power2.in; incoming 3.0 back to 1 over 10 f expo.out. Streak (core 2400x14, halo 2600x80, 360 px hot spot, screen blend) scaleX 0.15 to 1.1 over 3 f, then fades 10 f while creeping to 1.25 and sliding 80 px; 4 ghosts on the line through the centre; wash 0 to 0.55 to 0.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "16 frames, cut on frame 5. Footage brightness 1 to 3.2, contrast to 0.78, saturation to 0.6 over 4 f power2.in; incoming 3.0 back to 1 over 10 f expo.out. Streak (core 2400x14, halo 2600x80, 360 px hot spot, screen blend) scaleX 0.15 to 1.1 over 3 f, then fades 10 f while creeping to 1.25 and sliding 80 px; 4 ghosts on the line through the centre; wash 0 to 0.55 to 0."
+      }
      }
     },
     {
@@ -2528,7 +3794,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "light-flare (03-atpilates)",
+      "how": "Warm wash 0 to 0.5 over 0.28 s sine.in into the cut, 0.5 s sine.out after; a 3240 px 100 deg light band x -2020 to -140 over 0.76 s sine.inOut, peak 0.55.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Warm wash 0 to 0.5 over 0.28 s sine.in into the cut, 0.5 s sine.out after; a 3240 px 100 deg light band x -2020 to -140 over 0.76 s sine.inOut, peak 0.55."
+      }
      }
     },
     {
@@ -2555,7 +3842,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "flash-through-white (retimed)",
+      "how": "Warm white 0 to 0.92 over 2 f, decay 9 f expo.out; footage brightness to 2.2 and back.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Warm white 0 to 0.92 over 2 f, decay 9 f expo.out; footage brightness to 2.2 and back."
+      }
      }
     },
     {
@@ -2583,7 +3891,28 @@
        "freeze frame of the outgoing shot"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "transitions push (catalog)",
+      "how": "Pure function of time: the last frame before the cut is held as a still; from the cut the still x 0 to -1080 and the plate x +1080 to 0 over 0.42 s power3.inOut with a fine brand edge between them.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Pure function of time: the last frame before the cut is held as a still; from the cut the still x 0 to -1080 and the plate x +1080 to 0 over 0.42 s power3.inOut with a fine brand edge between them."
+      }
      }
     },
     {
@@ -2610,7 +3939,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "custom (brand splash)",
+      "how": "A skewed (-14 deg) accent band with cream edges x -2200 to -320 over 0.3 s power3.in, covers the cut, then exits x 1700 over 0.38 s power3.out.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "A skewed (-14 deg) accent band with cream edges x -2200 to -320 over 0.3 s power3.in, covers the cut, then exits x 1700 over 0.38 s power3.out."
+      }
      }
     },
     {
@@ -2637,7 +3987,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "whip-pan-cut",
+      "how": "x 0 to -200 px with scale 1.4 and blur 22 over 0.16 s power3.in; cut; +200 to 0 over 0.2 s power3.out.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "x 0 to -200 px with scale 1.4 and blur 22 over 0.16 s power3.in; cut; +200 to 0 over 0.2 s power3.out."
+      }
      }
     },
     {
@@ -2664,7 +4035,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "zoom-through-transition",
+      "how": "Scale 1 to 1.25, blur 0 to 12 over 0.22 s power4.in; cut; 1.25 to 1 over 0.3 s power4.out (mirrored eases match speed).",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Scale 1 to 1.25, blur 0 to 12 over 0.22 s power4.in; cut; 1.25 to 1 over 0.3 s power4.out (mirrored eases match speed)."
+      }
      }
     },
     {
@@ -2692,7 +4084,28 @@
        "freeze frame of the outgoing shot"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "blur cross-dissolve",
+      "how": "Plate blurs 0 to 8 px over the last 0.2 s; from the cut the held still fades 1 to 0 while blurring 8 to 22 px and the new shot sharpens 16 to 0 px, 0.55 s sine.inOut.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Plate blurs 0 to 8 px over the last 0.2 s; from the cut the held still fades 1 to 0 while blurring 8 to 22 px and the new shot sharpens 16 to 0 px, 0.55 s sine.inOut."
+      }
      }
     },
     {
@@ -2719,7 +4132,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip."
+      "final_render": "Same renderer in a 1080x1920 HyperFrames composition seeked to clip time; --alpha renders the overlay as a transparent PNG sequence, --burn composites over the clip.",
+      "registry": "dip-to-color",
+      "how": "Accent field 0 to 1 over 0.26 s sine.in into the cut, logo shows for 0.24 s, field back to 0 over 0.34 s sine.out.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Accent field 0 to 1 over 0.26 s sine.in into the cut, logo shows for 0.24 s, field back to 0 over 0.34 s sine.out."
+      }
      }
     },
     {
@@ -2746,7 +4180,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "light-leak / organic-light-leak-overlay",
+      "how": "Three radial blobs (screen) enter from the top right and drift 30 f sine.inOut at different speeds, peak 0.7 to 0.85 at the cut (frame 12); footage brightness 1.4 at the peak.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "Three radial blobs (screen) enter from the top right and drift 30 f sine.inOut at different speeds, peak 0.7 to 0.85 at the cut (frame 12); footage brightness 1.4 at the peak."
+      }
      }
     },
     {
@@ -2773,7 +4228,28 @@
        "overlay layer"
       ],
       "needs_matte": false,
-      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout."
+      "final_render": "Load the same renderer in a 1080x1920 HyperFrames composition (gsap timeline seeked to clip time), feed board.json + picks + word timings, render a transparent PNG sequence (--alpha) or composite over the clip (--burn). Matte styles composite text between the plate and the matte cutout.",
+      "registry": "grid-pixelate-wipe (adapted)",
+      "how": "40 slats scaleX 0 to 1 from the left, 4 f power3.inOut, staggered across 7 f; cut; close from the right; old shot dims to 60 %.",
+      "framing": {
+       "canvas": "1080x1920",
+       "safe_box": {
+        "x0": 135,
+        "x1": 945,
+        "y0": 250,
+        "y1": 1500,
+        "note": "Centred and symmetric. Clears the right-hand buttons on Reels, TikTok and Shorts (x 130 to 950) and stays above the name and caption (y 1500) and below the top bar (y 250). Measured from assets/mock-ui and TEMPLATES/social-safe-zones/safe-zones.json."
+       },
+       "placement": "Full frame (footage and board moves)"
+      },
+      "timings": {
+       "segment_s": [
+        5.4,
+        8.4
+       ],
+       "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
+       "detail": "40 slats scaleX 0 to 1 from the left, 4 f power3.inOut, staggered across 7 f; cut; close from the right; old shot dims to 60 %."
+      }
      }
     }
    ],
@@ -2978,5 +4454,53 @@
  "scope_notes": {
   "any": "House style: the same on every video, whatever the type.",
   "type": "Changes with the type of video."
+ },
+ "vidpod_pick": {
+  "subtitles": {
+   "style": "cap-weight-shift",
+   "font": "brand",
+   "size": 64,
+   "y": 1400,
+   "colour": "white",
+   "case": "spoken",
+   "lines": 1
+  },
+  "hook": {
+   "style": "hook-serif",
+   "font": "brand",
+   "size": 132,
+   "y": 1180,
+   "colour": "white",
+   "case": "spoken"
+  },
+  "moves": [
+   {
+    "style": "move-punch"
+   }
+  ],
+  "graphics": [
+   {
+    "style": "gfx-quote"
+   }
+  ],
+  "name": {
+   "style": "lt-soft-pill",
+   "font": "brand",
+   "size": 62,
+   "y": 1380,
+   "colour": "primary",
+   "case": "spoken",
+   "align": "left"
+  },
+  "logo": {
+   "style": "logo-fade",
+   "size": 680,
+   "bg": "white",
+   "speed": "normal",
+   "label": false
+  },
+  "transitions": {
+   "style": "tr-dissolve"
+  }
  }
 }

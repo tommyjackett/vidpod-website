@@ -145,15 +145,75 @@ img { max-width: 100%; display: block; }
 /* PiP: when the preview scrolls away on a phone, the same live screen docks small in the corner */
 /* now-playing dock: when the big preview scrolls away on a phone, the live screen docks small under the tabs,
    inside the sticky header, so it never sits on top of options (they scroll under the header like any app) */
-.screen.pip { position: fixed; inset: auto; left: var(--gut-l); top: calc(var(--tabs-h) + 8px); height: 124px; width: auto; aspect-ratio: 9 / 16; z-index: 45; border-radius: 10px; box-shadow: 0 0 0 2px #000; touch-action: manipulation; }
+.screen.pip { position: fixed; inset: auto; left: var(--gut-l); top: calc(var(--tabs-h) + 8px); height: var(--pip-h, 124px); width: auto; aspect-ratio: 9 / 16; z-index: 45; border-radius: 10px; box-shadow: 0 0 0 2px #000; touch-action: pan-y; }
+.pip-handle { display: none; position: absolute; right: 3px; bottom: 3px; z-index: 12; width: 30px; height: 30px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.94); color: #000; place-items: center; touch-action: none; cursor: nwse-resize; box-shadow: 0 1px 6px rgba(0,0,0,.35); }
+.pip-handle svg { width: 16px; height: 16px; }
+.screen.pip .pip-handle { display: grid; }
 .sticky { position: sticky; top: 0; z-index: 40; }
-.dock { display: none; position: absolute; left: 0; right: 0; top: 100%; height: 140px; align-items: center; gap: 12px; padding: 0 var(--gut-r) 0 calc(var(--gut-l) + 82px); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+.dock { display: none; position: absolute; left: 0; right: 0; top: 100%; height: calc(var(--pip-h, 124px) + 16px); align-items: center; gap: 12px; padding: 0 var(--gut-r) 0 calc(var(--gut-l) + var(--pip-h, 124px) * 9 / 16 + 14px); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
 body.pip-on .dock { display: flex; }
 .dock .now { flex: 1 1 auto; min-width: 0; }
 .dock .now small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
 .dock .now b { display: block; font-size: 15px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dock .acts { display: flex; gap: 8px; flex: 0 0 auto; }
-body.pip-on { scroll-padding-top: calc(var(--tabs-h) + 150px); }
+body.pip-on { scroll-padding-top: calc(var(--tabs-h) + var(--pip-h, 124px) + 26px); }
+body.pip-big .dock { flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px; }
+body.pip-big .dock .now { flex: 0 0 auto; width: 100%; }
+body.pip-big .dock .now b { white-space: normal; font-size: 13px; }
+body.pip-big .dock .acts { flex-direction: column; }
+.dock .size-hint { display: block; font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+body.pip-big .dock .size-hint { white-space: normal; }
+
+/* close-up: a magnified live view of the text being edited, pinned above the Send bar while Customise is on screen */
+.closeup { position: fixed; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 58; padding: 8px var(--gut-r) 8px var(--gut-l); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-top: 1px solid var(--line); display: none; }
+body.cu-show .closeup { display: block; }
+body.cu-show { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 24px + var(--cu-h, 168px)); }
+.cu-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.cu-head b { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.cu-head .link { border: 0; background: transparent; padding: 4px 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.cu-view { position: relative; height: 120px; border-radius: 12px; overflow: hidden; background: #111; contain: strict; }
+.cu-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cu-layers { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
+.cu-layers > .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: none !important; }
+body.cu-off .cu-view { display: none; }
+body.cu-off .cu-head { margin-bottom: 0; }
+
+/* sign-in */
+.gate { position: fixed; inset: 0; z-index: 200; background: var(--bg); display: grid; place-items: center; padding: 24px var(--gut-r) 24px var(--gut-l); overflow-y: auto; }
+.gate[hidden] { display: none; }
+.gate-card { width: min(100%, 380px); display: flex; flex-direction: column; gap: 16px; }
+.gate-card .vp-logo img { height: 24px; width: auto; }
+.gate-card h1 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: 44px; line-height: .95; margin: 8px 0 0; letter-spacing: -.01em; }
+.gate-card p { margin: 0; color: var(--muted); font-size: 14px; }
+.gate-card .btn { width: 100%; margin-top: 4px; }
+.gate-card .err { margin: 0; }
+.gate-small { font-size: 12px !important; }
+.who-line { font-size: 12px; color: var(--muted); }
+.who-line .link, .foot-note .link { border: 0; background: transparent; padding: 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.ourrow { display: flex; align-items: center; gap: 12px; padding: 10px var(--gut-r) 10px var(--gut-l); border-bottom: 1px solid var(--line); }
+.ourrow span { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.ourrow:has(#our-picks[hidden]) { display: none; }
+.card .our { font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--on-green); background: var(--green); border-radius: 100px; padding: 2px 7px; align-self: flex-start; margin-top: 2px; }
+.bar .btn.ghost.sm { flex: 0 0 auto; }
+@media (max-width: 400px) { .bar { gap: 8px; } .bar .btn { padding-left: 14px; padding-right: 14px; letter-spacing: .03em; } .bar .count { font-size: 12px; } }
+.voice { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 16px; background: var(--bg-2); }
+.voice[hidden], .voice-take[hidden], .voice-words[hidden] { display: none; }
+.rec-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border: 0; border-radius: 100px; background: var(--fg); color: var(--bg); font-size: 15px; font-weight: 800; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.rec-btn i { width: 12px; height: 12px; border-radius: 50%; background: #E5484D; flex: 0 0 auto; }
+.rec-btn[aria-pressed="true"] { background: #E5484D; color: #fff; }
+.rec-btn[aria-pressed="true"] i { background: #fff; animation: recpulse 1.2s ease-in-out infinite; }
+@keyframes recpulse { 50% { opacity: .35; } }
+.voice-meta { font-size: 12px !important; font-variant-numeric: tabular-nums; }
+.voice-words { font-size: 14px !important; color: var(--fg) !important; line-height: 1.4; max-height: 120px; overflow-y: auto; }
+.voice-words em { color: var(--muted); font-style: normal; }
+.voice-take { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.voice-take audio { width: 100%; height: 40px; }
+.link { border: 0; background: transparent; padding: 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .rec-btn[aria-pressed="true"] i { animation: none; } }
+.toast { position: fixed; left: 50%; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 12px); transform: translate(-50%, 8px); z-index: 70; background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 100px; opacity: 0; pointer-events: none; transition: opacity .25s var(--ease), transform .25s var(--ease); width: max-content; max-width: calc(100vw - 32px); text-align: center; line-height: 1.3; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+body.cu-show .toast { bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + var(--cu-h, 168px) + 12px); }
+@media (min-width: 980px) { .closeup { display: none !important; } body.cu-show { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px) + 24px); } }
 
 .transport { display: flex; align-items: center; gap: 10px; width: min(100%, 460px); }
 .scrub { flex: 1 1 auto; min-width: 0; }
@@ -400,6 +460,7 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
             <div class="grab" id="grab" hidden aria-hidden="true"></div>
             <div class="drag-hint" id="drag-hint">Drag the text to move it</div>
             <div class="loading-veil" id="veil">Loading the preview</div>
+            <button type="button" class="pip-handle" id="pip-handle" aria-label="Drag to resize the small preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20h11V9M20 20L11 11"/></svg></button>
           </div>
         </div>
       </div>
@@ -426,11 +487,12 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   </section>
 
   <main class="panel" id="panel" aria-label="Choose your look">
+    <div class="ourrow" id="our-row"><button type="button" class="btn sm" id="our-picks" hidden>Use VIDPOD's picks</button><span>Our recommended look in every tab, in one tap. You can still change anything.</span></div>
     <div class="vtype"><span class="vtype-l" id="vtype-l">Making a</span><div class="seg" id="vtype" role="radiogroup" aria-labelledby="vtype-l"></div></div>
     <div class="sticky" id="sticky">
       <nav class="tabs" role="tablist" id="tabs" aria-label="Sections"></nav>
       <div class="dock" id="dock" aria-label="Now playing">
-        <div class="now"><small id="dock-code"></small><b id="dock-name"></b></div>
+        <div class="now"><small id="dock-code"></small><b id="dock-name"></b><span class="size-hint" id="dock-hint">Pinch or drag the corner to resize</span></div>
         <div class="acts"><button type="button" class="ibtn" id="dock-play" aria-label="Play"></button><button type="button" class="ibtn" id="dock-full" aria-label="Full screen preview"></button><button type="button" class="ibtn" id="dock-up" aria-label="Back to the big preview"></button></div>
       </div>
     </div>
@@ -443,12 +505,20 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
       <div class="custom" id="custom"></div>
     </div>
     <p class="foot-note">Styles play on the real clip and words; logos play on their own. The small code on each card (for example HOOK-04) is how to ask VIDPOD for it.</p>
+    <p class="foot-note who-line" id="who-foot"></p>
   </main>
 </div>
 
 
+<div class="closeup" id="closeup" aria-label="Close-up of the text you are editing">
+  <div class="cu-head"><b>Close-up</b><button type="button" class="link" id="cu-toggle">Hide</button></div>
+  <div class="cu-view" id="cu-view"><canvas id="cu-canvas"></canvas><div class="cu-layers" id="cu-layers"></div></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <div class="bar" id="bar">
   <div class="count" id="count" aria-live="polite"></div>
+  <button type="button" class="btn ghost sm" id="fb-btn">Feedback</button>
   <button type="button" class="btn" id="review-btn" disabled>Send to VIDPOD</button>
 </div>
 
@@ -461,10 +531,7 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
         <label for="viewer-name">Your name</label>
         <input id="viewer-name" name="viewer-name" autocomplete="name">
       </div>
-      <div class="field">
-        <label for="viewer-code">Access code <span style="font-weight:500;color:var(--muted)">(if VIDPOD gave you one)</span></label>
-        <input id="viewer-code" name="viewer-code" autocomplete="off" autocapitalize="characters">
-      </div>
+      <p class="who-line" id="who-sheet"></p>
       <div class="field">
         <label for="viewer-note">Anything to add? <span style="font-weight:500;color:var(--muted)">(optional)</span></label>
         <textarea id="viewer-note" name="viewer-note"></textarea>
@@ -483,6 +550,46 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
     </div>
   </form>
 </dialog>
+
+<dialog class="sheet" id="fb" aria-labelledby="fb-title">
+  <form class="sheet-body" id="fb-form" novalidate>
+    <div id="fb-main" style="display:flex;flex-direction:column;gap:14px">
+      <h2 id="fb-title">Feedback<span class="dot"></span></h2>
+      <p>Tell us what you think about a look, the studio, or anything else.</p>
+      <div class="field"><label for="fb-note">Your note</label><textarea id="fb-note" maxlength="4000" placeholder="Type here"></textarea></div>
+      <div class="voice" id="fb-voice" hidden>
+        <button type="button" class="rec-btn" id="fb-rec" aria-pressed="false"><i aria-hidden="true"></i><span id="fb-rec-l">Hold to record a voice note</span></button>
+        <p class="voice-meta" id="fb-time" aria-live="polite">Up to 2 minutes. Let go to stop.</p>
+        <p class="voice-words" id="fb-words" hidden></p>
+        <div class="voice-take" id="fb-take" hidden><audio id="fb-audio" controls preload="metadata"></audio><button type="button" class="link" id="fb-del">Delete recording</button></div>
+      </div>
+      <p class="err" id="fb-err" hidden></p>
+      <div class="sheet-actions">
+        <button type="button" class="btn ghost" id="fb-cancel">Cancel</button>
+        <button type="submit" class="btn" id="fb-send">Send feedback</button>
+      </div>
+    </div>
+    <div id="fb-done" style="display:none;flex-direction:column;gap:14px">
+      <div class="done-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2 id="fb-done-t">Sent<span class="dot"></span></h2>
+      <p id="fb-done-p"></p>
+      <div class="sheet-actions"><button type="button" class="btn" id="fb-close">Done</button></div>
+    </div>
+  </form>
+</dialog>
+
+<div class="gate" id="gate" hidden>
+  <form class="gate-card" id="gate-form" novalidate>
+    <span class="vp-logo"><img class="only-light" src="assets/vidpod/vidpod-logo-light.png" alt="VIDPOD" width="67" height="24"><img class="only-dark" src="assets/vidpod/vidpod-logo-dark.png" alt="" width="67" height="24"></span>
+    <h1>Studio<span class="dot"></span></h1>
+    <p>Pick the look for your videos, live on real footage. Pop in your name and the code VIDPOD gave you.</p>
+    <div class="field"><label for="gate-name">Your name</label><input id="gate-name" autocomplete="name" required></div>
+    <div class="field"><label for="gate-code">Access code</label><input id="gate-code" autocomplete="off" autocapitalize="characters" spellcheck="false" required></div>
+    <p class="err" id="gate-err" hidden></p>
+    <button type="submit" class="btn" id="gate-go">Open the studio</button>
+    <p class="gate-small">No account needed. Your name just tells VIDPOD whose picks are whose.</p>
+  </form>
+</div>
 
 <script src="studio-looks.js"></script>
 <script src="studio-looks-2.js"></script>

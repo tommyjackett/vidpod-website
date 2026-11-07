@@ -11,7 +11,24 @@
     if (!use) return Promise.resolve(null);
     return Promise.race([Promise.resolve(use).catch(function () { return null; }), timeout]);
   })();
-  function local(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
+  function local(key, val) { try { if (val === undefined) return localStorage.getItem(key); if (val === null) localStorage.removeItem(key); else localStorage.setItem(key, val); } catch (e) { return null; } }
+
+  /* ================= the VIDPOD log: every sign-in, pick, like and screenshot goes to the Google Sheet "VidPod Studio Log"
+     through a Google Apps Script web app (URL in codes.json, log_endpoint). Plain text body, no-cors: no preflight. ================= */
+  var PAGE_VERSION = "v5";
+  var SIGN = null, LOG_URL = "";
+  function post(tab, rows, extra) {
+    if (!LOG_URL || typeof fetch !== "function") return Promise.resolve(false);
+    var body = JSON.stringify(Object.assign({
+      tab: tab, name: (S && S.viewer) || (SIGN && SIGN.name) || "", client: B ? B.client.name : "", project: B && B.project ? (B.project.label || B.project.id) : "",
+      code: SIGN ? SIGN.code : "", version: PAGE_VERSION + (B ? " (board " + B.board.version + ")" : ""), rows: rows || [{}]
+    }, extra || {}));
+    var opt = { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body };
+    if (body.length < 60000) opt.keepalive = true;
+    return fetch(LOG_URL, opt).then(function () { return true; }).catch(function () { return false; });
+  }
+  var toastT = 0;
+  function toast(msg) { var t = document.getElementById("toast"); if (!t) return; t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove("show"); }, 2200); }
 
   /* ================= icons ================= */
   var I = {
@@ -45,6 +62,23 @@
   function styleDef(secObj, id) { return secObj.styles.filter(function (s) { return s.id === id; })[0]; }
   function fontDef(id) { var f = B.fonts.filter(function (x) { return x.id === id; })[0] || B.fonts[0]; return f.id === "brand" ? Object.assign({ id: "brand", label: f.label, sub: f.sub }, B.brand.font) : f; }
   function swatch(id) { if (/^#[0-9a-f]{6}$/i.test(String(id))) return { id: id, label: "Custom " + String(id).toUpperCase(), hex: String(id).toUpperCase() }; return (B.brand.swatches.filter(function (s) { return s.id === id; })[0] || B.brand.swatches[0]); }
+  /* colour roles: every colour row is named by exactly what it colours; a second row where a style has two colourable parts.
+     [first row label, second row label, second row default swatch]. Every swatch is applied as picked (no hidden fallbacks);
+     text that sits on a box only swaps to a readable ink when it would match the box. */
+  var COLOUR_ROLES = {
+    "cap-weight-shift": ["Text colour"], "cap-per-word-rise": ["Text colour"], "cap-karaoke": ["Text colour"],
+    "cap-box-word": ["Box colour", "Text colour", "white"], "cap-editorial": ["Text colour", "Key word colour", "primary"],
+    "cap-colour-pop": ["Text colour", "Spoken word colour", "primary"], "cap-pill-karaoke": ["Pill colour", "Text colour", "dark"],
+    "cap-clip-wipe": ["Text colour", "Key word colour", "primary"],
+    "hook-bars": ["Bar colour", "Text colour", "dark"], "hook-mixed": ["Big word colour", "Small words colour", "white"],
+    "hook-behind": ["Big word colour", "Text colour", "white"], "hook-quote": ["Key word colour", "Card colour", "white"],
+    "hook-wordbyword": ["Text colour"], "hook-serif": ["Text colour"],
+    "lt-clean-bar": ["Tab colour", "Card colour", "white"], "lt-soft-pill": ["Dot colour", "Pill colour", "white"],
+    "lt-dark-card": ["Line colour", "Card colour", "dark"], "lt-accent-underline": ["Line colour", "Text colour", "white"],
+    "lt-mask-reveal": ["Sweep colour", "Text colour", "white"], "lt-stack-bars": ["Role bar colour", "Name bar colour", "dark"]
+  };
+  function colourRole(styleId) { return COLOUR_ROLES[styleId] || ["Colour"]; }
+  function colour2Of(L) { var r = colourRole(L.style); return r[1] ? (L.colour2 || r[2]) : null; }
   function isLight(hex) { var h = hex.replace("#", ""); var r = parseInt(h.substr(0, 2), 16), g = parseInt(h.substr(2, 2), 16), b = parseInt(h.substr(4, 2), 16); return (0.299 * r + 0.587 * g + 0.114 * b) > 150; }
   function fmt(t) { t = Math.max(0, t); return Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0"); }
   var _cv = document.createElement("canvas").getContext("2d");
@@ -88,10 +122,10 @@
   /* ================= stages: the big preview and every mini card run the same looks ================= */
   var studioRegs = [];   // live studio videos to keep in step on the main stage
   function makeCtx(L, sd, styleObj, stage) {
-    var f = fontDef(L.font || "brand"), sw = swatch(L.colour || "white");
+    var f = fontDef(L.font || "brand"), sw = swatch(L.colour || "white"), c2 = colour2Of(L), sw2 = c2 ? swatch(c2) : null;
     var segm = styleObj.segment || sd.segment;
     return {
-      L: L, f: f, hex: sw.hex, colourId: sw.id, shadow: isLight(sw.hex) ? B.brand.shadow : "none", seg: segm, card: stage.card, B: B,
+      L: L, f: f, hex: sw.hex, colourId: sw.id, hex2: sw2 ? sw2.hex : null, colour2Id: sw2 ? sw2.id : null, shadow: isLight(sw.hex) ? B.brand.shadow : "none", seg: segm, card: stage.card, B: B,
       media: stage.media, backdrop: stage.backdrop, under: stage.under, over: stage.over, safe: B.safe,
       px: function (n) { return n * stage.scale(); },
       hook: function () { return parseHook(S.hookText, segm); },
@@ -337,6 +371,7 @@
     $("scrub").style.setProperty("--p", (p * 100).toFixed(2) + "%");
     $("t-now").textContent = fmt(t - s[0]);
     tickCards(now || performance.now());
+    cuRender(now || performance.now());
     requestAnimationFrame(frame);
   }
   function setPlayIcon() { var playing = isOwn() ? !LC.paused : !video.paused; $("play").innerHTML = playing ? I.pause : I.play; $("play").setAttribute("aria-label", playing ? "Pause" : "Play"); $("play-l").textContent = playing ? "Pause" : "Play"; }
@@ -432,7 +467,7 @@
     mini.appendChild(lk);
     btn.appendChild(mini);
     var fits = S.vtype && sd.scope !== "any" && (st.use_cases || []).indexOf(S.vtype) >= 0 && (st.use_cases || []).length < 4;
-    btn.appendChild(el("div", "meta", '<span class="id">' + esc(st.code) + '</span><span class="nm">' + esc(st.label) + "</span>" + (st.kind ? '<span class="kind">' + esc(st.kind) + "</span>" : "") + (fits ? '<span class="rec">Made for ' + esc(vtypeLabel()) + "</span>" : "")));
+    btn.appendChild(el("div", "meta", '<span class="id">' + esc(st.code) + '</span><span class="nm">' + esc(st.label) + "</span>" + (st.kind ? '<span class="kind">' + esc(st.kind) + "</span>" : "") + (fits ? '<span class="rec">Made for ' + esc(vtypeLabel()) + "</span>" : "") + (isOurPick(sd.id, st.id) ? '<span class="our">Our pick</span>' : "")));
     var c = { btn: btn, mini: mini, img: img, und: und, ov: ov, cut: cut, bd: bd, sd: sd, st: st, tl: null, visible: false, t0: performance.now() / 1000 + Math.random() * 0.4, sc: 0.1, built: false };
     btn.addEventListener("click", function () { chooseStyle(st.id); });
     return c;
@@ -488,6 +523,20 @@
     // keep the chosen card in view in the swipe row
     var sel = cards.filter(function (c) { return c.st.id === look().style; })[0];
     if (sel && box.scrollWidth > box.clientWidth) box.scrollLeft = Math.max(0, sel.btn.offsetLeft - 16);
+  }
+  /* ---- VIDPOD's pick: board.json vidpod_pick holds one recommended option (and its settings) per section ---- */
+  function isOurPick(sid, styleId) { var p = (B.vidpod_pick || {})[sid]; if (!p) return false; return Array.isArray(p) ? p.some(function (x) { return x.style === styleId; }) : p.style === styleId; }
+  function useOurPicks() {
+    var vp = B.vidpod_pick || {}, n = 0;
+    B.sections.forEach(function (s2) {
+      var p = vp[s2.id]; if (!p) return;
+      if (Array.isArray(p)) { S.picks[s2.id] = p.filter(function (x) { return styleDef(s2, x.style); }).map(clone); n++; return; }
+      if (!styleDef(s2, p.style)) return;
+      S.looks[s2.id] = clone(p); S.picks[s2.id] = clone(p); n++;
+      if (s2.id === "hook") S.picks.hook.hookText = S.hookText == null ? B.base.hook_text : S.hookText;
+    });
+    save(); renderTabs(); renderCards(); renderChosen(); renderCustom(); updateFoot(); rebuild(); updateDock();
+    toast(n ? "VIDPOD's picks are in every tab. Change anything you like." : "No picks set for this board yet.");
   }
   function markCards() {
     var L = look(), p = S.picks[S.sec];
@@ -653,9 +702,15 @@
     }
     if (hasCtl("colour") || hasCtl("highlight") || hasCtl("outline") || hasCtl("backing")) grpH("Colour");
     if (hasCtl("colour")) {
-      var cb = el("div", "wide"); cb.appendChild(el("p", "label", L.style === "cap-pill-karaoke" ? "Pill colour" : S.sec === "name" ? "Accent colour" : /hook-bars|cap-box-word/.test(L.style) ? "Bar colour" : /hook-quote/.test(L.style) ? "Key word colour" : "Colour"));
-      cb.appendChild(swatchRow(B.brand.swatches, L.colour, function (v, keep) { L.colour = v; if (keep) changedSoon(); else { changed(); renderCustom(); } }, "Colour"));
+      var role = colourRole(L.style);
+      var cb = el("div", "wide"); cb.appendChild(el("p", "label", role[0]));
+      cb.appendChild(swatchRow(B.brand.swatches, L.colour, function (v, keep) { L.colour = v; if (keep) changedSoon(); else { changed(); renderCustom(); } }, role[0]));
       grid.appendChild(cb);
+      if (role[1]) {
+        var cb2 = el("div", "wide"); cb2.appendChild(el("p", "label", role[1]));
+        cb2.appendChild(swatchRow(B.brand.swatches, colour2Of(L), function (v, keep) { L.colour2 = v; if (keep) changedSoon(); else { changed(); renderCustom(); } }, role[1]));
+        grid.appendChild(cb2);
+      }
     }
     if (hasCtl("highlight")) {
       var hw = el("div", "wide"); hw.appendChild(seg3("Active word highlight", [[false, "Off"], [true, "On"]], !!L.hl, function (v) { L.hl = v; if (v && !L.hlColour) L.hlColour = "primary"; changed(); renderCustom(); }));
@@ -696,7 +751,7 @@
     $("out-pos").textContent = lab;
     Array.prototype.forEach.call(document.querySelectorAll("[data-y]"), function (c) { c.setAttribute("aria-pressed", String(clampY(+c.dataset.y) === L.y)); });
   }
-  var LOOK_KEYS = ["style", "font", "size", "y", "colour", "case", "lines", "align", "flash", "wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "anim", "backing", "motion", "bg", "speed", "label"];
+  var LOOK_KEYS = ["style", "font", "size", "y", "colour", "colour2", "case", "lines", "align", "flash", "wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "anim", "backing", "motion", "bg", "speed", "label"];
   function sameLook(a, b) { return a && b && LOOK_KEYS.every(function (k) { return a[k] === b[k]; }); }
   function updateUse() {
     var ub = $("use-btn"); if (!ub) return;
@@ -737,7 +792,7 @@
     save(); renderTabs(); updateUse(); updateFoot(); markCards();
   }
   function switchSec(id, scroll) {
-    S.sec = id; renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); goSeg(true); rebuild(); save();
+    S.sec = id; if (CU.ok) setTimeout(cuSync, 0); renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); goSeg(true); rebuild(); save();
     updateDock();
     if (scroll) { var stk = $("sticky"), r = stk.getBoundingClientRect(); if (r.top <= 0) window.scrollTo({ top: window.scrollY + $("panel-body").getBoundingClientRect().top - stk.offsetHeight - (document.body.classList.contains("pip-on") ? 140 : 0), behavior: "smooth" }); }
     setTimeout(showHint, 900);
@@ -774,7 +829,7 @@
   (function () { try { if (window.claude && typeof window.claude.use === "function") Promise.resolve(window.claude.use("assets")).then(function (a) { ASSETS = a || null; renderRef(); }).catch(function () {}); } catch (e) {} })();
   function renderRef() {
     var box = $("ref"); if (!box || !B) return; box.innerHTML = "";
-    var show = !!ASSETS && (S.sec === "subtitles" || S.sec === "hook"); box.hidden = !show; if (!show) return;
+    var show = (!!ASSETS || !!LOG_URL) && (S.sec === "subtitles" || S.sec === "hook"); box.hidden = !show; if (!show) return;
     var head = el("div", "ref-head", '<div><b>Seen a look you love?</b><small>Drop a screenshot and we will match it for you.</small></div>');
     var pick = el("label", "btn ghost sm ref-pick", "Add screenshot<input type=\"file\" accept=\"image/png,image/jpeg,image/webp,image/gif\" class=\"sr\">");
     head.appendChild(pick); box.appendChild(head);
@@ -790,14 +845,25 @@
       var msg = el("span", "ok");
       col.appendChild(note); col.appendChild(send); col.appendChild(msg); form.appendChild(col);
       send.addEventListener("click", function () {
+        if (file.size > 4 * 1024 * 1024) { msg.textContent = "That file is too big. Try a screenshot under 4 MB."; return; }
         send.disabled = true; msg.textContent = "Sending";
-        ASSETS.upload(file, /^image\/(png|jpeg|webp|gif)$/.test(file.type) ? undefined : { type: "image/png" }).then(function (up) {
-          return writeDoc("references", Object.assign(baseFields(), { section: S.sec, assetId: up.id, contentType: up.contentType, note: note.value.trim(), currentStyle: look().style, at: new Date().toISOString() })).then(function (ok) {
-            msg.textContent = ok ? "Sent. Thanks, we will take a look." : "Uploaded, but the note did not save. Tell your VIDPOD contact."; send.textContent = "Sent";
-          });
-        }).catch(function (e) {
-          var c = e && e.code; send.disabled = false;
-          msg.textContent = c === "too_large" ? "That file is too big. Try a smaller screenshot." : c === "unsupported_type" ? "Please use a PNG or JPG screenshot." : c === "rate_limited" ? "Too many at once. Try again in a moment." : "That did not send. Try again.";
+        var st0 = curStyle(), noteTxt = note.value.trim(), type = /^image\/(png|jpeg|webp|gif)$/.test(file.type) ? file.type : "image/png";
+        var toSheet = new Promise(function (res) {
+          if (!LOG_URL) return res(false);
+          var fr = new FileReader();
+          fr.onload = function () {
+            var b64 = String(fr.result || "").replace(/^data:[^,]*,/, "");
+            post("References", [{ section: S.sec, optionCode: st0 ? st0.code : "", label: "Screenshot of a look they love", settings: { currentStyle: look().style, clip: S.clip || null, useCase: S.vtype || null, file: file.name, contentType: type, bytes: file.size }, note: noteTxt }], { image: { base64: b64, contentType: type, filename: file.name } }).then(res);
+          };
+          fr.onerror = function () { res(false); };
+          fr.readAsDataURL(file);
+        });
+        var toDb = !ASSETS ? Promise.resolve(false) : ASSETS.upload(file, /^image\/(png|jpeg|webp|gif)$/.test(file.type) ? undefined : { type: "image/png" }).then(function (up) {
+          return writeDoc("references", Object.assign(baseFields(), { section: S.sec, assetId: up.id, contentType: up.contentType, note: noteTxt, currentStyle: look().style, at: new Date().toISOString() }));
+        }).catch(function () { return false; });
+        Promise.all([toSheet, toDb]).then(function (r) {
+          if (r[0] || r[1]) { msg.textContent = "Sent to VIDPOD. Thanks, we will take a look."; send.textContent = "Sent"; }
+          else { send.disabled = false; msg.textContent = "That did not send. Check your connection and try again."; }
         });
       });
     });
@@ -831,7 +897,9 @@
     var on = !S.likes[st.id];
     if (on) S.likes[st.id] = { at: new Date().toISOString() }; else delete S.likes[st.id];
     save();
-    writeDoc("likes", Object.assign(baseFields(), { section: sd.id, style: st.id, code: st.code, label: st.label, liked: on, note: "", at: new Date().toISOString() }));
+    var likeDb = writeDoc("likes", Object.assign(baseFields(), { section: sd.id, style: st.id, code: st.code, label: st.label, liked: on, note: "", at: new Date().toISOString() }));
+    var likeLog = post("Likes", [{ section: sd.id, optionCode: st.code, label: st.label, settings: { liked: on, style: st.id, clip: S.clip || null, useCase: S.vtype || null }, note: on ? "liked" : "unliked" }]);
+    Promise.all([likeLog, likeDb]).then(function (r) { toast(r[0] || r[1] ? (on ? "Liked. Sent to VIDPOD" : "Unliked. Sent to VIDPOD") : "Saved on this device only"); });
     if (S.favOnly && !on) renderCards(); else cards.forEach(function (c) { if (c.st.id === st.id) { var b = c.btn.querySelector(".like"); b.innerHTML = on ? I.heartOn : I.heart; b.setAttribute("aria-pressed", String(on)); } });
     if (on && look().style !== st.id) chooseStyle(st.id); else renderChosen();
   }
@@ -844,7 +912,11 @@
     sb.addEventListener("click", function () {
       var nmI2 = $("like-name"); if (nmI2 && nmI2.value.trim()) { S.viewer = nmI2.value.trim(); local("vidpod-studio-viewer", S.viewer); }
       S.likes[st.id] = Object.assign(S.likes[st.id] || {}, { note: inp.value.trim() }); save();
-      writeDoc("likes", Object.assign(baseFields(), { section: S.sec, style: st.id, code: st.code, label: st.label, liked: true, note: inp.value.trim(), at: new Date().toISOString() })).then(function (okk) { ok.textContent = okk ? "Saved for VIDPOD" : "Saved on this device"; });
+      ok.textContent = "Sending";
+      Promise.all([
+        post("Likes", [{ section: S.sec, optionCode: st.code, label: st.label, settings: { liked: true, style: st.id, clip: S.clip || null, useCase: S.vtype || null }, note: inp.value.trim() }]),
+        writeDoc("likes", Object.assign(baseFields(), { section: S.sec, style: st.id, code: st.code, label: st.label, liked: true, note: inp.value.trim(), at: new Date().toISOString() }))
+      ]).then(function (r) { ok.textContent = r[0] || r[1] ? "Sent to VIDPOD" : "Saved on this device only (offline)"; });
     });
     w.appendChild(inp); w.appendChild(sb); w.appendChild(ok);
     return w;
@@ -859,7 +931,7 @@
     if (s.controls.indexOf("position") >= 0) parts.push("y " + p.y);
     if (s.controls.indexOf("lines") >= 0) parts.push((p.lines || 1) + (p.lines === 2 ? " lines" : " line"));
     if (s.controls.indexOf("align") >= 0) parts.push(p.align === "centre" ? "centred" : "left");
-    if (s.controls.indexOf("colour") >= 0) parts.push(swatch(p.colour).label);
+    if (s.controls.indexOf("colour") >= 0) { var rl = colourRole(p.style); parts.push(rl[0].toLowerCase() + " " + swatch(p.colour).label); if (rl[1]) parts.push(rl[1].toLowerCase() + " " + swatch(colour2Of(p)).label); }
     if (s.controls.indexOf("case") >= 0) parts.push(p.case === "spoken" ? "as said" : p.case);
     if (p.flash && p.style === "tr-lens") parts.push(p.flash + " flash");
     if (s.controls.indexOf("wpl") >= 0 && +p.wpl) parts.push(p.wpl + " words per line");
@@ -888,7 +960,7 @@
       if (multi(s.id)) return "<li><span>" + esc(s.tab) + "</span><span>" + p.map(function (x) { var d = styleDef(s, x.style); return "<b>" + esc(d.code + " " + d.label) + "</b>"; }).join("") + "</span></li>";
       var d = lookDetail(s.id, p); return "<li><span>" + esc(s.tab) + "</span><span><b>" + esc(d.label) + "</b>" + (d.detail ? "<small>" + esc(d.detail) + "</small>" : "") + (p.hookText ? "<small>Hook: " + esc(p.hookText.replace(/\n/g, " / ")) + "</small>" : "") + "</span></li>";
     }).join("");
-    $("viewer-name").value = S.viewer; $("sheet-err").hidden = true;
+    $("viewer-name").value = S.viewer; $("sheet-err").hidden = true; whoLines();
     $("sheet-main").style.display = "flex"; $("sheet-done").style.display = "none";
     var dlg = $("sheet"); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
     (S.viewer ? $("sheet-send") : $("viewer-name")).focus();
@@ -906,7 +978,7 @@
       if (s.controls.indexOf("position") >= 0) o.yPx = p.y;
       if (s.controls.indexOf("lines") >= 0) o.lines = p.lines || 1;
       if (s.controls.indexOf("align") >= 0) o.align = p.align || "left";
-      if (s.controls.indexOf("colour") >= 0) { o.colour = p.colour; o.colourHex = swatch(p.colour).hex; }
+      if (s.controls.indexOf("colour") >= 0) { var rl2 = colourRole(p.style); o.colour = p.colour; o.colourHex = swatch(p.colour).hex; o.colourIs = rl2[0]; if (rl2[1]) { o.colour2 = colour2Of(p); o.colour2Hex = swatch(o.colour2).hex; o.colour2Is = rl2[1]; } }
       if (s.controls.indexOf("case") >= 0) o.case = p.case;
       if (p.flash && p.style === "tr-lens") o.flash = p.flash;
       if (p.hookText) o.hookText = p.hookText;
@@ -920,7 +992,7 @@
     var likes = Object.keys(S.likes).map(function (id) { var d = null; B.sections.forEach(function (s) { var x = styleDef(s, id); if (x) d = x; }); return d ? { style: id, code: d.code, note: S.likes[id].note || "" } : null; }).filter(Boolean);
     var sfx = { on: !!SFX.on, sounds: {} };
     B.sections.forEach(function (s) { var p = S.picks[s.id]; if (!p) return; var st = styleDef(s, (multi(s.id) ? (p[0] || {}).style : p.style)); if (!st) return; var keep = SFX.events, used = SFX.used; buildSfx(s, st, null); sfx.sounds[s.id] = SFX.used.map(function (n) { return { name: n, file: B.sfx.files[n].src, from: B.sfx.files[n].from }; }); SFX.events = keep; SFX.used = used; });
-    return Object.assign(baseFields(), { clip: S.clip || null, sfx: sfx, client: B.client.id, sentAt: new Date().toISOString(), viewer: S.viewer, accessCode: $("viewer-code").value.trim() || null, note: $("viewer-note").value.trim(), canvas: "1080x1920", yIs: "centre of the text block, px on 1080x1920", picks: picks, likes: likes });
+    return Object.assign(baseFields(), { clip: S.clip || null, sfx: sfx, client: B.client.id, sentAt: new Date().toISOString(), viewer: S.viewer, accessCode: SIGN ? SIGN.code : null, note: $("viewer-note").value.trim(), canvas: "1080x1920", yIs: "centre of the text block, px on 1080x1920", picks: picks, likes: likes });
   }
   function finish(ok, text) {
     $("done-title").innerHTML = (ok ? "Sent" : "Saved") + '<span class="dot"></span>';
@@ -931,16 +1003,17 @@
     e.preventDefault();
     var name = $("viewer-name").value.trim();
     if (!name) { $("sheet-err").textContent = "Add your name so we know whose picks these are."; $("sheet-err").hidden = false; $("viewer-name").focus(); return; }
-    S.viewer = name; local("vidpod-studio-viewer", name);
+    S.viewer = name; local("vidpod-studio-viewer", name); if (SIGN && SIGN.name !== name) { SIGN.name = name; saveSign(); }
     var doc = picksDoc(), btn = $("sheet-send"); btn.disabled = true; btn.textContent = "Sending";
     local("vidpod-studio-last-sent-" + B.client.id, JSON.stringify(doc));
-    var fallback = "Your picks are saved on this device. Let your VIDPOD contact know you are done.";
-    dbReady.then(function (db) {
-      if (!db) return finish(false, fallback);
-      return db.collection("picks").add(doc).then(function () {
-        finish(true, "Thanks " + name + ". Your picks are with VIDPOD. Change anything and send again whenever you like.");
-      });
-    }).catch(function () { finish(false, fallback); }).then(function () { btn.disabled = false; btn.textContent = "Send picks"; });
+    var fallback = "We could not reach VIDPOD just now, so your picks are saved on this device. Try Send again when you are back online.";
+    var rows = [{ section: "all", optionCode: Object.keys(doc.picks).map(function (k) { var v = doc.picks[k]; return !v ? null : Array.isArray(v) ? v.map(function (x) { return x.code; }).join(" ") : v.code; }).filter(Boolean).join(", "), label: pickedCount() + " of " + B.sections.length + " tabs picked", settings: doc, note: doc.note }];
+    B.sections.forEach(function (s2) { var v = doc.picks[s2.id]; if (!v) return; rows.push({ section: s2.id, optionCode: Array.isArray(v) ? v.map(function (x) { return x.code; }).join(", ") : v.code, label: Array.isArray(v) ? v.map(function (x) { return x.label; }).join(", ") : v.label, settings: v, note: "" }); });
+    var toDb = dbReady.then(function (db) { if (!db) return false; return db.collection("picks").add(doc).then(function () { return true; }); }).catch(function () { return false; });
+    Promise.all([post("Picks", rows), toDb]).then(function (r) {
+      if (r[0] || r[1]) finish(true, "Sent to VIDPOD. Thanks " + name + ". Change anything and send again whenever you like.");
+      else finish(false, fallback);
+    }).then(function () { btn.disabled = false; btn.textContent = "Send picks"; });
   });
   $("sheet-cancel").addEventListener("click", closeReview);
   $("sheet-close").addEventListener("click", closeReview);
@@ -956,7 +1029,7 @@
   $("full").innerHTML = I.full; $("close-full").innerHTML = I.close; $("replay").innerHTML = I.replay; $("dock-up").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg>';
   $("replay").addEventListener("click", replay);
   function setFull(on) {
-    $("stage").classList.toggle("full", on); if (on) unPip();
+    $("stage").classList.toggle("full", on); if (on) unPip(); if (CU.ok) cuSync();
     requestAnimationFrame(function () { fit(); if (!on) { var r = $("screen-slot").getBoundingClientRect(); if (r.bottom < 0) setPip(true); } });
     if (on) startPlay();
   }
@@ -982,7 +1055,90 @@
   $("dock-up").addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
   $("dock-full").innerHTML = I.full; $("dock-full").addEventListener("click", function () { setFull(true); });
   // tapping the small docked preview opens it full screen right here, no scrolling back up
-  screenEl.addEventListener("click", function () { if (screenEl.classList.contains("pip")) setFull(true); });
+  screenEl.addEventListener("click", function (e) { if (Date.now() - pipGestureAt < 450 || (e.target && e.target.closest && e.target.closest(".pip-handle"))) return; if (screenEl.classList.contains("pip")) setFull(true); });
+
+  /* ---- the docked preview can be resized: pinch it, or drag the corner handle. Snaps to small, medium (40 %) or large (55 %) ---- */
+  var pipGestureAt = 0, pipSize = "small";
+  function pipSizes() { var h = window.innerHeight || 800; return { small: 124, medium: Math.round(h * 0.40), large: Math.round(h * 0.55) }; }
+  function setPipH(px) { document.body.style.setProperty("--pip-h", Math.round(px) + "px"); document.body.classList.toggle("pip-big", px > 170); }
+  function snapPip(px, keep) {
+    var z = pipSizes(), best = "small"; ["small", "medium", "large"].forEach(function (k) { if (Math.abs(z[k] - px) < Math.abs(z[best] - px)) best = k; });
+    pipSize = best; setPipH(z[best]); if (keep !== false) local("vidpod-studio-pip", best);
+    var h = $("dock-hint"); if (h) h.textContent = best === "small" ? "Pinch or drag the corner to make it bigger" : "Pinch or drag the corner to resize";
+    requestAnimationFrame(fit);
+  }
+  function curPipH() { return parseFloat(getComputedStyle(document.body).getPropertyValue("--pip-h")) || 124; }
+  function initDockSize() {
+    var saved = local("vidpod-studio-pip"); snapPip(pipSizes()[saved] || 124, false); if (saved) pipSize = saved;
+    window.addEventListener("resize", function () { setPipH(pipSizes()[pipSize] || 124); });
+    var max = function () { return pipSizes().large; }, clampH = function (v) { return Math.max(100, Math.min(max(), v)); };
+    // corner handle: drag down or right to grow
+    var hd = $("pip-handle"), drag = null;
+    hd.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); drag = { y: e.clientY, x: e.clientX, h: curPipH() }; try { hd.setPointerCapture(e.pointerId); } catch (x) {} });
+    hd.addEventListener("pointermove", function (e) { if (!drag) return; var d = Math.max(e.clientY - drag.y, (e.clientX - drag.x) * 16 / 9); setPipH(clampH(drag.h + d)); fit(); });
+    // after a resize, scroll by the change so what sat just under the dock is still just under it (nothing hides behind it)
+    var keepView = function (h0) { var d = curPipH() - h0; if (d && window.scrollY > 0) window.scrollBy(0, -d); };
+    var endDrag = function () { if (!drag) return; var h0 = drag.h; drag = null; pipGestureAt = Date.now(); snapPip(curPipH()); keepView(h0); };
+    hd.addEventListener("pointerup", endDrag); hd.addEventListener("pointercancel", endDrag);
+    hd.addEventListener("click", function (e) { e.stopPropagation(); });
+    // pinch with two fingers on the docked preview
+    var pin = null, dist = function (t) { var a = t[0], b = t[1]; return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); };
+    screenEl.addEventListener("touchstart", function (e) { if (!screenEl.classList.contains("pip") || e.touches.length !== 2) return; pin = { d: dist(e.touches), h: curPipH() }; e.preventDefault(); }, { passive: false });
+    screenEl.addEventListener("touchmove", function (e) { if (!pin || e.touches.length !== 2) return; e.preventDefault(); setPipH(clampH(pin.h * dist(e.touches) / pin.d)); fit(); }, { passive: false });
+    var endPin = function (e) { if (!pin || (e.touches && e.touches.length >= 2)) return; var h0 = pin.h; pin = null; pipGestureAt = Date.now(); snapPip(curPipH()); keepView(h0); };
+    screenEl.addEventListener("touchend", endPin); screenEl.addEventListener("touchcancel", endPin);
+    ["gesturestart", "gesturechange"].forEach(function (n) { screenEl.addEventListener(n, function (e) { if (screenEl.classList.contains("pip")) e.preventDefault(); }); });
+  }
+
+  /* ---- close-up: while Customise is on screen (phone), a 2x live view of the text block sits above the Send bar ---- */
+  var CU = { want: local("vidpod-studio-closeup") !== "off", seen: false, last: 0, ok: false };
+  var CU_SECS = ["subtitles", "hook", "name", "logo"];
+  function cuShouldShow() { return CU.seen && CU_SECS.indexOf(S.sec) >= 0 && window.innerWidth < 980 && !$("stage").classList.contains("full") && !!live; }
+  function cuSync() {
+    var on = cuShouldShow(); document.body.classList.toggle("cu-show", on); document.body.classList.toggle("cu-off", !CU.want);
+    $("cu-toggle").textContent = CU.want ? "Hide" : "Show close-up";
+    var h = $("closeup").offsetHeight; if (on && h) document.body.style.setProperty("--cu-h", h + "px");
+  }
+  function initCloseup() {
+    $("cu-toggle").addEventListener("click", function () { CU.want = !CU.want; local("vidpod-studio-closeup", CU.want ? "on" : "off"); cuSync(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { CU.seen = en.isIntersecting; }); cuSync(); }, { threshold: 0, rootMargin: "0px 0px -120px 0px" }).observe($("custom"));
+    window.addEventListener("resize", cuSync);
+    CU.ok = true; cuSync();
+  }
+  function cuRect() {
+    // the text block, in 1080x1920 canvas units, measured on the live screen
+    var sr = screenEl.getBoundingClientRect(), k = scale || 0.25, r = null;
+    var add = function (q) { if (!q || q.width < 1 || q.height < 1) return; r = r ? { l: Math.min(r.l, q.left), t: Math.min(r.t, q.top), rr: Math.max(r.rr, q.right), b: Math.max(r.b, q.bottom) } : { l: q.left, t: q.top, rr: q.right, b: q.bottom }; };
+    if (live && live.block) { var ins = live.block.querySelectorAll(".inner"); if (ins.length) Array.prototype.forEach.call(ins, function (n) { add(n.getBoundingClientRect()); }); else add(live.block.getBoundingClientRect()); }
+    if (!r) return { x: 540, y: 960, w: 800, h: 300 };
+    return { x: ((r.l + r.rr) / 2 - sr.left) / k, y: ((r.t + r.b) / 2 - sr.top) / k, w: (r.rr - r.l) / k, h: (r.b - r.t) / k };
+  }
+  // copy a layer as it is right now (inline styles carry the animation state); media and canvases are skipped so nothing reloads
+  function cuClone(n) {
+    if (n.nodeType !== 1) return n.cloneNode(false);
+    var c = n.cloneNode(false); c.removeAttribute("id");
+    for (var ch = n.firstChild; ch; ch = ch.nextSibling) { var t = ch.nodeName; if (t === "VIDEO" || t === "AUDIO" || t === "CANVAS" || t === "SCRIPT") continue; c.appendChild(cuClone(ch)); }
+    return c;
+  }
+  function cuRender(now) {
+    if (!CU.ok || !CU.want || !document.body.classList.contains("cu-show") || now - CU.last < 66) return;
+    CU.last = now;
+    var view = $("cu-view"), vw = view.clientWidth, vh = view.clientHeight; if (!vw || !vh) return;
+    var big = ($("screen-slot").clientWidth || 260) / 1080, rc = cuRect();
+    var z = Math.max(big, Math.min(big * 2, (vw - 16) / Math.max(rc.w, 1)));
+    var ox = vw / 2 - rc.x * z, oy = vh / 2 - rc.y * z;
+    var lay = $("cu-layers"); lay.style.transform = "translate(" + ox.toFixed(1) + "px," + oy.toFixed(1) + "px) scale(" + z.toFixed(4) + ")";
+    var frag = document.createDocumentFragment();
+    [backdrop, under, over].forEach(function (L0) { frag.appendChild(cuClone(L0)); });
+    lay.replaceChildren(frag);
+    var cv = $("cu-canvas"), dpr = Math.min(2, window.devicePixelRatio || 1), cw = Math.round(vw * dpr), ch = Math.round(vh * dpr);
+    if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
+    var g = cv.getContext("2d"); g.fillStyle = "#111"; g.fillRect(0, 0, cw, ch);
+    if (!isOwn() && video.readyState >= 2 && video.videoWidth) {
+      var kv = video.videoWidth / 1080, sx = -ox / z, sy = -oy / z;
+      try { g.drawImage(video, sx * kv, sy * kv, (vw / z) * kv, (vh / z) * kv, 0, 0, cw, ch); } catch (e) {}
+    }
+  }
   if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { setPip(!en.isIntersecting && en.boundingClientRect.top < 0); }); }, { threshold: 0 }).observe($("screen-slot"));
   window.addEventListener("resize", function () { if (window.innerWidth >= 980) unPip(); });
 
@@ -997,7 +1153,7 @@
     var saved = {}; try { saved = JSON.parse(local("vidpod-studio-v3-" + c.id) || "{}") || {}; } catch (e) { saved = {}; }
     if (c.id === "vidpod") document.querySelector(".made-for").style.display = "none";
     if (B.clips && B.clips.length) { B.clips[0].base = B.clips[0].base || B.base; S.clip = B.clips[0].id; if (saved.clip && saved.clip !== S.clip) useClip(saved.clip, true); }
-    S.viewer = local("vidpod-studio-viewer") || "";
+    S.viewer = (SIGN && SIGN.name) || local("vidpod-studio-viewer") || "";
     S.hookText = saved.hookText == null ? null : saved.hookText;
     S.likes = saved.likes || {};
     S.vtype = saved.vtype || ((B.video_types || [])[0] || {}).id || null;
@@ -1020,13 +1176,16 @@
     renderCheck(); renderClips(); renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); updateFoot();
     goSeg(true); rebuild(); requestAnimationFrame(frame);
     setTimeout(showHint, 1500);
+    whoLines(); initDockSize(); initCloseup(); initFeedback();
+    var ob = $("our-picks"); if (ob) { ob.hidden = !B.vidpod_pick; ob.addEventListener("click", useOurPicks); }
+    if (SIGN) post("Sign-ins", [{ section: "", optionCode: "", label: SIGN.fresh ? "Signed in" : "Came back", settings: { board: B.client.id, hash: location.hash || "", page: location.host || "claude", screen: window.innerWidth + "x" + window.innerHeight }, note: (navigator.userAgent || "").slice(0, 160) }]);
     window.__studio = { S: S, switchSec: switchSec, chooseStyle: chooseStyle, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
   }
   /* ---- which board: #atpilates (or #atpilates/hook) opens that client's board; no hash opens the VIDPOD standard board ---- */
   var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions"];
   function route() {
-    var parts = (location.hash || "").replace(/^#\/?/, "").split("/").filter(Boolean), out = { client: "vidpod", sec: null };
-    parts.forEach(function (x) { x = decodeURIComponent(x).toLowerCase(); if (SECTION_IDS.indexOf(x) >= 0) out.sec = x; else if (/^[a-z0-9-]{2,40}$/.test(x)) out.client = x; });
+    var parts = (location.hash || "").replace(/^#\/?/, "").split("/").filter(Boolean), out = { client: "vidpod", sec: null, explicit: false };
+    parts.forEach(function (x) { x = decodeURIComponent(x).toLowerCase(); if (SECTION_IDS.indexOf(x) >= 0) out.sec = x; else if (/^[a-z0-9-]{2,40}$/.test(x)) { out.client = x; out.explicit = true; } });
     return out;
   }
   function getBoard(id) { return fetch("clients/" + id + "/board.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
@@ -1042,9 +1201,133 @@
       return b;
     }).catch(function () { return b; });
   }
-  var startClient = route().client;
-  window.addEventListener("hashchange", function () { if (B && route().client !== B.client.id) location.reload(); else if (B && route().sec && route().sec !== S.sec && sec(route().sec)) switchSec(route().sec, false); });
-  getBoard(startClient).catch(function () { return startClient === "vidpod" ? Promise.reject(new Error("no board")) : getBoard("vidpod"); }).then(loadMark).then(boot).catch(function (e) {
+  window.addEventListener("hashchange", function () { var r = route(); if (B && r.explicit && r.client !== B.client.id) location.reload(); else if (B && r.sec && r.sec !== S.sec && sec(r.sec)) switchSec(r.sec, false); });
+
+  /* ---- feedback: a text note and, outside the Claude page, a hold-to-record voice note with live words where the browser can ---- */
+  var FB = { rec: null, chunks: [], blob: null, type: "", t0: 0, timer: 0, stream: null, sr: null, words: "", interim: "", holding: false, secs: 0 };
+  function fbVoiceOK() { return !(window.claude && typeof window.claude.use === "function") && typeof window.MediaRecorder === "function" && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function"; }
+  function fbType() { var c = ["audio/mp4", "audio/webm;codecs=opus", "audio/webm", "audio/ogg;codecs=opus"]; for (var i = 0; i < c.length; i++) if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c[i])) return c[i]; return ""; }
+  function fbShowWords() { var w = $("fb-words"); var txt = (FB.words + " " + FB.interim).trim(); w.hidden = !txt; w.innerHTML = esc(FB.words) + (FB.interim ? " <em>" + esc(FB.interim) + "</em>" : ""); }
+  function fbStartWords() {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR) return;
+    try {
+      var sr = new SR(); sr.lang = "en-AU"; sr.continuous = true; sr.interimResults = true;
+      sr.onresult = function (ev) { var fin = "", mid = ""; for (var i = ev.resultIndex; i < ev.results.length; i++) { var r = ev.results[i]; if (r.isFinal) fin += r[0].transcript; else mid += r[0].transcript; } if (fin) FB.words = (FB.words + " " + fin).trim(); FB.interim = mid; fbShowWords(); };
+      sr.onerror = function () {}; sr.onend = function () { FB.sr = null; };
+      sr.start(); FB.sr = sr;
+    } catch (e) { FB.sr = null; }
+  }
+  function fbTick() { var s2 = Math.floor((Date.now() - FB.t0) / 1000); FB.secs = s2; $("fb-time").textContent = "Recording " + fmt(s2) + " of 2:00. Let go to stop."; if (s2 >= 120) fbStop(); }
+  function fbBegin() {
+    FB.chunks = []; FB.words = ""; FB.interim = ""; fbShowWords();
+    FB.type = fbType();
+    try { FB.rec = FB.type ? new MediaRecorder(FB.stream, { mimeType: FB.type }) : new MediaRecorder(FB.stream); } catch (e) { FB.rec = new MediaRecorder(FB.stream); }
+    FB.type = FB.rec.mimeType || FB.type || "audio/webm";
+    FB.rec.ondataavailable = function (e) { if (e.data && e.data.size) FB.chunks.push(e.data); };
+    FB.rec.onstop = function () {
+      FB.blob = new Blob(FB.chunks, { type: FB.type.split(";")[0] });
+      $("fb-audio").src = URL.createObjectURL(FB.blob); $("fb-take").hidden = !FB.blob.size;
+      $("fb-time").textContent = FB.blob.size ? "Voice note ready (" + fmt(FB.secs) + "). Hold again to replace it." : "Nothing recorded. Hold the button while you talk.";
+      if (FB.stream) { FB.stream.getTracks().forEach(function (t) { t.stop(); }); FB.stream = null; }
+    };
+    FB.rec.start(500); FB.t0 = Date.now(); FB.secs = 0; clearInterval(FB.timer); FB.timer = setInterval(fbTick, 250); fbTick();
+    $("fb-rec").setAttribute("aria-pressed", "true"); $("fb-rec-l").textContent = "Recording. Let go to stop";
+    fbStartWords();
+  }
+  function fbStart() {
+    if (FB.rec && FB.rec.state === "recording") return;
+    FB.holding = true; $("fb-err").hidden = true;
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (st) {
+      FB.stream = st;
+      if (!FB.holding) { st.getTracks().forEach(function (t) { t.stop(); }); FB.stream = null; $("fb-time").textContent = "Microphone ready. Now hold the button while you talk."; return; }
+      fbBegin();
+    }).catch(function () { FB.holding = false; $("fb-err").textContent = "We could not use your microphone. You can still type your note."; $("fb-err").hidden = false; });
+  }
+  function fbStop() {
+    FB.holding = false; clearInterval(FB.timer);
+    $("fb-rec").setAttribute("aria-pressed", "false"); $("fb-rec-l").textContent = "Hold to record a voice note";
+    if (FB.sr) try { FB.sr.stop(); } catch (e) {}
+    if (FB.interim) { FB.words = (FB.words + " " + FB.interim).trim(); FB.interim = ""; fbShowWords(); }
+    if (FB.rec && FB.rec.state === "recording") FB.rec.stop();
+  }
+  function fbClear() { FB.blob = null; FB.words = ""; FB.interim = ""; fbShowWords(); $("fb-take").hidden = true; $("fb-audio").removeAttribute("src"); $("fb-time").textContent = "Up to 2 minutes. Let go to stop."; }
+  function initFeedback() {
+    var dlg = $("fb");
+    $("fb-btn").addEventListener("click", function () {
+      $("fb-main").style.display = "flex"; $("fb-done").style.display = "none"; $("fb-err").hidden = true;
+      $("fb-voice").hidden = !fbVoiceOK();
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    });
+    var close = function () { fbStop(); if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); };
+    $("fb-cancel").addEventListener("click", close); $("fb-close").addEventListener("click", close);
+    var rb = $("fb-rec");
+    rb.addEventListener("pointerdown", function (e) { e.preventDefault(); try { rb.setPointerCapture(e.pointerId); } catch (x) {} fbStart(); });
+    ["pointerup", "pointercancel", "lostpointercapture"].forEach(function (n) { rb.addEventListener(n, function () { if (FB.holding || (FB.rec && FB.rec.state === "recording")) fbStop(); }); });
+    rb.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    rb.addEventListener("keydown", function (e) { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); fbStart(); } });
+    rb.addEventListener("keyup", function (e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); fbStop(); } });
+    $("fb-del").addEventListener("click", fbClear);
+    $("fb-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var note = $("fb-note").value.trim(), btn = $("fb-send"), st0 = curStyle();
+      if (!note && !FB.blob) { $("fb-err").textContent = "Add a note or record a voice note first."; $("fb-err").hidden = false; return; }
+      if (FB.blob && FB.blob.size > 5 * 1024 * 1024) { $("fb-err").textContent = "That voice note is too long to send. Try a shorter one."; $("fb-err").hidden = false; return; }
+      btn.disabled = true; btn.textContent = "Sending";
+      var row = { section: S.sec, optionCode: st0 ? st0.code : "", label: FB.blob ? "Feedback with voice note" : "Feedback", settings: { clip: S.clip || null, useCase: S.vtype || null, voiceSeconds: FB.blob ? FB.secs : 0, audioType: FB.blob ? FB.blob.type : null }, note: note, transcript: FB.words };
+      var withAudio = !FB.blob ? Promise.resolve(null) : new Promise(function (res) { var fr = new FileReader(); fr.onload = function () { res({ base64: String(fr.result || "").replace(/^data:[^,]*,/, ""), contentType: FB.blob.type || "audio/mp4", filename: "voice note." + (/mp4/.test(FB.blob.type) ? "m4a" : /ogg/.test(FB.blob.type) ? "ogg" : "webm") }); }; fr.onerror = function () { res(null); }; fr.readAsDataURL(FB.blob); });
+      withAudio.then(function (au) { return post("Feedback", [row], au ? { audio: au } : null); }).then(function (ok) {
+        btn.disabled = false; btn.textContent = "Send feedback";
+        if (!ok) { local("vidpod-studio-feedback-unsent", JSON.stringify(row)); $("fb-err").textContent = "We could not reach VIDPOD just now. Your note is saved on this device; try again in a moment."; $("fb-err").hidden = false; return; }
+        $("fb-done-p").textContent = "Sent to VIDPOD. Thanks " + (S.viewer || "") + ", we read every note.";
+        $("fb-main").style.display = "none"; $("fb-done").style.display = "flex";
+        $("fb-note").value = ""; fbClear();
+      });
+    });
+  }
+
+  /* ---- sign-in: name + access code (no account). The code decides the board; a client hash in the URL still wins (for VIDPOD). ---- */
+  function saveSign() { local("vidpod-studio-signin", JSON.stringify({ name: SIGN.name, code: SIGN.code })); }
+  function loadCodes() { return fetch("codes.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
+  function gate(cfg) {
+    var codes = {}; Object.keys(cfg.codes || {}).forEach(function (k) { codes[k.toUpperCase()] = cfg.codes[k]; });
+    var saved = null; try { saved = JSON.parse(local("vidpod-studio-signin") || "null"); } catch (e) { saved = null; }
+    if (saved && saved.name && saved.code && codes[String(saved.code).toUpperCase()]) {
+      var c0 = String(saved.code).toUpperCase();
+      return Promise.resolve({ name: saved.name, code: c0, board: codes[c0].board, fresh: false });
+    }
+    return new Promise(function (res) {
+      var g = $("gate"); g.hidden = false;
+      $("gate-name").value = (saved && saved.name) || local("vidpod-studio-viewer") || "";
+      ($("gate-name").value ? $("gate-code") : $("gate-name")).focus();
+      $("gate-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nm = $("gate-name").value.trim(), cd = $("gate-code").value.trim().toUpperCase(), er = $("gate-err");
+        if (!nm) { er.textContent = "Add your name so VIDPOD knows who is picking."; er.hidden = false; $("gate-name").focus(); return; }
+        if (!codes[cd]) { er.textContent = cd ? "That code did not work. Check it with your VIDPOD contact and try again." : "Add the access code VIDPOD gave you."; er.hidden = false; $("gate-code").focus(); $("gate-code").select(); return; }
+        er.hidden = true; g.hidden = true;
+        local("vidpod-studio-signin", JSON.stringify({ name: nm, code: cd })); local("vidpod-studio-viewer", nm);
+        res({ name: nm, code: cd, board: codes[cd].board, fresh: true });
+      });
+    });
+  }
+  function switchUser() { local("vidpod-studio-signin", null); location.reload(); }
+  function whoLines() {
+    if (!SIGN) return;
+    ["who-foot", "who-sheet"].forEach(function (id) {
+      var n = $(id); if (!n) return;
+      n.innerHTML = "Signed in as <b>" + esc(S.viewer || SIGN.name) + "</b>. ";
+      var b = el("button", "link", "Not you? Switch"); b.type = "button"; b.addEventListener("click", switchUser); n.appendChild(b);
+    });
+  }
+  loadCodes().catch(function () { return null; }).then(function (cfg) {
+    if (!cfg) { $("veil").textContent = "The studio could not load. Check your connection and refresh."; return; }
+    LOG_URL = /^https:\/\//.test(cfg.log_endpoint || "") ? cfg.log_endpoint : "";
+    return gate(cfg).then(function (sg) {
+      SIGN = sg;
+      var r = route(), startClient = r.explicit ? r.client : (sg.board || "vidpod");
+      return getBoard(startClient).catch(function () { return startClient === "vidpod" ? Promise.reject(new Error("no board")) : getBoard("vidpod"); }).then(loadMark).then(boot);
+    });
+  }).catch(function (e) {
     console.error(e); $("veil").textContent = "The studio could not load. Refresh to try again.";
   });
 })();

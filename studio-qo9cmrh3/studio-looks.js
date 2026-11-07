@@ -28,6 +28,11 @@ window.VPLooks = function (K) {
   // emphasis on footage: same colour as the line, marked with a fine underline in the brand accent (reads on any background)
   H.emphTok = function (s, ctx, col) { s.style.textDecoration = "underline"; s.style.textDecorationColor = col || ctx.B.brand.accent; s.style.textDecorationThickness = "0.085em"; s.style.textUnderlineOffset = "0.14em"; s.style.textDecorationSkipInk = "none"; };
   H.inkOn = function (bg, ctx) { return K.isLight(bg) ? ctx.B.brand.ink : "#FFFFFF"; };
+  // text on a coloured box: the picked text colour, unless it would vanish into the box (then a readable ink)
+  H.lum = function (hex) { var h = String(hex).replace("#", ""), c = [0, 2, 4].map(function (o) { var v = parseInt(h.substr(o, 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  H.contrast = function (a, b) { var x = H.lum(a), y = H.lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  H.on = function (bg, want, ctx) { return want && H.contrast(bg, want) >= 1.8 ? want : H.inkOn(bg, ctx); };
+  H.c2 = function (ctx, fallback) { return ctx.hex2 || fallback; };
   H.clamp = function (x, a, b) { return Math.max(a, Math.min(b, x)); };
   H.ss = function (a, b, x) { var t = H.clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
   H.maxW = function (ctx) { return (ctx.safe.x1 - ctx.safe.x0) - 40; };
@@ -176,10 +181,10 @@ window.VPLooks = function (K) {
   };
   // SUB-03 highlight box (cap.highlight-box): a soft brand box slides from word to word
   R["cap-box-word"] = function (ctx) {
-    var f = ctx.f, box = ctx.hex === "#FFFFFF" ? ctx.B.brand.accent : ctx.hex, ink = H.inkOn(box, ctx), boxes = [];
+    var f = ctx.f, box = ctx.hex, txt = H.c2(ctx, "#FFFFFF"), ink = H.on(box, txt, ctx), tsh = K.isLight(txt) ? ctx.B.brand.shadow : "none", boxes = [];
     var r = capBuild(ctx, {
       gapEm: 0.3,
-      word: function (s) { H.txt(s, ctx, f.w_bold, false, "#FFFFFF"); s.style.textShadow = ctx.B.brand.shadow; s.style.zIndex = 1; },
+      word: function (s) { H.txt(s, ctx, f.w_bold, false, txt); s.style.textShadow = tsh; s.style.zIndex = 1; },
       decorate: function (G, c) { var b = el("div"); b.style.cssText = "position:absolute;left:0;top:0;border-radius:" + Math.round(c.fs * 0.2) + "px;background:" + box + ";opacity:0;z-index:0;"; G.inner.style.position = "relative"; G.inner.insertBefore(b, G.inner.firstChild); G.box = b; },
       anim: function (tl, G, spans, lines, c, st, en) { boxes.push({ G: G, spans: spans, c: c, st: st, en: en }); tl.fromTo(G.g, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out", immediateRender: false }, st); }
     });
@@ -191,9 +196,9 @@ window.VPLooks = function (K) {
           var at = Math.max(o.st, x.w.t - 0.04);
           if (j === 0) r.tl.set(o.G.box, { x: X, y: Y, width: w, height: h, opacity: 1 }, at);
           else r.tl.to(o.G.box, { x: X, y: Y, width: w, height: h, duration: 0.12, ease: "power2.out" }, at);
-          r.tl.set(s, { color: "#FFFFFF", textShadow: ctx.B.brand.shadow }, o.st);
+          r.tl.set(s, { color: txt, textShadow: tsh }, o.st);
           r.tl.set(s, { color: ink, textShadow: "none" }, at + 0.04);
-          r.tl.set(s, { color: "#FFFFFF", textShadow: ctx.B.brand.shadow }, j < o.spans.length - 1 ? Math.max(at + 0.05, o.spans[j + 1].w.t - 0.04) : o.en);
+          r.tl.set(s, { color: txt, textShadow: tsh }, j < o.spans.length - 1 ? Math.max(at + 0.05, o.spans[j + 1].w.t - 0.04) : o.en);
         });
         r.tl.set(o.G.box, { opacity: 0 }, o.st - 0.001);
       });
@@ -217,7 +222,7 @@ window.VPLooks = function (K) {
     return capBuild(ctx, {
       weight: f.w_light,
       word: function (s, i, isE) {
-        if (isE) { H.txt(s, ctx, f.w_display, true, H.hero(ctx)); s.style.fontSize = "1.32em"; s.style.lineHeight = "0.9"; s.style.textShadow = ctx.B.brand.shadow; }
+        if (isE) { H.txt(s, ctx, f.w_display, true, H.c2(ctx, H.hero(ctx))); s.style.fontSize = "1.32em"; s.style.lineHeight = "0.9"; s.style.textShadow = ctx.B.brand.shadow; }
         else H.txt(s, ctx, f.w_light);
       },
       anim: function (tl, G, spans, lines, c, st) {
@@ -232,25 +237,25 @@ window.VPLooks = function (K) {
   };
   // SUB-06 colour pop (cap.hormozi-pop, kept calm): the spoken word takes your colour and lifts 8 %
   R["cap-colour-pop"] = function (ctx) {
-    var f = ctx.f, hero = H.hero(ctx);
+    var f = ctx.f, hero = H.c2(ctx, H.hero(ctx)), base = ctx.hex;
     return capBuild(ctx, {
-      word: function (s) { H.txt(s, ctx, f.w_bold, false, "#FFFFFF"); s.style.textShadow = ctx.B.brand.shadow; },
+      word: function (s) { H.txt(s, ctx, f.w_bold, false, base); s.style.textShadow = K.isLight(base) ? ctx.B.brand.shadow : "none"; },
       anim: function (tl, G, spans, lines, c, st, en) {
         tl.fromTo(G.g, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.1, ease: "power3.out", immediateRender: false }, st);
         spans.forEach(function (x, j) {
           var on = Math.max(st, x.w.t - 0.02), off = j < spans.length - 1 ? Math.max(on + 0.05, spans[j + 1].w.t - 0.02) : en;
-          tl.set(x.s, { color: "#FFFFFF", scale: 1 }, st);
+          tl.set(x.s, { color: base, scale: 1 }, st);
           tl.to(x.s, { color: hero, scale: 1.08, duration: 0.08, ease: "power2.out" }, on);
-          tl.to(x.s, { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.out" }, off);
+          tl.to(x.s, { color: base, scale: 1, duration: 0.08, ease: "power2.out" }, off);
         });
       }
     });
   };
   // SUB-07 caption-pill-karaoke: one soft pill per phrase, words fill in as they are spoken
   R["cap-pill-karaoke"] = function (ctx) {
-    var f = ctx.f, pill = ctx.hex, ink = H.inkOn(pill, ctx);
+    var f = ctx.f, pill = ctx.hex, ink = H.on(pill, H.c2(ctx, null), ctx);
     var mix = function (a, b, t) { var p = function (h, o) { return parseInt(h.replace("#", "").substr(o, 2), 16); }; var c = [0, 2, 4].map(function (o) { return Math.round(p(a, o) * (1 - t) + p(b, o) * t); }); return "rgb(" + c.join(",") + ")"; };
-    var inactive = mix(ink === "#FFFFFF" ? "#FFFFFF" : ink, pill, 0.55);
+    var inactive = mix(/^#[0-9a-f]{6}$/i.test(ink) ? ink : "#FFFFFF", pill, 0.55);
     return capBuild(ctx, {
       lh: 1.16,
       word: function (s) { s.style.fontFamily = H.fam(f); s.style.fontWeight = f.w_bold; s.style.fontSynthesis = "none"; s.style.color = inactive; },
@@ -263,7 +268,7 @@ window.VPLooks = function (K) {
   };
   // SUB-08 caption-clip-wipe: each word wipes in left to right, key words take your colour
   R["cap-clip-wipe"] = function (ctx) {
-    var f = ctx.f, accent = H.hero(ctx) === ctx.hex && ctx.colourId !== "white" ? "#FFFFFF" : ctx.B.brand.accent;
+    var f = ctx.f, accent = H.c2(ctx, ctx.B.brand.accent);
     return capBuild(ctx, {
       gapEm: 0.3, lh: 1.05,
       word: function (s) { H.txt(s, ctx, f.w_bold); s.style.letterSpacing = "0.03em"; s.style.clipPath = "inset(0 100% 0 0)"; },
@@ -312,7 +317,7 @@ window.VPLooks = function (K) {
     var fs = 50;
     H.wrap(lines, fs, f.w_bold, f.family, H.maxW(ctx)).forEach(function (ln) {
       var le = el("div"); le.style.cssText = "display:flex;gap:" + Math.round(ln.size * 0.26) + "px;white-space:nowrap;font-size:" + ln.size + "px;line-height:1.15;";
-      ln.toks.forEach(function (tk) { var s = el("span", "", esc(tk.text)); H.txt(s, ctx, tk.emph ? f.w_bold : f.w_light, false, "#FFFFFF"); s.style.textShadow = ctx.B.brand.shadow; s.style.opacity = 0.3; le.appendChild(s); tl.to(s, { opacity: 1, duration: 0.08 }, Math.max(ctx.seg[0], tk.t - 0.02)); });
+      ln.toks.forEach(function (tk) { var s = el("span", "", esc(tk.text)); var fc = H.c2(ctx, "#FFFFFF"); H.txt(s, ctx, tk.emph ? f.w_bold : f.w_light, false, fc); s.style.textShadow = K.isLight(fc) ? ctx.B.brand.shadow : "none"; s.style.opacity = 0.3; le.appendChild(s); tl.to(s, { opacity: 1, duration: 0.08 }, Math.max(ctx.seg[0], tk.t - 0.02)); });
       front.appendChild(le);
     });
     holdOut(tl, front, ctx);
@@ -323,7 +328,7 @@ window.VPLooks = function (K) {
   };
   // HOOK-02 highlight bars (H3, inline-highlight): a headline on bars that holds for the whole hook
   R["hook-bars"] = function (ctx) {
-    var L = ctx.L, f = ctx.f, bar = ctx.hex, ink = H.inkOn(bar, ctx), tl = H.tl();
+    var L = ctx.L, f = ctx.f, bar = ctx.hex, ink = H.on(bar, H.c2(ctx, null), ctx), tl = H.tl();
     var rows = H.wrap(hookTokens(ctx), L.size, f.w_bold, f.family, H.maxW(ctx) - L.size * 0.5);
     var block = H.block(), G = H.grp(block), t0 = ctx.seg[0] + 0.12;
     rows.forEach(function (r, k) {
@@ -342,7 +347,7 @@ window.VPLooks = function (K) {
   };
   // HOOK-03 quote box and stacked label (H4, testimonial-proof-card): cream card, her words type on, a small label above
   R["hook-quote"] = function (ctx) {
-    var L = ctx.L, f = ctx.f, b = ctx.B.brand, paper = b.cream || "#FFFFFF", tl = H.tl(), hero = ctx.colourId === "white" ? b.accent : ctx.hex;
+    var L = ctx.L, f = ctx.f, b = ctx.B.brand, paper = H.c2(ctx, b.cream || "#FFFFFF"), tl = H.tl(), hero = ctx.hex, qInk = H.inkOn(paper, ctx), qKey = H.on(paper, hero, ctx);
     var block = H.block(), G = H.grp(block), t0 = ctx.seg[0] + 0.1;
     var lab = el("div"); lab.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:" + Math.round(L.size * 0.34) + "px;";
     var rule = el("div"); rule.style.cssText = "width:64px;height:4px;border-radius:4px;background:" + b.accent + ";margin-bottom:6px;";
@@ -353,7 +358,7 @@ window.VPLooks = function (K) {
     var rows = H.wrap(hookTokens(ctx), L.size, f.w_bold, f.family, (ctx.safe.x1 - ctx.safe.x0) - L.size * 1.2), spans = [];
     rows.forEach(function (r) {
       var le = el("div"); le.style.cssText = "display:flex;gap:" + Math.round(r.size * 0.24) + "px;white-space:nowrap;font-size:" + r.size + "px;line-height:1.08;letter-spacing:-0.01em;";
-      r.toks.forEach(function (tk) { var s = el("span", "", esc(tk.text)); H.txt(s, ctx, f.w_bold, false, b.ink); if (tk.emph) H.emphTok(s, ctx, hero); le.appendChild(s); spans.push({ s: s, tk: tk }); });
+      r.toks.forEach(function (tk) { var s = el("span", "", esc(tk.text)); H.txt(s, ctx, f.w_bold, false, tk.emph ? qKey : qInk); if (tk.emph) H.emphTok(s, ctx, hero); le.appendChild(s); spans.push({ s: s, tk: tk }); });
       card.appendChild(le);
     });
     G.inner.appendChild(lab); G.inner.appendChild(card);
@@ -374,7 +379,7 @@ window.VPLooks = function (K) {
       var stack = el("div"); stack.style.cssText = "display:inline-flex;flex-direction:column;";
       var mk = function (toks, align) {
         var r = el("div"); r.style.cssText = "display:flex;gap:" + Math.round(small * 0.28) + "px;white-space:nowrap;font-size:" + small + "px;line-height:1.05;align-self:" + align + ";";
-        toks.forEach(function (tk) { var s = el("span", "", esc(tk.text)); H.txt(s, ctx, f.w_light || 400, false, "#FFFFFF"); s.style.textShadow = ctx.B.brand.shadow; r.appendChild(s); tl.fromTo(s, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out", immediateRender: true }, Math.max(seg[0], tk.t - 0.02)); });
+        toks.forEach(function (tk) { var s = el("span", "", esc(tk.text)), sc = H.c2(ctx, "#FFFFFF"); H.txt(s, ctx, f.w_light || 400, false, sc); s.style.textShadow = K.isLight(sc) ? ctx.B.brand.shadow : "none"; r.appendChild(s); tl.fromTo(s, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out", immediateRender: true }, Math.max(seg[0], tk.t - 0.02)); });
         return r;
       };
       // a long lead-in breaks over two short rows so it hugs the hero word
@@ -556,9 +561,9 @@ window.VPLooks = function (K) {
   R["lt-accent-underline"] = function (ctx) {
     var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), tl = H.tl();
     var wrap = el("div"); wrap.style.cssText = "display:flex;flex-direction:column;align-items:" + (o.left ? "flex-start" : "center") + ";gap:" + Math.round(L.size * 0.19) + "px;";
-    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:0.96;letter-spacing:0.005em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, "#FFFFFF"); nm.style.textShadow = ctx.B.brand.shadow;
-    var rule = el("div"); rule.style.cssText = "height:" + Math.max(3, Math.round(L.size * 0.055)) + "px;width:" + Math.round(L.size * 2.2) + "px;border-radius:3px;transform-origin:" + (o.left ? "0%" : "50%") + " 50%;background:" + ltAcc(ctx, false) + ";";
-    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + Math.round(L.size * 0.46) + "px;line-height:1.2;letter-spacing:0.01em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, "#FFFFFF"); role.style.textShadow = ctx.B.brand.shadow;
+    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:0.96;letter-spacing:0.005em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, ltTxt(ctx).c); nm.style.textShadow = ltTxt(ctx).sh;
+    var rule = el("div"); rule.style.cssText = "height:" + Math.max(3, Math.round(L.size * 0.055)) + "px;width:" + Math.round(L.size * 2.2) + "px;border-radius:3px;transform-origin:" + (o.left ? "0%" : "50%") + " 50%;background:" + ltAcc(ctx) + ";";
+    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + Math.round(L.size * 0.46) + "px;line-height:1.2;letter-spacing:0.01em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, ltTxt(ctx).c); role.style.textShadow = ltTxt(ctx).sh;
     wrap.appendChild(nm); wrap.appendChild(rule); wrap.appendChild(role); o.G.inner.appendChild(wrap);
     tl.set(nm, { y: 28, opacity: 0 }, ctx.seg[0]); tl.set(rule, { scaleX: 0 }, ctx.seg[0]); tl.set(role, { y: 16, opacity: 0 }, ctx.seg[0]);
     tl.to(nm, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, T.t0 + 0.1);
@@ -591,10 +596,11 @@ window.VPLooks = function (K) {
   R["lt-clean-bar"] = function (ctx) {
     var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), k = L.size / 52, tl = H.tl(), b = ctx.B.brand;
     var card = el("div"); card.style.cssText = "display:flex;align-items:stretch;border-radius:" + Math.round(16 * k) + "px;overflow:hidden;box-shadow:0 14px 44px rgba(15,17,21,.18);";
-    var tab = el("div"); tab.style.cssText = "width:" + Math.round(12 * k) + "px;flex-shrink:0;transform-origin:50% 0%;background:" + ltAcc(ctx, true) + ";";
-    var body = el("div"); body.style.cssText = "background:" + (b.ground || "#FFFFFF") + ";padding:" + Math.round(22 * k) + "px " + Math.round(40 * k) + "px " + Math.round(24 * k) + "px " + Math.round(30 * k) + "px;display:flex;flex-direction:column;gap:" + Math.round(7 * k) + "px;align-items:" + (o.left ? "flex-start" : "center") + ";";
-    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1.06;letter-spacing:-0.015em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, b.ink);
-    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + Math.round(27 * k) + "px;line-height:1.2;letter-spacing:0.01em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, b.taupe);
+    var cardBg = H.c2(ctx, b.ground || "#FFFFFF");
+    var tab = el("div"); tab.style.cssText = "width:" + Math.round(12 * k) + "px;flex-shrink:0;transform-origin:50% 0%;background:" + ltAcc(ctx) + ";";
+    var body = el("div"); body.style.cssText = "background:" + cardBg + ";padding:" + Math.round(22 * k) + "px " + Math.round(40 * k) + "px " + Math.round(24 * k) + "px " + Math.round(30 * k) + "px;display:flex;flex-direction:column;gap:" + Math.round(7 * k) + "px;align-items:" + (o.left ? "flex-start" : "center") + ";";
+    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1.06;letter-spacing:-0.015em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, H.inkOn(cardBg, ctx)); nm.style.textShadow = "none";
+    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + Math.round(27 * k) + "px;line-height:1.2;letter-spacing:0.01em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, ltRole(cardBg, ctx)); role.style.textShadow = "none";
     body.appendChild(nm); body.appendChild(role); card.appendChild(tab); card.appendChild(body); o.G.inner.appendChild(card);
     tl.set(card, { clipPath: "inset(0 100% 0 0)", y: 0, opacity: 1 }, ctx.seg[0]); tl.set(tab, { scaleY: 0 }, ctx.seg[0]); tl.set([nm, role], { y: 22, opacity: 0 }, ctx.seg[0]);
     tl.to(card, { clipPath: "inset(0 0% 0 0)", duration: 0.55, ease: "power3.out" }, T.t0 + 0.1);
@@ -621,15 +627,18 @@ window.VPLooks = function (K) {
   /* ---- v4 name cards from the HyperFrames registry (lt-soft-pill, lt-dark-card, lt-mask-reveal, lt-stack-bars),
      same timings as the registry blocks, skinned with board.json brand colours and fonts. The colour pick is the
      accent (dot, tab, rule, sweep, role bar); on a white card a white accent falls back to the brand accent. ---- */
-  function ltAcc(ctx, onLight) { return onLight && ctx.colourId === "white" ? ctx.B.brand.accent : ctx.hex; }
+  function ltAcc(ctx) { return ctx.hex; }
+  function ltTxt(ctx) { var c = H.c2(ctx, "#FFFFFF"); return { c: c, sh: K.isLight(c) ? ctx.B.brand.shadow : "none" }; }
+  function ltRole(bg, ctx) { var b = ctx.B.brand; return K.isLight(bg) ? (b.taupe || b.ink) : "rgba(255,255,255,.74)"; }
   function px(n) { return Math.round(n) + "px"; }
   R["lt-soft-pill"] = function (ctx) {
     var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), k = L.size / 46, tl = H.tl(), b = ctx.B.brand;
-    var pill = el("div"); pill.style.cssText = "display:flex;align-items:center;gap:" + px(22 * k) + ";background:" + (b.ground || "#FFFFFF") + ";border-radius:999px;padding:" + px(20 * k) + " " + px(40 * k) + " " + px(20 * k) + " " + px(26 * k) + ";box-shadow:0 16px 46px rgba(15,17,21,.2);transform-origin:" + (o.left ? "0% 100%" : "50% 100%") + ";";
-    var dot = el("div"); dot.style.cssText = "width:" + px(18 * k) + ";height:" + px(18 * k) + ";border-radius:50%;flex-shrink:0;background:" + ltAcc(ctx, true) + ";";
+    var pillBg = H.c2(ctx, b.ground || "#FFFFFF");
+    var pill = el("div"); pill.style.cssText = "display:flex;align-items:center;gap:" + px(22 * k) + ";background:" + pillBg + ";border-radius:999px;padding:" + px(20 * k) + " " + px(40 * k) + " " + px(20 * k) + " " + px(26 * k) + ";box-shadow:0 16px 46px rgba(15,17,21,.2);transform-origin:" + (o.left ? "0% 100%" : "50% 100%") + ";";
+    var dot = el("div"); dot.style.cssText = "width:" + px(18 * k) + ";height:" + px(18 * k) + ";border-radius:50%;flex-shrink:0;background:" + ltAcc(ctx) + ";";
     var tx = el("div"); tx.style.cssText = "display:flex;flex-direction:column;gap:" + px(4 * k) + ";";
-    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1.04;letter-spacing:-0.015em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, b.ink);
-    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + px(25 * k) + ";line-height:1.2;letter-spacing:0.01em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, b.taupe || b.ink);
+    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1.04;letter-spacing:-0.015em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, H.inkOn(pillBg, ctx)); nm.style.textShadow = "none";
+    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + px(25 * k) + ";line-height:1.2;letter-spacing:0.01em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, ltRole(pillBg, ctx)); role.style.textShadow = "none";
     tx.appendChild(nm); tx.appendChild(role); pill.appendChild(dot); pill.appendChild(tx); o.G.inner.appendChild(pill);
     tl.set(pill, { scale: 0.88, y: 18, opacity: 0 }, ctx.seg[0]); tl.set(dot, { scale: 0 }, ctx.seg[0]); tl.set([nm, role], { opacity: 0, x: -10 }, ctx.seg[0]);
     tl.to(pill, { scale: 1, y: 0, opacity: 1, duration: 0.55, ease: "back.out(1.7)" }, T.t0 + 0.1);
@@ -641,10 +650,11 @@ window.VPLooks = function (K) {
   };
   R["lt-dark-card"] = function (ctx) {
     var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), k = L.size / 48, tl = H.tl(), b = ctx.B.brand;
-    var card = el("div"); card.style.cssText = "background:" + (b.ink || "#16181D") + ";border-radius:" + px(14 * k) + ";padding:" + px(24 * k) + " " + px(38 * k) + " " + px(26 * k) + " " + px(32 * k) + ";box-shadow:0 18px 50px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:" + px(12 * k) + ";align-items:" + (o.left ? "flex-start" : "center") + ";";
-    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1.02;letter-spacing:-0.015em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, "#FFFFFF"); nm.style.textShadow = "none";
-    var ul = el("div"); ul.style.cssText = "height:" + px(Math.max(3, 4 * k)) + ";align-self:stretch;border-radius:2px;transform-origin:" + (o.left ? "0%" : "50%") + " 50%;background:" + ltAcc(ctx, false) + ";";
-    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + px(25 * k) + ";line-height:1.2;letter-spacing:0.02em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, "rgba(255,255,255,.74)"); role.style.textShadow = "none";
+    var dcBg = H.c2(ctx, b.ink || "#16181D");
+    var card = el("div"); card.style.cssText = "background:" + dcBg + ";border-radius:" + px(14 * k) + ";padding:" + px(24 * k) + " " + px(38 * k) + " " + px(26 * k) + " " + px(32 * k) + ";box-shadow:0 18px 50px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:" + px(12 * k) + ";align-items:" + (o.left ? "flex-start" : "center") + ";";
+    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1.02;letter-spacing:-0.015em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, H.inkOn(dcBg, ctx)); nm.style.textShadow = "none";
+    var ul = el("div"); ul.style.cssText = "height:" + px(Math.max(3, 4 * k)) + ";align-self:stretch;border-radius:2px;transform-origin:" + (o.left ? "0%" : "50%") + " 50%;background:" + ltAcc(ctx) + ";";
+    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + px(25 * k) + ";line-height:1.2;letter-spacing:0.02em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, ltRole(dcBg, ctx)); role.style.textShadow = "none";
     card.appendChild(nm); card.appendChild(ul); card.appendChild(role); o.G.inner.appendChild(card);
     tl.set(card, { y: 60, opacity: 0 }, ctx.seg[0]); tl.set(nm, { y: 14, opacity: 0 }, ctx.seg[0]); tl.set(ul, { scaleX: 0 }, ctx.seg[0]); tl.set(role, { opacity: 0 }, ctx.seg[0]);
     tl.to(card, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, T.t0 + 0.1);
@@ -658,9 +668,9 @@ window.VPLooks = function (K) {
     var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), k = L.size / 72, tl = H.tl(), b = ctx.B.brand, name = nameText(ctx);
     var wrap = el("div"); wrap.style.cssText = "display:flex;flex-direction:column;align-items:" + (o.left ? "flex-start" : "center") + ";gap:" + px(14 * k) + ";";
     var nw = el("div"); nw.style.cssText = "position:relative;overflow:hidden;padding:" + px(2 * k) + " 0;";
-    var nm = el("div", "", esc(name)); nm.style.cssText = "font-size:" + L.size + "px;line-height:0.98;letter-spacing:-0.02em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, "#FFFFFF"); nm.style.textShadow = b.shadow;
-    var sweep = el("div"); sweep.style.cssText = "position:absolute;top:0;bottom:0;left:0;width:" + px(Math.max(5, 8 * k)) + ";background:" + ltAcc(ctx, false) + ";";
-    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + px(28 * k) + ";line-height:1.2;letter-spacing:0.02em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, "#FFFFFF"); role.style.textShadow = b.shadow;
+    var nm = el("div", "", esc(name)); nm.style.cssText = "font-size:" + L.size + "px;line-height:0.98;letter-spacing:-0.02em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, ltTxt(ctx).c); nm.style.textShadow = ltTxt(ctx).sh;
+    var sweep = el("div"); sweep.style.cssText = "position:absolute;top:0;bottom:0;left:0;width:" + px(Math.max(5, 8 * k)) + ";background:" + ltAcc(ctx) + ";";
+    var role = el("div", "", esc(ctx.B.base.role)); role.style.cssText = "font-size:" + px(28 * k) + ";line-height:1.2;letter-spacing:0.02em;white-space:nowrap;"; H.txt(role, ctx, f.w_light, false, ltTxt(ctx).c); role.style.textShadow = ltTxt(ctx).sh;
     nw.appendChild(nm); nw.appendChild(sweep); wrap.appendChild(nw); wrap.appendChild(role); o.G.inner.appendChild(wrap);
     var travel = textW(name, f.w_bold, L.size, f.family) * 1.0;
     tl.set(nm, { clipPath: "inset(0 100% 0 0)" }, ctx.seg[0]); tl.set(sweep, { x: 0, opacity: 0 }, ctx.seg[0]); tl.set(role, { y: 14, opacity: 0 }, ctx.seg[0]);
@@ -674,10 +684,10 @@ window.VPLooks = function (K) {
     return { block: o.block, tl: tl };
   };
   R["lt-stack-bars"] = function (ctx) {
-    var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), k = L.size / 52, tl = H.tl(), b = ctx.B.brand, acc = ltAcc(ctx, false);
+    var L = ctx.L, f = ctx.f, T = ltT(ctx), o = ltGrp(ctx), k = L.size / 52, tl = H.tl(), b = ctx.B.brand, acc = ltAcc(ctx), nbBg = H.c2(ctx, b.ink || "#141518");
     var wrap = el("div"); wrap.style.cssText = "display:flex;flex-direction:column;align-items:" + (o.left ? "flex-start" : "center") + ";gap:" + px(8 * k) + ";";
-    var nb = el("div"); nb.style.cssText = "background:" + (b.ink || "#141518") + ";padding:" + px(14 * k) + " " + px(30 * k) + ";";
-    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1;letter-spacing:-0.005em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, "#FFFFFF"); nm.style.textShadow = "none";
+    var nb = el("div"); nb.style.cssText = "background:" + nbBg + ";padding:" + px(14 * k) + " " + px(30 * k) + ";";
+    var nm = el("div", "", esc(nameText(ctx))); nm.style.cssText = "font-size:" + L.size + "px;line-height:1;letter-spacing:-0.005em;white-space:nowrap;"; H.txt(nm, ctx, f.w_bold, false, H.inkOn(nbBg, ctx)); nm.style.textShadow = "none";
     var rb = el("div"); rb.style.cssText = "background:" + acc + ";padding:" + px(9 * k) + " " + px(22 * k) + ";" + (o.left ? "margin-left:" + px(14 * k) + ";" : "");
     var role = el("div", "", esc(K.caseText(String(ctx.B.base.role), "upper"))); role.style.cssText = "font-size:" + px(23 * k) + ";line-height:1;letter-spacing:0.06em;white-space:nowrap;"; H.txt(role, ctx, f.w_bold, false, H.inkOn(acc, ctx)); role.style.textShadow = "none";
     nb.appendChild(nm); rb.appendChild(role); wrap.appendChild(nb); wrap.appendChild(rb); o.G.inner.appendChild(wrap);
