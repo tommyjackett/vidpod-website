@@ -224,7 +224,8 @@
     v.style.cssText = "position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;display:block;";
     over.appendChild(v);
     var tl = gsap.timeline({ paused: true }); tl.to({}, { duration: st.preview.loop || 2.8 });
-    return { tl: tl, loop: st.preview.loop || 2.8, pre: v, focus: st.preview.focus || null, fixed: true };
+    var still = new Image(); still.src = st.preview.still;   // the close-up falls back to the still while the loop loads or seeks
+    return { tl: tl, loop: st.preview.loop || 2.8, pre: v, preStill: still, focus: st.preview.focus || null, fixed: true };
   }
   function preSync(t) {
     var v = live && live.pre; if (!v) return;
@@ -713,7 +714,7 @@
   var SEC_HELP = {
     subtitles: "Runs under everything said. Always centred.", hook: "The first line on screen.",
     name: "Who is speaking, the first time they talk.", logo: "Your logo on a plain background.",
-    graphics: "From VIDPOD's own card library, in your brand. Pick as many as you like.", moves: "Camera and layout moves. Pick as many as you like.", transitions: "Plays at the join between two moments."
+    graphics: "Graphics in your brand. Pick as many as you like.", moves: "Camera and layout moves. Pick as many as you like.", transitions: "Plays at the join between two moments."
   };
   function renderTabs() {
     var t = $("tabs"); t.innerHTML = "";
@@ -1296,8 +1297,10 @@
     if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
     var g = cv.getContext("2d"); g.fillStyle = "#111"; g.fillRect(0, 0, cw, ch);
     var srcV = live && live.pre ? live.pre : (!isOwn() ? video : null);
-    if (srcV && srcV.readyState >= 2 && srcV.videoWidth) {
-      var kv = srcV.videoWidth / 1080, sx = -ox / z, sy = -oy / z;
+    if (srcV && !(srcV.readyState >= 2 && srcV.videoWidth) && live && live.preStill && live.preStill.complete && live.preStill.naturalWidth) srcV = live.preStill;
+    var srcW = srcV ? (srcV.videoWidth || srcV.naturalWidth || 0) : 0;
+    if (srcV && srcW && (srcV.tagName === "IMG" || srcV.readyState >= 2)) {
+      var kv = srcW / 1080, sx = -ox / z, sy = -oy / z;
       try { g.drawImage(srcV, sx * kv, sy * kv, (vw / z) * kv, (vh / z) * kv, 0, 0, cw, ch); } catch (e) {}
     }
     // the person cut-out in front of the words (hooks behind the head), as on the big preview
