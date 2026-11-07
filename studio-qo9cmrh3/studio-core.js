@@ -709,7 +709,7 @@
     S.app = ""; renderCheck(); refreshUI();
     switchSec(orderedSections()[0].id, false);
     $("tabs").scrollLeft = 0; tabFade();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0); requestAnimationFrame(function () { window.scrollTo(0, 0); }); setTimeout(function () { window.scrollTo(0, 0); }, 350);
   }
   // the section row fades at an edge while there is more to scroll
   function tabFade() { var t = $("tabs"); if (!t) return; t.classList.toggle("more-l", t.scrollLeft > 4); t.classList.toggle("more-r", t.scrollLeft + t.clientWidth < t.scrollWidth - 4); }
