@@ -15,7 +15,7 @@
 
   /* ================= the VIDPOD log: every sign-in, pick, like and screenshot goes to the Google Sheet "VidPod Studio Log"
      through a Google Apps Script web app (URL in codes.json, log_endpoint). Plain text body, no-cors: no preflight. ================= */
-  var PAGE_VERSION = "v5";
+  var PAGE_VERSION = "v7";
   var SIGN = null, LOG_URL = "";
   function post(tab, rows, extra) {
     if (!LOG_URL || typeof fetch !== "function") return Promise.resolve(false);
@@ -1480,7 +1480,7 @@
     if (!items.length) { er.textContent = "Pick at least one look first."; er.hidden = false; return; }
     if (!j.video) { er.textContent = "Name the video first, for example: " + (B.base.name || B.client.name).split(" ")[0] + " #1."; er.hidden = false; $("mk-video").focus(); return; }
     er.hidden = true;
-    var doc = picksDoc(), now = new Date(), stamp = now.toISOString().slice(0, 16).replace(/[-:T]/g, "").replace(/^(\d{8})(\d{4})$/, "$1-$2");
+    var doc = picksDoc(), now = new Date(), p2 = function (n) { return ("0" + n).slice(-2); }, stamp = now.getFullYear() + p2(now.getMonth() + 1) + p2(now.getDate()) + "-" + p2(now.getHours()) + p2(now.getMinutes());
     var batch = "MK-" + B.client.id + "-" + stamp, msg = messageText();
     // one summary row (the whole send doc, like a studio Send's "all" row, plus video and batch), then one row per pick in the
     // pick shape tools/picks_to_jobs.py reads: {client, project, video, section, code, at, settings}; at = "whole" (house style),

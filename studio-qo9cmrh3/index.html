@@ -579,7 +579,8 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 @media (max-width: 979px) {
   .stage { position: sticky; top: 0; z-index: 40; padding-top: 6px; padding-bottom: 6px; gap: 4px; box-shadow: 0 1px 0 var(--line); }
   .phone { --ph: min(31svh, 520px); }
-  .sticky { position: sticky; top: var(--stage-h, 0px); z-index: 39; }
+  .sticky { position: sticky; top: var(--stage-h, 0px); z-index: 39; background: var(--bg); }
+  .sticky .tabs { background: var(--bg); }
   .needs { font-size: 11px; min-height: 16px; }
   .transport { height: 26px; }
   .mk-job { grid-template-columns: 1fr; }
@@ -825,6 +826,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r6"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7"></script>
+<script src="studio-core.js?v=r7b"></script>
 
 </html>
