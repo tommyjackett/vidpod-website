@@ -161,7 +161,7 @@ img { max-width: 100%; display: block; }
 
 /* close-up: a magnified live view of the text being edited. It sits under the preview (in its slot) while the
    preview is on screen, and docks above the Send bar once the preview scrolls away (phone). */
-.cu-slot { width: min(100%, 460px); }
+.cu-slot { width: min(100%, 460px); margin: 8px auto 0; }
 .cu-slot[hidden] { display: none; }
 .closeup { padding: 0; }
 .closeup.docked { position: fixed; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 58; padding: 8px var(--gut-r) 8px var(--gut-l); background: var(--bar); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-top: 1px solid var(--line); }
@@ -171,6 +171,7 @@ body.cu-docked { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom,
 .cu-head .link { border: 0; background: transparent; padding: 2px 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
 .cu-view { position: relative; height: 96px; border-radius: 12px; overflow: hidden; background: #111; contain: strict; }
 .closeup.docked .cu-view { height: 104px; }
+@media (max-width: 979px) { .cu-view { height: 120px; } .closeup.docked .cu-view { height: 120px; } }
 .cu-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cu-layers { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
 .cu-layers > .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: none !important; }
@@ -705,6 +706,12 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
       <span class="time" id="t-end">0:00</span>
     </div>
     <div class="step" id="step" hidden><button type="button" class="st-arrow" id="st-prev" aria-label="Previous option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><div class="st-mid" aria-live="polite"><b id="st-name"></b><small id="st-n"></small></div><button type="button" class="st-arrow" id="st-next" aria-label="Next option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><button type="button" class="opick" id="st-pick" aria-pressed="false" aria-label="Pick this"></button></div>
+    <div class="cu-slot" id="cu-slot" hidden>
+      <div class="closeup" id="closeup" aria-label="Close-up of the words">
+        <div class="cu-head"><b>Close-up</b><button type="button" class="link" id="cu-toggle">Hide</button></div>
+        <div class="cu-view" id="cu-view"><canvas id="cu-canvas"></canvas><div class="cu-layers" id="cu-layers"></div><canvas id="cu-fg"></canvas></div>
+      </div>
+    </div>
     <p class="check-note" id="check-note" aria-live="polite"></p>
     <div class="needs" id="needs" aria-live="polite"></div>
     <button type="button" class="ibtn close-full" id="close-full" aria-label="Close full screen"></button>
@@ -720,12 +727,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
       <div class="chosen" id="chosen"></div>
       <div class="lead" id="lead" hidden></div>
       <div class="adjust" id="adjust" hidden>
-        <div class="cu-slot" id="cu-slot" hidden>
-          <div class="closeup" id="closeup" aria-label="Close-up of the words">
-            <div class="cu-head"><b>Close-up</b><button type="button" class="link" id="cu-toggle">Hide</button></div>
-            <div class="cu-view" id="cu-view"><canvas id="cu-canvas"></canvas><div class="cu-layers" id="cu-layers"></div><canvas id="cu-fg"></canvas></div>
-          </div>
-        </div>
         <div class="custom" id="custom"></div>
       </div>
       <div class="ref" id="ref" hidden></div>
@@ -862,6 +863,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r6b"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7h"></script>
+<script src="studio-core.js?v=r7i"></script>
 
 </html>

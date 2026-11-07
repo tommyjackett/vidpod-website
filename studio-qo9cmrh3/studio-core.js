@@ -1668,11 +1668,11 @@
      preview is on screen; on a phone, once the preview scrolls away, it docks above the Send bar. ---- */
   var CU = { want: local("vidpod-studio-closeup") !== "off", last: 0, ok: false, slotSeen: true, onScreen: true };
   var CU_SECS = ["subtitles", "hook", "name", "logo"];
-  function cuWanted() { return !!(S.adjust && S.canAdjust) && CU_SECS.indexOf(S.sec) >= 0 && !(live && live.pre) && !$("stage").classList.contains("full") && !!live; }
+  function cuWanted() { return CU_SECS.indexOf(S.sec) >= 0 && !(live && live.pre && !live.focus) && !$("stage").classList.contains("full") && !!live; }   // 8 Nov: back for everyone, under the window; docks on phones (Tommy: "one of the best features")
   function cuSync() {
     var want = cuWanted(), slot = $("cu-slot"), cu = $("closeup");
     slot.hidden = !want;
-    var dock = false; // Round 7: the close-up sits in Adjust; the window itself stays in view
+    var dock = want && CU.want && !CU.slotSeen && window.innerWidth < 980; // phones: once the window scrolls away, the close-up docks above the bottom bar
     if (dock) slot.style.height = slot.offsetHeight ? slot.offsetHeight + "px" : slot.style.height; else slot.style.height = "";
     cu.classList.toggle("docked", dock); document.body.classList.toggle("cu-docked", dock);
     document.body.classList.toggle("cu-off", !CU.want);
