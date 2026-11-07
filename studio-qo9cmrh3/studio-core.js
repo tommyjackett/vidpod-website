@@ -2073,7 +2073,7 @@
     Object.keys(CODES).forEach(function (k) { boards[CODES[k].board] = CODES[k].label || k; });
     if (Object.keys(boards).length < 2) return;
     mf.classList.add("switch");
-    if (c.id === "vidpod") { var t = el("b", "sw-name", "VIDPOD"); mf.appendChild(t); }
+    if (c.id === "vidpod") { mf.classList.add("own"); mf.appendChild(el("b", "sw-name", "Clients")); }
     var chev = el("span", "sw-chev", "<svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 9l6 6 6-6\"/></svg>");
     mf.appendChild(chev);
     var sel = el("select", "sw-sel"); sel.setAttribute("aria-label", "Open another client's board");
