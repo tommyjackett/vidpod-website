@@ -9,6 +9,10 @@
     "PILATES": {
       "board": "atpilates",
       "label": "@pilates"
+    },
+    "TNG": {
+      "board": "tng",
+      "label": "The Numbers Game"
     }
   }
 }

@@ -676,6 +676,12 @@
        "Text colour",
        "Punch word colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -736,6 +742,12 @@
       "colour_roles": [
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -796,6 +808,12 @@
       "colour_roles": [
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -857,6 +875,12 @@
        "Box colour",
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -917,6 +941,12 @@
       "colour_roles": [
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -978,6 +1008,12 @@
        "Text colour",
        "Key word colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -1039,6 +1075,12 @@
        "Text colour",
        "Spoken word colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -1100,6 +1142,12 @@
        "Pill colour",
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -1161,6 +1209,12 @@
        "Text colour",
        "Key word colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "layer"
      }
     }
    ],
@@ -1255,7 +1309,14 @@
        "Big word colour"
       ]
      },
-     "no_position": true
+     "no_position": true,
+     "menu": {
+      "needs": [
+       "line",
+       "cutout"
+      ],
+      "makes": "layer"
+     }
     },
     {
      "id": "hk-quote-box",
@@ -1320,7 +1381,14 @@
        "Text colour"
       ]
      },
-     "no_position": true
+     "no_position": true,
+     "menu": {
+      "needs": [
+       "line",
+       "cutout"
+      ],
+      "makes": "layer"
+     }
     },
     {
      "id": "hk-mixed-stack",
@@ -1382,6 +1450,12 @@
        "Big word colour",
        "Small words colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "line"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -1445,6 +1519,12 @@
        "Top bar colour",
        "Bottom bar colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "line"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -1507,7 +1587,14 @@
        "Caps colour"
       ]
      },
-     "no_position": true
+     "no_position": true,
+     "menu": {
+      "needs": [
+       "line",
+       "cutout"
+      ],
+      "makes": "layer"
+     }
     },
     {
      "id": "hk-headline-band",
@@ -1571,7 +1658,14 @@
        "Band colour"
       ]
      },
-     "no_position": true
+     "no_position": true,
+     "menu": {
+      "needs": [
+       "line",
+       "cutout"
+      ],
+      "makes": "layer"
+     }
     },
     {
      "id": "hk-glow-intro",
@@ -1638,7 +1732,13 @@
        "Top line colour"
       ]
      },
-     "no_position": true
+     "no_position": true,
+     "menu": {
+      "needs": [
+       "headline"
+      ],
+      "makes": "layer+move"
+     }
     },
     {
      "id": "fx-cover-word",
@@ -1664,11 +1764,20 @@
        1060,
        330
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "word"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L02",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     },
@@ -1696,11 +1805,56 @@
        1080,
        420
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "word"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L07",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-flicker-word",
+     "code": "HOOK-10",
+     "label": "Flicker word",
+     "best_for": "Pages of your words flick past, one boxed word stays put.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L20.jpg",
+      "video": "review-thumbs/L20.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "words",
+       "word"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L20",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
@@ -1772,6 +1926,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Plate, word, matte, front. Word scale 1.08 to 1 over 0.32 s expo.out on 'Kew', then drift 1 to 1.03 linear."
       }
+     },
+     "menu": {
+      "needs": [
+       "cutout"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -1824,6 +1984,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "As MOVE-01 with the word on the front layer and a soft shadow."
       }
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -1877,6 +2043,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Plate wrapper x -282 px and scale 0.7 about 50% 45% over 0.6 s power3.inOut, corners round to 5 %; brand ground behind; studio window x +140 to 0 over 0.55 s power3.out; reverse at the end."
       }
+     },
+     "menu": {
+      "needs": [
+       "broll"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -1929,6 +2101,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Scale 1 to 1.03 linear to the cut, an instant set to 1.08 on the cut frame, then 1.08 to 1.11 linear; origin on her face (50% 28%)."
       }
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -1982,6 +2160,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Her scale 1 to 2.4 with blur 0 to 14 over 0.6 s power3.in into the cut; studio scale 1.6 to 1, blur 14 to 0 over 0.6 s power3.out; back the same way 2.8 s later."
       }
+     },
+     "menu": {
+      "needs": [
+       "broll"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2035,6 +2219,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Studio half yPercent 100 to 0 over 0.5 s power3.out, an 8 px brand line scaleX 0 to 1 over 0.4 s; reverse 0.45 s power3.in."
       }
+     },
+     "menu": {
+      "needs": [
+       "broll"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2088,6 +2278,13 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Pure function of time. Front arch (780 wide, top 170, radius 390) rises y 1500 to 0 over 1.15 s power3.out while she frames to 0.86 about the bottom centre. Camera z 0 to 4.75 over 2.75 s sine.inOut; arch j at depth 0.55j scales 1/(1+depth-z) about (540,640), hidden past 7; walls are box-shadow spreads stepping cream to warm. She rides the push and leaves left (power2.in, 0.6 s). Studio window at depth 4.83, stat card at 5.83 (push 1.1 s power2.inOut), odometer roll 0.9 s power2.inOut, warm flare back to her."
       }
+     },
+     "menu": {
+      "needs": [
+       "number",
+       "broll"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2140,6 +2337,12 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Plate x +190 px, scale 1.1 over 0.64 s power3.inOut; text lines x -90 to 0 over 0.3 s power3.out stagger 0.13 (Jackett stacked-lines entry)."
       }
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2161,11 +2364,375 @@
       "video": "review-thumbs/L04.mp4",
       "loop": 2.8,
       "focus": null,
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L04",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-paper-cut",
+     "code": "FX-01",
+     "label": "Paper cut-out",
+     "best_for": "You as a paper sticker on a scribbled page, with one word cut from a magazine.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L01.jpg",
+      "video": "review-thumbs/L01.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "word"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L01",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-thumb-wall",
+     "code": "FX-02",
+     "label": "Thumbnail wall",
+     "best_for": "A wall of your video thumbnails pops in behind you.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L03.jpg",
+      "video": "review-thumbs/L03.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "clips"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L03",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-doodle",
+     "code": "FX-03",
+     "label": "Doodle outline",
+     "best_for": "A hand-drawn outline and doodles boil around you on key words.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L05.jpg",
+      "video": "review-thumbs/L05.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "words"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L05",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-orbit",
+     "code": "FX-04",
+     "label": "Orbiting cards",
+     "best_for": "Cards circle you in 3D.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L08.jpg",
+      "video": "review-thumbs/L08.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "photos"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L08",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-pull-back",
+     "code": "FX-05",
+     "label": "Pull-back reveal",
+     "best_for": "The shot pulls back to show it being edited.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L09.jpg",
+      "video": "review-thumbs/L09.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "clips"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L09",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-phone",
+     "code": "FX-06",
+     "label": "Phone beside you",
+     "best_for": "A phone floats beside you showing your app or page.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L10.jpg",
+      "video": "review-thumbs/L10.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "app"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L10",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-dolly",
+     "code": "FX-07",
+     "label": "Dolly zoom",
+     "best_for": "The room pushes in while you stay still. Needs a deep room behind you.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L11.jpg",
+      "video": "review-thumbs/L11.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L11",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-frame-pop",
+     "code": "FX-08",
+     "label": "Frame pop-out",
+     "best_for": "The shot shrinks into a phone and you break out of it.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L13.jpg",
+      "video": "review-thumbs/L13.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L13",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-app-world",
+     "code": "FX-09",
+     "label": "App world",
+     "best_for": "An app screen fills the top while clips drop in.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L16.jpg",
+      "video": "review-thumbs/L16.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "app"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L16",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-pixel-words",
+     "code": "FX-10",
+     "label": "Pixel screen words",
+     "best_for": "Each word you say lights up on a pixel screen.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L22.jpg",
+      "video": "review-thumbs/L22.mp4",
+      "loop": 2.76,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L22",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
@@ -2235,6 +2802,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Card y 420 to 0, rotation -6 to -2 over 0.7 s power3.out; number parts back.out(1.5) 0.28 s apart; line and rule fade up; card falls 0.4 s power2.in."
       }
+     },
+     "menu": {
+      "needs": [
+       "number"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2287,6 +2860,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Rule scaleX in 0.5 s; number y 40 to 0 over 0.6 s power3.out; changing digits are vertical strips that roll 0.9 s power2.inOut while the label swaps."
       }
+     },
+     "menu": {
+      "needs": [
+       "number"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2339,6 +2918,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Arch (brand shape) y 1100 to 0 over 1.25 s power3.out; quote mark, line and label fade up stagger 0.14; arch drops 0.6 s power3.in."
       }
+     },
+     "menu": {
+      "needs": [
+       "quote"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2390,6 +2975,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Pane clip-path wipes up 0.6 s power3.inOut; ghost numeral scale 1.12 to 1 over 2.4 s; title rises in a mask 0.6 s power4.out; rule expo.inOut."
       }
+     },
+     "menu": {
+      "needs": [
+       "line"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2440,6 +3031,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "One board world, camera {cx,cy,z,r}: 0.7 s power2.inOut moves between pins at z 0.92 with r = -tilt*0.6, linear hold drift (+0.035 z); each photo pins in scale 1.7 rot +10 to 1 over 0.22 s power4.in, pushpin and shadow 16 26 40; pulls back to z 0.42."
       }
+     },
+     "menu": {
+      "needs": [
+       "photos"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2493,6 +3090,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Card scale 0.6 to 1, y 80 to 0, rotation 4 to -3 over 0.6 s back.out(1.4); live studio clip inside; slow 1 to 1.02 drift; out 0.35 s."
       }
+     },
+     "menu": {
+      "needs": [
+       "broll"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2543,6 +3146,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Card scaleY in 0.45 s; each row x -30 to 0, dot back.out(1.6), tick path dashoffset 1 to 0 over 0.3 s, rows 0.7 s apart."
       }
+     },
+     "menu": {
+      "needs": [
+       "list"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2593,6 +3202,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Streets draw (dashoffset) 0.8 s staggered; route draws linear 1.0 s; pin y -140 to 0 back.out(1.3); ripple ring; map leans in 1 to 1.18 over 2.2 s power2.inOut."
       }
+     },
+     "menu": {
+      "needs": [
+       "place"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2643,6 +3258,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Each photo scale 2 to 1 with rotation over 0.18 s power4.in, 0.55 s apart; tape strips on opposite corners at -38 deg; exit drops y 1900 with rotation 0.5 s power2.in."
       }
+     },
+     "menu": {
+      "needs": [
+       "photos"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2694,6 +3315,13 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Pure function of time: world transform translate(540,960) rotate(r) scale(z) translate(-cx,-cy); her video is slot 0, given the same camera transform so board and footage move as one. Pull to z 0.84 and travel to the studio slot, then the stat slot, then back and push to z 1."
       }
+     },
+     "menu": {
+      "needs": [
+       "number",
+       "broll"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2745,6 +3373,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "Plate brightness to 0.5 and blur 16 over 0.5 s; opening quote mark scale 0.9 to 1 with y 30 to 0 over 0.5 s power3.out; each line rises in a mask 0.5 s power4.out, 0.32 s apart; closing mark, rule (expo.inOut), name and role follow."
       }
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2797,6 +3431,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "As GFX-11 on a full brand ground that fades in 0.45 s and out 0.4 s."
       }
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2847,6 +3487,12 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "A 10 px rounded track at the bottom of the safe area; the accent fill scaleX 0 to 1 linear over the whole clip."
       }
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -2873,18 +3519,26 @@
        960,
        1170
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "number"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L18",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     },
     {
      "id": "fx-before-after",
      "code": "GFX-15",
-     "label": "Before and after stat cards",
+     "label": "Before and after",
      "best_for": "Two cards show before and after, then the camera pushes in on the result.",
      "kind": "Finished effect",
      "defaults": {},
@@ -2905,11 +3559,19 @@
        1060,
        940
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "number"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L19",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     },
@@ -2937,11 +3599,20 @@
        1080,
        900
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "number"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L06",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     },
@@ -2969,11 +3640,19 @@
        1020,
        1430
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "list"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L17",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     },
@@ -3001,11 +3680,126 @@
        1080,
        650
       ],
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout",
+       "headlines"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L12",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-snapshots",
+     "code": "GFX-19",
+     "label": "Snapshot cards",
+     "best_for": "Snapshot cards slam down one per word, for a list of wins.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L21.jpg",
+      "video": "review-thumbs/L21.mp4",
+      "loop": 2.76,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "words",
+       "photos"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L21",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-pour",
+     "code": "GFX-20",
+     "label": "Pour into the box",
+     "best_for": "Balls pour into a box and overflow under your words. For 'hundreds of'.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L23.jpg",
+      "video": "review-thumbs/L23.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "words"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L23",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-headline-highlight",
+     "code": "GFX-21",
+     "label": "Headline highlight",
+     "best_for": "An article blurs in and a marker swipes behind the key words.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/HH01.jpg",
+      "video": "review-thumbs/HH01.mp4",
+      "loop": 5.0,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "article"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "HH01",
+      "skill": "headline-highlight",
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
@@ -3097,6 +3891,12 @@
        "Tab colour",
        "Card colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "name"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -3159,6 +3959,12 @@
        "Dot colour",
        "Pill colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "name"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -3221,6 +4027,12 @@
        "Line colour",
        "Card colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "name"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -3283,6 +4095,12 @@
        "Line colour",
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "name"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -3345,6 +4163,12 @@
        "Sweep colour",
        "Text colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "name"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -3407,6 +4231,12 @@
        "Role bar colour",
        "Name bar colour"
       ]
+     },
+     "menu": {
+      "needs": [
+       "name"
+      ],
+      "makes": "layer"
      }
     }
    ],
@@ -3485,6 +4315,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "Scale 0.12 to 1 over 0.8 s back.out(2.6), opacity in over 0.12 s; hold 1 s; fade out 0.3 s; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3539,6 +4375,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "Scale 0.45 to 1 and opacity 0 to 1 over 1.3 s power3.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3593,6 +4435,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "x from off the left edge to 0 over 1.1 s expo.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3647,6 +4495,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "x from off the right edge to 0 over 1.1 s expo.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3701,6 +4555,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "y from above the frame to 0 over 1.1 s expo.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3755,6 +4615,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "y from below the frame to 0 over 1.1 s expo.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3809,6 +4675,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "Opacity 0 to 1 over 1.4 s sine.inOut; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3863,6 +4735,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "Blur 36 px to 0, scale 1.06 to 1, opacity 0 to 1 over 1.4 s power2.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3917,6 +4795,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "Rotation -270 to 0, scale 0.2 to 1, opacity in over 1.3 s power3.out; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -3971,6 +4855,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "SVG mark (brand.twin_circle): every path gets pathLength 1 and a stroke in the logo colour; stroke-dashoffset 1 to 0 over 1.8 s power1.inOut, 0.08 s stagger; fill fades in over 0.5 s at +1.6 s while the stroke fades. PNG-only logo: clip-path wipe left to right over 1.6 s power2.inOut with a thin leading line."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     },
     {
@@ -4025,6 +4915,12 @@
        "rule": "Own loop clock (2 to 4 s by speed: slow, normal, fast); ignores the video time.",
        "detail": "CSS mask: linear-gradient(100deg, opaque 45 %, clear 55 %), mask-size 300 %, mask-position x 100 % to 0 % over 1.3 s power2.inOut; logo x 30 to 0 with it; hold; fade out; loop."
       }
+     },
+     "menu": {
+      "needs": [
+       "logo"
+      ],
+      "makes": "endcard"
      }
     }
    ],
@@ -4091,6 +4987,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "None."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -4141,6 +5043,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "16 frames, cut on frame 5. Footage brightness 1 to 3.2, contrast to 0.78, saturation to 0.6 over 4 f power2.in; incoming 3.0 back to 1 over 10 f expo.out. Streak (core 2400x14, halo 2600x80, 360 px hot spot, screen blend) scaleX 0.15 to 1.1 over 3 f, then fades 10 f while creeping to 1.25 and sliding 80 px; 4 ghosts on the line through the centre; wash 0 to 0.55 to 0."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4189,6 +5097,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Warm wash 0 to 0.5 over 0.28 s sine.in into the cut, 0.5 s sine.out after; a 3240 px 100 deg light band x -2020 to -140 over 0.76 s sine.inOut, peak 0.55."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4237,6 +5151,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Warm white 0 to 0.92 over 2 f, decay 9 f expo.out; footage brightness to 2.2 and back."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4286,6 +5206,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Pure function of time: the last frame before the cut is held as a still; from the cut the still x 0 to -1080 and the plate x +1080 to 0 over 0.42 s power3.inOut with a fine brand edge between them."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -4334,6 +5260,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "A skewed (-14 deg) accent band with cream edges x -2200 to -320 over 0.3 s power3.in, covers the cut, then exits x 1700 over 0.38 s power3.out."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4382,6 +5314,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "x 0 to -200 px with scale 1.4 and blur 22 over 0.16 s power3.in; cut; +200 to 0 over 0.2 s power3.out."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -4430,6 +5368,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Scale 1 to 1.25, blur 0 to 12 over 0.22 s power4.in; cut; 1.25 to 1 over 0.3 s power4.out (mirrored eases match speed)."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -4479,6 +5423,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Plate blurs 0 to 8 px over the last 0.2 s; from the cut the held still fades 1 to 0 while blurring 8 to 22 px and the new shot sharpens 16 to 0 px, 0.55 s sine.inOut."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "finished"
      }
     },
     {
@@ -4527,6 +5477,13 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Accent field 0 to 1 over 0.26 s sine.in into the cut, logo shows for 0.24 s, field back to 0 over 0.34 s sine.out."
       }
+     },
+     "menu": {
+      "needs": [
+       "quote",
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4575,6 +5532,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "Three radial blobs (screen) enter from the top right and drift 30 f sine.inOut at different speeds, peak 0.7 to 0.85 at the cut (frame 12); footage brightness 1.4 at the peak."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4623,6 +5586,12 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "40 slats scaleX 0 to 1 from the left, 4 f power3.inOut, staggered across 7 f; cut; close from the right; old shot dims to 60 %."
       }
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "layer"
      }
     },
     {
@@ -4644,16 +5613,125 @@
       "video": "review-thumbs/L14.mp4",
       "loop": 2.8,
       "focus": null,
-      "clip": "seated"
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "takes"
+      ],
+      "makes": "finished"
      },
      "recipe": {
       "renderer": "prerendered",
       "ref": "L14",
+      "skill": null,
       "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
    ],
    "scope": "type"
+  },
+  {
+   "id": "backgrounds",
+   "tab": "Backgrounds",
+   "code": "BG",
+   "question": "Want a new background behind you?",
+   "help": "You, cut out, on a clean background in your colours.",
+   "segment": [
+    0,
+    6.0
+   ],
+   "controls": [],
+   "scope": "type",
+   "styles": [
+    {
+     "id": "fx-new-background",
+     "code": "BG-01",
+     "label": "New background",
+     "best_for": "You, cut out, on a clean background in your colours.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L15.jpg",
+      "video": "review-thumbs/L15.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "cutout"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L15",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    }
+   ]
+  },
+  {
+   "id": "endcard",
+   "tab": "End card",
+   "code": "END",
+   "question": "How should the video end?",
+   "help": "The last few seconds, with a clear next step.",
+   "segment": [
+    0,
+    3.4
+   ],
+   "controls": [],
+   "scope": "type",
+   "styles": [
+    {
+     "id": "fx-comment-end",
+     "code": "END-01",
+     "label": "Comment end card",
+     "best_for": "A wall of your clips under a headline that flips to 'Comment' and your word.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L24.jpg",
+      "video": "review-thumbs/L24.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "own",
+      "example": false
+     },
+     "menu": {
+      "needs": [
+       "clips",
+       "word"
+      ],
+      "makes": "finished"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L24",
+      "skill": null,
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    }
+   ]
   }
  ],
  "apps": [

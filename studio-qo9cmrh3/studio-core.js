@@ -195,7 +195,13 @@
     return [s0, Math.round(Math.min(B.base.duration || end, end) * 1000) / 1000];
   }
   function lookSeg(st, sd) { return st && st.hold ? holdSeg(st, sd) : (st && st.segment) || sd.segment; }
-  function hookTextFor(L) { return S.hookText != null ? S.hookText : (L && L.text) || B.base.hook_text; }
+  // Hook text (Round 7): every hook defaults to the speaker's own line (real words rule). The Glow title is a headline, not a
+  // quote: it keeps its own text (S.headText, default the board's headline) and the page marks it "Headline, edit me".
+  function isHeadline(L) { var st = L && styleDef(sec("hook") || { styles: [] }, L.style); return !!(st && (st.id === "hk-glow-intro" || (st.menu && (st.menu.needs || []).indexOf("headline") >= 0))); }
+  function hookTextFor(L) {
+    if (isHeadline(L)) return S.headText != null ? S.headText : (L && L.text) || B.base.hook_text;
+    return S.hookText != null ? S.hookText : B.base.hook_text;
+  }
   function makeCtx(L, sd, styleObj, stage) {
     var f = fontDef(L.font || "brand"), sw = swatch(L.colour || "white"), c2 = colour2Of(L), sw2 = c2 ? swatch(c2) : null;
     var segm = lookSeg(styleObj, sd), BB = boardFor(L);
@@ -531,6 +537,7 @@
     $("scrub").style.setProperty("--p", (p * 100).toFixed(2) + "%");
     $("t-now").textContent = fmt(t - s[0]);
     cuRender(now || performance.now());
+    playAllTick(t);
     requestAnimationFrame(frame);
   }
   function setPlayIcon() { var playing = isOwn() ? !LC.paused : !video.paused; $("play").innerHTML = playing ? I.pause : I.play; $("play").setAttribute("aria-label", playing ? "Pause" : "Play"); $("play-l").textContent = playing ? "Pause" : "Play"; }
@@ -774,54 +781,90 @@
     return L;
   }
   function hasCtlIn(sd, name) { return (sd.controls || []).indexOf(name) >= 0; }
+  /* Round 7: the pinned list. Short names, the playing one marked like a highlighter, a round Pick button on each row.
+     Tap a name: it plays in the big window (one video at a time, the engine's own rules). No stills are built, so the
+     list costs nothing on a phone. The old pill code above stays for reference (buildCard, mountCard, cropCard). */
+  var PA = { on: false, last: -1 };
+  function isPicked(sid, styleId) { var p = S.picks[sid]; return multi(sid) ? (p || []).some(function (x) { return x.style === styleId; }) : !!(p && p.style === styleId); }
   function renderCards() {
     var box = $("cards"), sd = sec(S.sec); box.innerHTML = "";
-    if (cardIO) cardIO.disconnect();
-    cards.forEach(function (c) { if (c.tl) c.tl.kill(); if (c.r && c.r.teardown) try { c.r.teardown(); } catch (e) {} });
-    var list = sd.styles.slice();
-    cards = list.map(function (st) { var c = buildCard(sd, st); box.appendChild(c.btn); return c; });
+    cards = []; if (cardIO) { cardIO.disconnect(); cardIO = null; }
+    var list = sd.styles.slice(), admin = isVidpodCode();
+    var head = el("div", "ohead");
+    head.appendChild(el("span", "lbl", esc(list.length + (list.length === 1 ? " option" : " options"))));
+    if (list.length > 1) {
+      var pa = el("button", "playall", "<i></i>Play all"); pa.type = "button"; pa.setAttribute("aria-pressed", String(PA.on)); pa.id = "playall";
+      pa.addEventListener("click", function () { PA.on = !PA.on; PA.last = -1; pa.setAttribute("aria-pressed", String(PA.on)); if (PA.on) { var i0 = list.findIndex(function (x) { return x.id === look().style; }); chooseStyle(list[Math.max(0, i0)].id, false, true); goSeg(true); } });
+      head.appendChild(pa);
+    }
+    box.appendChild(head);
+    var lastKind = null, anyFin = list.some(function (x) { return !!x.preview; }), anyLive = list.some(function (x) { return !x.preview; });
+    var split = anyFin && anyLive && (S.sec === "moves" || S.sec === "graphics"), grp = el("div", "ogrp"); box.appendChild(grp);
+    list.forEach(function (st, i) {
+      var kind = st.preview ? "fin" : "live";
+      if (split && kind !== lastKind) { if (lastKind) { grp = el("div", "ogrp"); box.appendChild(grp); } grp.appendChild(el("div", "osub", kind === "fin" ? (S.sec === "moves" ? "Effects" : "Effect graphics") : (S.sec === "moves" ? "Moves" : "Graphics"))); }
+      lastKind = kind;
+      var row = el("div", "orow"); row.dataset.style = st.id;
+      var tags = (isOurPick(sd.id, st.id) ? '<span class="t our">Our pick</span>' : "") + (st.preview && st.preview.example ? '<span class="t ex">Example</span>' : "");
+      var nb = el("button", "oname", '<span class="n">' + esc(st.label) + "</span>" + (admin ? '<span class="c">' + esc(st.code) + "</span>" : "") + tags);
+      nb.type = "button"; nb.setAttribute("role", "radio"); nb.setAttribute("aria-label", st.label + (admin ? " " + st.code : ""));
+      nb.addEventListener("click", function () { PA.on = false; var pb = $("playall"); if (pb) pb.setAttribute("aria-pressed", "false"); chooseStyle(st.id); });
+      var pk = el("button", "opick", I.tick); pk.type = "button"; pk.setAttribute("aria-label", "Pick " + st.label);
+      pk.addEventListener("click", function () { if (look().style !== st.id) chooseStyle(st.id); togglePick(st.id); });
+      row.appendChild(nb); row.appendChild(pk); grp.appendChild(row);
+      cards.push({ btn: row, st: st, sd: sd, built: false });
+    });
+    box.classList.toggle("long", list.length > 11); box.classList.toggle("split", split);
     markCards();
-    cardIO = "IntersectionObserver" in window ? new IntersectionObserver(function (ents) {
-      ents.forEach(function (en) { var c = cards.filter(function (x) { return x.btn === en.target; })[0]; if (!c) return; c.visible = en.isIntersecting; if (c.visible && !c.built) mountCard(c); });
-    }, { root: null, rootMargin: "200px 300px 200px 300px" }) : null;
-    cards.forEach(function (c) { if (cardIO) cardIO.observe(c.btn); else { c.visible = true; } });
-    if (!cardIO) cards.forEach(mountCard);
-    // keep the chosen pill in view in the row
-    var sel = cards.filter(function (c) { return c.st.id === look().style; })[0];
-    if (sel && box.scrollWidth > box.clientWidth) box.scrollLeft = Math.max(0, sel.btn.offsetLeft - 16);
+  }
+  // Play all: each option plays once through, then the next (stops at the end of the list or on any tap)
+  function playAllTick(t) {
+    if (!PA.on || !playing()) { PA.last = t; return; }
+    if (PA.last >= 0 && t + 0.08 < PA.last) {
+      var list = sec(S.sec).styles, i = list.findIndex(function (x) { return x.id === look().style; });
+      if (i < list.length - 1) chooseStyle(list[i + 1].id, false, true);
+      else { PA.on = false; var pb = $("playall"); if (pb) pb.setAttribute("aria-pressed", "false"); }
+      PA.last = -1; return;
+    }
+    PA.last = t;
   }
   /* ---- VIDPOD's pick: board.json vidpod_pick holds one recommended option (and its settings) per section ---- */
   function isOurPick(sid, styleId) { var p = (B.vidpod_pick || {})[sid]; if (!p) return false; return Array.isArray(p) ? p.some(function (x) { return x.style === styleId; }) : p.style === styleId; }
   function markCards() {
-    var L = look(), p = S.picks[S.sec];
+    var L = look();
     cards.forEach(function (c) {
-      c.btn.setAttribute("aria-checked", String(c.st.id === L.style));
-      var picked = multi() ? (p || []).some(function (x) { return x.style === c.st.id; }) : (p && p.style === c.st.id);
-      c.btn.classList.toggle("is-picked", !!picked);
+      var on = c.st.id === L.style, picked = isPicked(S.sec, c.st.id);
+      c.btn.classList.toggle("cur", on); c.btn.querySelector(".oname").setAttribute("aria-checked", String(on));
+      var pk = c.btn.querySelector(".opick"); pk.setAttribute("aria-pressed", String(picked)); pk.setAttribute("aria-label", (picked ? "Remove " : "Pick ") + c.st.label);
     });
   }
 
   /* ================= panel ================= */
   /* sections: House style (same on every video), Openers, Motion graphics, Cuts. Box style is a placeholder tab that
      studio-mograph.js fills (window.VPMograph.render). Tab labels come from the board, except where noted here. */
+  // Round 7 (8 Nov): House style, then one tab per kind of moment, in the order a video plays
   var GROUPS = [
     { id: "house", label: "House style", tabs: ["subtitles", "name", "logo"] },
     { id: "openers", label: "Openers", tabs: ["hook"] },
-    { id: "mograph", label: "Motion graphics", tabs: ["graphics"] }, // "box" (Jackett Ranch styles) pulled 7 Nov night: Tommy said it was random
-    { id: "cuts", label: "Cuts", tabs: ["moves", "transitions"] }
+    { id: "graphics", label: "Graphics", tabs: ["graphics"] },
+    { id: "fx", label: "Effects and moves", tabs: ["moves"] },
+    { id: "joins", label: "Transitions", tabs: ["transitions"] },
+    { id: "bg", label: "Backgrounds", tabs: ["backgrounds"] },
+    { id: "end", label: "End card", tabs: ["endcard"] }
   ];
-  var TAB_LABEL = { hook: "Hook titles", box: "Box style" };
+  var TAB_LABEL = { hook: "Openers", box: "Box style", moves: "Effects and moves", graphics: "Graphics", transitions: "Transitions", backgrounds: "Backgrounds", endcard: "End card" };
   var SEC_HELP = {
-    subtitles: "Runs under everything said. Always centred.", hook: "The first line on screen.",
-    name: "Who is speaking, the first time they talk.", logo: "Your logo on a plain background.",
-    graphics: "Graphics in your brand. Pick as many as you like.", moves: "Camera and layout moves. Pick as many as you like.", transitions: "Plays at the join between two moments."
+    subtitles: "Runs under everything said. Always centred.", hook: "The first line on screen, from the first frame.",
+    name: "Who is speaking, the first time they talk.", logo: "How the logo signs off.",
+    graphics: "A number, a list or a quote, right when it is said. Pick as many as you like.", moves: "Bigger moments for a key line. One or two per video is plenty.",
+    transitions: "Plays at the join between two moments.", backgrounds: "A new background behind the speaker.", endcard: "The last few seconds."
   };
   function renderTabs() {
     var t = $("tabs"); t.innerHTML = "";
     GROUPS.forEach(function (g) {
       var ids = g.tabs.filter(function (id) { return id === "box" || sec(id); }); if (!ids.length) return;
-      var gw = el("div", "tgrp"); gw.setAttribute("role", "group"); gw.setAttribute("aria-label", g.label);
-      gw.appendChild(el("span", "tgrp-l", esc(g.label)));
+      var gw = el("div", "tgrp" + (g.tabs.length === 1 ? " solo" : "")); gw.setAttribute("role", "group"); gw.setAttribute("aria-label", g.label);
+      gw.appendChild(el("span", "tgrp-l", g.tabs.length === 1 ? "&nbsp;" : esc(g.label)));
       var row = el("div", "tgrp-t");
       ids.forEach(function (id) {
         var s = id === "box" ? null : sec(id), p = s ? S.picks[s.id] : null, has = s ? (multi(s.id) ? p && p.length : !!p) : false;
@@ -859,21 +902,60 @@
   // Openers: the opener-into-subtitles card (studio-mograph.js VPMograph.renderOpener) shows under the Hook titles options
   function renderOpenerSlot() {
     var box = $("opener-slot"); if (!box) return;
-    var ok = S.sec === "hook" && window.VPMograph && typeof window.VPMograph.renderOpener === "function";
+    var ok = false; // Round 7: off the main path (the Openers tab already plays the opener into the subtitles)
     box.hidden = !ok; if (!ok || box.dataset.done) return;
     try { window.VPMograph.renderOpener(box, mgApi()); box.dataset.done = "1"; } catch (e) { console.error(e); }
   }
   function renderHead() { renderOpenerSlot(); var s = sec(S.sec); $("sec-q").textContent = s.question; $("sec-help").textContent = SEC_HELP[s.id] || s.help; }
+  /* who the words belong to, for the plain lines: VIDPOD sees "her words", the client sees "your words" */
+  function speakerWords() {
+    if (!isVidpodCode()) return { poss: "your", subj: "you", cap: "Your", you: true };
+    var pr = String(B.base.pronoun || ({ vidpod: "he", atpilates: "she" })[B.client.id] || "they").toLowerCase();
+    var poss = pr === "he" ? "his" : pr === "she" ? "her" : "their";
+    return { poss: poss, subj: pr, cap: poss.charAt(0).toUpperCase() + poss.slice(1), you: false, plural: pr === "they" };
+  }
+  var MAKES = { layer: "a transparent layer for Resolve", finished: "a finished clip for that moment", endcard: "an end card, plus a transparent layer", "layer+move": "a transparent layer, plus the pull-back as a finished clip" };
+  function needText(tok) {
+    var w = speakerWords(), says = w.you || w.plural ? "say" : "says";
+    return ({ words: w.poss + " words", line: "a line " + w.subj + " " + says, headline: "a headline (we write it, you edit it)", name: w.poss + " name and role",
+      number: "a number " + w.subj + " " + says, list: "a list " + w.subj + " " + says, quote: "a line worth quoting", word: "one word " + w.subj + " " + says, place: "the place",
+      cutout: "a cut-out (we make it)", broll: "B-roll", photos: "photos", logo: "your logo", takes: "two takes to join", clips: "a few clips",
+      app: "an app or page screen", article: "an article or page", headlines: "headlines or posts" })[tok] || tok;
+  }
+  function renderNeeds() {
+    var st = curStyle(), box = $("needs"); if (!box) return;
+    var m = (st && st.menu) || { needs: [], makes: "" }, parts = [];
+    if (m.needs && m.needs.length) parts.push("<span><b>Needs</b> " + esc(m.needs.map(needText).join(", ")) + "</span>");
+    if (isVidpodCode() && m.makes) parts.push("<span><b>Makes</b> " + esc(MAKES[m.makes] || m.makes) + "</span>");
+    var ex = st && st.preview && st.preview.example ? '<span class="ex">' + esc(st.preview.example_note || "Example on VIDPOD footage. We make it on yours.") + "</span>" : "";
+    box.innerHTML = parts.join("") + ex;
+  }
   function renderChosen() {
     var st = curStyle(), box = $("chosen"); box.innerHTML = "";
-    var txt = el("div", "txt", '<span class="cid">' + esc(st.code) + "</span><b>" + esc(st.label) + "</b><small>" + esc(st.best_for) + "</small>");
-    var lk = el("button", "ibtn like-btn", S.likes[st.id] ? I.heartOn : I.heart); lk.type = "button"; lk.setAttribute("aria-pressed", String(!!S.likes[st.id])); lk.setAttribute("aria-label", (S.likes[st.id] ? "Unlike " : "Like ") + st.code);
-    lk.addEventListener("click", function () { toggleLike(sec(S.sec), st); });
-    var ub = el("button", "btn", "Use this look"); ub.type = "button"; ub.id = "use-btn";
-    ub.addEventListener("click", usePick);
-    box.appendChild(txt); box.appendChild(lk); box.appendChild(ub);
-    if (S.likes[st.id]) box.appendChild(likeNote(st));
-    updateUse();
+    var list = sec(S.sec).styles, i = list.findIndex(function (x) { return x.id === st.id; });
+    var txt = el("div", "txt", "<b>" + esc(st.label) + '</b><span class="of">' + (i + 1 < 10 ? "0" : "") + (i + 1) + "/" + (list.length < 10 ? "0" : "") + list.length + "</span>");
+    var acts = el("div", "acts");
+    var ub = el("button", "btn", "Pick this"); ub.type = "button"; ub.id = "use-btn"; ub.addEventListener("click", function () { togglePick(st.id); });
+    var canAdjust = !st.preview && !!(sec(S.sec).controls || []).length && !(S.sec === "transitions" && st.id !== "tr-lens");
+    if (canAdjust) {
+      var ab = el("button", "btn ghost adjust-btn", "Adjust"); ab.type = "button"; ab.id = "adjust-btn"; ab.setAttribute("aria-expanded", String(!!S.adjust)); ab.setAttribute("aria-controls", "adjust");
+      ab.addEventListener("click", function () { S.adjust = !S.adjust; showAdjust(); if (S.adjust) setTimeout(function () { var r = $("adjust").getBoundingClientRect(); if (r.top > window.innerHeight - 120) $("adjust").scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 60); });
+      acts.appendChild(ab);
+    }
+    acts.appendChild(ub);
+    box.appendChild(txt); box.appendChild(acts);
+    S.canAdjust = canAdjust; showAdjust();
+    renderNeeds(); updateUse();
+  }
+  function showAdjust() { var on = !!(S.adjust && S.canAdjust); $("adjust").hidden = !on; var ab = $("adjust-btn"); if (ab) ab.setAttribute("aria-expanded", String(on)); if (CU.ok) cuSync(); }
+  // pick or unpick an option (the round button on a row, or Pick this)
+  function togglePick(id) {
+    if (multi()) { usePick(); return; }
+    var p = S.picks[S.sec];
+    if (p && p.style === id && sameLook(p, look())) delete S.picks[S.sec];
+    else { var L = look(); S.picks[S.sec] = clone(L); delete S.picks[S.sec].fontTouched; if (S.sec === "hook") { S.picks.hook.hookText = hookTextFor(L); S.picks.hook.textIs = isHeadline(L) ? "headline" : "quote"; } if (p && p.at) S.picks[S.sec].at = p.at; }
+    save(); renderTabs(); updateUse(); updateFoot(); markCards();
+    toast(S.picks[S.sec] && (multi() ? true : S.picks[S.sec].style === id) ? "Added to my picks" : "Taken out of my picks");
   }
   function seg3(label, opts, cur, onPick) {
     var w = el("div"); w.appendChild(el("p", "label", esc(label)));
@@ -890,16 +972,19 @@
     var box = $("lead"); box.innerHTML = "";
     if (!hasCtl("hooktext") || (curStyle() && curStyle().preview)) { box.hidden = true; return; }
     box.hidden = false;
+    var head = isHeadline(look()), who = speakerWords();
     var hb = el("div", "field lead-field");
-    hb.innerHTML = '<label for="hook-text">Your hook line</label><textarea id="hook-text" rows="3" spellcheck="true"></textarea><p class="hint">One line per row. Put *stars* round the big word. Every option updates as you type.</p>';
+    hb.innerHTML = head
+      ? '<label for="hook-text">Headline<span class="tag hd">Headline, edit me</span></label><textarea id="hook-text" rows="2" spellcheck="true"></textarea><p class="hint">A headline we write for the video, never shown as a quote. One line per row, *stars* round the big word.</p>'
+      : '<label for="hook-text">Opening line<span class="tag">' + esc(who.cap) + " own words</span></label><textarea id=\"hook-text\" rows=\"2\" spellcheck=\"true\"></textarea><p class=\"hint\">Straight from what " + esc(who.subj) + " " + (who.you ? "say" : "says") + ". One line per row, *stars* round the big word.</p>";
     box.appendChild(hb);
     var ta = hb.querySelector("textarea"); ta.value = hookTextFor(look());
-    var hT = null; ta.addEventListener("input", function () { S.hookText = ta.value; clearTimeout(hT); hT = setTimeout(function () { changed(); }, 260); });
+    var hT = null; ta.addEventListener("input", function () { if (head) S.headText = ta.value; else S.hookText = ta.value; clearTimeout(hT); hT = setTimeout(function () { changed(); }, 260); });
     var rs = el("div", "hook-chips");
-    var b1 = el("button", "chip", "Words as said"); b1.type = "button";
-    b1.addEventListener("click", function () { S.hookText = B.base.words.filter(function (w) { return w.t < sec("hook").segment[1]; }).map(function (w) { return w.text; }).join(" ").replace(/,\s*/g, "\n"); ta.value = S.hookText; changed(); });
-    var b2 = el("button", "chip", "VIDPOD suggestion"); b2.type = "button";
-    b2.addEventListener("click", function () { S.hookText = null; ta.value = hookTextFor(look()); changed(); });
+    var b1 = el("button", "chip", head ? "Reset the headline" : esc(who.cap) + " line"); b1.type = "button";
+    b1.addEventListener("click", function () { if (head) S.headText = null; else S.hookText = null; ta.value = hookTextFor(look()); changed(); });
+    var b2 = el("button", "chip", "Words as said"); b2.type = "button";
+    b2.addEventListener("click", function () { var v = B.base.words.filter(function (w) { return w.t < sec("hook").segment[1]; }).map(function (w) { return w.text; }).join(" ").replace(/,\s*/g, "\n"); if (head) S.headText = v; else S.hookText = v; ta.value = v; changed(); });
     rs.appendChild(b1); rs.appendChild(b2); hb.appendChild(rs);
   }
   /* ---- colour swatches: brand colours first, then Custom (colour picker plus a checked #RRGGBB field) ---- */
@@ -937,7 +1022,7 @@
   function logoBg(id) { if (isHex(id)) return { id: id, label: "Custom " + id.toUpperCase(), hex: id.toUpperCase() }; var l = logoBgs(); return l.filter(function (d) { return d.id === (id || "white"); })[0] || l[0]; }
   function renderCustom() {
     var s = sec(S.sec), L = look(), st = curStyle(), box = $("custom"); box.innerHTML = "";
-    box.appendChild(el("h3", "custom-h", "Customise<span class=\"dot\"></span>"));
+    box.appendChild(el("h3", "custom-h", "Adjust<span class=\"dot\"></span>"));
     if (st.preview) {
       var pb0 = el("div");
       pb0.appendChild(el("p", "none-note", "Set by VIDPOD to your brand. We make it on your clip, with your words and colours."));
@@ -1136,10 +1221,10 @@
     ub.classList.remove("picked"); ub.disabled = false;
     if (multi()) {
       var has = (p || []).some(function (x) { return x.style === L.style; });
-      ub.textContent = has ? "Picked. Tap to remove" : "Add to my picks"; if (has) ub.classList.add("picked");
-    } else if (p && sameLook(p, L)) { ub.textContent = "In your picks"; ub.classList.add("picked"); }
-    else if (p) { ub.textContent = "Swap my pick to this"; }
-    else ub.textContent = "Use this look";
+      ub.textContent = has ? "Picked" : "Pick this"; if (has) ub.classList.add("picked");
+    } else if (p && sameLook(p, L)) { ub.textContent = "Picked"; ub.classList.add("picked"); }
+    else if (p) { ub.textContent = p.style === L.style ? "Update my pick" : "Swap to this"; }
+    else ub.textContent = "Pick this";
   }
   function markDirty() { updateUse(); }
   var soonT = null;
@@ -1165,7 +1250,7 @@
       var arr = S.picks[S.sec] || [], i = arr.findIndex(function (x) { return x.style === L.style; });
       if (i >= 0) arr.splice(i, 1); else arr.push({ style: L.style });
       S.picks[S.sec] = arr;
-    } else { S.picks[S.sec] = clone(L); delete S.picks[S.sec].fontTouched; if (S.sec === "hook") S.picks.hook.hookText = hookTextFor(L); }
+    } else { S.picks[S.sec] = clone(L); delete S.picks[S.sec].fontTouched; if (S.sec === "hook") { S.picks.hook.hookText = hookTextFor(L); S.picks.hook.textIs = isHeadline(L) ? "headline" : "quote"; } }
     save(); renderTabs(); updateUse(); updateFoot(); markCards();
   }
   function switchSec(id, scroll) {
@@ -1310,11 +1395,139 @@
   }
   function pickedCount() { return B.sections.filter(function (s) { var p = S.picks[s.id]; return multi(s.id) ? p && p.length : !!p; }).length; }
   function updateFoot() {
-    var n = pickedCount(), codes = [];
-    B.sections.forEach(function (s) { var p = S.picks[s.id]; if (!p) return; (multi(s.id) ? p : [p]).forEach(function (x) { var d = styleDef(s, x.style); if (d) codes.push(d.code); }); });
-    $("count").innerHTML = "<b>" + n + " of " + B.sections.length + "</b><span> picked</span>";
+    var n = pickedCount(), codes = [], items = pickItems();
+    items.forEach(function (it) { codes.push(it.d.code); });
+    var dots = B.sections.map(function (s) { var p = S.picks[s.id]; return '<i class="' + ((multi(s.id) ? p && p.length : p) ? "on" : "") + '"></i>'; }).join("");
+    $("count").innerHTML = '<span class="stack" aria-hidden="true">' + dots + "</span><span><b>" + items.length + (items.length === 1 ? " pick" : " picks") + "</b> <u>My picks</u></span>";
     $("count").title = codes.join(", ");
-    $("review-btn").disabled = n === 0;
+    $("count").setAttribute("aria-label", "My picks: " + items.length + " picked");
+    var admin = isVidpodCode();
+    $("review-btn").textContent = admin ? "Make these" : "Send to VIDPOD";
+    $("review-btn").disabled = items.length === 0;
+    $("tpl-btn").hidden = !admin;
+    if ($("mk") && $("mk").open) renderMk();
+  }
+  /* ---- My picks (VIDPOD): everything picked for this client and video, with an optional "where" per moment; Make these
+     (Sheet tab Picks, section "make", read by tools/picks_to_jobs.py and the run-my-picks skill) and Copy as message ---- */
+  var HOUSE = ["subtitles", "name", "logo"];
+  function pickItems() {
+    var out = [];
+    orderedPickSecs().forEach(function (s) { var p = S.picks[s.id]; if (!p) return; (multi(s.id) ? p : [p]).forEach(function (x) { var d = styleDef(s, x.style); if (d) out.push({ s: s, p: x, d: d }); }); });
+    return out;
+  }
+  function orderedPickSecs() { var ids = ["subtitles", "name", "logo", "hook", "graphics", "moves", "transitions", "backgrounds", "endcard"]; return ids.map(sec).filter(Boolean).concat(B.sections.filter(function (s) { return ids.indexOf(s.id) < 0; })); }
+  function defaultAt(sid) { return sid === "hook" ? "Opening" : sid === "endcard" ? "End" : ""; }
+  function atOf(it) { return it.p.at || defaultAt(it.s.id); }
+  function jobInfo() { var j = S.job || {}; return { project: j.project != null ? j.project : ((B.project || {}).label || ""), video: j.video || "" }; }
+  function cleanAt(v) { v = String(v || "").trim(); var m = /^(\d{1,2})[:.](\d{1,2})$/.exec(v); if (m) return m[1] + ":" + ("0" + m[2]).slice(-2); if (/^\d{1,3}$/.test(v)) { var n = +v; return Math.floor(n / 60) + ":" + ("0" + (n % 60)).slice(-2); } return v; }
+  function messageText() {
+    // the order a video plays: house style, the opening, moments by time, moments with no time yet, the end
+    var j = jobInfo(), items = pickItems(), hasEnd = items.some(function (it) { return it.s.id === "endcard"; });
+    var B5 = [[], [], [], [], []], secsOf = function (a) { var m = /^(\d+):(\d{2})$/.exec(a); return m ? (+m[1]) * 60 + (+m[2]) : 0; };
+    items.forEach(function (it) {
+      var at = atOf(it), c = it.d.code, sid = it.s.id;
+      if (sid === "subtitles") B5[0].unshift("subtitles " + c);
+      else if (sid === "name") B5[0].push("name " + c);
+      else if (sid === "logo") { if (hasEnd) B5[0].push("logo " + c); else B5[4].push("end " + c); }
+      else if (/^opening$/i.test(at)) B5[1].push("opening " + c);
+      else if (/^end$/i.test(at)) B5[4].unshift("end " + c);
+      else if (at) B5[2].push([secsOf(at), at + " " + c]);
+      else B5[3].push(c);
+    });
+    B5[2] = B5[2].sort(function (x, y) { return x[0] - y[0]; }).map(function (x) { return x[1]; });
+    var who = (j.video || B.client.name).trim();
+    var hp = S.picks.hook, hk = hp && hp.hookText ? ". " + (hp.textIs === "headline" ? "Headline" : "Opening line") + ': "' + hp.hookText.replace(/\*/g, "").replace(/\n/g, " ").trim() + '"' : "";
+    return who + ": " + [].concat(B5[0], B5[1], B5[2], B5[3], B5[4]).join(", ") + hk;
+  }
+  function renderMk() {
+    var box = $("mk-list"); box.innerHTML = "";
+    var items = pickItems(), j = jobInfo();
+    if ($("mk-project") !== document.activeElement) $("mk-project").value = j.project;
+    if ($("mk-video") !== document.activeElement) $("mk-video").value = j.video;
+    if (!items.length) { box.appendChild(el("p", "mk-empty", "Nothing picked yet. Tap the round button beside a name to pick it.")); $("mk-msg").textContent = ""; return; }
+    var groups = [["House style, every video", items.filter(function (it) { return HOUSE.indexOf(it.s.id) >= 0; })], ["This video", items.filter(function (it) { return HOUSE.indexOf(it.s.id) < 0; })]];
+    groups.forEach(function (g) {
+      if (!g[1].length) return;
+      box.appendChild(el("p", "mk-sec", esc(g[0])));
+      var ul = el("ul", "mk-rows");
+      g[1].forEach(function (it) {
+        var li = el("li");
+        li.appendChild(el("div", "what", "<small>" + esc(TAB_LABEL[it.s.id] || it.s.tab) + "</small><b>" + esc(it.d.label) + "</b><code>" + esc(it.d.code) + "</code>"));
+        if (HOUSE.indexOf(it.s.id) < 0) {
+          var w = el("div", "mk-at"), cur = atOf(it);
+          var setAt = function (v) { it.p.at = v; save(); renderMk(); };
+          ["Opening", "End"].forEach(function (lab) { var b = el("button", "", lab); b.type = "button"; b.setAttribute("aria-pressed", String(cur === lab)); b.addEventListener("click", function () { setAt(cur === lab ? "" : lab); }); w.appendChild(b); });
+          var ti = el("input"); ti.inputMode = "numeric"; ti.placeholder = "time"; ti.setAttribute("aria-label", "Where, a time like 0:42"); ti.value = /^\d/.test(cur) ? cur : "";
+          ti.addEventListener("change", function () { setAt(cleanAt(ti.value)); });
+          w.appendChild(ti); li.appendChild(w);
+        }
+        var rm = el("button", "mk-rm", "Remove"); rm.type = "button";
+        rm.addEventListener("click", function () { if (multi(it.s.id)) S.picks[it.s.id] = (S.picks[it.s.id] || []).filter(function (x) { return x !== it.p; }); else delete S.picks[it.s.id]; save(); renderTabs(); markCards(); updateUse(); updateFoot(); renderMk(); });
+        li.appendChild(rm); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+    });
+    $("mk-msg").textContent = messageText();
+  }
+  function openMk() {
+    $("mk-err").hidden = true; renderMk();
+    var d = $("mk"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+  }
+  function closeMk() { var d = $("mk"); if (d.close) d.close(); else d.removeAttribute("open"); }
+  function saveJob() { S.job = { project: $("mk-project").value.trim(), video: $("mk-video").value.trim() }; save(); $("mk-msg").textContent = pickItems().length ? messageText() : ""; }
+  function makeThese() {
+    var j = jobInfo(), items = pickItems(), er = $("mk-err"), btn = $("mk-make");
+    if (!items.length) { er.textContent = "Pick at least one look first."; er.hidden = false; return; }
+    if (!j.video) { er.textContent = "Name the video first, for example: " + (B.base.name || B.client.name).split(" ")[0] + " #1."; er.hidden = false; $("mk-video").focus(); return; }
+    er.hidden = true;
+    var doc = picksDoc(), now = new Date(), stamp = now.toISOString().slice(0, 16).replace(/[-:T]/g, "").replace(/^(\d{8})(\d{4})$/, "$1-$2");
+    var batch = "MK-" + B.client.id + "-" + stamp, msg = messageText();
+    // one summary row (the whole send doc, like a studio Send's "all" row, plus video and batch), then one row per pick in the
+    // pick shape tools/picks_to_jobs.py reads: {client, project, video, section, code, at, settings}; at = "whole" (house style),
+    // "opening", "end", seconds on the cut, or null (not set yet)
+    var jobAt = function (it) { if (HOUSE.indexOf(it.s.id) >= 0) return "whole"; var a = atOf(it); if (/^opening$/i.test(a)) return "opening"; if (/^end$/i.test(a)) return "end"; var m = /^(\d+):(\d{2})$/.exec(a); return m ? (+m[1]) * 60 + (+m[2]) : null; };
+    var strip = function (o) { if (!o) return {}; var s2 = {}; Object.keys(o).forEach(function (k) { if (["code", "label", "registry", "source", "scope", "at", "how", "finished", "ref"].indexOf(k) < 0) s2[k] = o[k]; }); return s2; };
+    var sum = Object.assign({}, doc, { video: j.video, project: j.project, batch: batch, make: true, message: msg });
+    sum.picks = {}; Object.keys(doc.picks).forEach(function (k) { var v = doc.picks[k]; if (!v) return; (Array.isArray(v) ? v : [v]).forEach(function (x) { var it0 = items.filter(function (y) { return y.s.id === k && y.d.code === x.code; })[0]; if (it0) x.at = jobAt(it0); }); sum.picks[k] = v; });
+    var rows = [{ section: "make", optionCode: "all", label: "Make these: " + items.length + (items.length === 1 ? " pick" : " picks") + " for " + j.video, settings: sum, note: msg }];
+    items.forEach(function (it) {
+      var full = doc.picks[it.s.id], one = Array.isArray(full) ? full.filter(function (x) { return x.style === it.d.id; })[0] : full;
+      rows.push({ section: "make", optionCode: it.d.code, label: (TAB_LABEL[it.s.id] || it.s.tab) + ": " + it.d.label,
+        settings: { client: B.client.id, project: j.project, video: j.video, section: it.s.id, code: it.d.code, at: jobAt(it), settings: strip(one),
+          where: atOf(it) || null, label: it.d.label, finished: !!(it.d.preview), ref: ((it.d.recipe || {}).ref) || null, batch: batch, clip: S.clip || null, by: S.viewer || (SIGN && SIGN.name) || "", sentAt: now.toISOString() },
+        note: "" });
+    });
+    btn.disabled = true; btn.textContent = "Sending";
+    local("vidpod-studio-last-make-" + B.client.id, JSON.stringify({ batch: batch, rows: rows }));
+    post("Picks", rows, { project: j.project || "" }).then(function (ok) {
+      btn.disabled = false; btn.textContent = "Make these";
+      toast(ok ? "Sent to the job sheet. Tell Claude: run my picks" : "Saved on this device. Try again when online.");
+      $("mk-msg").textContent = (ok ? "Sent as " + batch + ". " : "") + msg;
+    });
+  }
+  function copyMessage() {
+    var txt = messageText();
+    var done = function () { toast("Copied. Paste it to Claude."); $("mk-msg").textContent = txt; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done).catch(function () { fallbackCopy(txt); done(); });
+    else { fallbackCopy(txt); done(); }
+  }
+  function fallbackCopy(txt) { var ta = document.createElement("textarea"); ta.value = txt; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;left:-9999px;top:0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} document.body.removeChild(ta); }
+  function initMk() {
+    $("mk-close").innerHTML = I.close;
+    $("mk-close").addEventListener("click", closeMk);
+    $("mk-project").addEventListener("input", saveJob); $("mk-video").addEventListener("input", saveJob);
+    $("mk-copy").addEventListener("click", copyMessage);
+    $("mk-make").addEventListener("click", makeThese);
+    $("mk-tpl").addEventListener("click", function () { closeMk(); openTpl(); });
+    $("mk").addEventListener("click", function (e) { if (e.target === $("mk")) closeMk(); });
+    $("count").addEventListener("click", function () { if (isVidpodCode()) openMk(); else openReview(); });
+  }
+  // the one line at the top, chosen by the code: clients pick; VIDPOD runs the studio
+  function renderStageLine() {
+    var n = $("stage-line"); if (!n) return;
+    n.innerHTML = isVidpodCode()
+      ? "<b>Studio.</b> Tap a name to play it on " + esc(B.client.id === "vidpod" ? "the footage" : B.client.name + "'s footage") + ". Pick, adjust, then <b>Make these</b> or copy the list to Claude."
+      : "<b>Pick your looks.</b> Tap a name to see it on your footage, then tap the circle to pick it.";
   }
   function openReview() {
     $("sum").innerHTML = B.sections.map(function (s) {
@@ -1333,9 +1546,10 @@
     var picks = {};
     B.sections.forEach(function (s) {
       var p = S.picks[s.id];
-      if (multi(s.id)) { picks[s.id] = p && p.length ? p.map(function (x) { var d = styleDef(s, x.style); var o2 = { style: d.id, code: d.code, label: d.label, registry: d.registry || null, source: d.source || null }; if (d.preview) { o2.finished = true; o2.ref = (d.recipe || {}).ref || null; } return o2; }) : null; return; }
+      if (multi(s.id)) { picks[s.id] = p && p.length ? p.map(function (x) { var d = styleDef(s, x.style); var o2 = { style: d.id, code: d.code, label: d.label, registry: d.registry || null, source: d.source || null }; if (d.preview) { o2.finished = true; o2.ref = (d.recipe || {}).ref || null; } if (x.at) o2.at = x.at; return o2; }) : null; return; }
       if (!p) { picks[s.id] = null; return; }
       var d = styleDef(s, p.style), o = { style: p.style, code: d.code, label: d.label, registry: d.registry || null, scope: s.scope === "any" ? "house-style" : "per-video-type" };
+      if (p.at) o.at = p.at;
       if (d.preview) { o.finished = true; o.ref = (d.recipe || {}).ref || null; o.how = (d.recipe || {}).how || ""; picks[s.id] = o; return; }
       if (s.controls.indexOf("font") >= 0) { var fo = fontDef(p.font); o.font = p.font; o.fontFamily = p.font === "brand" ? B.brand.font.sub : fo.family; }
       if (s.controls.indexOf("size") >= 0) o.sizePx = p.size;
@@ -1346,7 +1560,7 @@
       if (s.controls.indexOf("case") >= 0) o.case = p.case;
       if (p.shadow != null) { o.shadow = +p.shadow; o.shadowIs = "strength 0 to 100, soft drop shadow (0 = none)"; }
       if (p.flash && p.style === "tr-lens") o.flash = p.flash;
-      if (p.hookText) o.hookText = p.hookText;
+      if (p.hookText) { o.hookText = p.hookText; o.textIs = p.textIs || "quote"; }
       if (s.id === "hook") o.timing = p.timing || (d.hold ? "frame1" : "frame1");
       if (s.id === "subtitles") { if (Array.isArray(p.emph)) { o.emph = p.emph; o.emphClip = p.emphClip || null; } if (curFixes()) o.fixes = curFixes(); }
       ["wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "anim", "backing", "motion"].forEach(function (k2) { if (s.controls.indexOf(k2 === "hlStyle" || k2 === "hlColour" || k2 === "hl" ? "highlight" : k2 === "fx" ? "outline" : k2) >= 0 && p[k2] != null) o[k2] = p[k2]; });
@@ -1384,9 +1598,9 @@
   });
   $("sheet-cancel").addEventListener("click", closeReview);
   $("sheet-close").addEventListener("click", closeReview);
-  $("review-btn").addEventListener("click", openReview);
+  $("review-btn").addEventListener("click", function () { if (isVidpodCode()) openMk(); else openReview(); });
 
-  function save() { local("vidpod-studio-v3-" + B.client.id, JSON.stringify({ looks: S.looks, picks: S.picks, sec: S.sec, hookText: S.hookText, likes: S.likes, vtype: S.vtype, clip: S.clip, fixes: S.fixes })); }
+  function save() { local("vidpod-studio-v3-" + B.client.id, JSON.stringify({ looks: S.looks, picks: S.picks, sec: S.sec, hookText: S.hookText, headText: S.headText, likes: S.likes, vtype: S.vtype, clip: S.clip, fixes: S.fixes, adjust: !!S.adjust, job: S.job || null })); }
 
   /* ---- buttons ---- */
   $("play").addEventListener("click", togglePlay);
@@ -1412,11 +1626,11 @@
      preview is on screen; on a phone, once the preview scrolls away, it docks above the Send bar. ---- */
   var CU = { want: local("vidpod-studio-closeup") !== "off", last: 0, ok: false, slotSeen: true, onScreen: true };
   var CU_SECS = ["subtitles", "hook", "name", "logo"];
-  function cuWanted() { return (CU_SECS.indexOf(S.sec) >= 0 || !!(live && live.pre && live.focus)) && !(live && live.pre && !live.focus) && !$("stage").classList.contains("full") && !!live; }
+  function cuWanted() { return !!(S.adjust && S.canAdjust) && CU_SECS.indexOf(S.sec) >= 0 && !(live && live.pre) && !$("stage").classList.contains("full") && !!live; }
   function cuSync() {
     var want = cuWanted(), slot = $("cu-slot"), cu = $("closeup");
     slot.hidden = !want;
-    var dock = want && !CU.slotSeen && window.innerWidth < 980 && S.view !== "box";
+    var dock = false; // Round 7: the close-up sits in Adjust; the window itself stays in view
     if (dock) slot.style.height = slot.offsetHeight ? slot.offsetHeight + "px" : slot.style.height; else slot.style.height = "";
     cu.classList.toggle("docked", dock); document.body.classList.toggle("cu-docked", dock);
     document.body.classList.toggle("cu-off", !CU.want);
@@ -1689,6 +1903,7 @@
     if (B.clips && B.clips.length) { B.clips[0].base = B.clips[0].base || B.base; S.clip = B.clips[0].id; if (saved.clip && saved.clip !== S.clip) useClip(saved.clip, true); }
     S.viewer = (SIGN && SIGN.name) || local("vidpod-studio-viewer") || "";
     S.hookText = saved.hookText == null ? null : saved.hookText;
+    S.headText = saved.headText == null ? null : saved.headText; S.adjust = !!saved.adjust; S.job = saved.job || null;
     S.fixes = saved.fixes && typeof saved.fixes === "object" ? saved.fixes : {};
     S.likes = saved.likes || {};
     S.vtype = saved.vtype || ((B.video_types || [])[0] || {}).id || null;
@@ -1711,7 +1926,9 @@
     renderCheck(); renderClips(); renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); updateFoot();
     goSeg(true); rebuild(); requestAnimationFrame(frame);
     setTimeout(showHint, 1500);
-    whoLines(); initCloseup(); initFeedback(); initTemplates();
+    whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); renderStageLine(); updateFoot();
+    // phones: the tabs stick just under the window
+    if ("ResizeObserver" in window) new ResizeObserver(function () { document.documentElement.style.setProperty("--stage-h", (window.innerWidth < 980 ? $("stage").offsetHeight : 0) + "px"); }).observe($("stage"));
     $("home").addEventListener("click", goStart);
     $("tabs").addEventListener("scroll", tabFade, { passive: true }); window.addEventListener("resize", tabFade);
     $("sz-btn").addEventListener("click", function () { openMenu("sz"); }); $("clip-btn").addEventListener("click", function () { openMenu("clip"); });
@@ -1719,7 +1936,7 @@
     window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
   }
   /* ---- which board: #atpilates (or #atpilates/hook) opens that client's board; no hash opens the VIDPOD standard board ---- */
-  var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions"];
+  var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions", "backgrounds", "endcard"];
   function route() {
     var parts = (location.hash || "").replace(/^#\/?/, "").split("/").filter(Boolean), out = { client: "vidpod", sec: null, explicit: false };
     parts.forEach(function (x) { x = decodeURIComponent(x).toLowerCase(); if (SECTION_IDS.indexOf(x) >= 0) out.sec = x; else if (/^[a-z0-9-]{2,40}$/.test(x)) { out.client = x; out.explicit = true; } });

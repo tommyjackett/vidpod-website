@@ -1,0 +1,419 @@
+{
+ "source": {
+  "show": "The Numbers Game",
+  "episode": "EP 307 (2026 report card and 2027 predictions), recorded REC2 8 Oct 2026",
+  "file": "Desktop/DELETE/Q4_REC2_EP 307_v1.1_SNIPPETS.mp4 (1920x1080 two-up, 25 fps)",
+  "in": 1065.7,
+  "out": 1081.4,
+  "crop": "Jason's half: 608x1080 from x 124, scaled to 1080x1920 (lanczos), 25 fps",
+  "audio": "programme mix, loudnorm -15 LUFS",
+  "words": "AssemblyAI pipeline on the cut (lib/words.py transcribe); one fix: 'put a number on a go.' -> 'put a number on it and go,' (the episode transcript at 1077.93 s)"
+ },
+ "label": "Jase, DPN call",
+ "video": "media/base.mp4",
+ "poster": "media/base.jpg",
+ "duration": 15.76,
+ "cuts": [],
+ "words": [
+  {
+   "t": 0.273,
+   "end": 0.402,
+   "text": "So"
+  },
+  {
+   "t": 0.418,
+   "end": 0.467,
+   "text": "I"
+  },
+  {
+   "t": 0.595,
+   "end": 0.885,
+   "text": "have"
+  },
+  {
+   "t": 1.062,
+   "end": 1.223,
+   "text": "at"
+  },
+  {
+   "t": 1.223,
+   "end": 1.545,
+   "text": "number"
+  },
+  {
+   "t": 1.545,
+   "end": 1.771,
+   "text": "1,"
+  },
+  {
+   "t": 2.367,
+   "end": 2.673,
+   "text": "such"
+  },
+  {
+   "t": 2.673,
+   "end": 2.721,
+   "text": "an"
+  },
+  {
+   "t": 2.769,
+   "end": 3.188,
+   "text": "accounting"
+  },
+  {
+   "t": 3.252,
+   "end": 3.542,
+   "text": "nerd,"
+  },
+  {
+   "t": 3.575,
+   "end": 3.736,
+   "text": "but"
+  },
+  {
+   "t": 3.752,
+   "end": 3.897,
+   "text": "it"
+  },
+  {
+   "t": 3.897,
+   "end": 3.945,
+   "text": "is"
+  },
+  {
+   "t": 4.042,
+   "end": 4.138,
+   "text": "what"
+  },
+  {
+   "t": 4.138,
+   "end": 4.219,
+   "text": "it"
+  },
+  {
+   "t": 4.283,
+   "end": 4.348,
+   "text": "is,"
+  },
+  {
+   "t": 4.782,
+   "end": 4.927,
+   "text": "that"
+  },
+  {
+   "t": 4.927,
+   "end": 5.088,
+   "text": "the"
+  },
+  {
+   "t": 5.104,
+   "end": 5.475,
+   "text": "ATO"
+  },
+  {
+   "t": 5.507,
+   "end": 5.716,
+   "text": "will"
+  },
+  {
+   "t": 5.765,
+   "end": 6.103,
+   "text": "issue"
+  },
+  {
+   "t": 6.135,
+   "end": 6.489,
+   "text": "more"
+  },
+  {
+   "t": 6.554,
+   "end": 7.069,
+   "text": "DPNs"
+  },
+  {
+   "t": 7.907,
+   "end": 8.035,
+   "text": "than"
+  },
+  {
+   "t": 8.39,
+   "end": 8.551,
+   "text": "the"
+  },
+  {
+   "t": 8.567,
+   "end": 9.662,
+   "text": "84,000"
+  },
+  {
+   "t": 9.678,
+   "end": 9.742,
+   "text": "that"
+  },
+  {
+   "t": 9.742,
+   "end": 9.775,
+   "text": "it"
+  },
+  {
+   "t": 9.775,
+   "end": 9.952,
+   "text": "did"
+  },
+  {
+   "t": 9.952,
+   "end": 10.016,
+   "text": "in"
+  },
+  {
+   "t": 10.016,
+   "end": 10.097,
+   "text": "the"
+  },
+  {
+   "t": 10.161,
+   "end": 10.548,
+   "text": "previous"
+  },
+  {
+   "t": 10.564,
+   "end": 10.676,
+   "text": "year."
+  },
+  {
+   "t": 10.757,
+   "end": 10.821,
+   "text": "So"
+  },
+  {
+   "t": 10.821,
+   "end": 10.934,
+   "text": "I'm"
+  },
+  {
+   "t": 10.934,
+   "end": 11.031,
+   "text": "going"
+  },
+  {
+   "t": 11.047,
+   "end": 11.079,
+   "text": "to"
+  },
+  {
+   "t": 11.127,
+   "end": 11.24,
+   "text": "put"
+  },
+  {
+   "t": 11.24,
+   "end": 11.256,
+   "text": "a"
+  },
+  {
+   "t": 11.288,
+   "end": 11.53,
+   "text": "number"
+  },
+  {
+   "t": 11.53,
+   "end": 11.627,
+   "text": "on"
+  },
+  {
+   "t": 11.627,
+   "end": 11.68,
+   "text": "it"
+  },
+  {
+   "t": 11.68,
+   "end": 11.7,
+   "text": "and"
+  },
+  {
+   "t": 11.7,
+   "end": 11.95,
+   "text": "go,"
+  },
+  {
+   "t": 12.416,
+   "end": 12.432,
+   "text": "I"
+  },
+  {
+   "t": 12.432,
+   "end": 12.609,
+   "text": "think"
+  },
+  {
+   "t": 12.673,
+   "end": 12.802,
+   "text": "there'll"
+  },
+  {
+   "t": 12.818,
+   "end": 12.979,
+   "text": "be"
+  },
+  {
+   "t": 13.06,
+   "end": 13.285,
+   "text": "over"
+  },
+  {
+   "t": 13.382,
+   "end": 14.59,
+   "text": "100,000"
+  },
+  {
+   "t": 14.59,
+   "end": 14.96,
+   "text": "DPNs."
+  }
+ ],
+ "phrases": [
+  0,
+  6,
+  10,
+  16,
+  22,
+  23,
+  24,
+  30,
+  33,
+  39,
+  44,
+  50
+ ],
+ "emphasis": [
+  8,
+  18,
+  22,
+  25,
+  49,
+  50
+ ],
+ "name": "Jason Robinson",
+ "role": "Co-host, The Numbers Game",
+ "name_at": 2.4,
+ "protect_case": [
+  "ATO",
+  "DPNs"
+ ],
+ "proper": [
+  "I",
+  "ATO",
+  "DPNs",
+  "Jason",
+  "Robinson"
+ ],
+ "hook_text": "I think there'll be over\n*100,000 DPNs*",
+ "hook_label": "Jason Robinson, The Numbers Game",
+ "moves_suggested": {
+  "word": "DPNs",
+  "word_y": 620,
+  "word_size": 380,
+  "small": "ATO",
+  "at": 6.55,
+  "small_at": 5.1,
+  "side": {
+   "lead": "The ATO will issue",
+   "big": "More DPNs",
+   "small": "than the 84,000"
+  }
+ },
+ "words_extra_suggested": {
+  "stat": {
+   "big": "84,000",
+   "line": "DPNs the ATO issued the previous year"
+  },
+  "roll": {
+   "from": 84000,
+   "to": 100000,
+   "before": "DPNs the previous year",
+   "after": "DPNs, his number 1 call"
+  },
+  "list": [
+   "The ATO",
+   "More DPNs",
+   "Over 100,000"
+  ],
+  "section": {
+   "num": "01",
+   "title": "The ATO",
+   "kicker": "Number 1"
+  },
+  "place": {
+   "name": "West Melbourne",
+   "sub": "Victoria"
+  },
+  "quote": {
+   "text": "I think there'll be over 100,000 DPNs.",
+   "label": "Jason Robinson, The Numbers Game"
+  },
+  "quote_card": {
+   "text": "The ATO will issue more DPNs than the 84,000 that it did in the previous year.",
+   "name": "Jason Robinson",
+   "role": "Co-host, The Numbers Game"
+  }
+ },
+ "numbers_said": [
+  {
+   "value": "84,000",
+   "line": "the ATO will issue more DPNs than the 84,000 that it did in the previous year",
+   "t": 8.567
+  },
+  {
+   "value": "over 100,000",
+   "line": "I think there'll be over 100,000 DPNs",
+   "t": 13.382
+  }
+ ],
+ "depth": {
+  "video": "base_depth.mp4",
+  "duration": 15.76,
+  "note": "top half colour, bottom half person matte (Apple Vision), 720x1280 each; tools/make_matte.py"
+ },
+ "face": {
+  "x": 516,
+  "y": 462,
+  "r": 396,
+  "top": 106,
+  "hook_top": 106,
+  "note": "measured by tools/make_matte.py from the person matte (median of the clip); check on a still"
+ },
+ "card_frames": [
+  {
+   "t": 1,
+   "src": "media/cards/f_1_0.jpg"
+  },
+  {
+   "t": 3,
+   "src": "media/cards/f_3_0.jpg"
+  },
+  {
+   "t": 5,
+   "src": "media/cards/f_5_0.jpg"
+  },
+  {
+   "t": 7,
+   "src": "media/cards/f_7_0.jpg"
+  },
+  {
+   "t": 9,
+   "src": "media/cards/f_9_0.jpg"
+  },
+  {
+   "t": 11,
+   "src": "media/cards/f_11_0.jpg"
+  },
+  {
+   "t": 13,
+   "src": "media/cards/f_13_0.jpg"
+  }
+ ],
+ "card_cutout": {
+  "src": "media/cards/cutout_7_0.png",
+  "t": 7.0
+ }
+}
