@@ -1,0 +1,493 @@
+{
+ "note": "VIDPOD swipe review queue (for Tommy). Thumbnails and 4 s loops in review-thumbs/ are small previews made from public preview files, for internal review only; every item links back to its source. Rebuild: scratchpad review/build.py (see HANDOFF.md).",
+ "version": "2026-11-07",
+ "items": [
+  {
+   "id": "P01",
+   "title": "Kinetic hook titles (pack preview)",
+   "type": "Hook",
+   "note": "Bold block type, one word on a highlight bar. Envato pack by Qwadro, vertical.",
+   "source": "Envato Elements: Kinetic Hook Titles by Qwadro",
+   "link": "https://elements.envato.com/kinetic-hook-titles-B8T9WR2",
+   "video": "review-thumbs/P01.mp4",
+   "image": "review-thumbs/P01.jpg"
+  },
+  {
+   "id": "P02",
+   "title": "Visual hook: glass smash",
+   "type": "Hook",
+   "note": "Title sits over a shattering glass layer in the first second.",
+   "source": "Pinterest: pinned by Filmora_Video_Editor",
+   "link": "https://www.instagram.com/reel/DcEzd-jDTMT/",
+   "pinBoard": "https://www.pinterest.com/Filmora_Video_Editor/_tpd_social/",
+   "video": "review-thumbs/P02.mp4",
+   "image": "review-thumbs/P02.jpg"
+  },
+  {
+   "id": "R01",
+   "title": "Mixed-scale stack",
+   "type": "Hook",
+   "note": "Small connector words orbit one huge glowing word, built as spoken.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R01.mp4",
+   "image": "review-thumbs/R01.jpg"
+  },
+  {
+   "id": "P03",
+   "title": "Serif key word on a framed clip",
+   "type": "Caption",
+   "note": "Before/after: plain clip vs framed card with a serif italic key word.",
+   "source": "Pinterest: pinned by Motion_pet",
+   "link": "https://www.instagram.com/reel/DcIqF-EupQ0/",
+   "pinBoard": "https://www.pinterest.com/Motion_pet/_tpd_social/",
+   "video": "review-thumbs/P03.mp4",
+   "image": "review-thumbs/P03.jpg"
+  },
+  {
+   "id": "P04",
+   "title": "One giant word beside the face",
+   "type": "Hook",
+   "note": "Single huge lowercase word sharing the frame with the subject.",
+   "source": "Pinterest: pinned by itsmadeandstyled",
+   "link": "https://www.instagram.com/reel/DHlT6zaPb4i/",
+   "pinBoard": "https://www.pinterest.com/itsmadeandstyled/design-inspirations/",
+   "video": "review-thumbs/P04.mp4",
+   "image": "review-thumbs/P04.jpg"
+  },
+  {
+   "id": "P05",
+   "title": "Serif + heavy hook templates",
+   "type": "Hook",
+   "note": "Five hook layouts mixing a serif display word with a heavy sans.",
+   "source": "Pinterest: pinned by AsteriskCreate",
+   "link": "https://www.instagram.com/p/DUQ163MDiFw/",
+   "pinBoard": "https://www.pinterest.com/AsteriskCreate/_tpd_social/",
+   "image": "review-thumbs/P05.jpg"
+  },
+  {
+   "id": "P06",
+   "title": "THIS is a HOOK stack",
+   "type": "Hook",
+   "note": "Mixed weight and size stack sitting above the head.",
+   "source": "Pinterest: pinned by theaceagency",
+   "link": "https://www.instagram.com/theace_agency/",
+   "pinBoard": "https://www.pinterest.com/theaceagency/content-tips/",
+   "video": "review-thumbs/P06.mp4",
+   "image": "review-thumbs/P06.jpg"
+  },
+  {
+   "id": "R02",
+   "title": "Karaoke-dim stack",
+   "type": "Caption",
+   "note": "Next word sits dimmed until it is spoken.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R02.mp4",
+   "image": "review-thumbs/R02.jpg"
+  },
+  {
+   "id": "P07",
+   "title": "Curved text around the subject",
+   "type": "Hook",
+   "note": "Serif words bend along an arc around the subject.",
+   "source": "Pinterest: pinned by kiyashmi",
+   "link": "https://www.instagram.com/shemeanssocial/",
+   "pinBoard": "https://www.pinterest.com/kiyashmi/learn-social-media-management/",
+   "video": "review-thumbs/P07.mp4",
+   "image": "review-thumbs/P07.jpg"
+  },
+  {
+   "id": "P08",
+   "title": "Repeated word stack",
+   "type": "Kinetic type",
+   "note": "One word repeated down the frame, plain black on white.",
+   "source": "Pinterest: pinned by themargator",
+   "link": "https://www.instagram.com/reel/C8MzGRjC4eL/",
+   "pinBoard": "https://www.pinterest.com/themargator/_quick_saves/",
+   "video": "review-thumbs/P08.mp4",
+   "image": "review-thumbs/P08.jpg"
+  },
+  {
+   "id": "P09",
+   "title": "Serif yellow hook, full body",
+   "type": "Hook",
+   "note": "Yellow serif title across the waist of a full-length shot.",
+   "source": "Pinterest: pinned by lecreativecontent",
+   "link": "https://www.instagram.com/reel/DTzmpOlEdOS/",
+   "pinBoard": "https://www.pinterest.com/lecreativecontent/le-creative-content/",
+   "video": "review-thumbs/P09.mp4",
+   "image": "review-thumbs/P09.jpg"
+  },
+  {
+   "id": "P10",
+   "title": "Hollow outline text behind subject",
+   "type": "Hook",
+   "note": "Outline letters with the subject walking in front.",
+   "source": "Pinterest: pinned by marieaiedits",
+   "link": "https://www.instagram.com/reel/DXBd39XjN9T/",
+   "pinBoard": "https://www.pinterest.com/marieaiedits/_tpd_social/",
+   "video": "review-thumbs/P10.mp4",
+   "image": "review-thumbs/P10.jpg"
+  },
+  {
+   "id": "R03",
+   "title": "Hand-drawn strike",
+   "type": "Hook",
+   "note": "Red marker strike through the key word.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R03.mp4",
+   "image": "review-thumbs/R03.jpg"
+  },
+  {
+   "id": "P11",
+   "title": "Yellow key word on framed talking head",
+   "type": "Caption",
+   "note": "Before/after: footage set in a rounded card, one word yellow.",
+   "source": "Pinterest: pinned by Motion_pet",
+   "link": "https://www.instagram.com/reel/DcF1qNmi_1S/",
+   "pinBoard": "https://www.pinterest.com/Motion_pet/_tpd_social/",
+   "video": "review-thumbs/P11.mp4",
+   "image": "review-thumbs/P11.jpg"
+  },
+  {
+   "id": "P12",
+   "title": "Text behind person, cut-out",
+   "type": "Hook",
+   "note": "Big words layered behind the talent via a matte.",
+   "source": "Pinterest: pinned by itsvirtuallytara",
+   "link": "https://www.instagram.com/reel/Db94KF2JWeU/",
+   "pinBoard": "https://www.pinterest.com/itsvirtuallytara/_tpd_social/",
+   "video": "review-thumbs/P12.mp4",
+   "image": "review-thumbs/P12.jpg"
+  },
+  {
+   "id": "P13",
+   "title": "Serif italic viral text",
+   "type": "Hook",
+   "note": "Large serif mixed with italic, over a wide outdoor shot.",
+   "source": "Pinterest: pinned by alisonrubke",
+   "link": "https://www.instagram.com/reel/DGbIFTbP2PH/",
+   "pinBoard": "https://www.pinterest.com/alisonrubke/social-media-instagram-tips/",
+   "video": "review-thumbs/P13.mp4",
+   "image": "review-thumbs/P13.jpg"
+  },
+  {
+   "id": "P14",
+   "title": "OPEN your eyes word reveal",
+   "type": "Kinetic type",
+   "note": "Letters split and open; tiny connector words inside.",
+   "source": "Pinterest: pinned by hmgraphic11",
+   "link": "https://www.instagram.com/reel/CxYO0kEPgYU/",
+   "pinBoard": "https://www.pinterest.com/hmgraphic11/animation-video/",
+   "video": "review-thumbs/P14.mp4",
+   "image": "review-thumbs/P14.jpg"
+  },
+  {
+   "id": "R04",
+   "title": "Slat wipe into word behind head",
+   "type": "Transition",
+   "note": "White vertical slats, then a giant word tucked behind the head.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R04.mp4",
+   "image": "review-thumbs/R04.jpg"
+  },
+  {
+   "id": "P15",
+   "title": "Clean two-line subtitles",
+   "type": "Caption",
+   "note": "Soft white sans subtitles, centred, low over a seated talking head.",
+   "source": "Pinterest: pinned by mattiamediax",
+   "link": "https://www.instagram.com/reel/DWBy83ijC9u/",
+   "pinBoard": "https://www.pinterest.com/mattiamediax/_tpd_social/",
+   "video": "review-thumbs/P15.mp4",
+   "image": "review-thumbs/P15.jpg"
+  },
+  {
+   "id": "K01",
+   "title": "Caption Creator Pack, all 191 presets",
+   "type": "Pack",
+   "note": "DaVinci Resolve caption pack: 191 presets in 9 styles + 21 hooks.",
+   "source": "NeoEditFX: Caption Creator Pack",
+   "link": "https://neoeditfx.com/products/caption-creator-pack",
+   "image": "review-thumbs/K01.jpg"
+  },
+  {
+   "id": "P16",
+   "title": "Split-letter kinetic word",
+   "type": "Kinetic type",
+   "note": "Word slices apart and reassembles, bold colour on dark.",
+   "source": "Pinterest: pinned by Zenmotiondesigner",
+   "link": "https://www.instagram.com/reel/DJLq5MMooJl/",
+   "pinBoard": "https://www.pinterest.com/Zenmotiondesigner/_quick_creates/",
+   "video": "review-thumbs/P16.mp4",
+   "image": "review-thumbs/P16.jpg"
+  },
+  {
+   "id": "P17",
+   "title": "15 simple lower thirds",
+   "type": "Lower third",
+   "note": "Videohive pack preview: clean bars and labels.",
+   "source": "Pinterest: pinned by indiana178",
+   "link": "https://1.envato.market/c/1310796/275988/4415?u=https://videohive.net/item/15-simple-lower-thirds/24660105",
+   "pinBoard": "https://www.pinterest.com/indiana178/_quick_saves/",
+   "video": "review-thumbs/P17.mp4",
+   "image": "review-thumbs/P17.jpg"
+  },
+  {
+   "id": "P18",
+   "title": "Lower thirds, mixed-weight names",
+   "type": "Lower third",
+   "note": "First name light, surname heavy, role in small caps.",
+   "source": "Pinterest: pinned by motionlibrary",
+   "link": "https://motionlibrary.io/product/lower-thirds-different-1",
+   "pinBoard": "https://www.pinterest.com/motionlibrary/lower-thirds/",
+   "video": "review-thumbs/P18.mp4",
+   "image": "review-thumbs/P18.jpg"
+  },
+  {
+   "id": "R05",
+   "title": "Ring around the head + tag pill",
+   "type": "Graphic",
+   "note": "Thin glowing ring circles the head, small red pill pops beside it.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R05.mp4",
+   "image": "review-thumbs/R05.jpg"
+  },
+  {
+   "id": "P19",
+   "title": "486 lower thirds and titles (Gumroad pack)",
+   "type": "Pack",
+   "note": "One seller's bundle: name titles, news bars, callouts.",
+   "source": "Pinterest: pinned by domujimotion",
+   "link": "https://domuji.gumroad.com/l/lkhmep",
+   "pinBoard": "https://www.pinterest.com/domujimotion/premiere-pro-templates/",
+   "image": "review-thumbs/P19.jpg"
+  },
+  {
+   "id": "P20",
+   "title": "Big name lower third on footage",
+   "type": "Lower third",
+   "note": "Oversized name with a thin role line, over the shot.",
+   "source": "Pinterest: pinned by designshack",
+   "link": "https://designshack.net/articles/software/what-are-lower-thirds/",
+   "pinBoard": "https://www.pinterest.com/designshack/design-shack/",
+   "image": "review-thumbs/P20.jpg"
+  },
+  {
+   "id": "P21",
+   "title": "Serif mixed italic headline",
+   "type": "Title card",
+   "note": "Serif headline with one italic phrase over a soft photo.",
+   "source": "Pinterest: pinned by crvkstudio",
+   "link": "https://www.instagram.com/p/DWg7p4IiCXy/",
+   "pinBoard": "https://www.pinterest.com/crvkstudio/_tpd_social/",
+   "image": "review-thumbs/P21.jpg"
+  },
+  {
+   "id": "P22",
+   "title": "Script + bold yellow title mix",
+   "type": "Hook",
+   "note": "Thin script word over a heavy condensed yellow word.",
+   "source": "Pinterest: pinned by TemplifyApp",
+   "link": "https://www.instagram.com/reel/DKN5T_KylTh/",
+   "pinBoard": "https://www.pinterest.com/TemplifyApp/_tpd_social/",
+   "video": "review-thumbs/P22.mp4",
+   "image": "review-thumbs/P22.jpg"
+  },
+  {
+   "id": "R06",
+   "title": "Viewfinder frame",
+   "type": "Graphic",
+   "note": "REC dot and corner brackets over the talent.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R06.mp4",
+   "image": "review-thumbs/R06.jpg"
+  },
+  {
+   "id": "P23",
+   "title": "Lowercase serif caption",
+   "type": "Caption",
+   "note": "Quiet lowercase serif line, no box, generous space.",
+   "source": "Pinterest: pinned by voccastudio1",
+   "link": "https://500hooks.netlify.app/",
+   "pinBoard": "https://www.pinterest.com/voccastudio1/socmed-manager/",
+   "image": "review-thumbs/P23.jpg"
+  },
+  {
+   "id": "P24",
+   "title": "Single-word captions",
+   "type": "Caption",
+   "note": "One word at a time, heavy, stacked near the face.",
+   "source": "Pinterest: pinned by samgracieee",
+   "link": "https://www.instagram.com/reel/DU1dSBKgQkt/",
+   "pinBoard": "https://www.pinterest.com/samgracieee/as-seen-on-insta/",
+   "video": "review-thumbs/P24.mp4",
+   "image": "review-thumbs/P24.jpg"
+  },
+  {
+   "id": "P25",
+   "title": "Hormozi-style caption with emoji",
+   "type": "Caption",
+   "note": "Caps, heavy, key word coloured, emoji above.",
+   "source": "Pinterest: pinned by GoviralinstagramReel",
+   "link": "https://submagic.co/?fpr=jacques75",
+   "pinBoard": "https://www.pinterest.com/GoviralinstagramReel/serillonm-relaxation/",
+   "video": "review-thumbs/P25.mp4",
+   "image": "review-thumbs/P25.jpg"
+  },
+  {
+   "id": "P26",
+   "title": "Podcast clip in a card, serif number",
+   "type": "Caption",
+   "note": "Framed podcast shot, serif italic number in brand colour.",
+   "source": "Pinterest: pinned by yumekoooodes",
+   "link": "https://www.instagram.com/y.umeekooo/",
+   "pinBoard": "https://www.pinterest.com/yumekoooodes/%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%BE%D0%BA/",
+   "video": "review-thumbs/P26.mp4",
+   "image": "review-thumbs/P26.jpg"
+  },
+  {
+   "id": "R07",
+   "title": "Glass alert pills",
+   "type": "Graphic",
+   "note": "Dark red glass pills slide in and stack at chest height.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R07.mp4",
+   "image": "review-thumbs/R07.jpg"
+  },
+  {
+   "id": "P27",
+   "title": "Huge word + small caption line",
+   "type": "Hook",
+   "note": "Giant grey word up top, small caption with one coloured word.",
+   "source": "Pinterest: pinned by rekhamotion",
+   "link": "https://rekhamotion.com/",
+   "pinBoard": "https://www.pinterest.com/rekhamotion/kinetic-typography/",
+   "video": "review-thumbs/P27.mp4",
+   "image": "review-thumbs/P27.jpg"
+  },
+  {
+   "id": "K02",
+   "title": "Subtitle and caption animations (pack preview)",
+   "type": "Caption",
+   "note": "Vertical caption styles with highlight, gradient and glow. MotionMeister, Videohive.",
+   "source": "Videohive: Subtitles & Captions Text Animations by MotionMeister",
+   "link": "https://videohive.net/item/subtitle-caption-text-animations/60153529",
+   "video": "review-thumbs/K02.mp4",
+   "image": "review-thumbs/K02.jpg"
+  },
+  {
+   "id": "P28",
+   "title": "Podcast caption, coloured key line",
+   "type": "Caption",
+   "note": "Bold coloured key phrase over a smaller white line.",
+   "source": "Pinterest: pinned by paidprodigital",
+   "link": "https://www.instagram.com/paidprodigital/",
+   "pinBoard": "https://www.pinterest.com/paidprodigital/podcast-video-edit/",
+   "video": "review-thumbs/P28.mp4",
+   "image": "review-thumbs/P28.jpg"
+  },
+  {
+   "id": "P29",
+   "title": "Sliced-letter kinetic type",
+   "type": "Kinetic type",
+   "note": "Letters cut by diagonal slashes, black and white.",
+   "source": "Pinterest: pinned by alt_type_foundry",
+   "link": "https://www.instagram.com/p/DSUtq79kdrU/",
+   "pinBoard": "https://www.pinterest.com/alt_type_foundry/_tpd_social/",
+   "image": "review-thumbs/P29.jpg"
+  },
+  {
+   "id": "P30",
+   "title": "Condensed two-colour word stack",
+   "type": "Kinetic type",
+   "note": "Tall condensed words fill the frame in two colours.",
+   "source": "Pinterest: pinned by yousayjump",
+   "link": "https://www.wesayhowhigh.com/motion-graphics-animation",
+   "pinBoard": "https://www.pinterest.com/yousayjump/animation-and-motion-graphics/",
+   "video": "review-thumbs/P30.mp4",
+   "image": "review-thumbs/P30.jpg"
+  },
+  {
+   "id": "R08",
+   "title": "Closing stack",
+   "type": "Hook",
+   "note": "Same type system closes the piece: small words + one hero word.",
+   "source": "Pinterest: Reels Editing Tutorial Clean & Minimal Style (paidprodigital), Tommy's reference",
+   "link": "https://au.pinterest.com/pin/953637289872814725/",
+   "video": "review-thumbs/R08.mp4",
+   "image": "review-thumbs/R08.jpg"
+  },
+  {
+   "id": "P31",
+   "title": "Raw vs edit, framed talking head",
+   "type": "Hook",
+   "note": "Raw clip vs edit: card frame, ghosted big type behind.",
+   "source": "Pinterest: pinned by prakharparsai7",
+   "link": "https://www.instagram.com/parsai_graphics/",
+   "pinBoard": "https://www.pinterest.com/prakharparsai7/talking-head-video-editing/",
+   "video": "review-thumbs/P31.mp4",
+   "image": "review-thumbs/P31.jpg"
+  },
+  {
+   "id": "P32",
+   "title": "Podcast caption, white + yellow",
+   "type": "Caption",
+   "note": "Small white lead-in, heavy yellow emphasis below.",
+   "source": "Pinterest: pinned by paidprodigital",
+   "link": "https://www.instagram.com/ariya_akter27/",
+   "pinBoard": "https://www.pinterest.com/paidprodigital/podcast-video-edit/",
+   "video": "review-thumbs/P32.mp4",
+   "image": "review-thumbs/P32.jpg"
+  },
+  {
+   "id": "P33",
+   "title": "Serif stack with strike-through",
+   "type": "Hook",
+   "note": "Serif words stacked, one crossed out in red.",
+   "source": "Pinterest: pinned by pamkriangkum",
+   "link": "https://www.instagram.com/reel/DCSEfbMSHxU/",
+   "pinBoard": "https://www.pinterest.com/pamkriangkum/the-strategy-edit-tse/",
+   "video": "review-thumbs/P33.mp4",
+   "image": "review-thumbs/P33.jpg"
+  },
+  {
+   "id": "P34",
+   "title": "Serif italic subtitles",
+   "type": "Caption",
+   "note": "Mixed roman and italic serif subtitles over the subject.",
+   "source": "Pinterest: pinned by dpakkia",
+   "link": "https://www.instagram.com/p/DNbgHpoNnWv/",
+   "pinBoard": "https://www.pinterest.com/dpakkia/reels/",
+   "video": "review-thumbs/P34.mp4",
+   "image": "review-thumbs/P34.jpg"
+  },
+  {
+   "id": "P35",
+   "title": "Letters as windows into footage",
+   "type": "Title card",
+   "note": "Giant letters cut out of the frame show the video through them.",
+   "source": "Pinterest: pinned by littlewhimsey",
+   "link": "https://www.instagram.com/reel/DLhRh3ypYq0/",
+   "pinBoard": "https://www.pinterest.com/littlewhimsey/_tpd_social/",
+   "video": "review-thumbs/P35.mp4",
+   "image": "review-thumbs/P35.jpg"
+  },
+  {
+   "id": "P36",
+   "title": "Vintage yellow subtitles",
+   "type": "Caption",
+   "note": "Classic film-style yellow subtitles with a soft shadow.",
+   "source": "Pinterest: pinned by fatemaaqeel2000",
+   "link": "https://m.youtube.com/watch?v=y6qIyIBcKpg&feature=youtu.be",
+   "pinBoard": "https://www.pinterest.com/fatemaaqeel2000/yellow-subtitles/",
+   "image": "review-thumbs/P36.jpg"
+  }
+ ]
+}
