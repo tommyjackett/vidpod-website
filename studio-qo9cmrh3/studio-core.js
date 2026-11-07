@@ -1691,6 +1691,7 @@
     window.addEventListener("resize", function () { cuSync(); demoFit(); });
     $("dm-custom").addEventListener("click", function () {
       if (!S.adjust) { S.adjust = true; showAdjust(); rebuild(); }
+      setTimeout(startPlay, 300);   // the demo follows the clock: keep it moving so the words show while adjusting
       setTimeout(function () { var a = $("adjust"); if (a && !a.hidden) a.scrollIntoView({ behavior: "smooth", block: "start" }); }, 80);
     });
     CU.ok = true; cuSync();
