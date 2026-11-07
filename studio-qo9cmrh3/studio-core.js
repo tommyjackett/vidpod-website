@@ -16,7 +16,7 @@
   /* ================= the VIDPOD log: every sign-in, pick, like and screenshot goes to the Google Sheet "VidPod Studio Log"
      through a Google Apps Script web app (URL in codes.json, log_endpoint). Plain text body, no-cors: no preflight. ================= */
   var PAGE_VERSION = "v7";
-  var SIGN = null, LOG_URL = "";
+  var SIGN = null, LOG_URL = "", CODES = {};
   function post(tab, rows, extra) {
     if (!LOG_URL || typeof fetch !== "function") return Promise.resolve(false);
     var body = JSON.stringify(Object.assign({
@@ -1899,7 +1899,8 @@
     var css = B.brand.font.faces.map(function (fc) { return "@font-face{font-family:\"" + fc.family + "\";src:url(\"" + fc.src + "\");font-weight:" + fc.weight + ";font-display:block;}"; }).join("");
     var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
     var saved = {}; try { saved = JSON.parse(local("vidpod-studio-v3-" + c.id) || "{}") || {}; } catch (e) { saved = {}; }
-    if (c.id === "vidpod") document.querySelector(".made-for").style.display = "none";
+    if (c.id === "vidpod" && !isVidpodCode()) document.querySelector(".made-for").style.display = "none";
+    clientSwitch(c);
     if (B.clips && B.clips.length) { B.clips[0].base = B.clips[0].base || B.base; S.clip = B.clips[0].id; if (saved.clip && saved.clip !== S.clip) useClip(saved.clip, true); }
     S.viewer = (SIGN && SIGN.name) || local("vidpod-studio-viewer") || "";
     S.hookText = saved.hookText == null ? null : saved.hookText;
@@ -1955,7 +1956,7 @@
       return b;
     }).catch(function () { return b; });
   }
-  window.addEventListener("hashchange", function () { var r = route(); if (B && r.explicit && r.client !== B.client.id) location.reload(); else if (B && r.sec && r.sec !== S.sec && sec(r.sec)) switchSec(r.sec, false); });
+  window.addEventListener("hashchange", function () { var r = route(); if (B && r.explicit && r.client !== B.client.id && isVidpodCode()) location.reload(); else if (B && r.sec && r.sec !== S.sec && sec(r.sec)) switchSec(r.sec, false); });
 
   /* ---- feedback: a text note and, outside the Claude page, a hold-to-record voice note with live words where the browser can ---- */
   var FB = { rec: null, chunks: [], blob: null, type: "", t0: 0, timer: 0, stream: null, sr: null, words: "", interim: "", holding: false, secs: 0 };
@@ -2064,6 +2065,22 @@
       });
     });
   }
+  /* VIDPOD only: a client switcher in the header (opens that client's board on this sign-in, so Make these works on their footage).
+     Client codes never see it, and a client hash in the URL is ignored for them (one board per client code). */
+  function clientSwitch(c) {
+    if (!isVidpodCode()) return;
+    var mf = document.querySelector(".made-for"), boards = {};
+    Object.keys(CODES).forEach(function (k) { boards[CODES[k].board] = CODES[k].label || k; });
+    if (Object.keys(boards).length < 2) return;
+    mf.classList.add("switch");
+    if (c.id === "vidpod") { var t = el("b", "sw-name", "VIDPOD"); mf.appendChild(t); }
+    var chev = el("span", "sw-chev", "<svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 9l6 6 6-6\"/></svg>");
+    mf.appendChild(chev);
+    var sel = el("select", "sw-sel"); sel.setAttribute("aria-label", "Open another client's board");
+    Object.keys(boards).forEach(function (id) { var o = el("option", "", esc(boards[id])); o.value = id; if (id === c.id) o.selected = true; sel.appendChild(o); });
+    sel.addEventListener("change", function () { location.hash = sel.value; });
+    mf.appendChild(sel);
+  }
   function switchUser() { local("vidpod-studio-signin", null); location.reload(); }
   function whoLines() {
     if (!SIGN) return;
@@ -2076,9 +2093,10 @@
   loadCodes().catch(function () { return null; }).then(function (cfg) {
     if (!cfg) { $("veil").textContent = "The studio could not load. Check your connection and refresh."; return; }
     LOG_URL = /^https:\/\//.test(cfg.log_endpoint || "") ? cfg.log_endpoint : "";
+    CODES = cfg.codes || {};
     return gate(cfg).then(function (sg) {
       SIGN = sg;
-      var r = route(), startClient = r.explicit ? r.client : (sg.board || "vidpod");
+      var r = route(), vp = String(sg.code).toUpperCase() === "VIDPOD", startClient = (r.explicit && vp) ? r.client : (sg.board || "vidpod");
       return getBoard(startClient).catch(function () { return startClient === "vidpod" ? Promise.reject(new Error("no board")) : getBoard("vidpod"); }).then(loadMark).then(boot);
     });
   }).catch(function (e) {

@@ -94,6 +94,10 @@ img { max-width: 100%; display: block; }
 .top .sep { width: 1px; height: 20px; background: var(--line); }
 .made-for { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .made-for img { height: 24px; width: auto; }
+.made-for.switch { position: relative; cursor: pointer; padding: 4px 8px; border: 1px solid var(--line-strong); border-radius: 999px; }
+.made-for.switch .sw-name { font-size: 12px; font-weight: 800; color: var(--fg); letter-spacing: .02em; }
+.made-for.switch .sw-chev { display: inline-flex; color: var(--muted); }
+.made-for.switch .sw-sel { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 16px; }
 .hlinks { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .hlink { border: 0; background: transparent; padding: 6px 0; font-size: 12px; font-weight: 600; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
 .hlink:hover { color: var(--fg); }
@@ -826,6 +830,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r6b"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7b"></script>
+<script src="studio-core.js?v=r7c"></script>
 
 </html>
