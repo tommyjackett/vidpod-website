@@ -707,7 +707,7 @@
   var GROUPS = [
     { id: "house", label: "House style", tabs: ["subtitles", "name", "logo"] },
     { id: "openers", label: "Openers", tabs: ["hook"] },
-    { id: "mograph", label: "Motion graphics", tabs: ["graphics", "box"] },
+    { id: "mograph", label: "Motion graphics", tabs: ["graphics"] }, // "box" (Jackett Ranch styles) pulled 7 Nov night: Tommy said it was random
     { id: "cuts", label: "Cuts", tabs: ["moves", "transitions"] }
   ];
   var TAB_LABEL = { hook: "Hook titles", box: "Box style" };
