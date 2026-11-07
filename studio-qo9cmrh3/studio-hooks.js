@@ -359,7 +359,7 @@
       var text = joinT(r), w = tw(text, fo, S, -0.01), bar = k < n1 ? c1 : c2, x = Math.round((maxW + 120 - w) / 2), capTop = k * pitch;
       var bt = capTop + m.cap - m.xh * 0.86, bb = capTop + m.cap + S * 0.25;
       var bg = el("div"); bg.style.cssText = "position:absolute;left:" + Math.round(x - S * 0.12) + "px;width:" + Math.round(w + S * 0.26) + "px;top:" + Math.round(bt) + "px;height:" + Math.round(bb - bt) + "px;background:" + bar + ";transform-origin:0% 50%;";
-      var ink = light(bar) && light("#FFFFFF") && H.contrast(bar, "#FFFFFF") < 1.25 ? b.ink : "#FFFFFF";
+      var ink = b.ink && H.contrast(bar, b.ink) > H.contrast(bar, "#FFFFFF") ? b.ink : "#FFFFFF";   // dark words on light bars (TNG: black on mint), 8 Nov 2026
       var t = el("div", "", esc(text)); setF(t, fo, S, ink);
       t.style.cssText += "position:absolute;left:" + x + "px;top:" + Math.round(capTop - capOff(fo, S, S * 1.2)) + "px;white-space:nowrap;line-height:" + Math.round(S * 1.2) + "px;letter-spacing:-0.01em;";
       t.style.textShadow = ink === "#FFFFFF" ? "0 0.035em 0 rgba(10,8,30,.6), 0 0 0.04em rgba(10,8,30,.6), 0 0 0.08em rgba(10,8,30,.35), 0 0.05em 0.16em rgba(0,0,0,.3)" : "none";
