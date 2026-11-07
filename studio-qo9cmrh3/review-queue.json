@@ -1,6 +1,6 @@
 {
- "note": "VIDPOD swipe review queue + mood board source. One look per card (multi-look pack previews are split into crops and retired). Each item: group (mood board section), build {section, match = closest existing studio option or null for a new build, recipe = how we'd build it}, built = the studio option ID once built (set by the 'build my yeses' routine, tools/build_yeses.md). Thumbnails and 4 s loops in review-thumbs/ are small previews made from public preview files, for internal review only; every item links back to its source. Trend scan 7 Nov (T01..T38) and opener study R2-16 (OP01..OP16): items carry claudeVerdict (recommend|maybe|skip), evidence, account, views, trendScan; recommended items sit at the top of the queue. See TRENDS.md and OPENERS.md.",
- "version": "2026-11-07b",
+ "note": "VIDPOD swipe review queue + mood board source. One look per card (multi-look pack previews are split into crops and retired). Each item: group (mood board section), build {section, match = closest existing studio option or null for a new build, recipe = how we'd build it}, built = the studio option ID once built (set by the 'build my yeses' routine, tools/build_yeses.md). Thumbnails and 4 s loops in review-thumbs/ are small previews made from public preview files, for internal review only; every item links back to its source. Trend scan 7 Nov (T01..T38) and opener study R2-16 (OP01..OP16): items carry claudeVerdict (recommend|maybe|skip), evidence, account, views, trendScan; recommended items sit at the top of the queue. See TRENDS.md and OPENERS.md. AI Lab looks L01..L19 (7 Nov night): the VIDPOD effects kit's effects rendered on Tommy's seated clip in VIDPOD brand; source 'VIDPOD effects: VIDPOD effects'; aiLabPick marks the 9 in AI-LAB-STYLES.md.",
+ "version": "2026-11-07c",
  "items": [
   {
    "id": "T01",
@@ -19584,6 +19584,2076 @@
      "safe": {
       "inside": true,
       "note": "Inside x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L01",
+   "title": "Paper cut-out sticker with ransom-note word (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Playful scrapbook look; fights 'subtle, not gimmicky' for client work. Keep for a fun TNG or VIDPOD social one-off only.",
+   "source": "VIDPOD effects: VIDPOD effects (Paper Cut, effect 13 of 24)",
+   "link": null,
+   "adName": "Paper Cutout",
+   "adTime": 0.34,
+   "image": "review-thumbs/L01.jpg",
+   "video": "review-thumbs/L01.mp4",
+   "strip": "review-thumbs/L01-strip.jpg",
+   "claudeVerdict": "skip",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Paper cut-out",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-09",
+    "recipe": "Use the kit's 'paper-cut' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L01-paper-cut.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render paper-cut (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (the whole frame is replaced by paper; no alpha)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L01-paper-cut.json"
+    },
+    "motion": "Sticker slaps in on frame 0; letters land one every 4 kit frames (about 3 at 25 fps) with a small overshoot; the ring draws on after the last letter; subline pops in; every scribble re-draws every 3 frames (stop-motion boil).",
+    "style": {
+     "keep": "Sticker cut-out, ransom letters, boiling scribbles.",
+     "swap": "Strip and pink scribble to #00FFAA, navy and red to ink/grey, paper to #F5F5F2 (config colors)."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Room replaced by off-white paper #F5F5F2 with a faint grid, grey crayon scribble across the top, a torn VIDPOD-green strip right of the head with grey scribbles. Tommy cut out as a paper sticker (white ragged border about 15 px, drop shadow). Ransom-note letters YARRA (mixed chips: blue, white, black, yellow, red; Archivo Black, Bodoni, Courier) top left at y about 145, black marker ring drawn round them, smaller RIVER under it. No captions.",
+    "motion": "Sticker slaps in on frame 0; letters land one every 4 kit frames (about 3 at 25 fps) with a small overshoot; the ring draws on after the last letter; subline pops in; every scribble re-draws every 3 frames (stop-motion boil).",
+    "brandMap": "VIDPOD: Strip and pink scribble to #00FFAA, navy and red to ink/grey, paper to #F5F5F2 (config colors). @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Paper Cutout\" (spoken at 0.3 s). Render path: finished MP4 (the whole frame is replaced by paper; no alpha).",
+    "prompt": "Render the VIDPOD effects effect 'paper-cut' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L01-paper-cut.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine paper-cut <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L01-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "ransom letters YARRA",
+       "startFrame": 5,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 3,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "marker ring",
+       "startFrame": 22,
+       "entry": "draw-on",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 10,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "subline RIVER",
+       "startFrame": 32,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 3,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.4 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 76,
+      "y": 150,
+      "w": 870,
+      "h": 300
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L02",
+   "title": "Magazine cover word behind the head (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Hooks",
+   "note": "Text-behind-head opener with real cut-out layering, renders in about 20 s; the VIDPOD version uses Archivo Black. Fits @pilates case-study openers (studio name), TNG Shorts (topic word), Monash speaker intros.",
+   "source": "VIDPOD effects: VIDPOD effects (Cover Story, effect 16 of 24)",
+   "link": null,
+   "adName": "Magazine Cover",
+   "adTime": 1.3,
+   "image": "review-thumbs/L02.jpg",
+   "video": "review-thumbs/L02.mp4",
+   "strip": "review-thumbs/L02-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Openers > Hook titles",
+   "clientName": "Cover word behind you",
+   "build": {
+    "section": "HOOK",
+    "match": "HOOK-01",
+    "recipe": "Use the kit's 'cover-story' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L02-cover-story.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render cover-story (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (word sits between footage and cut-out); alpha possible as two layers (word + our matte) if needed in Resolve",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L02-cover-story.json"
+    },
+    "motion": "Letters rise in one by one, 3 kit frames apart (about 2.5 at 25 fps), each over 16 kit frames (13 at 25 fps) with a soft blur; the issue line fades up after the last letter; holds to the end.",
+    "style": {
+     "keep": "One word, head covering the letters, letter-by-letter rise.",
+     "swap": "Bodoni masthead to Archivo Black (our added font option); white stays."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "One huge white word SCAMS in Archivo Black across the top (about 86% of the width, y 35 to 190), Tommy's head in front covering the middle of the letters; a small tracked line AUSTRALIAN COFFEE HISTORY under it (Inter 600, about 24 px, 0.32 em tracking). Box captions on the chest (black #0A0A0A chips, white Inter 800, spoken key word on #00FFAA).",
+    "motion": "Letters rise in one by one, 3 kit frames apart (about 2.5 at 25 fps), each over 16 kit frames (13 at 25 fps) with a soft blur; the issue line fades up after the last letter; holds to the end.",
+    "brandMap": "VIDPOD: Bodoni masthead to Archivo Black (our added font option); white stays. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Magazine Cover\" (spoken at 1.3 s). Render path: finished MP4 (word sits between footage and cut-out); alpha possible as two layers (word + our matte) if needed in Resolve.",
+    "prompt": "Render the VIDPOD effects effect 'cover-story' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L02-cover-story.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine cover-story <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L02-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "masthead letters",
+       "startFrame": 4,
+       "entry": "blur-in",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 13,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": 2,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "issue line",
+       "startFrame": 20,
+       "entry": "fade",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.0 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 76,
+      "y": 35,
+      "w": 928,
+      "h": 175
+     },
+     "relativeToFace": "forehead",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L03",
+   "title": "Wall of video thumbnails pops in behind the speaker (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Strong 'body of work' beat for VIDPOD's own ads or a showreel with real client thumbnails; not for client case studies.",
+   "source": "VIDPOD effects: VIDPOD effects (Couch Wall, effect 02 of 24)",
+   "link": null,
+   "adName": "Sofa Wall",
+   "adTime": 2.62,
+   "image": "review-thumbs/L03.jpg",
+   "video": "review-thumbs/L03.mp4",
+   "strip": "review-thumbs/L03-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Wall of thumbnails",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-05",
+    "recipe": "Use the kit's 'couch-wall' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L03-couch-wall.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render couch-wall (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (wall sits between footage and cut-out)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L03-couch-wall.json"
+    },
+    "motion": "Tiles pop in outward from the head over 0.55 s (about 14 frames at 25 fps), quick overshoot each; the wall then drifts in very slowly (3.5%).",
+    "style": {
+     "keep": "Tile wall behind the head, pop-out cascade, labels.",
+     "swap": "Tiles to real client thumbnails (config media), labels from the script."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Three columns of rounded 9:16 tiles (stills of the clip, 8 px gaps, 10 px radius) cover the curtain behind Tommy's head, white view-count badges, two white headline stickers ('Quite a few rabbit holes', 'Fishing oBikes out of the Yarra'). Tommy cut out in front. Box captions.",
+    "motion": "Tiles pop in outward from the head over 0.55 s (about 14 frames at 25 fps), quick overshoot each; the wall then drifts in very slowly (3.5%).",
+    "brandMap": "VIDPOD: Tiles to real client thumbnails (config media), labels from the script. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Sofa Wall\" (spoken at 2.6 s). Render path: finished MP4 (wall sits between footage and cut-out).",
+    "prompt": "Render the VIDPOD effects effect 'couch-wall' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L03-couch-wall.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine couch-wall <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L03-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "thumbnail tiles",
+       "startFrame": 5,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 3,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 1,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.1 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 700
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L04",
+   "title": "Punch-in zoom with zoom blur on key words (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "The cheapest fix for jumpy one-take talking heads: no cut-out, renders in about 15 s. Every @pilates case study, TNG snippet and Monash clip.",
+   "source": "VIDPOD effects: VIDPOD effects (Digital Zoom, effect 05 of 24)",
+   "link": null,
+   "adName": "Pixel Zoom",
+   "adTime": 3.72,
+   "image": "review-thumbs/L04.jpg",
+   "video": "review-thumbs/L04.mp4",
+   "strip": "review-thumbs/L04-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Cuts > Moves",
+   "clientName": "Punch-in zoom",
+   "build": {
+    "section": "MOVE",
+    "match": "MOVE-04",
+    "recipe": "Use the kit's 'digital-zoom' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L04-digital-zoom.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render digital-zoom (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (whole-frame move); the same move can be keyframed in Resolve from the punch times",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "not needed",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L04-digital-zoom.json"
+    },
+    "motion": "Each snap takes 5 kit frames (4 at 25 fps) with a radial zoom blur, then holds; snaps land on the spoken word.",
+    "style": {
+     "keep": "Snap length, zoom blur, word-timed punches.",
+     "swap": "Nothing to re-skin; punch words come from our words.json."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Footage only. The frame snaps 30% closer toward the face on 'biggest', back out on 'coffee', in again on '7-Eleven'. Box captions on the chest.",
+    "motion": "Each snap takes 5 kit frames (4 at 25 fps) with a radial zoom blur, then holds; snaps land on the spoken word.",
+    "brandMap": "VIDPOD: Nothing to re-skin; punch words come from our words.json. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Pixel Zoom\" (spoken at 3.7 s). Render path: finished MP4 (whole-frame move); the same move can be keyframed in Resolve from the punch times.",
+    "prompt": "Render the VIDPOD effects effect 'digital-zoom' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L04-digital-zoom.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine digital-zoom <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L04-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "punch in on 'biggest'",
+       "startFrame": 12,
+       "entry": "scale-up",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 2.7 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1920
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "whole frame / in front",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L05",
+   "title": "Boiling chalk outline and doodles round the speaker (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Cartoon energy; too gimmicky for client case studies. Maybe a light TNG moment.",
+   "source": "VIDPOD effects: VIDPOD effects (Doodle Boil, effect 14 of 24)",
+   "link": null,
+   "adName": "Sketch Boil",
+   "adTime": 4.78,
+   "image": "review-thumbs/L05.jpg",
+   "video": "review-thumbs/L05.mp4",
+   "strip": "review-thumbs/L05-strip.jpg",
+   "claudeVerdict": "skip",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Doodle outline",
+   "build": {
+    "section": "GFX",
+    "match": null,
+    "recipe": "Use the kit's 'doodle-boil' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L05-doodle-boil.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render doodle-boil (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (outline follows the cut-out contour)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L05-doodle-boil.json"
+    },
+    "motion": "Outline draws on over 14 kit frames then re-wobbles every 3 frames; each doodle draws in 10 kit frames, fill 3 frames later, boiling with the outline.",
+    "style": {
+     "keep": "Boil rhythm (every 3 frames).",
+     "swap": "Chalk white could take #00FFAA."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A white chalk line traces Tommy's silhouette 10 px outside his body; hand-drawn white doodles (swirl top left, circle top right, arrow left) draw on beside the head. Box captions.",
+    "motion": "Outline draws on over 14 kit frames then re-wobbles every 3 frames; each doodle draws in 10 kit frames, fill 3 frames later, boiling with the outline.",
+    "brandMap": "VIDPOD: Chalk white could take #00FFAA. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Sketch Boil\" (spoken at 4.8 s). Render path: finished MP4 (outline follows the cut-out contour).",
+    "prompt": "Render the VIDPOD effects effect 'doodle-boil' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L05-doodle-boil.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine doodle-boil <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L05-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "outline",
+       "startFrame": 0,
+       "entry": "draw-on",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 12,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "doodle on 'fishing'",
+       "startFrame": 27,
+       "entry": "draw-on",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 2.3 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 150,
+      "y": 30,
+      "w": 800,
+      "h": 1100
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L06",
+   "title": "Line chart draws behind the head and spikes up (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Results lines: @pilates member or revenue growth, TNG numbers, Inovayt-style investor case studies.",
+   "source": "VIDPOD effects: VIDPOD effects (Chart Grow, effect 10 of 24)",
+   "link": null,
+   "adName": "Graph Rise",
+   "adTime": 6.12,
+   "image": "review-thumbs/L06.jpg",
+   "video": "review-thumbs/L06.mp4",
+   "strip": "review-thumbs/L06-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Growth line chart",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-02",
+    "recipe": "Use the kit's 'chart-grow' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L06-chart-grow.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render chart-grow (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (line passes behind the head)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L06-chart-grow.json"
+    },
+    "motion": "Labels fade in, line draws over 1.1 s (about 28 frames) with a glowing tip; at the take-off point the pill pops and the end dot pulses.",
+    "style": {
+     "keep": "Behind-the-head line, spike, pill.",
+     "swap": "Accent #FFE14D to #00FFAA; labels and values from the real numbers."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Faint month labels JAN to JUN across the top, a white dotted line drawing left to right behind Tommy's head, turning into a glowing #00FFAA spike with a soft green gradient under it; a green pill 'BIGGEST' with an arrow pops in at the take-off point. Box captions.",
+    "motion": "Labels fade in, line draws over 1.1 s (about 28 frames) with a glowing tip; at the take-off point the pill pops and the end dot pulses.",
+    "brandMap": "VIDPOD: Accent #FFE14D to #00FFAA; labels and values from the real numbers. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Graph Rise\" (spoken at 6.1 s). Render path: finished MP4 (line passes behind the head).",
+    "prompt": "Render the VIDPOD effects effect 'chart-grow' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L06-chart-grow.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine chart-grow <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L06-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "line draw",
+       "startFrame": 9,
+       "entry": "draw-on",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 28,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "BIGGEST pill",
+       "startFrame": 30,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 5,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 2.5 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 60,
+      "y": 40,
+      "w": 960,
+      "h": 420
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L07",
+   "title": "3D glass word on the wall behind the head (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Hooks",
+   "note": "Premium text-behind-head title; one word per video. Good for VIDPOD's own ads, Monash and trailer title beats. Keep it to one per piece.",
+   "source": "VIDPOD effects: VIDPOD effects (Glass Type, effect 17 of 24)",
+   "link": null,
+   "adName": "Glass Text",
+   "adTime": 7.42,
+   "image": "review-thumbs/L07.jpg",
+   "video": "review-thumbs/L07.mp4",
+   "strip": "review-thumbs/L07-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Openers > Hook titles",
+   "clientName": "Glass word behind you",
+   "build": {
+    "section": "HOOK",
+    "match": "HOOK-01",
+    "recipe": "Use the kit's 'glass-type' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L07-glass-type.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render glass-type (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (glass refracts the footage, so it cannot be an alpha layer)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L07-glass-type.json"
+    },
+    "motion": "Word fades in from a blur over 0.6 s (15 frames) on 'scams', a light sweep crosses it over 1.1 s, then it sways about 3 degrees while it holds.",
+    "style": {
+     "keep": "Glass letters, refraction, sweep.",
+     "swap": "Font 'black' = Archivo Black already; tint stays white."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "COFFEE in tall condensed Archivo Black glass letters across the top third, turned 30 degrees in perspective, refracting the curtain, bright rims and a light sweep; Tommy's head covers the lower middle letters. Box captions.",
+    "motion": "Word fades in from a blur over 0.6 s (15 frames) on 'scams', a light sweep crosses it over 1.1 s, then it sways about 3 degrees while it holds.",
+    "brandMap": "VIDPOD: Font 'black' = Archivo Black already; tint stays white. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Glass Text\" (spoken at 7.4 s). Render path: finished MP4 (glass refracts the footage, so it cannot be an alpha layer).",
+    "prompt": "Render the VIDPOD effects effect 'glass-type' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L07-glass-type.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine glass-type <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L07-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "glass word",
+       "startFrame": 9,
+       "entry": "blur-in",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 15,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "light sweep",
+       "startFrame": 24,
+       "entry": "mask-wipe",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 28,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 3.2 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 40,
+      "w": 1080,
+      "h": 290
+     },
+     "relativeToFace": "forehead",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L08",
+   "title": "Cards orbit round the speaker in 3D (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Busy; flagged gimmicky in the catalogue. Social-proof idea is better served by Couch Wall.",
+   "source": "VIDPOD effects: VIDPOD effects (Orbit, effect 01 of 24)",
+   "link": null,
+   "adName": "Orbit Spin",
+   "adTime": 8.69,
+   "image": "review-thumbs/L08.jpg",
+   "video": "review-thumbs/L08.mp4",
+   "strip": "review-thumbs/L08-strip.jpg",
+   "claudeVerdict": "skip",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Orbiting cards",
+   "build": {
+    "section": "GFX",
+    "match": null,
+    "recipe": "Use the kit's 'orbit' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L08-orbit.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render orbit (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (cards pass behind and in front of the cut-out)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L08-orbit.json"
+    },
+    "motion": "Cards whip in at the start then settle into a slow spin (one lap about every 6 s).",
+    "style": {
+     "keep": "3D ring and depth.",
+     "swap": "Titles from the script."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Six small portrait cards (clip stills with white title chips: Rabbit holes, oBikes, Yarra River, Deep dive, 7-Eleven, Domino's) circle Tommy's chest on a tilted ring, far cards smaller and softer. Box captions.",
+    "motion": "Cards whip in at the start then settle into a slow spin (one lap about every 6 s).",
+    "brandMap": "VIDPOD: Titles from the script. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Orbit Spin\" (spoken at 8.7 s). Render path: finished MP4 (cards pass behind and in front of the cut-out).",
+    "prompt": "Render the VIDPOD effects effect 'orbit' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L08-orbit.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine orbit <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L08-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "cards whip in",
+       "startFrame": 2,
+       "entry": "scale-up",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 10,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 1,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.0 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 100,
+      "y": 900,
+      "w": 880,
+      "h": 700
+     },
+     "relativeToFace": "chest",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L09",
+   "title": "Pull back to reveal the video rendering in an editor (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Only for VIDPOD's own marketing (how we make videos). Not client work.",
+   "source": "VIDPOD effects: VIDPOD effects (Pull Back Reveal, effect 11 of 24)",
+   "link": null,
+   "adName": "Pull Out Reveal",
+   "adTime": 9.75,
+   "image": "review-thumbs/L09.jpg",
+   "video": "review-thumbs/L09.mp4",
+   "strip": "review-thumbs/L09-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Cuts > Moves",
+   "clientName": "Pull-back reveal",
+   "build": {
+    "section": "MOVE",
+    "match": null,
+    "recipe": "Use the kit's 'pull-back-reveal' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L09-pull-back-reveal.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render pull-back-reveal (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "not needed",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L09-pull-back-reveal.json"
+    },
+    "motion": "Pull-back over 0.75 s (about 19 frames), panel slides in, steps tick one by one, counter rolls up near the end and the window border turns green.",
+    "style": {
+     "keep": "Pull-back and process panel.",
+     "swap": "Accent to #00FFAA, tab VIDPOD, file name and steps ours."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "The frame shrinks into an editor window on a #F5F5F2 desk (title bar rabbit-holes_v1.mp4, tab VIDPOD); a white agent panel ticks off steps with green checks; a render bar with a waveform fills in #00FFAA; a big serif counter rolls to 100.",
+    "motion": "Pull-back over 0.75 s (about 19 frames), panel slides in, steps tick one by one, counter rolls up near the end and the window border turns green.",
+    "brandMap": "VIDPOD: Accent to #00FFAA, tab VIDPOD, file name and steps ours. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Pull Out Reveal\" (spoken at 9.8 s). Render path: finished MP4.",
+    "prompt": "Render the VIDPOD effects effect 'pull-back-reveal' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L09-pull-back-reveal.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine pull-back-reveal <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L09-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "pull-back",
+       "startFrame": 2,
+       "entry": "scale-down",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 19,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "agent panel",
+       "startFrame": 20,
+       "entry": "slide",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.1 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 60,
+      "y": 100,
+      "w": 960,
+      "h": 1500
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "whole frame / in front",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L10",
+   "title": "Floating phone beside the head plays an app chat (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Useful when a client talks about an app or booking flow (Equip, PukaUp); put their real screen recording in via config 'screen'.",
+   "source": "VIDPOD effects: VIDPOD effects (Phone Mockup, effect 06 of 24)",
+   "link": null,
+   "adName": "Phone Frame",
+   "adTime": 10.85,
+   "image": "review-thumbs/L10.jpg",
+   "video": "review-thumbs/L10.mp4",
+   "strip": "review-thumbs/L10-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Phone beside you",
+   "build": {
+    "section": "GFX",
+    "match": null,
+    "recipe": "Use the kit's 'phone-mockup' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L10-phone-mockup.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render phone-mockup (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (footage pans away from the phone)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L10-phone-mockup.json"
+    },
+    "motion": "Phone springs in from the side, floats; messages type in, a touch dot taps Approve, reply pops.",
+    "style": {
+     "keep": "Phone frame and float.",
+     "swap": "App to VIDPOD or the client's real screen recording."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A titanium phone with a slight 3D tilt beside Tommy's head, dark chat app 'VIDPOD' with a green avatar: 'Your cut is ready.', a card NEW EPISODE 'Fishing oBikes out of the Yarra', Approve button turns green, reply 'Sent to the client.'",
+    "motion": "Phone springs in from the side, floats; messages type in, a touch dot taps Approve, reply pops.",
+    "brandMap": "VIDPOD: App to VIDPOD or the client's real screen recording. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Phone Frame\" (spoken at 10.8 s). Render path: finished MP4 (footage pans away from the phone).",
+    "prompt": "Render the VIDPOD effects effect 'phone-mockup' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L10-phone-mockup.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine phone-mockup <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L10-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "phone",
+       "startFrame": 0,
+       "entry": "slide",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 12,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 2.3 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 700,
+      "y": 120,
+      "w": 360,
+      "h": 740
+     },
+     "relativeToFace": "eye line",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L11",
+   "title": "Dolly zoom: room pushes in, speaker stays still (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Strong on a reveal line in a deep room; on a flat curtain it barely reads (as here). Needs background depth.",
+   "source": "VIDPOD effects: VIDPOD effects (Vertigo, effect 15 of 24)",
+   "link": null,
+   "adName": "Dolly Zoom",
+   "adTime": 12.07,
+   "image": "review-thumbs/L11.jpg",
+   "video": "review-thumbs/L11.mp4",
+   "strip": "review-thumbs/L11-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Cuts > Moves",
+   "clientName": "Dolly zoom",
+   "build": {
+    "section": "MOVE",
+    "match": null,
+    "recipe": "Use the kit's 'vertigo' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L11-vertigo.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render vertigo (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (clean plate + cut-out)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L11-vertigo.json"
+    },
+    "motion": "One eased 2 s push starting on 'biggest', then hold.",
+    "style": {
+     "keep": "Single eased beat.",
+     "swap": "None."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Tommy held still at 126% while the curtain behind him swells toward camera. Box captions.",
+    "motion": "One eased 2 s push starting on 'biggest', then hold.",
+    "brandMap": "VIDPOD: None. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Dolly Zoom\" (spoken at 12.1 s). Render path: finished MP4 (clean plate + cut-out).",
+    "prompt": "Render the VIDPOD effects effect 'vertigo' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L11-vertigo.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine vertigo <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L11-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "background push",
+       "startFrame": 7,
+       "entry": "scale-up",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 50,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 2.9 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1920
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L12",
+   "title": "Headline and tweet cards pin to the wall behind the head (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "TNG is news-led: the articles the hosts cite become the wall. Also 'everyone is talking about' beats for VIDPOD ads.",
+   "source": "VIDPOD effects: VIDPOD effects (Headline Wall, effect 08 of 24)",
+   "link": null,
+   "adName": "News Wall",
+   "adTime": 13.12,
+   "image": "review-thumbs/L12.jpg",
+   "video": "review-thumbs/L12.mp4",
+   "strip": "review-thumbs/L12-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "News wall",
+   "build": {
+    "section": "GFX",
+    "match": null,
+    "recipe": "Use the kit's 'headline-wall' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L12-headline-wall.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render headline-wall (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (cards between footage and cut-out)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L12-headline-wall.json"
+    },
+    "motion": "A card every 3 kit frames (about 2.5 at 25 fps) with overshoot and slight tilt; the hero card lands 6 frames later and the highlighter swipes across its key word.",
+    "style": {
+     "keep": "Card cascade, hero highlight.",
+     "swap": "Highlighter #FFE14D to #00FFAA; card text from the episode's real headlines."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Cream paper headline notes (black serif, tiny caps kicker), a black POV card, a search pill, a quote card, chat bubble and notification pop onto the wall behind Tommy's head; a hero note lands last with 'biggest' swiped in #00FFAA. Box captions.",
+    "motion": "A card every 3 kit frames (about 2.5 at 25 fps) with overshoot and slight tilt; the hero card lands 6 frames later and the highlighter swipes across its key word.",
+    "brandMap": "VIDPOD: Highlighter #FFE14D to #00FFAA; card text from the episode's real headlines. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"News Wall\" (spoken at 13.1 s). Render path: finished MP4 (cards between footage and cut-out).",
+    "prompt": "Render the VIDPOD effects effect 'headline-wall' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L12-headline-wall.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine headline-wall <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L12-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "cards",
+       "startFrame": 5,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 2,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "hero highlight",
+       "startFrame": 30,
+       "entry": "mask-wipe",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 1.6 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 30,
+      "w": 1080,
+      "h": 560
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L13",
+   "title": "Shot shrinks into a phone window, speaker breaks out (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Social-native hook; needs headroom above the head to read (on Tommy's tight crop the break is small).",
+   "source": "VIDPOD effects: VIDPOD effects (Frame Break, effect 04 of 24)",
+   "link": null,
+   "adName": "Frame Pop",
+   "adTime": 14.14,
+   "image": "review-thumbs/L13.jpg",
+   "video": "review-thumbs/L13.mp4",
+   "strip": "review-thumbs/L13-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Openers > Hook titles",
+   "clientName": "Frame pop-out",
+   "build": {
+    "section": "MOVE",
+    "match": null,
+    "recipe": "Use the kit's 'frame-break' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L13-frame-break.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render frame-break (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L13-frame-break.json"
+    },
+    "motion": "Spring down over about 12 frames, UI fades in after it settles.",
+    "style": {
+     "keep": "Spring into window.",
+     "swap": "Handle, no Instagram look on client work (ui false gives a clean window)."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "The full shot springs down into a rounded window on a dark blurred copy of the footage; feed icons and a 'vidpod' handle fade in. Box captions inside the window.",
+    "motion": "Spring down over about 12 frames, UI fades in after it settles.",
+    "brandMap": "VIDPOD: Handle, no Instagram look on client work (ui false gives a clean window). @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Frame Pop\" (spoken at 14.1 s). Render path: finished MP4.",
+    "prompt": "Render the VIDPOD effects effect 'frame-break' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L13-frame-break.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine frame-break <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L13-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "window spring",
+       "startFrame": 2,
+       "entry": "scale-down",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 12,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.0 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 180,
+      "y": 400,
+      "w": 720,
+      "h": 1150
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L14",
+   "title": "Zoom-through cut that hides a jump cut (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Transitions",
+   "note": "Hides jump cuts inside one take (the @pilates rough-cut problem) and joins two takes or angles; no cut-out, renders in about 15 s.",
+   "source": "VIDPOD effects: VIDPOD effects (Zoom Through Cut, effect 09 of 24)",
+   "link": null,
+   "adName": "Punch Through Cut",
+   "adTime": 15.03,
+   "image": "review-thumbs/L14.jpg",
+   "video": "review-thumbs/L14.mp4",
+   "strip": "review-thumbs/L14-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Cuts > Transitions",
+   "clientName": "Zoom-through cut",
+   "build": {
+    "section": "TR",
+    "match": "TR-08",
+    "recipe": "Use the kit's 'zoom-through-cut' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L14-zoom-through-cut.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render zoom-through-cut (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (whole-frame transition)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 5.6 to 13.35 s",
+     "matte": "not needed",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L14-zoom-through-cut.json"
+    },
+    "motion": "Push over the last 9 kit frames (8 at 25 fps), cut, pull out over 12 kit frames (10 at 25 fps), 7 degrees of spin across the cut.",
+    "style": {
+     "keep": "Velocity-matched push and pull, blur, spin.",
+     "swap": "None."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Footage only: the frame rushes into Tommy's chest with a radial zoom blur and slight spin, hard cut on 'Australian', the next shot starts 3.4x in and settles out. Box captions blur with it.",
+    "motion": "Push over the last 9 kit frames (8 at 25 fps), cut, pull out over 12 kit frames (10 at 25 fps), 7 degrees of spin across the cut.",
+    "brandMap": "VIDPOD: None. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Punch Through Cut\" (spoken at 15.0 s). Render path: finished MP4 (whole-frame transition).",
+    "prompt": "Render the VIDPOD effects effect 'zoom-through-cut' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L14-zoom-through-cut.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine zoom-through-cut <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L14-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "push in",
+       "startFrame": 19,
+       "entry": "scale-up",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "pull out",
+       "startFrame": 27,
+       "entry": "scale-down",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 10,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 3.0 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1920
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "whole frame / in front",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L15",
+   "title": "Speaker cut out onto a new background (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Replace a messy room with a brand gradient or a client's product shot; the default app UI is not for client work.",
+   "source": "VIDPOD effects: VIDPOD effects (Green Screen, effect 12 of 24)",
+   "link": null,
+   "adName": "Green Screen",
+   "adTime": 15.85,
+   "image": "review-thumbs/L15.jpg",
+   "video": "review-thumbs/L15.mp4",
+   "strip": "review-thumbs/L15-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Cuts > Moves",
+   "clientName": "New background",
+   "build": {
+    "section": "MOVE",
+    "match": "MOVE-07",
+    "recipe": "Use the kit's 'green-screen' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L15-green-screen.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render green-screen (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L15-green-screen.json"
+    },
+    "motion": "Room morphs away while he glides down over about 1 s, then holds.",
+    "style": {
+     "keep": "Cut-out move.",
+     "swap": "Background = brand gradient or client image (config background)."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Room dissolves to a dark VIDPOD gradient (#0A0A0A to #1C1C1C); Tommy glides down to the lower centre at a smaller size; headline 'Rabbit holes.' in green serif above his head. Box captions.",
+    "motion": "Room morphs away while he glides down over about 1 s, then holds.",
+    "brandMap": "VIDPOD: Background = brand gradient or client image (config background). @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Green Screen\" (spoken at 15.8 s). Render path: finished MP4.",
+    "prompt": "Render the VIDPOD effects effect 'green-screen' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L15-green-screen.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine green-screen <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L15-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "glide down",
+       "startFrame": 0,
+       "entry": "slide",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 25,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 0.0 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 300,
+      "y": 1050,
+      "w": 480,
+      "h": 870
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L16",
+   "title": "App UI fills the top, clips drop in, command types (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Software-tool promo; no current client fit.",
+   "source": "VIDPOD effects: VIDPOD effects (Ui World, effect 03 of 24)",
+   "link": null,
+   "adName": "Interface World",
+   "adTime": 16.81,
+   "image": "review-thumbs/L16.jpg",
+   "video": "review-thumbs/L16.mp4",
+   "strip": "review-thumbs/L16-strip.jpg",
+   "claudeVerdict": "skip",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "App world",
+   "build": {
+    "section": "GFX",
+    "match": null,
+    "recipe": "Use the kit's 'ui-world' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L16-ui-world.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render ui-world (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L16-ui-world.json"
+    },
+    "motion": "App slides down, thumbnails fly in on arcs, typing at 20 characters a second, send button pressed.",
+    "style": {
+     "keep": "Layering.",
+     "swap": "App name and accent VIDPOD."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A cream VIDPOD app (green starburst) slides over the top 60%; clip thumbnails fly into a drop box, a RAW CLIPS tape label sticks on, '/rabbit-hole-cut' types in; Tommy's head pokes up over the app.",
+    "motion": "App slides down, thumbnails fly in on arcs, typing at 20 characters a second, send button pressed.",
+    "brandMap": "VIDPOD: App name and accent VIDPOD. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Interface World\" (spoken at 16.8 s). Render path: finished MP4.",
+    "prompt": "Render the VIDPOD effects effect 'ui-world' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L16-ui-world.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine ui-world <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L16-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "app",
+       "startFrame": 0,
+       "entry": "slide",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 12,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 1.5 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1150
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": true,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L17",
+   "title": "Frosted checklist card types and ticks steps as spoken (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "'Three steps' and recap moments: @pilates (what changed for the studio), Monash tips, TNG explainers.",
+   "source": "VIDPOD effects: VIDPOD effects (Checklist, effect 07 of 24)",
+   "link": null,
+   "adName": "Tick List",
+   "adTime": 17.99,
+   "image": "review-thumbs/L17.jpg",
+   "video": "review-thumbs/L17.mp4",
+   "strip": "review-thumbs/L17-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Ticking checklist",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-07",
+    "recipe": "Use the kit's 'checklist' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L17-checklist.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render checklist (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 now; it sits in front of everything, so an alpha version is a small engine change (render without the footage layer)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0 to 16 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range, about 25 s for 5 s)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L17-checklist.json"
+    },
+    "motion": "Card springs in, each row types at 32 characters a second when its key word is spoken, then its circle fills #00FFAA with a check and a small burst 0.3 s later; counter ticks up.",
+    "style": {
+     "keep": "Type-on then tick, counter and segment bar.",
+     "swap": "Accent #F5E15A to #00FFAA; rows written from the speaker's own words."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A dark frosted-glass card with a slight 3D tilt over the chest (y about 1100 to 1450): header RABBIT HOLES DONE with an 'n of 3' counter and a segmented #00FFAA bar; rows 'Fish oBikes out of the Yarra', 'Uncover the coffee scam', 'Do a Domino's deep dive' type in with a caret and tick green. Box captions under it.",
+    "motion": "Card springs in, each row types at 32 characters a second when its key word is spoken, then its circle fills #00FFAA with a check and a small burst 0.3 s later; counter ticks up.",
+    "brandMap": "VIDPOD: Accent #F5E15A to #00FFAA; rows written from the speaker's own words. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. In a reference ad as \"Tick List\" (spoken at 18.0 s). Render path: finished MP4 now; it sits in front of everything, so an alpha version is a small engine change (render without the footage layer).",
+    "prompt": "Render the VIDPOD effects effect 'checklist' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L17-checklist.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine checklist <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L17-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "card",
+       "startFrame": 0,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "row 1 types",
+       "startFrame": 6,
+       "entry": "type-on",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 20,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "row 1 ticks",
+       "startFrame": 33,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 3.3 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 90,
+      "y": 1080,
+      "w": 900,
+      "h": 400
+     },
+     "relativeToFace": "chest",
+     "overlapsHead": false,
+     "layer": "behind person (between footage and cut-out)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L18",
+   "title": "Liquid-glass stat card with a climbing line (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Not in the ad but in the same kit: the cleanest stat card for @pilates results, TNG numbers and investor case studies; no cut-out.",
+   "source": "VIDPOD effects: VIDPOD effects (Liquid Glass Graph, effect 21 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L18.jpg",
+   "video": "review-thumbs/L18.mp4",
+   "strip": "review-thumbs/L18-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Glass stat card",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-01",
+    "recipe": "Use the kit's 'liquid-glass-graph' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L18-liquid-glass-graph.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render liquid-glass-graph (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (the glass blurs the footage behind it, so not an alpha layer)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0.0 to 5.3 s",
+     "matte": "not needed",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L18-liquid-glass-graph.json"
+    },
+    "motion": "Card appears on 'rabbit', the line draws over 2.4 s (60 frames) and the counter follows the tip.",
+    "style": {
+     "keep": "Glass card, counter tied to the line.",
+     "swap": "Accent #2BD46A to #00FFAA; label and numbers from the real result."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A frosted glass card over the chest (78% of the width), tracked label RABBIT HOLES DONE, a big white counter 0 to 3, a #00FFAA line climbing left to right with a soft fill. Box captions just above the card.",
+    "motion": "Card appears on 'rabbit', the line draws over 2.4 s (60 frames) and the counter follows the tip.",
+    "brandMap": "VIDPOD: Accent #2BD46A to #00FFAA; label and numbers from the real result. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. Not in the ad; same kit (VIDPOD effects). Render path: finished MP4 (the glass blurs the footage behind it, so not an alpha layer).",
+    "prompt": "Render the VIDPOD effects effect 'liquid-glass-graph' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L18-liquid-glass-graph.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine liquid-glass-graph <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L18-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "glass card",
+       "startFrame": 5,
+       "entry": "fade",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "line + counter",
+       "startFrame": 5,
+       "entry": "draw-on",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 60,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 1.2 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 120,
+      "y": 870,
+      "w": 840,
+      "h": 330
+     },
+     "relativeToFace": "chest",
+     "overlapsHead": false,
+     "layer": "whole frame / in front",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   }
+  },
+  {
+   "id": "L19",
+   "title": "Before/after stat cards beside the head, push-in on the payoff (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Not in the ad but in the same kit: before and after numbers for @pilates case studies and TNG, with a camera push on the payoff; no cut-out.",
+   "source": "VIDPOD effects: VIDPOD effects (Over The Shoulder Zoom, effect 23 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L19.jpg",
+   "video": "review-thumbs/L19.mp4",
+   "strip": "review-thumbs/L19-strip.jpg",
+   "claudeVerdict": "recommend",
+   "aiLabPick": true,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Before and after stat cards",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-01",
+    "recipe": "Use the kit's 'over-the-shoulder-zoom' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L19-over-the-shoulder-zoom.json); render with vidpod-render.sh.",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render over-the-shoulder-zoom (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (camera push moves the whole frame)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine 4.0.534), private copy",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, grey #6B6B6B, paper #F5F5F2; Inter + Archivo Black (both ship inside the kit as Fontsource, so no font swap is needed). @pilates: cream, taupe #BCA28F, Sohne; set through the same config keys (accent, colors, captions.accent).",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with clients/vidpod/media/words.json; preview range 0 to 16 s",
+     "matte": "not needed",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L19-over-the-shoulder-zoom.json"
+    },
+    "motion": "Each card drops in with a slight tilt on its word; just before the last card the frame pushes in 30% over 0.55 s (14 frames) and the first card fades.",
+    "style": {
+     "keep": "Card pair, push on the payoff.",
+     "swap": "Accent #B3261E to #00FFAA; labels and values from the real numbers."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "White rounded stat cards beside Tommy's head: left 'FISHING / oBikes / out of the Yarra', then right 'UNCOVERED / 7-Eleven / coffee scam' with the value in #00FFAA; the camera pushes in over the shoulder as the second card lands. Box captions.",
+    "motion": "Each card drops in with a slight tilt on its word; just before the last card the frame pushes in 30% over 0.55 s (14 frames) and the first card fades.",
+    "brandMap": "VIDPOD: Accent #B3261E to #00FFAA; labels and values from the real numbers. @pilates: same config keys with cream/taupe #BCA28F and the client's own words.",
+    "build": "No rebuild. Not in the ad; same kit (VIDPOD effects). Render path: finished MP4 (camera push moves the whole frame).",
+    "prompt": "Render the VIDPOD effects effect 'over-the-shoulder-zoom' on the client's vertical talking-head clip, reusing the kit as-is (no rebuild). Use a scratch copy of Tools/VIDPOD Motion Graphics/ai-employee-lab/claude-video-fx (setup in its vidpod-render.sh), start from the config ../ai-employee-lab/claude-video-fx/vidpod-configs/L19-over-the-shoulder-zoom.json and change only the words (from the clip's own words.json, shifted to the range) and the client colours/fonts through the config keys. Run: zsh vidpod-render.sh <scratch>/engine over-the-shoulder-zoom <clip.mp4> <start> <end> <words.json> <config.json> <out.mp4>. Check a still first (fx.mjs still ... --at), then the contact sheet (fx.mjs sheet). Output: 1080x1920 H.264 with audio, metadata stripped (the wrapper confirms 'clean'). Done when the graphic reads at phone size, sits inside x 135 to 945 / y 250 to 1500 where it carries text, and no tool or creator tag is in the file."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L19-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "card 2 lands",
+       "startFrame": 27,
+       "entry": "drop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 6,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "push-in",
+       "startFrame": 25,
+       "entry": "scale-up",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 14,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames are counted from the start of the preview loop (render time 11.0 s). Durations from the kit's defaults and our config (kit runs at 30 fps, converted to 25), checked on the render's contact sheet."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 640,
+      "y": 300,
+      "w": 400,
+      "h": 230
+     },
+     "relativeToFace": "eye line",
+     "overlapsHead": false,
+     "layer": "whole frame / in front",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
    }

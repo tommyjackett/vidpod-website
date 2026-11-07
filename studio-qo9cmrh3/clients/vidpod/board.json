@@ -1513,6 +1513,70 @@
       ]
      },
      "no_position": true
+    },
+    {
+     "id": "fx-cover-word",
+     "code": "HOOK-07",
+     "label": "Cover word behind you",
+     "best_for": "One huge word sits behind your head, like a magazine cover.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L02.jpg",
+      "video": "review-thumbs/L02.mp4",
+      "loop": 2.8,
+      "focus": [
+       20,
+       40,
+       1060,
+       330
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L02",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-glass-word",
+     "code": "HOOK-08",
+     "label": "Glass word behind you",
+     "best_for": "A clear glass word stands on the wall behind you.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L07.jpg",
+      "video": "review-thumbs/L07.mp4",
+      "loop": 2.8,
+      "focus": [
+       0,
+       40,
+       1080,
+       420
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L07",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
     }
    ],
    "scope": "type"
@@ -1950,6 +2014,33 @@
        "rule": "Keyed to the cut (base.cuts[0]) inside the move segment.",
        "detail": "Plate x +190 px, scale 1.1 over 0.64 s power3.inOut; text lines x -90 to 0 over 0.3 s power3.out stagger 0.13 (Jackett stacked-lines entry)."
       }
+     }
+    },
+    {
+     "id": "fx-punch-in",
+     "code": "MOVE-09",
+     "label": "Punch-in zoom",
+     "best_for": "Quick zooms land on the words that matter.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L04.jpg",
+      "video": "review-thumbs/L04.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L04",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
    ],
@@ -2630,6 +2721,166 @@
        "rule": "Inside the graphics segment from the start of the clip; holds then exits before the segment ends.",
        "detail": "A 10 px rounded track at the bottom of the safe area; the accent fill scaleX 0 to 1 linear over the whole clip."
       }
+     }
+    },
+    {
+     "id": "fx-glass-stat",
+     "code": "GFX-14",
+     "label": "Glass stat card",
+     "best_for": "A frosted card counts up a number with a rising line.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L18.jpg",
+      "video": "review-thumbs/L18.mp4",
+      "loop": 2.8,
+      "focus": [
+       100,
+       620,
+       960,
+       1170
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L18",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-before-after",
+     "code": "GFX-15",
+     "label": "Before and after stat cards",
+     "best_for": "Two cards show before and after, then the camera pushes in on the result.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L19.jpg",
+      "video": "review-thumbs/L19.mp4",
+      "loop": 2.8,
+      "focus": [
+       560,
+       620,
+       1060,
+       940
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L19",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-growth-chart",
+     "code": "GFX-16",
+     "label": "Growth line chart",
+     "best_for": "A line chart climbs on the wall behind you as you talk.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L06.jpg",
+      "video": "review-thumbs/L06.mp4",
+      "loop": 2.8,
+      "focus": [
+       0,
+       70,
+       1080,
+       900
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L06",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-checklist",
+     "code": "GFX-17",
+     "label": "Ticking checklist",
+     "best_for": "Steps tick off one by one as you say them.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L17.jpg",
+      "video": "review-thumbs/L17.mp4",
+      "loop": 2.8,
+      "focus": [
+       80,
+       820,
+       1020,
+       1430
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L17",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
+     }
+    },
+    {
+     "id": "fx-news-wall",
+     "code": "GFX-18",
+     "label": "News wall",
+     "best_for": "Headlines and posts pin up on the wall behind you.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L12.jpg",
+      "video": "review-thumbs/L12.mp4",
+      "loop": 2.8,
+      "focus": [
+       0,
+       40,
+       1080,
+       650
+      ],
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L12",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
    ],
@@ -4246,6 +4497,33 @@
        "rule": "Centred on the join (base.cuts[0]); the effect spans the transition segment.",
        "detail": "40 slats scaleX 0 to 1 from the left, 4 f power3.inOut, staggered across 7 f; cut; close from the right; old shot dims to 60 %."
       }
+     }
+    },
+    {
+     "id": "fx-zoom-through",
+     "code": "TR-13",
+     "label": "Zoom-through cut",
+     "best_for": "Rushes into the shot and bursts out of the next one. Hides a jump cut.",
+     "kind": "Finished effect",
+     "defaults": {},
+     "no_position": true,
+     "use_cases": [
+      "case-study",
+      "podcast-snippet",
+      "trailer",
+      "teaser"
+     ],
+     "preview": {
+      "still": "review-thumbs/L14.jpg",
+      "video": "review-thumbs/L14.mp4",
+      "loop": 2.8,
+      "focus": null,
+      "clip": "seated"
+     },
+     "recipe": {
+      "renderer": "prerendered",
+      "ref": "L14",
+      "how": "Rendered by VIDPOD on the client's moment with their words and brand colours, delivered as a finished video section (same length, original audio). Not drawn by the studio engine."
      }
     }
    ],

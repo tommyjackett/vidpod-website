@@ -212,7 +212,26 @@
   function look(id) { return S.looks[id || S.sec]; }
   /* ---- own loop clock: sections with clock "loop" (the logo) play without footage, on wall time ---- */
   var LC = { t0: performance.now() / 1000, paused: false, at: 0 };
-  function isOwn(id) { var s = sec(id || S.sec); return !!(s && s.clock === "loop"); }
+  function isOwn(id) {
+    var s = sec(id || S.sec); if (s && s.clock === "loop") return true;
+    if (!s || (id && id !== S.sec) || !S.looks[s.id]) return false;
+    var st = styleDef(s, S.looks[s.id].style); return !!(st && st.preview);
+  }
+  /* finished effects (board style with a `preview`): a preview loop rendered by VIDPOD, played instead of a live look */
+  function preLook(st) {
+    var v = el("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "auto"; v.loop = true;
+    v.src = st.preview.video; v.poster = st.preview.still;
+    v.style.cssText = "position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;display:block;";
+    over.appendChild(v);
+    var tl = gsap.timeline({ paused: true }); tl.to({}, { duration: st.preview.loop || 2.8 });
+    return { tl: tl, loop: st.preview.loop || 2.8, pre: v, focus: st.preview.focus || null, fixed: true };
+  }
+  function preSync(t) {
+    var v = live && live.pre; if (!v) return;
+    var L2 = live.loop, tt = ((t % L2) + L2) % L2;
+    if (playing()) { if (v.paused) v.play().catch(function () {}); if (Math.abs(v.currentTime - tt) > 0.25 && Math.abs(v.currentTime - tt) < L2 - 0.25) try { v.currentTime = tt; } catch (e) {} }
+    else { if (!v.paused) v.pause(); if (Math.abs(v.currentTime - tt) > 0.03) try { v.currentTime = tt; } catch (e) {} }
+  }
   function playing() { return isOwn() ? !LC.paused : !video.paused; }
   function clockT() { var L2 = seg()[1], t = LC.paused ? LC.at : performance.now() / 1000 - LC.t0; return ((t % L2) + L2) % L2; }
   function setClock(t, play) { LC.at = t; LC.t0 = performance.now() / 1000 - t; if (play != null) LC.paused = !play; }
@@ -243,7 +262,8 @@
     var st = styleDef(sd, L.style);
     var ctx = makeCtx(L, sd, st, mainStage);
     var r;
-    try { r = R[L.style](ctx); } catch (e) { console.error(e); r = { tl: gsap.timeline({ paused: true }) }; }
+    if (st && st.preview) r = preLook(st);
+    else try { r = R[L.style](ctx); } catch (e) { console.error(e); r = { tl: gsap.timeline({ paused: true }) }; }
     if (r.block) { r.block.classList.add("block"); (r.blockUnder ? under : over).appendChild(r.block); }
     under.style.filter = over.style.filter = layerShadow(sd, L);
     addOns(r, L, (st && st.segment) || sd.segment);
@@ -255,11 +275,13 @@
     r.tl.seek(isOwn() ? clockT() : Math.max(seg()[0], video.currentTime || 0), false);
     syncPosSlider();
     refreshUI();
+    if (CU.ok) cuSync();
   }
   function teardown() {
     if (!live) return;
     if (live.tl) live.tl.kill();
     if (live.teardown) try { live.teardown(); } catch (e) {}
+    if (live.pre) try { live.pre.pause(); live.pre.removeAttribute("src"); live.pre.load(); } catch (e) {}
     under.innerHTML = ""; over.innerHTML = ""; under.style.filter = over.style.filter = "";
     studioRegs.forEach(function (s) { try { s.el.pause(); s.el.removeAttribute("src"); s.el.load(); } catch (e) {} }); studioRegs = [];
     resetMedia(video, backdrop);
@@ -393,6 +415,7 @@
     if (own && !video.paused) video.pause();
     if (!own && !video.paused && (t >= s[1] - 0.04 || t < s[0] - 0.3)) { video.currentTime = s[0]; t = s[0]; }
     if (live && live.tl) live.tl.seek(Math.max(s[0], t), false);
+    if (live && live.pre) preSync(t);
     if (!own) drawDepth(t); sfxTick(t);
     studioRegs.forEach(function (r) {
       var lt = t - r.t0, v = r.el, dur = v.duration || 4;
@@ -549,6 +572,16 @@
   }
   function mountCard(c) {
     var sd = c.sd, st = c.st, L = cardLook(sd, st);
+    if (st.preview) {
+      if (c.tl) c.tl.kill(); c.und.innerHTML = ""; c.ov.innerHTML = ""; c.bd.innerHTML = ""; c.cut.hidden = true;
+      c.img.style.cssText = ""; c.img.src = st.preview.still; c.r = { tl: gsap.timeline({ paused: true }) }; c.tl = c.r.tl; c.built = true;
+      var w0 = c.mini.clientWidth || 124, h0 = c.mini.clientHeight || 70, zf = w0 / 1080, f = st.preview.focus;
+      if (!(c.land || c.sq) || !f) { c.fr.style.transform = "scale(" + zf.toFixed(5) + ")"; return; }
+      var bw = f[2] - f[0], bh = f[3] - f[1], z = Math.max(zf, Math.min(0.36, w0 * 0.96 / bw, h0 * 0.96 / bh));
+      var ox = Math.min(0, Math.max(w0 - 1080 * z, w0 / 2 - (f[0] + f[2]) / 2 * z)), oy = Math.min(0, Math.max(h0 - 1920 * z, h0 / 2 - (f[1] + f[3]) / 2 * z));
+      c.fr.style.transform = "translate(" + ox.toFixed(1) + "px," + oy.toFixed(1) + "px) scale(" + z.toFixed(5) + ")";
+      return;
+    }
     var stage = { card: true, media: c.img, backdrop: c.bd, under: c.und, over: c.ov, scale: function () { return 1; } };
     var ctx = makeCtx(L, sd, st, stage), prevCase = CASE, prevP = PUNCT;
     if (c.r && c.r.teardown) try { c.r.teardown(); } catch (e) {}
@@ -678,7 +711,7 @@
   ];
   var TAB_LABEL = { hook: "Hook titles", box: "Box style" };
   var SEC_HELP = {
-    subtitles: "Runs under everything said. Always centred.", hook: "The first line on screen. Change the words in the box below.",
+    subtitles: "Runs under everything said. Always centred.", hook: "The first line on screen.",
     name: "Who is speaking, the first time they talk.", logo: "Your logo on a plain background.",
     graphics: "From VIDPOD's own card library, in your brand. Pick as many as you like.", moves: "Camera and layout moves. Pick as many as you like.", transitions: "Plays at the join between two moments."
   };
@@ -754,7 +787,7 @@
   /* ---- the hook line: the first thing on the Hook tab, above the cards ---- */
   function renderLead() {
     var box = $("lead"); box.innerHTML = "";
-    if (!hasCtl("hooktext")) { box.hidden = true; return; }
+    if (!hasCtl("hooktext") || (curStyle() && curStyle().preview)) { box.hidden = true; return; }
     box.hidden = false;
     var hb = el("div", "field lead-field");
     hb.innerHTML = '<label for="hook-text">Your hook line</label><textarea id="hook-text" rows="3" spellcheck="true"></textarea><p class="hint">One line per row. Put *stars* round the big word. Every option updates as you type.</p>';
@@ -804,6 +837,13 @@
   function renderCustom() {
     var s = sec(S.sec), L = look(), st = curStyle(), box = $("custom"); box.innerHTML = "";
     box.appendChild(el("h3", "custom-h", "Customise<span class=\"dot\"></span>"));
+    if (st.preview) {
+      var pb0 = el("div");
+      pb0.appendChild(el("p", "none-note", "Set by VIDPOD to your brand. We make it on your clip, with your words and colours."));
+      var rb0 = el("button", "btn ghost sm", I.replay.replace("<svg", "<svg width=\"16\" height=\"16\"") + " Replay"); rb0.type = "button"; rb0.style.marginTop = "12px";
+      rb0.addEventListener("click", replay); pb0.appendChild(rb0); box.appendChild(pb0);
+      return;
+    }
     if (!s.controls.length || (S.sec === "transitions" && st.id !== "tr-lens")) {
       var reb = el("div");
       reb.appendChild(el("p", "none-note", S.sec === "transitions" ? "Transitions play at the join between two moments. Tap Replay to see it again." : "This one is set by VIDPOD to suit your footage. Tap Replay to watch it again, and pick as many as you like."));
@@ -946,7 +986,7 @@
     S.looks[S.sec] = n;
     var newSeg = d.segment || s.segment, oldSeg = seg();
     rebuild(); save();
-    markCards(); renderChosen(); renderCustom();
+    markCards(); renderChosen(); renderLead(); renderCustom();
     if (!d.segment || newSeg[0] !== oldSeg[0] || newSeg[1] !== oldSeg[1] || S.sec === "transitions" || S.sec === "logo" || S.sec === "moves" || S.sec === "graphics") goSeg(true);
     $("t-end").textContent = fmt(seg()[1] - seg()[0]);
   }
@@ -1077,6 +1117,7 @@
   /* ---- picks bar + review ---- */
   function lookDetail(sid, p) {
     var s = sec(sid), d = styleDef(s, p.style), parts = [];
+    if (d && d.preview) return { label: d.code + " " + d.label, detail: "finished effect, set by VIDPOD to your brand" };
     if (s.controls.indexOf("font") >= 0) { var fo = B.fonts.filter(function (x) { return x.id === p.font; })[0] || B.fonts[0]; parts.push(fo.id === "brand" ? fo.sub : fo.label); }
     if (s.controls.indexOf("size") >= 0) parts.push((sid === "logo" ? "width " : "") + p.size + " px");
     if (s.controls.indexOf("position") >= 0 && p.y != null && !(d && d.no_position)) parts.push("height y " + p.y);
@@ -1123,9 +1164,10 @@
     var picks = {};
     B.sections.forEach(function (s) {
       var p = S.picks[s.id];
-      if (multi(s.id)) { picks[s.id] = p && p.length ? p.map(function (x) { var d = styleDef(s, x.style); return { style: d.id, code: d.code, label: d.label, registry: d.registry || null, source: d.source || null }; }) : null; return; }
+      if (multi(s.id)) { picks[s.id] = p && p.length ? p.map(function (x) { var d = styleDef(s, x.style); var o2 = { style: d.id, code: d.code, label: d.label, registry: d.registry || null, source: d.source || null }; if (d.preview) { o2.finished = true; o2.ref = (d.recipe || {}).ref || null; } return o2; }) : null; return; }
       if (!p) { picks[s.id] = null; return; }
       var d = styleDef(s, p.style), o = { style: p.style, code: d.code, label: d.label, registry: d.registry || null, scope: s.scope === "any" ? "house-style" : "per-video-type" };
+      if (d.preview) { o.finished = true; o.ref = (d.recipe || {}).ref || null; o.how = (d.recipe || {}).how || ""; picks[s.id] = o; return; }
       if (s.controls.indexOf("font") >= 0) { var fo = fontDef(p.font); o.font = p.font; o.fontFamily = p.font === "brand" ? B.brand.font.sub : fo.family; }
       if (s.controls.indexOf("size") >= 0) o.sizePx = p.size;
       if (s.controls.indexOf("position") >= 0) o.yPx = p.y;
@@ -1199,7 +1241,7 @@
      preview is on screen; on a phone, once the preview scrolls away, it docks above the Send bar. ---- */
   var CU = { want: local("vidpod-studio-closeup") !== "off", last: 0, ok: false, slotSeen: true };
   var CU_SECS = ["subtitles", "hook", "name", "logo"];
-  function cuWanted() { return CU_SECS.indexOf(S.sec) >= 0 && !$("stage").classList.contains("full") && !!live; }
+  function cuWanted() { return (CU_SECS.indexOf(S.sec) >= 0 || !!(live && live.pre && live.focus)) && !(live && live.pre && !live.focus) && !$("stage").classList.contains("full") && !!live; }
   function cuSync() {
     var want = cuWanted(), slot = $("cu-slot"), cu = $("closeup");
     slot.hidden = !want;
@@ -1220,6 +1262,7 @@
   }
   function cuRect() {
     // the words, in 1080x1920 canvas units, measured on the live screen
+    if (live && live.pre && live.focus) { var f = live.focus; return { x: (f[0] + f[2]) / 2, y: (f[1] + f[3]) / 2, w: f[2] - f[0], h: f[3] - f[1] }; }
     var nowT = performance.now(); if (CU.lastRect && nowT - (CU.rectAt || 0) < 240) return CU.lastRect; CU.rectAt = nowT;
     var sr = screenEl.getBoundingClientRect(), k = scale || 0.25;
     var bx = null;
@@ -1252,9 +1295,10 @@
     var cv = $("cu-canvas"), dpr = Math.min(2, window.devicePixelRatio || 1), cw = Math.round(vw * dpr), ch = Math.round(vh * dpr);
     if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
     var g = cv.getContext("2d"); g.fillStyle = "#111"; g.fillRect(0, 0, cw, ch);
-    if (!isOwn() && video.readyState >= 2 && video.videoWidth) {
-      var kv = video.videoWidth / 1080, sx = -ox / z, sy = -oy / z;
-      try { g.drawImage(video, sx * kv, sy * kv, (vw / z) * kv, (vh / z) * kv, 0, 0, cw, ch); } catch (e) {}
+    var srcV = live && live.pre ? live.pre : (!isOwn() ? video : null);
+    if (srcV && srcV.readyState >= 2 && srcV.videoWidth) {
+      var kv = srcV.videoWidth / 1080, sx = -ox / z, sy = -oy / z;
+      try { g.drawImage(srcV, sx * kv, sy * kv, (vw / z) * kv, (vh / z) * kv, 0, 0, cw, ch); } catch (e) {}
     }
     // the person cut-out in front of the words (hooks behind the head), as on the big preview
     var fg = $("cu-fg"), gf = fg.getContext("2d"); if (fg.width !== cw || fg.height !== ch) { fg.width = cw; fg.height = ch; }
