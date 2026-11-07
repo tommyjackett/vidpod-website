@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VIDPOD Lookbook</title>
+<style>
+/* VIDPOD Lookbook: the simple client page. One calm scrolling page: a few curated looks per section, each playing
+   on the client's own footage in their brand. Data: clients/<id>/board.json "lookbook" block (LOOKBOOK.md).
+   Media: clients/<id>/lookbook/<KEY>.mp4 + .jpg (tools/lookbook_make.py). One video element for the whole page. */
+@font-face { font-family: "Archivo Black"; src: url("fonts/ArchivoBlack-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-var.woff2") format("woff2"); font-weight: 300 800; font-display: swap; }
+:root {
+  --bg: #FFFFFF; --bg-2: #F5F5F2; --bg-3: #ECECE7; --fg: #0A0A0A; --muted: #6B6B6B; --line: #EAEAE5; --line-strong: #CFCFC8;
+  --green: #00FFAA; --on-green: #000000; --paper: #FBFBF8; --paper-line: #E6E6DF;
+  --shadow: 0 18px 50px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  --font-head: 'Archivo Black', 'Arial Black', 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  --gut-l: max(16px, env(safe-area-inset-left, 0px)); --gut-r: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0A0A0A; --bg-2: #121212; --bg-3: #1C1C1C; --fg: #FAFAF7; --muted: #9A9A9A; --line: #242424; --line-strong: #3A3A3A; --paper: #161616; --paper-line: #2A2A2A; --shadow: 0 18px 50px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.4); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0A0A0A; --bg-2: #121212; --bg-3: #1C1C1C; --fg: #FAFAF7; --muted: #9A9A9A; --line: #242424; --line-strong: #3A3A3A; --paper: #161616; --paper-line: #2A2A2A; --shadow: 0 18px 50px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.4); color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
+.dot { display: inline-block; width: .22em; height: .22em; margin-left: .06em; background: var(--green); border-radius: 50%; }
+.only-dark { display: none !important; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .only-light { display: none !important; } :root:not([data-theme="light"]) .only-dark { display: block !important; } }
+:root[data-theme="dark"] .only-light { display: none !important; }
+:root[data-theme="dark"] .only-dark { display: block !important; }
+
+/* header */
+.top { display: flex; align-items: center; gap: 12px; padding: calc(env(safe-area-inset-top, 0px) + 14px) var(--gut-r) 14px var(--gut-l); max-width: 1180px; margin: 0 auto; }
+.top .vp img { height: 20px; width: auto; }
+.top .sep { width: 1px; height: 20px; background: var(--line-strong); }
+.top .nm { font-family: var(--font-head); text-transform: uppercase; font-size: 13px; letter-spacing: .01em; }
+.made-for { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.made-for img { height: 26px; width: auto; }
+
+/* intro */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gut-r) 0 var(--gut-l); }
+.intro { padding: 28px 0 8px; }
+.intro h1 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: clamp(40px, 11vw, 88px); line-height: .92; letter-spacing: -.01em; margin: 0 0 14px; }
+.intro p { margin: 0; font-size: 18px; color: var(--muted); max-width: 34ch; }
+.intro .how { margin-top: 16px; font-size: 14px; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; max-width: 40ch; }
+.intro .how svg { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 3px; color: #E0245E; }
+
+/* sections */
+.sec { padding: 36px 0 8px; border-top: 1px solid var(--line); margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.sec-head { align-self: stretch; }
+.sec-h { display: flex; align-items: baseline; gap: 12px; margin: 0 0 4px; }
+.sec-h .n { font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sec-h h2 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: clamp(26px, 6vw, 40px); line-height: 1; margin: 0; }
+.sec-sub { margin: 6px 0 0; color: var(--muted); font-size: 15px; max-width: 46ch; }
+
+/* the phone window */
+.stage { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.phone { position: relative; width: min(52vw, 210px); aspect-ratio: 9 / 16; border-radius: 26px; padding: 6px; background: #0A0A0A; box-shadow: var(--shadow); }
+.screen { position: absolute; inset: 6px; border-radius: 20px; overflow: hidden; background: #1a1a1a; }
+.screen img, .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.screen video { opacity: 0; transition: opacity .2s linear; }
+.screen video.on { opacity: 1; }
+.playbtn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 58px; height: 58px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #0A0A0A; display: grid; place-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.3); z-index: 3; }
+.playbtn svg { width: 22px; height: 22px; margin-left: 3px; }
+.bar { position: absolute; left: 14px; right: 14px; bottom: 12px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; z-index: 2; }
+.bar i { display: block; height: 100%; width: 0; background: #fff; }
+.now { font-size: 14px; font-weight: 750; text-align: center; min-height: 20px; margin: 0; max-width: 300px; line-height: 1.35; }
+.now small { font-weight: 500; color: var(--muted); }
+.now .good { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
+
+/* the pinned paper list */
+.list { position: relative; width: 100%; max-width: 520px; margin: 0; padding: 20px 8px 6px; list-style: none; background: var(--paper); border: 1px solid var(--paper-line); border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,.07); transform: rotate(-.5deg); }
+.list::before { content: ""; position: absolute; top: 8px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--green); box-shadow: 0 2px 4px rgba(0,0,0,.25); }
+.row { display: flex; align-items: flex-start; gap: 6px; border-bottom: 1px dashed var(--paper-line); padding: 4px 0; }
+.row:last-child { border-bottom: 0; }
+.pick { flex: 1 1 auto; min-width: 0; min-height: 44px; border: 0; background: transparent; text-align: left; padding: 8px 8px; justify-content: center; border-radius: 8px; display: flex; flex-direction: column; gap: 2px; }
+.pick b { font-size: 16px; font-weight: 750; line-height: 1.25; align-self: flex-start; padding: 0 3px; margin: 0 -3px; transition: background .25s var(--ease); }
+.pick span { font-size: 13.5px; color: var(--muted); line-height: 1.35; display: none; }
+.row.cur .pick b { background: linear-gradient(transparent 52%, var(--green) 52%, var(--green) 92%, transparent 92%); color: var(--fg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .row.cur .pick b { color: #0A0A0A; background: var(--green); border-radius: 3px; } }
+:root[data-theme="dark"] .row.cur .pick b { color: #0A0A0A; background: var(--green); border-radius: 3px; }
+.heart { flex: 0 0 auto; width: 44px; height: 44px; margin-top: 0; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg); display: grid; place-items: center; color: var(--fg); transition: transform .2s var(--ease); }
+.heart svg { width: 20px; height: 20px; }
+.heart[aria-pressed="true"] { border-color: #E0245E; background: #E0245E; color: #fff; }
+.heart:active { transform: scale(.92); }
+.note { flex-basis: 100%; padding: 0 8px 8px; }
+.note input { width: 100%; font-size: 16px; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg); color: var(--fg); }
+.row { flex-wrap: wrap; }
+
+/* send */
+.send { margin: 64px auto 0; width: 100%; padding: 28px 20px; border-radius: 24px; background: var(--bg-2); display: flex; flex-direction: column; gap: 14px; }
+.send h2 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: 30px; line-height: 1; margin: 0; }
+.send p { margin: 0; color: var(--muted); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 13px; font-weight: 650; padding: 6px 11px; border-radius: 100px; background: var(--bg); border: 1px solid var(--line-strong); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13px; font-weight: 700; }
+.field input, .field textarea { font-size: 16px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; width: 100%; color: var(--fg); }
+.field textarea { min-height: 76px; resize: vertical; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 100px; padding: 15px 22px; min-height: 52px; background: var(--fg); color: var(--bg); font-size: 15px; font-weight: 800; letter-spacing: .02em; transition: background .2s var(--ease), color .2s var(--ease); }
+.btn:hover:not(:disabled) { background: var(--green); color: var(--on-green); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.err { margin: 0; font-weight: 600; font-size: 14px; color: var(--fg) !important; }
+.done-mark { width: 52px; height: 52px; border-radius: 50%; background: var(--green); color: var(--on-green); display: grid; place-items: center; }
+.done-mark svg { width: 24px; height: 24px; }
+
+/* the closing wall of more looks */
+.wall-sec { margin-top: 72px; }
+.wall-sec h2 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: clamp(24px, 5.5vw, 36px); line-height: 1; margin: 0 0 6px; }
+.wall-sec p { margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+.wall { position: relative; height: 340px; overflow: hidden; border-radius: 24px; background: #0A0A0A; }
+.wall-grid { position: absolute; left: 50%; top: 50%; width: 170%; display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; transform: translate(-50%, -50%) rotate(-12deg); }
+.wall-grid img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 10px; background: #222; }
+.wall::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(10,10,10,0) 40%, rgba(10,10,10,.65) 100%); pointer-events: none; }
+.foot { padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px)); font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; }
+.link { border: 0; background: transparent; padding: 0; font-size: 12px; font-weight: 700; color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.studio-link { margin-left: auto; }
+
+/* sign-in */
+.gate { position: fixed; inset: 0; z-index: 200; background: var(--bg); display: grid; place-items: center; padding: 24px var(--gut-r) 24px var(--gut-l); overflow-y: auto; }
+.gate-card { width: min(100%, 380px); display: flex; flex-direction: column; gap: 16px; }
+.gate-card .vp img { height: 24px; width: auto; }
+.gate-card h1 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; font-size: 44px; line-height: .95; margin: 8px 0 0; }
+.gate-card p { margin: 0; color: var(--muted); font-size: 14px; }
+.gate-small { font-size: 12px !important; }
+.loading { padding: 80px 0; text-align: center; color: var(--muted); }
+
+/* phones: the window stays in view while a long list scrolls under it */
+@media (max-width: 899px) {
+  .stage.sticky { position: sticky; top: 0; z-index: 4; background: var(--bg); padding: 10px 0 12px; }
+  .stage.sticky .phone { width: min(46vw, 200px); }
+}
+/* desktop: list on the left, the window on the right */
+@media (min-width: 900px) {
+  .top { padding-top: 22px; padding-bottom: 22px; }
+  .top .vp img { height: 22px; }
+  .intro { padding: 56px 0 16px; }
+  .intro p { font-size: 20px; }
+  .sec { padding-top: 72px; margin-top: 48px; display: grid; grid-template-columns: minmax(0, 560px) auto; grid-template-areas: "head stage" "list stage"; grid-template-rows: auto 1fr; justify-content: center; column-gap: 96px; row-gap: 28px; align-items: start; }
+  .sec-head { grid-area: head; align-self: end; }
+  .list { grid-area: list; max-width: 560px; padding: 26px 14px 14px; }
+  .stage { grid-area: stage; position: sticky; top: 24px; width: auto; }
+  .pick b { font-size: 18px; }
+  .pick span { display: block; font-size: 14px; }
+  .now .good { display: none; }
+  .phone { width: auto; height: min(70vh, 620px); }
+  .send { padding: 36px; flex-direction: column; max-width: 720px; }
+  .wall { height: 420px; }
+  .wall-grid { width: 130%; grid-template-columns: repeat(10, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="vp"><img class="only-light" src="assets/vidpod/vidpod-logo-light.png" alt="VIDPOD" width="61" height="22"><img class="only-dark" src="assets/vidpod/vidpod-logo-dark.png" alt="" width="61" height="22"></span>
+  <span class="sep" aria-hidden="true"></span>
+  <span class="nm">Lookbook</span>
+  <div class="made-for" id="made-for" hidden><span>Made for</span><img class="only-light" id="client-logo" alt=""><img class="only-dark" id="client-logo-dark" alt=""></div>
+</header>
+
+<main class="wrap" id="main">
+  <p class="loading" id="loading">Loading your looks</p>
+</main>
+
+<div class="gate" id="gate" hidden>
+  <form class="gate-card" id="gate-form" novalidate>
+    <span class="vp"><img class="only-light" src="assets/vidpod/vidpod-logo-light.png" alt="VIDPOD" width="67" height="24"><img class="only-dark" src="assets/vidpod/vidpod-logo-dark.png" alt="" width="67" height="24"></span>
+    <h1>Lookbook<span class="dot"></span></h1>
+    <p>A few looks for your videos, on your own footage. Pop in your name and the code VIDPOD gave you.</p>
+    <div class="field"><label for="gate-name">Your name</label><input id="gate-name" autocomplete="name" required></div>
+    <div class="field"><label for="gate-code">Access code</label><input id="gate-code" autocomplete="off" autocapitalize="characters" spellcheck="false" required></div>
+    <p class="err" id="gate-err" hidden></p>
+    <button type="submit" class="btn">Show me the looks</button>
+    <p class="gate-small">No account needed. Your name just tells VIDPOD whose picks are whose.</p>
+  </form>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var PAGE_VERSION = "lookbook v1";
+  var SECTIONS = [
+    { id: "subtitles", title: "Subtitles", sub: "The words on screen while you talk." },
+    { id: "hook", title: "Opening line", sub: "The first line people read, in the first second." },
+    { id: "name", title: "Name", sub: "Who you are, the first time you appear." },
+    { id: "graphics", title: "Graphics", sub: "A number, a list or a quote, right when you say it." },
+    { id: "logo", title: "End card", sub: "How your logo signs off the video." },
+    { id: "effects", title: "Effects", sub: "Bigger moments for a key line. One or two per video is plenty." }
+  ];
+  var HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>';
+  var HEART_ON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>';
+  var PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+  var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function local(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  var SIGN = null, LOG_URL = "", B = null, LB = null, CID = "", ST = { likes: {} }, SECS = [];
+
+  /* ---- the VIDPOD log (Google Sheet "VidPod Studio Log" via the Apps Script web app in codes.json) ---- */
+  function post(tab, rows) {
+    if (!LOG_URL || typeof fetch !== "function") return Promise.resolve(false);
+    var body = JSON.stringify({ tab: tab, name: SIGN ? SIGN.name : "", client: B ? B.client.name : "", project: "Lookbook",
+      code: SIGN ? SIGN.code : "", version: PAGE_VERSION + (B && B.board ? " (board " + B.board.version + ")" : ""), rows: rows });
+    var opt = { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body };
+    if (body.length < 60000) opt.keepalive = true;
+    return fetch(LOG_URL, opt).then(function () { return true; }).catch(function () { return false; });
+  }
+
+  /* ---- sign-in: the studio's gate (name + access code from codes.json); remembered on this device, shared with the studio ---- */
+  function gate(cfg) {
+    var codes = {}; Object.keys(cfg.codes || {}).forEach(function (k) { codes[k.toUpperCase()] = cfg.codes[k]; });
+    var saved = null; try { saved = JSON.parse(local("vidpod-studio-signin") || "null"); } catch (e) { saved = null; }
+    if (saved && saved.name && saved.code && codes[String(saved.code).toUpperCase()]) {
+      var c0 = String(saved.code).toUpperCase();
+      return Promise.resolve({ name: saved.name, code: c0, board: codes[c0].board, fresh: false });
+    }
+    return new Promise(function (res) {
+      $("gate").hidden = false;
+      $("gate-name").value = (saved && saved.name) || local("vidpod-studio-viewer") || "";
+      ($("gate-name").value ? $("gate-code") : $("gate-name")).focus();
+      $("gate-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nm = $("gate-name").value.trim(), cd = $("gate-code").value.trim().toUpperCase(), er = $("gate-err");
+        if (!nm) { er.textContent = "Add your name so VIDPOD knows who is picking."; er.hidden = false; $("gate-name").focus(); return; }
+        if (!codes[cd]) { er.textContent = cd ? "That code did not work. Check it with your VIDPOD contact and try again." : "Add the access code VIDPOD gave you."; er.hidden = false; $("gate-code").focus(); $("gate-code").select(); return; }
+        er.hidden = true; $("gate").hidden = true;
+        local("vidpod-studio-signin", JSON.stringify({ name: nm, code: cd })); local("vidpod-studio-viewer", nm);
+        res({ name: nm, code: cd, board: codes[cd].board, fresh: true });
+      });
+    });
+  }
+  function switchUser() { local("vidpod-studio-signin", null); location.reload(); }
+
+  /* ---- data ---- */
+  function styleOf(code) {
+    var hit = null; (B.sections || []).forEach(function (s) { (s.styles || []).forEach(function (st) { if (st.code && code && st.code.toUpperCase() === String(code).toUpperCase()) hit = { sec: s, st: st }; }); });
+    return hit;
+  }
+  function styleByRef(ref) {
+    var hit = null; (B.sections || []).forEach(function (s) { (s.styles || []).forEach(function (st) { if (st.recipe && st.recipe.ref === ref) hit = { sec: s, st: st }; }); });
+    return hit;
+  }
+  function items(secId) {
+    return (LB[secId] || []).map(function (e) {
+      if (typeof e === "string") e = { code: e };
+      var key = String(e.code || e.ref).toUpperCase();
+      var hit = e.code ? styleOf(e.code) : (e.ref ? styleByRef(e.ref) : null);
+      var name = e.name || (hit ? hit.st.label : key);
+      return { key: key, name: name, good: e.good || (hit ? hit.st.best_for : ""), code: hit ? hit.st.code : (e.code || null), style: hit ? hit.st.id : null,
+               ref: e.ref || (hit && hit.st.recipe ? hit.st.recipe.ref || null : null), finished: !!(e.ref || (hit && hit.st.preview) || e.src),
+               mp4: "clients/" + CID + "/lookbook/" + key + ".mp4", jpg: "clients/" + CID + "/lookbook/" + key + ".jpg" };
+    });
+  }
+  function saveLikes() { local("vidpod-lookbook-" + CID, JSON.stringify(ST.likes)); }
+
+  /* ---- one video for the whole page: it moves into whichever section is on screen ---- */
+  var video = document.createElement("video");
+  video.muted = true; video.defaultMuted = true; video.playsInline = true; video.setAttribute("playsinline", ""); video.setAttribute("muted", ""); video.preload = "none";
+  video.setAttribute("disablepictureinpicture", ""); video.setAttribute("aria-hidden", "true");
+  var active = null, raf = 0;
+  function tick() {
+    raf = 0; if (!active) return;
+    var d = video.duration || 0; active.barI.style.width = d ? Math.min(100, 100 * video.currentTime / d) + "%" : "0";
+    if (!video.paused) raf = requestAnimationFrame(tick);
+  }
+  video.addEventListener("playing", function () { video.classList.add("on"); if (active) active.play.hidden = true; if (!raf) raf = requestAnimationFrame(tick); });
+  video.addEventListener("ended", function () {
+    if (!active) return;
+    var S = active;
+    if (!S.loopOne && S.idx < S.items.length - 1) { show(S, S.idx + 1, true); return; }
+    if (!S.loopOne) { S.passDone = true; S.play.hidden = false; S.play.setAttribute("aria-label", "Play again"); }
+  });
+  function release() {
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    video.pause(); video.classList.remove("on"); video.removeAttribute("src"); try { video.load(); } catch (e) {}
+    if (video.parentNode) video.parentNode.removeChild(video);
+  }
+  function show(S, i, autoplay) {
+    S.idx = i; var it = S.items[i];
+    S.img.src = it.jpg; S.img.alt = it.name;
+    S.rows.forEach(function (r, k) { r.classList.toggle("cur", k === i); r.querySelector(".pick").setAttribute("aria-current", k === i ? "true" : "false"); });
+    S.now.innerHTML = esc(it.name) + (S.items.length > 1 ? " <small>" + (i + 1) + " of " + S.items.length + "</small>" : "") + (it.good ? '<span class="good">' + esc(it.good) + "</span>" : "");
+    S.barI.style.width = "0";
+    if (active !== S) { S.play.hidden = false; return; }
+    video.classList.remove("on"); video.loop = !!S.loopOne;
+    if (!autoplay) { video.pause(); video.removeAttribute("src"); try { video.load(); } catch (e) {} S.play.hidden = false; return; }
+    video.src = it.mp4; video.poster = it.jpg;
+    var p = video.play(); if (p && p.catch) p.catch(function () { S.play.hidden = false; });
+  }
+  function activate(S) {
+    if (active === S) return;
+    if (active) { release(); active.play.hidden = false; active.barI.style.width = "0"; }
+    active = S;
+    S.screen.insertBefore(video, S.play);
+    show(S, S.idx, !reduce && !S.passDone);
+  }
+  function deactivate(S) { if (active !== S) return; release(); S.play.hidden = false; S.barI.style.width = "0"; active = null; }
+
+  /* ---- page ---- */
+  function render() {
+    var main = $("main"); main.innerHTML = "";
+    var intro = el("section", "intro");
+    intro.innerHTML = "<h1>Your looks<span class=\"dot\"></span></h1><p>" + esc(LB.intro || "Here are a few looks for your videos. Tap the ones you like.") + "</p>" +
+      '<p class="how">' + HEART_ON + "<span>Heart the ones you like, add a note if you want, then send them to VIDPOD at the end.</span></p>";
+    main.appendChild(intro);
+    var n = 0;
+    SECTIONS.forEach(function (meta) {
+      var its = items(meta.id); if (!its.length) return; n++;
+      var sec = el("section", "sec"); sec.id = "s-" + meta.id; sec.setAttribute("aria-labelledby", "h-" + meta.id);
+      sec.innerHTML = '<div class="sec-head"><div class="sec-h"><span class="n">' + (n < 10 ? "0" : "") + n + '</span><h2 id="h-' + meta.id + '">' + esc(meta.title) + "</h2></div>" +
+        '<p class="sec-sub">' + esc(meta.sub) + "</p></div>";
+      var stage = el("div", "stage" + (its.length > 5 ? " sticky" : ""));
+      var phone = el("div", "phone"), screen = el("div", "screen");
+      var img = el("img"); img.decoding = "async"; img.loading = n <= 1 ? "eager" : "lazy";
+      var play = el("button", "playbtn", PLAY); play.type = "button"; play.setAttribute("aria-label", "Play");
+      var bar = el("div", "bar"), barI = el("i"); bar.appendChild(barI);
+      screen.appendChild(img); screen.appendChild(play); screen.appendChild(bar); phone.appendChild(screen);
+      var now = el("p", "now"); now.setAttribute("aria-live", "polite");
+      stage.appendChild(phone); stage.appendChild(now);
+      var list = el("ul", "list"); list.setAttribute("aria-label", meta.title + " looks");
+      var S = { id: meta.id, items: its, idx: 0, passDone: false, loopOne: false, img: img, screen: screen, play: play, barI: barI, now: now, rows: [], sec: sec };
+      its.forEach(function (it, i) {
+        var li = el("li", "row");
+        var pk = el("button", "pick", "<b>" + esc(it.name) + "</b><span>" + esc(it.good) + "</span>"); pk.type = "button";
+        pk.addEventListener("click", function () {
+          S.loopOne = true; S.passDone = true;
+          if (active !== S) { active && release(); if (active) { active.play.hidden = false; } active = S; S.screen.insertBefore(video, S.play); }
+          show(S, i, true);
+          if (window.matchMedia("(max-width: 899px)").matches) { var r = phone.getBoundingClientRect(); if (r.bottom < 60 || r.top > window.innerHeight - 120) stage.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }
+        });
+        var liked = !!ST.likes[it.key];
+        var hb = el("button", "heart", liked ? HEART_ON : HEART); hb.type = "button"; hb.setAttribute("aria-pressed", String(liked)); hb.setAttribute("aria-label", "Like " + it.name);
+        var noteW = el("div", "note"); noteW.hidden = !liked;
+        var inp = el("input"); inp.type = "text"; inp.maxLength = 200; inp.placeholder = "Add a note (optional)"; inp.setAttribute("aria-label", "Note on " + it.name);
+        inp.value = liked ? (ST.likes[it.key].note || "") : "";
+        inp.addEventListener("input", function () { if (ST.likes[it.key]) { ST.likes[it.key].note = inp.value; saveLikes(); } });
+        noteW.appendChild(inp);
+        hb.addEventListener("click", function () {
+          var on = !ST.likes[it.key];
+          if (on) ST.likes[it.key] = { sec: meta.id, note: inp.value || "" }; else delete ST.likes[it.key];
+          hb.setAttribute("aria-pressed", String(on)); hb.innerHTML = on ? HEART_ON : HEART; noteW.hidden = !on; saveLikes(); renderSend();
+        });
+        li.appendChild(pk); li.appendChild(hb); li.appendChild(noteW); list.appendChild(li); S.rows.push(li);
+      });
+      play.addEventListener("click", function () {
+        if (active !== S) { S.passDone = false; S.loopOne = false; activate(S); return; }
+        if (S.passDone && !S.loopOne) { S.passDone = false; show(S, 0, true); return; }
+        if (video.getAttribute("src") && video.paused) { video.play(); return; }
+        show(S, S.idx, true);
+      });
+      screen.addEventListener("click", function (e) { if (e.target === play || play.contains(e.target)) return; if (active === S && !video.paused) { video.pause(); play.hidden = false; } });
+      sec.appendChild(stage); sec.appendChild(list); main.appendChild(sec);
+      show(S, 0, false);
+      SECS.push(S);
+    });
+
+    // send
+    var send = el("section", "send"); send.id = "send";
+    send.innerHTML = '<div id="send-main" style="display:flex;flex-direction:column;gap:14px">' +
+      "<h2>Your picks<span class=\"dot\"></span></h2><p id=\"send-sum\"></p><div class=\"chips\" id=\"send-chips\"></div>" +
+      '<div class="field"><label for="send-note">Anything else? <span style="font-weight:500;color:var(--muted)">(optional)</span></label><textarea id="send-note" maxlength="2000"></textarea></div>' +
+      '<p class="err" id="send-err" hidden></p><button type="button" class="btn" id="send-btn">Send my picks to VIDPOD</button></div>' +
+      '<div id="send-done" hidden style="display:flex;flex-direction:column;gap:12px"><div class="done-mark">' + TICK + '</div><h2 id="done-h">Sent<span class="dot"></span></h2><p id="done-p"></p></div>';
+    main.appendChild(send);
+
+    // the wall
+    var wall = (LB.wall || []).map(function (k) { return "clients/" + CID + "/lookbook/wall/" + String(k).toUpperCase() + ".jpg"; });
+    var stills = SECS.reduce(function (a, S) { return a.concat(S.items.map(function (x) { return x.jpg; })); }, []);
+    var tiles = wall.concat(stills);
+    if (tiles.length) {
+      var ws = el("section", "wall-sec");
+      ws.innerHTML = "<h2>More looks we can make</h2><p>These are a few. Ask us for anything you have seen and liked.</p>";
+      var box = el("div", "wall"), grid = el("div", "wall-grid"); box.setAttribute("aria-hidden", "true");
+      var seed = 7; tiles = tiles.map(function (x) { seed = (seed * 9301 + 49297) % 233280; return [seed, x]; }).sort(function (p, q) { return p[0] - q[0]; }).map(function (p) { return p[1]; });
+      var want = 40; for (var i = 0; i < want; i++) { var im = el("img"); im.loading = "lazy"; im.decoding = "async"; im.alt = ""; im.onerror = function () { this.style.visibility = "hidden"; }; im.src = tiles[i % tiles.length]; grid.appendChild(im); }
+      box.appendChild(grid); ws.appendChild(box); main.appendChild(ws);
+    }
+
+    // footer
+    var foot = el("footer", "foot");
+    var who = el("span", null, "Signed in as <b>" + esc(SIGN.name) + "</b>. "); var sw = el("button", "link", "Not you? Switch"); sw.type = "button"; sw.addEventListener("click", switchUser); who.appendChild(sw);
+    foot.appendChild(who);
+    if (SIGN.code === "VIDPOD") { var a = el("a", "link studio-link", "Open the full studio"); a.href = "index.html"; foot.appendChild(a); }
+    main.appendChild(foot);
+
+    $("send-btn").addEventListener("click", sendPicks);
+    renderSend();
+
+    // play whichever section is on screen (one at a time)
+    if ("IntersectionObserver" in window) {
+      var ratios = new Map();
+      var io = new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) { ratios.set(e.target, e.isIntersecting ? e.intersectionRatio : 0); });
+        var best = null, bestR = 0; SECS.forEach(function (S) { var r = ratios.get(S.screen) || 0; if (r > bestR) { bestR = r; best = S; } });
+        if (best && bestR >= 0.6) activate(best);
+        else if (active && (ratios.get(active.screen) || 0) < 0.25) deactivate(active);
+      }, { threshold: [0, 0.25, 0.6, 0.9, 1] });
+      SECS.forEach(function (S) { io.observe(S.screen); });
+    }
+    document.addEventListener("visibilitychange", function () { if (document.hidden && active) { video.pause(); active.play.hidden = false; } });
+  }
+
+  function picked() {
+    var out = [];
+    SECS.forEach(function (S) { S.items.forEach(function (it) { if (ST.likes[it.key]) out.push({ S: S, it: it, note: ST.likes[it.key].note || "" }); }); });
+    return out;
+  }
+  function renderSend() {
+    var p = picked();
+    $("send-sum").textContent = p.length ? "You picked " + p.length + (p.length === 1 ? " look." : " looks.") + " Send them over and VIDPOD will build your videos with them." : "Heart the looks you like above, then send them here.";
+    $("send-chips").innerHTML = p.map(function (x) { return '<span class="chip">' + esc(x.it.name) + "</span>"; }).join("");
+    $("send-btn").disabled = !p.length;
+  }
+  function sendPicks() {
+    var p = picked(); if (!p.length) return;
+    var note = $("send-note").value.trim(), btn = $("send-btn"); btn.disabled = true; btn.textContent = "Sending";
+    var bySec = {};
+    p.forEach(function (x) {
+      (bySec[x.S.id] = bySec[x.S.id] || []).push({ style: x.it.style, code: x.it.code || x.it.ref, label: x.it.name, ref: x.it.ref || null, finished: x.it.finished || undefined, note: x.note });
+    });
+    var doc = { source: "lookbook", client: CID, clientName: B.client.name, sentAt: new Date().toISOString(), viewer: SIGN.name, accessCode: SIGN.code, note: note,
+                canvas: "1080x1920", picks: bySec, likes: p.map(function (x) { return { style: x.it.style, code: x.it.code || x.it.ref, note: x.note }; }) };
+    var rows = [{ section: "lookbook", optionCode: p.map(function (x) { return x.it.code || x.it.ref; }).join(", "), label: p.length + " picked in the lookbook", settings: doc, note: note }];
+    p.forEach(function (x) {
+      var title = (SECTIONS.filter(function (m) { return m.id === x.S.id; })[0] || {}).title || x.S.id;
+      rows.push({ section: "lookbook", optionCode: x.it.code || x.it.ref, label: title + ": " + x.it.name, settings: { section: x.S.id, style: x.it.style, code: x.it.code || x.it.ref, label: x.it.name, ref: x.it.ref || null, finished: x.it.finished }, note: x.note });
+    });
+    local("vidpod-lookbook-last-sent-" + CID, JSON.stringify(doc));
+    post("Picks", rows).then(function (ok) {
+      $("send-main").hidden = true; $("send-done").hidden = false;
+      $("done-h").innerHTML = (ok ? "Sent" : "Saved") + '<span class="dot"></span>';
+      $("done-p").textContent = ok ? "Sent to VIDPOD. Thanks " + SIGN.name + ". Change your hearts and send again any time." : "We could not reach VIDPOD just now, so your picks are saved on this device. Try again when you are back online.";
+      if (!ok) { var again = el("button", "btn", "Try again"); again.type = "button"; again.addEventListener("click", function () { $("send-main").hidden = false; $("send-done").hidden = true; again.remove(); btn.disabled = false; btn.textContent = "Send my picks to VIDPOD"; }); $("send-done").appendChild(again); }
+      btn.textContent = "Send my picks to VIDPOD"; btn.disabled = false;
+    });
+  }
+
+  function fail(msg) { $("loading").textContent = msg; }
+  fetch("codes.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (cfg) {
+    LOG_URL = /^https:\/\//.test(cfg.log_endpoint || "") ? cfg.log_endpoint : "";
+    return gate(cfg).then(function (sg) {
+      SIGN = sg;
+      var h = (location.hash || "").replace(/^#\/?/, "").toLowerCase();
+      CID = (sg.code === "VIDPOD" && /^[a-z0-9-]{2,40}$/.test(h)) ? h : (sg.board || "vidpod");   // VIDPOD can preview a client: lookbook.html#atpilates
+      return fetch("clients/" + CID + "/board.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+    });
+  }).then(function (b) {
+    B = b; LB = b.lookbook;
+    if (!LB) { fail("Your looks are on their way. Check back soon."); return; }
+    try { ST.likes = JSON.parse(local("vidpod-lookbook-" + CID) || "{}") || {}; } catch (e) { ST.likes = {}; }
+    if (b.client && b.client.id !== "vidpod" && b.client.logo) {
+      $("client-logo").src = b.client.logo; $("client-logo").alt = b.client.logo_alt || b.client.name;
+      $("client-logo-dark").src = b.client.logo_on_dark || b.client.logo; $("made-for").hidden = false;
+    }
+    document.title = (b.client && b.client.id !== "vidpod" ? b.client.name + " " : "VIDPOD ") + "Lookbook";
+    render();
+    post("Sign-ins", [{ section: "lookbook", optionCode: "", label: SIGN.fresh ? "Signed in" : "Came back", settings: { board: CID, page: "lookbook", screen: window.innerWidth + "x" + window.innerHeight }, note: (navigator.userAgent || "").slice(0, 160) }]);
+  }).catch(function (e) { console.error(e); fail("The lookbook could not load. Check your connection and refresh."); });
+})();
+</script>
+</body>
+</html>

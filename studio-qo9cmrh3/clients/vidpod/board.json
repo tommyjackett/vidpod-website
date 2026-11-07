@@ -6203,19 +6203,23 @@
   "subtitles": [
    {
     "code": "SUB-03",
-    "good": "Good for punchy tips straight to camera."
+    "good": "Good for punchy tips straight to camera.",
+    "still": 1.5
    },
    {
     "code": "SUB-01",
-    "good": "Good for calm, longer answers."
+    "good": "Good for calm, longer answers.",
+    "still": 1.5
    },
    {
     "code": "SUB-05",
-    "good": "Good for a premium, magazine feel."
+    "good": "Good for a premium, magazine feel.",
+    "still": 1.5
    },
    {
     "code": "SUB-07",
-    "good": "Good for busy backgrounds. Every word stays readable."
+    "good": "Good for busy backgrounds. Every word stays readable.",
+    "still": 1.5
    }
   ],
   "hook": [

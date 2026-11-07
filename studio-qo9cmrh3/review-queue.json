@@ -22810,6 +22810,569 @@
     "what": "Before and after numbers, then a push in on the result.",
     "goodFor": "Case study results."
    }
+  },
+  {
+   "id": "L20",
+   "title": "Match cut: one boxed word on flickering article pages (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Strong TNG fit (news-led). Body text is the speaker's own words (the kit pads short bodies with filler: give it 20+ words).",
+   "source": "VIDPOD effects: VIDPOD effects (Match Cut, effect 18 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L20.jpg",
+   "video": "review-thumbs/L20.mp4",
+   "strip": "review-thumbs/L20-strip.jpg",
+   "claudeVerdict": "yes",
+   "aiLabPick": false,
+   "studioSection": "Openers > Hook titles",
+   "clientName": "Match cut word",
+   "build": {
+    "section": "HOOK",
+    "match": "HOOK-04",
+    "recipe": "Use the kit's 'match-cut' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L20-match-cut.json); make it with tools/kit_make.py (MAKE-A-LOOK.md 4b, captions off).",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render match-cut (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (full-frame cutaway, speaker returns)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine), private copy, permanent install",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, paper #F2F2F2; Inter + Archivo Black (ship inside the kit). Other clients: same config keys with their palette.",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with the board's own words; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L20-match-cut.json"
+    },
+    "motion": "Burst of about 1.7 s: first page holds 0.35 s, then a new page every 4 frames (kit 30 fps), slow 8% push with a nudge on every cut, last page holds 0.3 s, hard cut back.",
+    "style": {
+     "keep": "The locked word in a box, the page flicker, the blur on the body.",
+     "swap": "Box to the client accent, the word to their key word, body to their own line."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Full-screen article pages swap every 4 frames (cream serif, dark, newsprint looks); Tommy's own line is the page text, blurred away from the word; 'scams' sits locked in a #00FFAA box with dark text at mid frame. Speaker returns after the burst.",
+    "motion": "Burst of about 1.7 s: first page holds 0.35 s, then a new page every 4 frames (kit 30 fps), slow 8% push with a nudge on every cut, last page holds 0.3 s, hard cut back.",
+    "brandMap": "VIDPOD: Box to the client accent, the word to their key word, body to their own line. Other clients: same config keys with their colours and their own words.",
+    "build": "No rebuild. Kit effect 'match-cut'. Render path: finished MP4 (full-frame cutaway, speaker returns).",
+    "prompt": "python3 tools/kit_make.py match-cut --clip <clip> --range <start-end s> --config <job copy of ../ai-employee-lab/claude-video-fx/vidpod-configs/L20-match-cut.json with the job's own words> --out \"<job>/EXPORTS/<file>.mp4\" (still first with --still). Captions off; 25 fps; stamps stripped and checked. Done when it reads at phone size, text sits inside x 135 to 945 / y 250 to 1500, and ffprobe shows only generic tags."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L20-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "article pages",
+       "startFrame": 20,
+       "entry": "cut",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 42,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 3,
+       "holdFrames": null,
+       "exit": "cut",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames counted from the start of the preview loop (segment time 2.6 s). Timings from the kit defaults and our config (kit renders 30 fps, conformed to 25), checked on the render's sheets."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1920
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "full frame cutaway",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   },
+   "plain": {
+    "name": "Match cut: one boxed word on flickering article pages",
+    "what": "Article pages flicker past while one boxed word stays locked in place.",
+    "goodFor": "News or 'everyone is talking about' hooks: TNG topics, a client's big word."
+   }
+  },
+  {
+   "id": "L21",
+   "title": "Shutter strike: snapshot cards slam onto a desk above the speaker (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Busy; best as one beat in a 30 to 60 s piece. Needs real moments for each card.",
+   "source": "VIDPOD effects: VIDPOD effects (Shutter Strike, effect 19 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L21.jpg",
+   "video": "review-thumbs/L21.mp4",
+   "strip": "review-thumbs/L21-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Snapshot cards",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-05",
+    "recipe": "Use the kit's 'shutter-strike' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L21-shutter-strike.json); make it with tools/kit_make.py (MAKE-A-LOOK.md 4b, captions off).",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render shutter-strike (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (desk pushes the speaker down)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine), private copy, permanent install",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, paper #F2F2F2; Inter + Archivo Black (ship inside the kit). Other clients: same config keys with their palette.",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with the board's own words; preview range 0.0 to 5.3 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L21-shutter-strike.json"
+    },
+    "motion": "Desk pushes in over 0.4 s; each card lands with a shutter blink and white flash on its word, slight angle, camera creeps 1.8% per card; hold 1.2 s then a diagonal light strike wipes it away.",
+    "style": {
+     "keep": "Cards landing on the words, the pinboard overlap, the light strike out.",
+     "swap": "Card text and photos to the client's moments; mint cards to the client accent."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A light grid desk drops over the top 56% and pushes Tommy down; cards land on his words: a freeze-frame ('rabbit holes'), a #00FFAA note card 'oBikes', a black-and-white freeze with a scribble, a live clip 'Yarra River'. Light streak clears the desk at the end.",
+    "motion": "Desk pushes in over 0.4 s; each card lands with a shutter blink and white flash on its word, slight angle, camera creeps 1.8% per card; hold 1.2 s then a diagonal light strike wipes it away.",
+    "brandMap": "VIDPOD: Card text and photos to the client's moments; mint cards to the client accent. Other clients: same config keys with their colours and their own words.",
+    "build": "No rebuild. Kit effect 'shutter-strike'. Render path: finished MP4 (desk pushes the speaker down).",
+    "prompt": "python3 tools/kit_make.py shutter-strike --clip <clip> --range <start-end s> --config <job copy of ../ai-employee-lab/claude-video-fx/vidpod-configs/L21-shutter-strike.json with the job's own words> --out \"<job>/EXPORTS/<file>.mp4\" (still first with --still). Captions off; 25 fps; stamps stripped and checked. Done when it reads at phone size, text sits inside x 135 to 945 / y 250 to 1500, and ffprobe shows only generic tags."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L21-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "desk panel",
+       "startFrame": 0,
+       "entry": "slide-down",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 10,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "snapshot cards",
+       "startFrame": 8,
+       "entry": "slam",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 12,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames counted from the start of the preview loop (segment time 2.5 s). Timings from the kit defaults and our config (kit renders 30 fps, conformed to 25), checked on the render's sheets."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1070
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": false,
+     "layer": "above person (desk panel over the top of frame)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   },
+   "plain": {
+    "name": "Shutter strike: snapshot cards slam onto a desk above the speaker",
+    "what": "Snapshot cards slam onto a desk above the speaker, one per word.",
+    "goodFor": "Listing things done or made: a client's wins, TNG episode run-downs."
+   }
+  },
+  {
+   "id": "L22",
+   "title": "Screen push digital: every word on a glowing pixel screen (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Full-frame text, so the face leaves: use for one line only.",
+   "source": "VIDPOD effects: VIDPOD effects (Screen Push Digital, effect 20 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L22.jpg",
+   "video": "review-thumbs/L22.mp4",
+   "strip": "review-thumbs/L22-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Openers > Hook titles",
+   "clientName": "Pixel screen words",
+   "build": {
+    "section": "HOOK",
+    "match": "SUB-02",
+    "recipe": "Use the kit's 'screen-push-digital' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L22-screen-push-digital.json); make it with tools/kit_make.py (MAKE-A-LOOK.md 4b, captions off).",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render screen-push-digital (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (full-frame cutaway)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine), private copy, permanent install",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, paper #F2F2F2; Inter + Archivo Black (ship inside the kit). Other clients: same config keys with their palette.",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with the board's own words; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L22-screen-push-digital.json"
+    },
+    "motion": "Each word lands when spoken: 6-frame push from 88%, 5-frame camera pan to the next word, 6% slow drift over the whole piece, soft bloom and a rolling scan band.",
+    "style": {
+     "keep": "Spoken words on a pixel screen, the pan along the line.",
+     "swap": "Screen colour to the client's dark, line to their slogan or statement."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Cut to a macro LCD (#0A0A0A, RGB subpixels faintly visible); each word Tommy says lights up in big white pixel type, with a brief red/blue fringe, the camera gliding along the line to each new word.",
+    "motion": "Each word lands when spoken: 6-frame push from 88%, 5-frame camera pan to the next word, 6% slow drift over the whole piece, soft bloom and a rolling scan band.",
+    "brandMap": "VIDPOD: Screen colour to the client's dark, line to their slogan or statement. Other clients: same config keys with their colours and their own words.",
+    "build": "No rebuild. Kit effect 'screen-push-digital'. Render path: finished MP4 (full-frame cutaway).",
+    "prompt": "python3 tools/kit_make.py screen-push-digital --clip <clip> --range <start-end s> --config <job copy of ../ai-employee-lab/claude-video-fx/vidpod-configs/L22-screen-push-digital.json with the job's own words> --out \"<job>/EXPORTS/<file>.mp4\" (still first with --still). Captions off; 25 fps; stamps stripped and checked. Done when it reads at phone size, text sits inside x 135 to 945 / y 250 to 1500, and ffprobe shows only generic tags."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L22-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "spoken words",
+       "startFrame": 0,
+       "entry": "push-in",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 5,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames counted from the start of the preview loop (segment time 2.5 s). Timings from the kit defaults and our config (kit renders 30 fps, conformed to 25), checked on the render's sheets."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 700,
+      "w": 1080,
+      "h": 500
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "full frame cutaway",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   },
+   "plain": {
+    "name": "Screen push digital: every word on a glowing pixel screen",
+    "what": "The shot becomes a pixel screen and each spoken word lights up on it.",
+    "goodFor": "A slogan or statement line: VIDPOD ads, TNG cold opens."
+   }
+  },
+  {
+   "id": "L23",
+   "title": "Screen push: balls pour into a box and overflow (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Literal 'volume' visual; a bit playful for case studies, fine for VIDPOD's own ads.",
+   "source": "VIDPOD effects: VIDPOD effects (Screen Push, effect 22 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L23.jpg",
+   "video": "review-thumbs/L23.mp4",
+   "strip": "review-thumbs/L23-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Motion graphics > Graphics",
+   "clientName": "Pour and overflow",
+   "build": {
+    "section": "GFX",
+    "match": "GFX-01",
+    "recipe": "Use the kit's 'screen-push' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L23-screen-push.json); make it with tools/kit_make.py (MAKE-A-LOOK.md 4b, captions off).",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render screen-push (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (panel pushes the speaker down)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine), private copy, permanent install",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, paper #F2F2F2; Inter + Archivo Black (ship inside the kit). Other clients: same config keys with their palette.",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with the board's own words; preview range 5.6 to 13.35 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L23-screen-push.json"
+    },
+    "motion": "Panel slides in over 0.4 s on 'trying'; the pour fills the box in 2.6 s with small bounces, then heaps and rolls off both sides while the words under it change every 1 to 3 words.",
+    "style": {
+     "keep": "The pour, the fill to the payoff word, the overflow.",
+     "swap": "Ball colour to the client accent; labels off; words from their line."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "A light grid panel pushes Tommy into the lower half; #00FFAA balls pour into a black box, fill it row by row and spill over both sides; the spoken phrase sits in black under the box ('coffee history at').",
+    "motion": "Panel slides in over 0.4 s on 'trying'; the pour fills the box in 2.6 s with small bounces, then heaps and rolls off both sides while the words under it change every 1 to 3 words.",
+    "brandMap": "VIDPOD: Ball colour to the client accent; labels off; words from their line. Other clients: same config keys with their colours and their own words.",
+    "build": "No rebuild. Kit effect 'screen-push'. Render path: finished MP4 (panel pushes the speaker down).",
+    "prompt": "python3 tools/kit_make.py screen-push --clip <clip> --range <start-end s> --config <job copy of ../ai-employee-lab/claude-video-fx/vidpod-configs/L23-screen-push.json with the job's own words> --out \"<job>/EXPORTS/<file>.mp4\" (still first with --still). Captions off; 25 fps; stamps stripped and checked. Done when it reads at phone size, text sits inside x 135 to 945 / y 250 to 1500, and ffprobe shows only generic tags."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L23-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "paper panel",
+       "startFrame": 0,
+       "entry": "slide-down",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 10,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "balls",
+       "startFrame": 0,
+       "entry": "pour",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 65,
+       "overshoot": false,
+       "peakPct": null,
+       "easing": "soft",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames counted from the start of the preview loop (segment time 4.0 s). Timings from the kit defaults and our config (kit renders 30 fps, conformed to 25), checked on the render's sheets."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 960
+     },
+     "relativeToFace": "above head",
+     "overlapsHead": false,
+     "layer": "above person (paper panel over the top half)",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   },
+   "plain": {
+    "name": "Screen push: balls pour into a box and overflow",
+    "what": "Balls pour into a box until it overflows, under the speaker's words.",
+    "goodFor": "Volume moments: 'hundreds of', 'more than ever', growth."
+   }
+  },
+  {
+   "id": "L24",
+   "title": "Stack end card: wall of clips, then the call to action (AI Lab)",
+   "type": "Motion graphic",
+   "group": "Motion graphics",
+   "note": "Never use the kit's own default tiles or text: they carry the maker's wording. Tiles = the client's clips.",
+   "source": "VIDPOD effects: VIDPOD effects (Stack, effect 24 of 24)",
+   "link": null,
+   "adName": null,
+   "adTime": null,
+   "image": "review-thumbs/L24.jpg",
+   "video": "review-thumbs/L24.mp4",
+   "strip": "review-thumbs/L24-strip.jpg",
+   "claudeVerdict": "maybe",
+   "aiLabPick": false,
+   "studioSection": "Openers > Logo end card",
+   "clientName": "Clip wall end card",
+   "build": {
+    "section": "LOGO",
+    "match": "LOGO-01",
+    "recipe": "Use the kit's 'stack' effect as-is, re-skinned by config (../ai-employee-lab/claude-video-fx/vidpod-configs/L24-stack.json); make it with tools/kit_make.py (MAKE-A-LOOK.md 4b, captions off).",
+    "path": "ai-employee-lab/claude-video-fx",
+    "option": null,
+    "renderer": "engine/fx.mjs render stack (our render engine composition, engine/src/effects)",
+    "renders": "finished MP4 (full-frame end card, voice continues)",
+    "registry": [],
+    "engine": "VIDPOD effects engine (our render engine), private copy, permanent install",
+    "add": "Nothing to build: config only. Studio card = the preview still + loop.",
+    "assets": {
+     "fonts": [
+      "fonts/Inter-var.woff2",
+      "fonts/ArchivoBlack-400.woff2"
+     ],
+     "sfx": [],
+     "colours": "VIDPOD: ink #0A0A0A, white #FFFFFF, accent #00FFAA, paper #F2F2F2; Inter + Archivo Black (ship inside the kit). Other clients: same config keys with their palette.",
+     "clip": "clients/vidpod/media/base.mp4 (Tommy seated, 16 s, 1080x1920 25 fps) with the board's own words; preview range 12.6 to 16.0 s",
+     "matte": "kit makes its own cut-out (RVM, cached per range)",
+     "config": "../ai-employee-lab/claude-video-fx/vidpod-configs/L24-stack.json"
+    },
+    "motion": "Tiles pop in as a diagonal wave (1.6-frame stagger), wall drifts 3% closer; headline lifts away and the CTA springs in on the cue word.",
+    "style": {
+     "keep": "Clip wall, spoken-word tile, headline-to-CTA swap.",
+     "swap": "Tiles to the client's own clips; headline, subline and CTA from the script (never the kit defaults)."
+    }
+   },
+   "built": null,
+   "breakdown": {
+    "onScreen": "Near-black #0A0A0A end card: white headline 'Rabbit holes' with a #00FFAA subline (oBikes, coffee scams, Domino's), a 5x4 wall of Tommy's own preview loops popping in as a diagonal wave, one tile showing the spoken word; on 'deep' the headline swaps to 'Comment “DEEP DIVE”'.",
+    "motion": "Tiles pop in as a diagonal wave (1.6-frame stagger), wall drifts 3% closer; headline lifts away and the CTA springs in on the cue word.",
+    "brandMap": "VIDPOD: Tiles to the client's own clips; headline, subline and CTA from the script (never the kit defaults). Other clients: same config keys with their colours and their own words.",
+    "build": "No rebuild. Kit effect 'stack'. Render path: finished MP4 (full-frame end card, voice continues).",
+    "prompt": "python3 tools/kit_make.py stack --clip <clip> --range <start-end s> --config <job copy of ../ai-employee-lab/claude-video-fx/vidpod-configs/L24-stack.json with the job's own words> --out \"<job>/EXPORTS/<file>.mp4\" (still first with --still). Captions off; 25 fps; stamps stripped and checked. Done when it reads at phone size, text sits inside x 135 to 945 / y 250 to 1500, and ffprobe shows only generic tags."
+   },
+   "analysis": {
+    "evidence": "review-thumbs/L24-25fps.jpg",
+    "motion": {
+     "fps": 25,
+     "clipFrames": 70,
+     "beats": [
+      {
+       "element": "tiles",
+       "startFrame": 0,
+       "entry": "pop",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 4,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": 2,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      },
+      {
+       "element": "call to action",
+       "startFrame": 45,
+       "entry": "spring",
+       "from": null,
+       "direction": null,
+       "distancePx": null,
+       "durationFrames": 8,
+       "overshoot": true,
+       "peakPct": null,
+       "easing": "snappy",
+       "staggerFrames": null,
+       "holdFrames": null,
+       "exit": "none",
+       "exitFrames": 0
+      }
+     ],
+     "notes": "Frames counted from the start of the preview loop (segment time 0.4 s). Timings from the kit defaults and our config (kit renders 30 fps, conformed to 25), checked on the render's sheets."
+    },
+    "layout": {
+     "measured": false,
+     "box": {
+      "x": 90,
+      "y": 150,
+      "w": 900,
+      "h": 1650
+     },
+     "relativeToFace": "full frame",
+     "overlapsHead": false,
+     "layer": "full frame end card",
+     "align": "centre",
+     "margins": null,
+     "safe": {
+      "inside": true,
+      "note": "Studio safe area x 135 to 945, y 250 to 1500."
+     }
+    }
+   },
+   "plain": {
+    "name": "Stack end card: wall of clips, then the call to action",
+    "what": "An end card: a wall of clips under a headline that flips to 'Comment WORD'.",
+    "goodFor": "End of a Reel with a comment CTA; podcast snippet end cards."
+   }
   }
  ]
 }
