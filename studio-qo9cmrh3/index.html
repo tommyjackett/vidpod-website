@@ -477,6 +477,8 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
   .tabs { scroll-snap-type: none; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+/* phones: no backdrop blurs (the bars are 92% solid already); each blur is a live GPU layer iOS has to keep */
+@media (max-width: 820px) { .tabs, .bar, .closeup.docked, .card .like, dialog.sheet::backdrop { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; } }
 </style>
 
 <header class="top">
@@ -659,7 +661,7 @@ dialog.sheet::backdrop { background: rgba(10, 10, 10, .5); backdrop-filter: blur
 <script src="studio-looks.js?v=r4b"></script>
 <script src="studio-hooks.js?v=r4b"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
-<script src="studio-mograph.js?v=r4b" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r4c"></script>
+<script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
+<script src="studio-core.js?v=r5"></script>
 
 </html>

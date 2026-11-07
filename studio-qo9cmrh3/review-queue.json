@@ -1,5 +1,5 @@
 {
- "note": "VIDPOD swipe review queue + mood board source. One look per card (multi-look pack previews are split into crops and retired). Each item: group (mood board section), build {section, match = closest existing studio option or null for a new build, recipe = how we'd build it}, built = the studio option ID once built (set by the 'build my yeses' routine, tools/build_yeses.md). Thumbnails and 4 s loops in review-thumbs/ are small previews made from public preview files, for internal review only; every item links back to its source. Trend scan 7 Nov (T01..T38) and opener study R2-16 (OP01..OP16): items carry claudeVerdict (recommend|maybe|skip), evidence, account, views, trendScan; recommended items sit at the top of the queue. See TRENDS.md and OPENERS.md. AI Lab looks L01..L19 (7 Nov night): the VIDPOD effects kit's effects rendered on Tommy's seated clip in VIDPOD brand; source 'VIDPOD effects: VIDPOD effects'; aiLabPick marks the 9 in AI-LAB-STYLES.md.",
+ "note": "VIDPOD swipe review queue + mood board source. One look per card (multi-look pack previews are split into crops and retired). Each item: group (mood board section), build {section, match = closest existing studio option or null for a new build, recipe = how we'd build it}, built = the studio option ID once built (set by the 'build my yeses' routine, tools/build_yeses.md). Thumbnails and 4 s loops in review-thumbs/ are small previews made from public preview files, for internal review only; every item links back to its source. Trend scan 7 Nov (T01..T38) and opener study R2-16 (OP01..OP16): items carry claudeVerdict (recommend|maybe|skip), evidence, account, views, trendScan; recommended items sit at the top of the queue. See TRENDS.md and OPENERS.md. AI Lab looks L01..L19 (7 Nov night): the VIDPOD effects kit's effects rendered on Tommy's seated clip in VIDPOD brand; source 'VIDPOD effects: VIDPOD effects'; aiLabPick marks the 9 in AI-LAB-STYLES.md. plain {name, what, goodFor} = the only copy clients see on the mood board (two plain lines; no paths, pixel numbers or maker names); everything else is VIDPOD-only.",
  "version": "2026-11-07c",
  "items": [
   {
@@ -14,7 +14,13 @@
    "build": {
     "section": "SUB",
     "match": null,
-    "recipe": "New SUB style: 2 lines max, 2 to 3 words a line, line 2 indented about 70 px; each line enters as Gaussian blur 18 px to 0 plus opacity 0 to 1 over 6 to 7 frames, lines 6 to 7 frames apart, hard cut out."
+    "recipe": "New SUB style: 2 lines max, 2 to 3 words a line, line 2 indented about 70 px; each line enters as Gaussian blur 18 px to 0 plus opacity 0 to 1 over 6 to 7 frames, lines 6 to 7 frames apart, hard cut out.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-02",
+    "renderer": "studio-looks.js R['cap-per-word-rise']",
+    "add": "New SUB style: 2 lines max, 2 to 3 words a line, line 2 indented about 70 px; each line enters as Gaussian blur 18 px to 0 plus opacity 0 to 1 over 6 to 7 frames, lines 6 to 7 frames apart, hard cut out.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -95,6 +101,11 @@
       "note": "Bottom edge reaches y 1526, 26 px under the studio safe line; lift it 40 px when built."
      }
     }
+   },
+   "plain": {
+    "name": "Blur-to-sharp staggered captions",
+    "what": "Captions that sharpen out of a soft blur as each line is said.",
+    "goodFor": "Calm, premium talking clips and podcast clips."
    }
   },
   {
@@ -109,7 +120,13 @@
    "build": {
     "section": "SUB",
     "match": "SUB-06",
-    "recipe": "Speaker colour switch on any SUB style: speaker A text #FFFFFF, speaker B accent colour, driven by the speaker labels already in words.json."
+    "recipe": "Speaker colour switch on any SUB style: speaker A text #FFFFFF, speaker B accent colour, driven by the speaker labels already in words.json.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-06",
+    "renderer": "studio-looks.js R['cap-colour-pop']",
+    "add": "Speaker colour switch on any SUB style: speaker A text #FFFFFF, speaker B accent colour, driven by the speaker labels already in words.json.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -174,6 +191,11 @@
       "note": "Bottom edge y 1533, just under the safe line."
      }
     }
+   },
+   "plain": {
+    "name": "Host captions in yellow, guest in white",
+    "what": "The host's captions are one colour and the guest's another.",
+    "goodFor": "Podcast clips with two voices."
    }
   },
   {
@@ -188,7 +210,11 @@
    "build": {
     "section": "SUB",
     "match": null,
-    "recipe": "New SUB preset: condensed caps (Bebas Neue / Oswald 600), white, soft drop shadow, 2 to 4 words, centred at y 1440, hard cut per phrase, no highlight."
+    "recipe": "New SUB preset: condensed caps (Bebas Neue / Oswald 600), white, soft drop shadow, 2 to 4 words, centred at y 1440, hard cut per phrase, no highlight.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New SUB preset: condensed caps (Bebas Neue / Oswald 600), white, soft drop shadow, 2 to 4 words, centred at y 1440, hard cut per phrase, no highlight.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -253,6 +279,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Condensed caps captions at mic height",
+    "what": "Tall, narrow capital captions sitting low on the chest.",
+    "goodFor": "Clean talking-head clips and case studies."
    }
   },
   {
@@ -267,7 +298,13 @@
    "build": {
     "section": "SUB",
     "match": "HOOK-02",
-    "recipe": "Caption mode of HOOK-02 Mixed scale: lead words 48 px caps, key word 96 px caps on its own line, left aligned at x 142; key word colour on emphasis words; words build in as spoken."
+    "recipe": "Caption mode of HOOK-02 Mixed scale: lead words 48 px caps, key word 96 px caps on its own line, left aligned at x 142; key word colour on emphasis words; words build in as spoken.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "Caption mode of HOOK-02 Mixed scale: lead words 48 px caps, key word 96 px caps on its own line, left aligned at x 142; key word colour on emphasis words; words build in as spoken.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -380,6 +417,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Mixed-scale caps captions, red key word",
+    "what": "Small lead-in words, then the key word big on the next line.",
+    "goodFor": "Punchy podcast clips."
    }
   },
   {
@@ -394,7 +436,13 @@
    "build": {
     "section": "SUB",
     "match": "SUB-05",
-    "recipe": "SUB-05 Editorial tuned: Garamond-class serif, sentence case, words appended as spoken (hard, 0 frames), key line 1.4x, centred on the chest."
+    "recipe": "SUB-05 Editorial tuned: Garamond-class serif, sentence case, words appended as spoken (hard, 0 frames), key line 1.4x, centred on the chest.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-05",
+    "renderer": "studio-looks.js R['cap-editorial']",
+    "add": "SUB-05 Editorial tuned: Garamond-class serif, sentence case, words appended as spoken (hard, 0 frames), key line 1.4x, centred on the chest.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -507,6 +555,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Serif mixed-scale captions",
+    "what": "Elegant serif captions, with the key line a little bigger.",
+    "goodFor": "Premium brands and thoughtful interviews."
    }
   },
   {
@@ -521,7 +574,11 @@
    "build": {
     "section": "SUB",
     "match": null,
-    "recipe": "New SUB style \"Clean\": Inter 600 sentence case 44 px white, faint shadow, max 2 lines, centred at y 1050, phrase cut on and off."
+    "recipe": "New SUB style \"Clean\": Inter 600 sentence case 44 px white, faint shadow, max 2 lines, centred at y 1050, phrase cut on and off.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New SUB style \"Clean\": Inter 600 sentence case 44 px white, faint shadow, max 2 lines, centred at y 1050, phrase cut on and off.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -586,6 +643,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Plain small sentence captions",
+    "what": "Small, plain sentence captions with no effects at all.",
+    "goodFor": "Calm, expert talking clips."
    }
   },
   {
@@ -600,7 +662,13 @@
    "build": {
     "section": "SUB",
     "match": "SUB-05",
-    "recipe": "SUB-05 Editorial at small size (40 px) placed on the seam of a split layout."
+    "recipe": "SUB-05 Editorial at small size (40 px) placed on the seam of a split layout.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-05",
+    "renderer": "studio-looks.js R['cap-editorial']",
+    "add": "SUB-05 Editorial at small size (40 px) placed on the seam of a split layout.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -665,6 +733,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Small serif captions over cinematic B-roll",
+    "what": "Small serif captions over moody footage.",
+    "goodFor": "Story clips and trailers."
    }
   },
   {
@@ -679,7 +752,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-01",
-    "recipe": "New HOOK \"Quote cold open\": two faces split vertically with a glowing divider, 2-line caps quote centred on the chest, one word in red, name line below in accent, all on at frame 0, held 1.2 s, then cut into the clip."
+    "recipe": "New HOOK \"Quote cold open\": two faces split vertically with a glowing divider, 2-line caps quote centred on the chest, one word in red, name line below in accent, all on at frame 0, held 1.2 s, then cut into the clip.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-01",
+    "renderer": "studio-hooks.js R['hk-behind-head']",
+    "add": "New HOOK \"Quote cold open\": two faces split vertically with a glowing divider, 2-line caps quote centred on the chest, one word in red, name line below in accent, all on at frame 0, held 1.2 s, then cut into the clip.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -744,6 +823,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Cold-open quote: split faces, one red word, name in yellow",
+    "what": "Two faces side by side with a bold quote and one red word.",
+    "goodFor": "The first second of a podcast clip."
    }
   },
   {
@@ -758,7 +842,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-04",
-    "recipe": "HOOK-04 Quote box variant: white caps in quotes on a solid accent box, centred just above the seam of a 50/50 stacked split, persistent while the question is live."
+    "recipe": "HOOK-04 Quote box variant: white caps in quotes on a solid accent box, centred just above the seam of a 50/50 stacked split, persistent while the question is live.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-04",
+    "renderer": "studio-hooks.js R['hk-highlight-bars']",
+    "add": "HOOK-04 Quote box variant: white caps in quotes on a solid accent box, centred just above the seam of a 50/50 stacked split, persistent while the question is live.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -839,6 +929,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Question header in a red box over a stacked Q&A",
+    "what": "The viewer's question in a bold box above the answer.",
+    "goodFor": "Q&A and 'a member asked' clips."
    }
   },
   {
@@ -853,7 +948,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-04",
-    "recipe": "HOOK-04 Quote box, white box with dark text, title case in quotes, persistent; frame 0 rendered as the cover (two faces side by side + sticker + name)."
+    "recipe": "HOOK-04 Quote box, white box with dark text, title case in quotes, persistent; frame 0 rendered as the cover (two faces side by side + sticker + name).",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-04",
+    "renderer": "studio-hooks.js R['hk-highlight-bars']",
+    "add": "HOOK-04 Quote box, white box with dark text, title case in quotes, persistent; frame 0 rendered as the cover (two faces side by side + sticker + name).",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -934,6 +1035,11 @@
       "note": "880 px wide: edges at x 103 and 982 pass the studio safe sides; build at 760 px."
      }
     }
+   },
+   "plain": {
+    "name": "Quote sticker headline that stays the whole clip",
+    "what": "A headline sticker that stays on screen the whole clip.",
+    "goodFor": "Podcast clips and covers that need a clear point."
    }
   },
   {
@@ -948,7 +1054,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-06",
-    "recipe": "HOOK-06 Calm title as a long text block: serif, sentence case, dark on a light wall, left aligned top left, static for the whole loop."
+    "recipe": "HOOK-06 Calm title as a long text block: serif, sentence case, dark on a light wall, left aligned top left, static for the whole loop.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-06",
+    "renderer": "studio-hooks.js R['hk-headline-band']",
+    "add": "HOOK-06 Calm title as a long text block: serif, sentence case, dark on a light wall, left aligned top left, static for the whole loop.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1013,6 +1125,11 @@
       "note": "Left edge x 75 is 60 px outside the studio safe side; build at x 140."
      }
     }
+   },
+   "plain": {
+    "name": "POV serif text block, top left, on a short exercise loop",
+    "what": "A short 'POV' line in serif over a looping exercise shot.",
+    "goodFor": "Studio social posts with no talking."
    }
   },
   {
@@ -1027,7 +1144,13 @@
    "build": {
     "section": "GFX",
     "match": "GFX-07",
-    "recipe": "GFX-07 List card as an overlay without a card: title 2 lines, one item at a time under it, item swap is a hard cut."
+    "recipe": "GFX-07 List card as an overlay without a card: title 2 lines, one item at a time under it, item swap is a hard cut.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "GFX-07",
+    "renderer": "studio-looks-2.js R['gfx-list']",
+    "add": "GFX-07 List card as an overlay without a card: title 2 lines, one item at a time under it, item swap is a hard cut.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1108,6 +1231,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Numbered list over a talking head",
+    "what": "A title stays up while each numbered point appears under it.",
+    "goodFor": "List and tips videos."
    }
   },
   {
@@ -1122,7 +1250,11 @@
    "build": {
     "section": "NAME",
     "match": null,
-    "recipe": "New NAME \"Big name card\": full-screen interlude, title 30 px, name 120 px caps on 2 lines, role 34 px caps, left aligned at x 140, block slides in from the right 400 px over 10 frames, 1 to 2 frame line stagger; background slow push."
+    "recipe": "New NAME \"Big name card\": full-screen interlude, title 30 px, name 120 px caps on 2 lines, role 34 px caps, left aligned at x 140, block slides in from the right 400 px over 10 frames, 1 to 2 frame line stagger; background slow push.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New NAME \"Big name card\": full-screen interlude, title 30 px, name 120 px caps on 2 lines, role 34 px caps, left aligned at x 140, block slides in from the right 400 px over 10 frames, 1 to 2 frame line stagger; background slow push.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1235,6 +1367,11 @@
       "note": "Name line reaches x 989; build with a capped width."
      }
     }
+   },
+   "plain": {
+    "name": "Oversized name card over a mood image",
+    "what": "A big name card over a slow-moving image.",
+    "goodFor": "Introducing a guest or expert."
    }
   },
   {
@@ -1249,7 +1386,13 @@
    "build": {
     "section": "NAME",
     "match": "NAME-01",
-    "recipe": "Plain text name tag: name 32 px bold, role 26 px regular, right aligned at x 975, on the chest, cut on with the guest's shot."
+    "recipe": "Plain text name tag: name 32 px bold, role 26 px regular, right aligned at x 975, on the chest, cut on with the guest's shot.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "NAME-01",
+    "renderer": "studio-looks.js R['lt-clean-bar']",
+    "add": "Plain text name tag: name 32 px bold, role 26 px regular, right aligned at x 975, on the chest, cut on with the guest's shot.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1314,6 +1457,11 @@
       "note": "Right edge x 975 passes the safe side by 30 px; build at x 940."
      }
     }
+   },
+   "plain": {
+    "name": "Name and credential, right aligned, small",
+    "what": "Name and role in two small lines, no box.",
+    "goodFor": "Quiet, premium interviews."
    }
   },
   {
@@ -1328,7 +1476,13 @@
    "build": {
     "section": "NAME",
     "match": "NAME-02",
-    "recipe": "NAME-02 Soft pill preset: translucent grey pill, name + blue tick icon, left aligned low, follows the speaker."
+    "recipe": "NAME-02 Soft pill preset: translucent grey pill, name + blue tick icon, left aligned low, follows the speaker.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "NAME-02",
+    "renderer": "studio-looks.js R['lt-soft-pill']",
+    "add": "NAME-02 Soft pill preset: translucent grey pill, name + blue tick icon, left aligned low, follows the speaker.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1393,6 +1547,11 @@
       "note": "Left edge x 114, build at x 140."
      }
     }
+   },
+   "plain": {
+    "name": "Handle-style name with a verified tick",
+    "what": "Each speaker's name in a small pill with a tick.",
+    "goodFor": "Podcast clips with several speakers."
    }
   },
   {
@@ -1407,7 +1566,13 @@
    "build": {
     "section": "GFX",
     "match": "GFX-01",
-    "recipe": "GFX-01 Big stat restyled: serif number about 120 px with small serif lead and tail words, placed in clear space above the head."
+    "recipe": "GFX-01 Big stat restyled: serif number about 120 px with small serif lead and tail words, placed in clear space above the head.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "GFX-01",
+    "renderer": "studio-looks-2.js R['gfx-stat']",
+    "add": "GFX-01 Big stat restyled: serif number about 120 px with small serif lead and tail words, placed in clear space above the head.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1472,6 +1637,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Serif money stat over the shot",
+    "what": "A big money number in serif above the speaker.",
+    "goodFor": "Results and numbers moments."
    }
   },
   {
@@ -1486,7 +1656,13 @@
    "build": {
     "section": "MOVE",
     "match": null,
-    "recipe": "New MOVE \"Stacked B-roll\": top half = speaker crop (face at y 460 to 860), bottom half = B-roll, hard cut between full frame and split, captions centred on the seam at y 960."
+    "recipe": "New MOVE \"Stacked B-roll\": top half = speaker crop (face at y 460 to 860), bottom half = B-roll, hard cut between full frame and split, captions centred on the seam at y 960.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "MOVE-06",
+    "renderer": "studio-looks-2.js R['move-split']",
+    "add": "New MOVE \"Stacked B-roll\": top half = speaker crop (face at y 460 to 860), bottom half = B-roll, hard cut between full frame and split, captions centred on the seam at y 960.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1567,6 +1743,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Stacked split: speaker on top, B-roll below, captions on the seam",
+    "what": "Speaker on top, what they talk about underneath.",
+    "goodFor": "Covering jumps in a talking clip with footage."
    }
   },
   {
@@ -1581,7 +1762,11 @@
    "build": {
     "section": "MOVE",
     "match": null,
-    "recipe": "New MOVE \"Tier stack\": three 640 px rows, each a clip of one level, label right aligned in each row."
+    "recipe": "New MOVE \"Tier stack\": three 640 px rows, each a clip of one level, label right aligned in each row.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New MOVE \"Tier stack\": three 640 px rows, each a clip of one level, label right aligned in each row.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1646,6 +1831,11 @@
       "note": "Labels run to x 985 and the stack fills the frame; build labels at x 940."
      }
     }
+   },
+   "plain": {
+    "name": "Three tiers stacked: Basics, Signature, Advanced",
+    "what": "Three strips of the same move at three levels.",
+    "goodFor": "Fitness and studio class content."
    }
   },
   {
@@ -1660,7 +1850,13 @@
    "build": {
     "section": "LOGO",
     "match": "LOGO-10",
-    "recipe": "LOGO-10 Draw on as an end sequence: two text beats then logo + signature write-on."
+    "recipe": "LOGO-10 Draw on as an end sequence: two text beats then logo + signature write-on.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "LOGO-10",
+    "renderer": "studio-looks-2.js R['logo-draw-on']",
+    "add": "LOGO-10 Draw on as an end sequence: two text beats then logo + signature write-on.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1773,6 +1969,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "\"Tomorrow\" teaser end: date, logo, signature",
+    "what": "A teaser that ends on the date and the logo.",
+    "goodFor": "Trailers and launch teasers."
    }
   },
   {
@@ -1787,7 +1988,13 @@
    "build": {
     "section": "LOGO",
     "match": null,
-    "recipe": "New LOGO \"Watch now\": CTA line, logo, 3 platform icons, centred on the chest over live footage, cut on, held to the end."
+    "recipe": "New LOGO \"Watch now\": CTA line, logo, 3 platform icons, centred on the chest over live footage, cut on, held to the end.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "LOGO-01",
+    "renderer": "studio-looks-2.js R['logo-pop-bounce']",
+    "add": "New LOGO \"Watch now\": CTA line, logo, 3 platform icons, centred on the chest over live footage, cut on, held to the end.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1852,6 +2059,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "\"Watch Now\" end card with platform icons over the host",
+    "what": "A 'Watch now' card with platform icons in the last seconds.",
+    "goodFor": "Podcast clips that send people to the full episode."
    }
   },
   {
@@ -1866,7 +2078,11 @@
    "build": {
     "section": "THUMB",
     "match": null,
-    "recipe": "New THUMB \"Bar cover\": portrait, 2 lines max 5 words, Inter Black title case 110 px, line 2 on an accent bar, text inside the 1080x1440 grid-safe band."
+    "recipe": "New THUMB \"Bar cover\": portrait, 2 lines max 5 words, Inter Black title case 110 px, line 2 on an accent bar, text inside the 1080x1440 grid-safe band.",
+    "path": "hyperframes",
+    "engine": "HyperFrames composition",
+    "add": "New THUMB \"Bar cover\": portrait, 2 lines max 5 words, Inter Black title case 110 px, line 2 on an accent bar, text inside the 1080x1440 grid-safe band.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1912,6 +2128,11 @@
       "note": "Estimated from the cover screenshot (3:4 crop), not measured on a 9:16 frame."
      }
     }
+   },
+   "plain": {
+    "name": "Reel cover: guest close-up, 2 lines, last line on a red bar",
+    "what": "A cover with a close-up face and a two-line title.",
+    "goodFor": "Reel covers and grid tiles."
    }
   },
   {
@@ -1926,7 +2147,11 @@
    "build": {
     "section": "CAROUSEL",
     "match": null,
-    "recipe": "New CAROUSEL \"Tweet card\": white 4:5 slide, avatar 96 px, name + tick + handle, body Inter 400 44 px, short line pairs."
+    "recipe": "New CAROUSEL \"Tweet card\": white 4:5 slide, avatar 96 px, name + tick + handle, body Inter 400 44 px, short line pairs.",
+    "path": "hyperframes",
+    "engine": "HyperFrames composition",
+    "add": "New CAROUSEL \"Tweet card\": white 4:5 slide, avatar 96 px, name + tick + handle, body Inter 400 44 px, short line pairs.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -1972,6 +2197,11 @@
       "note": "Carousel slide, 4:5."
      }
     }
+   },
+   "plain": {
+    "name": "Tweet-card carousel",
+    "what": "A carousel whose first slide looks like a simple post.",
+    "goodFor": "Quick-tip carousels."
    }
   },
   {
@@ -1988,7 +2218,14 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "New HOOK \"Font pair\": heavy sans word + script word overlapping by about 30% of the cap height, script offset right and down; rise-in with blur."
+    "recipe": "New HOOK \"Font pair\": heavy sans word + script word overlapping by about 30% of the cap height, script offset right and down; rise-in with blur.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "registry": [
+     "text-stagger"
+    ],
+    "add": "New HOOK \"Font pair\": heavy sans word + script word overlapping by about 30% of the cap height, script offset right and down; rise-in with blur.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2066,6 +2303,11 @@
       "note": "Low position, bottom y 1617 is below the safe line; build at y 1300."
      }
     }
+   },
+   "plain": {
+    "name": "Font pair title: glowing orange sans with a white script word overlapping",
+    "what": "A bold title word paired with a script word.",
+    "goodFor": "Opening titles."
    }
   },
   {
@@ -2082,7 +2324,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-02",
-    "recipe": "HOOK-02 two-line variant: same size both lines, line 2 in accent, tight leading (lines overlap 15%)."
+    "recipe": "HOOK-02 two-line variant: same size both lines, line 2 in accent, tight leading (lines overlap 15%).",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "HOOK-02 two-line variant: same size both lines, line 2 in accent, tight leading (lines overlap 15%).",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2176,6 +2424,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Two-tone stacked lowercase: white word over a colour word",
+    "what": "Two stacked words, the bottom one in a bright colour.",
+    "goodFor": "Short punchy openers."
    }
   },
   {
@@ -2192,7 +2445,13 @@
    "build": {
     "section": "SUB",
     "match": "SUB-02",
-    "recipe": "SUB-02 Word rise in blur mode: white Inter 700 sentence case, word by word, each word blur 10 px to 0 + 6 px rise over 3 to 4 frames."
+    "recipe": "SUB-02 Word rise in blur mode: white Inter 700 sentence case, word by word, each word blur 10 px to 0 + 6 px rise over 3 to 4 frames.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-02",
+    "renderer": "studio-looks.js R['cap-per-word-rise']",
+    "add": "SUB-02 Word rise in blur mode: white Inter 700 sentence case, word by word, each word blur 10 px to 0 + 6 px rise over 3 to 4 frames.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2308,6 +2567,11 @@
     "atSecond": 8.1,
     "transition": "dissolve 6 frames, same y band",
     "changes": "glow, colour and font mix dropped; weight and slot kept; words now come in as spoken"
+   },
+   "plain": {
+    "name": "Handover: plain white captions, word by word blur-pop, same top band",
+    "what": "Plain white captions that pop in word by word.",
+    "goodFor": "Carrying on from an opening title."
    }
   },
   {
@@ -2324,7 +2588,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-06",
-    "recipe": "HOOK-06 Calm title as a one-line caps tag at y 260, 85% opacity, on from frame 0."
+    "recipe": "HOOK-06 Calm title as a one-line caps tag at y 260, 85% opacity, on from frame 0.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-06",
+    "renderer": "studio-hooks.js R['hk-headline-band']",
+    "add": "HOOK-06 Calm title as a one-line caps tag at y 260, 85% opacity, on from frame 0.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2386,6 +2656,11 @@
       "note": "836 px wide line: keep copy under 24 characters to stay inside x 135 to 945."
      }
     }
+   },
+   "plain": {
+    "name": "Plain small caps hook at the top of a selfie",
+    "what": "One small line of bold caps at the top of a selfie video.",
+    "goodFor": "Casual selfie clips."
    }
   },
   {
@@ -2402,7 +2677,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-02",
-    "recipe": "HOOK-02 preset (two-tone)"
+    "recipe": "HOOK-02 preset (two-tone)",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "HOOK-02 preset (two-tone)",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2464,6 +2745,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Two-tone stack \"Clean / blue\": white heavy word over a blue heavy word",
+    "what": "Two stacked words, white over a soft blue, with a glow.",
+    "goodFor": "Clean, modern openers."
    }
   },
   {
@@ -2480,7 +2766,13 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "Font pair HOOK (see OP02) preset"
+    "recipe": "Font pair HOOK (see OP02) preset",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "Font pair HOOK (see OP02) preset",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2542,6 +2834,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Font pair \"Clean style\": orange sans + white script overlap",
+    "what": "A bold word with a script word tucked over it.",
+    "goodFor": "Opening titles."
    }
   },
   {
@@ -2558,7 +2855,13 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "Font pair HOOK (see OP02) preset"
+    "recipe": "Font pair HOOK (see OP02) preset",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "Font pair HOOK (see OP02) preset",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2620,6 +2923,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Serif caps + green script \"OLD Money\"",
+    "what": "Classic serif caps with a script word across them.",
+    "goodFor": "Premium, elegant openers."
    }
   },
   {
@@ -2636,7 +2944,13 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "Font pair HOOK (see OP02) preset"
+    "recipe": "Font pair HOOK (see OP02) preset",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "Font pair HOOK (see OP02) preset",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "recommend",
@@ -2698,6 +3012,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Sans over script \"Trending / Captions\"",
+    "what": "A plain word sitting on a big script word.",
+    "goodFor": "Playful openers."
    }
   },
   {
@@ -2861,6 +3180,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 316 to 764, y 250 to 950. After the frame-25 punch-in it grows to about 520 x 812, still inside."
      }
     }
+   },
+   "plain": {
+    "name": "People judge instantly: caps stack with a purple label and a yellow loop",
+    "what": "A stack of caps with a coloured label and a looping line.",
+    "goodFor": "Hook titles that grab in the first second."
    }
   },
   {
@@ -2997,6 +3321,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 250 to 830, y 250 to 950. In the crop the top of NO touches the crop edge, so leave about 40 px of headroom above it."
      }
     }
+   },
+   "plain": {
+    "name": "No clear message: stacked caps on a tilted yellow bar",
+    "what": "Stacked caps on a tilted coloured bar.",
+    "goodFor": "Hook titles."
    }
   },
   {
@@ -3195,6 +3524,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 348 to 733, y 250 to 950."
      }
     }
+   },
+   "plain": {
+    "name": "The game is won: a big green number that counts up",
+    "what": "A big number that counts up.",
+    "goodFor": "Results and numbers hooks."
    }
   },
   {
@@ -3364,6 +3698,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 240 to 840, y 309 to 892."
      }
     }
+   },
+   "plain": {
+    "name": "Add captions, watch time: serif word over a gradient caps word",
+    "what": "A serif word over a colourful caps word.",
+    "goodFor": "Hook titles."
    }
   },
   {
@@ -3531,6 +3870,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 281 to 799, y 250 to 950, with the body caption as the bottom 15% of the box."
      }
     }
+   },
+   "plain": {
+    "name": "No hook, no views: neon script behind tilted blocks",
+    "what": "Glowing script behind tilted blocks of text.",
+    "goodFor": "Bold, energetic hooks."
    }
   },
   {
@@ -3697,6 +4041,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 243 to 838, y 250 to 950 once settled; during frames 0 to 13 the oversized stack would reach about x 120 to 960, past both side edges."
      }
     }
+   },
+   "plain": {
+    "name": "Too slow, people scroll: lime and white heavy stack",
+    "what": "A heavy two-colour stack of words.",
+    "goodFor": "Hook titles."
    }
   },
   {
@@ -3915,6 +4264,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 240 to 840, y 386 to 814; the cursor arrives below the stack at about y 900."
      }
     }
+   },
+   "plain": {
+    "name": "Focus on hook, not design: serif on a lime tape",
+    "what": "A serif word on a strip of coloured tape.",
+    "goodFor": "Friendly, handmade-feel hooks."
    }
   },
   {
@@ -4116,6 +4470,11 @@
       "note": "proposed placement, measured from the pack crop and scaled to a hook centred in the top half; inside x 240 to 840, y 271 to 929 once settled; before frame 27 THINK is wider than the box and would cross both side edges."
      }
     }
+   },
+   "plain": {
+    "name": "Don't make them think: gradient word with a sticker",
+    "what": "A colourful word with a sticker beside it.",
+    "goodFor": "Playful hooks."
    }
   },
   {
@@ -4235,6 +4594,11 @@
       "note": "crosses the left safe edge: '5 Catchy' and VISUAL start at x 125, 10 px outside x 135. Top at y 860 sits just under the chin (face about y 720 to 940). 'Hook 1' later is inside, x 215 to 840, y 920 to 1060, behind the person."
      }
     }
+   },
+   "plain": {
+    "name": "Glass smash into a title",
+    "what": "The title appears as glass shatters.",
+    "goodFor": "High-energy openers."
    }
   },
   {
@@ -4401,6 +4765,11 @@
       "note": "inside x 150 to 910, y 965 to 1160 once settled; the face sits about y 450 to 710 with hands at the chin, so the stack lands on the chest. During frames 7 to 12 it crosses both side edges (x 95 to 970)."
      }
     }
+   },
+   "plain": {
+    "name": "Mixed-scale stack",
+    "what": "Small words around one big glowing word, built as it is said.",
+    "goodFor": "Hook titles."
    }
   },
   {
@@ -4586,6 +4955,11 @@
       "note": "inside x 233 to 870, y 940 to 1250. Sits just under the chin (mouth about y 720, chin about y 815), on the upper chest; doorway words later centre at about y 960."
      }
     }
+   },
+   "plain": {
+    "name": "Serif key word on a framed clip",
+    "what": "The clip sits in a framed card with one serif key word.",
+    "goodFor": "Polished talking clips."
    }
   },
   {
@@ -4768,6 +5142,11 @@
       "note": "inside; box is the word 'So', and single words centre at x 540, y about 810 (a 3-letter word spans about x 280 to 795). Frame 0 alone has a person, with the giant 'this' behind her body. On the desk shot words sit left of centre on the monitor edge, x about 205 to 650, y about 785."
      }
     }
+   },
+   "plain": {
+    "name": "One word at a time over changing shots",
+    "what": "One big word at a time sharing the frame with the speaker.",
+    "goodFor": "Slow, dramatic moments."
    }
   },
   {
@@ -4851,6 +5230,11 @@
       "note": "canvas is a 3:4 carousel (1080 x 1440), not 1080 x 1920, so y values are on that canvas. Crosses the right safe edge by 5 px (HOOKS ends at x 950). The man at the desk sits below at y about 890 to 1120."
      }
     }
+   },
+   "plain": {
+    "name": "Serif number over a heavy word, carousel cover",
+    "what": "A serif number over a heavy word on a cover slide.",
+    "goodFor": "Carousel covers."
    }
   },
   {
@@ -4939,6 +5323,11 @@
       "note": "inside x 320 to 757, y 390 to 710. The bottom of HOOK (y 711) just touches the top of the head (about y 717), so it could tuck behind the hair with a matte."
      }
     }
+   },
+   "plain": {
+    "name": "THIS is a HOOK stack",
+    "what": "A stack of words in mixed weights above the head.",
+    "goodFor": "Hook titles."
    }
   },
   {
@@ -5105,6 +5494,11 @@
       "note": "crosses left edge ('Understand' starts x about 100) and right edge ('value' ends x about 1010); vertical span y 900 to 1190 is inside"
      }
     }
+   },
+   "plain": {
+    "name": "Karaoke-dim stack",
+    "what": "The next word waits dimmed until it is said.",
+    "goodFor": "Easy-to-follow captions."
    }
   },
   {
@@ -5205,6 +5599,11 @@
       "note": "inside x 135-945; bottom line 'text' ends at y about 1500, right on the safe edge. Text sits over a latte cup, centred on the cup"
      }
     }
+   },
+   "plain": {
+    "name": "Curved text around the subject",
+    "what": "Words curve around the speaker.",
+    "goodFor": "Stand-out openers."
    }
   },
   {
@@ -5388,6 +5787,11 @@
       "note": "the 12-copy 'today' column crosses the top (y 130) and bottom (y 1760) edges; the 'stop scrolling' card sits at x 117-947, y 1070-1430, just past the left and right edges, with the string running from the top of frame to the dot at y 910"
      }
     }
+   },
+   "plain": {
+    "name": "Repeated word stack",
+    "what": "One word repeated down the frame.",
+    "goodFor": "Bold graphic moments."
    }
   },
   {
@@ -5524,6 +5928,11 @@
       "note": "inside x 135-945, y 250-1500 (measured on the still). The clip labels sit at x 320-760, y 1285-1415 on a close-up chest"
      }
     }
+   },
+   "plain": {
+    "name": "Yellow serif title at the waist",
+    "what": "A yellow serif title across a full-length shot.",
+    "goodFor": "Wide shots and openers."
    }
   },
   {
@@ -5642,6 +6051,11 @@
       "note": "inside x 135-945, y 250-1500. Header 'CapCut Hack' sits x 200-825, y 350-450 with small labels to y 500"
      }
     }
+   },
+   "plain": {
+    "name": "Hollow outline text behind subject",
+    "what": "Outlined letters with the person walking in front.",
+    "goodFor": "Openers with movement."
    }
   },
   {
@@ -5776,6 +6190,11 @@
       "note": "inside x 135-945, y 250-1500"
      }
     }
+   },
+   "plain": {
+    "name": "Hand-drawn strike",
+    "what": "A marker line strikes through the key word.",
+    "goodFor": "Myth-busting and 'not this' moments."
    }
   },
   {
@@ -5977,6 +6396,11 @@
       "note": "inside x 135-945, y 250-1500; the skyline (behind the person, needs matte) fills x 0-1080, y 350-940 around the head"
      }
     }
+   },
+   "plain": {
+    "name": "Yellow key word on framed talking head",
+    "what": "The clip in a rounded card with one yellow word.",
+    "goodFor": "Clean talking clips."
    }
   },
   {
@@ -6125,6 +6549,11 @@
       "note": "opening stack crosses the bottom edge (ends y about 1565). After the scatter, 'IS A' crosses the right edge (to x 995) and 'THIS' sits on the top edge (y 250)"
      }
     }
+   },
+   "plain": {
+    "name": "Text behind person, cut-out",
+    "what": "Big words sit behind the person.",
+    "goodFor": "Openers with real depth."
    }
   },
   {
@@ -6276,6 +6705,11 @@
       "note": "'Create' starts at x about 127, just past the left edge; 'Let me show you how!' later spans x 105-970, y 540-800, past both side edges"
      }
     }
+   },
+   "plain": {
+    "name": "Serif italic viral text",
+    "what": "Large serif text with italics over a wide outdoor shot.",
+    "goodFor": "Lifestyle and travel clips."
    }
   },
   {
@@ -6476,6 +6910,11 @@
       "note": "inside x 135-945, y 250-1500; 'YOUR EYES' sits x 455-690 at y about 965; credit line at y about 1410"
      }
     }
+   },
+   "plain": {
+    "name": "OPEN your eyes word reveal",
+    "what": "Letters split open to reveal small words inside.",
+    "goodFor": "Stand-out titles."
    }
   },
   {
@@ -6623,6 +7062,11 @@
       "note": "crosses top (y 160), left (x 60) and right (x 1010) edges; the cap hides the middle of 'content' and the end of 'You know'"
      }
     }
+   },
+   "plain": {
+    "name": "Slat wipe into word behind head",
+    "what": "Stripes wipe across, then a big word sits behind the head.",
+    "goodFor": "Openers and section changes."
    }
   },
   {
@@ -6771,6 +7215,11 @@
       "note": "inside x 135-945, y 250-1500; 'Meet' overlaps his mouth and chin"
      }
     }
+   },
+   "plain": {
+    "name": "Clean two-line subtitles",
+    "what": "Soft white two-line captions low on the frame.",
+    "goodFor": "Everyday talking clips."
    }
   },
   {
@@ -6852,6 +7301,11 @@
       "note": "proposed: centred caption at y about 1350, 75% width, inside x 135-945"
      }
     }
+   },
+   "plain": {
+    "name": "Letter slide up, glowing yellow",
+    "what": "Captions whose letters slide up with a yellow glow.",
+    "goodFor": "Energetic social clips."
    }
   },
   {
@@ -7037,6 +7491,11 @@
       "note": "measured on the still (mirrored 'sizə / NECƏ / sizə' stack); in the clip 'Müştərilərin' spans x 233-1000 at y about 950, past the right edge"
      }
     }
+   },
+   "plain": {
+    "name": "Circle wipe into a search bar",
+    "what": "A word slices apart and becomes a search bar.",
+    "goodFor": "Tech and 'search for this' moments."
    }
   },
   {
@@ -7231,6 +7690,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Name about 560 px wide, bar 10 px tall sits 24 px above the cap height."
      }
     }
+   },
+   "plain": {
+    "name": "Name under a thin yellow bar",
+    "what": "A name under a thin coloured bar.",
+    "goodFor": "Simple name cards."
    }
   },
   {
@@ -7380,6 +7844,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Triangle about 190 px wide at x 135, name runs to about x 640."
      }
     }
+   },
+   "plain": {
+    "name": "Name breaking out of a yellow triangle",
+    "what": "A name breaking out of a coloured triangle.",
+    "goodFor": "Name cards with energy."
    }
   },
   {
@@ -7529,6 +7998,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Two stacked boxes about 520 px wide; 170 px tall while split, about 105 px closed."
      }
     }
+   },
+   "plain": {
+    "name": "Two lines on outlined yellow boxes",
+    "what": "Two lines on outlined boxes.",
+    "goodFor": "Name and role cards."
    }
   },
   {
@@ -7662,6 +8136,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Bar skewed about -20 deg, role sits under it; the slash runs a little above and below the bar."
      }
     }
+   },
+   "plain": {
+    "name": "Italic name on a slanted yellow bar",
+    "what": "A slanted name on a coloured bar.",
+    "goodFor": "Sporty name cards."
    }
   },
   {
@@ -7828,6 +8307,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Dot about 80 px at x 135 to 215, line and name to about x 705; ticks extend 50 px above and below."
      }
     }
+   },
+   "plain": {
+    "name": "Yellow dot with crosshair ticks",
+    "what": "A coloured dot with small tick marks beside the name.",
+    "goodFor": "Minimal name cards."
    }
   },
   {
@@ -7961,6 +8445,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Card about 570 x 100 px, round icon at its left third, name right of it."
      }
     }
+   },
+   "plain": {
+    "name": "Yellow card revealed by a white wipe",
+    "what": "A coloured card revealed by a white wipe.",
+    "goodFor": "Name cards."
    }
   },
   {
@@ -8126,6 +8615,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Bar about 570 x 50 px; the square sits 20 px above the bar centre before stretching."
      }
     }
+   },
+   "plain": {
+    "name": "White line that thickens into a name bar",
+    "what": "A thin line that grows into a name bar.",
+    "goodFor": "Clean name cards."
    }
   },
   {
@@ -8290,6 +8784,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Rule at x 135 runs the full block height; name two lines about 430 px wide starting x 220."
      }
     }
+   },
+   "plain": {
+    "name": "Big two-line name beside a thin yellow rule",
+    "what": "A big two-line name beside a thin rule.",
+    "goodFor": "Expert introductions."
    }
   },
   {
@@ -8467,6 +8966,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Name about 560 px wide, THIS IS above, DIRECTOR between dashes below."
      }
     }
+   },
+   "plain": {
+    "name": "Hand-drawn caps name with dashes",
+    "what": "A hand-drawn style name with small dashes.",
+    "goodFor": "Friendly, personal name cards."
    }
   },
   {
@@ -8633,6 +9137,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. RICHARD top left, JOHNSON offset right with the chevrons in front."
      }
     }
+   },
+   "plain": {
+    "name": "Chevrons leading into the surname",
+    "what": "Arrows leading into the surname.",
+    "goodFor": "Name cards with movement."
    }
   },
   {
@@ -8801,6 +9310,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Role and icons on the top line, condensed name below."
      }
     }
+   },
+   "plain": {
+    "name": "Tall condensed name with a small serif role",
+    "what": "A tall narrow name with a small serif role.",
+    "goodFor": "Premium name cards."
    }
   },
   {
@@ -8967,6 +9481,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. EMILY in its outline box top right, CLARK below left, chevrons pointing in."
      }
     }
+   },
+   "plain": {
+    "name": "Italic boxed name with chevrons both sides",
+    "what": "A slanted boxed name with arrows each side.",
+    "goodFor": "Sporty name cards."
    }
   },
   {
@@ -9132,6 +9651,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. Circle icon on top, MORGAN over outline BENNETT, tag below; block about 480 px wide."
      }
     }
+   },
+   "plain": {
+    "name": "Solid name over an outline surname",
+    "what": "A solid first name over an outlined surname.",
+    "goodFor": "Bold name cards."
    }
   },
   {
@@ -9299,6 +9823,11 @@
       "note": "Proposed lower-third placement, inside x 135-945, y 250-1500. ROBERT top, streak with spaced-caps role between, FOSTER below offset right."
      }
     }
+   },
+   "plain": {
+    "name": "Role on a light streak between two italic names",
+    "what": "The role on a light streak between two names.",
+    "goodFor": "Two-person introductions."
    }
   },
   {
@@ -9434,6 +9963,11 @@
       "note": "Proposed lower-third placement (no person in the pack preview): x 135 to 635, y 1300 to 1500, inside x 135-945, y 250-1500. Box size keeps the crop's aspect ratio."
      }
     }
+   },
+   "plain": {
+    "name": "Italic name with an outlined role pill",
+    "what": "A slanted name with the role in an outlined pill.",
+    "goodFor": "Name cards."
    }
   },
   {
@@ -9569,6 +10103,11 @@
       "note": "Proposed placement (no person in the pack preview): the lockup is symmetrical so it is centred, x 300 to 780, y 1298 to 1500, inside x 135-945, y 250-1500. Move left edge to x 135 for a standard left lower third."
      }
     }
+   },
+   "plain": {
+    "name": "Thin wide name between two rules",
+    "what": "A thin, wide name between two lines.",
+    "goodFor": "Elegant name cards."
    }
   },
   {
@@ -9703,6 +10242,11 @@
       "note": "Proposed lower-third placement (no person in the pack preview): x 135 to 655, y 1298 to 1500, inside x 135-945, y 250-1500. Box size keeps the crop's aspect ratio."
      }
     }
+   },
+   "plain": {
+    "name": "Name split by a small script word",
+    "what": "A name split by a small script word.",
+    "goodFor": "Stylish name cards."
    }
   },
   {
@@ -9855,6 +10399,11 @@
       "note": "Proposed lower-third placement (no person in the pack preview): x 135 to 635, y 1296 to 1500, inside x 135-945, y 250-1500. Box size keeps the crop's aspect ratio."
      }
     }
+   },
+   "plain": {
+    "name": "Outline first name, solid surname",
+    "what": "An outlined first name with a solid surname.",
+    "goodFor": "Bold name cards."
    }
   },
   {
@@ -10008,6 +10557,11 @@
       "note": "Proposed lower-third placement (no person in the pack preview): x 135 to 575, y 1290 to 1500, inside x 135-945, y 250-1500. Box size keeps the crop's aspect ratio."
      }
     }
+   },
+   "plain": {
+    "name": "Thin first name over a heavy surname",
+    "what": "A thin first name over a heavy surname.",
+    "goodFor": "Modern name cards."
    }
   },
   {
@@ -10144,6 +10698,11 @@
       "note": "Proposed lower-third placement (no person in the pack preview): x 135 to 665, y 1300 to 1500, inside x 135-945, y 250-1500. Box size keeps the crop's aspect ratio."
      }
     }
+   },
+   "plain": {
+    "name": "Heavy first name, light condensed surname",
+    "what": "A heavy first name with a light, narrow surname.",
+    "goodFor": "Modern name cards."
    }
   },
   {
@@ -10310,6 +10869,11 @@
       "note": "Box is the ring at frame 42 (centred on the face, about y 760) and sits inside x 135-945, y 250-1500; the pill sits on its upper right at x 628-900, y 512-568. The headline (x 80-992, y 208-432) crosses the left, right and top safe edges."
      }
     }
+   },
+   "plain": {
+    "name": "Ring around the head + tag pill",
+    "what": "A thin glowing ring around the head with a small tag.",
+    "goodFor": "Pointing out who is speaking."
    }
   },
   {
@@ -10406,6 +10970,11 @@
       "note": "Proposed vertical placement keeping the source aspect (about 4.1:1): x 135-815, y 1335-1500, inside the safe box. If the thin rule runs to the frame edge as in the source it crosses the right safe edge; stop it at x 945."
      }
     }
+   },
+   "plain": {
+    "name": "Big name lower third on footage",
+    "what": "A big name with a thin role line over the shot.",
+    "goodFor": "Expert introductions."
    }
   },
   {
@@ -10493,6 +11062,11 @@
       "note": "Coordinates on a 1080x1350 (4:5) frame. Headline x 112-975, y 137-562; circled note and arrow x 270-938, y 600-812; handle centred at y about 1237; the man at the desk sits about y 760-1075. Against the vertical safe rule the headline crosses the left and right edges (x 135 and 945) and the top (y 250)."
      }
     }
+   },
+   "plain": {
+    "name": "Serif mixed italic headline",
+    "what": "A serif headline with one phrase in italics.",
+    "goodFor": "Carousel covers."
    }
   },
   {
@@ -10598,6 +11172,11 @@
       "note": "Type block (Mental top y 610 to BREAK bottom y 1310) is inside x 135-945, y 250-1500, centred on frame centre. The small sparkles reach x 50 and x 990, outside the left and right safe edges. The rounded black film-gate border is about 20 px all round."
      }
     }
+   },
+   "plain": {
+    "name": "Script + bold yellow title mix",
+    "what": "A thin script word over a heavy coloured word.",
+    "goodFor": "Hook titles."
    }
   },
   {
@@ -10762,6 +11341,11 @@
       "note": "Caption block (x 180-900, y 940-1140) is inside x 135-945, y 250-1500. The viewfinder brackets sit about 80 px in from the frame edges (x 80 to 1000, y 140 to 1780), outside the safe box on all four sides by design."
      }
     }
+   },
+   "plain": {
+    "name": "Viewfinder frame",
+    "what": "A camera-style frame with a record dot.",
+    "goodFor": "Behind-the-scenes clips."
    }
   },
   {
@@ -10847,6 +11431,11 @@
       "note": "Coordinates on a 1080x1350 (4:5) frame; only hands are in shot. Headline x 105-900, y 112-337; underlined answer x 495-925, y 1080-1237; star emoji about x 800-890, y 660-760. Against the vertical safe rule the headline crosses the left edge (x 135) and the top (y 250)."
      }
     }
+   },
+   "plain": {
+    "name": "Lowercase serif caption",
+    "what": "A quiet lowercase serif line with lots of space.",
+    "goodFor": "Calm carousel slides."
    }
   },
   {
@@ -10980,6 +11569,11 @@
       "note": "Box measured on the widest word 'through' (x 290-780, y 330-450), centred about x 540; top of her head is about y 610. Inside x 135-945, y 250-1500."
      }
     }
+   },
+   "plain": {
+    "name": "Single-word captions",
+    "what": "One heavy word at a time near the face.",
+    "goodFor": "Fast, punchy clips."
    }
   },
   {
@@ -11128,6 +11722,11 @@
       "note": "Emoji top about y 1225 to the second line's bottom about y 1505, x 290-770. Crosses the bottom safe edge (y 1500) by about 5 px; lift it 10 px to clear."
      }
     }
+   },
+   "plain": {
+    "name": "Bold caps captions with emoji",
+    "what": "Bold caps captions with a coloured key word and an emoji.",
+    "goodFor": "High-energy social clips."
    }
   },
   {
@@ -11311,6 +11910,11 @@
       "note": "Right edge reaches x 964, about 19 px past 945, because the caption is centred in the right-hand AFTER card (card x 400 to 1030, y 424 to 1530); centre it on the frame or shrink 5 percent to fit."
      }
     }
+   },
+   "plain": {
+    "name": "Podcast clip in a card, serif number",
+    "what": "A framed podcast shot with a serif number.",
+    "goodFor": "Podcast clips with a stat."
    }
   },
   {
@@ -11459,6 +12063,11 @@
       "note": "Inside. Pill 1 x 216 to 864, y 1026 to 1150; pill 2 y 1212 to 1336, gap about 62 px."
      }
     }
+   },
+   "plain": {
+    "name": "Glass alert pills",
+    "what": "Small glass pills slide in and stack.",
+    "goodFor": "Listing points or warnings."
    }
   },
   {
@@ -11643,6 +12252,11 @@
       "note": "Hero stack FEW/BUILD. x 200 to 880, y 636 to 1010 is inside; the caption line sits at y 1530 to 1590 and crosses the bottom edge (1500); the opening chips spread x 40 to 1020, y 220 to 1380 and cross left, right and top."
      }
     }
+   },
+   "plain": {
+    "name": "Huge word + small caption line",
+    "what": "A huge word up top with a small caption under it.",
+    "goodFor": "One-idea moments."
    }
   },
   {
@@ -11904,6 +12518,11 @@
       "note": "Caption 'because / if you think about it' runs x 130 to 950, about 5 px past both side edges; 'finding COMMUNITY' on the orbit beat sits x 290 to 794, y 1160 to 1310 and is inside."
      }
     }
+   },
+   "plain": {
+    "name": "Orange key word under a small lead-in",
+    "what": "A coloured key phrase over a smaller white line.",
+    "goodFor": "Captions that stress the main point."
    }
   },
   {
@@ -11988,6 +12607,11 @@
       "note": "Measured on the 4:5 still placed full width on the 1080x1920 frame (y offset 285). Right edge x 950 and bottom y 1560 cross the safe box; scale the stack to 92 percent to fit."
      }
     }
+   },
+   "plain": {
+    "name": "Sliced-letter kinetic type",
+    "what": "Letters cut by diagonal slashes.",
+    "goodFor": "Bold title moments."
    }
   },
   {
@@ -12118,6 +12742,11 @@
       "note": "Mapped from the 4:5 frame placed full width (y offset 285). Left edge x 120 is 15 px past 135; right edge 940 is inside. Scale 97 percent to fit."
      }
     }
+   },
+   "plain": {
+    "name": "Condensed two-colour word stack",
+    "what": "Tall narrow words filling the frame in two colours.",
+    "goodFor": "Big statement moments."
    }
   },
   {
@@ -12247,6 +12876,11 @@
       "note": "Right edge x 950 is 5 px past 945; small line x 276 to 790, y 960 to 1000, hero x 136 to 950, y 980 to 1120."
      }
     }
+   },
+   "plain": {
+    "name": "Closing stack",
+    "what": "Small words and one big word to close the video.",
+    "goodFor": "Endings."
    }
   },
   {
@@ -12396,6 +13030,11 @@
       "note": "Rotated word runs x 870 to 976, past the right edge (945) by about 31 px, because it sits on the edit card's right edge (card x 460 to 1006, y 480 to 1450). Spans forehead to chest height beside the head, no overlap."
      }
     }
+   },
+   "plain": {
+    "name": "Raw vs edit, framed talking head",
+    "what": "The clip in a card with faint big type behind it.",
+    "goodFor": "Before-and-after edits."
    }
   },
   {
@@ -12529,6 +13168,11 @@
       "note": "Inside. White line y 1106 to 1150, PEDESTALS y 1160 to 1240, both centred."
      }
     }
+   },
+   "plain": {
+    "name": "Podcast caption, white + yellow",
+    "what": "A small white lead-in with a bold coloured line below.",
+    "goodFor": "Podcast clips."
    }
   },
   {
@@ -12663,6 +13307,11 @@
       "note": "Title letters start at x 125 and the ellipse at x 75, both past the left edge (135). Waveform crosses the full width at y 1425 to 1675 and caption boxes sit at y 1315 to 1370. Title sits left of and above the host's head (head y 800 to 1175, x 830 to 1080), no overlap."
      }
     }
+   },
+   "plain": {
+    "name": "Serif title stack with a circled word",
+    "what": "Stacked serif words with one crossed out.",
+    "goodFor": "Thumbnails and covers."
    }
   },
   {
@@ -12861,6 +13510,11 @@
       "note": "Inside. 'the most sales,' x 260 to 820, y 1050 to 1210; 'they were / just random / ideas.' x 230 to 854, y 1024 to 1260."
      }
     }
+   },
+   "plain": {
+    "name": "Mixed-size white captions",
+    "what": "Captions mixing upright and italic serif words.",
+    "goodFor": "Elegant talking clips."
    }
   },
   {
@@ -13044,6 +13698,11 @@
       "note": "Letters span x 50 to 1024 (one per strip), past both side edges; letters y 744 to 1064, labels y 1110 to 1180. Narrow the strip grid to x 135 to 945 for safe use."
      }
     }
+   },
+   "plain": {
+    "name": "Word spelled across video strips",
+    "what": "Giant letters with the video showing through them.",
+    "goodFor": "Openers and section changes."
    }
   },
   {
@@ -13123,6 +13782,11 @@
       "note": "Measured on the 16:9 still placed full width on 1080x1920 (band y 656 to 1264): headline x 108 to 972, y 1057 to 1136, dialogue lines to y 1203, crossing both side edges. For VIDPOD use, two short lines bottom centre inside x 135 to 945 at y about 1380 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Vintage yellow subtitles",
+    "what": "Classic film-style yellow subtitles.",
+    "goodFor": "Story and documentary clips."
    }
   },
   {
@@ -13137,7 +13801,13 @@
    "build": {
     "section": "SUB",
     "match": "SUB-02",
-    "recipe": "SUB-02 Word rise in one-word mode with a \"serif italic for starred words\" option."
+    "recipe": "SUB-02 Word rise in one-word mode with a \"serif italic for starred words\" option.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-02",
+    "renderer": "studio-looks.js R['cap-per-word-rise']",
+    "add": "SUB-02 Word rise in one-word mode with a \"serif italic for starred words\" option.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13202,6 +13872,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "One word at a time, centred, serif italic swap",
+    "what": "One or two small words at a time in the centre.",
+    "goodFor": "Emotional, slow moments."
    }
   },
   {
@@ -13216,7 +13891,11 @@
    "build": {
     "section": "SUB",
     "match": null,
-    "recipe": "New SUB style \"Bold caps\": Anton caps 90 px, gradient fill, 8 px black stroke, 2 to 3 words, centred at y 980, phrase cut."
+    "recipe": "New SUB style \"Bold caps\": Anton caps 90 px, gradient fill, 8 px black stroke, 2 to 3 words, centred at y 980, phrase cut.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New SUB style \"Bold caps\": Anton caps 90 px, gradient fill, 8 px black stroke, 2 to 3 words, centred at y 980, phrase cut.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13281,6 +13960,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Bold caps: lime gradient, black outline",
+    "what": "Heavy caps captions in bright colour with a thick outline.",
+    "goodFor": "High-energy social clips."
    }
   },
   {
@@ -13295,7 +13979,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-04",
-    "recipe": "HOOK-04 variant: outline box, caps, small."
+    "recipe": "HOOK-04 variant: outline box, caps, small.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-04",
+    "renderer": "studio-hooks.js R['hk-highlight-bars']",
+    "add": "HOOK-04 variant: outline box, caps, small.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13360,6 +14050,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Boxed topic label on the chest",
+    "what": "A small topic label in a box at the start.",
+    "goodFor": "Expert explainers."
    }
   },
   {
@@ -13374,7 +14069,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-04",
-    "recipe": "Same renderer as T13 Sticker, placed low (y 1460) and timed to 4 s."
+    "recipe": "Same renderer as T13 Sticker, placed low (y 1460) and timed to 4 s.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-04",
+    "renderer": "studio-hooks.js R['hk-highlight-bars']",
+    "add": "Same renderer as T13 Sticker, placed low (y 1460) and timed to 4 s.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13439,6 +14140,11 @@
       "note": "Bottom y 1601 passes the safe line by 100 px; build at y 1380."
      }
     }
+   },
+   "plain": {
+    "name": "\"This is your sign\" sticker over captions",
+    "what": "A 'this is your sign' sticker at the start.",
+    "goodFor": "Motivational clips."
    }
   },
   {
@@ -13453,7 +14159,11 @@
    "build": {
     "section": "TR",
     "match": null,
-    "recipe": "New TR \"Colour card\": flat accent card fills the frame (or the rounded frame) for 15 to 20 frames, small caps words append left aligned, slow 5 px upward drift, hard cut in and out."
+    "recipe": "New TR \"Colour card\": flat accent card fills the frame (or the rounded frame) for 15 to 20 frames, small caps words append left aligned, slow 5 px upward drift, hard cut in and out.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New TR \"Colour card\": flat accent card fills the frame (or the rounded frame) for 15 to 20 frames, small caps words append left aligned, slow 5 px upward drift, hard cut in and out.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13550,6 +14260,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Full colour title card with words typing on",
+    "what": "A full-colour card where words type on, then back to the speaker.",
+    "goodFor": "Section breaks."
    }
   },
   {
@@ -13564,7 +14279,11 @@
    "build": {
     "section": "NAME",
     "match": null,
-    "recipe": "New NAME \"Decode card\": cut-out portrait blur-to-sharp 10 frames, name text scrambles to final over 10 frames, role under."
+    "recipe": "New NAME \"Decode card\": cut-out portrait blur-to-sharp 10 frames, name text scrambles to final over 10 frames, role under.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New NAME \"Decode card\": cut-out portrait blur-to-sharp 10 frames, name text scrambles to final over 10 frames, role under.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13645,6 +14364,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Glitch photo name card",
+    "what": "A dark card where the guest's photo sharpens and the name decodes.",
+    "goodFor": "Guest introductions."
    }
   },
   {
@@ -13659,7 +14383,13 @@
    "build": {
     "section": "GFX",
     "match": "GFX-13",
-    "recipe": "GFX-13 progress bar turned vertical: bar scales up from 0, label card under it, value label above, footage blurs behind."
+    "recipe": "GFX-13 progress bar turned vertical: bar scales up from 0, label card under it, value label above, footage blurs behind.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "GFX-13",
+    "renderer": "studio-looks-2.js R['gfx-progress']",
+    "add": "GFX-13 progress bar turned vertical: bar scales up from 0, label card under it, value label above, footage blurs behind.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13772,6 +14502,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Growing bar comparison with a background blur",
+    "what": "The footage blurs and a bar grows to show a number.",
+    "goodFor": "Comparisons and results."
    }
   },
   {
@@ -13786,7 +14521,13 @@
    "build": {
     "section": "GFX",
     "match": null,
-    "recipe": "New GFX \"Headline tag\": dark box, 3 lines caps, one phrase in red, persistent over the lower panel."
+    "recipe": "New GFX \"Headline tag\": dark box, 3 lines caps, one phrase in red, persistent over the lower panel.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "GFX-11",
+    "renderer": "studio-looks-2.js R['gfx-quotecard']",
+    "add": "New GFX \"Headline tag\": dark box, 3 lines caps, one phrase in red, persistent over the lower panel.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13851,6 +14592,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "News-style headline tag on a photo",
+    "what": "A news-style headline tag over a photo.",
+    "goodFor": "News and current topics."
    }
   },
   {
@@ -13865,7 +14611,11 @@
    "build": {
     "section": "MOVE",
     "match": null,
-    "recipe": "New MOVE \"Square frame\": 980x980 frame, radius 24 px, centred, black outside; captions centred inside."
+    "recipe": "New MOVE \"Square frame\": 980x980 frame, radius 24 px, centred, black outside; captions centred inside.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New MOVE \"Square frame\": 980x980 frame, radius 24 px, centred, black outside; captions centred inside.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -13930,6 +14680,11 @@
       "note": "Captions overlap the chin here (face ends y 976)."
      }
     }
+   },
+   "plain": {
+    "name": "Rounded-square frame on black",
+    "what": "The clip in a rounded square on black.",
+    "goodFor": "Wide footage in a vertical video."
    }
   },
   {
@@ -13944,7 +14699,11 @@
    "build": {
     "section": "MOVE",
     "match": null,
-    "recipe": "New MOVE \"Letterbox\": 1080x608 frame centred at y 656, captions 2 lines 36 px centred at y 1400 in the black band."
+    "recipe": "New MOVE \"Letterbox\": 1080x608 frame centred at y 656, captions 2 lines 36 px centred at y 1400 in the black band.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New MOVE \"Letterbox\": 1080x608 frame centred at y 656, captions 2 lines 36 px centred at y 1400 in the black band.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14009,6 +14768,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "16:9 letterbox with captions in the black",
+    "what": "The wide shot in the middle with captions in the black below.",
+    "goodFor": "Wide podcast footage on phones."
    }
   },
   {
@@ -14023,7 +14787,11 @@
    "build": {
     "section": "MOVE",
     "match": null,
-    "recipe": "New MOVE \"Panel stack\": 2 to 3 rounded panels (radius 28 px, 16 px gaps) stacked, each its own clip, caption under."
+    "recipe": "New MOVE \"Panel stack\": 2 to 3 rounded panels (radius 28 px, 16 px gaps) stacked, each its own clip, caption under.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New MOVE \"Panel stack\": 2 to 3 rounded panels (radius 28 px, 16 px gaps) stacked, each its own clip, caption under.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14088,6 +14856,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Rounded photo panels stacked",
+    "what": "Two or three rounded photo panels stacked.",
+    "goodFor": "Showing several moments at once."
    }
   },
   {
@@ -14102,7 +14875,11 @@
    "build": {
     "section": "CAROUSEL",
     "match": null,
-    "recipe": "New CAROUSEL \"News post\": black slide, red pill label, Oswald caps headline, photo, body text."
+    "recipe": "New CAROUSEL \"News post\": black slide, red pill label, Oswald caps headline, photo, body text.",
+    "path": "hyperframes",
+    "engine": "HyperFrames composition",
+    "add": "New CAROUSEL \"News post\": black slide, red pill label, Oswald caps headline, photo, body text.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14148,6 +14925,11 @@
       "note": "Carousel slide, 4:5."
      }
     }
+   },
+   "plain": {
+    "name": "Breaking-news headline carousel",
+    "what": "A carousel that opens like a breaking-news post.",
+    "goodFor": "Timely carousels."
    }
   },
   {
@@ -14162,7 +14944,11 @@
    "build": {
     "section": "CAROUSEL",
     "match": null,
-    "recipe": "New CAROUSEL \"Serif joke\": photo with clear wall, serif setup line small, punchline larger, top left."
+    "recipe": "New CAROUSEL \"Serif joke\": photo with clear wall, serif setup line small, punchline larger, top left.",
+    "path": "hyperframes",
+    "engine": "HyperFrames composition",
+    "add": "New CAROUSEL \"Serif joke\": photo with clear wall, serif setup line small, punchline larger, top left.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14208,6 +14994,11 @@
       "note": "Carousel slide, 4:5; left edge x 80."
      }
     }
+   },
+   "plain": {
+    "name": "Serif joke caption on a staged photo, swipe series",
+    "what": "A staged photo with a two-part joke in serif.",
+    "goodFor": "Fun studio carousels."
    }
   },
   {
@@ -14224,7 +15015,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-02",
-    "recipe": "HOOK-02 Mixed scale with a glow layer: small white line over one big glowing accent word; drops in blurred from above and settles in about 5 frames."
+    "recipe": "HOOK-02 Mixed scale with a glow layer: small white line over one big glowing accent word; drops in blurred from above and settles in about 5 frames.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "HOOK-02 Mixed scale with a glow layer: small white line over one big glowing accent word; drops in blurred from above and settles in about 5 frames.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14318,6 +15115,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Neon stacked title: small white line over a glowing magenta caps word",
+    "what": "A glowing coloured title word under a small white line.",
+    "goodFor": "Bold openers."
    }
   },
   {
@@ -14334,7 +15136,14 @@
    "build": {
     "section": "GFX",
     "match": null,
-    "recipe": "New GFX \"Keyword pill\": rounded pill, small line + big keyword in quotes, persistent; a 4-frame horizontal motion-blur wobble every 2 s."
+    "recipe": "New GFX \"Keyword pill\": rounded pill, small line + big keyword in quotes, persistent; a 4-frame horizontal motion-blur wobble every 2 s.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "registry": [
+     "motion-blur"
+    ],
+    "add": "New GFX \"Keyword pill\": rounded pill, small line + big keyword in quotes, persistent; a 4-frame horizontal motion-blur wobble every 2 s.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14412,6 +15221,11 @@
       "note": "Pill 856 px wide passes the safe sides; build at 760 px."
      }
     }
+   },
+   "plain": {
+    "name": "Wordmark top + pulsing comment-keyword pill",
+    "what": "A logo up top and a small pill asking people to comment.",
+    "goodFor": "Posts that ask for comments."
    }
   },
   {
@@ -14428,7 +15242,16 @@
    "build": {
     "section": "SUB",
     "match": "SUB-06",
-    "recipe": "SUB-06 Colour pop in \"Stack\" mode: one word per line, lines stack downward, key word in accent with bloom; new phrase clears the stack."
+    "recipe": "SUB-06 Colour pop in \"Stack\" mode: one word per line, lines stack downward, key word in accent with bloom; new phrase clears the stack.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-06",
+    "renderer": "studio-looks.js R['cap-colour-pop']",
+    "registry": [
+     "text-stagger"
+    ],
+    "add": "SUB-06 Colour pop in \"Stack\" mode: one word per line, lines stack downward, key word in accent with bloom; new phrase clears the stack.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14554,6 +15377,11 @@
       "note": "Stack overlaps the chin and neck."
      }
     }
+   },
+   "plain": {
+    "name": "Glowing word stack: words drop in one under another, key word in yellow bloom",
+    "what": "Words drop in one under another, the key word glowing.",
+    "goodFor": "Energetic talking clips."
    }
   },
   {
@@ -14570,7 +15398,13 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "Font pair HOOK (see OP02) preset"
+    "recipe": "Font pair HOOK (see OP02) preset",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "Font pair HOOK (see OP02) preset",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14632,6 +15466,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Text in a selection box \"Text selected\"",
+    "what": "Text inside a selection box, like an editing app.",
+    "goodFor": "Behind-the-edit content."
    }
   },
   {
@@ -14648,7 +15487,13 @@
    "build": {
     "section": "HOOK",
     "match": "HOOK-02",
-    "recipe": "HOOK-02 preset (two-tone)"
+    "recipe": "HOOK-02 preset (two-tone)",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "HOOK-02",
+    "renderer": "studio-hooks.js R['hk-quote-box']",
+    "add": "HOOK-02 preset (two-tone)",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "maybe",
@@ -14710,6 +15555,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Stacked glow \"aesthetic / striking\": white over red",
+    "what": "Two stacked glowing words, white over red.",
+    "goodFor": "Bold openers."
    }
   },
   {
@@ -14724,7 +15574,13 @@
    "build": {
     "section": "SUB",
     "match": "SUB-04",
-    "recipe": "SUB-04 Karaoke dim inside SUB-07 Soft pill."
+    "recipe": "SUB-04 Karaoke dim inside SUB-07 Soft pill.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "option": "SUB-04",
+    "renderer": "studio-looks.js R['cap-karaoke']",
+    "add": "SUB-04 Karaoke dim inside SUB-07 Soft pill.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "skip",
@@ -14789,6 +15645,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Karaoke pill captions under a 3D headline",
+    "what": "Small dark pill captions with the spoken word bright.",
+    "goodFor": "Explainers with a headline up top."
    }
   },
   {
@@ -14805,7 +15666,11 @@
    "build": {
     "section": "GFX",
     "match": null,
-    "recipe": "New GFX \"Subscribe click\": button pops in, cursor slides to it, click, state swap to grey."
+    "recipe": "New GFX \"Subscribe click\": button pops in, cursor slides to it, click, state swap to grey.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "New GFX \"Subscribe click\": button pops in, cursor slides to it, click, state swap to grey.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "skip",
@@ -14883,6 +15748,11 @@
       "note": ""
      }
     }
+   },
+   "plain": {
+    "name": "Subscribe button with a cursor click",
+    "what": "A subscribe button that gets clicked.",
+    "goodFor": "Channel growth moments."
    }
   },
   {
@@ -14899,7 +15769,11 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "No build."
+    "recipe": "No build.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "No build.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "skip",
@@ -14961,6 +15835,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Chrome italic \"Futurist / retro\"",
+    "what": "Shiny chrome italic words.",
+    "goodFor": "Retro-style openers."
    }
   },
   {
@@ -14977,7 +15856,11 @@
    "build": {
     "section": "HOOK",
     "match": null,
-    "recipe": "No build."
+    "recipe": "No build.",
+    "path": "rebuild",
+    "engine": "studio engine",
+    "add": "No build.",
+    "derived": "tools/audit_recipes.py --fix (7 Nov 2026): engine, base option and registry read from the card's own recipe text"
    },
    "built": null,
    "claudeVerdict": "skip",
@@ -15039,6 +15922,11 @@
       "note": "Placement is ours, not the pack's: centred on the chest for verticals."
      }
     }
+   },
+   "plain": {
+    "name": "Glitch \"Error\": red outline text with a strike",
+    "what": "A glitchy red 'error' word with a strike.",
+    "goodFor": "Tech or 'mistake' moments."
    }
   },
   {
@@ -15150,6 +16038,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Hook plate on frame 1: two caps lines on a black box, one word red",
+    "what": "The opening line as a bold headline from the first frame.",
+    "goodFor": "The first second of a podcast clip."
    }
   },
   {
@@ -15293,6 +16186,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Hairline split open: guest and host side by side",
+    "what": "Both people side by side, split by a thin line.",
+    "goodFor": "Podcast clip openers."
    }
   },
   {
@@ -15518,6 +16416,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Chest stack: words pop on as said, one huge key word, mixed sans and serif",
+    "what": "A short word stack on the chest, one word big.",
+    "goodFor": "Talking shots in podcast clips."
    }
   },
   {
@@ -15692,6 +16595,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Host line in gold, caps stack with an italic last word",
+    "what": "Everything the host says is in one warm colour.",
+    "goodFor": "Podcast clips with a host and guest."
    }
   },
   {
@@ -15840,6 +16748,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Evidence-board name card: pinned photo, torn name strip, red tape labels",
+    "what": "The guest's photo pinned to a board with their credentials.",
+    "goodFor": "Guest introductions."
    }
   },
   {
@@ -16020,6 +16933,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Glow name out of a whip pan, serif credential types on",
+    "what": "The camera whips away, the name glows in, then whips back.",
+    "goodFor": "Guest introductions."
    }
   },
   {
@@ -16217,6 +17135,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Newspaper collage on a country, highlighter on the key words",
+    "what": "A paper collage map with key words highlighted.",
+    "goodFor": "Explaining places and events."
    }
   },
   {
@@ -16409,6 +17332,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Cut-out portrait row on a red field, focus moves face to face",
+    "what": "A row of cut-out portraits, focus moving face to face.",
+    "goodFor": "Talking about several people."
    }
   },
   {
@@ -16553,6 +17481,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Territory map with a cut-out; the colour drains away on the word",
+    "what": "A coloured map where the colour drains away on the key word.",
+    "goodFor": "Explaining change over time."
    }
   },
   {
@@ -16727,6 +17660,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Location and date stamp typed over archive, colour flash in",
+    "what": "A place and date types on over old footage.",
+    "goodFor": "Setting the scene in a story."
    }
   },
   {
@@ -16871,6 +17809,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "'Reported call' quote card: cut-out speaker on navy, quote and waveform",
+    "what": "A quote card with a cut-out photo of who said it.",
+    "goodFor": "Quoting someone not in the room."
    }
   },
   {
@@ -17015,6 +17958,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Prop floats in front of the blurred speaker",
+    "what": "A printed prop floats in front of the blurred speaker.",
+    "goodFor": "Reading out a headline."
    }
   },
   {
@@ -17155,6 +18103,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Cream bloom flash out of an illustrated world",
+    "what": "A soft cream flash from a graphic back to the speaker.",
+    "goodFor": "Gentle transitions."
    }
   },
   {
@@ -17266,6 +18219,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Watch Now end card over the last cuts of the conversation",
+    "what": "A small 'Watch now' card over the last seconds.",
+    "goodFor": "Sending people to the full episode."
    }
   },
   {
@@ -17426,6 +18384,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Paper-craft scene with a price tag that changes on the word",
+    "what": "A paper-craft scene where a price tag changes on the word.",
+    "goodFor": "Prices and money moments."
    }
   },
   {
@@ -17543,6 +18506,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Stair-stack build: words pop as spoken, one huge key word",
+    "what": "Words pop on as said, one word huge.",
+    "goodFor": "Trailers."
    }
   },
   {
@@ -17645,6 +18613,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Blur resolve: the phrase sharpens line by line",
+    "what": "The phrase sharpens line by line.",
+    "goodFor": "Trailers."
    }
   },
   {
@@ -17756,6 +18729,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Key-word colour: only the key word takes a colour",
+    "what": "Only the key word takes a colour.",
+    "goodFor": "Trailers and podcast clips."
    }
   },
   {
@@ -17857,6 +18835,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Serif heart word inside a sans phrase",
+    "what": "One heartfelt word in serif inside a plain phrase.",
+    "goodFor": "Emotional trailer moments."
    }
   },
   {
@@ -17967,6 +18950,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Host in gold: every host line in one warm colour",
+    "what": "Every host line in one warm colour.",
+    "goodFor": "Trailers with a host and guest."
    }
   },
   {
@@ -18081,6 +19069,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Italic slam: one heavy italic word lands hard",
+    "what": "One heavy slanted word lands hard.",
+    "goodFor": "Trailer punchlines."
    }
   },
   {
@@ -18199,6 +19192,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Stat build: the number is the biggest thing on screen",
+    "what": "The number is the biggest thing on screen.",
+    "goodFor": "Results in a trailer."
    }
   },
   {
@@ -18301,6 +19299,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Corner list number held for the whole list",
+    "what": "A list number held in the corner.",
+    "goodFor": "List moments in trailers."
    }
   },
   {
@@ -18432,6 +19435,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Dossier card: scrapbook on a desk",
+    "what": "A scrapbook card on a desk introduces the guest.",
+    "goodFor": "Trailer guest introductions."
    }
   },
   {
@@ -18534,6 +19542,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Lightbox plate: portrait in a glowing frame, black name plate",
+    "what": "A portrait in a glowing frame with a name plate.",
+    "goodFor": "Trailer guest introductions."
    }
   },
   {
@@ -18652,6 +19665,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Name over montage: huge name over a 3-panel montage",
+    "what": "A huge name over three moving panels.",
+    "goodFor": "Trailer openers."
    }
   },
   {
@@ -18762,6 +19780,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "B-roll subtitles: small white two lines, host in gold",
+    "what": "Small white two-line captions over footage.",
+    "goodFor": "Trailers."
    }
   },
   {
@@ -18863,6 +19886,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Hairline split: reaction one side, insert the other",
+    "what": "A reaction on one side, footage on the other.",
+    "goodFor": "Trailer moments."
    }
   },
   {
@@ -18992,6 +20020,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Framed archive: headlines on a surface, vignette, drift",
+    "what": "Headlines laid on a surface with a slow drift.",
+    "goodFor": "Setting the scene in a trailer."
    }
   },
   {
@@ -19110,6 +20143,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Redaction tease: bleep, blurred mouth, gold asterisks",
+    "what": "A bleep, a blurred mouth and asterisks to tease a line.",
+    "goodFor": "Teasing a big reveal."
    }
   },
   {
@@ -19221,6 +20259,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Slow push on every talking shot",
+    "what": "A slow push in on every talking shot.",
+    "goodFor": "Trailers and podcast clips."
    }
   },
   {
@@ -19348,6 +20391,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Ghost line: the last line stays at 30 %",
+    "what": "The last line stays faintly on screen.",
+    "goodFor": "Trailer pacing."
    }
   },
   {
@@ -19474,6 +20522,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Dip and flash at the turn",
+    "what": "A quick dip and flash at the turning point.",
+    "goodFor": "Trailer turning points."
    }
   },
   {
@@ -19586,6 +20639,11 @@
       "note": "Inside x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Show ident / sign-off lockup",
+    "what": "The show's sign-off with its logo.",
+    "goodFor": "Trailer endings."
    }
   },
   {
@@ -19716,6 +20774,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Paper cut-out sticker with ransom-note word",
+    "what": "A paper sticker with a cut-out letter word.",
+    "goodFor": "Fun one-off social posts."
    }
   },
   {
@@ -19830,6 +20893,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Magazine cover word behind the head",
+    "what": "One huge word behind the head, like a magazine cover.",
+    "goodFor": "Case study and podcast openers."
    }
   },
   {
@@ -19928,6 +20996,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Wall of video thumbnails pops in behind the speaker",
+    "what": "A wall of video tiles pops in behind the speaker.",
+    "goodFor": "Showreels and 'our work' moments."
    }
   },
   {
@@ -20026,6 +21099,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Punch-in zoom with zoom blur on key words",
+    "what": "Quick zooms in on the words that matter.",
+    "goodFor": "Talking clips that need energy."
    }
   },
   {
@@ -20140,6 +21218,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Boiling chalk outline and doodles round the speaker",
+    "what": "Chalk-style doodles around the speaker.",
+    "goodFor": "Playful one-off moments."
    }
   },
   {
@@ -20254,6 +21337,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Line chart draws behind the head and spikes up",
+    "what": "A line chart climbs behind the speaker.",
+    "goodFor": "Growth and results moments."
    }
   },
   {
@@ -20368,6 +21456,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "3D glass word on the wall behind the head",
+    "what": "A clear glass word on the wall behind the head.",
+    "goodFor": "Premium titles, once per video."
    }
   },
   {
@@ -20466,6 +21559,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Cards orbit round the speaker in 3D",
+    "what": "Cards orbit around the speaker.",
+    "goodFor": "Busy, playful moments."
    }
   },
   {
@@ -20580,6 +21678,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Pull back to reveal the video rendering in an editor",
+    "what": "Pulls back to show the video being edited.",
+    "goodFor": "Behind-the-scenes content."
    }
   },
   {
@@ -20678,6 +21781,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Floating phone beside the head plays an app chat",
+    "what": "A floating phone beside the speaker shows an app.",
+    "goodFor": "Talking about an app or booking."
    }
   },
   {
@@ -20776,6 +21884,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Dolly zoom: room pushes in, speaker stays still",
+    "what": "The room pushes in while the speaker stays still.",
+    "goodFor": "Big reveal lines."
    }
   },
   {
@@ -20890,6 +22003,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Headline and tweet cards pin to the wall behind the head",
+    "what": "Headlines and posts pin up on the wall behind.",
+    "goodFor": "News and 'everyone is talking about' moments."
    }
   },
   {
@@ -20988,6 +22106,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Shot shrinks into a phone window, speaker breaks out",
+    "what": "The shot shrinks into a phone and the speaker breaks out.",
+    "goodFor": "Social-style hooks."
    }
   },
   {
@@ -21102,6 +22225,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Zoom-through cut that hides a jump cut",
+    "what": "Rushes into the shot and bursts out of the next.",
+    "goodFor": "Hiding a jump cut."
    }
   },
   {
@@ -21200,6 +22328,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Speaker cut out onto a new background",
+    "what": "The speaker on a new background.",
+    "goodFor": "Replacing a messy room."
    }
   },
   {
@@ -21298,6 +22431,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "App UI fills the top, clips drop in, command types",
+    "what": "An app screen fills the top while clips drop in.",
+    "goodFor": "Software promos."
    }
   },
   {
@@ -21428,6 +22566,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Frosted checklist card types and ticks steps as spoken",
+    "what": "Steps tick off on a frosted card as they are said.",
+    "goodFor": "Steps and recaps."
    }
   },
   {
@@ -21542,6 +22685,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Liquid-glass stat card with a climbing line",
+    "what": "A frosted card counts up a number with a rising line.",
+    "goodFor": "Results and numbers."
    }
   },
   {
@@ -21656,6 +22804,11 @@
       "note": "Studio safe area x 135 to 945, y 250 to 1500."
      }
     }
+   },
+   "plain": {
+    "name": "Before/after stat cards beside the head, push-in on the payoff",
+    "what": "Before and after numbers, then a push in on the result.",
+    "goodFor": "Case study results."
    }
   }
  ]

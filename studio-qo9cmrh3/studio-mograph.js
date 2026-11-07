@@ -566,8 +566,9 @@
     inner.appendChild(backdrop);
     var video = null;
     if (clock !== "loop") {
-      video = el("video"); video.muted = true; video.playsInline = true; video.setAttribute("playsinline", ""); video.preload = "metadata";
-      video.src = ctx.root + ctx.base.video; if (ctx.base.poster) video.poster = ctx.root + ctx.base.poster;
+      // the file loads only while this demo plays (phones: one video at a time); until then the poster shows
+      video = el("video"); video.muted = true; video.playsInline = true; video.setAttribute("playsinline", ""); video.preload = "none";
+      video.dataset.src = ctx.root + ctx.base.video; if (ctx.base.poster) video.poster = ctx.root + ctx.base.poster;
       inner.appendChild(video);
     } else { inner.style.background = ctx.sk.ground; }
     inner.appendChild(under); inner.appendChild(over);
@@ -578,12 +579,19 @@
       screen: screen, inner: inner, video: video, backdrop: backdrop, under: under, over: over, fit: fit,
       // a renderer may move the clip into its own element (the board puts it in a taped photo)
       adopt: function (parent) { if (video) { video.style.zIndex = ""; parent.appendChild(video); } },
+      ensure: function () { if (video && !video.getAttribute("src")) video.src = video.dataset.src; },
+      release: function () { if (video) { video.pause(); if (video.getAttribute("src")) { video.removeAttribute("src"); video.load(); } } },
       destroy: function () { if (ro) ro.disconnect(); if (video) { video.pause(); video.removeAttribute("src"); video.load(); } }
     };
   }
   function Player(ctx, host, renderer, seg, clock, posterT) {
     var P = { playing: false, built: false, tls: [], seg: seg, clock: clock, loop: seg[1] - seg[0], t0: 0, at: posterT, onTime: null };
     var stage = makeStage(host, ctx, clock); ctx.stage = stage; P.stage = stage;
+    if (stage.video) {
+      // another video starting (the studio's one-video rule) or this demo leaving the screen: stop and let go of the file
+      stage.video.vpRelease = function () { if (P.playing) P.pause(); stage.release(); };
+      if (typeof IntersectionObserver === "function") new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) stage.video.vpRelease(); }); }).observe(stage.screen);
+    }
     function build() {
       if (P.built) return; P.built = true;
       var fam = [ctx.sk.display, ctx.sk.body].map(function (f) { return ctx.sk.displayW + " 80px \"" + f + "\""; }).concat(["800 80px \"" + ctx.sk.body + "\""]);
@@ -617,7 +625,7 @@
       Promise.resolve(build()).then(function () {
         P.playing = true; stage.screen.classList.add("playing");
         if (P.clock === "loop") P.t0 = performance.now() / 1000 - P.at;
-        else { var t = stage.video.currentTime; if (t < P.seg[0] || t >= P.seg[1] - 0.05) stage.video.currentTime = P.seg[0]; stage.video.play().catch(function () {}); }
+        else { var fresh = !stage.video.getAttribute("src"); stage.ensure(); if (fresh) { try { stage.video.currentTime = P.at; } catch (e) {} } var t = fresh ? P.at : stage.video.currentTime; if (t < P.seg[0] || t >= P.seg[1] - 0.05) stage.video.currentTime = P.seg[0]; stage.video.play().catch(function () {}); }
         if (P.onState) P.onState(); kick();
       });
     };

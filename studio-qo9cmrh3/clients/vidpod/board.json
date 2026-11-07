@@ -6196,5 +6196,192 @@
     }
    }
   }
- ]
+ ],
+ "lookbook": {
+  "note": "Client lookbook (lookbook.html): 3 or 4 curated looks per section, chosen by VIDPOD. Edit here, then python3 tools/lookbook_make.py <client>, then push. Runbook: LOOKBOOK.md.",
+  "intro": "Here are a few looks for your videos. Tap the ones you like.",
+  "subtitles": [
+   {
+    "code": "SUB-03",
+    "good": "Good for punchy tips straight to camera."
+   },
+   {
+    "code": "SUB-01",
+    "good": "Good for calm, longer answers."
+   },
+   {
+    "code": "SUB-05",
+    "good": "Good for a premium, magazine feel."
+   },
+   {
+    "code": "SUB-07",
+    "good": "Good for busy backgrounds. Every word stays readable."
+   }
+  ],
+  "hook": [
+   {
+    "code": "HOOK-01",
+    "good": "Good for one big topic word in the first second."
+   },
+   {
+    "code": "HOOK-04",
+    "good": "Good for a two-line question or claim."
+   },
+   {
+    "code": "HOOK-02",
+    "good": "Good for opening on a strong quote."
+   }
+  ],
+  "name": [
+   {
+    "code": "NAME-01",
+    "good": "Good for any footage. Calm and clear."
+   },
+   {
+    "code": "NAME-03",
+    "good": "Good for bright footage."
+   },
+   {
+    "code": "NAME-04",
+    "good": "Good for a light look with no box."
+   }
+  ],
+  "graphics": [
+   {
+    "code": "GFX-14",
+    "good": "Good for a result or a number you say."
+   },
+   {
+    "code": "GFX-15",
+    "good": "Good for a before and after."
+   },
+   {
+    "code": "GFX-07",
+    "good": "Good for three quick points."
+   },
+   {
+    "code": "GFX-11",
+    "good": "Good for a line worth keeping."
+   }
+  ],
+  "logo": [
+   {
+    "code": "LOGO-01",
+    "good": "Good for an upbeat finish."
+   },
+   {
+    "code": "LOGO-07",
+    "good": "Good for a calm, classy finish."
+   },
+   {
+    "code": "LOGO-10",
+    "good": "Good for a crafted, hand-made feel."
+   }
+  ],
+  "effects": [
+   {
+    "ref": "L01",
+    "name": "Paper cut-out",
+    "good": "Good for a playful, scrapbook opener."
+   },
+   {
+    "ref": "L02",
+    "name": "Cover word behind you",
+    "good": "Good for naming the topic like a magazine cover."
+   },
+   {
+    "ref": "L03",
+    "name": "Wall of clips",
+    "good": "Good for showing off a body of work behind you."
+   },
+   {
+    "ref": "L04",
+    "name": "Punch-in zoom",
+    "good": "Good for landing the words that matter."
+   },
+   {
+    "ref": "L05",
+    "name": "Sketch outline",
+    "good": "Good for a hand-drawn, fun moment."
+   },
+   {
+    "ref": "L06",
+    "name": "Growth line chart",
+    "good": "Good for growth, numbers and results."
+   },
+   {
+    "ref": "L07",
+    "name": "Glass word behind you",
+    "good": "Good for one premium title word."
+   },
+   {
+    "ref": "L08",
+    "name": "Orbiting cards",
+    "good": "Good for a list of things you have made or done."
+   },
+   {
+    "ref": "L09",
+    "name": "Pull-back reveal",
+    "good": "Good for a behind-the-scenes reveal."
+   },
+   {
+    "ref": "L10",
+    "name": "Phone beside you",
+    "good": "Good for showing an app or a post."
+   },
+   {
+    "ref": "L11",
+    "name": "Dolly zoom",
+    "good": "Good for a turn in the story."
+   },
+   {
+    "ref": "L12",
+    "name": "News wall",
+    "good": "Good for when everyone is talking about it."
+   },
+   {
+    "ref": "L13",
+    "name": "Frame pop-out",
+    "good": "Good for breaking out of the frame on a big line."
+   },
+   {
+    "ref": "L14",
+    "name": "Zoom-through cut",
+    "good": "Good for hiding a jump cut with energy."
+   },
+   {
+    "ref": "L15",
+    "name": "New background",
+    "good": "Good for putting you somewhere new."
+   },
+   {
+    "ref": "L16",
+    "name": "App world",
+    "good": "Good for walking through a tool or a process."
+   },
+   {
+    "ref": "L17",
+    "name": "Ticking checklist",
+    "good": "Good for steps or a quick recap."
+   }
+  ],
+  "wall": [
+   "SUB-04",
+   "SUB-06",
+   "SUB-08",
+   "HOOK-03",
+   "HOOK-05",
+   "HOOK-06",
+   "NAME-02",
+   "NAME-05",
+   "NAME-06",
+   "GFX-01",
+   "GFX-03",
+   "GFX-09",
+   "GFX-12",
+   "GFX-16",
+   "GFX-18",
+   "LOGO-09"
+  ]
+ }
 }

@@ -4518,5 +4518,150 @@
    "colour": "white",
    "case": "lower"
   }
+ },
+ "lookbook": {
+  "note": "Client lookbook (lookbook.html): 3 or 4 curated looks per section, chosen by VIDPOD. Edit here, then python3 tools/lookbook_make.py <client>, then push. Runbook: LOOKBOOK.md.",
+  "intro": "Here are a few looks for your videos. Tap the ones you like.",
+  "subtitles": [
+   {
+    "code": "SUB-01",
+    "good": "Good for calm, considered answers."
+   },
+   {
+    "code": "SUB-02",
+    "good": "Good for a soft, premium feel."
+   },
+   {
+    "code": "SUB-07",
+    "good": "Good for bright studio shots. Every word stays readable."
+   },
+   {
+    "code": "SUB-05",
+    "good": "Good for a touch of your script font on the key word."
+   }
+  ],
+  "hook": [
+   {
+    "code": "HOOK-05",
+    "good": "Good for an elegant opening line."
+   },
+   {
+    "code": "HOOK-02",
+    "good": "Good for opening on a member's or owner's quote."
+   },
+   {
+    "code": "HOOK-04",
+    "good": "Good for a clear two-line claim."
+   }
+  ],
+  "name": [
+   {
+    "code": "NAME-02",
+    "good": "Good for a friendly, modern intro."
+   },
+   {
+    "code": "NAME-01",
+    "good": "Good for any footage. Calm and clear."
+   },
+   {
+    "code": "NAME-04",
+    "good": "Good for a light look with no box."
+   }
+  ],
+  "graphics": [
+   {
+    "code": "GFX-14",
+    "ref": "L18",
+    "name": "Glass stat card",
+    "good": "Good for member numbers and results.",
+    "src": "lookbook-src/atpilates/L18.mp4"
+   },
+   {
+    "code": "GFX-03",
+    "good": "Good for a quote in your arch shape."
+   },
+   {
+    "code": "GFX-11",
+    "good": "Good for a line worth keeping."
+   }
+  ],
+  "logo": [
+   {
+    "code": "LOGO-07",
+    "good": "Good for a calm, classy finish."
+   },
+   {
+    "code": "LOGO-08",
+    "good": "Good for a soft focus finish."
+   },
+   {
+    "code": "LOGO-11",
+    "good": "Good for a smooth reveal."
+   }
+  ],
+  "effects": [
+   {
+    "ref": "L04",
+    "name": "Punch-in zoom",
+    "good": "Good for landing the words that matter.",
+    "src": "lookbook-src/atpilates/L04.mp4"
+   },
+   {
+    "ref": "L14",
+    "name": "Zoom-through cut",
+    "good": "Good for joining two takes smoothly.",
+    "src": "lookbook-src/atpilates/L14.mp4"
+   },
+   {
+    "ref": "L07",
+    "name": "Glass word behind you",
+    "good": "Good for one premium title word.",
+    "src": "lookbook-src/atpilates/L07.mp4"
+   },
+   {
+    "ref": "L19",
+    "name": "Before and after stat cards",
+    "good": "Good for a goal and where you got to.",
+    "src": "lookbook-src/atpilates/L19.mp4",
+    "window": [
+     1.2,
+     5.1
+    ]
+   },
+   {
+    "ref": "L17",
+    "name": "Ticking checklist",
+    "good": "Good for reasons, steps or a quick recap.",
+    "src": "lookbook-src/atpilates/L17.mp4",
+    "window": [
+     1.9,
+     6.3
+    ]
+   },
+   {
+    "ref": "L15",
+    "name": "New background",
+    "good": "Good for a clean, on-brand backdrop behind you.",
+    "src": "lookbook-src/atpilates/L15.mp4"
+   }
+  ],
+  "wall": [
+   "SUB-03",
+   "SUB-04",
+   "SUB-06",
+   "SUB-08",
+   "HOOK-01",
+   "HOOK-03",
+   "HOOK-06",
+   "NAME-03",
+   "NAME-05",
+   "NAME-06",
+   "GFX-01",
+   "GFX-02",
+   "GFX-07",
+   "GFX-09",
+   "GFX-12",
+   "LOGO-01"
+  ]
  }
 }

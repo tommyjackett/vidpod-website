@@ -55,6 +55,25 @@
   var backdrop = document.getElementById("backdrop");
   var scale = 0.25, live = null, R = null;
   var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* phones (iOS Safari kills tabs that hold too much video and GPU memory): LITE = one video decoding at a time, small
+     loops, studio footage as a still, slower close-up. Desktop keeps the richer preview. */
+  var LITE = (window.matchMedia && matchMedia("(max-width: 820px), (pointer: coarse)").matches) || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || "");
+  /* one video at a time: when a video starts, every other video on the page pauses and lets go of its file
+     (src removed + load()), except the main clip's own cut-out matte, which plays in step with it */
+  function releaseVideo(v) { try { if (v.vpRelease) { v.vpRelease(); return; } v.pause(); if (v.getAttribute("src")) { v.removeAttribute("src"); v.load(); } } catch (e) {} }
+  function followsMain(o) { return o === depthVid || studioRegs.some(function (r) { return r.el === o; }); }
+  document.addEventListener("play", function (e) {
+    var v = e.target; if (!v || v.tagName !== "VIDEO" || followsMain(v)) return;
+    Array.prototype.forEach.call(document.querySelectorAll("video"), function (o) {
+      if (o === v || followsMain(o)) return;   // the matte and studio layers follow the main clip's clock
+      if (live && o === live.pre) { if (v !== video && !LC.paused) { setClock(clockT(), false); setPlayIcon(); } try { o.pause(); } catch (x) {} return; }   // a finished effect pauses (Play brings it back)
+      if (o === video) { try { o.pause(); } catch (x) {} return; }          // the main clip pauses (Play brings it back)
+      releaseVideo(o);
+    });
+  }, true);
+  // the main clip lets go of its file while a finished effect plays in its place, and picks it up again after
+  function releaseMain() { try { video.pause(); if (video.getAttribute("src")) { video.removeAttribute("src"); video.load(); } } catch (e) {} }
+  function ensureMain() { if (B && B.base && B.base.video && !video.getAttribute("src")) { video.src = B.base.video; } }
 
   function $(id) { return document.getElementById(id); }
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
@@ -160,11 +179,11 @@
       },
       studio: function (parent, css) {
         var e;
-        if (stage.card) { e = el("img"); e.src = B.base.studio.poster; e.alt = ""; }
+        if (stage.card || (LITE && B.base.studio.poster)) { e = el("img"); e.src = B.base.studio.poster; e.alt = ""; }   // phones: a still, not a second video
         else { e = el("video"); e.muted = true; e.playsInline = true; e.setAttribute("playsinline", ""); e.preload = "auto"; e.src = B.base.studio.video; e.loop = true; }
         e.style.cssText = "position:absolute;object-fit:cover;display:block;" + (css || "");
         parent.appendChild(e);
-        return { el: e, from: function (t0) { if (!stage.card) studioRegs.push({ el: e, t0: t0 }); } };
+        return { el: e, from: function (t0) { if (!stage.card && e.tagName === "VIDEO") studioRegs.push({ el: e, t0: t0 }); } };
       }
     };
   }
@@ -220,7 +239,10 @@
   /* finished effects (board style with a `preview`): a preview loop rendered by VIDPOD, played instead of a live look */
   function preLook(st) {
     var v = el("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "auto"; v.loop = true;
-    v.src = st.preview.video; v.poster = st.preview.still;
+    // phones get the 540x960 copy of the loop (same name + "-540"); if it is missing, the full-size loop
+    var full = st.preview.video, small = LITE ? full.replace(/\.mp4$/i, "-540.mp4") : full;
+    if (small !== full) v.addEventListener("error", function () { if (v.getAttribute("src") === small) { v.src = full; } }, { once: true });
+    v.src = small; v.poster = st.preview.still;
     v.style.cssText = "position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;display:block;";
     over.appendChild(v);
     var tl = gsap.timeline({ paused: true }); tl.to({}, { duration: st.preview.loop || 2.8 });
@@ -236,8 +258,8 @@
   function playing() { return isOwn() ? !LC.paused : !video.paused; }
   function clockT() { var L2 = seg()[1], t = LC.paused ? LC.at : performance.now() / 1000 - LC.t0; return ((t % L2) + L2) % L2; }
   function setClock(t, play) { LC.at = t; LC.t0 = performance.now() / 1000 - t; if (play != null) LC.paused = !play; }
-  function startPlay() { if (isOwn()) { if (LC.paused) { setClock(clockT(), true); setPlayIcon(); } return; } if (video.paused) video.play().catch(function () {}); }
-  function togglePlay() { if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } if (video.paused) video.play().catch(function () {}); else video.pause(); }
+  function startPlay() { if (isOwn()) { if (LC.paused) { setClock(clockT(), true); setPlayIcon(); } return; } ensureMain(); if (video.paused) video.play().catch(function () {}); }
+  function togglePlay() { if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } ensureMain(); if (video.paused) video.play().catch(function () {}); else video.pause(); }
   function curStyle() { return styleDef(sec(S.sec), look().style); }
   function hasCtl(name) { return sec(S.sec).controls.indexOf(name) >= 0; }
   function seg() { if (isOwn()) return [0, (live && live.loop) || sec(S.sec).segment[1]]; var st = curStyle(); return (st && st.segment) || sec(S.sec).segment; }
@@ -263,13 +285,14 @@
     var st = styleDef(sd, L.style);
     var ctx = makeCtx(L, sd, st, mainStage);
     var r;
-    if (st && st.preview) r = preLook(st);
+    if (st && st.preview) { releaseMain(); r = preLook(st); }
     else try { r = R[L.style](ctx); } catch (e) { console.error(e); r = { tl: gsap.timeline({ paused: true }) }; }
     if (r.block) { r.block.classList.add("block"); (r.blockUnder ? under : over).appendChild(r.block); }
     under.style.filter = over.style.filter = layerShadow(sd, L);
     addOns(r, L, (st && st.segment) || sd.segment);
+    if (!isOwn()) ensureMain();
     live = r; buildSfx(sd, st, r);
-    if (isOwn()) { video.pause(); $("t-end").textContent = fmt(seg()[1]); }
+    if (isOwn()) { releaseMain(); $("t-end").textContent = fmt(seg()[1]); }
     setDepth(!!r.depth);
     place();
     if (r.after) r.after();
@@ -325,7 +348,9 @@
   function initDepth() {
     if (depthVid || !B.base.depth) return;
     depthVid = el("video"); depthVid.muted = true; depthVid.playsInline = true; depthVid.setAttribute("playsinline", ""); depthVid.preload = "auto"; depthVid.crossOrigin = "anonymous";
-    depthVid.src = B.base.depth.video; depthVid.className = "studio-v"; screenEl.appendChild(depthVid);
+    var dfull = B.base.depth.video, dsmall = LITE ? dfull.replace(/\.mp4$/i, "-half.mp4") : dfull;   // phones: half-size matte
+    if (dsmall !== dfull) depthVid.addEventListener("error", function () { if (depthVid && depthVid.getAttribute("src") === dsmall) depthVid.src = dfull; }, { once: true });
+    depthVid.src = dsmall; depthVid.className = "studio-v"; screenEl.appendChild(depthVid);
     ctx2d = dBg.getContext("2d");
     if (gl) return;
     try {
@@ -341,21 +366,28 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     } catch (e) { gl = null; }
   }
-  function dropDepth() { // a new clip: forget the old matte (a clip without one shows matte looks without the cut-out)
+  function dropDepth() { // a new clip, or no cut-out look selected: let go of the matte video, the WebGL context and the canvases
     if (depthVid) { try { depthVid.pause(); depthVid.removeAttribute("src"); depthVid.load(); depthVid.remove(); } catch (e) {} }
-    depthVid = null; depthOn = false; dBg.hidden = dFg.hidden = true;
+    depthVid = null; depthOn = false; dBg.hidden = dFg.hidden = true; DEPTH.lastT = -1;
+    if (gl) {
+      try { var lc = gl.getExtension("WEBGL_lose_context"); if (glTex) gl.deleteTexture(glTex); if (lc) lc.loseContext(); } catch (e) {}
+      gl = null; glTex = null;
+      var fresh = dFg.cloneNode(false); fresh.width = 1; fresh.height = 1; dFg.parentNode.replaceChild(fresh, dFg); dFg = fresh;   // a lost context cannot be reused
+    }
+    dFg.width = dFg.height = 1; dBg.width = dBg.height = 1;   // free the backing stores
   }
+  var DEPTH = { lastT: -1, lastW: 0 };
   function setDepth(on) {
-    if (on) initDepth();
+    if (on) initDepth(); else if (depthVid || gl) dropDepth();
     depthOn = !!(on && gl && depthVid);
     dBg.hidden = !depthOn; dFg.hidden = !depthOn;
-    if (!depthOn && depthVid) depthVid.pause();
     sizeDepth();
   }
   function sizeDepth() {
     if (!depthOn) return;
-    var dpr = Math.min(2, window.devicePixelRatio || 1), w = Math.round(screenEl.clientWidth * dpr), h = Math.round(screenEl.clientHeight * dpr);
-    if (dFg.width !== w) { dFg.width = w; dFg.height = h; dBg.width = w; dBg.height = h; }
+    // the canvases match the preview as it is shown on screen (not 1080x1920)
+    var dpr = Math.min(LITE ? 1.5 : 2, window.devicePixelRatio || 1), w = Math.round(screenEl.clientWidth * dpr), h = Math.round(screenEl.clientHeight * dpr);
+    if (dFg.width !== w || dFg.height !== h) { dFg.width = w; dFg.height = h; dBg.width = w; dBg.height = h; DEPTH.lastT = -1; }
   }
   function drawDepth(t) {
     if (!depthOn) return;
@@ -366,6 +398,8 @@
     if (video.paused && !depthVid.paused) depthVid.pause();
     if (depthVid.readyState < 2) { dBg.style.visibility = dFg.style.visibility = "hidden"; return; }
     dBg.style.visibility = dFg.style.visibility = "visible";
+    if (video.paused && DEPTH.lastT === depthVid.currentTime && DEPTH.lastW === dFg.width) return;   // nothing new to upload
+    DEPTH.lastT = depthVid.currentTime; DEPTH.lastW = dFg.width;
     var vw = depthVid.videoWidth, vh = depthVid.videoHeight / 2;
     ctx2d.drawImage(depthVid, 0, 0, vw, vh, 0, 0, dBg.width, dBg.height);
     gl.viewport(0, 0, dFg.width, dFg.height);
@@ -437,7 +471,7 @@
   function goSeg(play) {
     var s = seg();
     if (isOwn()) { video.pause(); setClock(0, !!play && !reduceMotion); $("t-end").textContent = fmt(s[1] - s[0]); setPlayIcon(); return; }
-    try { video.currentTime = s[0]; } catch (e) {} $("t-end").textContent = fmt(s[1] - s[0]);
+    ensureMain(); try { video.currentTime = s[0]; } catch (e) {} $("t-end").textContent = fmt(s[1] - s[0]);
     if (play && !reduceMotion) video.play().catch(function () {}); setPlayIcon();
   }
   function fit() { var w = screenEl.clientWidth; scale = w / 1080; [backdrop, under, over, ui].forEach(function (l) { l.style.transform = "scale(" + scale + ")"; }); sizeDepth(); updateGrab(); }
@@ -1005,7 +1039,7 @@
     if (scroll) { var stk = $("sticky"), r = stk.getBoundingClientRect(); if (r.top <= 0) window.scrollTo({ top: window.scrollY + $("panel-body").getBoundingClientRect().top - stk.offsetHeight, behavior: "smooth" }); }
     setTimeout(showHint, 900);
   }
-  function replay() { var s = seg(); if (isOwn()) { setClock(0, true); setPlayIcon(); return; } try { video.currentTime = s[0]; } catch (e) {} video.play().catch(function () {}); }
+  function replay() { var s = seg(); if (isOwn()) { setClock(0, true); setPlayIcon(); return; } ensureMain(); try { video.currentTime = s[0]; } catch (e) {} video.play().catch(function () {}); }
 
   /* ---- preview on: a board can carry several clips; words, timings, cards and matte follow the chosen clip ---- */
   function clipList() { return (B.clips || []).filter(function (c) { return c.base; }); }
@@ -1240,7 +1274,7 @@
 
   /* ---- close-up: a magnified live view of the words (subtitles, hook, name, logo). It sits under the preview while the
      preview is on screen; on a phone, once the preview scrolls away, it docks above the Send bar. ---- */
-  var CU = { want: local("vidpod-studio-closeup") !== "off", last: 0, ok: false, slotSeen: true };
+  var CU = { want: local("vidpod-studio-closeup") !== "off", last: 0, ok: false, slotSeen: true, onScreen: true };
   var CU_SECS = ["subtitles", "hook", "name", "logo"];
   function cuWanted() { return (CU_SECS.indexOf(S.sec) >= 0 || !!(live && live.pre && live.focus)) && !(live && live.pre && !live.focus) && !$("stage").classList.contains("full") && !!live; }
   function cuSync() {
@@ -1258,6 +1292,7 @@
     $("cu-toggle").addEventListener("click", function () { CU.want = !CU.want; local("vidpod-studio-closeup", CU.want ? "on" : "off"); cuSync(); });
     // dock only when the slot has scrolled up out of view (not when it is below the fold)
     if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { var rc = en.boundingClientRect; CU.slotSeen = en.isIntersecting || rc.top > 0 || rc.height === 0; }); cuSync(); }, { threshold: 0, rootMargin: "-60px 0px 0px 0px" }).observe($("cu-slot"));
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { CU.onScreen = en.isIntersecting; if (en.isIntersecting) CU.last = 0; }); }, { threshold: 0 }).observe($("closeup"));
     window.addEventListener("resize", cuSync);
     CU.ok = true; cuSync();
   }
@@ -1283,7 +1318,9 @@
     return c;
   }
   function cuRender(now) {
-    if (!cuShown() || now - CU.last < 66) return;
+    // a low-rate copy of the main frame: 15 a second on desktop, 5 on a phone, 4 while paused; only while it is on screen
+    var gap = !playing() ? 250 : LITE ? 200 : 66;
+    if (!cuShown() || !CU.onScreen || now - CU.last < gap) return;
     CU.last = now;
     var view = $("cu-view"), vw = view.clientWidth, vh = view.clientHeight; if (!vw || !vh) return;
     var big = ($("screen-slot").clientWidth || 260) / 1080, rc = cuRect();
@@ -1293,7 +1330,7 @@
     var frag = document.createDocumentFragment();
     [backdrop, under, over].forEach(function (L0) { frag.appendChild(cuClone(L0)); });
     lay.replaceChildren(frag);
-    var cv = $("cu-canvas"), dpr = Math.min(2, window.devicePixelRatio || 1), cw = Math.round(vw * dpr), ch = Math.round(vh * dpr);
+    var cv = $("cu-canvas"), dpr = Math.min(LITE ? 1.5 : 2, window.devicePixelRatio || 1), cw = Math.round(vw * dpr), ch = Math.round(vh * dpr);
     if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
     var g = cv.getContext("2d"); g.fillStyle = "#111"; g.fillRect(0, 0, cw, ch);
     var srcV = live && live.pre ? live.pre : (!isOwn() ? video : null);

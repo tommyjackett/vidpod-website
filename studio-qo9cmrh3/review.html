@@ -154,6 +154,10 @@ details img { width: 100%; border-radius: 10px; display: block; }
 table.beats { border-collapse: collapse; font-size: 12px; min-width: 560px; }
 table.beats th, table.beats td { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; color: #E6E6E0; }
 table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 10px; }
+.dmeta .plain { margin-top: 10px; }
+.dmeta .plain .ifyes { margin: 0 0 6px; }
+details.made { margin-top: 18px; }
+details.made > .inner .sect:first-of-type { margin-top: 6px; }
 .dacts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
 .dacts .btn { height: 48px; font-size: 14px; flex: 1 1 auto; }
 .btn.danger { color: var(--no); }
@@ -350,8 +354,8 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     if (!LOG_URL) return;
     fetch(LOG_URL + (LOG_URL.indexOf("?") < 0 ? "?" : "&") + "board=" + encodeURIComponent(BOARD), { cache: "no-store" })
       .then(function (r) { return r.json(); })
-      .then(function (o) { if (o && o.ok && o.decisions && o.board === BOARD) { REMOTE = o; refresh(); } })
-      .catch(function () {});
+      .then(function (o) { if (o && o.ok && o.decisions && o.board === BOARD) { REMOTE = o; } else fetchRemote.failed = true; refresh(); })
+      .catch(function () { fetchRemote.failed = true; refresh(); });
   }
   function remoteFor(id) { return REMOTE && REMOTE.decisions ? REMOTE.decisions[id] : null; }
   function dec(id) {
@@ -372,7 +376,17 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
   }
   function allItems() { var a = addedItems(); a.forEach(function (it) { ITEMS[it.id] = it; }); return a.concat(QUEUE); } // newest finds first
 
-  // ---------- copy: what a yes does ----------
+  // ---------- plain copy: the only words a client sees (name + two lines) ----------
+  function nameOf(it) { return (it.plain && it.plain.name) || String(it.title || "").replace(/^TRL-\d+\s+/, "").replace(/\s*\([^)]*\)\s*$/, ""); }
+  function whatOf(it) { return (it.plain && it.plain.what) || (it.added ? it.note || "" : ""); }
+  function goodOf(it) { return (it.plain && it.plain.goodFor) || ""; }
+  function plainHTML(it, cls) {
+    var w = whatOf(it), g = goodOf(it);
+    return (w ? '<p class="' + cls + '"><b>What it is:</b> ' + esc(w) + '</p>' : "") + (g ? '<p class="' + cls + '"><b>Good for:</b> ' + esc(g) + '</p>' : "");
+  }
+  function releaseVideos(root) { Array.prototype.forEach.call(root.querySelectorAll("video"), function (v) { try { v.pause(); if (v.getAttribute("src")) { v.removeAttribute("src"); v.load(); } v.classList.remove("on"); } catch (e) {} }); }
+
+  // ---------- copy: what a yes does (VIDPOD only, inside "How it's made") ----------
   function yesLine(it) {
     var b = it.build || {}, brand = boardLabel();
     if (builtCode(it)) return "Built as " + optName(builtCode(it)) + " in VidPod Studio.";
@@ -402,7 +416,13 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
   $("mBoard").onclick = function () { setMode("board"); };
 
   // ---------- swipe ----------
-  function pending() { return QUEUE.filter(function (it) { var d = dec(it.id); return savedOnly ? d === "later" : !d; }); }
+  // best first: Claude's recommended looks, then the rest in queue order, skips last. 20 per sitting, "More" for the next 20.
+  var SESSION = 20, sessionCap = SESSION, sessionDone = 0;
+  function rank(it) { var v = it.claudeVerdict; return v === "recommend" || v === "yes" ? 0 : v === "skip" ? 2 : 1; }
+  function pending() {
+    return QUEUE.filter(function (it) { var d = dec(it.id); return savedOnly ? d === "later" : !d; })
+      .map(function (it, i) { return { it: it, i: i }; }).sort(function (a, b) { return rank(a.it) - rank(b.it) || a.i - b.i; }).map(function (x) { return x.it; });
+  }
   function counts() { var c = { yes: 0, no: 0, later: 0, removed: 0 }; allItems().forEach(function (it) { var d = dec(it.id); if (c[d] != null) c[d]++; }); return c; }
   function cardHTML(it) {
     // Still always shows; the clip only appears on tap and only once frames are really playing.
@@ -410,19 +430,19 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
       ? '<video class="clip" muted loop playsinline preload="none" data-src="' + esc(it.video) + '"></video><span class="playhint">Tap to play</span>' : "");
     return '<div class="media">' + media + '</div>' +
       '<div class="stamp yes">YES</div><div class="stamp no">NO</div><div class="stamp later">LATER</div>' +
-      '<div class="info"><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span>' +
-      '<div class="title">' + esc(it.title) + '</div>' +
-      '<p class="ifyes"><b>Could be built:</b> ' + esc(yesLine(it)) + '</p>' +
-      '<div class="src"><button type="button" class="more">How we\'d build it</button>' + (it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</div></div>';
+      '<div class="info"><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span>' + (rank(it) === 0 ? '<span class="chip id">Claude pick</span>' : "") +
+      '<div class="title">' + esc(nameOf(it)) + '</div>' + plainHTML(it, "ifyes") +
+      '<div class="src"><button type="button" class="more">How it\'s made</button>' + (it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</div></div>';
   }
   function renderSwipe() {
-    Array.prototype.slice.call(stage.querySelectorAll(".card")).forEach(function (c) { c.remove(); });
-    var list = pending(), total = savedOnly ? list.length : QUEUE.length, doneN = savedOnly ? 0 : QUEUE.length - list.length;
-    $("count").textContent = savedOnly ? list.length + " saved" : Math.min(doneN + 1, total) + " / " + total;
+    Array.prototype.slice.call(stage.querySelectorAll(".card")).forEach(function (c) { releaseVideos(c); c.remove(); });
+    var all = pending(), capped = !savedOnly && sessionDone >= sessionCap, list = capped ? [] : all;
+    var inSitting = Math.min(sessionCap - sessionDone, all.length);
+    $("count").textContent = savedOnly ? list.length + " saved" : capped ? all.length + " left" : (sessionDone + 1) + " / " + (sessionDone + inSitting);
     $("savedBtn").textContent = savedOnly ? "All" : "Saved (" + counts().later + ")";
     var show = !!list.length;
     $("actions").style.visibility = show ? "visible" : "hidden";
-    if (!show) { current = null; showDone(); return; }
+    if (!show) { current = null; showDone(capped ? all.length : 0); return; }
     doneEl.classList.remove("on");
     if (list[1]) stage.appendChild(makeCard(list[1], true));
     current = makeCard(list[0], false);
@@ -441,14 +461,15 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     var m = c.querySelector(".more"); if (m) m.addEventListener("click", function (e) { e.stopPropagation(); openDetail(it.id); });
     return c;
   }
-  function showDone() {
+  function showDone(left) {
     var c = counts();
-    doneEl.innerHTML = '<h2>' + (savedOnly ? "No saved looks left" : "All done") + '</h2>' +
-      '<p>' + c.yes + ' on the board, ' + c.no + ' no, ' + c.later + ' saved for later. ' + (LOG_URL ? "Every swipe went to the VIDPOD sheet." : "Kept on this phone.") + '</p>' +
-      '<div class="donebtns"><button class="btn go" id="dBoard">Open the mood board</button>' + (c.later && !savedOnly ? '<button class="btn" id="dSaved">Go through saved</button>' : "") +
+    doneEl.innerHTML = '<h2>' + (left ? "That's " + sessionDone + " for now" : savedOnly ? "No saved looks left" : "All done") + '</h2>' +
+      '<p>' + c.yes + ' on the board, ' + c.no + ' no, ' + c.later + ' saved for later. ' + (left ? left + " more to see when you want them. " : "") + (LOG_URL ? "Every swipe went to the VIDPOD sheet." : "Kept on this phone.") + '</p>' +
+      '<div class="donebtns">' + (left ? '<button class="btn go" id="dMore">More (' + Math.min(SESSION, left) + ')</button>' : "") + '<button class="btn' + (left ? "" : " go") + '" id="dBoard">Open the mood board</button>' + (c.later && !savedOnly ? '<button class="btn" id="dSaved">Go through saved</button>' : "") +
       (savedOnly ? '<button class="btn" id="dAll">Back to all</button>' : "") + '<button class="btn" id="dCopy">Copy results</button><button class="btn" id="dReset">Start over</button></div>';
     doneEl.classList.add("on");
     $("dBoard").onclick = function () { setMode("board"); };
+    var mo = $("dMore"); if (mo) mo.onclick = function () { sessionCap = sessionDone + SESSION; renderSwipe(); };
     var s = $("dSaved"); if (s) s.onclick = function () { savedOnly = true; renderSwipe(); };
     var a = $("dAll"); if (a) a.onclick = function () { savedOnly = false; renderSwipe(); };
     $("dCopy").onclick = copyResults;
@@ -467,6 +488,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     state.history.push({ board: BOARD, id: id, d: d, prev: prev, at: at });
     if (state.history.length > 500) state.history = state.history.slice(-500);
     logDecision(it, d, at, prev, "");
+    if (!savedOnly) sessionDone++;
     var w = window.innerWidth, tx = d === "yes" ? w * 1.3 : d === "no" ? -w * 1.3 : 0, ty = d === "later" ? -window.innerHeight * 1.1 : 40;
     card.classList.remove("snap"); card.classList.add("fly");
     card.querySelector(".stamp." + d).style.opacity = 1;
@@ -482,6 +504,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     var at = new Date().toISOString();
     decs()[h.id] = { d: h.prev || "none", at: at };
     logDecision(ITEMS[h.id], "undo", at, h.d, h.prev || "");
+    if (sessionDone > 0) sessionDone--;
     if (savedOnly && h.prev !== "later") savedOnly = false;
     refresh();
     toast("Undone: " + (ITEMS[h.id] ? ITEMS[h.id].title : h.id));
@@ -493,7 +516,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     var items = boardItems(), byG = {};
     GROUPS.forEach(function (g) { byG[g] = []; });
     items.forEach(function (it) { (byG[it.group] || byG.Graphics).push(it); });
-    $("bsub").textContent = items.length ? items.length + " look" + (items.length === 1 ? "" : "s") + " for " + boardLabel() + ". Tap one to see it move and how we'd build it." : "";
+    $("bsub").textContent = items.length ? items.length + " look" + (items.length === 1 ? "" : "s") + " for " + boardLabel() + ". Tap one to see it move." : "";
     // controls
     var ctl = "";
     if (isAdmin()) {
@@ -512,7 +535,9 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     Array.prototype.forEach.call($("chips").querySelectorAll(".fchip"), function (b) { b.onclick = function () { FILTER = b.dataset.g; renderBoard(); }; });
     // grid
     var html = "";
-    if (!items.length) {
+    if (!items.length && LOG_URL && !REMOTE && !fetchRemote.failed) {
+      html = '<p class="empty">Loading your board...</p>';
+    } else if (!items.length) {
       html = '<p class="empty">' + (isAdmin() ? "Nothing on this board yet. Swipe right on a look, or tap + Add." : "VIDPOD is putting your board together. Check back soon.") + '</p>';
     } else {
       GROUPS.forEach(function (g) {
@@ -531,8 +556,8 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     var media = it.image
       ? '<img loading="lazy" alt="" src="' + esc(it.image) + '"' + (it.fallback ? ' data-fallback="' + esc(it.fallback) + '"' : "") + '>' + (it.video ? '<span class="tclip">Clip</span>' : "")
       : '<div class="ltile">' + esc(it.title) + '<small>' + esc(host(it.link)) + '</small></div>';
-    return '<article class="tile" data-id="' + esc(it.id) + '"><button type="button" class="tmedia" aria-label="Open ' + esc(it.title) + '">' + media + '</button>' +
-      '<div class="tbody">' + statusPill(it) + '<b>' + esc(it.title) + '</b></div>' +
+    return '<article class="tile" data-id="' + esc(it.id) + '"><button type="button" class="tmedia" aria-label="Open ' + esc(nameOf(it)) + '">' + media + '</button>' +
+      '<div class="tbody">' + (isAdmin() ? statusPill(it) : "") + '<b>' + esc(nameOf(it)) + '</b></div>' +
       '<div class="tacts"><button type="button" class="ibtn heart' + (hearted ? " on" : "") + '" aria-pressed="' + hearted + '" aria-label="Love this">' + heartSVG(hearted) + (n ? "<span>" + n + "</span>" : "") + '</button>' +
       (isAdmin() ? '<button type="button" class="ibtn bin" aria-label="Remove from the board"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button>' : "") +
       '</div></article>';
@@ -603,18 +628,22 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
         '<p><b>Studio safe area' + (sf.inside ? " (inside)" : " (crosses it)") + ':</b> ' + esc(sf.note || (sf.inside ? "fits inside x 135 to 945, y 250 to 1500." : "")) + '</p></div>';
     }
     var p = $("dPanel");
-    p.innerHTML = '<div class="phead"><span><span class="chip">' + esc(it.group || it.type) + '</span><span class="chip id">' + esc(it.id) + '</span></span><button type="button" class="xbtn" data-close aria-label="Close">' + x + '</button></div>' +
+    // everyone: the look big, its name, two plain lines, the heart. VIDPOD only: one closed "How it's made" row with the full breakdown.
+    var made = !isAdmin() ? "" : '<details class="made"><summary>How it\'s made</summary><div class="inner">' +
+      '<p class="ifyes"><b>' + (builtCode(it) ? "In the studio:" : "Could be built:") + '</b> ' + esc(yesLine(it)) + '</p>' +
+      '<p class="dsrc">' + esc(it.title) + ' &middot; ' + esc(it.source || "") + (it.link ? ' &middot; <a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</p>' +
+      (it.note && it.added ? '<p class="dsrc">Note: ' + esc(it.note) + '</p>' : "") +
+      '<div class="sect"><h4>On screen</h4><p>' + esc(bd.onScreen || (it.added ? "Breakdown coming: Claude writes it when it files this find." : it.note || "")) + '</p></div>' +
+      (bd.motion ? '<div class="sect"><h4>Motion</h4><p>' + esc(bd.motion) + '</p>' + beatsHTML + '</div>' : "") +
+      (where ? where.replace("<h4>Where it sits</h4>", "<h4>Layout</h4>") : "") +
+      '<div class="sect"><h4>Build</h4>' + how + '</div></div></details>';
+    p.innerHTML = '<div class="phead"><span><span class="chip">' + esc(it.group || it.type) + '</span>' + (isAdmin() ? '<span class="chip id">' + esc(it.id) + '</span>' : "") + '</span><button type="button" class="xbtn" data-close aria-label="Close">' + x + '</button></div>' +
       '<div class="dmedia" id="dMedia">' + media + '</div>' +
-      '<div class="dmeta"><h3 id="dTitle">' + esc(it.title) + '</h3>' + (onBoard ? statusPill(it) + " " : "") +
-      '<p class="ifyes" style="margin-top:10px"><b>' + (builtCode(it) ? "In the studio:" : "Could be built:") + '</b> ' + esc(yesLine(it)) + '</p>' +
-      '<p class="dsrc">' + esc(it.source || "") + (it.link ? ' · <a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer">Open source</a>' : "") + '</p>' +
-      (it.note && it.added ? '<p class="dsrc">Note: ' + esc(it.note) + '</p>' : "") + '</div>' +
-      '<div class="sect"><h4>What\'s on screen</h4><p>' + esc(bd.onScreen || (it.added ? "Breakdown coming: Claude writes it when it files this find." : it.note || "")) + '</p></div>' +
-      (bd.motion ? '<div class="sect"><h4>How it moves</h4><p>' + esc(bd.motion) + '</p>' + beatsHTML + '</div>' : "") + where +
-      '<div class="sect"><h4>How we\'d build it</h4>' + how + '</div>' +
-      '<div class="dacts">' + (code && SEC_HASH[(code.split("-")[0])] && BOARD === "vidpod" ? '<a class="btn" href="index.html#' + SEC_HASH[code.split("-")[0]] + '" style="text-decoration:none">Try ' + esc(code) + ' in the studio</a>' : "") +
-      '<button type="button" class="btn" id="dHeart">' + heartSVG(hearted) + (hearted ? "Loved" : "Love it") + '</button>' +
-      (isAdmin() && onBoard ? '<button type="button" class="btn danger" id="dRemove">Remove from board</button>' : "") + '</div>';
+      '<div class="dmeta"><h3 id="dTitle">' + esc(nameOf(it)) + '</h3>' + (isAdmin() && onBoard ? statusPill(it) : "") +
+      '<div class="plain">' + plainHTML(it, "ifyes") + '</div></div>' +
+      '<div class="dacts"><button type="button" class="btn" id="dHeart">' + heartSVG(hearted) + (hearted ? "Loved" : "Love it") + '</button>' +
+      (isAdmin() && code && SEC_HASH[(code.split("-")[0])] && BOARD === "vidpod" ? '<a class="btn" href="index.html#' + SEC_HASH[code.split("-")[0]] + '" style="text-decoration:none">Try ' + esc(code) + ' in the studio</a>' : "") +
+      (isAdmin() && onBoard ? '<button type="button" class="btn danger" id="dRemove">Remove from board</button>' : "") + '</div>' + made;
     $("detail").classList.add("on"); p.scrollTop = 0;
     var im = p.querySelector("img[data-fallback]"); if (im) im.onerror = function () { if (im.src !== im.dataset.fallback) im.src = im.dataset.fallback; };
     var v = p.querySelector("video"); if (v) $("dMedia").onclick = function () { toggleClip($("dMedia"), v); };
@@ -624,7 +653,7 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
     p.querySelector("[data-close]").onclick = closeSheets;
   }
   function closeSheets() {
-    Array.prototype.forEach.call(document.querySelectorAll(".sheet.on"), function (s) { s.classList.remove("on"); var v = s.querySelector("video"); if (v) v.pause(); });
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet.on"), function (s) { s.classList.remove("on"); releaseVideos(s); });
   }
   Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function (s) {
     s.addEventListener("click", function (e) { if (e.target === s) closeSheets(); });
@@ -634,8 +663,8 @@ table.beats th { color: var(--muted); font-weight: 700; text-transform: uppercas
   // ---------- help ----------
   function showHelp() {
     $("hList").innerHTML = isAdmin()
-      ? "<li>Yes puts this look on your mood board. That's all it does.</li><li>Nothing gets built until you say \"build this\". Each card shows how it could be built if you do.</li><li>No removes it. Later keeps it for another day.</li>"
-      : "<li>This is your mood board: looks VIDPOD picked for your videos.</li><li>Tap one to see it move and how we'd build it in your brand.</li><li>Heart the ones you love. VIDPOD sees every heart.</li>";
+      ? "<li>Yes puts this look on your mood board. That's all it does.</li><li>Nothing gets built until you say \"build this\". \"How it's made\" on each card is for VIDPOD only.</li><li>No removes it. Later keeps it for another day.</li>"
+      : "<li>This is your mood board: looks VIDPOD picked for your videos.</li><li>Tap one to see it move.</li><li>Heart the ones you love. VIDPOD sees every heart.</li>";
     $("help").classList.add("on");
   }
   $("hGo").onclick = function () { local(HELP, "1"); closeSheets(); };
