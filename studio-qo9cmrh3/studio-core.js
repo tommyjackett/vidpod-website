@@ -825,7 +825,7 @@
       var tags = (isOurPick(sd.id, st.id) ? '<span class="t our">Our pick</span>' : "") + (st.preview && st.preview.example ? '<span class="t ex">Example</span>' : "");
       var nb = el("button", "oname", '<span class="n">' + esc(st.label) + "</span>" + (admin ? '<span class="c">' + esc(st.code) + "</span>" : "") + tags);
       nb.type = "button"; nb.setAttribute("role", "radio"); nb.setAttribute("aria-label", st.label + (admin ? " " + st.code : ""));
-      nb.addEventListener("click", function () { PA.on = false; var pb = $("playall"); if (pb) pb.setAttribute("aria-pressed", "false"); chooseStyle(st.id); });
+      nb.addEventListener("click", function () { PA.on = false; var pb = $("playall"); if (pb) pb.setAttribute("aria-pressed", "false"); chooseStyle(st.id); if (window.innerWidth < 980) { var sg = $("stage"); if (sg.getBoundingClientRect().top < -40) sg.scrollIntoView({ behavior: "smooth", block: "start" }); } });
       var pk = el("button", "opick", I.tick); pk.type = "button"; pk.setAttribute("aria-label", "Pick " + st.label);
       pk.addEventListener("click", function () { if (look().style !== st.id) chooseStyle(st.id); togglePick(st.id); });
       row.appendChild(nb); row.appendChild(pk); grp.appendChild(row);
@@ -1971,7 +1971,7 @@
     setTimeout(showHint, 1500);
     whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); initStep(); stepSync(); renderStageLine(); updateFoot();
     // phones: the tabs stick just under the window
-    if ("ResizeObserver" in window) new ResizeObserver(function () { document.documentElement.style.setProperty("--stage-h", (window.innerWidth < 980 ? $("stage").offsetHeight : 0) + "px"); }).observe($("stage"));
+    if ("ResizeObserver" in window) new ResizeObserver(function () { document.documentElement.style.setProperty("--stage-h", "0px"); }).observe($("stage"));
     $("home").addEventListener("click", goStart);
     $("tabs").addEventListener("scroll", tabFade, { passive: true }); window.addEventListener("resize", tabFade);
     $("sz-btn").addEventListener("click", function () { openMenu("sz"); }); $("clip-btn").addEventListener("click", function () { openMenu("clip"); });

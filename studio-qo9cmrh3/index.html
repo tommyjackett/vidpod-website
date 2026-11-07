@@ -595,11 +595,12 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 .mk-acts .btn { text-transform: none; letter-spacing: 0; font-size: 14px; }
 .mk-small { font-size: 12px !important; }
 
-/* phones: the window stays in view (sticky) while the list scrolls under it */
+/* phones: a normal scrolling page (8 Nov: a pinned window filled the screen and the list could not be reached).
+   The window and its arrows sit at the top; the tabs stick once scrolled; tapping a name in the list scrolls back to the window. */
 @media (max-width: 979px) {
-  .stage { position: sticky; top: 0; z-index: 40; padding-top: 6px; padding-bottom: 6px; gap: 4px; box-shadow: 0 1px 0 var(--line); }
-  .phone { --ph: min(31svh, 520px); }
-  .sticky { position: sticky; top: var(--stage-h, 0px); z-index: 39; background: var(--bg); }
+  .stage { position: relative; z-index: 1; padding-top: 6px; padding-bottom: 6px; gap: 4px; box-shadow: 0 1px 0 var(--line); }
+  .phone { --ph: min(42svh, 520px); }
+  .sticky { position: sticky; top: 0; z-index: 39; background: var(--bg); }
   .sticky .tabs { background: var(--bg); }
   .needs { font-size: 11px; min-height: 16px; }
   .transport { height: 26px; }
@@ -618,7 +619,7 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 /* small phones: the window as wide as the screen allows, the buttons in one row under it */
 @media (max-width: 480px) {
   .stage-row { display: grid; grid-template-columns: auto auto; grid-template-areas: "ph ph" "l r"; justify-content: center; column-gap: 4px; row-gap: 6px; }
-  .phone { grid-area: ph; justify-self: center; padding: 4px; border-radius: 18px; --ph: min(50svh, calc((100vw - 40px) * 16 / 9)); }
+  .phone { grid-area: ph; justify-self: center; padding: 4px; border-radius: 18px; --ph: min(48svh, calc((100vw - 40px) * 16 / 9)); }
   .screen { border-radius: 14px; }
   .side.l { grid-area: l; flex-direction: row; justify-self: end; gap: 4px; }
   .side.r { grid-area: r; flex-direction: row; justify-self: start; gap: 4px; }
@@ -861,6 +862,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r6b"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7g"></script>
+<script src="studio-core.js?v=r7h"></script>
 
 </html>
