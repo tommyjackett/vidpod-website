@@ -1,8 +1,14 @@
 {
   "note": "Access codes for VidPod Studio. Code (any case) opens that client's board (clients/<board>/board.json). log_endpoint is the Google Apps Script web app that writes to the Sheet 'VidPod Studio Log'.",
-  "log_endpoint": "",
+  "log_endpoint": "https://script.google.com/macros/s/AKfycbxq-SFHCjelMcIiuc8Fr9p4qIE8CUYjwdyKDgR4LeENbAL_CV4VtEAko9d_HnBPytI15A/exec",
   "codes": {
-    "VIDPOD": { "board": "vidpod", "label": "VIDPOD" },
-    "PILATES": { "board": "atpilates", "label": "@pilates" }
+    "VIDPOD": {
+      "board": "vidpod",
+      "label": "VIDPOD"
+    },
+    "PILATES": {
+      "board": "atpilates",
+      "label": "@pilates"
+    }
   }
 }
