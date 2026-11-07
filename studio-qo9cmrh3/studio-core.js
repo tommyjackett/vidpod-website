@@ -1730,7 +1730,7 @@
   /* ---- subtitles: "How it works" (8 Nov, Tommy). The same renderer and settings as the clip above, drawn on its own plain
      stage, big and sharp, on the clip's clock; it replaces the video close-up for subtitles (that copy lagged on phones).
      Customise opens Adjust right there. ---- */
-  var DM = { r: null, off: 0, y: 1400, k: 0.4 };
+  var DM = { r: null, off: 0, y: 1400, k: 0.4, lo: null, hi: null, meas: 0 };
   var dmStage = { card: false, media: $("dm-media"), backdrop: $("dm-backdrop"), under: $("dm-under"), over: $("dm-over"), scale: function () { return DM.k; } };
   function demoOn() { return S.sec === "subtitles"; }
   function demoTear() {
@@ -1753,19 +1753,29 @@
     }
     addOns(r, L, lookSeg(st, sd));
     if (r.after) try { r.after(); } catch (e) {}
-    DM.r = r; DM.y = L.y == null ? 1400 : L.y;
+    DM.r = r; DM.y = L.y == null ? 1400 : L.y; DM.lo = DM.hi = null; DM.meas = 0;
     DM.off = st.preview && st.preview.loop ? Math.max(0, (sd.segment || [0, 0])[1] - st.preview.loop) : 0;
     demoFit();
   }
   function demoFit() {
     var v = $("dm-view"), vw = v.clientWidth, vh = v.clientHeight; if (!vw || !vh) return;
-    var z = B.safe, k = vw / (z.x1 - z.x0 + 60); DM.k = k;
-    $("dm-stage").style.transform = "translate(" + (-(z.x0 - 30) * k).toFixed(1) + "px," + (vh / 2 - DM.y * k).toFixed(1) + "px) scale(" + k.toFixed(4) + ")";
+    var z = B.safe, k = vw / (z.x1 - z.x0 + 60), cy = DM.y;
+    // the words' full height so far (tall looks like Chest punch): shrink to fit, centre on them
+    if (DM.lo != null) { var span = DM.hi - DM.lo; if (span * k > vh - 14) k = (vh - 14) / span; cy = (DM.lo + DM.hi) / 2; }
+    DM.k = k;
+    var x = vw / 2 - 540 * k;
+    $("dm-stage").style.transform = "translate(" + x.toFixed(1) + "px," + (vh / 2 - cy * k).toFixed(1) + "px) scale(" + k.toFixed(4) + ")";
   }
   function demoTick(t) {
     if (!DM.r || !cuShown() || !CU.onScreen) return;
     if ($("dm-stage").style.transform === "" || !DM.k) demoFit();
     DM.r.tl.seek(t, false);
+    var now = performance.now(); if (now - DM.meas < 300) return; DM.meas = now;
+    var st0 = $("dm-stage").getBoundingClientRect(), lo = Infinity, hi = -Infinity;
+    Array.prototype.forEach.call($("dm-over").querySelectorAll("*"), function (n) { if (!n.firstChild || n.firstChild.nodeType !== 3) return; var q = n.getBoundingClientRect(); if (q.height < 1 || q.width < 1) return; lo = Math.min(lo, (q.top - st0.top) / DM.k); hi = Math.max(hi, (q.bottom - st0.top) / DM.k); });
+    if (lo === Infinity) return;
+    var grew = DM.lo == null || lo < DM.lo - 4 || hi > DM.hi + 4;
+    if (grew) { DM.lo = DM.lo == null ? lo : Math.min(DM.lo, lo); DM.hi = DM.hi == null ? hi : Math.max(DM.hi, hi); demoFit(); }
   }
   function cuRender(now) {
     if (demoOn() && DM.r) return;   // subtitles: the demo draws itself
