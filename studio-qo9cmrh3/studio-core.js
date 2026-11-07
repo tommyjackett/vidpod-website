@@ -432,7 +432,7 @@
     if (a) {
       if (a.img) { var img = el("img", "app-ui"); img.alt = ""; img.src = a.img; ui.appendChild(img); }
       a.covered.forEach(function (c) {
-        var d = el("div", "cover" + (c[4] === "buttons" ? " rail" : ""), "<span>Covered by " + esc(a.name) + " " + esc(c[4]) + "</span>");
+        var d = el("div", "cover" + (c[4] === "buttons" || c[4] === "right side" ? " rail" : ""), "<span>" + (a.img ? "Covered by " + esc(a.name) + " " + esc(c[4]) : "Keep clear") + "</span>");
         d.style.left = c[0] + "px"; d.style.top = c[1] + "px"; d.style.width = (c[2] - c[0]) + "px"; d.style.height = (c[3] - c[1]) + "px";
         if (c[4] === "buttons") { d.firstChild.style.transformOrigin = "50% 50%"; }
         ui.appendChild(d);
@@ -1226,6 +1226,13 @@
     if (!isOwn() && video.readyState >= 2 && video.videoWidth) {
       var kv = video.videoWidth / 1080, sx = -ox / z, sy = -oy / z;
       try { g.drawImage(video, sx * kv, sy * kv, (vw / z) * kv, (vh / z) * kv, 0, 0, cw, ch); } catch (e) {}
+    }
+    // the person cut-out in front of the words (hooks behind the head), as on the big preview
+    var fg = $("cu-fg"), gf = fg.getContext("2d"); if (fg.width !== cw || fg.height !== ch) { fg.width = cw; fg.height = ch; }
+    gf.clearRect(0, 0, cw, ch);
+    if (depthOn && !dFg.hidden && dFg.style.visibility !== "hidden" && dFg.width) {
+      var kf = dFg.width / 1080, sx2 = -ox / z, sy2 = -oy / z;
+      try { gf.drawImage(dFg, sx2 * kf, sy2 * kf, (vw / z) * kf, (vh / z) * kf, 0, 0, cw, ch); } catch (e) {}
     }
   }
 
