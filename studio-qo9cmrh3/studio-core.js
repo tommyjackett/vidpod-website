@@ -1547,7 +1547,7 @@
     return out;
   }
   function orderedPickSecs() { var ids = ["subtitles", "name", "logo", "hook", "graphics", "moves", "transitions", "backgrounds", "endcard"]; return ids.map(sec).filter(Boolean).concat(B.sections.filter(function (s) { return ids.indexOf(s.id) < 0; })); }
-  function defaultAt(sid) { return sid === "hook" ? "Opening" : sid === "endcard" ? "End" : ""; }
+  function defaultAt(sid) { return sid === "hook" ? "Opening" : sid === "endcard" ? "End" : ""; }   // everything else: Claude suggests where
   function atOf(it) { return it.p.at || defaultAt(it.s.id); }
   function jobInfo() { var j = S.job || {}; return { project: j.project != null ? j.project : ((B.project || {}).label || ""), video: j.video || "" }; }
   function cleanAt(v) { v = String(v || "").trim(); var m = /^(\d{1,2})[:.](\d{1,2})$/.exec(v); if (m) return m[1] + ":" + ("0" + m[2]).slice(-2); if (/^\d{1,3}$/.test(v)) { var n = +v; return Math.floor(n / 60) + ":" + ("0" + (n % 60)).slice(-2); } return v; }
@@ -1563,7 +1563,7 @@
       else if (/^opening$/i.test(at)) B5[1].push("opening " + c);
       else if (/^end$/i.test(at)) B5[4].unshift("end " + c);
       else if (at) B5[2].push([secsOf(at), at + " " + c]);
-      else B5[3].push(c);
+      else B5[3].push(c + " (where: Claude suggests from the video)");
     });
     B5[2] = B5[2].sort(function (x, y) { return x[0] - y[0]; }).map(function (x) { return x[1]; });
     var who = (j.video || B.client.name).trim();
@@ -1587,10 +1587,10 @@
         if (HOUSE.indexOf(it.s.id) < 0) {
           var w = el("div", "mk-at"), cur = atOf(it);
           var setAt = function (v) { it.p.at = v; save(); renderMk(); };
-          ["Opening", "End"].forEach(function (lab) { var b = el("button", "", lab); b.type = "button"; b.setAttribute("aria-pressed", String(cur === lab)); b.addEventListener("click", function () { setAt(cur === lab ? "" : lab); }); w.appendChild(b); });
-          var ti = el("input"); ti.inputMode = "numeric"; ti.placeholder = "time"; ti.setAttribute("aria-label", "Where, a time like 0:42"); ti.value = /^\d/.test(cur) ? cur : "";
-          ti.addEventListener("change", function () { setAt(cleanAt(ti.value)); });
-          w.appendChild(ti); li.appendChild(w);
+          // 8 Nov 2026 (Tommy: "I wouldn't be able to give you a time ... just pick it then work on it in the chat"): the default is
+          // "Claude suggests": Claude reads the video and proposes where and how long in chat. Opening and End stay as quick picks.
+          [["", "Claude suggests"], ["Opening", "Opening"], ["End", "End"]].forEach(function (o2) { var b = el("button", "", o2[1]); b.type = "button"; b.setAttribute("aria-pressed", String(o2[0] === "" ? !/^(opening|end)$/i.test(cur) : cur === o2[0])); b.addEventListener("click", function () { setAt(o2[0]); }); w.appendChild(b); });
+          li.appendChild(w);
         }
         var rm = el("button", "mk-rm", "Remove"); rm.type = "button";
         rm.addEventListener("click", function () { if (multi(it.s.id)) S.picks[it.s.id] = (S.picks[it.s.id] || []).filter(function (x) { return x !== it.p; }); else delete S.picks[it.s.id]; save(); renderTabs(); markCards(); updateUse(); updateFoot(); renderMk(); });
