@@ -1009,17 +1009,19 @@
      and paste it back in"): one look, exactly as built, as a message for Claude. Claude makes only this look, on the video
      in the folder he is working in (tools/one_look.py, runbook ONE-LOOK.md). "Lock it as" names it (e.g. "TNG subtitles
      January") so it can be used again by name. ---- */
-  function lookMessage(name) {
+  function lookMessage(name, note) {
     var keep = S.picks, one = {}, L = look(), st = curStyle(), sd = sec(S.sec), doc;
     one[S.sec] = multi(S.sec) ? [{ style: L.style }] : clone(L); S.picks = one;
     try { doc = picksDoc(); } finally { S.picks = keep; }
     var pk = doc.picks[S.sec]; if (Array.isArray(pk)) pk = pk[0];
     if (S.sec === "hook" && pk) { pk.hookText = hookTextFor(L); pk.textIs = isHeadline(L) ? "headline" : "quote"; }
     var needs = ((st.menu || {}).needs) || [], tab = TAB_LABEL[S.sec] || sd.tab;
-    var o = { v: 1, client: B.client.id, board: B.client.name, section: S.sec, code: st.code, label: st.label, name: name || null, pick: pk, needs: needs, fixes: curFixes() || null };
+    var o = { v: 1, client: B.client.id, board: B.client.name, section: S.sec, code: st.code, label: st.label, name: name || null, note: note || null, pick: pk, needs: needs, ask: ((st.menu || {}).ask) || [], fixes: curFixes() || null };
     var lines = ["Make this VidPod look on my video, and only this look (VidPod Studio, " + B.client.name + " board).", "Look: " + st.code + " " + st.label + " (" + tab + ")"];
     if (name) lines.push('Lock it as: "' + name + '"');
-    if (needs.length) lines.push("It needs: " + needs.map(needText).join(", ") + ".");
+    var ask = ((st.menu || {}).ask) || [];
+    if (ask.length) lines.push("Ask me for: " + ask.join("; ") + ".");
+    if (note) lines.push("Note from me: " + note);
     lines.push("Video: the one in the folder I'm working in (ask me if there are several).");
     lines.push("VIDPOD-LOOK " + JSON.stringify(o));
     return lines.join("\n");
@@ -1029,14 +1031,23 @@
     var fall = function () { var ta = document.createElement("textarea"); ta.value = t; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;left:-9999px;top:0;"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) { window.prompt("Copy this for Claude:", t); } document.body.removeChild(ta); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, fall); else fall();
   }
+  function openTk() {
+    var st = curStyle(), m = st.menu || {}, tab = TAB_LABEL[S.sec] || sec(S.sec).tab, mon = new Date().toLocaleString("en-AU", { month: "long" });
+    $("tk-look").textContent = st.label + " (" + st.code + "), " + tab + ", " + B.client.name + " board";
+    var ul = $("tk-ask"); ul.innerHTML = "";
+    var ask = (m.ask && m.ask.length) ? m.ask : ["Which video"];
+    ask.forEach(function (a) { ul.appendChild(el("li", "", esc(a))); });
+    var ch = m.change || []; $("tk-change").textContent = ch.join(", "); $("tk-change").hidden = $("tk-change-h").hidden = !ch.length;
+    $("tk-name").placeholder = "For example: " + B.client.name + " " + tab.toLowerCase() + " " + mon;
+    var d = $("tkd"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+  }
+  function closeTk() { var d = $("tkd"); if (d.close) d.close(); else d.removeAttribute("open"); }
   function initTake() {
-    var c = $("tk-copy"), k = $("tk-lock"); if (!c || !k) return;
-    c.addEventListener("click", function () { copyText(lookMessage(null)); });
-    k.addEventListener("click", function () {
-      var mon = new Date().toLocaleString("en-AU", { month: "long" }), tab = TAB_LABEL[S.sec] || sec(S.sec).tab;
-      var n = window.prompt("Name this look so you can use it again (for example: " + B.client.name + " " + tab.toLowerCase() + " " + mon + ")", B.client.name + " " + tab.toLowerCase() + " " + mon);
-      if (n && n.trim()) copyText(lookMessage(n.trim()));
-    });
+    var c = $("tk-copy"); if (!c || !$("tkd")) return;
+    $("tk-close").innerHTML = I.close; $("tk-close").addEventListener("click", closeTk);
+    $("tkd").addEventListener("click", function (e) { if (e.target === $("tkd")) closeTk(); });
+    c.addEventListener("click", openTk);
+    $("tk-go").addEventListener("click", function () { copyText(lookMessage($("tk-name").value.trim() || null, $("tk-note").value.trim() || null)); closeTk(); });
   }
   function renderChosen() {
     var st = curStyle(), box = $("chosen"); box.innerHTML = "";
@@ -1522,7 +1533,7 @@
     $("count").title = codes.join(", ");
     $("count").setAttribute("aria-label", "My picks: " + items.length + " picked");
     var admin = isVidpodCode();
-    $("review-btn").textContent = admin ? "Make these" : "Send to VIDPOD";
+    $("review-btn").textContent = admin ? "Save my picks" : "Send to VIDPOD";
     $("review-btn").disabled = items.length === 0;
     $("tpl-btn").hidden = !admin;
     if ($("mk") && $("mk").open) renderMk();
@@ -1620,9 +1631,9 @@
     btn.disabled = true; btn.textContent = "Sending";
     local("vidpod-studio-last-make-" + B.client.id, JSON.stringify({ batch: batch, rows: rows }));
     post("Picks", rows, { project: j.project || "" }).then(function (ok) {
-      btn.disabled = false; btn.textContent = "Make these";
-      toast(ok ? "Sent to the job sheet. Tell Claude: run my picks" : "Saved on this device. Try again when online.");
-      $("mk-msg").textContent = (ok ? "Sent as " + batch + ". " : "") + msg;
+      btn.disabled = false; btn.textContent = "Save my picks";
+      toast(ok ? "Saved. Nothing is made yet." : "Saved on this device. Try again when online.");
+      $("mk-msg").textContent = (ok ? 'Saved. Nothing is made yet. Now tell Claude: "run my picks for ' + j.video + '". It shows you the list and asks before making anything. ' : "") + msg;
     });
   }
   function copyMessage() {
@@ -1646,7 +1657,7 @@
   function renderStageLine() {
     var n = $("stage-line"); if (!n) return;
     n.innerHTML = isVidpodCode()
-      ? "<b>Studio.</b> Tap a name to play it on " + esc(B.client.id === "vidpod" ? "the footage" : B.client.name + "'s footage") + ". Pick, adjust, then <b>Make these</b> or copy the list to Claude."
+      ? "<b>Studio.</b> Tap a name to play it on " + esc(B.client.id === "vidpod" ? "the footage" : B.client.name + "'s footage") + ". Pick, adjust, then <b>Copy for Claude</b> for one look, or <b>Save my picks</b> for the whole video."
       : "<b>Pick your looks.</b> Tap a name to see it on your footage, then tap the circle to pick it.";
   }
   function openReview() {

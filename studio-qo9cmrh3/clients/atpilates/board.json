@@ -702,7 +702,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-09.jpg",
@@ -783,7 +790,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-01.jpg",
@@ -863,7 +877,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-02.jpg",
@@ -944,7 +965,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-03.jpg",
@@ -1024,7 +1052,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-04.jpg",
@@ -1105,7 +1140,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-05.jpg",
@@ -1186,7 +1228,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-06.jpg",
@@ -1267,7 +1316,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-07.jpg",
@@ -1348,7 +1404,14 @@
       "needs": [
        "words"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Which video",
+       "Names spelled right (Claude reads them back)"
+      ],
+      "change": [
+       "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/SUB-08.jpg",
@@ -1463,7 +1526,18 @@
        "line",
        "cutout"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-01.jpg",
@@ -1550,7 +1624,18 @@
        "line",
        "cutout"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-02.jpg",
@@ -1633,7 +1718,18 @@
       "needs": [
        "line"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-03.jpg",
@@ -1717,7 +1813,18 @@
       "needs": [
        "line"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-04.jpg",
@@ -1801,7 +1908,18 @@
        "line",
        "cutout"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-05.jpg",
@@ -1887,7 +2005,18 @@
        "line",
        "cutout"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-06.jpg",
@@ -1975,7 +2104,18 @@
       "needs": [
        "headline"
       ],
-      "makes": "layer+move"
+      "makes": "layer+move",
+      "ask": [
+       "The opening line (Claude suggests one from your video, or you type a headline)"
+      ],
+      "change": [
+       "the words",
+       "font",
+       "size",
+       "position",
+       "colours",
+       "when it shows"
+      ]
      },
      "preview": {
       "still": "clients/atpilates/looks/HOOK-09.jpg",
@@ -2019,7 +2159,16 @@
        "cutout",
        "word"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The one word to show behind the person (Claude suggests one they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the word",
+       "when it comes in",
+       "how big"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2055,7 +2204,17 @@
        "cutout",
        "word"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The one word in glass behind the person (Claude suggests one they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the word",
+       "font",
+       "how big",
+       "when it comes in"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2091,7 +2250,16 @@
        "words",
        "word"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The word that flickers (from what they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the word",
+       "how long it flickers",
+       "size"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2173,7 +2341,11 @@
       "needs": [
        "cutout"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2231,7 +2403,11 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2290,7 +2466,11 @@
       "needs": [
        "broll"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2348,7 +2528,11 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2407,7 +2591,11 @@
       "needs": [
        "broll"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2466,7 +2654,11 @@
       "needs": [
        "broll"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2526,7 +2718,11 @@
        "number",
        "broll"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2584,7 +2780,11 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -2613,7 +2813,15 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Which lines to punch in on (Claude suggests the strongest)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "how close",
+       "how many punch-ins"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2649,7 +2857,17 @@
        "cutout",
        "word"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "A headline and a small line under it (from what they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the words",
+       "where they sit",
+       "size",
+       "circle on or off"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2685,7 +2903,19 @@
        "cutout",
        "clips"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "6 to 12 thumbnails or photos to fill the wall: your videos, posts or photos (or stills from this video)",
+       "A label and view count for each, if you want them",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the pictures",
+       "labels",
+       "view counts on or off",
+       "how many columns",
+       "how fast it fills"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2721,7 +2951,16 @@
        "cutout",
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Which moments get a doodle (Claude suggests them)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "doodle shapes",
+       "colours",
+       "where and when they appear"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2757,7 +2996,20 @@
        "cutout",
        "photos"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "What goes on the cards: your logo, a few photos or clips, or stills from this video",
+       "A short title for each card (Claude can take them from what they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the cards",
+       "titles",
+       "how many (3 to 9)",
+       "view counts on or off",
+       "speed",
+       "height on the body"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2792,7 +3044,15 @@
       "needs": [
        "clips"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The screen it pulls back to: a screen recording of an app or page",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "what the screen says",
+       "timing"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2828,7 +3088,18 @@
        "cutout",
        "app"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The app name and the message or card shown on the phone",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "which side",
+       "size",
+       "tilt",
+       "app name",
+       "the message"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2863,7 +3134,16 @@
       "needs": [
        "cutout"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The moment for it (Claude suggests one)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "zoom in or out",
+       "how strong",
+       "how long"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2898,7 +3178,18 @@
       "needs": [
        "cutout"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The account name and caption on the post (and likes and comments, if wanted)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "app look",
+       "username",
+       "caption",
+       "likes",
+       "when it pops"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2934,7 +3225,17 @@
        "cutout",
        "app"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The app name and the screens or thumbnails to show",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "app name",
+       "colour",
+       "the screens",
+       "the typed line"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2969,7 +3270,16 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The words on the screen (from what they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the words",
+       "size",
+       "when"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3049,7 +3359,13 @@
       "needs": [
        "number"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3107,7 +3423,13 @@
       "needs": [
        "number"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3165,7 +3487,13 @@
       "needs": [
        "quote"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3222,7 +3550,13 @@
       "needs": [
        "line"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3278,7 +3612,13 @@
       "needs": [
        "photos"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3337,7 +3677,13 @@
       "needs": [
        "broll"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3393,7 +3739,13 @@
       "needs": [
        "list"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3449,7 +3801,13 @@
       "needs": [
        "place"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3505,7 +3863,13 @@
       "needs": [
        "photos"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3563,7 +3927,13 @@
        "number",
        "broll"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3620,7 +3990,13 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3678,7 +4054,13 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3734,7 +4116,13 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "Customise where it has controls"
+      ]
      }
     },
     {
@@ -3763,7 +4151,17 @@
       "needs": [
        "number"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The number they say: from and to, and its label (only numbers they said)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "label",
+       "from and to",
+       "$ or %",
+       "timing"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3798,7 +4196,15 @@
       "needs": [
        "number"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The before and after: two numbers or states they say",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the two cards",
+       "zoom timing"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3839,7 +4245,17 @@
        "cutout",
        "number"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The values over time and their labels (only numbers they said)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "labels",
+       "values",
+       "which part is highlighted",
+       "colour"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3874,7 +4290,17 @@
       "needs": [
        "list"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "A title and 3 to 5 items (from what they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "title",
+       "items",
+       "where it sits",
+       "when each ticks"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3915,7 +4341,16 @@
        "cutout",
        "headlines"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Headlines or posts to show: screenshots or text",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the cards",
+       "how many",
+       "columns"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3951,7 +4386,17 @@
        "words",
        "photos"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "2 to 4 photos, each with a short word",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the photos",
+       "the words",
+       "timing",
+       "flash on or off"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3986,7 +4431,15 @@
       "needs": [
        "words"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The words that pour into the box (from what they say)",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the words",
+       "timing"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4022,7 +4475,17 @@
       "needs": [
        "article"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The article or headline: a link or a screenshot",
+       "The 1 to 3 phrases to highlight",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the phrases",
+       "tilt",
+       "vertical or wide"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4124,7 +4587,14 @@
       "needs": [
        "name"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Their name and role, exactly as it should read",
+       "When it comes in (Claude suggests when they start talking)"
+      ],
+      "change": [
+       "Customise: font, size, position (or Anywhere), colours"
+      ]
      }
     },
     {
@@ -4192,7 +4662,14 @@
       "needs": [
        "name"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Their name and role, exactly as it should read",
+       "When it comes in (Claude suggests when they start talking)"
+      ],
+      "change": [
+       "Customise: font, size, position (or Anywhere), colours"
+      ]
      }
     },
     {
@@ -4260,7 +4737,14 @@
       "needs": [
        "name"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Their name and role, exactly as it should read",
+       "When it comes in (Claude suggests when they start talking)"
+      ],
+      "change": [
+       "Customise: font, size, position (or Anywhere), colours"
+      ]
      }
     },
     {
@@ -4328,7 +4812,14 @@
       "needs": [
        "name"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Their name and role, exactly as it should read",
+       "When it comes in (Claude suggests when they start talking)"
+      ],
+      "change": [
+       "Customise: font, size, position (or Anywhere), colours"
+      ]
      }
     },
     {
@@ -4396,7 +4887,14 @@
       "needs": [
        "name"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Their name and role, exactly as it should read",
+       "When it comes in (Claude suggests when they start talking)"
+      ],
+      "change": [
+       "Customise: font, size, position (or Anywhere), colours"
+      ]
      }
     },
     {
@@ -4464,7 +4962,14 @@
       "needs": [
        "name"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Their name and role, exactly as it should read",
+       "When it comes in (Claude suggests when they start talking)"
+      ],
+      "change": [
+       "Customise: font, size, position (or Anywhere), colours"
+      ]
      }
     }
    ],
@@ -4548,7 +5053,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4608,7 +5123,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4668,7 +5193,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4728,7 +5263,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4788,7 +5333,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4848,7 +5403,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4908,7 +5473,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -4968,7 +5543,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -5028,7 +5613,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -5088,7 +5683,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     },
     {
@@ -5148,7 +5753,17 @@
       "needs": [
        "logo"
       ],
-      "makes": "endcard"
+      "makes": "endcard",
+      "ask": [
+       "Your logo file, if it is not the one on this board",
+       "Start or end of the video"
+      ],
+      "change": [
+       "background",
+       "size",
+       "speed",
+       "small label"
+      ]
      }
     }
    ],
@@ -5220,7 +5835,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5276,7 +5895,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5330,7 +5953,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5384,7 +6011,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5439,7 +6070,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5493,7 +6128,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5547,7 +6186,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5601,7 +6244,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5656,7 +6303,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5711,7 +6362,11 @@
        "quote",
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5765,7 +6420,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5819,7 +6478,11 @@
       "needs": [
        "takes"
       ],
-      "makes": "layer"
+      "makes": "layer",
+      "ask": [
+       "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
+      ],
+      "change": []
      }
     },
     {
@@ -5848,7 +6511,15 @@
       "needs": [
        "takes"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The two takes to join, and the cut point",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "how strong",
+       "blur"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -5899,7 +6570,15 @@
       "needs": [
        "cutout"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The new background: an image, a colour or a video",
+       "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
+      ],
+      "change": [
+       "the background",
+       "a headline on it"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",
@@ -5950,7 +6629,16 @@
        "clips",
        "word"
       ],
-      "makes": "finished"
+      "makes": "finished",
+      "ask": [
+       "The call to action word (for example: comment DEMAND)",
+       "Tiles: clips or photos"
+      ],
+      "change": [
+       "the word",
+       "title",
+       "the tiles"
+      ]
      },
      "recipe": {
       "renderer": "prerendered",

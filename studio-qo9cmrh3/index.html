@@ -679,6 +679,12 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
   .kit .hlinks, .kit #review-btn, .kit #tpl-btn, .kit .made-for { display: none !important; }
   /* 8 Nov 2026 (Tommy): on the web the close-up adds nothing, show the whole phone instead; phones keep it */
   @media (min-width: 980px) { .stage > .cu-slot { display: none !important; } .phone { --ph: min(calc(100vh - var(--head-h) - var(--bar-h) - 38px - 215px), 820px); } }
+  /* Copy for Claude panel (8 Nov 2026) */
+  .tk-look { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
+  .tk-list { margin: 0 0 6px; padding-left: 18px; font-size: 14px; line-height: 1.45; }
+  .tk-change { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+  #tkd textarea { width: 100%; font: inherit; font-size: 15px; border: 1px solid var(--line-strong); border-radius: 10px; padding: 8px 10px; background: var(--bg); color: var(--fg); resize: vertical; }
+  #tpl-btn { display: none !important; }
 </style>
 
 <header class="top">
@@ -739,7 +745,7 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
     </div>
     <p class="check-note" id="check-note" aria-live="polite"></p>
     <div class="needs" id="needs" aria-live="polite"></div>
-    <div class="take" id="take"><button type="button" class="tk" id="tk-copy">Copy for Claude</button><button type="button" class="tk ghost" id="tk-lock">Lock it as a name</button></div>
+    <div class="take" id="take"><button type="button" class="tk" id="tk-copy">Copy for Claude</button></div>
     <button type="button" class="ibtn close-full" id="close-full" aria-label="Close full screen"></button>
   </section>
 
@@ -788,10 +794,25 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
     <p class="err" id="mk-err" hidden></p>
     <div class="mk-acts">
       <button type="button" class="btn ghost" id="mk-copy">Copy as message</button>
-      <button type="button" class="btn ghost" id="mk-tpl">Save as template</button>
-      <button type="button" class="btn" id="mk-make">Make these</button>
+      <button type="button" class="btn ghost" id="mk-tpl" hidden>Save as template</button>
+      <button type="button" class="btn" id="mk-make">Save my picks</button>
     </div>
-    <p class="mk-small">Make these sends the list to VIDPOD's job sheet, so Claude can run it. Copy as message gives you the same list to paste to Claude.</p>
+    <p class="mk-small">Nothing is made yet. Save my picks keeps this list for this video; then tell Claude "run my picks for" the video, and it shows you the list and asks before making anything. Copy as message gives you the same list to paste.</p>
+  </div>
+</dialog>
+
+<dialog class="sheet drawer" id="tkd" aria-labelledby="tk-title">
+  <div class="sheet-body">
+    <div class="mk-head"><h2 id="tk-title">Copy for Claude<span class="dot"></span></h2><button type="button" class="ibtn mk-x" id="tk-close" aria-label="Close"></button></div>
+    <p class="tk-look" id="tk-look"></p>
+    <p class="mk-sec">Claude will ask you for</p>
+    <ul class="tk-list" id="tk-ask"></ul>
+    <p class="mk-sec" id="tk-change-h">You can change</p>
+    <p class="tk-change" id="tk-change"></p>
+    <div class="field"><label for="tk-note">Anything else for Claude? (optional)</label><textarea id="tk-note" maxlength="1000" rows="2" placeholder="For example: use our logo and the 4 photos in the shoot folder"></textarea></div>
+    <div class="field"><label for="tk-name">Name it to use again (optional)</label><input id="tk-name" maxlength="80" autocomplete="off"></div>
+    <div class="mk-acts"><button type="button" class="btn" id="tk-go">Copy</button></div>
+    <p class="mk-small">Nothing is made yet. Paste it to Claude in the folder with your video: Claude checks the names and where it goes, shows you 6 seconds on your video, then makes the full thing.</p>
   </div>
 </dialog>
 
@@ -889,6 +910,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r7m"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7r"></script>
+<script src="studio-core.js?v=r7s"></script>
 
 </html>
