@@ -335,6 +335,7 @@
     return Math.max(ls[0], ls[1] - 0.75);
   }
   function goEnd() {
+    if (!isOwn() && video.readyState < 1) { ensureMain(); video.addEventListener("loadedmetadata", function () { if (S.atEnd) goEnd(); }, { once: true }); }
     var t = heroT(); S.atEnd = true;
     if (isOwn()) { video.pause(); setClock(t, false); }
     else { ensureMain(); video.pause(); try { video.currentTime = t; } catch (e) {} }
@@ -2111,7 +2112,7 @@
     $("tabs").addEventListener("scroll", tabFade, { passive: true }); window.addEventListener("resize", tabFade);
     $("sz-btn").addEventListener("click", function () { openMenu("sz"); }); $("clip-btn").addEventListener("click", function () { openMenu("clip"); });
     if (SIGN) post("Sign-ins", [{ section: "", optionCode: "", label: SIGN.fresh ? "Signed in" : "Came back", settings: { board: B.client.id, hash: location.hash || "", page: location.host || "claude", screen: window.innerWidth + "x" + window.innerHeight }, note: (navigator.userAgent || "").slice(0, 160) }]);
-    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, lookMessage: function (n) { return lookMessage(n); }, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
+    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, lookMessage: function (n) { return lookMessage(n); }, hero: function () { return heroT(); }, goEnd: function () { goEnd(); }, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
   }
   /* ---- which board: #atpilates (or #atpilates/hook) opens that client's board; no hash opens the VIDPOD standard board ---- */
   var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions", "backgrounds", "endcard"];
@@ -2271,6 +2272,8 @@
     if (!cfg) { $("veil").textContent = "The studio could not load. Check your connection and refresh."; return; }
     LOG_URL = /^https:\/\//.test(cfg.log_endpoint || "") ? cfg.log_endpoint : "";
     CODES = cfg.codes || {};
+    // the friend kit (tools/make_share_kit.py): no Sheet, no VIDPOD send, no mood board; looks go to Claude with Copy for Claude
+    if (cfg.kit) { document.documentElement.classList.add("kit"); }
     return gate(cfg).then(function (sg) {
       SIGN = sg;
       var r = route(), vp = String(sg.code).toUpperCase() === "VIDPOD", startClient = (r.explicit && vp) ? r.client : (sg.board || "vidpod");
