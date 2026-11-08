@@ -208,7 +208,7 @@
     return {
       L: L, f: f, hex: sw.hex, colourId: sw.id, hex2: sw2 ? sw2.hex : null, colour2Id: sw2 ? sw2.id : null, shadow: isLight(sw.hex) ? BB.brand.shadow : "none", seg: segm, card: stage.card, B: BB,
       media: stage.media, backdrop: stage.backdrop, under: stage.under, over: stage.over, safe: B.safe,
-      clipKey: fixKey(), frame1: sd.id === "hook" && (L.timing || "frame1") === "frame1",
+      clipKey: fixKey(), frame1: sd.id === "hook" && (L.timing || "spoken") === "frame1",
       px: function (n) { return n * stage.scale(); },
       hook: function () { return parseHook(hookTextFor(L), segm); },
       // a still of the last frame before the cut, so pushes and dissolves can show both shots at once
@@ -317,8 +317,32 @@
   function playing() { return isOwn() ? !LC.paused : !video.paused; }
   function clockT() { var L2 = seg()[1], t = LC.paused ? LC.at : performance.now() / 1000 - LC.t0; return ((t % L2) + L2) % L2; }
   function setClock(t, play) { LC.at = t; LC.t0 = performance.now() / 1000 - t; if (play != null) LC.paused = !play; }
-  function startPlay() { if (isOwn()) { if (LC.paused) { setClock(clockT(), true); setPlayIcon(); } return; } ensureMain(); if (video.paused) video.play().catch(function () {}); }
-  function togglePlay() { if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } ensureMain(); if (video.paused) video.play().catch(function () {}); else video.pause(); }
+  function startPlay() { if (S.atEnd) { replay(); return; } if (isOwn()) { if (LC.paused) { setClock(clockT(), true); setPlayIcon(); } return; } ensureMain(); if (video.paused) video.play().catch(function () {}); }
+  /* 8 Nov 2026 (Tommy: "press on one. It shows what it will actually be at the end of it ... then you see it animate by
+     pressing play"): tapping a look shows its finished state, paused. Play from there runs it from the start. */
+  function heroT() {
+    var st = curStyle(), sd = sec(S.sec), s = seg(), pv = st && st.preview, ls = lookSeg(st, sd);
+    if (isOwn()) {
+      var L2 = s[1];
+      if (pv && pv.hero != null) return Math.min(L2 - 0.05, pv.hero);
+      if (S.sec === "subtitles") return Math.min(L2 - 0.1, 2.0);
+      if (S.sec === "transitions") return L2 / 2;
+      return Math.max(0, L2 - (pv && pv.engine === "studio" ? 0.75 : 0.12));
+    }
+    if (st && st.hero != null) return ls[0] + st.hero;
+    if (S.sec === "subtitles") return ls[0] + Math.min(2.0, (ls[1] - ls[0]) / 2);
+    if (S.sec === "transitions") return (ls[0] + ls[1]) / 2;
+    return Math.max(ls[0], ls[1] - 0.75);
+  }
+  function goEnd() {
+    var t = heroT(); S.atEnd = true;
+    if (isOwn()) { video.pause(); setClock(t, false); }
+    else { ensureMain(); video.pause(); try { video.currentTime = t; } catch (e) {} }
+    if (live && live.tl) live.tl.seek(t, false);
+    $("t-end").textContent = fmt(seg()[1] - seg()[0]); setPlayIcon();
+  }
+  function endUI() { var b = $("endplay"); if (b) b.hidden = !(S.atEnd && !playing()); }
+  function togglePlay() { if (S.atEnd) { replay(); return; } if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } ensureMain(); if (video.paused) video.play().catch(function () {}); else video.pause(); }
   function curStyle() { return styleDef(sec(S.sec), look().style); }
   function hasCtl(name) { return sec(S.sec).controls.indexOf(name) >= 0; }
   // the Hook tab plays the opener and then 3.5 s of the house subtitles taking over (OPENERS.md handover)
@@ -389,6 +413,7 @@
     r.tl.seek(isOwn() ? clockT() : Math.max(seg()[0], video.currentTime || 0), false);
     syncPosSlider();
     refreshUI();
+    if (S.wantEnd) { S.wantEnd = false; goEnd(); }
     if (CU.ok) cuSync();
   }
   function teardown() {
@@ -407,7 +432,10 @@
     if (!h) h = live.block.offsetHeight;
     return Math.round(h);
   }
-  function yRange() { var h = blockH(), z = B.safe; var lo = z.y0 + h / 2, hi = z.y1 - h / 2; if (lo > hi) { lo = hi = (z.y0 + z.y1) / 2; } return [Math.round(lo), Math.round(hi)]; }
+  /* "Anywhere" (8 Nov 2026, Tommy: "a way to press it, which goes to basically anywhere"): safe zones off, the words can go
+     anywhere in the frame, up, down and sideways (L.free + L.x, the sideways shift in canvas px). */
+  function freeX(L, w) { var z = B.safe; return L.free ? Math.round(Math.max(-z.x0, Math.min(1080 - z.x1, L.x || 0))) : 0; }
+  function yRange() { var h = blockH(), z = B.safe; if (look().free) return [Math.round(h / 2 + 8), Math.round(1920 - h / 2 - 8)]; var lo = z.y0 + h / 2, hi = z.y1 - h / 2; if (lo > hi) { lo = hi = (z.y0 + z.y1) / 2; } return [Math.round(lo), Math.round(hi)]; }
   /* the name card and the subtitle line never overlap: when they would, the name sits just above the subtitles.
      Subtitle block height is estimated from its size and lines (the render uses the same rule, so picks match). */
   function subsBox() {
@@ -427,9 +455,9 @@
     var L = look(), z = B.safe, h = blockH();
     if (L.y == null) return;
     L.y = clampY(L.y);
-    if (S.sec === "name") L.y = clearOfSubs(L.y, h);
+    if (S.sec === "name" && !L.free) L.y = clearOfSubs(L.y, h);
     var b = live.block;
-    b.style.left = z.x0 + "px"; b.style.width = (z.x1 - z.x0) + "px"; b.style.height = h + "px"; b.style.top = Math.round(L.y - h / 2) + "px";
+    b.style.left = (z.x0 + freeX(L)) + "px"; b.style.width = (z.x1 - z.x0) + "px"; b.style.height = h + "px"; b.style.top = Math.round(L.y - h / 2) + "px";
     updateGrab();
   }
 
@@ -556,12 +584,13 @@
     $("scrub").style.setProperty("--p", (p * 100).toFixed(2) + "%");
     $("t-now").textContent = fmt(t - s[0]);
     cuRender(now || performance.now());
+    endUI();
     playAllTick(t);
     requestAnimationFrame(frame);
   }
   function setPlayIcon() { var playing = isOwn() ? !LC.paused : !video.paused; $("play").innerHTML = playing ? I.pause : I.play; $("play").setAttribute("aria-label", playing ? "Pause" : "Play"); $("play-l").textContent = playing ? "Pause" : "Play"; }
   function goSeg(play) {
-    var s = seg();
+    var s = seg(); if (play) S.atEnd = false;
     if (isOwn()) { video.pause(); setClock(0, !!play && !reduceMotion); $("t-end").textContent = fmt(s[1] - s[0]); setPlayIcon(); return; }
     ensureMain(); try { video.currentTime = s[0]; } catch (e) {} $("t-end").textContent = fmt(s[1] - s[0]);
     if (play && !reduceMotion) video.play().catch(function () {}); setPlayIcon();
@@ -627,11 +656,11 @@
     if (!canDrag()) { grab.hidden = true; return; }
     var L = look(), z = B.safe, h = Math.max(blockH(), 90);
     grab.hidden = false;
-    grab.style.left = (z.x0 * scale) + "px"; grab.style.width = ((z.x1 - z.x0) * scale) + "px";
+    grab.style.left = ((z.x0 + freeX(L)) * scale) + "px"; grab.style.width = ((z.x1 - z.x0) * scale) + "px";
     grab.style.top = ((L.y - h / 2) * scale) + "px"; grab.style.height = (h * scale) + "px";
   }
   function snapY(y) {
-    var best = null;
+    var best = null; if (look().free) return { y: Math.round(y), snap: null };
     (B.snaps || []).forEach(function (sn) { var c = clampY(sn.y); if (Math.abs(y - c) < 34 && (best === null || Math.abs(y - c) < Math.abs(y - best.c))) best = { c: c, y: sn.y }; });
     return best ? { y: best.c, snap: best.y } : { y: Math.round(y / 2) * 2, snap: null };
   }
@@ -639,18 +668,19 @@
     if (!canDrag()) return;
     e.preventDefault();
     dragging = true; grab.classList.add("active"); grab.setPointerCapture(e.pointerId);
-    dragStart = { cy: e.clientY, y: look().y }; hideHint(); refreshUI();
+    dragStart = { cy: e.clientY, cx: e.clientX, y: look().y, x: look().x || 0 }; hideHint(); refreshUI();
   });
   grab.addEventListener("pointermove", function (e) {
     if (!dragging) return;
     var raw = clampY(dragStart.y + (e.clientY - dragStart.cy) / scale), s = snapY(raw);
-    look().y = s.y; if (activeSnap !== s.snap) { activeSnap = s.snap; refreshUI(); }
+    look().y = s.y; if (look().free) { look().x = dragStart.x + (e.clientX - dragStart.cx) / scale; look().x = freeX(look()); }
+    if (activeSnap !== s.snap) { activeSnap = s.snap; refreshUI(); }
     place(); syncPosSlider(); markDirty();
   });
   function endDrag() { if (!dragging) return; dragging = false; activeSnap = null; grab.classList.remove("active"); refreshUI(); save(); }
   grab.addEventListener("pointerup", endDrag); grab.addEventListener("pointercancel", endDrag);
   var hintShown = false;
-  function showHint() { if (hintShown || !canDrag()) return; hintShown = true; $("drag-hint").classList.add("show"); grab.classList.add("hint"); setTimeout(hideHint, 3200); }
+  function showHint() { if (hintShown || !canDrag() || !S.adjust) return;   /* only while Customise is open: no dashed box on opening */ hintShown = true; $("drag-hint").classList.add("show"); grab.classList.add("hint"); setTimeout(hideHint, 3200); }
   function hideHint() { $("drag-hint").classList.remove("show"); grab.classList.remove("hint"); }
 
   /* ================= option pills: static stills at each option's best frame ================= */
@@ -983,7 +1013,7 @@
     var canAdjust = canAdj(st);
     if (canAdjust) {
       var ab = el("button", "btn ghost adjust-btn", "Adjust"); ab.type = "button"; ab.id = "adjust-btn"; ab.setAttribute("aria-expanded", String(!!S.adjust)); ab.setAttribute("aria-controls", "adjust");
-      ab.addEventListener("click", function () { S.adjust = !S.adjust; showAdjust(); if (curStyle() && curStyle().preview && !fin(curStyle())) rebuild(); if (S.adjust) setTimeout(function () { var r = $("adjust").getBoundingClientRect(); if (r.top > window.innerHeight - 120) $("adjust").scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 60); });
+      ab.addEventListener("click", function () { S.adjust = !S.adjust; showAdjust(); if (curStyle() && curStyle().preview && !fin(curStyle())) { S.wantEnd = true; S.atEnd = true; rebuild(); } if (S.adjust) setTimeout(function () { var r = $("adjust").getBoundingClientRect(); if (r.top > window.innerHeight - 120) $("adjust").scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 60); });
       acts.appendChild(ab);
     }
     acts.appendChild(ub);
@@ -1108,7 +1138,7 @@
       cs.addEventListener("input", function () { L.size = +cs.value; $("out-size").textContent = L.size + " px"; paintRange(cs); changedSoon(); });
     }
     if (hasCtl("lines")) grid.appendChild(seg3("Lines", [[1, "1 line"], [2, "2 lines"]], L.lines || 1, function (v) { L.lines = v; redo(); }));
-    if (hasCtl("wpl")) grid.appendChild(seg3("Words per line", [[0, "Auto"], [2, "2"], [3, "3"], [4, "4"], [5, "5"]], +L.wpl || 0, function (v) { L.wpl = v; redo(); }));
+    if (hasCtl("wpl")) grid.appendChild(seg3("Words per line", [[0, "Auto"], [1, "1 to 2"], [2, "2"], [3, "3"], [4, "4"], [5, "5"]], +L.wpl || 0, function (v) { L.wpl = v; redo(); }));
     var posOK = hasCtl("position") && !st.no_position;
     if (posOK || hasCtl("align")) grpH("Position");
     if (posOK) {
@@ -1117,10 +1147,14 @@
       var snaps = el("div", "chips"); snaps.style.marginBottom = "10px";
       (B.snaps || []).forEach(function (sn) {
         var c = el("button", "chip", esc(sn.label)); c.type = "button"; c.dataset.y = sn.y;
-        c.addEventListener("click", function () { L.y = clampY(sn.y); place(); syncPosSlider(); markDirty(); save(); flashGuide(sn.y); });
+        c.addEventListener("click", function () { L.free = false; L.x = 0; L.y = clampY(sn.y); place(); renderCustom(); syncPosSlider(); markDirty(); save(); flashGuide(sn.y); });
         snaps.appendChild(c);
       });
+      var any = el("button", "chip", "Anywhere"); any.type = "button"; any.setAttribute("aria-pressed", String(!!L.free));
+      any.addEventListener("click", function () { L.free = !L.free; if (!L.free) L.x = 0; place(); syncPosSlider(); markDirty(); save(); renderCustom(); });
+      snaps.appendChild(any);
       pb.appendChild(snaps);
+      if (L.free) pb.appendChild(el("p", "hint", "Safe zones off: drag the words anywhere in the preview, up, down or sideways."));
       var rg = el("input"); rg.type = "range"; rg.id = "ctl-pos"; rg.min = 0; rg.max = 100; rg.step = 1; pb.appendChild(rg);
       pb.appendChild(el("p", "hint", "Or drag the words in the preview."));
       grid.appendChild(pb);
@@ -1164,6 +1198,12 @@
       var shr = shw.querySelector("input"); paintRange(shr);
       shr.addEventListener("input", function () { L.shadow = +shr.value; if (L.fx === "none" || L.fx === "hard") L.fx = "shadow"; $("out-shadow").textContent = shWord(L.shadow) + " " + L.shadow; paintRange(shr); changedSoon(); });
       if (hasCtl("outline")) grid.appendChild(seg3("Outline", [[false, "Off"], [true, "On"]], L.fx === "stroke", function (v) { L.fx = v ? "stroke" : "shadow"; redo(); }));
+      if (L.style === "hk-glow-intro") [["glow", "Glow", 100, "How much the words glow."], ["grade", "Dark shade behind", 80, "The dark fade behind the title. 0 = none."]].forEach(function (g) {
+        var v0 = L[g[0]] == null ? g[2] : +L[g[0]], w = el("div", "wide shadow-row");
+        w.innerHTML = '<p class="label"><label>' + g[1] + '</label><output>' + v0 + '</output></p><input type="range" min="0" max="100" step="5" value="' + v0 + '"><p class="hint">' + g[3] + '</p>';
+        grid.appendChild(w); var r = w.querySelector("input"); paintRange(r);
+        r.addEventListener("input", function () { L[g[0]] = +r.value; w.querySelector("output").textContent = r.value; paintRange(r); changedSoon(); });
+      });
     }
     if (hasCtl("anim") || hasCtl("motion") || hasCtl("speed") || hasCtl("label") || (hasCtl("flash") && st.id === "tr-lens")) grpH("Motion");
     if (hasCtl("anim")) { var an = seg3("Entrance", [["style", "As designed"], ["none", "None"], ["pop", "Pop"], ["rise", "Rise"], ["fade", "Fade"], ["word", "Word by word"]], L.anim || "style", function (v) { L.anim = v; redo(); }); an.classList.add("wide"); grid.appendChild(an); }
@@ -1176,7 +1216,7 @@
     }
     if (S.sec === "hook" && !st.hold) {
       grpH("Timing");
-      var tm = seg3("When it shows", [["frame1", "From the first frame"], ["spoken", "As it is said"]], L.timing || "frame1", function (v) { L.timing = v; redo(); });
+      var tm = seg3("When it shows", [["spoken", "Animates on"], ["frame1", "Already on"]], L.timing || "spoken", function (v) { L.timing = v; redo(); });
       tm.classList.add("wide"); tm.appendChild(el("p", "hint", "Top videos have the hook up on the very first frame. Your subtitles take over when it clears.")); grid.appendChild(tm);
     }
     if (S.sec === "subtitles" && st.id === "cap-chest-punch") renderEmph(grid, L, grpH);
@@ -1255,9 +1295,10 @@
     cp.value = Math.round(v); paintRange(cp);
     var lab = "y " + L.y; (B.snaps || []).forEach(function (sn) { if (clampY(sn.y) === L.y) lab = sn.label; });
     $("out-pos").textContent = lab;
-    Array.prototype.forEach.call(document.querySelectorAll("[data-y]"), function (c) { c.setAttribute("aria-pressed", String(clampY(+c.dataset.y) === L.y)); });
+    if (L.free) lab = "Anywhere, y " + L.y + (L.x ? ", x " + (L.x > 0 ? "+" : "") + L.x : "");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-y]"), function (c) { c.setAttribute("aria-pressed", String(!L.free && clampY(+c.dataset.y) === L.y)); });
   }
-  var LOOK_KEYS = ["style", "font", "size", "y", "colour", "colour2", "case", "lines", "align", "flash", "wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "shadow", "anim", "backing", "motion", "bg", "speed", "label", "timing", "text", "emphClip"];
+  var LOOK_KEYS = ["style", "font", "size", "y", "colour", "colour2", "case", "lines", "align", "flash", "wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "shadow", "anim", "backing", "motion", "bg", "speed", "label", "timing", "text", "emphClip", "free", "x", "glow", "grade"];
   function sameLook(a, b) { return a && b && LOOK_KEYS.every(function (k) { return a[k] === b[k]; }) && JSON.stringify(a.emph || null) === JSON.stringify(b.emph || null); }
   function updateUse() {
     var ub = $("use-btn"); if (!ub) return;
@@ -1276,16 +1317,17 @@
   function changed() { rebuild(); updateUse(); save(); if (S.sec === "hook" || S.sec === "subtitles" || S.sec === "name" || isOwn()) refreshCardsSoon(); }
   var rcT = null;
   function refreshCardsSoon() { clearTimeout(rcT); rcT = setTimeout(function () { cards.forEach(function (c) { if (c.built) mountCard(c); }); }, 400); }
-  function chooseStyle(id, reset) {
+  function chooseStyle(id, reset, auto) {
     var s = sec(S.sec), d = styleDef(s, id), L = look(), keepFont = L.fontTouched && !reset ? L.font : null;
     var n = Object.assign({ style: id }, clone(d.defaults || {}));
     if (keepFont && s.controls.indexOf("font") >= 0) { n.font = keepFont; n.fontTouched = true; }
     if (!reset && s.clock === "loop") ["bg", "speed", "label", "size"].forEach(function (k) { if (L[k] != null) n[k] = L[k]; });
     S.looks[S.sec] = n;
     var newSeg = d.segment || s.segment, oldSeg = seg();
+    if (!auto) { S.wantEnd = true; S.atEnd = true; }
     rebuild(); save();
     markCards(); renderChosen(); renderLead(); renderCustom();
-    if (!d.segment || newSeg[0] !== oldSeg[0] || newSeg[1] !== oldSeg[1] || S.sec === "transitions" || S.sec === "logo" || S.sec === "moves" || S.sec === "graphics") goSeg(true);
+    if (auto && (!d.segment || newSeg[0] !== oldSeg[0] || newSeg[1] !== oldSeg[1] || S.sec === "transitions" || S.sec === "logo" || S.sec === "moves" || S.sec === "graphics")) goSeg(true);
     $("t-end").textContent = fmt(seg()[1] - seg()[0]);
   }
   function usePick() {
@@ -1298,11 +1340,11 @@
     save(); renderTabs(); updateUse(); updateFoot(); markCards();
   }
   function switchSec(id, scroll) {
-    S.sec = id; S.view = null; showBox(false); if (CU.ok) setTimeout(cuSync, 0); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); goSeg(true); rebuild(); save();
+    S.sec = id; S.view = null; showBox(false); if (CU.ok) setTimeout(cuSync, 0); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); S.wantEnd = true; S.atEnd = true; rebuild(); save();
     if (scroll) { var stk = $("sticky"), r = stk.getBoundingClientRect(); if (r.top <= 0) window.scrollTo({ top: window.scrollY + $("panel-body").getBoundingClientRect().top - stk.offsetHeight, behavior: "smooth" }); }
     setTimeout(showHint, 900);
   }
-  function replay() { var s = seg(); if (isOwn()) { setClock(0, true); setPlayIcon(); return; } ensureMain(); try { video.currentTime = s[0]; } catch (e) {} video.play().catch(function () {}); }
+  function replay() { S.atEnd = false; var s = seg(); if (isOwn()) { setClock(0, true); setPlayIcon(); return; } ensureMain(); try { video.currentTime = s[0]; } catch (e) {} video.play().catch(function () {}); }
 
   /* ---- preview on: a board can carry several clips; words, timings, cards and matte follow the chosen clip ---- */
   function clipList() { return (B.clips || []).filter(function (c) { return c.base; }); }
@@ -1597,7 +1639,7 @@
       if (fin(d)) { o.finished = true; o.ref = (d.recipe || {}).ref || null; o.how = (d.recipe || {}).how || ""; picks[s.id] = o; return; }
       if (s.controls.indexOf("font") >= 0) { var fo = fontDef(p.font); o.font = p.font; o.fontFamily = p.font === "brand" ? B.brand.font.sub : fo.family; }
       if (s.controls.indexOf("size") >= 0) o.sizePx = p.size;
-      if (s.controls.indexOf("position") >= 0) o.yPx = p.y;
+      if (s.controls.indexOf("position") >= 0) { o.yPx = p.y; if (p.free) { o.free = true; o.xPx = p.x || 0; o.freeIs = "Anywhere: safe zones off; xPx = sideways shift of the text block, px on 1080x1920"; } }
       if (s.controls.indexOf("lines") >= 0) o.lines = p.lines || 1;
       if (s.controls.indexOf("align") >= 0) o.align = p.align || "left";
       if (s.controls.indexOf("colour") >= 0) { var rl2 = colourRole(p.style); o.colour = p.colour; o.colourHex = swatch(p.colour).hex; o.colourIs = rl2[0]; if (rl2[1]) { o.colour2 = colour2Of(p); o.colour2Hex = swatch(o.colour2).hex; o.colour2Is = rl2[1]; } }
@@ -1605,7 +1647,7 @@
       if (p.shadow != null) { o.shadow = +p.shadow; o.shadowIs = "strength 0 to 100, soft drop shadow (0 = none)"; }
       if (p.flash && p.style === "tr-lens") o.flash = p.flash;
       if (p.hookText) { o.hookText = p.hookText; o.textIs = p.textIs || "quote"; }
-      if (s.id === "hook") o.timing = p.timing || (d.hold ? "frame1" : "frame1");
+      if (s.id === "hook") { o.timing = p.timing || "spoken"; if (p.glow != null) o.glow = p.glow; if (p.grade != null) o.grade = p.grade; }
       if (s.id === "subtitles") { if (Array.isArray(p.emph)) { o.emph = p.emph; o.emphClip = p.emphClip || null; } if (curFixes()) o.fixes = curFixes(); }
       ["wpl", "punct", "hl", "hlStyle", "hlColour", "fx", "anim", "backing", "motion"].forEach(function (k2) { if (s.controls.indexOf(k2 === "hlStyle" || k2 === "hlColour" || k2 === "hl" ? "highlight" : k2 === "fx" ? "outline" : k2) >= 0 && p[k2] != null) o[k2] = p[k2]; });
       if (o.hlColour) o.hlColourHex = swatch(o.hlColour).hex;
@@ -1648,6 +1690,7 @@
 
   /* ---- buttons ---- */
   $("play").addEventListener("click", togglePlay);
+  if ($("endplay")) $("endplay").addEventListener("click", function (e) { e.stopPropagation(); replay(); });
   video.addEventListener("play", setPlayIcon); video.addEventListener("pause", setPlayIcon);
   function setMute() { $("mute").innerHTML = video.muted ? I.mute : I.sound; $("mute").setAttribute("aria-pressed", String(!video.muted)); $("mute").setAttribute("aria-label", video.muted ? "Turn sound on" : "Turn sound off"); }
   $("mute").addEventListener("click", function () { video.muted = !video.muted; setMute(); startPlay(); });
@@ -1662,7 +1705,7 @@
   $("close-full").addEventListener("click", function () { setFull(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setFull(false); });
   var scrub = $("scrub");
-  scrub.addEventListener("input", function () { scrubbing = true; var s = seg(), t = s[0] + (s[1] - s[0]) * scrub.value / 1000; if (isOwn()) setClock(Math.min(t, s[1] - 0.01)); else video.currentTime = t; });
+  scrub.addEventListener("input", function () { scrubbing = true; S.atEnd = false; var s = seg(), t = s[0] + (s[1] - s[0]) * scrub.value / 1000; if (isOwn()) setClock(Math.min(t, s[1] - 0.01)); else video.currentTime = t; });
   scrub.addEventListener("change", function () { scrubbing = false; });
   scrub.addEventListener("pointerup", function () { scrubbing = false; });
 
@@ -1690,8 +1733,8 @@
     if ("IntersectionObserver" in window) new IntersectionObserver(function (ents) { ents.forEach(function (en) { CU.onScreen = en.isIntersecting; if (en.isIntersecting) CU.last = 0; }); }, { threshold: 0 }).observe($("closeup"));
     window.addEventListener("resize", function () { cuSync(); demoFit(); });
     $("dm-custom").addEventListener("click", function () {
-      if (!S.adjust) { S.adjust = true; showAdjust(); rebuild(); }
-      setTimeout(startPlay, 300);   // the demo follows the clock: keep it moving so the words show while adjusting
+      if (!S.adjust) { S.adjust = true; showAdjust(); }
+      S.wantEnd = true; S.atEnd = true; rebuild();   // the finished state, paused: every change shows straight away (Play to watch it)
       setTimeout(function () { var a = $("adjust"); if (a && !a.hidden) a.scrollIntoView({ behavior: "smooth", block: "start" }); }, 80);
     });
     CU.ok = true; cuSync();
@@ -2026,7 +2069,7 @@
     video.muted = true; setMute(); setSfxIcon();
     fit(); if ("ResizeObserver" in window) new ResizeObserver(function () { fit(); place(); }).observe(screenEl); else window.addEventListener("resize", fit);
     renderCheck(); renderClips(); renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); updateFoot();
-    goSeg(true); rebuild(); requestAnimationFrame(frame);
+    S.wantEnd = true; S.atEnd = true; rebuild(); requestAnimationFrame(frame);
     setTimeout(showHint, 1500);
     whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); initStep(); stepSync(); renderStageLine(); updateFoot();
     // phones: the tabs stick just under the window

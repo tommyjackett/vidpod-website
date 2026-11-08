@@ -195,7 +195,10 @@ window.VPLooks = function (K) {
   function chunks(ctx, weight, family, gapEm) {
     var L = ctx.L, size = L.size, maxW = H.maxW(ctx), out = [];
     var mw = function (idx, sz) { return H.lineW(idx.map(function (i) { return { text: wt(i) }; }), weight, sz, family, gapEm); };
-    if (L.lines !== 2 && !(+L.wpl > 2)) {
+    // 8 Nov 2026 (Tommy: "they're really using one word at a time ... earlier I think that was much better"): back to the
+    // original packing (one line fills the safe width, 3 to 4 words, as on the Alisha V1 render). The 1 to 2 word rule
+    // stays only on SUB-09 Chest punch (its own renderer), or when Words per line is set to 1.
+    if (+L.wpl === 1) {
       H.beats(ctx).forEach(function (bt) { var w = mw(bt.idx, size); out.push({ lines: [bt.idx], fs: w > maxW ? Math.floor(size * maxW / w) : size, st: bt.st, en: bt.en }); });
       return out;
     }
@@ -215,12 +218,11 @@ window.VPLooks = function (K) {
         if (cur.length) push();
       }
     });
-    // same timing rule as the default: cut on the first word, hold to the next, linger 0.3 s after a pause over 1 s
+    // the original timing (Alisha V1): on just before the first word, held to the next caption, or 0.6 s after the last word
+    out.forEach(function (c) { c.st = Math.max(ctx.seg[0], W(c.lines[0][0]).t - 0.06); });
     out.forEach(function (c, k) {
       var nx = out[k + 1], fl = c.lines[c.lines.length - 1], le = W(fl[fl.length - 1]).end;
-      c.st = Math.max(ctx.seg[0], W(c.lines[0][0]).t);
-      c.en = nx && W(nx.lines[0][0]).t - le <= 1.0 ? W(nx.lines[0][0]).t : Math.min(le + 0.3, nx ? W(nx.lines[0][0]).t : 1e9);
-      c.en = Math.max(c.en, c.st + 0.04);
+      c.en = nx ? Math.min(nx.st, Math.max(c.st + 0.4, le + 0.6)) : ctx.seg[1] + 1;
     });
     return out;
   }

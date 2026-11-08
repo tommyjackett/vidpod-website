@@ -663,6 +663,10 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #141414; --paper-line: #2A2A2A; } :root:not([data-theme="light"]) .orow.cur .oname .n { background: var(--green); color: #0A0A0A; border-radius: 3px; } }
 :root[data-theme="dark"] { --paper: #141414; --paper-line: #2A2A2A; }
 :root[data-theme="dark"] .orow.cur .oname .n { background: var(--green); color: #0A0A0A; border-radius: 3px; }
+  /* finished state first, Play to animate (8 Nov 2026) */
+  .endplay { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 30; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px 8px 10px; border: 0; border-radius: 999px; background: rgba(10,10,10,.72); color: #fff; font: 600 13px/1 Inter, system-ui, sans-serif; white-space: nowrap; cursor: pointer; }
+  .endplay svg { width: 16px; height: 16px; }
+  .endplay[hidden] { display: none; }
 </style>
 
 <header class="top">
@@ -698,6 +702,7 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
             <div class="grab" id="grab" hidden aria-hidden="true"></div>
             <div class="drag-hint" id="drag-hint">Drag the text to move it</div>
             <div class="loading-veil" id="veil">Loading the preview</div>
+            <button type="button" class="endplay" id="endplay" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Play to see it animate</button>
           </div>
         </div>
       </div>
@@ -867,10 +872,10 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
   </form>
 </div>
 
-<script src="studio-looks.js?v=r6"></script>
-<script src="studio-hooks.js?v=r6b"></script>
+<script src="studio-looks.js?v=r7m"></script>
+<script src="studio-hooks.js?v=r7m"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7l"></script>
+<script src="studio-core.js?v=r7m"></script>
 
 </html>

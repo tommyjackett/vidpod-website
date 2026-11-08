@@ -446,7 +446,9 @@
     var textTop = 200, textBot = textTop + textH;
     // the head top must sit 28 px under the words; the window's top edge 60 px under the head top
     var D = Math.min(420, Math.max(0, textBot + 28 - fc.top)), headTop = fc.top + D;
-    var winTop = Math.round(headTop + 60), winBot = winTop + 300, bandBot = winBot + 26;
+    // 8 Nov 2026 (Tommy: "why is there some sort of random hole, rectangle hole?"): the window now runs to the bottom of
+    // the frame, so it reads as the video in a frame under the headline, not a slot cut in the band.
+    var winTop = Math.round(headTop + 60), winBot = 1920 - M, bandBot = 1920;
     var strip = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + bandBot + "px;overflow:hidden;");
     H.abs(strip, "left:" + M + "px;top:" + winTop + "px;width:" + (1080 - 2 * M) + "px;height:" + (winBot - winTop) + "px;border-radius:" + R0 + "px;box-shadow:0 0 0 2400px " + band + ";");
     var txtBox = H.abs(ctx.under, "left:0;top:0;width:1080px;height:" + winTop + "px;");
@@ -492,7 +494,9 @@
     var top2 = ctx.hex2 && ctx.colour2Id !== "white" ? ctx.hex2 : null;
     var setupFill = top2 || "linear-gradient(180deg," + H.mixHex("#FFFFFF", acc, 0.03) + " 21%," + H.mixHex("#FFFFFF", acc, 0.06) + " 50%," + H.mixHex("#FFFFFF", acc, 0.087) + " 79%)";
     var punchFill = "linear-gradient(180deg," + H.mixHex(acc, "#FFFFFF", 0.03) + " 21%," + acc + " 50%," + H.mixHex(acc, "#000000", 0.06) + " 68%," + H.mixHex(acc, "#000000", 0.13) + " 79%)";
-    var glowSh = function (rgb, widest) { return "0 0 0.15em rgba(" + rgb + ",0.2), 0 0 1.1em rgba(" + rgb + ",0.6), 0 0 2.2em rgba(" + rgb + "," + widest + ")"; };
+    // 8 Nov 2026 (Tommy: "I can't change that sort of drop shadow that you're using behind"): Glow and Dark shade are adjustable
+    var gk = L.glow == null ? 1 : Math.max(0, +L.glow) / 100, gradeK = L.grade == null ? 0.8 : Math.max(0, +L.grade) / 100;
+    var glowSh = function (rgb, widest) { if (!gk) return "none"; return "0 0 0.15em rgba(" + rgb + "," + (0.2 * gk).toFixed(3) + "), 0 0 1.1em rgba(" + rgb + "," + Math.min(1, 0.6 * gk).toFixed(3) + "), 0 0 2.2em rgba(" + rgb + "," + Math.min(1, widest * gk).toFixed(3) + ")"; };
     var lineSpec = [];
     if (l1) lineSpec.push({ text: l1, S: S1, m: m1, top: y1, fill: setupFill, solid: top2 || H.mixHex("#FFFFFF", acc, 0.06), glow: H.rgbOf(H.mixHex(top2 || acc, "#FFFFFF", 0.9)), widest: 0.6 });
     if (l2) lineSpec.push({ text: l2, S: S2, m: m2, top: y2, fill: punchFill, solid: acc, glow: H.rgbOf(H.mixHex(acc, "#FFFFFF", 0.15)), widest: 0.25 });
@@ -521,7 +525,7 @@
       var fin = t >= 0.8 ? 1 : (1 - Math.exp(-t / 0.17)) / (1 - Math.exp(-0.8 / 0.17)), u = Math.max(0, Math.min(1, (seg[1] - o.t) / 0.25)), fout = 1 - (1 - u) * (1 - u);
       title.style.opacity = (o.t >= seg[1] ? 0 : fin * fout).toFixed(3);
       var gi = Math.min(1, t / 0.3), gIn = 1 - (1 - gi) * (1 - gi), gu = Math.max(0, Math.min(1, (seg[1] - o.t) / 0.3)), gOut = 1 - (1 - gu) * (1 - gu);
-      grade.style.opacity = (o.t >= seg[1] ? 0 : 0.8 * gIn * gOut).toFixed(3);
+      grade.style.opacity = (o.t >= seg[1] ? 0 : gradeK * gIn * gOut).toFixed(3);
       if (m && !ctx.card) { m.style.transformOrigin = "50% " + (GZ.oy * 100) + "%"; m.style.transform = sc > 1.0001 ? "scale(" + sc.toFixed(5) + ")" : ""; var bl = 1080 * share * 0.2; m.style.filter = bl > 0.3 ? "blur(" + bl.toFixed(2) + "px)" : ""; }
     };
     tl.fromTo(o, { t: seg[0] }, { t: end, duration: end - seg[0], ease: "none", immediateRender: true, onUpdate: apply }, seg[0]);
