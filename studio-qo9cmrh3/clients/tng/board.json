@@ -748,6 +748,16 @@
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/SUB-09.jpg",
+      "video": "clients/tng/looks/SUB-09.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
+     },
      "recipe": {
       "registry": "measured reference (internal): emphasis captions",
       "how": "Ported from a measured reference. Plain captions: 1 to 2 words, at most 13 characters, lowercase except names, acronyms and I, in the brand bold sans (Inter 700 on VIDPOD) at 95 px, tracking -0.03em, white with a soft dark shadow, centred on the chest (y 1325, 69 % of the height), hard cut exactly on the first spoken word, held to the next caption (after a pause over 1 s: 0.3 s, then clear). About every 8 to 12 s (never more than 4 a minute) an emphasis moment from the strongest words: the lead-in word in a serif italic (DM Serif Display; the brand script on @pilates) at 108 px appears at 117 % and settles to 100 % over 16/30 s, then the keyword (135 px, the brand colour as a light-to-colour gradient with a rim glow and a dark halo) lands 74 px below, over the lead-in's lower half, with a five-beat flicker at 30 beats a second (0.3, 1, 0.08, 1, 0.5, then solid) while rising 22 px; the lead-in dims white to grey as it lands.",
@@ -815,6 +825,16 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/SUB-01.jpg",
+      "video": "clients/tng/looks/SUB-01.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-weight-shift']",
@@ -889,6 +909,16 @@
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/SUB-02.jpg",
+      "video": "clients/tng/looks/SUB-02.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
+     },
      "recipe": {
       "renderer": "studio-looks.js R['cap-per-word-rise']",
       "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
@@ -961,6 +991,16 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/SUB-03.jpg",
+      "video": "clients/tng/looks/SUB-03.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-box-word']",
@@ -1036,6 +1076,16 @@
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/SUB-04.jpg",
+      "video": "clients/tng/looks/SUB-04.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
+     },
      "recipe": {
       "renderer": "studio-looks.js R['cap-karaoke']",
       "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
@@ -1108,6 +1158,16 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/SUB-05.jpg",
+      "video": "clients/tng/looks/SUB-05.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-editorial']",
@@ -1183,6 +1243,16 @@
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/SUB-06.jpg",
+      "video": "clients/tng/looks/SUB-06.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
+     },
      "recipe": {
       "renderer": "studio-looks.js R['cap-colour-pop']",
       "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
@@ -1257,6 +1327,16 @@
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/SUB-07.jpg",
+      "video": "clients/tng/looks/SUB-07.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
+     },
      "recipe": {
       "renderer": "studio-looks.js R['cap-pill-karaoke']",
       "params": "defaults + the client's picks (font, size, y, colour, case, lines, align, flash, hookText)",
@@ -1330,6 +1410,16 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/SUB-08.jpg",
+      "video": "clients/tng/looks/SUB-08.mp4",
+      "loop": 15.4,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio",
+      "hero": 9.2
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-clip-wipe']",
@@ -1442,6 +1532,15 @@
        "when it shows"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-01.jpg",
+      "video": "clients/tng/looks/HOOK-01.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
+     },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-behind-head']",
       "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
@@ -1524,6 +1623,15 @@
        "when it shows"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-02.jpg",
+      "video": "clients/tng/looks/HOOK-02.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
+     },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-quote-box']",
       "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
@@ -1604,6 +1712,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-03.jpg",
+      "video": "clients/tng/looks/HOOK-03.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-mixed-stack']",
@@ -1686,6 +1803,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-04.jpg",
+      "video": "clients/tng/looks/HOOK-04.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-highlight-bars']",
@@ -1772,6 +1898,15 @@
        "when it shows"
       ]
      },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-05.jpg",
+      "video": "clients/tng/looks/HOOK-05.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
+     },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-serif-keyword']",
       "params": "defaults + the client's picks (font, size, colour, colour2, case, hookText; position where allowed). *Stars* in the hook text mark the keyword(s).",
@@ -1851,6 +1986,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-06.jpg",
+      "video": "clients/tng/looks/HOOK-06.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-headline-band']",
@@ -1936,6 +2080,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/tng/looks/HOOK-09.jpg",
+      "video": "clients/tng/looks/HOOK-09.mp4",
+      "loop": 3.64,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-glow-intro']",
