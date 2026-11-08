@@ -1747,7 +1747,7 @@
      preview is on screen; on a phone, once the preview scrolls away, it docks above the Send bar. ---- */
   var CU = { want: local("vidpod-studio-closeup") !== "off", last: 0, ok: false, slotSeen: true, onScreen: true };
   var CU_SECS = ["subtitles", "hook", "name", "logo"];
-  function cuWanted() { return CU_SECS.indexOf(S.sec) >= 0 && !(live && live.pre && !live.focus) && !$("stage").classList.contains("full") && !!live; }   // 8 Nov: back for everyone, under the window; docks on phones (Tommy: "one of the best features")
+  function cuWanted() { return window.innerWidth < 980 && CU_SECS.indexOf(S.sec) >= 0 && !(live && live.pre && !live.focus) && !$("stage").classList.contains("full") && !!live; }   // 8 Nov: back for everyone, under the window; docks on phones (Tommy: "one of the best features")
   function cuSync() {
     var want = cuWanted(), slot = $("cu-slot"), cu = $("closeup");
     slot.hidden = !want;
@@ -1809,7 +1809,7 @@
      Customise opens Adjust right there. ---- */
   var DM = { r: null, off: 0, y: 1400, k: 0.4, lo: null, hi: null, meas: 0 };
   var dmStage = { card: false, media: $("dm-media"), backdrop: $("dm-backdrop"), under: $("dm-under"), over: $("dm-over"), scale: function () { return DM.k; } };
-  function demoOn() { return S.sec === "subtitles"; }
+  function demoOn() { return S.sec === "subtitles" && window.innerWidth < 980; }   // phones only (8 Nov: the web shows the whole phone instead)
   function demoTear() {
     if (DM.r) { try { if (DM.r.tl) DM.r.tl.kill(); if (DM.r.teardown) DM.r.teardown(); } catch (e) {} }
     DM.r = null; ["dm-under", "dm-over", "dm-backdrop", "dm-media"].forEach(function (id) { $(id).innerHTML = ""; });

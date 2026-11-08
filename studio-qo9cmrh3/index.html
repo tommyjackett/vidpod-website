@@ -112,6 +112,9 @@ img { max-width: 100%; display: block; }
 .side.l, .side.r { gap: 4px; }
 
 .side { display: flex; flex-direction: column; gap: 10px; flex: 0 0 auto; }
+/* every button on one centre line, whatever its label length (8 Nov 2026: SAFE ZONES sat off-centre) */
+.side { align-items: center; }
+.side > div { display: flex; flex-direction: column; align-items: center; }
 .ibtn {
   width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg); display: grid; place-items: center; padding: 0;
   transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
@@ -631,7 +634,7 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
   .screen { border-radius: 14px; }
   .side.l { grid-area: l; flex-direction: row; justify-self: end; gap: 4px; }
   .side.r { grid-area: r; flex-direction: row; justify-self: start; gap: 4px; }
-  .side > div { min-width: 44px; display: flex; flex-direction: column; align-items: center; }
+  .side > div { width: 54px; display: flex; flex-direction: column; align-items: center; }
   .side.l .pop, .side.r .pop { top: auto; bottom: calc(100% + 6px); }
   .side.l .pop { left: 0; }
   .side.r .pop { left: auto; right: 0; }
@@ -669,11 +672,13 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
   .endplay[hidden] { display: none; }
   /* take one look to Claude (8 Nov 2026) */
   .take { display: flex; justify-content: center; gap: 8px; margin: 10px 0 2px; flex-wrap: wrap; }
-  .take .tk { border: 1px solid var(--line-strong, rgba(255,255,255,.3)); background: var(--ink, #fff); color: var(--paper, #0a0a0a); border-radius: 999px; padding: 9px 16px; font: 600 13px/1 Inter, system-ui, sans-serif; cursor: pointer; }
-  .take .tk.ghost { background: transparent; color: inherit; }
+  .take .tk { border: 1px solid var(--fg); background: var(--fg); color: var(--bg); border-radius: 999px; padding: 9px 16px; font: 600 13px/1 Inter, system-ui, sans-serif; cursor: pointer; }
+  .take .tk.ghost { background: transparent; color: var(--fg); border-color: var(--line-strong); }
   .stage.full .take { display: none; }
   /* friend kit: nothing that needs VIDPOD's Sheet */
   .kit .hlinks, .kit #review-btn, .kit #tpl-btn, .kit .made-for { display: none !important; }
+  /* 8 Nov 2026 (Tommy): on the web the close-up adds nothing, show the whole phone instead; phones keep it */
+  @media (min-width: 980px) { .stage > .cu-slot { display: none !important; } .phone { --ph: min(calc(100vh - var(--head-h) - var(--bar-h) - 38px - 215px), 820px); } }
 </style>
 
 <header class="top">
@@ -884,6 +889,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r7m"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7q"></script>
+<script src="studio-core.js?v=r7r"></script>
 
 </html>
