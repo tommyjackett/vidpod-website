@@ -342,7 +342,7 @@
     if (live && live.tl) live.tl.seek(t, false);
     $("t-end").textContent = fmt(seg()[1] - seg()[0]); setPlayIcon();
   }
-  function endUI() { var b = $("endplay"); if (b) b.hidden = !(S.atEnd && !playing()); }
+  function endUI() { var b = $("endplay"); if (b) b.hidden = RENDER || !(S.atEnd && !playing()); }   // never in a render (8 Nov: it was baked into frames)
   function togglePlay() { if (S.atEnd) { replay(); return; } if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } ensureMain(); if (video.paused) video.play().catch(function () {}); else video.pause(); }
   function curStyle() { return styleDef(sec(S.sec), look().style); }
   function hasCtl(name) { return sec(S.sec).controls.indexOf(name) >= 0; }
@@ -2123,7 +2123,7 @@
     $("tabs").addEventListener("scroll", tabFade, { passive: true }); window.addEventListener("resize", tabFade);
     $("sz-btn").addEventListener("click", function () { openMenu("sz"); }); $("clip-btn").addEventListener("click", function () { openMenu("clip"); });
     if (SIGN) post("Sign-ins", [{ section: "", optionCode: "", label: SIGN.fresh ? "Signed in" : "Came back", settings: { board: B.client.id, hash: location.hash || "", page: location.host || "claude", screen: window.innerWidth + "x" + window.innerHeight }, note: (navigator.userAgent || "").slice(0, 160) }]);
-    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, lookMessage: function (n) { return lookMessage(n); }, hero: function () { return heroT(); }, goEnd: function () { goEnd(); }, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
+    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, lookMessage: function (n, note) { return lookMessage(n, note); }, hero: function () { return heroT(); }, goEnd: function () { goEnd(); }, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
   }
   /* ---- which board: #atpilates (or #atpilates/hook) opens that client's board; no hash opens the VIDPOD standard board ---- */
   var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions", "backgrounds", "endcard"];

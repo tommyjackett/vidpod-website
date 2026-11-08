@@ -2468,6 +2468,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "B-roll clips",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": []
@@ -2593,6 +2594,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "B-roll clips",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": []
@@ -2656,6 +2658,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "B-roll clips",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": []
@@ -2720,6 +2723,8 @@
       ],
       "makes": "finished",
       "ask": [
+       "The number (only a number they say, with the line it is in)",
+       "B-roll clips",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": []
@@ -3361,6 +3366,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The number (only a number they say, with the line it is in)",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3425,6 +3431,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The number (only a number they say, with the line it is in)",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3489,6 +3496,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The line to quote",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3614,6 +3622,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "Photos",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3679,6 +3688,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "B-roll clips",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3741,6 +3751,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The list items (from what they say)",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3803,6 +3814,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The place name (from what they say)",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3865,6 +3877,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "Photos",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -3929,6 +3942,8 @@
       ],
       "makes": "finished",
       "ask": [
+       "The number (only a number they say, with the line it is in)",
+       "B-roll clips",
        "Where it goes in your video: Claude reads your video and suggests the moment and how long, you confirm"
       ],
       "change": [
@@ -5837,6 +5852,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -5897,6 +5913,7 @@
       ],
       "makes": "layer",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -5955,6 +5972,7 @@
       ],
       "makes": "layer",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6013,6 +6031,7 @@
       ],
       "makes": "layer",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6072,6 +6091,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6130,6 +6150,7 @@
       ],
       "makes": "layer",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6188,6 +6209,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6246,6 +6268,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6305,6 +6328,7 @@
       ],
       "makes": "finished",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6364,6 +6388,8 @@
       ],
       "makes": "layer",
       "ask": [
+       "The line to quote",
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6422,6 +6448,7 @@
       ],
       "makes": "layer",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
@@ -6480,6 +6507,7 @@
       ],
       "makes": "layer",
       "ask": [
+       "The two takes to join",
        "Where it goes in your video: Claude reads your video and suggests the cut and how long, you confirm"
       ],
       "change": []
