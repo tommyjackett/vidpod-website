@@ -1,0 +1,207 @@
+{
+ "brand": {
+  "font": {
+   "label": "VIDPOD font",
+   "sub": "Inter and Archivo Black",
+   "faces": [],
+   "family": "Inter",
+   "w_bold": 800,
+   "w_light": 400,
+   "display": "Archivo Black",
+   "w_display": 400,
+   "scale": 1
+  },
+  "swatches": [
+   {
+    "id": "white",
+    "label": "White",
+    "hex": "#FFFFFF"
+   },
+   {
+    "id": "dark",
+    "label": "Black",
+    "hex": "#0A0A0A"
+   },
+   {
+    "id": "primary",
+    "label": "VIDPOD Green",
+    "hex": "#00FFAA"
+   },
+   {
+    "id": "taupe",
+    "label": "Grey",
+    "hex": "#6B6B6B"
+   }
+  ],
+  "accent": "#00FFAA",
+  "taupe": "#6B6B6B",
+  "ink": "#0A0A0A",
+  "base": "#6B6B6B",
+  "light": "#F5F5F2",
+  "ground": "#FFFFFF",
+  "cream": "#F5F5F2",
+  "warm": "#ECECE7",
+  "shadow": "0 2px 14px rgba(0, 0, 0, .55), 0 1px 2px rgba(0, 0, 0, .35)",
+  "logo_file": "assets/vidpod/vidpod-logo-light.png",
+  "logo_aspect": 2.7925,
+  "logo_backgrounds": [
+   {
+    "id": "white",
+    "label": "White",
+    "key": "ground"
+   },
+   {
+    "id": "brand",
+    "label": "Brand colour",
+    "key": "accent"
+   },
+   {
+    "id": "dark",
+    "label": "Dark",
+    "key": "ink"
+   }
+  ],
+  "shape": {
+   "kind": "rounded",
+   "radius": 28,
+   "note": "VIDPOD cards: rounded rectangles"
+  },
+  "radius_card": 28,
+  "card_shadow": "0 18px 44px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08)",
+  "arch_shadow": "0 30px 70px rgba(0,0,0,.24)",
+  "flare": {
+   "wash": "#FFF4E6",
+   "band": "255,244,230",
+   "note": "neutral warm light"
+  },
+  "leak": [
+   "#FFC9A0",
+   "#F2B48A",
+   "#FFE2BF"
+  ],
+  "tokens": "index.html :root (VIDPOD site tokens: #0A0A0A, #FFFFFF, #00FFAA; Archivo Black, Inter)"
+ },
+ "fonts": [
+  {
+   "id": "brand",
+   "label": "VIDPOD font",
+   "sub": "Inter"
+  },
+  {
+   "id": "gabarito",
+   "label": "Gabarito",
+   "family": "Gabarito",
+   "w_bold": 800,
+   "w_light": 400,
+   "display": "Gabarito",
+   "w_display": 900,
+   "scale": 1.0
+  },
+  {
+   "id": "montserrat",
+   "label": "Montserrat",
+   "family": "Montserrat",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Montserrat",
+   "w_display": 800,
+   "scale": 0.94
+  },
+  {
+   "id": "poppins",
+   "label": "Poppins",
+   "family": "Poppins",
+   "w_bold": 600,
+   "w_light": 300,
+   "display": "Poppins",
+   "w_display": 700,
+   "scale": 0.94
+  },
+  {
+   "id": "tiktok-sans",
+   "label": "TikTok Sans",
+   "family": "TikTok Sans",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "TikTok Sans",
+   "w_display": 800,
+   "scale": 1.0
+  },
+  {
+   "id": "inter",
+   "label": "Inter",
+   "family": "Inter",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Inter",
+   "w_display": 800,
+   "scale": 0.98
+  },
+  {
+   "id": "anton",
+   "label": "Anton",
+   "family": "Anton",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "Anton",
+   "w_display": 400,
+   "scale": 1.08,
+   "light_alpha": 0.6
+  },
+  {
+   "id": "oswald",
+   "label": "Oswald",
+   "family": "Oswald",
+   "w_bold": 600,
+   "w_light": 300,
+   "display": "Oswald",
+   "w_display": 700,
+   "scale": 1.08
+  },
+  {
+   "id": "bebas-neue",
+   "label": "Bebas Neue",
+   "family": "Bebas Neue",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "Bebas Neue",
+   "w_display": 400,
+   "scale": 1.24,
+   "light_alpha": 0.6
+  },
+  {
+   "id": "playfair",
+   "label": "Playfair Display",
+   "family": "Playfair Display",
+   "w_bold": 700,
+   "w_light": 400,
+   "display": "Playfair Display",
+   "w_display": 800,
+   "scale": 0.96
+  },
+  {
+   "id": "dm-serif",
+   "label": "DM Serif Display",
+   "family": "DM Serif Display",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "DM Serif Display",
+   "w_display": 400,
+   "scale": 0.98,
+   "light_alpha": 0.7
+  }
+ ],
+ "client": {
+  "id": "vidpod",
+  "name": "VIDPOD",
+  "person": "Tommy",
+  "logo": "assets/vidpod/vidpod-logo-light.png",
+  "logo_on_dark": "assets/vidpod/vidpod-logo-dark.png",
+  "logo_alt": "VIDPOD",
+  "intro": "Every style plays live on real footage, in your brand. Tap a look, make it yours, then send your picks."
+ },
+ "project": {
+  "id": "vidpod-standard",
+  "label": "VIDPOD standard board"
+ }
+}

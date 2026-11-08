@@ -1,0 +1,226 @@
+{
+ "brand": {
+  "font": {
+   "label": "TNG font",
+   "sub": "Anton and Inter",
+   "faces": [],
+   "family": "Inter",
+   "w_bold": 800,
+   "w_light": 400,
+   "display": "Anton",
+   "w_display": 400,
+   "scale": 1,
+   "note": "Anton is the web stand-in for Helvetica Neue Black Condensed (macOS only, no file); Bebas Neue is the older thumbnail face. Tommy to confirm (Brand Kit README)."
+  },
+  "swatches": [
+   {
+    "id": "white",
+    "label": "White",
+    "hex": "#FFFFFF"
+   },
+   {
+    "id": "dark",
+    "label": "Black",
+    "hex": "#0A0A0A"
+   },
+   {
+    "id": "primary",
+    "label": "TNG Mint",
+    "hex": "#7AD9A8"
+   },
+   {
+    "id": "purple",
+    "label": "TNG Purple",
+    "hex": "#585AF3"
+   },
+   {
+    "id": "taupe",
+    "label": "Deep purple",
+    "hex": "#2C1B8A"
+   }
+  ],
+  "accent": "#7AD9A8",
+  "taupe": "#2C1B8A",
+  "ink": "#0A0A0A",
+  "base": "#12093A",
+  "light": "#FFFFFF",
+  "ground": "#FFFFFF",
+  "cream": "#FFFFFF",
+  "warm": "#EEF0FF",
+  "purple": "#585AF3",
+  "purple_dark": "#2C1B8A",
+  "night": "#12093A",
+  "shadow": "0 2px 12px rgba(10, 10, 10, .5), 0 1px 2px rgba(10, 10, 10, .35)",
+  "logo_file": "assets/clients/tng/tng-logo.png",
+  "logo_aspect": 2.4377,
+  "logo_backgrounds": [
+   {
+    "id": "dark",
+    "label": "Black",
+    "hex": "#0A0A0A"
+   },
+   {
+    "id": "brand",
+    "label": "TNG Purple",
+    "hex": "#585AF3"
+   },
+   {
+    "id": "night",
+    "label": "Night purple",
+    "hex": "#12093A"
+   }
+  ],
+  "shape": {
+   "kind": "bars",
+   "radius": 0,
+   "note": "TNG bars: square purple and mint bars, white text on purple, black text on mint, one mint bar per frame (Carousel/design.md)"
+  },
+  "radius_card": 14,
+  "card_shadow": "0 18px 44px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.2)",
+  "arch_shadow": "0 30px 70px rgba(0,0,0,.4)",
+  "flare": {
+   "wash": "#EEF0FF",
+   "band": "238,240,255",
+   "note": "D13 bloom: light brand tint"
+  },
+  "leak": [
+   "#585AF3",
+   "#7AD9A8",
+   "#2C1B8A"
+  ],
+  "rules": [
+   "One accent per frame: mint or purple, never both as the highlight",
+   "Mint is the punchline colour",
+   "White on purple, black on mint",
+   "No text strokes; all caps for headlines"
+  ],
+  "open_questions": [
+   "Mint: site and carousels use #7AD9A8, the older thumbnail guide says #5BBF8A (used #7AD9A8)",
+   "Logo for light grounds: only the white + mint file exists, so the logo tab offers dark grounds only"
+  ],
+  "tokens": "Brain/Vidpod/clients/TNG/Brand Kit/tokens.css + repos/tng-website/index.html :root (purple #585af3, dark purple #2c1b8a, mint #7ad9a8, Anton + Inter)"
+ },
+ "fonts": [
+  {
+   "id": "brand",
+   "label": "TNG font",
+   "sub": "Anton"
+  },
+  {
+   "id": "gabarito",
+   "label": "Gabarito",
+   "family": "Gabarito",
+   "w_bold": 800,
+   "w_light": 400,
+   "display": "Gabarito",
+   "w_display": 900,
+   "scale": 1.0
+  },
+  {
+   "id": "montserrat",
+   "label": "Montserrat",
+   "family": "Montserrat",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Montserrat",
+   "w_display": 800,
+   "scale": 0.94
+  },
+  {
+   "id": "poppins",
+   "label": "Poppins",
+   "family": "Poppins",
+   "w_bold": 600,
+   "w_light": 300,
+   "display": "Poppins",
+   "w_display": 700,
+   "scale": 0.94
+  },
+  {
+   "id": "tiktok-sans",
+   "label": "TikTok Sans",
+   "family": "TikTok Sans",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "TikTok Sans",
+   "w_display": 800,
+   "scale": 1.0
+  },
+  {
+   "id": "inter",
+   "label": "Inter",
+   "family": "Inter",
+   "w_bold": 700,
+   "w_light": 300,
+   "display": "Inter",
+   "w_display": 800,
+   "scale": 0.98
+  },
+  {
+   "id": "anton",
+   "label": "Anton",
+   "family": "Anton",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "Anton",
+   "w_display": 400,
+   "scale": 1.08,
+   "light_alpha": 0.6
+  },
+  {
+   "id": "oswald",
+   "label": "Oswald",
+   "family": "Oswald",
+   "w_bold": 600,
+   "w_light": 300,
+   "display": "Oswald",
+   "w_display": 700,
+   "scale": 1.08
+  },
+  {
+   "id": "bebas-neue",
+   "label": "Bebas Neue",
+   "family": "Bebas Neue",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "Bebas Neue",
+   "w_display": 400,
+   "scale": 1.24,
+   "light_alpha": 0.6
+  },
+  {
+   "id": "playfair",
+   "label": "Playfair Display",
+   "family": "Playfair Display",
+   "w_bold": 700,
+   "w_light": 400,
+   "display": "Playfair Display",
+   "w_display": 800,
+   "scale": 0.96
+  },
+  {
+   "id": "dm-serif",
+   "label": "DM Serif Display",
+   "family": "DM Serif Display",
+   "w_bold": 400,
+   "w_light": 400,
+   "display": "DM Serif Display",
+   "w_display": 400,
+   "scale": 0.98,
+   "light_alpha": 0.7
+  }
+ ],
+ "client": {
+  "id": "tng",
+  "name": "The Numbers Game",
+  "person": "Jase",
+  "logo": "assets/clients/tng/tng-logo.png",
+  "logo_on_dark": "assets/clients/tng/tng-logo.png",
+  "logo_alt": "The Numbers Game",
+  "intro": "Every style plays live on a real Numbers Game moment, in the show's brand. Tap a look, make it yours, then send your picks."
+ },
+ "project": {
+  "id": "tng-house-style",
+  "label": "The Numbers Game house style (Shorts and snippets)"
+ }
+}
