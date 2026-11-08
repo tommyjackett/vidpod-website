@@ -752,7 +752,12 @@
       "still": "clients/tng/looks/SUB-09.jpg",
       "video": "clients/tng/looks/SUB-09.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1195,
+       940,
+       1455
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -830,7 +835,12 @@
       "still": "clients/tng/looks/SUB-01.jpg",
       "video": "clients/tng/looks/SUB-01.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -913,7 +923,12 @@
       "still": "clients/tng/looks/SUB-02.jpg",
       "video": "clients/tng/looks/SUB-02.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -996,7 +1011,12 @@
       "still": "clients/tng/looks/SUB-03.jpg",
       "video": "clients/tng/looks/SUB-03.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -1080,7 +1100,12 @@
       "still": "clients/tng/looks/SUB-04.jpg",
       "video": "clients/tng/looks/SUB-04.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -1163,7 +1188,12 @@
       "still": "clients/tng/looks/SUB-05.jpg",
       "video": "clients/tng/looks/SUB-05.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -1247,7 +1277,12 @@
       "still": "clients/tng/looks/SUB-06.jpg",
       "video": "clients/tng/looks/SUB-06.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -1331,7 +1366,12 @@
       "still": "clients/tng/looks/SUB-07.jpg",
       "video": "clients/tng/looks/SUB-07.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -1415,7 +1455,12 @@
       "still": "clients/tng/looks/SUB-08.jpg",
       "video": "clients/tng/looks/SUB-08.mp4",
       "loop": 15.4,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio",
@@ -1536,7 +1581,12 @@
       "still": "clients/tng/looks/HOOK-01.jpg",
       "video": "clients/tng/looks/HOOK-01.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       40,
+       40,
+       1040,
+       580
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1627,7 +1677,12 @@
       "still": "clients/tng/looks/HOOK-02.jpg",
       "video": "clients/tng/looks/HOOK-02.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       60,
+       130,
+       1040,
+       420
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1717,7 +1772,12 @@
       "still": "clients/tng/looks/HOOK-03.jpg",
       "video": "clients/tng/looks/HOOK-03.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       40,
+       1020,
+       1040,
+       1300
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1808,7 +1868,12 @@
       "still": "clients/tng/looks/HOOK-04.jpg",
       "video": "clients/tng/looks/HOOK-04.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       60,
+       940,
+       1040,
+       1340
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1902,7 +1967,12 @@
       "still": "clients/tng/looks/HOOK-05.jpg",
       "video": "clients/tng/looks/HOOK-05.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       40,
+       260,
+       1040,
+       620
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1991,7 +2061,12 @@
       "still": "clients/tng/looks/HOOK-06.jpg",
       "video": "clients/tng/looks/HOOK-06.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       40,
+       120,
+       1040,
+       660
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -2085,7 +2160,12 @@
       "still": "clients/tng/looks/HOOK-09.jpg",
       "video": "clients/tng/looks/HOOK-09.mp4",
       "loop": 3.64,
-      "focus": null,
+      "focus": [
+       80,
+       980,
+       1000,
+       1220
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"

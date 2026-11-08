@@ -694,7 +694,12 @@
       "still": "clients/vidpod/looks/SUB-09.jpg",
       "video": "clients/vidpod/looks/SUB-09.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1195,
+       940,
+       1455
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -776,7 +781,12 @@
       "still": "clients/vidpod/looks/SUB-01.jpg",
       "video": "clients/vidpod/looks/SUB-01.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -858,7 +868,12 @@
       "still": "clients/vidpod/looks/SUB-02.jpg",
       "video": "clients/vidpod/looks/SUB-02.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -941,7 +956,12 @@
       "still": "clients/vidpod/looks/SUB-03.jpg",
       "video": "clients/vidpod/looks/SUB-03.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1023,7 +1043,12 @@
       "still": "clients/vidpod/looks/SUB-04.jpg",
       "video": "clients/vidpod/looks/SUB-04.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1106,7 +1131,12 @@
       "still": "clients/vidpod/looks/SUB-05.jpg",
       "video": "clients/vidpod/looks/SUB-05.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1189,7 +1219,12 @@
       "still": "clients/vidpod/looks/SUB-06.jpg",
       "video": "clients/vidpod/looks/SUB-06.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1272,7 +1307,12 @@
       "still": "clients/vidpod/looks/SUB-07.jpg",
       "video": "clients/vidpod/looks/SUB-07.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1355,7 +1395,12 @@
       "still": "clients/vidpod/looks/SUB-08.jpg",
       "video": "clients/vidpod/looks/SUB-08.mp4",
       "loop": 16.0,
-      "focus": null,
+      "focus": [
+       140,
+       1270,
+       940,
+       1530
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1476,7 +1521,12 @@
       "still": "clients/vidpod/looks/HOOK-01.jpg",
       "video": "clients/vidpod/looks/HOOK-01.mp4",
       "loop": 2.96,
-      "focus": null,
+      "focus": [
+       40,
+       40,
+       1040,
+       460
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1568,7 +1618,12 @@
       "still": "clients/vidpod/looks/HOOK-02.jpg",
       "video": "clients/vidpod/looks/HOOK-02.mp4",
       "loop": 2.96,
-      "focus": null,
+      "focus": [
+       60,
+       130,
+       1040,
+       580
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1656,7 +1711,12 @@
       "still": "clients/vidpod/looks/HOOK-03.jpg",
       "video": "clients/vidpod/looks/HOOK-03.mp4",
       "loop": 2.96,
-      "focus": null,
+      "focus": [
+       40,
+       1000,
+       1040,
+       1260
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1745,7 +1805,12 @@
       "still": "clients/vidpod/looks/HOOK-04.jpg",
       "video": "clients/vidpod/looks/HOOK-04.mp4",
       "loop": 2.96,
-      "focus": null,
+      "focus": [
+       60,
+       920,
+       1040,
+       1340
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1834,7 +1899,12 @@
       "still": "clients/vidpod/looks/HOOK-05.jpg",
       "video": "clients/vidpod/looks/HOOK-05.mp4",
       "loop": 2.96,
-      "focus": null,
+      "focus": [
+       40,
+       230,
+       1040,
+       580
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -1925,7 +1995,12 @@
       "still": "clients/vidpod/looks/HOOK-06.jpg",
       "video": "clients/vidpod/looks/HOOK-06.mp4",
       "loop": 2.96,
-      "focus": null,
+      "focus": [
+       40,
+       120,
+       1040,
+       420
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
@@ -2018,7 +2093,12 @@
       "still": "clients/vidpod/looks/HOOK-09.jpg",
       "video": "clients/vidpod/looks/HOOK-09.mp4",
       "loop": 3.48,
-      "focus": null,
+      "focus": [
+       80,
+       1000,
+       1000,
+       1220
+      ],
       "clip": "own",
       "example": false,
       "engine": "studio"
