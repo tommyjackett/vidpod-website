@@ -689,6 +689,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-09.jpg",
+      "video": "clients/vidpod/looks/SUB-09.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -762,6 +771,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-01.jpg",
+      "video": "clients/vidpod/looks/SUB-01.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -835,6 +853,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-02.jpg",
+      "video": "clients/vidpod/looks/SUB-02.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -909,6 +936,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-03.jpg",
+      "video": "clients/vidpod/looks/SUB-03.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -982,6 +1018,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-04.jpg",
+      "video": "clients/vidpod/looks/SUB-04.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1056,6 +1101,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-05.jpg",
+      "video": "clients/vidpod/looks/SUB-05.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1130,6 +1184,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-06.jpg",
+      "video": "clients/vidpod/looks/SUB-06.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1204,6 +1267,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-07.jpg",
+      "video": "clients/vidpod/looks/SUB-07.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1278,6 +1350,15 @@
       "change": [
        "everything in Customise: font, case, size, words per line, position, colours, shadow, motion"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/SUB-08.jpg",
+      "video": "clients/vidpod/looks/SUB-08.mp4",
+      "loop": 16.0,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     }
    ],
@@ -1390,6 +1471,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-01.jpg",
+      "video": "clients/vidpod/looks/HOOK-01.mp4",
+      "loop": 2.96,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1473,6 +1563,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-02.jpg",
+      "video": "clients/vidpod/looks/HOOK-02.mp4",
+      "loop": 2.96,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1552,6 +1651,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-03.jpg",
+      "video": "clients/vidpod/looks/HOOK-03.mp4",
+      "loop": 2.96,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1632,6 +1740,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-04.jpg",
+      "video": "clients/vidpod/looks/HOOK-04.mp4",
+      "loop": 2.96,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1712,6 +1829,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-05.jpg",
+      "video": "clients/vidpod/looks/HOOK-05.mp4",
+      "loop": 2.96,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1794,6 +1920,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-06.jpg",
+      "video": "clients/vidpod/looks/HOOK-06.mp4",
+      "loop": 2.96,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
@@ -1878,6 +2013,15 @@
        "colours",
        "when it shows"
       ]
+     },
+     "preview": {
+      "still": "clients/vidpod/looks/HOOK-09.jpg",
+      "video": "clients/vidpod/looks/HOOK-09.mp4",
+      "loop": 3.48,
+      "focus": null,
+      "clip": "own",
+      "example": false,
+      "engine": "studio"
      }
     },
     {
