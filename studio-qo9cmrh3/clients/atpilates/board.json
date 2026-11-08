@@ -716,7 +716,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 3.5
      }
     },
     {
@@ -1476,7 +1477,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 6.15
      }
     },
     {
@@ -1562,7 +1564,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 6.15
      }
     },
     {
@@ -1644,7 +1647,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 6.2
      }
     },
     {
@@ -1727,7 +1731,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 6.15
      }
     },
     {
@@ -1810,7 +1815,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 6.4
      }
     },
     {
@@ -1895,7 +1901,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero": 6.2
      }
     },
     {

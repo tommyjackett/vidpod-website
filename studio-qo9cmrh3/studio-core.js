@@ -325,12 +325,12 @@
     if (isOwn()) {
       var L2 = s[1];
       if (pv && pv.hero != null) return Math.min(L2 - 0.05, pv.hero);
-      if (S.sec === "subtitles") return Math.min(L2 - 0.1, 2.0);
+      if (S.sec === "subtitles") return Math.min(L2 - 0.1, 3.5);
       if (S.sec === "transitions") return L2 / 2;
       return Math.max(0, L2 - (pv && pv.engine === "studio" ? 0.75 : 0.12));
     }
     if (st && st.hero != null) return ls[0] + st.hero;
-    if (S.sec === "subtitles") return ls[0] + Math.min(2.0, (ls[1] - ls[0]) / 2);
+    if (S.sec === "subtitles") return ls[0] + Math.min(3.5, (ls[1] - ls[0]) / 2);
     if (S.sec === "transitions") return (ls[0] + ls[1]) / 2;
     return Math.max(ls[0], ls[1] - 0.75);
   }
