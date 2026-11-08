@@ -1004,6 +1004,39 @@
     var ex = st && st.preview && st.preview.example ? '<span class="ex">' + esc(st.preview.example_note || "Example on VIDPOD footage. We make it on yours.") + "</span>" : "";
     box.innerHTML = parts.join("") + ex;
   }
+  /* ---- Take it to Claude (8 Nov 2026, Tommy: "I just want to get subtitles ... see it, build it out, quickly lock it in,
+     and paste it back in"): one look, exactly as built, as a message for Claude. Claude makes only this look, on the video
+     in the folder he is working in (tools/one_look.py, runbook ONE-LOOK.md). "Lock it as" names it (e.g. "TNG subtitles
+     January") so it can be used again by name. ---- */
+  function lookMessage(name) {
+    var keep = S.picks, one = {}, L = look(), st = curStyle(), sd = sec(S.sec), doc;
+    one[S.sec] = multi(S.sec) ? [{ style: L.style }] : clone(L); S.picks = one;
+    try { doc = picksDoc(); } finally { S.picks = keep; }
+    var pk = doc.picks[S.sec]; if (Array.isArray(pk)) pk = pk[0];
+    if (S.sec === "hook" && pk) { pk.hookText = hookTextFor(L); pk.textIs = isHeadline(L) ? "headline" : "quote"; }
+    var needs = ((st.menu || {}).needs) || [], tab = TAB_LABEL[S.sec] || sd.tab;
+    var o = { v: 1, client: B.client.id, board: B.client.name, section: S.sec, code: st.code, label: st.label, name: name || null, pick: pk, needs: needs, fixes: curFixes() || null };
+    var lines = ["Make this VidPod look on my video, and only this look (VidPod Studio, " + B.client.name + " board).", "Look: " + st.code + " " + st.label + " (" + tab + ")"];
+    if (name) lines.push('Lock it as: "' + name + '"');
+    if (needs.length) lines.push("It needs: " + needs.map(needText).join(", ") + ".");
+    lines.push("Video: the one in the folder I'm working in (ask me if there are several).");
+    lines.push("VIDPOD-LOOK " + JSON.stringify(o));
+    return lines.join("\n");
+  }
+  function copyText(t) {
+    var done = function () { toast("Copied. Paste it to Claude."); };
+    var fall = function () { var ta = document.createElement("textarea"); ta.value = t; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;left:-9999px;top:0;"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) { window.prompt("Copy this for Claude:", t); } document.body.removeChild(ta); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, fall); else fall();
+  }
+  function initTake() {
+    var c = $("tk-copy"), k = $("tk-lock"); if (!c || !k) return;
+    c.addEventListener("click", function () { copyText(lookMessage(null)); });
+    k.addEventListener("click", function () {
+      var mon = new Date().toLocaleString("en-AU", { month: "long" }), tab = TAB_LABEL[S.sec] || sec(S.sec).tab;
+      var n = window.prompt("Name this look so you can use it again (for example: " + B.client.name + " " + tab.toLowerCase() + " " + mon + ")", B.client.name + " " + tab.toLowerCase() + " " + mon);
+      if (n && n.trim()) copyText(lookMessage(n.trim()));
+    });
+  }
   function renderChosen() {
     var st = curStyle(), box = $("chosen"); box.innerHTML = "";
     var list = sec(S.sec).styles, i = list.findIndex(function (x) { return x.id === st.id; });
@@ -2071,14 +2104,14 @@
     renderCheck(); renderClips(); renderVtype(); renderTabs(); renderHead(); renderLead(); renderRef(); renderCards(); renderChosen(); renderCustom(); updateFoot();
     S.wantEnd = true; S.atEnd = true; rebuild(); requestAnimationFrame(frame);
     setTimeout(showHint, 1500);
-    whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); initStep(); stepSync(); renderStageLine(); updateFoot();
+    whoLines(); initCloseup(); initFeedback(); initTemplates(); initMk(); initStep(); stepSync(); initTake(); renderStageLine(); updateFoot();
     // phones: the tabs stick just under the window
     if ("ResizeObserver" in window) new ResizeObserver(function () { document.documentElement.style.setProperty("--stage-h", "0px"); }).observe($("stage"));
     $("home").addEventListener("click", goStart);
     $("tabs").addEventListener("scroll", tabFade, { passive: true }); window.addEventListener("resize", tabFade);
     $("sz-btn").addEventListener("click", function () { openMenu("sz"); }); $("clip-btn").addEventListener("click", function () { openMenu("clip"); });
     if (SIGN) post("Sign-ins", [{ section: "", optionCode: "", label: SIGN.fresh ? "Signed in" : "Came back", settings: { board: B.client.id, hash: location.hash || "", page: location.host || "claude", screen: window.innerWidth + "x" + window.innerHeight }, note: (navigator.userAgent || "").slice(0, 160) }]);
-    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
+    window.__studio = { S: S, goStart: goStart, switchSec: switchSec, openBox: openBox, templates: function () { return TPL; }, chooseStyle: chooseStyle, lookMessage: function (n) { return lookMessage(n); }, setApp: function (a) { S.app = a; renderCheck(); refreshUI(); }, seek: function (t) { if (isOwn()) { setClock(t, false); setPlayIcon(); return; } video.pause(); video.currentTime = t; }, look: look, useClip: useClip, setLook: function (o) { Object.assign(look(), o); changed(); renderCustom(); }, live: function () { return live; } };
   }
   /* ---- which board: #atpilates (or #atpilates/hook) opens that client's board; no hash opens the VIDPOD standard board ---- */
   var SECTION_IDS = ["subtitles", "hook", "name", "logo", "moves", "graphics", "transitions", "backgrounds", "endcard"];

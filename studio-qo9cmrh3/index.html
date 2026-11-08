@@ -667,6 +667,11 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
   .endplay { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 30; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px 8px 10px; border: 0; border-radius: 999px; background: rgba(10,10,10,.72); color: #fff; font: 600 13px/1 Inter, system-ui, sans-serif; white-space: nowrap; cursor: pointer; }
   .endplay svg { width: 16px; height: 16px; }
   .endplay[hidden] { display: none; }
+  /* take one look to Claude (8 Nov 2026) */
+  .take { display: flex; justify-content: center; gap: 8px; margin: 10px 0 2px; flex-wrap: wrap; }
+  .take .tk { border: 1px solid var(--line-strong, rgba(255,255,255,.3)); background: var(--ink, #fff); color: var(--paper, #0a0a0a); border-radius: 999px; padding: 9px 16px; font: 600 13px/1 Inter, system-ui, sans-serif; cursor: pointer; }
+  .take .tk.ghost { background: transparent; color: inherit; }
+  .stage.full .take { display: none; }
 </style>
 
 <header class="top">
@@ -727,6 +732,7 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
     </div>
     <p class="check-note" id="check-note" aria-live="polite"></p>
     <div class="needs" id="needs" aria-live="polite"></div>
+    <div class="take" id="take"><button type="button" class="tk" id="tk-copy">Copy for Claude</button><button type="button" class="tk ghost" id="tk-lock">Lock it as a name</button></div>
     <button type="button" class="ibtn close-full" id="close-full" aria-label="Close full screen"></button>
   </section>
 
@@ -876,6 +882,6 @@ dialog.drawer { width: min(560px, calc(100vw - 24px)); }
 <script src="studio-hooks.js?v=r7m"></script>
 <script src="studio-looks-2.js?v=r4b"></script>
 <script src="studio-mograph.js?v=r5" defer onerror="this.remove()"></script>
-<script src="studio-core.js?v=r7n"></script>
+<script src="studio-core.js?v=r7o"></script>
 
 </html>
