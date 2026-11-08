@@ -301,12 +301,18 @@
     // phones get the 540x960 copy of the loop (same name + "-540"); if it is missing, the full-size loop
     var full = st.preview.video, small = LITE ? full.replace(/\.mp4$/i, "-540.mp4") : full;
     if (small !== full) v.addEventListener("error", function () { if (v.getAttribute("src") === small) { v.src = full; } }, { once: true });
-    v.src = small; v.poster = st.preview.still;
+    v.src = small; v.poster = st.preview.hero_still || st.preview.still;
     v.style.cssText = "position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;display:block;";
     over.appendChild(v);
     var tl = gsap.timeline({ paused: true }); tl.to({}, { duration: st.preview.loop || 2.8 });
     var still = new Image(); still.src = st.preview.still;   // the close-up falls back to the still while the loop loads or seeks
-    return { tl: tl, loop: st.preview.loop || 2.8, pre: v, preStill: still, focus: st.preview.focus || null, fixed: true };
+    // 8 Nov 2026 (Tommy: "when I land fresh the subtitle is not onscreen"): the finished frame as a still on top while paused
+    // there, so the look always shows before Play, even when a phone has not loaded the video's frames yet
+    var heroImg = null;
+    var lift = function () { $("veil").style.display = "none"; };   // the cover lifts as soon as the still or the clip is ready
+    v.addEventListener("loadeddata", lift, { once: true }); still.addEventListener("load", lift, { once: true });
+    if (st.preview.hero_still) { heroImg = new Image(); heroImg.addEventListener("load", lift, { once: true }); heroImg.src = st.preview.hero_still; heroImg.alt = ""; heroImg.style.cssText = "position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;display:none;pointer-events:none;"; over.appendChild(heroImg); still.src = st.preview.hero_still; }
+    return { tl: tl, loop: st.preview.loop || 2.8, pre: v, preStill: still, heroImg: heroImg, focus: st.preview.focus || null, fixed: true };
   }
   function preSync(t) {
     var v = live && live.pre; if (!v) return;
@@ -342,7 +348,10 @@
     if (live && live.tl) live.tl.seek(t, false);
     $("t-end").textContent = fmt(seg()[1] - seg()[0]); setPlayIcon();
   }
-  function endUI() { var b = $("endplay"); if (b) b.hidden = RENDER || !(S.atEnd && !playing()); }   // never in a render (8 Nov: it was baked into frames)
+  function endUI() {
+    var b = $("endplay"), at = S.atEnd && !playing(); if (b) b.hidden = RENDER || !at;
+    if (live && live.heroImg) live.heroImg.style.display = at ? "block" : "none";
+  }   // never in a render (8 Nov: it was baked into frames)
   function togglePlay() { if (S.atEnd) { replay(); return; } if (isOwn()) { var t = clockT(); setClock(t, LC.paused); setPlayIcon(); return; } ensureMain(); if (video.paused) video.play().catch(function () {}); else video.pause(); }
   function curStyle() { return styleDef(sec(S.sec), look().style); }
   function hasCtl(name) { return sec(S.sec).controls.indexOf(name) >= 0; }
@@ -1066,7 +1075,15 @@
     S.canAdjust = canAdjust; showAdjust();
     renderNeeds(); updateUse();
   }
-  function showAdjust() { var on = !!(S.adjust && S.canAdjust); $("adjust").hidden = !on; var ab = $("adjust-btn"); if (ab) ab.setAttribute("aria-expanded", String(on)); if (CU.ok) cuSync(); }
+  var ADJ_HOME = null;
+  function placeAdjust() {   // phones: Adjust sits right under the close-up / How it works; desktop: in the panel as before
+    var a = $("adjust"), slot = $("cu-slot"); if (!a || !slot) return;
+    if (!ADJ_HOME) { ADJ_HOME = document.createComment("adjust-home"); a.parentNode.insertBefore(ADJ_HOME, a); }
+    if (window.innerWidth < 980) { if (a.previousSibling !== slot) slot.parentNode.insertBefore(a, slot.nextSibling); }
+    else if (ADJ_HOME.nextSibling !== a) ADJ_HOME.parentNode.insertBefore(a, ADJ_HOME.nextSibling);
+  }
+  window.addEventListener("resize", function () { placeAdjust(); });
+  function showAdjust() { placeAdjust(); var on = !!(S.adjust && S.canAdjust); $("adjust").hidden = !on; var ab = $("adjust-btn"); if (ab) ab.setAttribute("aria-expanded", String(on)); if (CU.ok) cuSync(); }
   // pick or unpick an option (the round button on a row, or Pick this)
   function togglePick(id) {
     if (multi()) { usePick(); return; }
@@ -1780,7 +1797,8 @@
     $("dm-custom").addEventListener("click", function () {
       if (!S.adjust) { S.adjust = true; showAdjust(); }
       S.wantEnd = true; S.atEnd = true; rebuild();   // the finished state, paused: every change shows straight away (Play to watch it)
-      setTimeout(function () { var a = $("adjust"); if (a && !a.hidden) a.scrollIntoView({ behavior: "smooth", block: "start" }); }, 80);
+      // keep the magnified view in sight: bring it to the top of the screen, the controls follow right under it
+      setTimeout(function () { var sl = $("cu-slot"); if (sl) window.scrollTo({ top: window.scrollY + sl.getBoundingClientRect().top - 8, behavior: "smooth" }); }, 80);
     });
     CU.ok = true; cuSync();
   }
@@ -1831,6 +1849,8 @@
     $("dm-view").hidden = !on; $("cu-view").hidden = on; $("cu-title").textContent = on ? "How it works" : "Close-up";
     $("dm-custom").hidden = !(on && canAdj(st));
     if (!on) return;
+    var bg = (st.preview && (st.preview.hero_still || st.preview.still)) || B.base.poster;
+    if (bg) $("dm-view").style.setProperty("--dm-bg", "url('" + bg + "')");
     var r; try { r = R[L.style](makeCtx(L, sd, st, dmStage)); } catch (e) { console.error(e); return; }
     if (!r || !r.tl) return;
     if (r.block) {

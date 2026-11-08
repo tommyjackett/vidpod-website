@@ -761,7 +761,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-09-hero.jpg"
      },
      "recipe": {
       "registry": "measured reference (internal): emphasis captions",
@@ -844,7 +845,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-01-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-weight-shift']",
@@ -932,7 +934,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-02-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-per-word-rise']",
@@ -1020,7 +1023,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-03-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-box-word']",
@@ -1109,7 +1113,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-04-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-karaoke']",
@@ -1197,7 +1202,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-05-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-editorial']",
@@ -1286,7 +1292,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-06-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-colour-pop']",
@@ -1375,7 +1382,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-07-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-pill-karaoke']",
@@ -1464,7 +1472,8 @@
       "clip": "own",
       "example": false,
       "engine": "studio",
-      "hero": 9.2
+      "hero": 10.66,
+      "hero_still": "clients/tng/looks/SUB-08-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-looks.js R['cap-clip-wipe']",
@@ -1589,7 +1598,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-01-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-behind-head']",
@@ -1685,7 +1695,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-02-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-quote-box']",
@@ -1780,7 +1791,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-03-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-mixed-stack']",
@@ -1876,7 +1888,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-04-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-highlight-bars']",
@@ -1975,7 +1988,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-05-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-serif-keyword']",
@@ -2069,7 +2083,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-06-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-headline-band']",
@@ -2168,7 +2183,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/tng/looks/HOOK-09-hero.jpg"
      },
      "recipe": {
       "renderer": "studio-hooks.js R['hk-glow-intro']",
@@ -2256,7 +2272,8 @@
        330
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L02-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2307,7 +2324,8 @@
        420
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L07-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2352,7 +2370,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L20-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2922,7 +2941,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L04-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -2968,7 +2988,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L01-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3016,7 +3037,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L03-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3061,7 +3083,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L05-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3110,7 +3133,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L08-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3153,7 +3177,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L09-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3200,7 +3225,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L10-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3244,7 +3270,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L11-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3290,7 +3317,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L13-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3336,7 +3364,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L16-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -3380,7 +3409,8 @@
       "loop": 2.76,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L22-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4277,7 +4307,8 @@
        1170
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L18-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4325,7 +4356,8 @@
        940
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L19-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4376,7 +4408,8 @@
        900
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L06-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4426,7 +4459,8 @@
        1430
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L17-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4476,7 +4510,8 @@
        650
       ],
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L12-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4522,7 +4557,8 @@
       "loop": 2.76,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L21-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4565,7 +4601,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L23-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -4611,7 +4648,8 @@
       "focus": null,
       "clip": "seated",
       "example": true,
-      "example_note": "Example on a VIDPOD page"
+      "example_note": "Example on a VIDPOD page",
+      "hero_still": "review-thumbs/HH01-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -6661,7 +6699,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L14-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -6720,7 +6759,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L15-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",
@@ -6780,7 +6820,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "seated",
-      "example": true
+      "example": true,
+      "hero_still": "review-thumbs/L24-hero.jpg"
      },
      "recipe": {
       "renderer": "prerendered",

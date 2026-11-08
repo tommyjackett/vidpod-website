@@ -702,7 +702,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-09-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -789,7 +791,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-01-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -876,7 +880,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-02-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -964,7 +970,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-03-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -1051,7 +1059,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-04-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -1139,7 +1149,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-05-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -1227,7 +1239,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-06-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -1315,7 +1329,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-07-hero.jpg",
+      "hero": 4.32
      }
     },
     {
@@ -1403,7 +1419,9 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/SUB-08-hero.jpg",
+      "hero": 4.32
      }
     }
    ],
@@ -1529,7 +1547,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-01-hero.jpg"
      }
     },
     {
@@ -1626,7 +1645,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-02-hero.jpg"
      }
     },
     {
@@ -1719,7 +1739,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-03-hero.jpg"
      }
     },
     {
@@ -1813,7 +1834,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-04-hero.jpg"
      }
     },
     {
@@ -1907,7 +1929,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-05-hero.jpg"
      }
     },
     {
@@ -2003,7 +2026,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-06-hero.jpg"
      }
     },
     {
@@ -2101,7 +2125,8 @@
       ],
       "clip": "own",
       "example": false,
-      "engine": "studio"
+      "engine": "studio",
+      "hero_still": "clients/vidpod/looks/HOOK-09-hero.jpg"
      }
     },
     {
@@ -2129,7 +2154,8 @@
        330
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L02-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2179,7 +2205,8 @@
        420
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L07-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2225,7 +2252,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L20-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2794,7 +2822,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L04-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2837,7 +2866,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L01-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2883,7 +2913,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L03-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2931,7 +2962,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L05-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -2976,7 +3008,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L08-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -3025,7 +3058,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L09-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -3068,7 +3102,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L10-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -3115,7 +3150,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L11-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -3159,7 +3195,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L13-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -3205,7 +3242,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L16-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -3251,7 +3289,8 @@
       "loop": 2.76,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L22-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4147,7 +4186,8 @@
        1170
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L18-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4197,7 +4237,8 @@
        940
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L19-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4245,7 +4286,8 @@
        900
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L06-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4296,7 +4338,8 @@
        1430
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L17-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4346,7 +4389,8 @@
        650
       ],
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L12-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4391,7 +4435,8 @@
       "loop": 2.76,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L21-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4437,7 +4482,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L23-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -4480,7 +4526,8 @@
       "loop": 5.0,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/HH01-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -6529,7 +6576,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L14-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -6588,7 +6636,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L15-hero.jpg"
      },
      "menu": {
       "needs": [
@@ -6646,7 +6695,8 @@
       "loop": 2.8,
       "focus": null,
       "clip": "own",
-      "example": false
+      "example": false,
+      "hero_still": "review-thumbs/L24-hero.jpg"
      },
      "menu": {
       "needs": [
