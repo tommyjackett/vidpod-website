@@ -5,18 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/brand/vidpod-logo-square.png">
 <link rel="apple-touch-icon" href="img/brand/vidpod-logo-square.png">
-<meta name="description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.">
+<meta name="description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, made with care by one dedicated team.">
 <title>Video Production Melbourne | Brand Films, Explainers &amp; Social | VIDPOD</title>
 <link rel="canonical" href="https://www.vidpod.com.au/video-production-melbourne">
+<link rel="preload" as="image" href="img/work/video-hero-poster-v7.jpg">
 <meta property="og:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/video-production-melbourne">
 <meta property="og:title" content="Video Production Melbourne | Brand Films, Explainers &amp; Social | VIDPOD">
-<meta property="og:description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.">
+<meta property="og:description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, made with care by one dedicated team.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta name="twitter:title" content="Video Production Melbourne | Brand Films, Explainers &amp; Social | VIDPOD">
-<meta name="twitter:description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.">
+<meta name="twitter:description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, made with care by one dedicated team.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,7 +63,7 @@
       "name": "Video production",
       "serviceType": "Video production",
       "url": "https://www.vidpod.com.au/video-production-melbourne",
-      "description": "Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.",
+      "description": "Melbourne video production: brand films, branded content, explainer videos, animation and social content, made with care by one dedicated team.",
       "provider": {
         "@id": "https://www.vidpod.com.au/#organization"
       },
@@ -972,6 +973,79 @@ html { scroll-behavior: smooth; }
 body.enq-lock { overflow: hidden; }
 @media (max-width: 600px) { .enq-panel { padding: 64px 22px 36px; } .enq .contact-form { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .enq-panel, .enq-backdrop { transition: none; } }
+/* ---- v7: hero, sharp poster, shade at the bottom only ---- */
+.hero-video::after { background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.18) 42%, rgba(0,0,0,0) 62%), linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.5) 62%, rgba(0,0,0,0.82) 100%); }
+h1, h2, .enq-title { text-wrap: balance; }
+.section-intro, .split-body > p, .hero-lede, .tile-cap { text-wrap: pretty; }
+/* ---- v7: type scale and one spacing rhythm (24 / 48 / 72 / 120) ---- */
+.section-intro { font-size: 18px; line-height: 1.6; max-width: 62ch; }
+.split-body > p { font-size: 18px; max-width: 58ch; }
+#faq .faq-list p { font-size: 17px; }
+.work-pod, .work-vid, .sel-work, .case-band, .split, .steps-band, .pod-sec, .snippets-strip { padding-top: 120px; padding-bottom: 120px; }
+.steps-band { padding-bottom: 120px; }
+.section-title + .section-intro { margin-top: 24px; }
+.tile-grid, .svc-grid, .steps { margin-top: 48px; }
+@media (max-width: 699px) {
+  .work-pod, .work-vid, .sel-work, .case-band, .split, .steps-band, .pod-sec, .snippets-strip { padding-top: 72px; padding-bottom: 72px; }
+  .section-intro, .split-body > p { font-size: 17px; }
+  .tile-grid, .svc-grid, .steps { margin-top: 32px; }
+}
+/* ---- v7: one corner radius, one grade, quiet motion ---- */
+.tile-media, .m-feature .tile-media, .svc-photo, .split-media > img, .moments-sheet img, .snippet-item { border-radius: 14px; }
+.tile-media:not(.is-square) img, .svc-photo img, .split-media > img, .bleed img { filter: contrast(1.04) saturate(0.94); }
+.tile-media { transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease); }
+.tile:hover .tile-media, .tile:focus-visible .tile-media { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(0,0,0,0.35); }
+.tile-play { transition: background 0.25s ease, transform 0.35s var(--ease); }
+.tile:hover .tile-play { transform: scale(1.14); }
+.quiet-link { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; text-decoration: none; padding-bottom: 3px; transition: background-size 0.35s var(--ease); }
+.quiet-link:hover { background-size: 40% 1px; opacity: 1; }
+a:focus-visible, button:focus-visible, .tile:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+.tile-media video.hover-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s ease; }
+.tile-media video.hover-preview.is-on { opacity: 1; }
+/* ---- v7: full-bleed moments ---- */
+.bleed { position: relative; width: 100%; aspect-ratio: 21 / 9; max-height: 78vh; overflow: hidden; background: #0A0A0A; }
+.bleed video, .bleed img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 699px) { .bleed { aspect-ratio: 16 / 10; } }
+.cs-wide { width: calc(100vw - 48px); margin-left: calc(50% - 50vw + 24px); }
+@media (max-width: 699px) { .cs-wide { width: 100%; margin-left: 0; } }
+/* ---- v7: phone, tiles go 2 across instead of one long column ---- */
+@media (max-width: 699px) {
+  .tile-grid.is-4 { gap: 26px 14px; }
+  .tile-grid.is-4 .tile { flex-basis: calc((100% - 14px) / 2); }
+  .tile-cap { font-size: 13px; margin-top: 10px; }
+  .tile-play { width: 36px; height: 36px; left: 10px; bottom: 10px; }
+  .tile-play::before { border-left-width: 11px; border-top-width: 6px; border-bottom-width: 6px; margin-left: 3px; }
+  .mosaic.m-pair, .mosaic.m-wn { grid-template-columns: 1fr 1fr; gap: 26px 14px; }
+  .mosaic.m-trio { grid-template-columns: 1fr 1fr; gap: 26px 14px; }
+  .mosaic.m-trio .tile:first-child { grid-column: 1 / -1; }
+  .m-wn .tile:last-child .tile-media { aspect-ratio: 16 / 9; }
+  .m-feature .tile-cap, .m-trio .tile:first-child .tile-cap { font-size: 15px; }
+  .chapter-head { margin-bottom: 20px; }
+  .svc-grid { grid-template-columns: 1fr 1fr; gap: 28px 14px; }
+  .svc-grid h3 { font-size: 15px; margin-top: 12px; }
+  .svc-grid p { font-size: 14px; }
+  .steps { gap: 18px; }
+  .split-points li { font-size: 15px; }
+}
+/* ---- v7: podcast shows, 6 equal tiles ---- */
+@media (max-width: 699px) {
+  .tile-grid.is-shows { gap: 26px 14px; }
+  .tile-grid.is-shows .tile { display: block; flex-basis: calc((100% - 14px) / 2); }
+  .tile-grid.is-shows .tile-media { flex: none; border-radius: 14px; }
+  .tile-grid.is-shows .tile-cap { margin-top: 10px; }
+}
+/* ---- v7: readable small text (4.5:1 or better) ---- */
+#faq .faq-aside { opacity: 1; color: rgba(255,255,255,0.74); }
+.footer-credits { color: rgba(255,255,255,0.7); }
+/* ---- v7: enquiry panel faster ---- */
+.enq-panel { transition: transform 0.28s var(--ease); }
+.enq-backdrop { transition: opacity 0.25s ease; }
+/* ---- v7: slim sticky Let's chat on phones, after the hero ---- */
+.m-chat { display: none; }
+@media (max-width: 699px) {
+  .m-chat { display: inline-flex; align-items: center; justify-content: center; position: fixed; left: 50%; bottom: 16px; z-index: 150; min-height: 48px; padding: 0 26px; border-radius: 100px; background: var(--green); color: #000; font-family: var(--font-body); font-weight: 900; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; box-shadow: 0 12px 30px rgba(0,0,0,0.45); transform: translate(-50%, 140%); transition: transform 0.3s var(--ease); }
+  .m-chat.is-shown { transform: translate(-50%, 0); }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1024,8 +1098,8 @@ document.documentElement.dataset.theme = 'dark';
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
     <video
-      src="video/video-hero-loop.mp4"
-      poster="img/work/video-hero-loop.jpg"
+      src="video/video-hero-loop-v7.mp4"
+      poster="img/work/video-hero-poster-v7.jpg"
       autoplay muted loop playsinline preload="metadata"
       tabindex="-1"></video>
   </div>
@@ -1077,15 +1151,15 @@ document.documentElement.dataset.theme = 'dark';
 <section class="sel-work" id="selected-work">
   <div class="wrap">
     <h2 class="section-title reveal">Selected <span class="nowrap-dot">work<span class="dot"></span></span></h2>
-    <p class="section-intro reveal">A selection of work we&#x27;ve created across different brands and video types. Over a decade of experience. One point of contact from brief to delivery.</p>
+    <p class="section-intro reveal">Over a decade of work across every kind of video, each one made with the same care.</p>
 
     <div class="chapter reveal" id="brand-films">
       <div class="chapter-head"><span class="chapter-num">01</span><h3>Brand films</h3></div>
       <div class="mosaic m-feature">
-        <div class="tile" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ-v7.jpg" alt="@Pilates, founding story" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div>
       </div>
       <div class="mosaic m-pair">
-        <div class="tile" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ.jpg" alt="@Pilates, founding story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
         <div class="tile" role="button" tabindex="0" data-yt-id="GCbtI7zRI4A" aria-label="Play: Brava, brand video"><div class="tile-media"><img src="img/work/GCbtI7zRI4A.jpg" alt="Brava, brand video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, brand video</span></p></div>
       </div>
     </div>
@@ -1093,32 +1167,36 @@ document.documentElement.dataset.theme = 'dark';
     <div class="chapter reveal" id="branded-content">
       <div class="chapter-head"><span class="chapter-num">02</span><h3>Branded and social content</h3></div>
       <div class="mosaic m-wn">
-        <div class="tile" role="button" tabindex="0" data-yt-id="03nftmt_D9k" aria-label="Play: Country Road, store launch"><div class="tile-media"><img src="img/work/03nftmt_D9k.jpg" alt="Country Road, store launch" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Country Road</strong><span class="cap-rest">, store launch</span></p></div>
-        <div class="tile" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI-v7.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
       </div>
       <div class="mosaic m-trio">
-        <div class="tile" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="03nftmt_D9k" aria-label="Play: Country Road, store launch"><div class="tile-media"><img src="img/work/03nftmt_D9k.jpg" alt="Country Road, store launch" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Country Road</strong><span class="cap-rest">, store launch</span></p></div>
         <div class="tile" role="button" tabindex="0" data-yt-id="fC7yxSSM3I0" aria-label="Play: Deliciou, social content"><div class="tile-media"><img src="img/work/fC7yxSSM3I0.jpg" alt="Deliciou, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Deliciou</strong><span class="cap-rest">, social content</span></p></div>
-        <div class="tile" role="button" tabindex="0" data-yt-id="v7zZYpXPymA" aria-label="Play: Chiropedic Bedding, social content"><div class="tile-media"><img src="img/work/v7zZYpXPymA.jpg" alt="Chiropedic Bedding, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Chiropedic Bedding</strong><span class="cap-rest">, social content</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="v7zZYpXPymA" aria-label="Play: Chiropedic Bedding, social content"><div class="tile-media"><img src="img/work/v7zZYpXPymA-v7.jpg" alt="Chiropedic Bedding, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Chiropedic Bedding</strong><span class="cap-rest">, social content</span></p></div>
       </div>
     </div>
 
     <div class="chapter reveal" id="explainers">
       <div class="chapter-head"><span class="chapter-num">03</span><h3>Explainers and animation</h3></div>
       <div class="mosaic m-trio">
+        <div class="tile" role="button" tabindex="0" data-yt-id="WnDGbiJXIhg" aria-label="Play: Equip Super, explainer video"><div class="tile-media"><img src="img/work/WnDGbiJXIhg.jpg" alt="Equip Super, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, explainer video</span></p></div>
         <div class="tile" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" aria-label="Play: Infrastructure Victoria, animated explainer"><div class="tile-media"><img src="img/work/YH-LnvrsxDo.jpg" alt="Infrastructure Victoria, animated explainer" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, animated explainer</span></p></div>
         <div class="tile" role="button" tabindex="0" data-yt-id="c9rdClIUDno" aria-label="Play: MedMate, explainer video"><div class="tile-media"><img src="img/work/c9rdClIUDno.jpg" alt="MedMate, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>MedMate</strong><span class="cap-rest">, explainer video</span></p></div>
-        <div class="tile" role="button" tabindex="0" data-yt-id="WnDGbiJXIhg" aria-label="Play: Equip Super, explainer video"><div class="tile-media"><img src="img/work/WnDGbiJXIhg.jpg" alt="Equip Super, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, explainer video</span></p></div>
       </div>
     </div>
   </div>
 </section>
 
+<div class="bleed" aria-hidden="true">
+  <video data-src="video/break-reel-v7.mp4" data-poster="img/work/break-reel-v7.jpg" muted loop playsinline preload="none" tabindex="-1"></video>
+</div>
+
 <section class="work-vid case-band" id="case-studies">
   <div class="wrap case-band-grid">
     <div class="reveal">
       <h2 class="section-title">Case <span class="nowrap-dot">studies<span class="dot"></span></span></h2>
-      <p class="section-intro">Real customers telling the story of a problem solved, for brands like Total Tools, Border Express and @Pilates.</p>
+      <p class="section-intro">Real customers, real turning points. See how Total Tools, Border Express and @Pilates let their customers do the selling.</p>
       <a class="quiet-link" href="video-case-studies-melbourne">See all our case study videos</a>
     </div>
     <div class="reveal">
@@ -1778,6 +1856,29 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 </script>
+<a class="m-chat" id="mChat" href="/#contact">Let&#x27;s chat</a>
+<script>
+// Phone only: a slim Let's chat button appears once the hero has scrolled away, and hides at the closing call to action.
+(function () {
+  var b = document.getElementById('mChat'), hero = document.querySelector('.hero'), cta = document.querySelector('.cta-strip');
+  if (!b || !hero || !('IntersectionObserver' in window)) return;
+  var heroOut = false, ctaIn = false;
+  function upd() { b.classList.toggle('is-shown', heroOut && !ctaIn); }
+  new IntersectionObserver(function (e) { heroOut = !e[0].isIntersecting; upd(); }).observe(hero);
+  if (cta) new IntersectionObserver(function (e) { ctaIn = e[0].isIntersecting; upd(); }).observe(cta);
+})();
+</script>
+
+<script>
+// Full-bleed loop: loads and plays only while on screen.
+(function () {
+  var v = document.querySelector('.bleed video');
+  if (!v || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.poster = v.getAttribute('data-poster'); return; }
+  new IntersectionObserver(function (e) { if (e[0].isIntersecting) { if (!v.poster) v.poster = v.getAttribute('data-poster'); if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { v.pause(); } }, { rootMargin: '200px' }).observe(v);
+})();
+</script>
+
 <!-- Enquiry panel: opens where the visitor is; the form itself is the homepage form, loaded when first opened -->
 <div class="enq" id="enq" aria-hidden="true">
   <div class="enq-backdrop" data-enq-close></div>
