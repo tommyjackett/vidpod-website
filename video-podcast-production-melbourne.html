@@ -1188,6 +1188,85 @@ a:focus-visible, button:focus-visible, .tile:focus-visible { outline: 2px solid 
 /* ---- v9: enquiry panel width and an even backdrop ---- */
 .enq-panel { width: min(680px, 100%); }
 .enq-backdrop { background: rgba(8,8,8,0.82); }
+/* ---- v10: full-bleed moments ---- */
+body { overflow-x: clip; }
+.bleed-feature { width: 100vw; margin-left: calc(50% - 50vw); margin-top: 40px; }
+.bleed-feature .tile-media { border-radius: 0; }
+.bleed-feature.is-reel .tile-media { aspect-ratio: 21 / 9; max-height: 78vh; }
+.bleed-feature.is-story .g-tile .tile-media { aspect-ratio: 4 / 1; }
+.bleed-feature .tile-play { left: max(20px, calc((100vw - 1280px) / 2 + 32px)); bottom: 24px; }
+.bleed-feature .tile-cap, .bleed-feature .g-also { display: block; max-width: var(--max); margin: 14px auto 0; padding: 0 32px; }
+.bleed-feature.is-reel .tile-cap { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.8; }
+.bleed-feature .g-also { width: auto; background: none; padding-bottom: 0; margin-top: 6px; }
+.bleed-feature .g-also span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
+.bleed-feature .tile:hover .tile-media img { transform: scale(1.02); }
+.bleed-feature + .gallery { margin-top: 48px; }
+.bleed-feature.is-story { display: flex; flex-wrap: wrap; align-items: baseline; }
+.bleed-feature.is-story > .g-tile { flex: 0 0 100%; }
+.bleed-feature.is-story > .g-tile .tile-cap { display: inline-block; margin: 14px 0 0; padding: 0 0 0 max(32px, calc((100vw - 1280px) / 2 + 32px)); max-width: none; }
+.bleed-feature.is-story { position: relative; }
+.bleed-feature.is-story > .g-also { position: absolute; right: max(32px, calc((100vw - 1280px) / 2 + 32px)); bottom: 0; margin: 0; padding: 0; max-width: none; }
+#vidpod-studio .split-body > p { font-size: 16px; }
+#vidpod-studio .split-points li { font-size: 15px; }
+.steps-band .section-intro { margin-top: 12px; }
+.steps-band .steps { margin-top: 24px; }
+.split-eyebrow { margin-bottom: 12px; }
+.stories-dark .section-intro { margin-top: 12px; }
+.bleed-feature.is-story { margin-top: 24px; }
+/* ---- v10: case studies stories band is dark, one green accent ---- */
+.stories-dark { background: #0A0A0A; color: #fff; padding: 96px 0; }
+.stories-dark .section-title { color: #fff; }
+.stories-dark .section-title .dot { background: var(--green); }
+.stories-dark .section-intro { color: rgba(255,255,255,0.74); margin-top: 18px; }
+.stories-dark .quiet-link { color: #fff; }
+.g-tile.ar-219 .tile-media { aspect-ratio: 21 / 9; }
+/* brand films pair inside one figure */
+.g-pair { display: grid; grid-template-columns: 5fr 7fr; gap: 24px; align-items: start; }
+.g-pair .g-tile.ar-54 .tile-media { aspect-ratio: 1.27 / 1; }
+/* ---- v10: case stories in one scrollable row, three on screen ---- */
+@media (min-width: 700px) {
+  .gallery.cs-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 24px; scrollbar-width: none; }
+  .gallery.cs-rail::-webkit-scrollbar { display: none; }
+  .gallery.cs-rail .g-item { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+}
+.rail-foot { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 28px; }
+.rail-foot .quiet-link { margin-top: 0; }
+.rail-foot .snippets-nav { margin: 0; padding: 0; }
+/* ---- v10: give back height so the full-bleed moments fit ---- */
+.hero { min-height: 74vh; }
+.cta-strip { padding: 96px 0; }
+#faq .faq-list summary { padding: 16px 0; }
+.logo-band { padding: 26px 0 24px; }
+.logo-band-label { margin-bottom: 20px; }
+@media (max-width: 699px) {
+  .stories-dark { padding: 64px 0; }
+  .cta-strip { padding: 64px 0; }
+  .bleed-feature.is-story .g-tile .tile-media { aspect-ratio: 2.4 / 1; }
+  .bleed-feature.is-story > .g-tile .tile-cap { display: block; padding-left: 22px; }
+  .bleed-feature.is-story > .g-also { position: static; display: block; margin: 6px 0 0; padding: 0 22px; }
+  .bleed-feature.is-story { margin-top: 16px; }
+  #vidpod-studio .split-body > p { font-size: 15px; }
+  #vidpod-studio .split-points li { font-size: 14px; }
+  .gallery.is-2up.cs-rail .g-item { flex-basis: 66%; }
+  .filmstrip-row { gap: 8px; }
+  .split-grid { gap: 16px; }
+  .filmstrip-main { display: none; }
+  .filmstrip-row { margin-top: 0; }
+  .split-grid { gap: 24px; }
+  .stories-dark .section-intro { font-size: 15px; }
+  .hero { min-height: 70vh; }
+  .work-pod, .work-vid, .sel-work, .case-band, .split, .steps-band, .pod-sec, .snippets-strip, .system, .stories-dark, .cta-strip { padding-top: 56px; padding-bottom: 56px; }
+  #faq .faq-list summary { padding: 14px 0; }
+  .bleed-feature { margin-top: 24px; }
+  .bleed-feature .tile-cap { margin-top: 10px; }
+  .bleed-feature .tile-cap, .bleed-feature .g-also { padding: 0 22px; }
+  .gallery.is-rail .g-pair { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gallery.is-rail .g-pair .g-tile .tile-media { aspect-ratio: 16 / 10; }
+  .gallery.is-rail .g-item.g-12 { flex-basis: 90%; }
+  .gallery.is-2up .g-item.g-4 { flex: 0 0 72%; }
+  .sys-copy-desktop { display: none; }
+}
+@media (min-width: 700px) { .sys-copy-mobile { display: none; } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1242,7 +1321,7 @@ document.documentElement.dataset.theme = 'dark';
     <video
       src="video/podcast-hero-loop-v8.mp4"
       poster="img/podcasts/podcast-hero-poster-v8.jpg"
-      autoplay muted loop playsinline preload="metadata"
+      autoplay muted loop playsinline preload="auto"
       tabindex="-1"></video>
   </div>
   <div class="wrap hero-inner">
@@ -1325,7 +1404,7 @@ document.documentElement.dataset.theme = 'dark';
 <section class="split" id="internal-podcasts">
   <div class="wrap split-grid">
     <div class="split-media reveal">
-      <img src="img/podcasts/help-at-hand-hero/01.jpg" srcset="img/podcasts/help-at-hand-hero/01-sm.jpg 480w, img/podcasts/help-at-hand-hero/01.jpg 1200w" sizes="(max-width: 860px) 100vw, 640px" alt="Recording the members-only Help at Hand Education podcast" loading="lazy" decoding="async" width="1200" height="800">
+      <img src="img/podcasts/help-at-hand-hero/01.jpg" srcset="img/podcasts/help-at-hand-hero/01-sm.jpg 480w, img/podcasts/help-at-hand-hero/01-800-v10.jpg 800w, img/podcasts/help-at-hand-hero/01.jpg 1200w" sizes="(max-width: 860px) 100vw, 640px" alt="Recording the members-only Help at Hand Education podcast" loading="lazy" decoding="async" width="1200" height="800">
     </div>
     <div class="split-body reveal">
       <span class="split-eyebrow">Internal podcasts</span>
@@ -1347,7 +1426,8 @@ document.documentElement.dataset.theme = 'dark';
     <div class="system-copy reveal">
       <span class="split-eyebrow">The system behind your show</span>
       <h2 class="section-title">Every episode keeps <span class="nowrap-dot">working<span class="dot"></span></span></h2>
-      <p>Most shows stop at the episode. Ours keep going. Each recording becomes the full episode on YouTube, Spotify and Apple, its own web page with notes and a full transcript, thumbnails for every platform, and short clips for Instagram, TikTok, LinkedIn and YouTube Shorts. It all goes out on a steady rhythm, so you never start from scratch.</p>
+      <p class="sys-copy-desktop">Most shows stop at the episode. Ours keep going. Each recording becomes the full episode on YouTube, Spotify and Apple, its own web page with notes and a full transcript, thumbnails for every platform, and short clips for Instagram, TikTok, LinkedIn and YouTube Shorts. It all goes out on a steady rhythm, so you never start from scratch.</p>
+      <p class="sys-copy-mobile">Each recording becomes the full episode on YouTube, Spotify and Apple, its own page with notes and a transcript, thumbnails, and short clips for Instagram, TikTok, LinkedIn and YouTube Shorts, out on a steady rhythm.</p>
       <p>Recorded in your office, on campus or remotely. Any room looks and sounds like a studio.</p>
       <p class="system-proof">It&#x27;s how we run The Numbers Game, the business podcast we produce every week. <a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">See The Numbers Game</a></p>
       <a class="quiet-link" href="/#contact">Tell us about your show</a>
@@ -1356,7 +1436,7 @@ document.documentElement.dataset.theme = 'dark';
       <img class="system-still" src="img/podcasts/tng-hero/01.jpg" srcset="img/podcasts/tng-hero/01-sm.jpg 480w, img/podcasts/tng-hero/01.jpg 1800w" sizes="(max-width: 860px) 100vw, 680px" alt="Recording an episode of The Numbers Game" loading="lazy" decoding="async" width="1800" height="1012">
       <figure class="sys-card sys-thumb"><img src="img/podcasts/system/tng-episode-thumb-v9.jpg" alt="The thumbnail made for that episode" loading="lazy" decoding="async" width="640" height="360"><figcaption>Thumbnail</figcaption></figure>
       <figure class="sys-card sys-clip"><img src="img/podcasts/clips/h1yiNZ7Zk1Y-v8.jpg" alt="A short vertical clip from The Numbers Game" loading="lazy" decoding="async" width="540" height="960"><figcaption>Short</figcaption></figure>
-      <figure class="sys-card sys-page"><img src="img/podcasts/system/tng-episode-page-v9.jpg" alt="The episode&#x27;s own page on The Numbers Game website" loading="lazy" decoding="async" width="800" height="176"><figcaption>Episode page</figcaption></figure>
+      <figure class="sys-card sys-page"><img src="img/podcasts/system/tng-episode-page-v10.jpg" alt="The Numbers Game episode page: the title and show notes for the Pokemon cards episode" loading="lazy" decoding="async" width="800" height="266"><figcaption>Episode page</figcaption></figure>
     </div>
   </div>
 </section>

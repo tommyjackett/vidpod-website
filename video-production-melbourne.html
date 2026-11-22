@@ -1194,6 +1194,85 @@ a:focus-visible, button:focus-visible, .tile:focus-visible { outline: 2px solid 
 /* ---- v9: enquiry panel width and an even backdrop ---- */
 .enq-panel { width: min(680px, 100%); }
 .enq-backdrop { background: rgba(8,8,8,0.82); }
+/* ---- v10: full-bleed moments ---- */
+body { overflow-x: clip; }
+.bleed-feature { width: 100vw; margin-left: calc(50% - 50vw); margin-top: 40px; }
+.bleed-feature .tile-media { border-radius: 0; }
+.bleed-feature.is-reel .tile-media { aspect-ratio: 21 / 9; max-height: 78vh; }
+.bleed-feature.is-story .g-tile .tile-media { aspect-ratio: 4 / 1; }
+.bleed-feature .tile-play { left: max(20px, calc((100vw - 1280px) / 2 + 32px)); bottom: 24px; }
+.bleed-feature .tile-cap, .bleed-feature .g-also { display: block; max-width: var(--max); margin: 14px auto 0; padding: 0 32px; }
+.bleed-feature.is-reel .tile-cap { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.8; }
+.bleed-feature .g-also { width: auto; background: none; padding-bottom: 0; margin-top: 6px; }
+.bleed-feature .g-also span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
+.bleed-feature .tile:hover .tile-media img { transform: scale(1.02); }
+.bleed-feature + .gallery { margin-top: 48px; }
+.bleed-feature.is-story { display: flex; flex-wrap: wrap; align-items: baseline; }
+.bleed-feature.is-story > .g-tile { flex: 0 0 100%; }
+.bleed-feature.is-story > .g-tile .tile-cap { display: inline-block; margin: 14px 0 0; padding: 0 0 0 max(32px, calc((100vw - 1280px) / 2 + 32px)); max-width: none; }
+.bleed-feature.is-story { position: relative; }
+.bleed-feature.is-story > .g-also { position: absolute; right: max(32px, calc((100vw - 1280px) / 2 + 32px)); bottom: 0; margin: 0; padding: 0; max-width: none; }
+#vidpod-studio .split-body > p { font-size: 16px; }
+#vidpod-studio .split-points li { font-size: 15px; }
+.steps-band .section-intro { margin-top: 12px; }
+.steps-band .steps { margin-top: 24px; }
+.split-eyebrow { margin-bottom: 12px; }
+.stories-dark .section-intro { margin-top: 12px; }
+.bleed-feature.is-story { margin-top: 24px; }
+/* ---- v10: case studies stories band is dark, one green accent ---- */
+.stories-dark { background: #0A0A0A; color: #fff; padding: 96px 0; }
+.stories-dark .section-title { color: #fff; }
+.stories-dark .section-title .dot { background: var(--green); }
+.stories-dark .section-intro { color: rgba(255,255,255,0.74); margin-top: 18px; }
+.stories-dark .quiet-link { color: #fff; }
+.g-tile.ar-219 .tile-media { aspect-ratio: 21 / 9; }
+/* brand films pair inside one figure */
+.g-pair { display: grid; grid-template-columns: 5fr 7fr; gap: 24px; align-items: start; }
+.g-pair .g-tile.ar-54 .tile-media { aspect-ratio: 1.27 / 1; }
+/* ---- v10: case stories in one scrollable row, three on screen ---- */
+@media (min-width: 700px) {
+  .gallery.cs-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 24px; scrollbar-width: none; }
+  .gallery.cs-rail::-webkit-scrollbar { display: none; }
+  .gallery.cs-rail .g-item { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+}
+.rail-foot { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 28px; }
+.rail-foot .quiet-link { margin-top: 0; }
+.rail-foot .snippets-nav { margin: 0; padding: 0; }
+/* ---- v10: give back height so the full-bleed moments fit ---- */
+.hero { min-height: 74vh; }
+.cta-strip { padding: 96px 0; }
+#faq .faq-list summary { padding: 16px 0; }
+.logo-band { padding: 26px 0 24px; }
+.logo-band-label { margin-bottom: 20px; }
+@media (max-width: 699px) {
+  .stories-dark { padding: 64px 0; }
+  .cta-strip { padding: 64px 0; }
+  .bleed-feature.is-story .g-tile .tile-media { aspect-ratio: 2.4 / 1; }
+  .bleed-feature.is-story > .g-tile .tile-cap { display: block; padding-left: 22px; }
+  .bleed-feature.is-story > .g-also { position: static; display: block; margin: 6px 0 0; padding: 0 22px; }
+  .bleed-feature.is-story { margin-top: 16px; }
+  #vidpod-studio .split-body > p { font-size: 15px; }
+  #vidpod-studio .split-points li { font-size: 14px; }
+  .gallery.is-2up.cs-rail .g-item { flex-basis: 66%; }
+  .filmstrip-row { gap: 8px; }
+  .split-grid { gap: 16px; }
+  .filmstrip-main { display: none; }
+  .filmstrip-row { margin-top: 0; }
+  .split-grid { gap: 24px; }
+  .stories-dark .section-intro { font-size: 15px; }
+  .hero { min-height: 70vh; }
+  .work-pod, .work-vid, .sel-work, .case-band, .split, .steps-band, .pod-sec, .snippets-strip, .system, .stories-dark, .cta-strip { padding-top: 56px; padding-bottom: 56px; }
+  #faq .faq-list summary { padding: 14px 0; }
+  .bleed-feature { margin-top: 24px; }
+  .bleed-feature .tile-cap { margin-top: 10px; }
+  .bleed-feature .tile-cap, .bleed-feature .g-also { padding: 0 22px; }
+  .gallery.is-rail .g-pair { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gallery.is-rail .g-pair .g-tile .tile-media { aspect-ratio: 16 / 10; }
+  .gallery.is-rail .g-item.g-12 { flex-basis: 90%; }
+  .gallery.is-2up .g-item.g-4 { flex: 0 0 72%; }
+  .sys-copy-desktop { display: none; }
+}
+@media (min-width: 700px) { .sys-copy-mobile { display: none; } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1246,14 +1325,14 @@ document.documentElement.dataset.theme = 'dark';
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
     <video
-      src="video/video-hero-loop-v9.mp4"
+      src="video/video-hero-loop-v10.mp4"
       poster="img/work/video-hero-poster-v8.jpg"
-      autoplay muted loop playsinline preload="metadata"
+      autoplay muted loop playsinline preload="auto"
       tabindex="-1"></video>
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video production, <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
-    <p class="hero-lede reveal">High-end corporate video production for Australian brands. We turn your customers, people and events into films that prove what you do, with social versions as standard.</p>
+    <p class="hero-lede reveal">High-end corporate video production in Melbourne, for brands across Australia. We turn your customers, people and events into films that prove what you do, with social versions as standard.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
     </div>
@@ -1300,24 +1379,19 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap">
     <h2 class="section-title reveal">Corporate video, made to keep <span class="nowrap-dot">working<span class="dot"></span></span></h2>
     <p class="section-intro reveal">From a brand film to a conference video to a customer testimonial video, everything we make looks beautiful and keeps working long after launch.</p>
+    <div class="bleed-feature is-reel reveal">
+      <div class="tile g-tile g-feature ar-219" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" aria-label="Play: VIDPOD showreel"><div class="tile-media"><img src="img/work/break-reel-v7.jpg" alt="VIDPOD showreel: an outback road, a red dirt track and a forest from above" loading="lazy" decoding="async" width="1920" height="822"><video class="g-preview" data-src="video/break-reel-v7.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>VIDPOD showreel</strong></p></div>
+    </div>
     <div class="gallery is-rail reveal">
-      <figure class="g-item g-12 g-feature-wrap">
-        <div class="tile g-tile g-feature ar-219" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" aria-label="Play: VIDPOD, showreel"><div class="tile-media"><img src="img/work/break-reel-v7.jpg" alt="VIDPOD, showreel" loading="lazy" decoding="async" width="1920" height="822"><video class="g-preview" data-src="video/break-reel-v7.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>VIDPOD</strong><span class="cap-rest">, showreel</span></p></div>
-      </figure>
       <figure class="g-item g-7" id="case-study-videos">
         <span class="g-kind">Customer case studies and testimonials</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" data-sprite="img/case-studies/inovayt-upsizer-sprite-v9.jpg" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-wide.jpg" alt="Inovayt, upsizer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div>
+        <div class="tile g-tile ar-169" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" data-sprite="img/case-studies/inovayt-upsizer-sprite-v9.jpg" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog and a laptop" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div>
         <p class="g-line">Real customers telling the story of the change you made. See our <a href="video-case-studies-melbourne">case study videos</a>.</p>
       </figure>
       <figure class="g-item g-5" id="founder-stories">
         <span class="g-kind">Founder stories</span>
-        <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W, founding story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
+        <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W founding story: the founder smiling in a wheat field" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
         <p class="g-line">Why you started, told by the people who started it.</p>
-      </figure>
-      <figure class="g-item g-4" id="brand-films">
-        <span class="g-kind">Brand films</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
-        <p class="g-line">Films that show who you are, plus explainers and animation for brands like Infrastructure Victoria, MedMate and Equip Super.</p>
       </figure>
       <figure class="g-item g-4" id="events">
         <span class="g-kind">Conference and event content</span>
@@ -1329,14 +1403,18 @@ document.documentElement.dataset.theme = 'dark';
         <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div>
         <p class="g-line">One shoot, a matching film for every location.</p>
       </figure>
-      <figure class="g-item g-5" id="social-versions">
+      <figure class="g-item g-4" id="social-versions">
         <span class="g-kind">Hero films with social versions</span>
-        <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
+        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
         <p class="g-line">The main film plus short vertical versions for every platform.</p>
       </figure>
-      <figure class="g-item g-7">
-        <span class="g-kind">Social content</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
+      <figure class="g-item g-12" id="brand-films">
+        <span class="g-kind">Brand films</span>
+        <div class="g-pair">
+          <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
+        </div>
+        <p class="g-line">Films that show who you are, plus explainers and animation for brands like Infrastructure Victoria, MedMate and Equip Super.</p>
       </figure>
     </div>
   </div>
