@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /README.md
+Disallow: /img/README.md
+Disallow: /.gitignore
 
 Sitemap: https://www.vidpod.com.au/sitemap.xml
