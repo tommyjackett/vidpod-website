@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/brand/vidpod-logo-square.png">
 <link rel="apple-touch-icon" href="img/brand/vidpod-logo-square.png">
-<meta name="description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and conference content, filmed beautifully with social versions as standard.">
+<meta name="description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and explainers that help people understand what you do, beautifully filmed and made to be shared.">
 <title>Corporate Video Production Melbourne | Brand Films &amp; Case Studies | VIDPOD</title>
 <link rel="canonical" href="https://www.vidpod.com.au/video-production-melbourne">
 <link rel="preload" as="image" href="img/work/video-hero-poster-v11.jpg">
@@ -13,11 +13,11 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/video-production-melbourne">
 <meta property="og:title" content="Corporate Video Production Melbourne | Brand Films &amp; Case Studies | VIDPOD">
-<meta property="og:description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and conference content, filmed beautifully with social versions as standard.">
+<meta property="og:description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and explainers that help people understand what you do, beautifully filmed and made to be shared.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta name="twitter:title" content="Corporate Video Production Melbourne | Brand Films &amp; Case Studies | VIDPOD">
-<meta name="twitter:description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and conference content, filmed beautifully with social versions as standard.">
+<meta name="twitter:description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and explainers that help people understand what you do, beautifully filmed and made to be shared.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,7 +63,7 @@
       "name": "Video production",
       "serviceType": "Video production",
       "url": "https://www.vidpod.com.au/video-production-melbourne",
-      "description": "Corporate video production in Melbourne. Brand films, customer case studies, founder stories and conference content, filmed beautifully with social versions as standard.",
+      "description": "Corporate video production in Melbourne. Brand films, customer case studies, founder stories and explainers that help people understand what you do, beautifully filmed and made to be shared.",
       "provider": {
         "@id": "https://www.vidpod.com.au/#organization"
       },
@@ -103,7 +103,7 @@
           "name": "Do we get social versions?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, as standard. Every film comes with short vertical versions for Instagram, TikTok, LinkedIn and YouTube Shorts."
+            "text": "Yes, whenever you need them. We can make short vertical versions of any film for Instagram, TikTok, LinkedIn and YouTube Shorts, so one project gives you content for every channel."
           }
         },
         {
@@ -116,10 +116,10 @@
         },
         {
           "@type": "Question",
-          "name": "Can you film our conference or event?",
+          "name": "Do you make explainer and animated videos?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. We film conferences, launches and events, as well as offices, sites and stores, and we bring everything needed to make it look and sound great. We work around your day, so your team can get on with theirs."
+            "text": "Yes. We make explainers and animation that turn complex ideas into something simple and easy to watch, like our work for Infrastructure Victoria, MedMate and Equip Super. We can mix filmed interviews, motion graphics and animation, whatever tells the story best."
           }
         },
         {
@@ -1352,6 +1352,26 @@ body { overflow-x: clip; }
   .m-chat { min-height: 44px; padding: 0 20px 0 17px; gap: 10px; background: rgba(16,16,16,0.72); color: #fff; border: 1px solid rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); font-weight: 800; font-size: 12px; letter-spacing: 0.16em; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
   .m-chat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(0,255,170,0.16); }
 }
+
+/* ---- 23 Nov: video page notes ---- */
+.gallery .g-6 { grid-column: span 6; }
+.g-pair.is-even { grid-template-columns: 1fr 1fr; gap: 18px; }
+.g-pair.is-even .g-tile .tile-media { aspect-ratio: 16 / 10; }
+@media (max-width: 699px) {
+  #workRail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 12px; overflow: visible; margin: 28px 0 0; padding: 0; scroll-snap-type: none; }
+  #workRail .g-item, #workRail .g-item.g-12 { flex: none; min-width: 0; grid-column: span 1; }
+  #workRail #brand-films, #workRail #explainers { grid-column: 1 / -1; }
+  #workRail .g-kind { font-size: 10px; letter-spacing: 0.1em; line-height: 1.35; min-height: 2.7em; margin-bottom: 8px; }
+  #workRail #brand-films .g-kind, #workRail #explainers .g-kind { min-height: 0; }
+  #workRail .g-tile .tile-media { aspect-ratio: 16 / 10; }
+  #workRail .tile-cap { font-size: 12px; line-height: 1.35; margin-top: 8px; }
+  #workRail .g-line { font-size: 13px; line-height: 1.45; margin-top: 6px; }
+  #workRail .g-line-lead { margin: 0 0 10px; }
+  #workRail .g-item:not(#brand-films):not(#explainers) .g-line { display: none; }
+  #workRail .g-pair.is-even { gap: 12px; }
+  #workRail .tile-play { height: 28px; padding: 0 10px 0 9px; gap: 6px; left: 8px; bottom: 8px; }
+  #workRail .tile-play::after { font-size: 9px; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1411,7 +1431,7 @@ document.documentElement.dataset.theme = 'dark';
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video production, <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
-    <p class="hero-lede reveal">High-end corporate video production in Melbourne, for brands across Australia. We turn your customers, people and events into films that prove what you do, with social versions as standard.</p>
+    <p class="hero-lede reveal">Corporate video production that helps people understand what you do and why it matters. Our Melbourne team plans, films and edits videos that look beautiful and get watched and shared.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
     </div>
@@ -1457,7 +1477,7 @@ document.documentElement.dataset.theme = 'dark';
 <section class="sel-work" id="selected-work">
   <div class="wrap">
     <h2 class="section-title reveal">Corporate video, made to keep <span class="nowrap-dot">working<span class="dot"></span></span></h2>
-    <p class="section-intro reveal">From a brand film to a conference video to a customer testimonial video, everything we make looks beautiful and keeps working long after launch.</p>
+    <p class="section-intro reveal">Whether it&#x27;s a customer story, a brand film or an explainer, every video we make has one job: helping the right people understand what you do.</p>
     <div class="bleed-feature is-reel reveal">
       <div class="tile g-tile g-feature ar-219" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" aria-label="Play: VIDPOD showreel"><div class="tile-media"><img src="img/work/break-reel-v7.jpg" alt="VIDPOD showreel: an outback road, a red dirt track and a forest from above" loading="lazy" decoding="async" width="1920" height="822"><video class="g-preview" data-src="video/break-reel-v7.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>VIDPOD showreel</strong></p></div>
     </div>
@@ -1472,31 +1492,33 @@ document.documentElement.dataset.theme = 'dark';
         <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W founding story: the founder smiling in a wheat field" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
         <p class="g-line">Why you started, told by the people who started it.</p>
       </figure>
-      <figure class="g-item g-4" id="events">
-        <span class="g-kind">Conference and event content</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="03nftmt_D9k" aria-label="Play: Country Road, store launch"><div class="tile-media"><img src="img/work/03nftmt_D9k.jpg" alt="Country Road, store launch" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Country Road</strong><span class="cap-rest">, store launch</span></p></div>
-        <p class="g-line">One event, filmed well, feeds your content for months.</p>
-      </figure>
-      <figure class="g-item g-4" id="franchise">
+      <figure class="g-item g-6" id="franchise">
         <span class="g-kind">Franchise and multi-site packs</span>
         <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div>
         <p class="g-line">One film day, a matching film for every location.</p>
       </figure>
-      <figure class="g-item g-4" id="social-versions">
+      <figure class="g-item g-6" id="social-versions">
         <span class="g-kind">Main films with social versions</span>
         <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
         <p class="g-line">The main film plus short vertical versions for every platform.</p>
       </figure>
-      <figure class="g-item g-12" id="brand-films">
+      <figure class="g-item g-6" id="brand-films">
         <span class="g-kind">Brand films</span>
-        <p class="g-line g-line-lead">Films that show who you are, plus explainers and animation for brands like Infrastructure Victoria, MedMate and Equip Super.</p>
-        <div class="g-pair">
-          <div class="g-pair-item"><div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div><p class="g-line">A launch trailer for the Barefoot Kids book.</p></div>
-          <div class="g-pair-item"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div><p class="g-line">A taste test, made for Nando&#x27;s social channels.</p></div>
+        <p class="g-line g-line-lead">Films that show who you are, like the Barefoot Kids book trailer and a taste test for Nando&#x27;s.</p>
+        <div class="g-pair is-even">
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
+        </div>
+      </figure>
+      <figure class="g-item g-6" id="explainers">
+        <span class="g-kind">Explainers and animation</span>
+        <p class="g-line g-line-lead">Complex ideas made simple and easy to watch, for Infrastructure Victoria and Equip Super.</p>
+        <div class="g-pair is-even">
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" aria-label="Play: Infrastructure Victoria, explainer video"><div class="tile-media"><img src="img/work/YH-LnvrsxDo-v12.jpg" alt="Infrastructure Victoria explainer: a project director speaking in front of the city" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, explainer video</span></p></div>
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="4ph0RxWnMUk" aria-label="Play: Equip Super, animated explainer"><div class="tile-media"><img src="img/work/4ph0RxWnMUk-v12.jpg" alt="Equip Super animated explainer: a set of scales balancing a laptop and a beach chair" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, animated explainer</span></p></div>
         </div>
       </figure>
     </div>
-    <div class="rail-foot is-phone"><nav class="snippets-nav" aria-label="More kinds of film"><span class="rail-progress" data-progress="workRail" aria-hidden="true"><span></span></span><button class="snippets-nav-btn" data-rail="workRail" data-dir="-1" aria-label="Previous" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button><button class="snippets-nav-btn" data-rail="workRail" data-dir="1" aria-label="Next" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></nav></div>
   </div>
 </section>
 
@@ -1504,11 +1526,11 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap case-band-grid">
     <div class="reveal">
       <h2 class="section-title">Case <span class="nowrap-dot">studies<span class="dot"></span></span></h2>
-      <p class="section-intro">Your customers tell the story better than any ad. See how Total Tools, Border Express and @Pilates let theirs do the selling.</p>
+      <p class="section-intro">Your customers tell the story better than any ad. See the customer stories we&#x27;ve made for Focus Insights, Inovayt and @Pilates.</p>
       <a class="quiet-link" href="video-case-studies-melbourne">See all our case study videos</a>
     </div>
     <div class="reveal">
-      <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Total Tools, customer story"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p></div>
+      <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Total Tools case study</span></p></div>
     </div>
   </div>
 </section>
@@ -1530,15 +1552,15 @@ document.documentElement.dataset.theme = 'dark';
       </details>
       <details>
         <summary>Do we get social versions?</summary>
-        <p>Yes, as standard. Every film comes with short vertical versions for Instagram, TikTok, LinkedIn and YouTube Shorts.</p>
+        <p>Yes, whenever you need them. We can make short vertical versions of any film for Instagram, TikTok, LinkedIn and YouTube Shorts, so one project gives you content for every channel.</p>
       </details>
       <details>
         <summary>How does a video project work?</summary>
         <p>It starts with a short chat about what the video needs to do and who it&#x27;s for. We plan it with you, film it and edit it, and you review each version before anything is final. You always know what&#x27;s happening next and what we need from you, which is usually not much.</p>
       </details>
       <details>
-        <summary>Can you film our conference or event?</summary>
-        <p>Yes. We film conferences, launches and events, as well as offices, sites and stores, and we bring everything needed to make it look and sound great. We work around your day, so your team can get on with theirs.</p>
+        <summary>Do you make explainer and animated videos?</summary>
+        <p>Yes. We make explainers and animation that turn complex ideas into something simple and easy to watch, like our work for Infrastructure Victoria, MedMate and Equip Super. We can mix filmed interviews, motion graphics and animation, whatever tells the story best.</p>
       </details>
       <details>
         <summary>Do you work outside Melbourne?</summary>
@@ -1582,10 +1604,9 @@ document.documentElement.dataset.theme = 'dark';
               <li><a href="video-case-studies-melbourne">Case Studies &amp; Testimonials</a></li>
               <li><a href="video-case-studies-melbourne">Customer Testimonial Videos</a></li>
               <li><a href="video-production-melbourne#founder-stories">Founder Stories</a></li>
-              <li><a href="video-production-melbourne#events">Conference &amp; Event Video</a></li>
               <li><a href="video-production-melbourne#social-versions">Social Content</a></li>
-              <li><a href="video-production-melbourne#brand-films">Explainer Videos</a></li>
-              <li><a href="video-production-melbourne#brand-films">Animation</a></li>
+              <li><a href="video-production-melbourne#explainers">Explainer Videos</a></li>
+              <li><a href="video-production-melbourne#explainers">Animation</a></li>
             </ul>
           </div>
 
