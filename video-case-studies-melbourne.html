@@ -48,26 +48,34 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What's the difference between a case study video and a testimonial?",
+          "name": "What's the difference between a case study and a testimonial video?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A testimonial is a customer saying nice things about you. A case study is a story: a real customer talks through a specific problem and how it was solved."
+            "text": "A testimonial is your customer saying why they'd recommend you. A case study tells the full story: the challenge, how you helped and the result. We can make both from the one day of filming."
           }
         },
         {
           "@type": "Question",
-          "name": "How does a case study shoot work?",
+          "name": "Does my customer need to prepare anything?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We start with a kick-off to work out the key message: what you're trying to say, who needs to hear it and what you need the video to do. Your customer gets interview directions and a shoot-day schedule, so they know exactly what to expect. Then we film the interview and b-roll on site with them, and can build out visuals and a content bank at your place for future videos."
+            "text": "Nothing at all. We send them a simple outline beforehand, then on the day it's a relaxed conversation. We guide them the whole way, and most people are comfortable within a few minutes."
           }
         },
         {
           "@type": "Question",
-          "name": "What do we get?",
+          "name": "What do we actually get?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A hero video first, then cut-downs made for exactly where you'll use them, not just a 30-second version."
+            "text": "A polished two to three minute video that tells the story properly. We also make shorter versions to suit where you'll use them, like social media, your website or sales presentations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can one shoot give us more than one video?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A good conversation always has more great moments than one video can hold. We keep the best of them, so you can share more stories and social posts over time."
           }
         },
         {
@@ -75,15 +83,7 @@
           "name": "Where do you film?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "On location, wherever your customer is: their home, office, site or store. We're based in Melbourne and travel interstate when the job needs it."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much does a case study video cost?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Every project is different, so we quote each one on what you actually need. Tell us about the project and we'll send you a clear quote before anything starts."
+            "text": "Wherever your customer is. Usually it's half a day with them, and we can also film at your place to show your team and work. We're based in Melbourne and travel interstate."
           }
         }
       ]
@@ -121,12 +121,26 @@
   "@graph": [
     {
       "@type": "VideoObject",
-      "name": "Inovayt, home buyer story",
+      "name": "Inovayt, first home buyer story",
       "description": "A case study video for Inovayt, where a home buyer talks through buying her family's first home.",
       "thumbnailUrl": "https://www.vidpod.com.au/img/case-studies/inovayt-first-home-buyer-wide.jpg",
       "contentUrl": "https://www.vidpod.com.au/video/case-studies/inovayt-first-home-buyer-wide.mp4",
       "uploadDate": "2026-11-06",
       "duration": "PT1M24S",
+      "width": 1280,
+      "height": 720,
+      "publisher": {
+        "@id": "https://www.vidpod.com.au/#organization"
+      }
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Inovayt, upsizer story",
+      "description": "A case study video for Inovayt, where a family talks through moving to a bigger home.",
+      "thumbnailUrl": "https://www.vidpod.com.au/img/case-studies/inovayt-upsizer-wide.jpg",
+      "contentUrl": "https://www.vidpod.com.au/video/case-studies/inovayt-upsizer-wide.mp4",
+      "uploadDate": "2026-11-06",
+      "duration": "PT1M32S",
       "width": 1280,
       "height": 720,
       "publisher": {
@@ -757,14 +771,82 @@
 .vid-lightbox-wrap video { width: 100%; height: 100%; display: block; background: #000; object-fit: contain; }
 .vid-lightbox-wrap.is-vertical { width: min(92vw, calc(86vh * 9 / 16)); aspect-ratio: 9 / 16; }
 /* Case study page */
-.hero .hero-sub { max-width: 16ch; }
-@media (max-width: 720px) { .hero .hero-sub { max-width: 10ch; } }
-.hero { min-height: 80vh; }
 .work-vid { padding: 120px 0; }
 .steps-band { background: #000; color: #fff; padding: 110px 0 20px; }
 .steps-band .section-title { color: #fff; }
 .steps-band .section-title .dot { background: var(--green); }
 @media (max-width: 760px) { .work-vid { padding: 80px 0; } .steps-band { padding: 80px 0 10px; } }
+/* ---- v5: calmer H1, identical on every service page ---- */
+.hero { min-height: 80vh; }
+.hero .hero-sub { font-size: clamp(40px, 4.4vw, 64px); max-width: 20ch; line-height: 1.02; margin-bottom: 24px; }
+@media (max-width: 720px) { .hero { min-height: 78vh; } .hero .hero-sub { font-size: 34px; max-width: none; } }
+/* ---- v5: one quiet caption style, "Brand, what it is" ---- */
+.tile-cap { font-size: 15px; font-weight: 400; line-height: 1.45; }
+.tile-cap strong { font-weight: 700; }
+.tile-cap .cap-rest { opacity: 0.72; }
+/* ---- v5: 4 across grid (case studies) ---- */
+.tile-grid.is-4 .tile { flex-basis: calc((100% - 66px) / 4); }
+@media (max-width: 1000px) { .tile-grid.is-4 .tile { flex-basis: calc((100% - 22px) / 2); } }
+@media (max-width: 699px) { .tile-grid.is-4 .tile { flex-basis: 100%; } }
+/* ---- v5: logo strip ---- */
+.logo-band { background: #0A0A0A; color: #fff; padding: 34px 0 32px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.logo-band-label { margin: 0 0 24px; text-align: center; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.logo-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logo-track { display: flex; align-items: center; width: max-content; animation: logoScroll 70s linear infinite; }
+.logo-track img { display: block; height: var(--h); width: auto; margin-right: 76px; opacity: 0.62; flex: 0 0 auto; }
+.logo-viewport:hover .logo-track { animation-play-state: paused; }
+@keyframes logoScroll { to { transform: translateX(-50%); } }
+@media (max-width: 699px) { .logo-band { padding: 26px 0 24px; } .logo-band-label { margin-bottom: 18px; } .logo-track { animation-duration: 55s; } .logo-track img { height: calc(var(--h) * 0.78); margin-right: 52px; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-viewport { -webkit-mask-image: none; mask-image: none; }
+  .logo-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 26px 44px; padding: 0 22px; }
+  .logo-track img { margin-right: 0; }
+  .logo-track img[aria-hidden] { display: none; }
+}
+/* ---- v5: filter tags, plain uppercase words, brand dot on the selected one ---- */
+.vid-categories { gap: 6px 30px; margin: 30px 0 4px; }
+.vid-cat-btn, .vid-cat-btn:hover, .vid-cat-btn.is-active { background: none; color: inherit; box-shadow: none; transform: none; }
+.vid-cat-btn { padding: 8px 0; border-radius: 0; font-family: var(--font-body); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; opacity: 0.62; transition: opacity 0.2s ease; }
+.vid-cat-btn::after { content: ''; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: currentColor; transform: scale(0); transition: transform 0.25s var(--ease); }
+.vid-cat-btn:hover { opacity: 0.85; }
+.vid-cat-btn.is-active { opacity: 1; }
+.vid-cat-btn.is-active::after { transform: scale(1); }
+.vid-cat-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media (max-width: 720px) { .vid-categories { gap: 2px 22px; } .vid-cat-btn { font-size: 12px; padding: 8px 0; } }
+/* ---- v5: FAQ in two columns that span the page ---- */
+#faq .faq-wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 0 72px; align-items: start; }
+#faq .faq-wrap h2 { margin: 0; }
+#faq .faq-aside { margin: 18px 0 0; font-size: 15px; line-height: 1.55; opacity: 0.7; max-width: 30ch; }
+#faq .faq-aside a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+#faq .faq-list { max-width: none; margin-top: 0; border-top: 1px solid var(--line); }
+#faq .faq-list summary { font-size: 18px; padding: 24px 0; }
+#faq .faq-list p { max-width: 62ch; opacity: 0.82; line-height: 1.6; }
+@media (min-width: 861px) { #faq .faq-head { position: sticky; top: 120px; } }
+@media (max-width: 860px) { #faq .faq-wrap { grid-template-columns: 1fr; } #faq .faq-head { margin-bottom: 26px; } #faq .faq-list summary { font-size: 17px; padding: 20px 0; } }
+/* ---- v5: podcast services, one photo per show ---- */
+.svc-grid { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.svc-grid li { margin: 0; }
+.svc-photo { aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: #0A0A0A; }
+.svc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.svc-grid h3 { font-family: var(--font-body); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 18px 0 8px; color: inherit; }
+.svc-grid p { font-size: 15px; line-height: 1.55; margin: 0; opacity: 0.78; }
+@media (max-width: 1000px) { .svc-grid { grid-template-columns: repeat(2, 1fr); gap: 34px 22px; } }
+@media (max-width: 699px) { .svc-grid { grid-template-columns: 1fr; gap: 34px; } }
+/* ---- v5: tidy edges ---- */
+.work-vid + .snippets-strip::before { display: none; }
+.steps-band { padding-bottom: 96px; }
+@media (max-width: 760px) { .steps-band { padding-bottom: 72px; } }
+/* ---- v5: podcast shows as compact rows on phones ---- */
+@media (max-width: 699px) {
+  .tile-grid.is-shows { gap: 16px; }
+  .tile-grid.is-shows .tile { display: flex; align-items: center; gap: 16px; }
+  .tile-grid.is-shows .tile-media { flex: 0 0 104px; border-radius: 12px; }
+  .tile-grid.is-shows .tile-cap { margin: 0; }
+  .svc-photo { aspect-ratio: 16 / 9; }
+}
+/* ---- v5: snippet show labels ---- */
+.snippet-item .snippet-show { position: absolute; left: 0; right: 0; top: 0; padding: 16px 16px 34px; background: linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0)); color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; pointer-events: none; }
+.snippet-item .snippet-show::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-left: 5px; border-radius: 50%; background: var(--green); }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -831,45 +913,77 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </header>
 
+<section class="logo-band" aria-label="Brands we&#x27;ve worked with">
+  <p class="logo-band-label">Brands we&#x27;ve worked with</p>
+  <div class="logo-viewport">
+    <div class="logo-track">
+      <img src="img/clients/barefoot-investor.png" alt="Barefoot Investor" width="108" height="38" style="--h:38px" loading="lazy" decoding="async">
+      <img src="img/clients/nandos.png" alt="Nando&#x27;s" width="144" height="27" style="--h:27px" loading="lazy" decoding="async">
+      <img src="img/clients/hubspot.png" alt="HubSpot" width="120" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/country-road.png" alt="Country Road" width="211" height="19" style="--h:19px" loading="lazy" decoding="async">
+      <img src="img/clients/monash-university.png" alt="Monash University" width="116" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/border-express.png" alt="Border Express" width="170" height="24" style="--h:24px" loading="lazy" decoding="async">
+      <img src="img/clients/atpilates.png" alt="@Pilates" width="129" height="31" style="--h:31px" loading="lazy" decoding="async">
+      <img src="img/clients/inovayt.png" alt="Inovayt" width="123" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/marathon-foods.png" alt="Marathon Foods" width="114" height="35" style="--h:35px" loading="lazy" decoding="async">
+      <img src="img/clients/infrastructure-victoria.png" alt="Infrastructure Victoria" width="150" height="26" style="--h:26px" loading="lazy" decoding="async">
+      <img src="img/clients/medmate.png" alt="MedMate" width="134" height="30" style="--h:30px" loading="lazy" decoding="async">
+      <img src="img/clients/food-industry-asia.png" alt="Food Industry Asia" width="88" height="40" style="--h:40px" loading="lazy" decoding="async">
+      <img src="img/clients/equip-super.png" alt="Equip Super" width="120" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/chiropedic.png" alt="Chiropedic" width="141" height="29" style="--h:29px" loading="lazy" decoding="async">
+      <img src="img/clients/barefoot-investor.png" alt="" aria-hidden="true" width="108" height="38" style="--h:38px" loading="lazy" decoding="async">
+      <img src="img/clients/nandos.png" alt="" aria-hidden="true" width="144" height="27" style="--h:27px" loading="lazy" decoding="async">
+      <img src="img/clients/hubspot.png" alt="" aria-hidden="true" width="120" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/country-road.png" alt="" aria-hidden="true" width="211" height="19" style="--h:19px" loading="lazy" decoding="async">
+      <img src="img/clients/monash-university.png" alt="" aria-hidden="true" width="116" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/border-express.png" alt="" aria-hidden="true" width="170" height="24" style="--h:24px" loading="lazy" decoding="async">
+      <img src="img/clients/atpilates.png" alt="" aria-hidden="true" width="129" height="31" style="--h:31px" loading="lazy" decoding="async">
+      <img src="img/clients/inovayt.png" alt="" aria-hidden="true" width="123" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/marathon-foods.png" alt="" aria-hidden="true" width="114" height="35" style="--h:35px" loading="lazy" decoding="async">
+      <img src="img/clients/infrastructure-victoria.png" alt="" aria-hidden="true" width="150" height="26" style="--h:26px" loading="lazy" decoding="async">
+      <img src="img/clients/medmate.png" alt="" aria-hidden="true" width="134" height="30" style="--h:30px" loading="lazy" decoding="async">
+      <img src="img/clients/food-industry-asia.png" alt="" aria-hidden="true" width="88" height="40" style="--h:40px" loading="lazy" decoding="async">
+      <img src="img/clients/equip-super.png" alt="" aria-hidden="true" width="120" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/chiropedic.png" alt="" aria-hidden="true" width="141" height="29" style="--h:29px" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
 <section class="work-vid" id="work">
   <div class="wrap work-inner">
     <h2 class="section-title reveal">Customer <span class="nowrap-dot">stories<span class="dot"></span></span></h2>
-    <div class="tile-grid reveal">
+    <div class="tile-grid is-4 reveal">
       <div class="tile" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Total Tools, customer story">
         <div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Total Tools, customer story</p>
+        <p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p>
       </div>
-      <div class="tile" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, home buyer story">
-        <div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt, home buyer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Inovayt, home buyer story</p>
+      <div class="tile" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story">
+        <div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt, first home buyer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
+        <p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, first home buyer story</span></p>
       </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, case study">
-        <div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Border Express, case study</p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Marathon Foods, customer story">
-        <div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Marathon Foods, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Marathon Foods, customer story</p>
+      <div class="tile" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story">
+        <div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
+        <p class="tile-cap"><strong>Border Express</strong><span class="cap-rest">, customer story</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study">
         <div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">@Pilates, franchise case study</p>
+        <p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p>
+      </div>
+      <div class="tile" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Marathon Foods, customer story">
+        <div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Marathon Foods, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
+        <p class="tile-cap"><strong>Marathon Foods</strong><span class="cap-rest">, customer story</span></p>
+      </div>
+      <div class="tile" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, upsizer story">
+        <div class="tile-media"><img src="img/case-studies/inovayt-upsizer-wide.jpg" alt="Inovayt, upsizer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
+        <p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="MOabmPW88Yg" aria-label="Play: RWW, Water NSW case study">
         <div class="tile-media"><img src="img/case-studies/MOabmPW88Yg.jpg" alt="RWW, Water NSW case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">RWW, Water NSW case study</p>
+        <p class="tile-cap"><strong>RWW</strong><span class="cap-rest">, Water NSW case study</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Food Industry Asia, customer story">
         <div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Food Industry Asia, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Food Industry Asia, customer story</p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="GCbtI7zRI4A" aria-label="Play: Brava, brand video">
-        <div class="tile-media"><img src="img/work/GCbtI7zRI4A.jpg" alt="Brava, brand video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Brava, brand video</p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story">
-        <div class="tile-media"><img src="img/case-studies/zyJLmbsxy9Y.jpg" alt="Wunder W, founding story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Wunder W, founding story</p>
+        <p class="tile-cap"><strong>Food Industry Asia</strong><span class="cap-rest">, customer story</span></p>
       </div>
     </div>
     <a class="quiet-link reveal" href="video-production-melbourne">See all our video work</a>
@@ -880,37 +994,40 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap">
     <h2 class="section-title reveal">How we make <span class="nowrap-dot">them<span class="dot"></span></span></h2>
     <ol class="steps reveal">
-      <li><span class="step-num">01</span><h3>Plan the message</h3><p>What you need to say, who needs to hear it and what the video has to do.</p></li>
-      <li><span class="step-num">02</span><h3>Prep your customer</h3><p>Interview directions and a shoot-day schedule, so they know what to expect.</p></li>
-      <li><span class="step-num">03</span><h3>Capture on site</h3><p>The interview and b-roll, filmed on site with your customer.</p></li>
-      <li><span class="step-num">04</span><h3>Edit for channels</h3><p>A hero video, then cut-downs for exactly where you&#x27;ll use them.</p></li>
+      <li><span class="step-num">01</span><h3>Plan</h3><p>We start with a quick chat about what you want people to feel and do after watching.</p></li>
+      <li><span class="step-num">02</span><h3>Prepare</h3><p>We brief your customer beforehand, so they know exactly what to expect and feel at ease.</p></li>
+      <li><span class="step-num">03</span><h3>Film</h3><p>We come to them and capture their story, plus the real work you did together.</p></li>
+      <li><span class="step-num">04</span><h3>Deliver</h3><p>You get a polished main video, plus shorter versions ready for your website, socials and sales.</p></li>
     </ol>
   </div>
 </section>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
-  <div class="wrap">
-    <h2 class="reveal">FAQ<span class="dot"></span></h2>
+  <div class="wrap faq-wrap">
+    <div class="faq-head reveal">
+      <h2>FAQ<span class="dot"></span></h2>
+      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us</a>.</p>
+    </div>
     <div class="faq-list reveal">
       <details>
-        <summary>What&#x27;s the difference between a case study video and a testimonial?</summary>
-        <p>A testimonial is a customer saying nice things about you. A case study is a story: a real customer talks through a specific problem and how it was solved.</p>
+        <summary>What&#x27;s the difference between a case study and a testimonial video?</summary>
+        <p>A testimonial is your customer saying why they&#x27;d recommend you. A case study tells the full story: the challenge, how you helped and the result. We can make both from the one day of filming.</p>
       </details>
       <details>
-        <summary>How does a case study shoot work?</summary>
-        <p>We start with a kick-off to work out the key message: what you&#x27;re trying to say, who needs to hear it and what you need the video to do. Your customer gets interview directions and a shoot-day schedule, so they know exactly what to expect. Then we film the interview and b-roll on site with them, and can build out visuals and a content bank at your place for future videos.</p>
+        <summary>Does my customer need to prepare anything?</summary>
+        <p>Nothing at all. We send them a simple outline beforehand, then on the day it&#x27;s a relaxed conversation. We guide them the whole way, and most people are comfortable within a few minutes.</p>
       </details>
       <details>
-        <summary>What do we get?</summary>
-        <p>A hero video first, then cut-downs made for exactly where you&#x27;ll use them, not just a 30-second version.</p>
+        <summary>What do we actually get?</summary>
+        <p>A polished two to three minute video that tells the story properly. We also make shorter versions to suit where you&#x27;ll use them, like social media, your website or sales presentations.</p>
+      </details>
+      <details>
+        <summary>Can one shoot give us more than one video?</summary>
+        <p>Yes. A good conversation always has more great moments than one video can hold. We keep the best of them, so you can share more stories and social posts over time.</p>
       </details>
       <details>
         <summary>Where do you film?</summary>
-        <p>On location, wherever your customer is: their home, office, site or store. We&#x27;re based in Melbourne and travel interstate when the job needs it.</p>
-      </details>
-      <details>
-        <summary>How much does a case study video cost?</summary>
-        <p>Every project is different, so we quote each one on what you actually need. Tell us about the project and we&#x27;ll send you a clear quote before anything starts.</p>
+        <p>Wherever your customer is. Usually it&#x27;s half a day with them, and we can also film at your place to show your team and work. We&#x27;re based in Melbourne and travel interstate.</p>
       </details>
     </div>
   </div>

@@ -751,6 +751,77 @@
 @media (max-width: 699px) { .steps { grid-template-columns: 1fr; gap: 22px; } }
 .vid-lightbox-wrap video { width: 100%; height: 100%; display: block; background: #000; object-fit: contain; }
 .vid-lightbox-wrap.is-vertical { width: min(92vw, calc(86vh * 9 / 16)); aspect-ratio: 9 / 16; }
+/* ---- v5: calmer H1, identical on every service page ---- */
+.hero { min-height: 80vh; }
+.hero .hero-sub { font-size: clamp(40px, 4.4vw, 64px); max-width: 20ch; line-height: 1.02; margin-bottom: 24px; }
+@media (max-width: 720px) { .hero { min-height: 78vh; } .hero .hero-sub { font-size: 34px; max-width: none; } }
+/* ---- v5: one quiet caption style, "Brand, what it is" ---- */
+.tile-cap { font-size: 15px; font-weight: 400; line-height: 1.45; }
+.tile-cap strong { font-weight: 700; }
+.tile-cap .cap-rest { opacity: 0.72; }
+/* ---- v5: 4 across grid (case studies) ---- */
+.tile-grid.is-4 .tile { flex-basis: calc((100% - 66px) / 4); }
+@media (max-width: 1000px) { .tile-grid.is-4 .tile { flex-basis: calc((100% - 22px) / 2); } }
+@media (max-width: 699px) { .tile-grid.is-4 .tile { flex-basis: 100%; } }
+/* ---- v5: logo strip ---- */
+.logo-band { background: #0A0A0A; color: #fff; padding: 34px 0 32px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.logo-band-label { margin: 0 0 24px; text-align: center; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.logo-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logo-track { display: flex; align-items: center; width: max-content; animation: logoScroll 70s linear infinite; }
+.logo-track img { display: block; height: var(--h); width: auto; margin-right: 76px; opacity: 0.62; flex: 0 0 auto; }
+.logo-viewport:hover .logo-track { animation-play-state: paused; }
+@keyframes logoScroll { to { transform: translateX(-50%); } }
+@media (max-width: 699px) { .logo-band { padding: 26px 0 24px; } .logo-band-label { margin-bottom: 18px; } .logo-track { animation-duration: 55s; } .logo-track img { height: calc(var(--h) * 0.78); margin-right: 52px; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-viewport { -webkit-mask-image: none; mask-image: none; }
+  .logo-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 26px 44px; padding: 0 22px; }
+  .logo-track img { margin-right: 0; }
+  .logo-track img[aria-hidden] { display: none; }
+}
+/* ---- v5: filter tags, plain uppercase words, brand dot on the selected one ---- */
+.vid-categories { gap: 6px 30px; margin: 30px 0 4px; }
+.vid-cat-btn, .vid-cat-btn:hover, .vid-cat-btn.is-active { background: none; color: inherit; box-shadow: none; transform: none; }
+.vid-cat-btn { padding: 8px 0; border-radius: 0; font-family: var(--font-body); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; opacity: 0.62; transition: opacity 0.2s ease; }
+.vid-cat-btn::after { content: ''; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: currentColor; transform: scale(0); transition: transform 0.25s var(--ease); }
+.vid-cat-btn:hover { opacity: 0.85; }
+.vid-cat-btn.is-active { opacity: 1; }
+.vid-cat-btn.is-active::after { transform: scale(1); }
+.vid-cat-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media (max-width: 720px) { .vid-categories { gap: 2px 22px; } .vid-cat-btn { font-size: 12px; padding: 8px 0; } }
+/* ---- v5: FAQ in two columns that span the page ---- */
+#faq .faq-wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 0 72px; align-items: start; }
+#faq .faq-wrap h2 { margin: 0; }
+#faq .faq-aside { margin: 18px 0 0; font-size: 15px; line-height: 1.55; opacity: 0.7; max-width: 30ch; }
+#faq .faq-aside a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+#faq .faq-list { max-width: none; margin-top: 0; border-top: 1px solid var(--line); }
+#faq .faq-list summary { font-size: 18px; padding: 24px 0; }
+#faq .faq-list p { max-width: 62ch; opacity: 0.82; line-height: 1.6; }
+@media (min-width: 861px) { #faq .faq-head { position: sticky; top: 120px; } }
+@media (max-width: 860px) { #faq .faq-wrap { grid-template-columns: 1fr; } #faq .faq-head { margin-bottom: 26px; } #faq .faq-list summary { font-size: 17px; padding: 20px 0; } }
+/* ---- v5: podcast services, one photo per show ---- */
+.svc-grid { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.svc-grid li { margin: 0; }
+.svc-photo { aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: #0A0A0A; }
+.svc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.svc-grid h3 { font-family: var(--font-body); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 18px 0 8px; color: inherit; }
+.svc-grid p { font-size: 15px; line-height: 1.55; margin: 0; opacity: 0.78; }
+@media (max-width: 1000px) { .svc-grid { grid-template-columns: repeat(2, 1fr); gap: 34px 22px; } }
+@media (max-width: 699px) { .svc-grid { grid-template-columns: 1fr; gap: 34px; } }
+/* ---- v5: tidy edges ---- */
+.work-vid + .snippets-strip::before { display: none; }
+.steps-band { padding-bottom: 96px; }
+@media (max-width: 760px) { .steps-band { padding-bottom: 72px; } }
+/* ---- v5: podcast shows as compact rows on phones ---- */
+@media (max-width: 699px) {
+  .tile-grid.is-shows { gap: 16px; }
+  .tile-grid.is-shows .tile { display: flex; align-items: center; gap: 16px; }
+  .tile-grid.is-shows .tile-media { flex: 0 0 104px; border-radius: 12px; }
+  .tile-grid.is-shows .tile-cap { margin: 0; }
+  .svc-photo { aspect-ratio: 16 / 9; }
+}
+/* ---- v5: snippet show labels ---- */
+.snippet-item .snippet-show { position: absolute; left: 0; right: 0; top: 0; padding: 16px 16px 34px; background: linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0)); color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; pointer-events: none; }
+.snippet-item .snippet-show::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-left: 5px; border-radius: 50%; background: var(--green); }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -803,8 +874,8 @@ document.documentElement.dataset.theme = 'dark';
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
     <video
-      src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Let's%20Talk%20Teaching%20Behind%20The%20Scenes.mp4"
-      poster="img/podcasts/ltt/ltt-068A2603.jpg"
+      src="video/podcast-hero-loop.mp4"
+      poster="img/podcasts/podcast-hero-loop.jpg"
       autoplay muted loop playsinline preload="metadata"
       tabindex="-1"></video>
   </div>
@@ -817,67 +888,94 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </header>
 
+<section class="logo-band" aria-label="Brands we&#x27;ve worked with">
+  <p class="logo-band-label">Brands we&#x27;ve worked with</p>
+  <div class="logo-viewport">
+    <div class="logo-track">
+      <img src="img/clients/barefoot-investor.png" alt="Barefoot Investor" width="108" height="38" style="--h:38px" loading="lazy" decoding="async">
+      <img src="img/clients/nandos.png" alt="Nando&#x27;s" width="144" height="27" style="--h:27px" loading="lazy" decoding="async">
+      <img src="img/clients/hubspot.png" alt="HubSpot" width="120" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/country-road.png" alt="Country Road" width="211" height="19" style="--h:19px" loading="lazy" decoding="async">
+      <img src="img/clients/monash-university.png" alt="Monash University" width="116" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/border-express.png" alt="Border Express" width="170" height="24" style="--h:24px" loading="lazy" decoding="async">
+      <img src="img/clients/atpilates.png" alt="@Pilates" width="129" height="31" style="--h:31px" loading="lazy" decoding="async">
+      <img src="img/clients/inovayt.png" alt="Inovayt" width="123" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/marathon-foods.png" alt="Marathon Foods" width="114" height="35" style="--h:35px" loading="lazy" decoding="async">
+      <img src="img/clients/infrastructure-victoria.png" alt="Infrastructure Victoria" width="150" height="26" style="--h:26px" loading="lazy" decoding="async">
+      <img src="img/clients/medmate.png" alt="MedMate" width="134" height="30" style="--h:30px" loading="lazy" decoding="async">
+      <img src="img/clients/food-industry-asia.png" alt="Food Industry Asia" width="88" height="40" style="--h:40px" loading="lazy" decoding="async">
+      <img src="img/clients/equip-super.png" alt="Equip Super" width="120" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/chiropedic.png" alt="Chiropedic" width="141" height="29" style="--h:29px" loading="lazy" decoding="async">
+      <img src="img/clients/barefoot-investor.png" alt="" aria-hidden="true" width="108" height="38" style="--h:38px" loading="lazy" decoding="async">
+      <img src="img/clients/nandos.png" alt="" aria-hidden="true" width="144" height="27" style="--h:27px" loading="lazy" decoding="async">
+      <img src="img/clients/hubspot.png" alt="" aria-hidden="true" width="120" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/country-road.png" alt="" aria-hidden="true" width="211" height="19" style="--h:19px" loading="lazy" decoding="async">
+      <img src="img/clients/monash-university.png" alt="" aria-hidden="true" width="116" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/border-express.png" alt="" aria-hidden="true" width="170" height="24" style="--h:24px" loading="lazy" decoding="async">
+      <img src="img/clients/atpilates.png" alt="" aria-hidden="true" width="129" height="31" style="--h:31px" loading="lazy" decoding="async">
+      <img src="img/clients/inovayt.png" alt="" aria-hidden="true" width="123" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/marathon-foods.png" alt="" aria-hidden="true" width="114" height="35" style="--h:35px" loading="lazy" decoding="async">
+      <img src="img/clients/infrastructure-victoria.png" alt="" aria-hidden="true" width="150" height="26" style="--h:26px" loading="lazy" decoding="async">
+      <img src="img/clients/medmate.png" alt="" aria-hidden="true" width="134" height="30" style="--h:30px" loading="lazy" decoding="async">
+      <img src="img/clients/food-industry-asia.png" alt="" aria-hidden="true" width="88" height="40" style="--h:40px" loading="lazy" decoding="async">
+      <img src="img/clients/equip-super.png" alt="" aria-hidden="true" width="120" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/chiropedic.png" alt="" aria-hidden="true" width="141" height="29" style="--h:29px" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
 <section class="work-pod" id="shows">
   <div class="wrap work-inner">
     <h2 class="section-title reveal">Shows we <span class="nowrap-dot">produce<span class="dot"></span></span></h2>
-    <div class="tile-grid reveal">
+    <div class="tile-grid is-shows reveal">
       <a class="tile" href="podcasts/the-numbers-game.html">
-        <div class="tile-media is-square"><img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy" decoding="async" width="800" height="800"></div>
-        <p class="tile-cap">A weekly video podcast on money, business, and strategy. 5 years of consistency and 300+ episodes deep.</p><span class="tile-more">Learn more <span aria-hidden="true">&rarr;</span></span>
+        <div class="tile-media is-square"><img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy" decoding="async" width="960" height="960"></div>
+        <p class="tile-cap"><strong>The Numbers Game</strong><span class="cap-rest">, weekly business podcast</span></p>
       </a>
       <a class="tile" href="podcasts/lets-talk-teaching.html">
-        <div class="tile-media is-square"><img src="img/podcasts/ltt.jpg" alt="Let's Talk Teaching" loading="lazy" decoding="async" width="800" height="800"></div>
-        <p class="tile-cap">Flagship podcast for Monash University’s Faculty of Education.</p><span class="tile-more">Learn more <span aria-hidden="true">&rarr;</span></span>
+        <div class="tile-media is-square"><img src="img/podcasts/ltt.jpg" alt="Let&#x27;s Talk Teaching" loading="lazy" decoding="async" width="960" height="960"></div>
+        <p class="tile-cap"><strong>Monash University</strong><span class="cap-rest">, Let&#x27;s Talk Teaching</span></p>
       </a>
       <a class="tile" href="podcasts/unconventional-business.html">
-        <div class="tile-media is-square"><img src="img/podcasts/unconventional.jpg" alt="Unconventional Business, HubSpot" loading="lazy" decoding="async" width="800" height="800"></div>
-        <p class="tile-cap">A HubSpot ANZ Podcast on the businesses doing something unconventional.</p><span class="tile-more">Learn more <span aria-hidden="true">&rarr;</span></span>
+        <div class="tile-media is-square"><img src="img/podcasts/unconventional.jpg" alt="Unconventional Business, HubSpot" loading="lazy" decoding="async" width="960" height="960"></div>
+        <p class="tile-cap"><strong>HubSpot ANZ</strong><span class="cap-rest">, Unconventional Business</span></p>
       </a>
     </div>
-    <p class="section-intro pod-more reveal">We also make Home Files for Carlisle Homes and The Huddle for Help at Hand Education. For brand films, explainers and case studies, see our <a href="video-production-melbourne">video production</a>.</p>
+    <a class="quiet-link reveal" href="index.html#work-pod">See more shows</a>
   </div>
 </section>
 
 <section class="work-vid" id="services">
   <div class="wrap work-inner">
     <h2 class="section-title reveal">How we make <span class="nowrap-dot">shows<span class="dot"></span></span></h2>
-    <p class="section-intro reveal">We bring the cameras, lights and audio and turn a room you already have into a set.</p>
-    <ul class="steps reveal">
-      <li><h3>Full-service shows</h3><p>Show development, website, producing, distribution and social strategy, built from the ground up, like The Numbers Game.</p></li>
-      <li><h3>In-person studio sessions</h3><p>Cinema cameras and high-end audio, with the full video podcast studio brought to you, for Monash University and The Numbers Game.</p></li>
-      <li><h3>Remote seasons</h3><p>Fully remote recordings run across multiple seasons, like Unconventional Business for HubSpot ANZ.</p></li>
-      <li><h3>Editing and clips</h3><p>Editing, show notes and social snippets that get the most out of your long-form content.</p></li>
+    <p class="section-intro reveal">We bring the cameras, lights and sound, and turn a room you already have into a set.</p>
+    <ul class="svc-grid reveal">
+      <li><div class="svc-photo"><img src="img/podcasts/tng-hero/01.jpg" srcset="img/podcasts/tng-hero/01-sm.jpg 480w, img/podcasts/tng-hero/01.jpg 1200w" sizes="(max-width: 699px) 100vw, (max-width: 1000px) 50vw, 330px" alt="The Numbers Game hosts recording an episode" loading="lazy" decoding="async"></div><h3>Full-service shows</h3><p>We shape the idea, then record, edit and publish every episode and help it find an audience, like The Numbers Game.</p></li>
+      <li><div class="svc-photo"><img src="img/podcasts/ltt-bts/03.jpg" srcset="img/podcasts/ltt-bts/03-sm.jpg 480w, img/podcasts/ltt-bts/03.jpg 1200w" sizes="(max-width: 699px) 100vw, (max-width: 1000px) 50vw, 330px" alt="Let&#x27;s Talk Teaching recording at Monash University" loading="lazy" decoding="async"></div><h3>In-person recording</h3><p>We bring cinema cameras, lights and studio sound to your office or campus, like Let&#x27;s Talk Teaching for Monash University.</p></li>
+      <li><div class="svc-photo"><img src="img/podcasts/ub-hero/01.jpg" srcset="img/podcasts/ub-hero/01-sm.jpg 480w, img/podcasts/ub-hero/01.jpg 1200w" sizes="(max-width: 699px) 100vw, (max-width: 1000px) 50vw, 330px" alt="Unconventional Business remote recording for HubSpot ANZ" loading="lazy" decoding="async"></div><h3>Remote seasons</h3><p>Hosts and guests join from anywhere and it still looks and sounds great, like Unconventional Business for HubSpot ANZ.</p></li>
+      <li><div class="svc-photo"><img src="img/podcasts/help-at-hand-hero/01.jpg" srcset="img/podcasts/help-at-hand-hero/01-sm.jpg 480w, img/podcasts/help-at-hand-hero/01.jpg 1200w" sizes="(max-width: 699px) 100vw, (max-width: 1000px) 50vw, 330px" alt="Help at Hand Education podcast recording" loading="lazy" decoding="async"></div><h3>Episodes and clips</h3><p>Every recording becomes a polished episode, plus short clips made for social.</p></li>
     </ul>
-    <div class="photo-3 reveal">
-      <img src="img/bts-pod/pod-09.jpg" srcset="img/bts-pod/pod-09-sm.jpg 480w, img/bts-pod/pod-09.jpg 1200w" sizes="(max-width: 720px) 100vw, 400px" alt="VIDPOD podcast production behind the scenes" loading="lazy" decoding="async">
-      <img src="img/bts-pod/pod-12.jpg" srcset="img/bts-pod/pod-12-sm.jpg 480w, img/bts-pod/pod-12.jpg 1200w" sizes="(max-width: 720px) 100vw, 400px" alt="VIDPOD podcast production behind the scenes" loading="lazy" decoding="async">
-      <img src="img/bts-pod/pod-15.jpg" srcset="img/bts-pod/pod-15-sm.jpg 480w, img/bts-pod/pod-15.jpg 1200w" sizes="(max-width: 720px) 100vw, 400px" alt="VIDPOD podcast production behind the scenes" loading="lazy" decoding="async">
-    </div>
   </div>
 </section>
 
-<!-- SNIPPETS, vertical podcast snippets carousel -->
+<!-- Clips rail: mixed shows, each labelled -->
 <section class="pod-sec snippets-strip">
   <div class="wrap">
-    <h2 class="reveal">SNIPPETS<span class="dot"></span></h2>
+    <h2 class="reveal">Clips from our shows<span class="dot"></span></h2>
   </div>
   <div class="snippets-rail reveal" id="snippetsRail">
-    <div class="snippet-item" data-yt-id="erxV1euSSAA"><img src="https://i.ytimg.com/vi/erxV1euSSAA/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="h1yiNZ7Zk1Y"><img src="https://i.ytimg.com/vi/h1yiNZ7Zk1Y/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="SVOhY5tpt_Q"><img src="https://i.ytimg.com/vi/SVOhY5tpt_Q/maxresdefault.jpg" alt="The Numbers Game Episode 200 social promo" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="DW808g9HINM"><img src="https://i.ytimg.com/vi/DW808g9HINM/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="t_yUPzH-bk0"><img src="https://i.ytimg.com/vi/t_yUPzH-bk0/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="DY5ffrW_Frc"><img src="https://i.ytimg.com/vi/DY5ffrW_Frc/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="Aa0p7JGeEac"><img src="https://i.ytimg.com/vi/Aa0p7JGeEac/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="3s5ucTj3u6U"><img src="https://i.ytimg.com/vi/3s5ucTj3u6U/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="rYeRMF96F7Y"><img src="https://i.ytimg.com/vi/rYeRMF96F7Y/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="U_DyIIwfmZA"><img src="https://i.ytimg.com/vi/U_DyIIwfmZA/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="pUqipvMwEN0"><img src="https://i.ytimg.com/vi/pUqipvMwEN0/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="kT5xi_cK0E8"><img src="https://i.ytimg.com/vi/kT5xi_cK0E8/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="ecJWsEYEwZ8"><img src="https://i.ytimg.com/vi/ecJWsEYEwZ8/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="R4KFG7x_qyw"><img src="https://i.ytimg.com/vi/R4KFG7x_qyw/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="h2kpq1lCdYg"><img src="https://i.ytimg.com/vi/h2kpq1lCdYg/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="EafIpRQYIJ0"><img src="https://i.ytimg.com/vi/EafIpRQYIJ0/maxresdefault.jpg" alt="The Numbers Game snippet" loading="lazy" decoding="async"><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="E5zQn7dhk48" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="https://i.ytimg.com/vi/E5zQn7dhk48/maxresdefault.jpg" alt="Unconventional Business clip" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="9RfQ7Nqrv-8" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="https://i.ytimg.com/vi/9RfQ7Nqrv-8/maxresdefault.jpg" alt="Let&#x27;s Talk Teaching clip" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="erxV1euSSAA" role="button" tabindex="0" aria-label="Play: The Numbers Game clip"><img src="https://i.ytimg.com/vi/erxV1euSSAA/maxresdefault.jpg" alt="The Numbers Game clip" loading="lazy" decoding="async"><span class="snippet-show">The Numbers Game</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="gnX6yYos30Q" role="button" tabindex="0" aria-label="Play: Help at Hand clip"><img src="https://i.ytimg.com/vi/gnX6yYos30Q/maxresdefault.jpg" alt="Help at Hand clip" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="5gvZf8BntUU" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="https://i.ytimg.com/vi/5gvZf8BntUU/maxresdefault.jpg" alt="Unconventional Business clip" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="6UCHB9E8Eg8" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="https://i.ytimg.com/vi/6UCHB9E8Eg8/maxresdefault.jpg" alt="Let&#x27;s Talk Teaching clip" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="DW808g9HINM" role="button" tabindex="0" aria-label="Play: The Numbers Game clip"><img src="https://i.ytimg.com/vi/DW808g9HINM/maxresdefault.jpg" alt="The Numbers Game clip" loading="lazy" decoding="async"><span class="snippet-show">The Numbers Game</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="AIjg80SysUU" role="button" tabindex="0" aria-label="Play: Help at Hand clip"><img src="https://i.ytimg.com/vi/AIjg80SysUU/maxresdefault.jpg" alt="Help at Hand clip" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="fj_bWMYKn7E" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="https://i.ytimg.com/vi/fj_bWMYKn7E/maxresdefault.jpg" alt="Unconventional Business clip" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="CPuYWArC1EA" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="https://i.ytimg.com/vi/CPuYWArC1EA/maxresdefault.jpg" alt="Let&#x27;s Talk Teaching clip" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="h1yiNZ7Zk1Y" role="button" tabindex="0" aria-label="Play: The Numbers Game clip"><img src="https://i.ytimg.com/vi/h1yiNZ7Zk1Y/maxresdefault.jpg" alt="The Numbers Game clip" loading="lazy" decoding="async"><span class="snippet-show">The Numbers Game</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg" role="button" tabindex="0" aria-label="Play: Help at Hand clip"><img src="https://i.ytimg.com/vi/2xT2Fp9_Qpg/maxresdefault.jpg" alt="Help at Hand clip" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
   </div>
   <div class="wrap">
     <nav class="snippets-nav reveal">
@@ -892,8 +990,11 @@ document.documentElement.dataset.theme = 'dark';
 </section>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
-  <div class="wrap">
-    <h2 class="reveal">FAQ<span class="dot"></span></h2>
+  <div class="wrap faq-wrap">
+    <div class="faq-head reveal">
+      <h2>FAQ<span class="dot"></span></h2>
+      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us</a>.</p>
+    </div>
     <div class="faq-list reveal">
       <details>
         <summary>What is video podcast production?</summary>
@@ -1270,6 +1371,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 
   rail.querySelectorAll('.snippet-item').forEach(function(item) {
     item.addEventListener('click', function() { openLb(item.getAttribute('data-yt-id')); });
+    item.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(item.getAttribute('data-yt-id')); } });
   });
 
   // Arrow buttons → scroll rail by one card width; disable at edges

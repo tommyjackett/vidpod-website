@@ -759,6 +759,77 @@
 @media (max-width: 699px) { .steps { grid-template-columns: 1fr; gap: 22px; } }
 .vid-lightbox-wrap video { width: 100%; height: 100%; display: block; background: #000; object-fit: contain; }
 .vid-lightbox-wrap.is-vertical { width: min(92vw, calc(86vh * 9 / 16)); aspect-ratio: 9 / 16; }
+/* ---- v5: calmer H1, identical on every service page ---- */
+.hero { min-height: 80vh; }
+.hero .hero-sub { font-size: clamp(40px, 4.4vw, 64px); max-width: 20ch; line-height: 1.02; margin-bottom: 24px; }
+@media (max-width: 720px) { .hero { min-height: 78vh; } .hero .hero-sub { font-size: 34px; max-width: none; } }
+/* ---- v5: one quiet caption style, "Brand, what it is" ---- */
+.tile-cap { font-size: 15px; font-weight: 400; line-height: 1.45; }
+.tile-cap strong { font-weight: 700; }
+.tile-cap .cap-rest { opacity: 0.72; }
+/* ---- v5: 4 across grid (case studies) ---- */
+.tile-grid.is-4 .tile { flex-basis: calc((100% - 66px) / 4); }
+@media (max-width: 1000px) { .tile-grid.is-4 .tile { flex-basis: calc((100% - 22px) / 2); } }
+@media (max-width: 699px) { .tile-grid.is-4 .tile { flex-basis: 100%; } }
+/* ---- v5: logo strip ---- */
+.logo-band { background: #0A0A0A; color: #fff; padding: 34px 0 32px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.logo-band-label { margin: 0 0 24px; text-align: center; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.logo-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logo-track { display: flex; align-items: center; width: max-content; animation: logoScroll 70s linear infinite; }
+.logo-track img { display: block; height: var(--h); width: auto; margin-right: 76px; opacity: 0.62; flex: 0 0 auto; }
+.logo-viewport:hover .logo-track { animation-play-state: paused; }
+@keyframes logoScroll { to { transform: translateX(-50%); } }
+@media (max-width: 699px) { .logo-band { padding: 26px 0 24px; } .logo-band-label { margin-bottom: 18px; } .logo-track { animation-duration: 55s; } .logo-track img { height: calc(var(--h) * 0.78); margin-right: 52px; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-viewport { -webkit-mask-image: none; mask-image: none; }
+  .logo-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 26px 44px; padding: 0 22px; }
+  .logo-track img { margin-right: 0; }
+  .logo-track img[aria-hidden] { display: none; }
+}
+/* ---- v5: filter tags, plain uppercase words, brand dot on the selected one ---- */
+.vid-categories { gap: 6px 30px; margin: 30px 0 4px; }
+.vid-cat-btn, .vid-cat-btn:hover, .vid-cat-btn.is-active { background: none; color: inherit; box-shadow: none; transform: none; }
+.vid-cat-btn { padding: 8px 0; border-radius: 0; font-family: var(--font-body); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; opacity: 0.62; transition: opacity 0.2s ease; }
+.vid-cat-btn::after { content: ''; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: currentColor; transform: scale(0); transition: transform 0.25s var(--ease); }
+.vid-cat-btn:hover { opacity: 0.85; }
+.vid-cat-btn.is-active { opacity: 1; }
+.vid-cat-btn.is-active::after { transform: scale(1); }
+.vid-cat-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media (max-width: 720px) { .vid-categories { gap: 2px 22px; } .vid-cat-btn { font-size: 12px; padding: 8px 0; } }
+/* ---- v5: FAQ in two columns that span the page ---- */
+#faq .faq-wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 0 72px; align-items: start; }
+#faq .faq-wrap h2 { margin: 0; }
+#faq .faq-aside { margin: 18px 0 0; font-size: 15px; line-height: 1.55; opacity: 0.7; max-width: 30ch; }
+#faq .faq-aside a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+#faq .faq-list { max-width: none; margin-top: 0; border-top: 1px solid var(--line); }
+#faq .faq-list summary { font-size: 18px; padding: 24px 0; }
+#faq .faq-list p { max-width: 62ch; opacity: 0.82; line-height: 1.6; }
+@media (min-width: 861px) { #faq .faq-head { position: sticky; top: 120px; } }
+@media (max-width: 860px) { #faq .faq-wrap { grid-template-columns: 1fr; } #faq .faq-head { margin-bottom: 26px; } #faq .faq-list summary { font-size: 17px; padding: 20px 0; } }
+/* ---- v5: podcast services, one photo per show ---- */
+.svc-grid { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.svc-grid li { margin: 0; }
+.svc-photo { aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: #0A0A0A; }
+.svc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.svc-grid h3 { font-family: var(--font-body); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 18px 0 8px; color: inherit; }
+.svc-grid p { font-size: 15px; line-height: 1.55; margin: 0; opacity: 0.78; }
+@media (max-width: 1000px) { .svc-grid { grid-template-columns: repeat(2, 1fr); gap: 34px 22px; } }
+@media (max-width: 699px) { .svc-grid { grid-template-columns: 1fr; gap: 34px; } }
+/* ---- v5: tidy edges ---- */
+.work-vid + .snippets-strip::before { display: none; }
+.steps-band { padding-bottom: 96px; }
+@media (max-width: 760px) { .steps-band { padding-bottom: 72px; } }
+/* ---- v5: podcast shows as compact rows on phones ---- */
+@media (max-width: 699px) {
+  .tile-grid.is-shows { gap: 16px; }
+  .tile-grid.is-shows .tile { display: flex; align-items: center; gap: 16px; }
+  .tile-grid.is-shows .tile-media { flex: 0 0 104px; border-radius: 12px; }
+  .tile-grid.is-shows .tile-cap { margin: 0; }
+  .svc-photo { aspect-ratio: 16 / 9; }
+}
+/* ---- v5: snippet show labels ---- */
+.snippet-item .snippet-show { position: absolute; left: 0; right: 0; top: 0; padding: 16px 16px 34px; background: linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0)); color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; pointer-events: none; }
+.snippet-item .snippet-show::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-left: 5px; border-radius: 50%; background: var(--green); }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -825,6 +896,42 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </header>
 
+<section class="logo-band" aria-label="Brands we&#x27;ve worked with">
+  <p class="logo-band-label">Brands we&#x27;ve worked with</p>
+  <div class="logo-viewport">
+    <div class="logo-track">
+      <img src="img/clients/barefoot-investor.png" alt="Barefoot Investor" width="108" height="38" style="--h:38px" loading="lazy" decoding="async">
+      <img src="img/clients/nandos.png" alt="Nando&#x27;s" width="144" height="27" style="--h:27px" loading="lazy" decoding="async">
+      <img src="img/clients/hubspot.png" alt="HubSpot" width="120" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/country-road.png" alt="Country Road" width="211" height="19" style="--h:19px" loading="lazy" decoding="async">
+      <img src="img/clients/monash-university.png" alt="Monash University" width="116" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/border-express.png" alt="Border Express" width="170" height="24" style="--h:24px" loading="lazy" decoding="async">
+      <img src="img/clients/atpilates.png" alt="@Pilates" width="129" height="31" style="--h:31px" loading="lazy" decoding="async">
+      <img src="img/clients/inovayt.png" alt="Inovayt" width="123" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/marathon-foods.png" alt="Marathon Foods" width="114" height="35" style="--h:35px" loading="lazy" decoding="async">
+      <img src="img/clients/infrastructure-victoria.png" alt="Infrastructure Victoria" width="150" height="26" style="--h:26px" loading="lazy" decoding="async">
+      <img src="img/clients/medmate.png" alt="MedMate" width="134" height="30" style="--h:30px" loading="lazy" decoding="async">
+      <img src="img/clients/food-industry-asia.png" alt="Food Industry Asia" width="88" height="40" style="--h:40px" loading="lazy" decoding="async">
+      <img src="img/clients/equip-super.png" alt="Equip Super" width="120" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/chiropedic.png" alt="Chiropedic" width="141" height="29" style="--h:29px" loading="lazy" decoding="async">
+      <img src="img/clients/barefoot-investor.png" alt="" aria-hidden="true" width="108" height="38" style="--h:38px" loading="lazy" decoding="async">
+      <img src="img/clients/nandos.png" alt="" aria-hidden="true" width="144" height="27" style="--h:27px" loading="lazy" decoding="async">
+      <img src="img/clients/hubspot.png" alt="" aria-hidden="true" width="120" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/country-road.png" alt="" aria-hidden="true" width="211" height="19" style="--h:19px" loading="lazy" decoding="async">
+      <img src="img/clients/monash-university.png" alt="" aria-hidden="true" width="116" height="34" style="--h:34px" loading="lazy" decoding="async">
+      <img src="img/clients/border-express.png" alt="" aria-hidden="true" width="170" height="24" style="--h:24px" loading="lazy" decoding="async">
+      <img src="img/clients/atpilates.png" alt="" aria-hidden="true" width="129" height="31" style="--h:31px" loading="lazy" decoding="async">
+      <img src="img/clients/inovayt.png" alt="" aria-hidden="true" width="123" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/marathon-foods.png" alt="" aria-hidden="true" width="114" height="35" style="--h:35px" loading="lazy" decoding="async">
+      <img src="img/clients/infrastructure-victoria.png" alt="" aria-hidden="true" width="150" height="26" style="--h:26px" loading="lazy" decoding="async">
+      <img src="img/clients/medmate.png" alt="" aria-hidden="true" width="134" height="30" style="--h:30px" loading="lazy" decoding="async">
+      <img src="img/clients/food-industry-asia.png" alt="" aria-hidden="true" width="88" height="40" style="--h:40px" loading="lazy" decoding="async">
+      <img src="img/clients/equip-super.png" alt="" aria-hidden="true" width="120" height="33" style="--h:33px" loading="lazy" decoding="async">
+      <img src="img/clients/chiropedic.png" alt="" aria-hidden="true" width="141" height="29" style="--h:29px" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
 <section class="work-vid" id="recent-work">
   <span id="brand-films" aria-hidden="true"></span>
   <div class="wrap work-inner">
@@ -841,51 +948,51 @@ document.documentElement.dataset.theme = 'dark';
     <div class="tile-grid reveal" id="workGrid">
       <div class="tile" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" data-category="brand-films" aria-label="Play: Barefoot Investor, book launch video">
         <div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Barefoot Investor, book launch video</p>
+        <p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="03nftmt_D9k" data-category="branded-content" aria-label="Play: Country Road, store launch">
         <div class="tile-media"><img src="img/work/03nftmt_D9k.jpg" alt="Country Road, store launch" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Country Road, store launch</p>
+        <p class="tile-cap"><strong>Country Road</strong><span class="cap-rest">, store launch</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" data-category="explainers" aria-label="Play: Infrastructure Victoria, animated explainer">
         <div class="tile-media"><img src="img/work/YH-LnvrsxDo.jpg" alt="Infrastructure Victoria, animated explainer" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Infrastructure Victoria, animated explainer</p>
+        <p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, animated explainer</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" data-category="social-content" aria-label="Play: Nando&#x27;s, taste test">
         <div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Nando&#x27;s, taste test</p>
+        <p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="GCbtI7zRI4A" data-category="brand-films" aria-label="Play: Brava, brand video">
         <div class="tile-media"><img src="img/work/GCbtI7zRI4A.jpg" alt="Brava, brand video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Brava, brand video</p>
+        <p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, brand video</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="c9rdClIUDno" data-category="explainers" aria-label="Play: MedMate, explainer video">
         <div class="tile-media"><img src="img/work/c9rdClIUDno.jpg" alt="MedMate, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">MedMate, explainer video</p>
+        <p class="tile-cap"><strong>MedMate</strong><span class="cap-rest">, explainer video</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" data-category="case-studies" aria-label="Play: Total Tools, customer story">
         <div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Total Tools, customer story</p>
+        <p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="fC7yxSSM3I0" data-category="social-content" aria-label="Play: Deliciou, social content">
         <div class="tile-media"><img src="img/work/fC7yxSSM3I0.jpg" alt="Deliciou, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Deliciou, social content</p>
+        <p class="tile-cap"><strong>Deliciou</strong><span class="cap-rest">, social content</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" data-category="brand-films" aria-label="Play: @Pilates, founding story">
         <div class="tile-media"><img src="img/work/fsJkJAmqskQ.jpg" alt="@Pilates, founding story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">@Pilates, founding story</p>
+        <p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="WnDGbiJXIhg" data-category="explainers" aria-label="Play: Equip Super, explainer video">
         <div class="tile-media"><img src="img/work/WnDGbiJXIhg.jpg" alt="Equip Super, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Equip Super, explainer video</p>
+        <p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, explainer video</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" data-category="branded-content" aria-label="Play: Brava, Obsessed with Fit campaign">
         <div class="tile-media"><img src="img/work/cyOn7RNLOhw.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Brava, Obsessed with Fit campaign</p>
+        <p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p>
       </div>
       <div class="tile" role="button" tabindex="0" data-yt-id="v7zZYpXPymA" data-category="social-content" aria-label="Play: Chiropedic Bedding, social content">
         <div class="tile-media"><img src="img/work/v7zZYpXPymA.jpg" alt="Chiropedic Bedding, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap">Chiropedic Bedding, social content</p>
+        <p class="tile-cap"><strong>Chiropedic Bedding</strong><span class="cap-rest">, social content</span></p>
       </div>
     </div>
     <a class="quiet-link reveal" href="video-case-studies-melbourne">See all our case studies</a>
@@ -895,7 +1002,7 @@ document.documentElement.dataset.theme = 'dark';
 <section class="pod-sec sec-white dark-alt">
   <div class="wrap">
     <div class="bts-strip reveal">
-      <h2 class="bts-heading">BTS<span class="dot"></span></h2>
+      <h2 class="bts-heading">On set<span class="dot"></span></h2>
       <div class="marquee-viewport">
         <div class="marquee-track" id="btsVidMarquee">
           <div class="marquee-item"><img src="img/bts-vid/bts-01.jpg" srcset="img/bts-vid/bts-01-sm.jpg 480w, img/bts-vid/bts-01.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
@@ -956,8 +1063,11 @@ document.documentElement.dataset.theme = 'dark';
 </section>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
-  <div class="wrap">
-    <h2 class="reveal">FAQ<span class="dot"></span></h2>
+  <div class="wrap faq-wrap">
+    <div class="faq-head reveal">
+      <h2>FAQ<span class="dot"></span></h2>
+      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us</a>.</p>
+    </div>
     <div class="faq-list reveal">
       <details>
         <summary>What does VIDPOD do?</summary>
