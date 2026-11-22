@@ -85,7 +85,7 @@
           "name": "What do we get from video podcast production?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A show people can watch as well as hear, filmed beautifully, with full episodes on YouTube, Spotify and Apple Podcasts. Then a system turns each recording into a bank of clips, quotes and Shorts, so one conversation keeps working for weeks."
+            "text": "The world is going video first, and people now search YouTube the way they search Google. We film your show beautifully so it can be watched as well as heard, then build the system that turns each episode into searchable pages, clips and Shorts. Every conversation keeps getting found long after it goes out."
           }
         },
         {
@@ -93,7 +93,7 @@
           "name": "Can you record it in our office or boardroom?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, absolutely. Even if your boardroom or office doesn't seem right, we bring the lighting, sound and know-how to make it look and sound great. We've recorded at Monash University, at Carlisle Homes and on location for Help at Hand Education."
+            "text": "Yes, absolutely. Even if your boardroom or office doesn't seem right, we bring the lighting, sound and know-how to make it look and sound great. We've recorded at Monash University, Carlisle Homes and Help at Hand Education, and in plenty of other offices, studios and boardrooms."
           }
         },
         {
@@ -101,7 +101,7 @@
           "name": "Can we make a podcast just for our staff?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Many of the shows we make are internal or members only, used as a learning resource. Your experts share what they know, and your team watches when it suits them, whether that's a full episode or a short clip."
+            "text": "Yes. Many of the shows we make are internal or members only, used for training, onboarding and sharing what your experts know. We can even build the setup behind it, so listening is easy and the way it reaches your team is world class."
           }
         },
         {
@@ -109,7 +109,7 @@
           "name": "Can you record a podcast remotely?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Unconventional Business for HubSpot ANZ is recorded fully remotely, with hosts in New South Wales and Singapore and guests across Australia. We look after the setup and guide everyone through it, so all they need to do is talk."
+            "text": "Yes. Several of the shows we produce are recorded completely remotely, like Unconventional Business for HubSpot ANZ, with hosts in New South Wales and Singapore and guests across Australia. We look after the setup and guide everyone through it, so all they need to do is talk."
           }
         },
         {
@@ -117,7 +117,7 @@
           "name": "What do we need to do?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not much. We plan the episodes with you, run the recording and look after the editing and clips. Your hosts turn up, have a great conversation and approve each episode before it goes out."
+            "text": "Whether you've got the seed of an idea or want to workshop it with us, we'll help you work out what it takes and where we can support you. From there we plan the episodes, guests and content with you, and look after the recording, editing and clips. Whether you're the host, the brand or the business behind it, we make sure everything comes together."
           }
         },
         {
@@ -1344,6 +1344,32 @@ body { overflow-x: clip; }
   .m-chat { min-height: 44px; padding: 0 20px 0 17px; gap: 10px; background: rgba(16,16,16,0.72); color: #fff; border: 1px solid rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); font-weight: 800; font-size: 12px; letter-spacing: 0.16em; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
   .m-chat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(0,255,170,0.16); }
 }
+
+/* ---- 23 Nov: the system behind your show, shown on The Numbers Game site ---- */
+.system-stage.is-site { position: relative; padding: 0; aspect-ratio: 1 / 0.86; }
+.system-stage.is-site .sys-card { position: absolute; border-radius: 12px; overflow: hidden; border: 0; background: #0d0d0f; box-shadow: 12px 12px 0 0 #fff; }
+.system-stage.is-site .sys-card img, .system-stage.is-site .sys-card video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sys-s1 { width: 80%; left: 0; top: 0; aspect-ratio: 16 / 10; z-index: 1; }
+.sys-s2 { width: 62%; right: 12px; bottom: 9%; aspect-ratio: 16 / 10; z-index: 2; }
+.sys-promo { width: 31%; left: 7%; bottom: 12px; aspect-ratio: 9 / 16; z-index: 3; }
+.system-stage.is-site .sys-card figcaption { position: absolute; left: 10px; top: 10px; right: auto; bottom: auto; padding: 6px 11px; border-radius: 100px; background: rgba(14,14,14,0.5); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.22); color: #fff; font-size: 10px; letter-spacing: 0.16em; }
+.sys-s2 figcaption { left: auto !important; right: 10px !important; }
+.sys-sound { position: absolute; left: 10px; bottom: 10px; padding: 7px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.3); background: rgba(14,14,14,0.4); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #fff; font: 800 10px/1 var(--font-body); white-space: nowrap; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: background 0.3s ease, color 0.3s ease; }
+.sys-sound:hover, .sys-sound[aria-pressed="true"] { background: #fff; color: #0b0b0b; }
+.system-stage.is-site.is-in .sys-s1 { transition-delay: 0s; }
+.system-stage.is-site.is-in .sys-s2 { transition-delay: 0.14s; }
+.system-stage.is-site.is-in .sys-promo { transition-delay: 0.28s; }
+.bleed img.bleed-group { object-position: 50% 6%; }
+@media (max-width: 699px) {
+  .system-stage.is-site .sys-card { box-shadow: 7px 7px 0 0 #fff; border-radius: 9px; }
+  .system-stage.is-site .sys-card figcaption { font-size: 8px; padding: 4px 8px; left: 6px; top: 6px; letter-spacing: 0.12em; }
+  .sys-s2 figcaption { right: 6px !important; }
+  .sys-s2 { right: 7px; }
+  .sys-promo { bottom: 7px; }
+  .sys-sound { font-size: 8px; padding: 5px 9px; left: 6px; bottom: 6px; }
+  .system-stage.is-site { aspect-ratio: 1 / 0.79; }
+  .system .system-grid { gap: 22px; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1482,14 +1508,14 @@ document.documentElement.dataset.theme = 'dark';
     <div class="split-body reveal">
       <span class="split-eyebrow">Internal podcasts</span>
       <h2 class="section-title">Corporate podcasts for your <span class="nowrap-dot">team<span class="dot"></span></span></h2>
-      <p>Many of the shows we make are private, made for staff or members, like the members-only podcast for Help at Hand Education. A video podcast is an easy learning resource: your experts share what they know, and your people watch when it suits them.</p>
+      <p>Many of the shows we make are private, made for staff or members, like the members-only podcast for Help at Hand Education. A training or internal video podcast is an easy learning resource: your experts share what they know, and your people watch when it suits them.</p>
       <ul class="split-points">
         <li><strong>Training and onboarding</strong> your team can come back to whenever they need.</li>
         <li><strong>Leadership updates</strong> your team will actually watch.</li>
         <li><strong>Expert knowledge</strong> captured once and shared across the business.</li>
       </ul>
-      <p class="split-more">Need a brand film or customer story too? See our <a href="video-production-melbourne">corporate video production</a>.</p>
       <a class="quiet-link" href="/#contact">Talk to us about an internal podcast</a>
+      <p class="split-more">Need a brand film or customer story too? See our <a href="video-production-melbourne">corporate video production</a>.</p>
     </div>
   </div>
 </section>
@@ -1499,17 +1525,15 @@ document.documentElement.dataset.theme = 'dark';
     <div class="system-copy reveal">
       <span class="split-eyebrow">The system behind your show</span>
       <h2 class="section-title">Every episode keeps <span class="nowrap-dot">working<span class="dot"></span></span></h2>
-      <p class="sys-copy-desktop">Most shows stop at the episode. Ours keep going. Each recording becomes the full episode on YouTube, Spotify and Apple, its own web page with notes and a full transcript, thumbnails for every platform, and short clips for Instagram, TikTok, LinkedIn and YouTube Shorts. It all goes out on a steady rhythm, so you never start from scratch.</p>
-      <p class="sys-copy-mobile">Each recording becomes the full episode on YouTube, Spotify and Apple, its own page with notes and a transcript, thumbnails, and short clips for Instagram, TikTok, LinkedIn and YouTube Shorts, out on a steady rhythm.</p>
+      <p>We build the system behind your show, so every episode goes further and gets found: a searchable library on your own website, broken into moments people can jump straight to.</p>
       <p>Recorded in your office, on campus or remotely. Any room looks and sounds like a studio.</p>
       <p class="system-proof">It&#x27;s how we run The Numbers Game, the business podcast we produce every week. <a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">See The Numbers Game</a></p>
       <a class="quiet-link" href="/#contact">Tell us about your show</a>
     </div>
-    <div class="system-stage">
-      <img class="system-still" src="img/podcasts/tng-hero/01.jpg" srcset="img/podcasts/tng-hero/01-sm.jpg 480w, img/podcasts/tng-hero/01.jpg 1800w" sizes="(max-width: 860px) 100vw, 680px" alt="Recording an episode of The Numbers Game" loading="lazy" decoding="async" width="1800" height="1012">
-      <figure class="sys-card sys-thumb"><img src="img/podcasts/system/tng-episode-thumb-v9.jpg" alt="The thumbnail made for that episode" loading="lazy" decoding="async" width="640" height="360"><figcaption>Thumbnail</figcaption></figure>
-      <figure class="sys-card sys-clip"><img src="img/podcasts/clips/h1yiNZ7Zk1Y-v8.jpg" alt="A short vertical clip from The Numbers Game" loading="lazy" decoding="async" width="540" height="960"><figcaption>Short</figcaption></figure>
-      <figure class="sys-card sys-page"><img src="img/podcasts/system/tng-episode-page-v11.jpg" alt="The Numbers Game episode page: the title and the start of the show notes for the Pokemon cards episode" loading="lazy" decoding="async" width="800" height="172"><figcaption>Episode page</figcaption></figure>
+    <div class="system-stage is-site">
+      <figure class="sys-card sys-screen sys-s1"><img src="img/podcasts/system/tng-site-episode-v12.jpg" alt="The Numbers Game website: the episode page for its 300th episode" loading="lazy" decoding="async" width="1200" height="750"><figcaption>Episode page</figcaption></figure>
+      <figure class="sys-card sys-screen sys-s2"><img src="img/podcasts/system/tng-site-library-v12.jpg" alt="The Numbers Game website: the searchable episode library with topic filters" loading="lazy" decoding="async" width="1200" height="750"><figcaption>Searchable library</figcaption></figure>
+      <figure class="sys-card sys-promo"><video class="sys-promo-video" data-src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/tng-ep300-promo.mp4#t=2.2" poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/tng-ep300-promo-poster-v2.jpg" muted loop playsinline preload="none" aria-label="The Numbers Game episode promo, filmed on a Melbourne rooftop"></video><button type="button" class="sys-sound" aria-pressed="false">Tap for sound</button></figure>
     </div>
   </div>
 </section>
@@ -1528,7 +1552,7 @@ document.documentElement.dataset.theme = 'dark';
 </section>
 
 <div class="bleed">
-  <img src="img/podcasts/ltt/ltt-068A2540-v11.jpg" alt="Two guests laughing on the Let&#x27;s Talk Teaching set at Monash University" loading="lazy" decoding="async" width="1600" height="1067">
+  <img class="bleed-group" src="img/podcasts/ltt/ltt-068A2794-v12.jpg" alt="The Let&#x27;s Talk Teaching hosts and guests together on set at Monash University" loading="lazy" decoding="async" width="1600" height="964">
 </div>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
@@ -1540,23 +1564,23 @@ document.documentElement.dataset.theme = 'dark';
     <div class="faq-list reveal">
       <details>
         <summary>What do we get from video podcast production?</summary>
-        <p>A show people can watch as well as hear, filmed beautifully, with full episodes on YouTube, Spotify and Apple Podcasts. Then a system turns each recording into a bank of clips, quotes and Shorts, so one conversation keeps working for weeks.</p>
+        <p>The world is going video first, and people now search YouTube the way they search Google. We film your show beautifully so it can be watched as well as heard, then build the system that turns each episode into searchable pages, clips and Shorts. Every conversation keeps getting found long after it goes out.</p>
       </details>
       <details>
         <summary>Can you record it in our office or boardroom?</summary>
-        <p>Yes, absolutely. Even if your boardroom or office doesn&#x27;t seem right, we bring the lighting, sound and know-how to make it look and sound great. We&#x27;ve recorded at Monash University, at Carlisle Homes and on location for Help at Hand Education.</p>
+        <p>Yes, absolutely. Even if your boardroom or office doesn&#x27;t seem right, we bring the lighting, sound and know-how to make it look and sound great. We&#x27;ve recorded at Monash University, Carlisle Homes and Help at Hand Education, and in plenty of other offices, studios and boardrooms.</p>
       </details>
       <details>
         <summary>Can we make a podcast just for our staff?</summary>
-        <p>Yes. Many of the shows we make are internal or members only, used as a learning resource. Your experts share what they know, and your team watches when it suits them, whether that&#x27;s a full episode or a short clip.</p>
+        <p>Yes. Many of the shows we make are internal or members only, used for training, onboarding and sharing what your experts know. We can even build the setup behind it, so listening is easy and the way it reaches your team is world class.</p>
       </details>
       <details>
         <summary>Can you record a podcast remotely?</summary>
-        <p>Yes. Unconventional Business for HubSpot ANZ is recorded fully remotely, with hosts in New South Wales and Singapore and guests across Australia. We look after the setup and guide everyone through it, so all they need to do is talk.</p>
+        <p>Yes. Several of the shows we produce are recorded completely remotely, like Unconventional Business for HubSpot ANZ, with hosts in New South Wales and Singapore and guests across Australia. We look after the setup and guide everyone through it, so all they need to do is talk.</p>
       </details>
       <details>
         <summary>What do we need to do?</summary>
-        <p>Not much. We plan the episodes with you, run the recording and look after the editing and clips. Your hosts turn up, have a great conversation and approve each episode before it goes out.</p>
+        <p>Whether you&#x27;ve got the seed of an idea or want to workshop it with us, we&#x27;ll help you work out what it takes and where we can support you. From there we plan the episodes, guests and content with you, and look after the recording, editing and clips. Whether you&#x27;re the host, the brand or the business behind it, we make sure everything comes together.</p>
       </details>
       <details>
         <summary>How much does a video podcast cost?</summary>
@@ -1656,7 +1680,7 @@ document.documentElement.dataset.theme = 'dark';
         <a href="https://www.linkedin.com/company/vidpodproduction" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       </div>
     </div>
-    <p class="footer-credits">Founded by <a href="https://tommyjackett.com" target="_blank" rel="noopener">Tommy Jackett</a> <span aria-hidden="true">&middot;</span> Produced by VIDPOD: <a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">The Numbers Game podcast</a></p>
+    <p class="footer-credits">Founded by <a href="https://tommyjackett.com" target="_blank" rel="noopener">Tommy Jackett</a></p>
   </div>
 </footer>
 
@@ -1951,6 +1975,27 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
   rail.addEventListener('scroll', updateNavState, { passive: true });
   window.addEventListener('resize', updateNavState);
   requestAnimationFrame(updateNavState);
+})();
+</script>
+
+<script>
+// EP 300 promo: loads and plays (muted) once it scrolls into view; tap for sound.
+(function () {
+  var v = document.querySelector('.sys-promo-video'); if (!v) return;
+  var btn = document.querySelector('.sys-sound');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function load() { if (!v.src) { v.src = v.getAttribute('data-src'); } }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { es.forEach(function (e) {
+      if (e.isIntersecting) { load(); if (!reduce || !v.muted) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } }
+      else if (!v.paused) { v.pause(); }
+    }); }, { threshold: 0.35 }).observe(v);
+  } else { load(); }
+  if (btn) btn.addEventListener('click', function () {
+    load(); v.muted = !v.muted; btn.setAttribute('aria-pressed', String(!v.muted));
+    btn.textContent = v.muted ? 'Tap for sound' : 'Sound on';
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  });
 })();
 </script>
 <a class="m-chat" id="mChat" href="/#contact">Let&#x27;s chat</a>
