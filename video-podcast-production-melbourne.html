@@ -695,6 +695,19 @@
 .photo-3 img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; display: block; }
 @media (max-width: 720px) { .photo-3 { grid-template-columns: 1fr; gap: 14px; } }
 .work-pod .pod-more { margin-top: 40px; }
+.work-pod .pod-more a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+/* Services band: homepage service cards (POD style), copied from index.html, compact on the green band */
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 56px; }
+@media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; gap: 14px; } }
+.service-card { padding: 40px 40px 36px; border-radius: 24px; position: relative; overflow: hidden; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); display: flex; flex-direction: column; gap: 24px; }
+.service-card:hover { transform: translateY(-6px); }
+.service-pod { background: #000; color: #fff; }
+.service-body h3 { font-family: var(--font-body); font-size: 21px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
+.service-body p { font-size: 15px; line-height: 1.55; opacity: 0.82; margin-bottom: 0; max-width: 48ch; }
+.work-vid .service-card { padding: 28px 28px 26px; }
+.work-vid .service-pod h3 { color: #fff; }
+.work-vid .service-pod p { color: #fff; }
+.work-vid .services-grid + .photo-3 { margin-top: 18px; }
 /* FAQ */
 .faq-list { max-width: 820px; margin-top: 12px; }
 .faq-list details { border-bottom: 1px solid var(--line); }
@@ -762,7 +775,7 @@ document.documentElement.dataset.theme = 'dark';
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video podcast production, <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
-    <p class="hero-lede reveal">VIDPOD is a Melbourne podcast production company that makes video podcasts for brands, universities and businesses.</p>
+    <p class="hero-lede reveal">VIDPOD is a Melbourne podcast production company that makes video podcasts for brands, universities and businesses, recorded in your office, in a studio or remotely.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
     </div>
@@ -778,7 +791,7 @@ document.documentElement.dataset.theme = 'dark';
           <img src="img/podcasts/tng.jpg" alt="The Numbers Game" loading="lazy">
         </div>
         <div class="pcard-body">
-          <p class="pcard-desc">A weekly video podcast on money, business, and strategy. 5 years of consistency and 280+ episodes deep.</p>
+          <p class="pcard-desc">A weekly video podcast on money, business, and strategy. 5 years of consistency and 300+ episodes deep.</p>
           <span class="pcard-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
@@ -803,14 +816,40 @@ document.documentElement.dataset.theme = 'dark';
         </div>
       </a>
     </div>
-    <p class="section-intro pod-more reveal">We also make Home Files for Carlisle Homes and The Huddle for Help at Hand Education.</p>
+    <p class="section-intro pod-more reveal">We also make Home Files for Carlisle Homes and The Huddle for Help at Hand Education. For brand films, explainers and case studies, see our <a href="video-production-melbourne">video production</a>.</p>
   </div>
 </section>
 
-<section class="work-vid" id="on-location">
+<section class="work-vid" id="services">
   <div class="wrap work-inner">
-    <h2 class="section-title reveal">In your office, boardroom or <span class="nowrap-dot">remote<span class="dot"></span></span></h2>
+    <h2 class="section-title reveal">How we make <span class="nowrap-dot">shows<span class="dot"></span></span></h2>
     <p class="section-intro reveal">We bring the cameras, lights and audio and turn a room you already have into a set.</p>
+    <div class="services-grid">
+      <div class="service-card service-pod reveal">
+        <div class="service-body">
+          <h3>Full-service shows</h3>
+          <p>Show development, website, producing, distribution and social strategy, built from the ground up, like The Numbers Game.</p>
+        </div>
+      </div>
+      <div class="service-card service-pod reveal">
+        <div class="service-body">
+          <h3>In-person studio sessions</h3>
+          <p>Cinema cameras and high-end audio, with the full video podcast studio brought to you, for Monash University and The Numbers Game.</p>
+        </div>
+      </div>
+      <div class="service-card service-pod reveal">
+        <div class="service-body">
+          <h3>Remote seasons</h3>
+          <p>Fully remote recordings run across multiple seasons, like Unconventional Business for HubSpot ANZ.</p>
+        </div>
+      </div>
+      <div class="service-card service-pod reveal">
+        <div class="service-body">
+          <h3>Editing and clips</h3>
+          <p>Editing, show notes and social snippets that get the most out of your long-form content.</p>
+        </div>
+      </div>
+    </div>
     <div class="photo-3 reveal">
       <img src="img/bts-pod/pod-09.jpg" srcset="img/bts-pod/pod-09-sm.jpg 480w, img/bts-pod/pod-09.jpg 1200w" sizes="(max-width: 720px) 100vw, 400px" alt="VIDPOD podcast production behind the scenes" loading="lazy" decoding="async">
       <img src="img/bts-pod/pod-12.jpg" srcset="img/bts-pod/pod-12-sm.jpg 480w, img/bts-pod/pod-12.jpg 1200w" sizes="(max-width: 720px) 100vw, 400px" alt="VIDPOD podcast production behind the scenes" loading="lazy" decoding="async">
@@ -908,7 +947,7 @@ document.documentElement.dataset.theme = 'dark';
             <ul>
               <li><a href="video-production-melbourne">Video Production Melbourne</a></li>
               <li><a href="video-production-melbourne#brand-films">Brand Films</a></li>
-              <li><a href="video-production-melbourne#case-studies">Case Studies &amp; Testimonials</a></li>
+              <li><a href="video-case-studies-melbourne">Case Studies &amp; Testimonials</a></li>
               <li><a href="video-production-melbourne#brand-films">Founder Stories</a></li>
               <li><a href="index.html#work-vid">Social Content</a></li>
               <li><a href="index.html#work-vid">Explainer Videos</a></li>

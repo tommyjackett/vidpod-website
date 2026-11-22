@@ -5,16 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/brand/vidpod-logo-square.png">
 <link rel="apple-touch-icon" href="img/brand/vidpod-logo-square.png">
-<meta name="description" content="Melbourne video production for brands, universities and franchise networks. Brand films, story-led case studies and event content, from brief to delivery.">
-<title>Video Production Melbourne | Brand Films &amp; Case Studies | VIDPOD</title>
+<meta name="description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.">
+<title>Video Production Melbourne | Brand Films, Explainers &amp; Social | VIDPOD</title>
 <link rel="canonical" href="https://www.vidpod.com.au/video-production-melbourne">
 <meta property="og:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/video-production-melbourne">
-<meta property="og:title" content="Video Production Melbourne | Brand Films &amp; Case Studies | VIDPOD">
-<meta property="og:description" content="Melbourne video production for brands, universities and franchise networks. Brand films, story-led case studies and event content, from brief to delivery.">
+<meta property="og:title" content="Video Production Melbourne | Brand Films, Explainers &amp; Social | VIDPOD">
+<meta property="og:description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
+<meta name="twitter:title" content="Video Production Melbourne | Brand Films, Explainers &amp; Social | VIDPOD">
+<meta name="twitter:description" content="Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -25,7 +27,7 @@
       "name": "Video production",
       "serviceType": "Video production",
       "url": "https://www.vidpod.com.au/video-production-melbourne",
-      "description": "Melbourne video production for brands, universities and franchise networks. Brand films, story-led case studies and event content, from brief to delivery.",
+      "description": "Melbourne video production: brand films, branded content, explainer videos, animation and social content, with one point of contact from brief to delivery.",
       "provider": {
         "@id": "https://www.vidpod.com.au/#organization"
       },
@@ -62,10 +64,10 @@
         },
         {
           "@type": "Question",
-          "name": "What's the difference between a case study video and a testimonial?",
+          "name": "What kinds of videos do you make?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A testimonial is a customer saying nice things about you. A case study is a story: a real customer talks through a specific problem and how it was solved."
+            "text": "Brand films, branded content, explainers and animation, social content and case studies. We take each one from brief to delivery."
           }
         },
         {
@@ -673,11 +675,44 @@
 .work-vid, .work-pod { padding: 140px 0; }
 @media (max-width: 760px) { .work-vid, .work-pod { padding: 90px 0; } }
 .hero-lede { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6; color: rgba(255,255,255,0.85); max-width: 560px; margin-bottom: 28px; }
-/* Work: even 3 by 2 grid of homepage tiles, with a small tag */
-@media (min-width: 721px) {
-  .work-vid .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-  .work-vid .pcard { width: 100%; height: auto; }
+/* Work: homepage category filter (copied from index.html) */
+.vid-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+  margin-bottom: 36px;
 }
+.vid-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #0A0A0A;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), background-color 0.15s ease, color 0.15s ease;
+}
+.vid-cat-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.22);
+}
+.vid-cat-btn.is-active {
+  background: #F5F5F2;
+  color: #0A0A0A;
+}
+@media (max-width: 720px) {
+  .vid-categories { gap: 8px; margin-bottom: 28px; }
+  .vid-cat-btn { font-size: 12px; padding: 10px 14px; }
+}
+.work-vid .section-intro a, .big-lines .section-intro a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.work-vid .vid-more { margin-top: 32px; }
 .pcard .work-tag { position: absolute; left: 12px; top: 12px; z-index: 2; background: #0A0A0A; color: #fff; font-family: var(--font-head); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 12px; border-radius: 6px; pointer-events: none; }
 /* Three big lines */
 .big-lines .big-line { padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.1); scroll-margin-top: 110px; }
@@ -762,7 +797,7 @@ document.documentElement.dataset.theme = 'dark';
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video production, <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
-    <p class="hero-lede reveal">VIDPOD is a Melbourne video production company run by founder Tommy Jackett.</p>
+    <p class="hero-lede reveal">VIDPOD is a Melbourne video production company run by founder Tommy Jackett, making brand films, branded content, explainers, animation, social content and case studies for organisations across Australia.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
     </div>
@@ -771,45 +806,125 @@ document.documentElement.dataset.theme = 'dark';
 
 <section class="work-vid" id="recent-work">
   <div class="wrap work-inner">
-    <h2 class="section-title reveal">Recent <span class="nowrap-dot">work<span class="dot"></span></span></h2>
-    <div class="card-grid">
-      <div class="pcard reveal" data-yt-id="fsJkJAmqskQ" data-aspect="wide">
-        <span class="work-tag">Brand film</span>
-        <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/fsJkJAmqskQ/maxresdefault.jpg" alt="@Pilates founding story" loading="lazy">
-        </div>
-      </div>
-      <div class="pcard reveal" data-yt-id="EizFidt8UTU" data-aspect="wide">
-        <span class="work-tag">Brand film</span>
-        <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/EizFidt8UTU/maxresdefault.jpg" alt="@Pilates franchise story" loading="lazy">
-        </div>
-      </div>
-      <div class="pcard reveal" data-yt-id="TLXo1eYwyKo" data-aspect="wide">
-        <span class="work-tag">Case study</span>
-        <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/TLXo1eYwyKo/maxresdefault.jpg" alt="Total Tools case study" loading="lazy">
-        </div>
-      </div>
-      <div class="pcard reveal" data-yt-id="UaxJNro4WeM" data-aspect="wide">
-        <span class="work-tag">Case study</span>
-        <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/UaxJNro4WeM/maxresdefault.jpg" alt="Border Express case study" loading="lazy">
-        </div>
-      </div>
-      <div class="pcard reveal" data-yt-id="03nftmt_D9k" data-aspect="wide">
-        <span class="work-tag">Launch</span>
-        <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/03nftmt_D9k/maxresdefault.jpg" alt="Country Road Chadstone store launch" loading="lazy">
-        </div>
-      </div>
-      <div class="pcard reveal" data-yt-id="GCbtI7zRI4A" data-aspect="wide">
-        <span class="work-tag">Brand film</span>
-        <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/GCbtI7zRI4A/maxresdefault.jpg" alt="Brava brand film" loading="lazy">
-        </div>
-      </div>
+    <div class="reveal">
+      <h2 class="section-title">Recent <span class="nowrap-dot">work<span class="dot"></span></span></h2>
+      <p class="section-intro">We&#x27;ve got you covered at all stages of the video production process: ideation, creative concept development, pre-production planning, scripting, filming, and editing. Below is a selection of work we&#x27;ve created across different brands and video types. Have a browse and see if there&#x27;s a project in the direction of what you&#x27;re after.</p>
     </div>
+
+    <!-- Category filters, same markup and JS as the homepage -->
+    <div class="vid-categories reveal" id="vidCategories">
+      <button type="button" class="vid-cat-btn is-active" data-category="brand-films">Brand films</button>
+      <button type="button" class="vid-cat-btn" data-category="branded-content">Branded content</button>
+      <button type="button" class="vid-cat-btn" data-category="explainers">Explainers and animation</button>
+      <button type="button" class="vid-cat-btn" data-category="social-content">Social content</button>
+      <button type="button" class="vid-cat-btn" data-category="case-studies">Case studies</button>
+    </div>
+
+    <div class="card-grid">
+      <!-- ===== BRAND FILMS ===== -->
+      <div class="pcard reveal" data-yt-id="fsJkJAmqskQ" data-aspect="wide" data-category="brand-films">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/fsJkJAmqskQ/maxresdefault.jpg?v=2026-05-08-3" alt="@Pilates: Founding story" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="cna1Ps30bX4" data-aspect="wide" data-category="brand-films">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/cna1Ps30bX4/maxresdefault.jpg" alt="@Pilates: Corporate overview" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="GCbtI7zRI4A" data-aspect="wide" data-category="brand-films">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/GCbtI7zRI4A/maxresdefault.jpg?v=2026-05-08-3" alt="Brava: Brand video / creative concept" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="5u4oJk2S-Uk" data-aspect="wide" data-category="brand-films">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/5u4oJk2S-Uk/maxresdefault.jpg" alt="QuadLock: Brand video" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="zyJLmbsxy9Y" data-aspect="wide" data-category="brand-films">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/zyJLmbsxy9Y/maxresdefault.jpg?v=2026-05-08-3" alt="Wunder W: Founding story" loading="lazy">
+        </div>
+      </div>
+      <!-- ===== BRANDED CONTENT ===== -->
+      <div class="pcard reveal" data-yt-id="oSlSom4mKNs" data-aspect="wide" data-category="branded-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/oSlSom4mKNs/maxresdefault.jpg?v=2026-05-08-3" alt="Barefoot Investor: Book launch video" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="cyOn7RNLOhw" data-aspect="wide" data-category="branded-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/cyOn7RNLOhw/maxresdefault.jpg" alt="Brava: Obsessed with Fit campaign" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="03nftmt_D9k" data-aspect="wide" data-category="branded-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/03nftmt_D9k/maxresdefault.jpg" alt="Country Road: Store launch" loading="lazy">
+        </div>
+      </div>
+      <!-- ===== EXPLAINERS AND ANIMATION ===== -->
+      <div class="pcard reveal" data-yt-id="YH-LnvrsxDo" data-aspect="wide" data-category="explainers" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/YH-LnvrsxDo/maxresdefault.jpg" alt="Infrastructure Victoria: Animation explainer" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="WnDGbiJXIhg" data-aspect="wide" data-category="explainers" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/WnDGbiJXIhg/maxresdefault.jpg" alt="Equip Super: Explainer video (website launch)" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="4ph0RxWnMUk" data-aspect="wide" data-category="explainers" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/4ph0RxWnMUk/maxresdefault.jpg" alt="Equip Super: Explainer video" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="c9rdClIUDno" data-aspect="wide" data-category="explainers" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/c9rdClIUDno/maxresdefault.jpg" alt="MedMate: Explainer video" loading="lazy">
+        </div>
+      </div>
+      <!-- ===== SOCIAL CONTENT ===== -->
+      <div class="pcard reveal" data-yt-id="NyWZ61PCJLI" data-aspect="wide" data-category="social-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/NyWZ61PCJLI/maxresdefault.jpg?v=2026-05-08-3" alt="Nando's: Social content (Taste test)" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="fC7yxSSM3I0" data-aspect="wide" data-category="social-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/fC7yxSSM3I0/maxresdefault.jpg" alt="Deliciou: Social media" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="_vmbrQUdB_8" data-aspect="wide" data-category="social-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/_vmbrQUdB_8/maxresdefault.jpg" alt="Barefoot Investor: Prank call at QBD Books" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="v7zZYpXPymA" data-aspect="wide" data-category="social-content" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/v7zZYpXPymA/maxresdefault.jpg" alt="Chiropedic Bedding: Social media" loading="lazy">
+        </div>
+      </div>
+      <!-- ===== CASE STUDIES ===== -->
+      <div class="pcard reveal" data-yt-id="EizFidt8UTU" data-aspect="wide" data-category="case-studies" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/EizFidt8UTU/maxresdefault.jpg" alt="@Pilates: Case study" loading="lazy">
+        </div>
+      </div>
+      <div class="pcard reveal" data-yt-id="TLXo1eYwyKo" data-aspect="wide" data-category="case-studies" style="display:none">
+        <div class="pcard-media">
+          <img src="https://i.ytimg.com/vi/TLXo1eYwyKo/maxresdefault.jpg" alt="Focus Insights: Total Tools" loading="lazy">
+        </div>
+      </div>
+      <a class="pcard reveal" href="video-case-studies-melbourne" data-aspect="wide" data-category="case-studies" style="display:none">
+        <span class="work-tag">Inovayt</span>
+        <div class="pcard-media">
+          <img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt: First home buyer case study" loading="lazy">
+        </div>
+      </a>
+    </div>
+
+    <p class="section-intro vid-more reveal"><a href="video-case-studies-melbourne">See our case studies</a></p>
   </div>
 </section>
 
@@ -819,13 +934,21 @@ document.documentElement.dataset.theme = 'dark';
       <h2>Brand <span class="nowrap-dot">films<span class="dot"></span></span></h2>
       <p class="section-intro">A film that shows people who you are and why you do what you do.</p>
     </div>
-    <div class="big-line reveal" id="case-studies">
-      <h2>Case studies, told as <span class="nowrap-dot">stories<span class="dot"></span></span></h2>
-      <p class="section-intro">A real customer talks through a specific problem and how it was solved, so the people you want to reach can see themselves in it.</p>
-    </div>
     <div class="big-line reveal" id="events">
-      <h2>Event and conference <span class="nowrap-dot">content<span class="dot"></span></span></h2>
-      <p class="section-intro">We film your conference, launch or event and turn it into content you can keep using long after the day.</p>
+      <h2>Branded <span class="nowrap-dot">content<span class="dot"></span></span></h2>
+      <p class="section-intro">We film your launch, campaign or event and turn it into content you can keep using long after the day.</p>
+    </div>
+    <div class="big-line reveal" id="explainers">
+      <h2>Explainers and <span class="nowrap-dot">animation<span class="dot"></span></span></h2>
+      <p class="section-intro">Explainer videos and animation that take an idea, a product or a service and make it easy to follow.</p>
+    </div>
+    <div class="big-line reveal" id="social-content">
+      <h2>Social <span class="nowrap-dot">content<span class="dot"></span></span></h2>
+      <p class="section-intro">Short videos for social media that help your brand connect with its audience.</p>
+    </div>
+    <div class="big-line reveal" id="case-studies">
+      <h2>Case <span class="nowrap-dot">studies<span class="dot"></span></span></h2>
+      <p class="section-intro">A real customer talks through a specific problem and how it was solved, so the people you want to reach can see themselves in it. <a href="video-case-studies-melbourne">See our case studies</a></p>
     </div>
   </div>
 </section>
@@ -906,8 +1029,8 @@ document.documentElement.dataset.theme = 'dark';
         <p>Every project is different, so we quote each one on what you actually need. Tell us about the project and we&#x27;ll send you a clear quote before anything starts.</p>
       </details>
       <details>
-        <summary>What&#x27;s the difference between a case study video and a testimonial?</summary>
-        <p>A testimonial is a customer saying nice things about you. A case study is a story: a real customer talks through a specific problem and how it was solved.</p>
+        <summary>What kinds of videos do you make?</summary>
+        <p>Brand films, branded content, explainers and animation, social content and case studies. We take each one from brief to delivery.</p>
       </details>
       <details>
         <summary>Can you film at our office, event or conference?</summary>
@@ -947,7 +1070,7 @@ document.documentElement.dataset.theme = 'dark';
             <ul>
               <li><a href="video-production-melbourne">Video Production Melbourne</a></li>
               <li><a href="video-production-melbourne#brand-films">Brand Films</a></li>
-              <li><a href="video-production-melbourne#case-studies">Case Studies &amp; Testimonials</a></li>
+              <li><a href="video-case-studies-melbourne">Case Studies &amp; Testimonials</a></li>
               <li><a href="video-production-melbourne#brand-films">Founder Stories</a></li>
               <li><a href="index.html#work-vid">Social Content</a></li>
               <li><a href="index.html#work-vid">Explainer Videos</a></li>
@@ -1480,6 +1603,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<script>
+// VID work, category filter chips (same as index.html). Click a chip => swap active class + show only
+// matching pcards. A pcard's data-category can be space-separated for multi-tagging.
+document.addEventListener('DOMContentLoaded', function() {
+  var row = document.getElementById('vidCategories');
+  if (!row) return;
+  var grid = row.parentElement.querySelector('.card-grid');
+  if (!grid) return;
+  row.addEventListener('click', function(e) {
+    var btn = e.target.closest('.vid-cat-btn');
+    if (!btn) return;
+    var cat = btn.getAttribute('data-category');
+    row.querySelectorAll('.vid-cat-btn').forEach(function(b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    grid.querySelectorAll('.pcard').forEach(function(card) {
+      var cats = (card.getAttribute('data-category') || '').split(/\s+/);
+      card.style.display = cats.indexOf(cat) !== -1 ? '' : 'none';
+    });
+  });
+});
+</script>
 <script>
 // Video lightbox, click video card to play in overlay
 (function() {
