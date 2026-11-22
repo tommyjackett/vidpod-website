@@ -22,6 +22,41 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://www.vidpod.com.au/#organization",
+      "name": "VIDPOD",
+      "legalName": "VIDPOD Pty Ltd",
+      "url": "https://www.vidpod.com.au/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.vidpod.com.au/img/brand/vidpod-logo-square.png",
+        "width": 600,
+        "height": 600
+      },
+      "image": "https://www.vidpod.com.au/img/social/og-default.jpg",
+      "description": "Melbourne video and podcast production. Brand films, case studies, explainers, social content and video podcasts.",
+      "founder": {
+        "@type": "Person",
+        "name": "Tommy Jackett",
+        "url": "https://tommyjackett.com"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Australia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Melbourne",
+        "addressRegion": "VIC",
+        "addressCountry": "AU"
+      },
+      "sameAs": [
+        "https://instagram.com/vid.pod",
+        "https://www.youtube.com/@vid_pod",
+        "https://www.linkedin.com/company/vidpodproduction"
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://www.vidpod.com.au/video-case-studies-melbourne#service",
       "name": "Case study and testimonial videos",
@@ -847,6 +882,115 @@
 /* ---- v5: snippet show labels ---- */
 .snippet-item .snippet-show { position: absolute; left: 0; right: 0; top: 0; padding: 16px 16px 34px; background: linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0)); color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; pointer-events: none; }
 .snippet-item .snippet-show::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-left: 5px; border-radius: 50%; background: var(--green); }
+/* ---- v6: smooth anchors ---- */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* ---- v6: Selected work (video page), cinematic chapters ---- */
+.sel-work { background: #0A0A0A; color: #fff; padding: 130px 0 120px; }
+.sel-work .section-title { color: #fff; }
+.sel-work .section-title .dot { background: var(--green); }
+.sel-work .section-intro { color: rgba(255,255,255,0.7); }
+.chapter { margin-top: 88px; scroll-margin-top: 110px; }
+.chapter-head { display: flex; align-items: baseline; gap: 16px; padding-bottom: 18px; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.14); }
+.chapter-num { font-family: var(--font-head); font-size: 14px; letter-spacing: 0.06em; color: var(--green); }
+.chapter-head h3 { margin: 0; font-family: var(--font-body); font-size: 13px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; }
+.mosaic { display: grid; gap: 44px 22px; }
+.mosaic + .mosaic { margin-top: 44px; }
+.mosaic .tile { min-width: 0; }
+.m-feature { grid-template-columns: 1fr; }
+.m-feature .tile-media { aspect-ratio: 21 / 9; border-radius: 18px; }
+.m-feature .tile-play { width: 64px; height: 64px; left: 26px; bottom: 26px; }
+.m-feature .tile-play::before { border-left-width: 18px; border-top-width: 11px; border-bottom-width: 11px; margin-left: 5px; }
+.m-feature .tile-cap { font-size: 17px; margin-top: 16px; }
+.m-pair { grid-template-columns: 1fr 1fr; }
+.m-trio { grid-template-columns: repeat(3, 1fr); }
+.m-wn { grid-template-columns: 2fr 1fr; }
+.m-wn .tile:last-child .tile-media { aspect-ratio: 8 / 9; }
+@media (max-width: 860px) {
+  .m-pair, .m-trio, .m-wn { grid-template-columns: 1fr 1fr; }
+  .m-wn .tile:last-child .tile-media { aspect-ratio: 16 / 9; }
+  .m-trio .tile:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 699px) {
+  .sel-work { padding: 84px 0; }
+  .chapter { margin-top: 60px; }
+  .mosaic, .m-pair, .m-trio, .m-wn { grid-template-columns: 1fr; gap: 30px; }
+  .mosaic + .mosaic { margin-top: 30px; }
+  .m-feature .tile-media { aspect-ratio: 16 / 9; border-radius: 14px; }
+  .m-feature .tile-play { width: 46px; height: 46px; left: 16px; bottom: 16px; }
+  .m-feature .tile-play::before { border-left-width: 14px; border-top-width: 8px; border-bottom-width: 8px; margin-left: 4px; }
+}
+/* ---- v6: case studies band (video page) ---- */
+.case-band { padding: 120px 0; }
+.case-band-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: center; }
+.case-band .section-intro { margin-top: 18px; max-width: 40ch; }
+.case-band .quiet-link { margin-top: 26px; }
+@media (max-width: 860px) { .case-band { padding: 84px 0; } .case-band-grid { grid-template-columns: 1fr; gap: 34px; } }
+/* ---- v6: split feature (internal podcasts, VIDPOD Studio) ---- */
+.split { background: #0A0A0A; color: #fff; padding: 130px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+.split-grid { display: grid; grid-template-columns: 6fr 5fr; gap: 72px; align-items: center; }
+.split.is-flip .split-grid { grid-template-columns: 5fr 6fr; }
+.split.is-flip .split-media { order: 2; }
+.split-media > img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; display: block; }
+.split-eyebrow { display: block; margin: 0 0 18px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.split .section-title { color: #fff; margin: 0; }
+.split .section-title .dot { background: var(--green); }
+.split-body > p { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 46ch; }
+.split-points { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 14px; max-width: 46ch; }
+.split-points li { position: relative; padding-left: 20px; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.78); }
+.split-points li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.split-points strong { color: #fff; font-weight: 700; }
+.split .quiet-link { margin-top: 32px; }
+.moments-sheet { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.moments-sheet img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 10px; opacity: 0.55; filter: saturate(0.7); }
+.moments-sheet img.is-picked { opacity: 1; filter: none; box-shadow: 0 0 0 2px var(--green); }
+@media (max-width: 860px) {
+  .split { padding: 84px 0; }
+  .split-grid, .split.is-flip .split-grid { grid-template-columns: 1fr; gap: 36px; }
+  .split.is-flip .split-media { order: 0; }
+}
+/* ---- v6: more shows (podcast page) ---- */
+.shows-more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.12); }
+.show-mini { display: flex; align-items: center; gap: 16px; color: inherit; text-decoration: none; }
+.show-mini img { width: 76px; height: 76px; flex: 0 0 76px; border-radius: 10px; object-fit: cover; display: block; transition: transform 0.4s var(--ease); }
+.show-mini:hover img { transform: scale(1.05); }
+.show-mini .tile-cap { margin: 0; }
+@media (max-width: 860px) { .shows-more { grid-template-columns: 1fr; gap: 16px; } .show-mini img { width: 104px; height: 104px; flex-basis: 104px; border-radius: 12px; } }
+/* ---- v6: footer credits ---- */
+.footer-credits { margin: 22px 0 0; text-align: center; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.footer-credits a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.footer-credits a:hover { color: var(--fg); }
+/* ---- v6: enquiry panel (opens where you are, same form as the homepage) ---- */
+.enq { position: fixed; inset: 0; z-index: 400; visibility: hidden; }
+.enq.is-open { visibility: visible; }
+.enq-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.35s ease; }
+.enq.is-open .enq-backdrop { opacity: 1; }
+.enq-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(580px, 100%); background: #131315; color: #fff; padding: 64px 48px 44px; overflow-y: auto; overscroll-behavior: contain; transform: translateX(100%); transition: transform 0.45s var(--ease); box-shadow: -30px 0 90px rgba(0,0,0,0.45); border-left: 1px solid rgba(255,255,255,0.08); }
+.enq.is-open .enq-panel { transform: none; }
+.enq-close { position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: none; color: #fff; font-size: 24px; line-height: 1; cursor: pointer; }
+.enq-close:hover { border-color: var(--green); color: var(--green); }
+.enq-title { margin: 0 0 14px; font-family: var(--font-head); font-size: clamp(30px, 3vw, 40px); line-height: 0.95; letter-spacing: -0.015em; text-transform: uppercase; }
+.enq-lead { margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.72); }
+.enq-alt { margin: 26px 0 0; font-size: 14px; color: rgba(255,255,255,0.6); }
+.enq-alt a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.enq-done h3 { font-family: var(--font-head); font-size: 28px; text-transform: uppercase; margin: 10px 0 10px; }
+.enq-done p { color: rgba(255,255,255,0.72); margin: 0; }
+.enq .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.enq .contact-form .full { grid-column: 1 / -1; }
+.enq .contact-form label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+.enq .contact-form input, .enq .contact-form textarea, .enq .contact-form select { width: 100%; font: inherit; font-size: 16px; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 15px 17px; outline: none; transition: all 0.2s var(--ease); }
+.enq .contact-form select option { color: #000; }
+.enq .contact-form textarea { min-height: 130px; resize: vertical; }
+.enq .contact-form input:focus, .enq .contact-form textarea:focus, .enq .contact-form select:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(0,255,170,0.18); background: rgba(255,255,255,0.1); }
+.enq .contact-submit { margin-top: 6px; grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.enq .contact-submit .small { font-size: 13px; color: rgba(255,255,255,0.6); }
+.enq .contact-submit button { appearance: none; border: none; cursor: pointer; font: inherit; font-weight: 800; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--green); color: #000; padding: 17px 28px; border-radius: 100px; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.25s var(--ease); }
+.enq .contact-submit button:hover { transform: translateY(-2px); }
+.enq .contact-submit button[disabled] { opacity: 0.6; cursor: wait; }
+.enq .contact-submit button .pulse { width: 8px; height: 8px; border-radius: 50%; background: #000; }
+body.enq-lock { overflow: hidden; }
+@media (max-width: 600px) { .enq-panel { padding: 64px 22px 36px; } .enq .contact-form { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .enq-panel, .enq-backdrop { transition: none; } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1002,11 +1146,37 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </section>
 
+<section class="split is-flip" id="vidpod-studio">
+  <div class="wrap split-grid">
+    <div class="split-media reveal">
+      <div class="moments-sheet">
+        <img src="img/studio/moment-1.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
+        <img src="img/studio/moment-2.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
+        <img src="img/studio/moment-3.jpg" alt="A moment picked from an Inovayt interview" class="is-picked" loading="lazy" decoding="async" width="640" height="360">
+        <img src="img/studio/moment-4.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
+        <img src="img/studio/moment-5.jpg" alt="A moment picked from an Inovayt interview" class="is-picked" loading="lazy" decoding="async" width="640" height="360">
+        <img src="img/studio/moment-6.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
+      </div>
+    </div>
+    <div class="split-body reveal">
+      <span class="split-eyebrow">VIDPOD Studio</span>
+      <h2 class="section-title">More than filming and <span class="nowrap-dot">editing<span class="dot"></span></span></h2>
+      <p>We film great interviews and cut the videos you need. But every interview holds far more than one video can use. VIDPOD Studio is our private space for each client, where you review your videos and see the extra gold from your interviews.</p>
+      <ul class="split-points">
+        <li><strong>Review in one place.</strong> Watch each video and leave notes on the exact moment, with no long email threads.</li>
+        <li><strong>See what else was said.</strong> The best moments from your interviews, already found for you.</li>
+        <li><strong>Turn moments into more.</strong> Pick the ones you like and we&#x27;ll shape them into new videos and posts.</li>
+      </ul>
+      <a class="quiet-link" href="/#contact">Ask us how it works</a>
+    </div>
+  </div>
+</section>
+
 <section class="pod-sec sec-white dark-alt" id="faq">
   <div class="wrap faq-wrap">
     <div class="faq-head reveal">
       <h2>FAQ<span class="dot"></span></h2>
-      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us</a>.</p>
+      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us anything</a>.</p>
     </div>
     <div class="faq-list reveal">
       <details>
@@ -1084,12 +1254,12 @@ document.documentElement.dataset.theme = 'dark';
           <div class="sitemap-col">
             <h4>Our Shows</h4>
             <ul>
-              <li><a href="podcasts/the-numbers-game.html">The Numbers Game</a></li>
-              <li><a href="podcasts/lets-talk-teaching.html">Let&apos;s Talk Teaching <span style="color:var(--muted);font-size:13px">(Monash)</span></a></li>
-              <li><a href="podcasts/unconventional-business.html">Unconventional Business <span style="color:var(--muted);font-size:13px">(HubSpot)</span></a></li>
-              <li><a href="podcasts/help-at-hand.html">The Huddle <span style="color:var(--muted);font-size:13px">(Help at Hand Education)</span></a></li>
-              <li><a href="podcasts/carlisle-homes.html">Home Files <span style="color:var(--muted);font-size:13px">(Carlisle Homes)</span></a></li>
-              <li><a href="podcasts/the-daily-talk-show.html">The Daily Talk Show</a></li>
+              <li><a href="podcasts/the-numbers-game">The Numbers Game</a></li>
+              <li><a href="podcasts/lets-talk-teaching">Let&apos;s Talk Teaching <span style="color:var(--muted);font-size:13px">(Monash)</span></a></li>
+              <li><a href="podcasts/unconventional-business">Unconventional Business <span style="color:var(--muted);font-size:13px">(HubSpot)</span></a></li>
+              <li><a href="podcasts/help-at-hand">The Huddle <span style="color:var(--muted);font-size:13px">(Help at Hand Education)</span></a></li>
+              <li><a href="podcasts/carlisle-homes">Home Files <span style="color:var(--muted);font-size:13px">(Carlisle Homes)</span></a></li>
+              <li><a href="podcasts/the-daily-talk-show">The Daily Talk Show</a></li>
             </ul>
           </div>
 
@@ -1120,6 +1290,7 @@ document.documentElement.dataset.theme = 'dark';
         <a href="https://www.linkedin.com/company/vidpodproduction" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       </div>
     </div>
+    <p class="footer-credits">Founded by <a href="https://tommyjackett.com" target="_blank" rel="noopener">Tommy Jackett</a> <span aria-hidden="true">&middot;</span> Produced by VIDPOD: <a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">The Numbers Game podcast</a></p>
   </div>
 </footer>
 
@@ -1650,5 +1821,91 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+<!-- Enquiry panel: opens where the visitor is; the form itself is the homepage form, loaded when first opened -->
+<div class="enq" id="enq" aria-hidden="true">
+  <div class="enq-backdrop" data-enq-close></div>
+  <div class="enq-panel" role="dialog" aria-modal="true" aria-labelledby="enqTitle">
+    <button type="button" class="enq-close" data-enq-close aria-label="Close">&times;</button>
+    <div class="enq-body">
+      <p class="enq-title" id="enqTitle">Let&#x27;s make something<span class="dot"></span></p>
+      <p class="enq-lead">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</p>
+      <div id="enqForm"><p class="enq-lead">Loading the form&hellip;</p></div>
+      <p class="enq-alt">Rather talk? <a href="tel:+61401576859">Call 0401 576 859</a></p>
+    </div>
+    <div class="enq-done" hidden>
+      <h3>Thanks, it&#x27;s with us<span class="dot"></span></h3>
+      <p>We usually reply within a day.</p>
+    </div>
+  </div>
+</div>
+<script>
+// Every "Let's chat" and contact link opens the enquiry panel in place, so nobody loses their spot.
+(function () {
+  var root = document.getElementById('enq');
+  if (!root) return;
+  var slot = document.getElementById('enqForm');
+  var body = root.querySelector('.enq-body');
+  var done = root.querySelector('.enq-done');
+  var lastFocus = null, loading = null;
+  var PAGE_TYPE = { 'video-podcast-production-melbourne': 'Podcast production' };
+
+  function load() {
+    if (loading) return loading;
+    loading = fetch('/', { credentials: 'same-origin' }).then(function (r) { return r.text(); }).then(function (t) {
+      var src = new DOMParser().parseFromString(t, 'text/html').getElementById('contactForm');
+      if (!src) throw new Error('form');
+      var f = document.importNode(src, true);
+      f.id = 'enqContactForm';
+      f.querySelectorAll('label[for]').forEach(function (l) { l.htmlFor = 'enq-' + l.htmlFor; });
+      f.querySelectorAll('[id]').forEach(function (el) { el.id = 'enq-' + el.id; });
+      var from = document.createElement('input');
+      from.type = 'hidden'; from.name = 'from_page'; from.value = location.pathname;
+      f.appendChild(from);
+      var page = location.pathname.replace(/^\/|\.html$/g, '');
+      var sel = f.querySelector('select[name="project_type"]');
+      if (sel) sel.value = PAGE_TYPE[page] || 'Video production';
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = f.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (!j || !j.success) throw new Error('send'); body.hidden = true; done.hidden = false; })
+          .catch(function () { f.submit(); });
+      });
+      slot.innerHTML = '';
+      slot.appendChild(f);
+    }).catch(function () {
+      loading = null;
+      slot.innerHTML = '<p class="enq-lead">The form didn&#x27;t load. <a href="/#contact" data-enq-skip style="color:#fff;text-decoration:underline">Open it here</a>, or call us.</p>';
+    });
+    return loading;
+  }
+  function open(trigger) {
+    lastFocus = trigger || document.activeElement;
+    root.classList.add('is-open');
+    root.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('enq-lock');
+    var pop = document.getElementById('sayhiPop');
+    if (pop) { pop.classList.remove('is-open'); var b = document.getElementById('sayhiBtn'); if (b) b.setAttribute('aria-expanded', 'false'); }
+    var p = load();
+    if (p && p.then) p.then(function () { var i = slot.querySelector('input:not([type=hidden]):not([type=checkbox])'); if (i) i.focus({ preventScroll: true }); });
+  }
+  function close() {
+    root.classList.remove('is-open');
+    root.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('enq-lock');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (a && !a.hasAttribute('data-enq-skip') && /(^|\/|index\.html)#contact$/.test(a.getAttribute('href'))) { e.preventDefault(); open(a); return; }
+    if (e.target.closest('[data-enq-open]')) { e.preventDefault(); open(e.target.closest('[data-enq-open]')); return; }
+    if (e.target.closest('[data-enq-close]')) close();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && root.classList.contains('is-open')) close(); });
+  window.vidpodEnquiry = open;
+})();
+</script>
 </body>
 </html>

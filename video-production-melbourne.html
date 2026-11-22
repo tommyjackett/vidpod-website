@@ -22,6 +22,41 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://www.vidpod.com.au/#organization",
+      "name": "VIDPOD",
+      "legalName": "VIDPOD Pty Ltd",
+      "url": "https://www.vidpod.com.au/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.vidpod.com.au/img/brand/vidpod-logo-square.png",
+        "width": 600,
+        "height": 600
+      },
+      "image": "https://www.vidpod.com.au/img/social/og-default.jpg",
+      "description": "Melbourne video and podcast production. Brand films, case studies, explainers, social content and video podcasts.",
+      "founder": {
+        "@type": "Person",
+        "name": "Tommy Jackett",
+        "url": "https://tommyjackett.com"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Australia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Melbourne",
+        "addressRegion": "VIC",
+        "addressCountry": "AU"
+      },
+      "sameAs": [
+        "https://instagram.com/vid.pod",
+        "https://www.youtube.com/@vid_pod",
+        "https://www.linkedin.com/company/vidpodproduction"
+      ]
+    },
+    {
       "@type": "Service",
       "@id": "https://www.vidpod.com.au/video-production-melbourne#service",
       "name": "Video production",
@@ -51,15 +86,7 @@
           "name": "What does VIDPOD do?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "VIDPOD is a video and podcast production company in Melbourne, founded by Tommy Jackett. On the video side we make brand films, case study videos and event and conference content."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much does a video cost?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Every project is different, so we quote each one on what you actually need. Tell us about the project and we'll send you a clear quote before anything starts."
+            "text": "VIDPOD is a Melbourne video and podcast production company, founded by Tommy Jackett. We make brand films, case studies, explainers and social content, and take each one from the first chat to the finished video. You deal with one team the whole way, so nothing gets lost between people."
           }
         },
         {
@@ -67,7 +94,15 @@
           "name": "What kinds of videos do you make?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Brand films, branded content, explainers and animation, social content and case studies. We take each one from brief to delivery."
+            "text": "Brand films, branded content, explainers and animation, social content and customer case studies. Most projects give you more than one video: a main piece, plus shorter versions ready for your website, socials and presentations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does a video project work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It starts with a short chat about what the video needs to do and who it's for. We plan it with you, film it and edit it, and you review each version before anything is final. You always know what's happening next and what we need from you, which is usually not much."
           }
         },
         {
@@ -75,7 +110,7 @@
           "name": "Can you film at our office, event or conference?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. We film on location at offices, sites, stores and events. We bring the cameras, lighting and audio."
+            "text": "Yes. We film at offices, sites, stores and events, and we bring everything needed to make it look and sound great. We work around your day, so your team can get on with theirs."
           }
         },
         {
@@ -83,7 +118,15 @@
           "name": "Do you work outside Melbourne?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We're based in Melbourne and work with organisations across Australia. We travel interstate when the job needs it."
+            "text": "Yes. We're based in Melbourne and work with organisations right across Australia. We travel interstate whenever the job needs it and plan each day so you get the most from it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a video cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every project is different, so we quote on what you actually need: how many videos, where we film and how they'll be used. Tell us about the project and we'll send a clear quote before anything starts, with no surprises."
           }
         }
       ]
@@ -786,16 +829,6 @@
   .logo-track img { margin-right: 0; }
   .logo-track img[aria-hidden] { display: none; }
 }
-/* ---- v5: filter tags, plain uppercase words, brand dot on the selected one ---- */
-.vid-categories { gap: 6px 30px; margin: 30px 0 4px; }
-.vid-cat-btn, .vid-cat-btn:hover, .vid-cat-btn.is-active { background: none; color: inherit; box-shadow: none; transform: none; }
-.vid-cat-btn { padding: 8px 0; border-radius: 0; font-family: var(--font-body); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; opacity: 0.62; transition: opacity 0.2s ease; }
-.vid-cat-btn::after { content: ''; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: currentColor; transform: scale(0); transition: transform 0.25s var(--ease); }
-.vid-cat-btn:hover { opacity: 0.85; }
-.vid-cat-btn.is-active { opacity: 1; }
-.vid-cat-btn.is-active::after { transform: scale(1); }
-.vid-cat-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-@media (max-width: 720px) { .vid-categories { gap: 2px 22px; } .vid-cat-btn { font-size: 12px; padding: 8px 0; } }
 /* ---- v5: FAQ in two columns that span the page ---- */
 #faq .faq-wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 0 72px; align-items: start; }
 #faq .faq-wrap h2 { margin: 0; }
@@ -830,6 +863,115 @@
 /* ---- v5: snippet show labels ---- */
 .snippet-item .snippet-show { position: absolute; left: 0; right: 0; top: 0; padding: 16px 16px 34px; background: linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0)); color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; pointer-events: none; }
 .snippet-item .snippet-show::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-left: 5px; border-radius: 50%; background: var(--green); }
+/* ---- v6: smooth anchors ---- */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* ---- v6: Selected work (video page), cinematic chapters ---- */
+.sel-work { background: #0A0A0A; color: #fff; padding: 130px 0 120px; }
+.sel-work .section-title { color: #fff; }
+.sel-work .section-title .dot { background: var(--green); }
+.sel-work .section-intro { color: rgba(255,255,255,0.7); }
+.chapter { margin-top: 88px; scroll-margin-top: 110px; }
+.chapter-head { display: flex; align-items: baseline; gap: 16px; padding-bottom: 18px; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.14); }
+.chapter-num { font-family: var(--font-head); font-size: 14px; letter-spacing: 0.06em; color: var(--green); }
+.chapter-head h3 { margin: 0; font-family: var(--font-body); font-size: 13px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; }
+.mosaic { display: grid; gap: 44px 22px; }
+.mosaic + .mosaic { margin-top: 44px; }
+.mosaic .tile { min-width: 0; }
+.m-feature { grid-template-columns: 1fr; }
+.m-feature .tile-media { aspect-ratio: 21 / 9; border-radius: 18px; }
+.m-feature .tile-play { width: 64px; height: 64px; left: 26px; bottom: 26px; }
+.m-feature .tile-play::before { border-left-width: 18px; border-top-width: 11px; border-bottom-width: 11px; margin-left: 5px; }
+.m-feature .tile-cap { font-size: 17px; margin-top: 16px; }
+.m-pair { grid-template-columns: 1fr 1fr; }
+.m-trio { grid-template-columns: repeat(3, 1fr); }
+.m-wn { grid-template-columns: 2fr 1fr; }
+.m-wn .tile:last-child .tile-media { aspect-ratio: 8 / 9; }
+@media (max-width: 860px) {
+  .m-pair, .m-trio, .m-wn { grid-template-columns: 1fr 1fr; }
+  .m-wn .tile:last-child .tile-media { aspect-ratio: 16 / 9; }
+  .m-trio .tile:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 699px) {
+  .sel-work { padding: 84px 0; }
+  .chapter { margin-top: 60px; }
+  .mosaic, .m-pair, .m-trio, .m-wn { grid-template-columns: 1fr; gap: 30px; }
+  .mosaic + .mosaic { margin-top: 30px; }
+  .m-feature .tile-media { aspect-ratio: 16 / 9; border-radius: 14px; }
+  .m-feature .tile-play { width: 46px; height: 46px; left: 16px; bottom: 16px; }
+  .m-feature .tile-play::before { border-left-width: 14px; border-top-width: 8px; border-bottom-width: 8px; margin-left: 4px; }
+}
+/* ---- v6: case studies band (video page) ---- */
+.case-band { padding: 120px 0; }
+.case-band-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: center; }
+.case-band .section-intro { margin-top: 18px; max-width: 40ch; }
+.case-band .quiet-link { margin-top: 26px; }
+@media (max-width: 860px) { .case-band { padding: 84px 0; } .case-band-grid { grid-template-columns: 1fr; gap: 34px; } }
+/* ---- v6: split feature (internal podcasts, VIDPOD Studio) ---- */
+.split { background: #0A0A0A; color: #fff; padding: 130px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+.split-grid { display: grid; grid-template-columns: 6fr 5fr; gap: 72px; align-items: center; }
+.split.is-flip .split-grid { grid-template-columns: 5fr 6fr; }
+.split.is-flip .split-media { order: 2; }
+.split-media > img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; display: block; }
+.split-eyebrow { display: block; margin: 0 0 18px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.split .section-title { color: #fff; margin: 0; }
+.split .section-title .dot { background: var(--green); }
+.split-body > p { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 46ch; }
+.split-points { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 14px; max-width: 46ch; }
+.split-points li { position: relative; padding-left: 20px; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.78); }
+.split-points li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.split-points strong { color: #fff; font-weight: 700; }
+.split .quiet-link { margin-top: 32px; }
+.moments-sheet { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.moments-sheet img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 10px; opacity: 0.55; filter: saturate(0.7); }
+.moments-sheet img.is-picked { opacity: 1; filter: none; box-shadow: 0 0 0 2px var(--green); }
+@media (max-width: 860px) {
+  .split { padding: 84px 0; }
+  .split-grid, .split.is-flip .split-grid { grid-template-columns: 1fr; gap: 36px; }
+  .split.is-flip .split-media { order: 0; }
+}
+/* ---- v6: more shows (podcast page) ---- */
+.shows-more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.12); }
+.show-mini { display: flex; align-items: center; gap: 16px; color: inherit; text-decoration: none; }
+.show-mini img { width: 76px; height: 76px; flex: 0 0 76px; border-radius: 10px; object-fit: cover; display: block; transition: transform 0.4s var(--ease); }
+.show-mini:hover img { transform: scale(1.05); }
+.show-mini .tile-cap { margin: 0; }
+@media (max-width: 860px) { .shows-more { grid-template-columns: 1fr; gap: 16px; } .show-mini img { width: 104px; height: 104px; flex-basis: 104px; border-radius: 12px; } }
+/* ---- v6: footer credits ---- */
+.footer-credits { margin: 22px 0 0; text-align: center; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.footer-credits a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.footer-credits a:hover { color: var(--fg); }
+/* ---- v6: enquiry panel (opens where you are, same form as the homepage) ---- */
+.enq { position: fixed; inset: 0; z-index: 400; visibility: hidden; }
+.enq.is-open { visibility: visible; }
+.enq-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.35s ease; }
+.enq.is-open .enq-backdrop { opacity: 1; }
+.enq-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(580px, 100%); background: #131315; color: #fff; padding: 64px 48px 44px; overflow-y: auto; overscroll-behavior: contain; transform: translateX(100%); transition: transform 0.45s var(--ease); box-shadow: -30px 0 90px rgba(0,0,0,0.45); border-left: 1px solid rgba(255,255,255,0.08); }
+.enq.is-open .enq-panel { transform: none; }
+.enq-close { position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: none; color: #fff; font-size: 24px; line-height: 1; cursor: pointer; }
+.enq-close:hover { border-color: var(--green); color: var(--green); }
+.enq-title { margin: 0 0 14px; font-family: var(--font-head); font-size: clamp(30px, 3vw, 40px); line-height: 0.95; letter-spacing: -0.015em; text-transform: uppercase; }
+.enq-lead { margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.72); }
+.enq-alt { margin: 26px 0 0; font-size: 14px; color: rgba(255,255,255,0.6); }
+.enq-alt a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.enq-done h3 { font-family: var(--font-head); font-size: 28px; text-transform: uppercase; margin: 10px 0 10px; }
+.enq-done p { color: rgba(255,255,255,0.72); margin: 0; }
+.enq .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.enq .contact-form .full { grid-column: 1 / -1; }
+.enq .contact-form label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+.enq .contact-form input, .enq .contact-form textarea, .enq .contact-form select { width: 100%; font: inherit; font-size: 16px; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 15px 17px; outline: none; transition: all 0.2s var(--ease); }
+.enq .contact-form select option { color: #000; }
+.enq .contact-form textarea { min-height: 130px; resize: vertical; }
+.enq .contact-form input:focus, .enq .contact-form textarea:focus, .enq .contact-form select:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(0,255,170,0.18); background: rgba(255,255,255,0.1); }
+.enq .contact-submit { margin-top: 6px; grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.enq .contact-submit .small { font-size: 13px; color: rgba(255,255,255,0.6); }
+.enq .contact-submit button { appearance: none; border: none; cursor: pointer; font: inherit; font-weight: 800; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--green); color: #000; padding: 17px 28px; border-radius: 100px; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.25s var(--ease); }
+.enq .contact-submit button:hover { transform: translateY(-2px); }
+.enq .contact-submit button[disabled] { opacity: 0.6; cursor: wait; }
+.enq .contact-submit button .pulse { width: 8px; height: 8px; border-radius: 50%; background: #000; }
+body.enq-lock { overflow: hidden; }
+@media (max-width: 600px) { .enq-panel { padding: 64px 22px 36px; } .enq .contact-form { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .enq-panel, .enq-backdrop { transition: none; } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -932,132 +1074,55 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </section>
 
-<section class="work-vid" id="recent-work">
-  <span id="brand-films" aria-hidden="true"></span>
-  <div class="wrap work-inner">
-    <h2 class="section-title reveal">Recent <span class="nowrap-dot">work<span class="dot"></span></span></h2>
-    <p class="section-intro reveal">A selection of work we&#x27;ve created across different brands and video types.</p>
-    <div class="vid-categories reveal" id="vidCategories" role="tablist">
-      <button type="button" class="vid-cat-btn is-active" data-category="all">All</button>
-      <button type="button" class="vid-cat-btn" data-category="brand-films">Brand films</button>
-      <button type="button" class="vid-cat-btn" data-category="branded-content">Branded content</button>
-      <button type="button" class="vid-cat-btn" data-category="explainers">Explainers</button>
-      <button type="button" class="vid-cat-btn" data-category="social-content">Social content</button>
-      <button type="button" class="vid-cat-btn" data-category="case-studies">Case studies</button>
-    </div>
-    <div class="tile-grid reveal" id="workGrid">
-      <div class="tile" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" data-category="brand-films" aria-label="Play: Barefoot Investor, book launch video">
-        <div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p>
+<section class="sel-work" id="selected-work">
+  <div class="wrap">
+    <h2 class="section-title reveal">Selected <span class="nowrap-dot">work<span class="dot"></span></span></h2>
+    <p class="section-intro reveal">A selection of work we&#x27;ve created across different brands and video types. Over a decade of experience. One point of contact from brief to delivery.</p>
+
+    <div class="chapter reveal" id="brand-films">
+      <div class="chapter-head"><span class="chapter-num">01</span><h3>Brand films</h3></div>
+      <div class="mosaic m-feature">
+        <div class="tile" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
       </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="03nftmt_D9k" data-category="branded-content" aria-label="Play: Country Road, store launch">
-        <div class="tile-media"><img src="img/work/03nftmt_D9k.jpg" alt="Country Road, store launch" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Country Road</strong><span class="cap-rest">, store launch</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" data-category="explainers" aria-label="Play: Infrastructure Victoria, animated explainer">
-        <div class="tile-media"><img src="img/work/YH-LnvrsxDo.jpg" alt="Infrastructure Victoria, animated explainer" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, animated explainer</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" data-category="social-content" aria-label="Play: Nando&#x27;s, taste test">
-        <div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="GCbtI7zRI4A" data-category="brand-films" aria-label="Play: Brava, brand video">
-        <div class="tile-media"><img src="img/work/GCbtI7zRI4A.jpg" alt="Brava, brand video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, brand video</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="c9rdClIUDno" data-category="explainers" aria-label="Play: MedMate, explainer video">
-        <div class="tile-media"><img src="img/work/c9rdClIUDno.jpg" alt="MedMate, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>MedMate</strong><span class="cap-rest">, explainer video</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" data-category="case-studies" aria-label="Play: Total Tools, customer story">
-        <div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="fC7yxSSM3I0" data-category="social-content" aria-label="Play: Deliciou, social content">
-        <div class="tile-media"><img src="img/work/fC7yxSSM3I0.jpg" alt="Deliciou, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Deliciou</strong><span class="cap-rest">, social content</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" data-category="brand-films" aria-label="Play: @Pilates, founding story">
-        <div class="tile-media"><img src="img/work/fsJkJAmqskQ.jpg" alt="@Pilates, founding story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="WnDGbiJXIhg" data-category="explainers" aria-label="Play: Equip Super, explainer video">
-        <div class="tile-media"><img src="img/work/WnDGbiJXIhg.jpg" alt="Equip Super, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, explainer video</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" data-category="branded-content" aria-label="Play: Brava, Obsessed with Fit campaign">
-        <div class="tile-media"><img src="img/work/cyOn7RNLOhw.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="v7zZYpXPymA" data-category="social-content" aria-label="Play: Chiropedic Bedding, social content">
-        <div class="tile-media"><img src="img/work/v7zZYpXPymA.jpg" alt="Chiropedic Bedding, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Chiropedic Bedding</strong><span class="cap-rest">, social content</span></p>
+      <div class="mosaic m-pair">
+        <div class="tile" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ.jpg" alt="@Pilates, founding story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="GCbtI7zRI4A" aria-label="Play: Brava, brand video"><div class="tile-media"><img src="img/work/GCbtI7zRI4A.jpg" alt="Brava, brand video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, brand video</span></p></div>
       </div>
     </div>
-    <a class="quiet-link reveal" href="video-case-studies-melbourne">See all our case studies</a>
+
+    <div class="chapter reveal" id="branded-content">
+      <div class="chapter-head"><span class="chapter-num">02</span><h3>Branded and social content</h3></div>
+      <div class="mosaic m-wn">
+        <div class="tile" role="button" tabindex="0" data-yt-id="03nftmt_D9k" aria-label="Play: Country Road, store launch"><div class="tile-media"><img src="img/work/03nftmt_D9k.jpg" alt="Country Road, store launch" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Country Road</strong><span class="cap-rest">, store launch</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
+      </div>
+      <div class="mosaic m-trio">
+        <div class="tile" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="fC7yxSSM3I0" aria-label="Play: Deliciou, social content"><div class="tile-media"><img src="img/work/fC7yxSSM3I0.jpg" alt="Deliciou, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Deliciou</strong><span class="cap-rest">, social content</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="v7zZYpXPymA" aria-label="Play: Chiropedic Bedding, social content"><div class="tile-media"><img src="img/work/v7zZYpXPymA.jpg" alt="Chiropedic Bedding, social content" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Chiropedic Bedding</strong><span class="cap-rest">, social content</span></p></div>
+      </div>
+    </div>
+
+    <div class="chapter reveal" id="explainers">
+      <div class="chapter-head"><span class="chapter-num">03</span><h3>Explainers and animation</h3></div>
+      <div class="mosaic m-trio">
+        <div class="tile" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" aria-label="Play: Infrastructure Victoria, animated explainer"><div class="tile-media"><img src="img/work/YH-LnvrsxDo.jpg" alt="Infrastructure Victoria, animated explainer" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, animated explainer</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="c9rdClIUDno" aria-label="Play: MedMate, explainer video"><div class="tile-media"><img src="img/work/c9rdClIUDno.jpg" alt="MedMate, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>MedMate</strong><span class="cap-rest">, explainer video</span></p></div>
+        <div class="tile" role="button" tabindex="0" data-yt-id="WnDGbiJXIhg" aria-label="Play: Equip Super, explainer video"><div class="tile-media"><img src="img/work/WnDGbiJXIhg.jpg" alt="Equip Super, explainer video" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, explainer video</span></p></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="pod-sec sec-white dark-alt">
-  <div class="wrap">
-    <div class="bts-strip reveal">
-      <h2 class="bts-heading">On set<span class="dot"></span></h2>
-      <div class="marquee-viewport">
-        <div class="marquee-track" id="btsVidMarquee">
-          <div class="marquee-item"><img src="img/bts-vid/bts-01.jpg" srcset="img/bts-vid/bts-01-sm.jpg 480w, img/bts-vid/bts-01.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-02.jpg" srcset="img/bts-vid/bts-02-sm.jpg 480w, img/bts-vid/bts-02.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-03.jpg" srcset="img/bts-vid/bts-03-sm.jpg 480w, img/bts-vid/bts-03.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-04.jpg" srcset="img/bts-vid/bts-04-sm.jpg 480w, img/bts-vid/bts-04.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-05.jpg" srcset="img/bts-vid/bts-05-sm.jpg 480w, img/bts-vid/bts-05.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-06.jpg" srcset="img/bts-vid/bts-06-sm.jpg 480w, img/bts-vid/bts-06.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-07.jpg" srcset="img/bts-vid/bts-07-sm.jpg 480w, img/bts-vid/bts-07.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-08.jpg" srcset="img/bts-vid/bts-08-sm.jpg 480w, img/bts-vid/bts-08.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-09.jpg" srcset="img/bts-vid/bts-09-sm.jpg 480w, img/bts-vid/bts-09.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-10.jpg" srcset="img/bts-vid/bts-10-sm.jpg 480w, img/bts-vid/bts-10.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-11.jpg" srcset="img/bts-vid/bts-11-sm.jpg 480w, img/bts-vid/bts-11.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-12.jpg" srcset="img/bts-vid/bts-12-sm.jpg 480w, img/bts-vid/bts-12.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-13.jpg" srcset="img/bts-vid/bts-13-sm.jpg 480w, img/bts-vid/bts-13.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-14.jpg" srcset="img/bts-vid/bts-14-sm.jpg 480w, img/bts-vid/bts-14.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-15.jpg" srcset="img/bts-vid/bts-15-sm.jpg 480w, img/bts-vid/bts-15.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-16.jpg" srcset="img/bts-vid/bts-16-sm.jpg 480w, img/bts-vid/bts-16.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-17.jpg" srcset="img/bts-vid/bts-17-sm.jpg 480w, img/bts-vid/bts-17.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-18.jpg" srcset="img/bts-vid/bts-18-sm.jpg 480w, img/bts-vid/bts-18.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-19.jpg" srcset="img/bts-vid/bts-19-sm.jpg 480w, img/bts-vid/bts-19.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-20.jpg" srcset="img/bts-vid/bts-20-sm.jpg 480w, img/bts-vid/bts-20.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-21.jpg" srcset="img/bts-vid/bts-21-sm.jpg 480w, img/bts-vid/bts-21.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-22.jpg" srcset="img/bts-vid/bts-22-sm.jpg 480w, img/bts-vid/bts-22.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-23.jpg" srcset="img/bts-vid/bts-23-sm.jpg 480w, img/bts-vid/bts-23.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-24.jpg" srcset="img/bts-vid/bts-24-sm.jpg 480w, img/bts-vid/bts-24.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item"><img src="img/bts-vid/bts-25.jpg" srcset="img/bts-vid/bts-25-sm.jpg 480w, img/bts-vid/bts-25.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="VIDPOD video production behind the scenes" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-01.jpg" srcset="img/bts-vid/bts-01-sm.jpg 480w, img/bts-vid/bts-01.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-02.jpg" srcset="img/bts-vid/bts-02-sm.jpg 480w, img/bts-vid/bts-02.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-03.jpg" srcset="img/bts-vid/bts-03-sm.jpg 480w, img/bts-vid/bts-03.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-04.jpg" srcset="img/bts-vid/bts-04-sm.jpg 480w, img/bts-vid/bts-04.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-05.jpg" srcset="img/bts-vid/bts-05-sm.jpg 480w, img/bts-vid/bts-05.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-06.jpg" srcset="img/bts-vid/bts-06-sm.jpg 480w, img/bts-vid/bts-06.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-07.jpg" srcset="img/bts-vid/bts-07-sm.jpg 480w, img/bts-vid/bts-07.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-08.jpg" srcset="img/bts-vid/bts-08-sm.jpg 480w, img/bts-vid/bts-08.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-09.jpg" srcset="img/bts-vid/bts-09-sm.jpg 480w, img/bts-vid/bts-09.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-10.jpg" srcset="img/bts-vid/bts-10-sm.jpg 480w, img/bts-vid/bts-10.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-11.jpg" srcset="img/bts-vid/bts-11-sm.jpg 480w, img/bts-vid/bts-11.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-12.jpg" srcset="img/bts-vid/bts-12-sm.jpg 480w, img/bts-vid/bts-12.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-13.jpg" srcset="img/bts-vid/bts-13-sm.jpg 480w, img/bts-vid/bts-13.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-14.jpg" srcset="img/bts-vid/bts-14-sm.jpg 480w, img/bts-vid/bts-14.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-15.jpg" srcset="img/bts-vid/bts-15-sm.jpg 480w, img/bts-vid/bts-15.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-16.jpg" srcset="img/bts-vid/bts-16-sm.jpg 480w, img/bts-vid/bts-16.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-17.jpg" srcset="img/bts-vid/bts-17-sm.jpg 480w, img/bts-vid/bts-17.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-18.jpg" srcset="img/bts-vid/bts-18-sm.jpg 480w, img/bts-vid/bts-18.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-19.jpg" srcset="img/bts-vid/bts-19-sm.jpg 480w, img/bts-vid/bts-19.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-20.jpg" srcset="img/bts-vid/bts-20-sm.jpg 480w, img/bts-vid/bts-20.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-21.jpg" srcset="img/bts-vid/bts-21-sm.jpg 480w, img/bts-vid/bts-21.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-22.jpg" srcset="img/bts-vid/bts-22-sm.jpg 480w, img/bts-vid/bts-22.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-23.jpg" srcset="img/bts-vid/bts-23-sm.jpg 480w, img/bts-vid/bts-23.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-24.jpg" srcset="img/bts-vid/bts-24-sm.jpg 480w, img/bts-vid/bts-24.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/bts-vid/bts-25.jpg" srcset="img/bts-vid/bts-25-sm.jpg 480w, img/bts-vid/bts-25.jpg 1200w" sizes="(max-width: 720px) 50vw, 420px" alt="" loading="lazy" decoding="async"></div>
-        </div>
-      </div>
-      <p class="section-intro bts-proof">Over a decade of experience. One point of contact from brief to delivery.</p>
+<section class="work-vid case-band" id="case-studies">
+  <div class="wrap case-band-grid">
+    <div class="reveal">
+      <h2 class="section-title">Case <span class="nowrap-dot">studies<span class="dot"></span></span></h2>
+      <p class="section-intro">Real customers telling the story of a problem solved, for brands like Total Tools, Border Express and @Pilates.</p>
+      <a class="quiet-link" href="video-case-studies-melbourne">See all our case study videos</a>
+    </div>
+    <div class="reveal">
+      <div class="tile" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Total Tools, customer story"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p></div>
     </div>
   </div>
 </section>
@@ -1066,28 +1131,32 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap faq-wrap">
     <div class="faq-head reveal">
       <h2>FAQ<span class="dot"></span></h2>
-      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us</a>.</p>
+      <p class="faq-aside">Something else on your mind? <a href="/#contact">Ask us anything</a>.</p>
     </div>
     <div class="faq-list reveal">
       <details>
         <summary>What does VIDPOD do?</summary>
-        <p>VIDPOD is a video and podcast production company in Melbourne, founded by Tommy Jackett. On the video side we make brand films, case study videos and event and conference content.</p>
-      </details>
-      <details>
-        <summary>How much does a video cost?</summary>
-        <p>Every project is different, so we quote each one on what you actually need. Tell us about the project and we&#x27;ll send you a clear quote before anything starts.</p>
+        <p>VIDPOD is a Melbourne video and podcast production company, founded by Tommy Jackett. We make brand films, case studies, explainers and social content, and take each one from the first chat to the finished video. You deal with one team the whole way, so nothing gets lost between people.</p>
       </details>
       <details>
         <summary>What kinds of videos do you make?</summary>
-        <p>Brand films, branded content, explainers and animation, social content and case studies. We take each one from brief to delivery.</p>
+        <p>Brand films, branded content, explainers and animation, social content and customer case studies. Most projects give you more than one video: a main piece, plus shorter versions ready for your website, socials and presentations.</p>
+      </details>
+      <details>
+        <summary>How does a video project work?</summary>
+        <p>It starts with a short chat about what the video needs to do and who it&#x27;s for. We plan it with you, film it and edit it, and you review each version before anything is final. You always know what&#x27;s happening next and what we need from you, which is usually not much.</p>
       </details>
       <details>
         <summary>Can you film at our office, event or conference?</summary>
-        <p>Yes. We film on location at offices, sites, stores and events. We bring the cameras, lighting and audio.</p>
+        <p>Yes. We film at offices, sites, stores and events, and we bring everything needed to make it look and sound great. We work around your day, so your team can get on with theirs.</p>
       </details>
       <details>
         <summary>Do you work outside Melbourne?</summary>
-        <p>We&#x27;re based in Melbourne and work with organisations across Australia. We travel interstate when the job needs it.</p>
+        <p>Yes. We&#x27;re based in Melbourne and work with organisations right across Australia. We travel interstate whenever the job needs it and plan each day so you get the most from it.</p>
+      </details>
+      <details>
+        <summary>How much does a video cost?</summary>
+        <p>Every project is different, so we quote on what you actually need: how many videos, where we film and how they&#x27;ll be used. Tell us about the project and we&#x27;ll send a clear quote before anything starts, with no surprises.</p>
       </details>
     </div>
   </div>
@@ -1144,12 +1213,12 @@ document.documentElement.dataset.theme = 'dark';
           <div class="sitemap-col">
             <h4>Our Shows</h4>
             <ul>
-              <li><a href="podcasts/the-numbers-game.html">The Numbers Game</a></li>
-              <li><a href="podcasts/lets-talk-teaching.html">Let&apos;s Talk Teaching <span style="color:var(--muted);font-size:13px">(Monash)</span></a></li>
-              <li><a href="podcasts/unconventional-business.html">Unconventional Business <span style="color:var(--muted);font-size:13px">(HubSpot)</span></a></li>
-              <li><a href="podcasts/help-at-hand.html">The Huddle <span style="color:var(--muted);font-size:13px">(Help at Hand Education)</span></a></li>
-              <li><a href="podcasts/carlisle-homes.html">Home Files <span style="color:var(--muted);font-size:13px">(Carlisle Homes)</span></a></li>
-              <li><a href="podcasts/the-daily-talk-show.html">The Daily Talk Show</a></li>
+              <li><a href="podcasts/the-numbers-game">The Numbers Game</a></li>
+              <li><a href="podcasts/lets-talk-teaching">Let&apos;s Talk Teaching <span style="color:var(--muted);font-size:13px">(Monash)</span></a></li>
+              <li><a href="podcasts/unconventional-business">Unconventional Business <span style="color:var(--muted);font-size:13px">(HubSpot)</span></a></li>
+              <li><a href="podcasts/help-at-hand">The Huddle <span style="color:var(--muted);font-size:13px">(Help at Hand Education)</span></a></li>
+              <li><a href="podcasts/carlisle-homes">Home Files <span style="color:var(--muted);font-size:13px">(Carlisle Homes)</span></a></li>
+              <li><a href="podcasts/the-daily-talk-show">The Daily Talk Show</a></li>
             </ul>
           </div>
 
@@ -1180,6 +1249,7 @@ document.documentElement.dataset.theme = 'dark';
         <a href="https://www.linkedin.com/company/vidpodproduction" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       </div>
     </div>
+    <p class="footer-credits">Founded by <a href="https://tommyjackett.com" target="_blank" rel="noopener">Tommy Jackett</a> <span aria-hidden="true">&middot;</span> Produced by VIDPOD: <a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">The Numbers Game podcast</a></p>
   </div>
 </footer>
 
@@ -1653,23 +1723,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-// Work filter: All shows every tile; a category shows only its tiles. #brand-films opens on Brand films.
-(function() {
-  var row = document.getElementById('vidCategories');
-  var grid = document.getElementById('workGrid');
-  if (!row || !grid) return;
-  function apply(cat) {
-    row.querySelectorAll('.vid-cat-btn').forEach(function(b) { b.classList.toggle('is-active', b.getAttribute('data-category') === cat); });
-    grid.querySelectorAll('.tile').forEach(function(t) { t.hidden = !(cat === 'all' || t.getAttribute('data-category') === cat); });
-  }
-  row.addEventListener('click', function(e) {
-    var btn = e.target.closest('.vid-cat-btn');
-    if (btn) apply(btn.getAttribute('data-category'));
-  });
-  if (location.hash === '#brand-films') apply('brand-films');
-})();
-</script>
-<script>
 // Video lightbox (one for the whole system): YouTube tiles and self-hosted tiles.
 // Self-hosted video starts from the click; controls appear once it is playing.
 (function() {
@@ -1723,6 +1776,92 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && lb.classList.contains('is-open')) closeVid();
   });
+})();
+</script>
+<!-- Enquiry panel: opens where the visitor is; the form itself is the homepage form, loaded when first opened -->
+<div class="enq" id="enq" aria-hidden="true">
+  <div class="enq-backdrop" data-enq-close></div>
+  <div class="enq-panel" role="dialog" aria-modal="true" aria-labelledby="enqTitle">
+    <button type="button" class="enq-close" data-enq-close aria-label="Close">&times;</button>
+    <div class="enq-body">
+      <p class="enq-title" id="enqTitle">Let&#x27;s make something<span class="dot"></span></p>
+      <p class="enq-lead">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</p>
+      <div id="enqForm"><p class="enq-lead">Loading the form&hellip;</p></div>
+      <p class="enq-alt">Rather talk? <a href="tel:+61401576859">Call 0401 576 859</a></p>
+    </div>
+    <div class="enq-done" hidden>
+      <h3>Thanks, it&#x27;s with us<span class="dot"></span></h3>
+      <p>We usually reply within a day.</p>
+    </div>
+  </div>
+</div>
+<script>
+// Every "Let's chat" and contact link opens the enquiry panel in place, so nobody loses their spot.
+(function () {
+  var root = document.getElementById('enq');
+  if (!root) return;
+  var slot = document.getElementById('enqForm');
+  var body = root.querySelector('.enq-body');
+  var done = root.querySelector('.enq-done');
+  var lastFocus = null, loading = null;
+  var PAGE_TYPE = { 'video-podcast-production-melbourne': 'Podcast production' };
+
+  function load() {
+    if (loading) return loading;
+    loading = fetch('/', { credentials: 'same-origin' }).then(function (r) { return r.text(); }).then(function (t) {
+      var src = new DOMParser().parseFromString(t, 'text/html').getElementById('contactForm');
+      if (!src) throw new Error('form');
+      var f = document.importNode(src, true);
+      f.id = 'enqContactForm';
+      f.querySelectorAll('label[for]').forEach(function (l) { l.htmlFor = 'enq-' + l.htmlFor; });
+      f.querySelectorAll('[id]').forEach(function (el) { el.id = 'enq-' + el.id; });
+      var from = document.createElement('input');
+      from.type = 'hidden'; from.name = 'from_page'; from.value = location.pathname;
+      f.appendChild(from);
+      var page = location.pathname.replace(/^\/|\.html$/g, '');
+      var sel = f.querySelector('select[name="project_type"]');
+      if (sel) sel.value = PAGE_TYPE[page] || 'Video production';
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = f.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (!j || !j.success) throw new Error('send'); body.hidden = true; done.hidden = false; })
+          .catch(function () { f.submit(); });
+      });
+      slot.innerHTML = '';
+      slot.appendChild(f);
+    }).catch(function () {
+      loading = null;
+      slot.innerHTML = '<p class="enq-lead">The form didn&#x27;t load. <a href="/#contact" data-enq-skip style="color:#fff;text-decoration:underline">Open it here</a>, or call us.</p>';
+    });
+    return loading;
+  }
+  function open(trigger) {
+    lastFocus = trigger || document.activeElement;
+    root.classList.add('is-open');
+    root.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('enq-lock');
+    var pop = document.getElementById('sayhiPop');
+    if (pop) { pop.classList.remove('is-open'); var b = document.getElementById('sayhiBtn'); if (b) b.setAttribute('aria-expanded', 'false'); }
+    var p = load();
+    if (p && p.then) p.then(function () { var i = slot.querySelector('input:not([type=hidden]):not([type=checkbox])'); if (i) i.focus({ preventScroll: true }); });
+  }
+  function close() {
+    root.classList.remove('is-open');
+    root.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('enq-lock');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (a && !a.hasAttribute('data-enq-skip') && /(^|\/|index\.html)#contact$/.test(a.getAttribute('href'))) { e.preventDefault(); open(a); return; }
+    if (e.target.closest('[data-enq-open]')) { e.preventDefault(); open(e.target.closest('[data-enq-open]')); return; }
+    if (e.target.closest('[data-enq-close]')) close();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && root.classList.contains('is-open')) close(); });
+  window.vidpodEnquiry = open;
 })();
 </script>
 </body>
