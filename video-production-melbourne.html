@@ -8,7 +8,7 @@
 <meta name="description" content="Corporate video production in Melbourne. Brand films, customer case studies, founder stories and conference content, filmed beautifully with social versions as standard.">
 <title>Corporate Video Production Melbourne | Brand Films &amp; Case Studies | VIDPOD</title>
 <link rel="canonical" href="https://www.vidpod.com.au/video-production-melbourne">
-<link rel="preload" as="image" href="img/work/video-hero-poster-v8.jpg">
+<link rel="preload" as="image" href="img/work/video-hero-poster-v11.jpg">
 <meta property="og:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/video-production-melbourne">
@@ -1273,6 +1273,85 @@ body { overflow-x: clip; }
   .sys-copy-desktop { display: none; }
 }
 @media (min-width: 700px) { .sys-copy-mobile { display: none; } }
+
+/* ---- r10 fix: video page ---- */
+.g-line-lead { margin: -4px 0 18px; }
+.g-pair-item { min-width: 0; }
+.rail-foot.is-phone { display: none; }
+@media (max-width: 699px) {
+  #workRail { gap: 24px; scroll-padding-inline: 22px; }
+  #workRail .g-item, #workRail .g-item.g-12 { flex: 0 0 100%; min-width: 0; }
+  #workRail .g-kind { margin-bottom: 10px; }
+  #workRail .g-line { font-size: 14px; margin-top: 8px; }
+  #workRail .g-pair .g-line { font-size: 13px; line-height: 1.45; }
+  #workRail .g-line-lead { margin: -2px 0 12px; }
+  .rail-foot.is-phone { display: flex; justify-content: flex-end; margin-top: 8px; }
+  #workRail { margin-top: 28px; padding-bottom: 0; }
+  #workRail .g-kind { font-size: 11px; letter-spacing: 0.12em; }
+  #workRail .g-tile .tile-media { aspect-ratio: 16 / 9; }
+  #workRail .g-line-lead { max-width: 52ch; }
+}
+@media (min-width: 700px) {
+  #workRail { row-gap: 32px; }
+  #workRail .g-line-lead { max-width: none; }
+}
+
+/* ---- r10 fix: enquiry panel fits a 390 x 844 phone, send button on the first screen ---- */
+.enq-lead-short { display: none; }
+@media (max-width: 600px) {
+  .enq-panel { padding: 58px 20px 24px; }
+  .enq-close { top: 10px; right: 12px; }
+  .enq-title { font-size: 28px; margin: 0 0 8px; }
+  .enq-lead { font-size: 15px; line-height: 1.45; margin: 0 0 16px; }
+  .enq-lead-long { display: none; }
+  .enq-lead-short { display: inline; }
+  .enq .contact-form { gap: 10px; }
+  .enq .contact-form label { margin-bottom: 5px; }
+  .enq .contact-form input, .enq .contact-form select { padding: 11px 15px; }
+  .enq .contact-form textarea { min-height: 84px; padding: 11px 15px; }
+  .enq .contact-submit { margin-top: 2px; }
+  .enq .contact-submit button { padding: 15px 26px; }
+  .enq-alt { margin-top: 14px; }
+}
+
+/* ---- r10 fix: controls (Tommy: the play button and phone button looked cheap) ---- */
+/* play: a small frosted glass pill, "Watch" */
+.tile-play, .m-feature .tile-play, .bleed-feature .tile-play { width: auto; height: 40px; padding: 0 17px 0 15px; gap: 10px; border-radius: 100px; display: inline-flex; align-items: center; justify-content: flex-start; background: rgba(14,14,14,0.34); border: 1px solid rgba(255,255,255,0.3); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); box-shadow: 0 8px 24px rgba(0,0,0,0.18); transition: background 0.35s ease, border-color 0.35s ease, transform 0.6s var(--ease); }
+.tile-play::before, .m-feature .tile-play::before { border-left: 9px solid #fff; border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; margin-left: 0; transition: border-color 0.35s ease; }
+.tile-play::after { content: 'Watch'; color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; transition: color 0.35s ease; }
+.m-feature .tile-play, .bleed-feature .tile-play { height: 46px; padding: 0 20px 0 18px; }
+.tile:hover .tile-play, .tile:focus-visible .tile-play { background: #fff; border-color: #fff; transform: none; }
+.tile:hover .tile-play::before, .tile:focus-visible .tile-play::before { border-left-color: #0b0b0b; }
+.tile:hover .tile-play::after, .tile:focus-visible .tile-play::after { color: #0b0b0b; }
+/* clip play: the same pill, bottom left */
+.snippet-play-overlay { align-items: flex-end; justify-content: flex-start; padding: 14px; }
+.snippet-play-btn, .snippets-strip .snippet-play-btn { width: auto; height: 36px; padding: 0 15px 0 13px; gap: 9px; border-radius: 100px; flex-direction: row-reverse; background: rgba(14,14,14,0.34) !important; border: 1px solid rgba(255,255,255,0.3); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); box-shadow: none; transition: background 0.35s ease, border-color 0.35s ease; }
+.snippet-play-btn::after { border-left: 8px solid #fff !important; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 0; }
+.snippet-play-btn::before { content: 'Watch'; color: #fff; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; }
+.snippet-item:hover .snippet-play-btn { transform: none; background: #fff !important; border-color: #fff; }
+.snippet-item:hover .snippet-play-btn::before { color: #0b0b0b; }
+.snippet-item:hover .snippet-play-btn::after { border-left-color: #0b0b0b !important; }
+/* rail arrows: fine line icons, quiet glass, a thin progress line */
+.snippets-nav { align-items: center; gap: 10px; }
+.snippets-nav-btn { width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); color: #fff; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+.snippets-nav-btn svg { width: 17px; height: 17px; stroke-width: 1.6; }
+.snippets-nav-btn:hover { background: #fff; border-color: #fff; color: #0b0b0b; }
+.rail-progress { position: relative; display: block; width: 120px; height: 2px; margin-right: 14px; border-radius: 2px; background: rgba(255,255,255,0.14); overflow: hidden; }
+.rail-progress > span { position: absolute; top: 0; bottom: 0; left: 0; width: 34%; border-radius: 2px; background: #fff; transition: left 0.35s var(--ease), width 0.35s var(--ease); }
+@media (max-width: 699px) {
+  .tile-play { height: 34px; padding: 0 14px 0 12px; gap: 8px; left: 12px; bottom: 12px; }
+  .tile-play::after { font-size: 10px; }
+  .m-feature .tile-play, .bleed-feature .tile-play { height: 36px; padding: 0 15px 0 13px; }
+  .snippet-play-overlay { padding: 10px; }
+  .snippet-play-btn, .snippets-strip .snippet-play-btn { height: 30px; padding: 0 12px 0 11px; gap: 7px; }
+  .snippet-play-btn::before { font-size: 9px; }
+  .rail-foot.is-phone .snippets-nav { width: 100%; }
+  .rail-foot.is-phone .rail-progress { flex: 1; width: auto; }
+  .cs-rail + .rail-foot .rail-progress { display: none; }
+  /* the floating phone button: dark glass with the green dot */
+  .m-chat { min-height: 44px; padding: 0 20px 0 17px; gap: 10px; background: rgba(16,16,16,0.72); color: #fff; border: 1px solid rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); font-weight: 800; font-size: 12px; letter-spacing: 0.16em; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+  .m-chat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(0,255,170,0.16); }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1325,8 +1404,8 @@ document.documentElement.dataset.theme = 'dark';
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
     <video
-      src="video/video-hero-loop-v10.mp4"
-      poster="img/work/video-hero-poster-v8.jpg"
+      src="video/video-hero-loop-v11.mp4"
+      poster="img/work/video-hero-poster-v11.jpg"
       autoplay muted loop playsinline preload="auto"
       tabindex="-1"></video>
   </div>
@@ -1382,7 +1461,7 @@ document.documentElement.dataset.theme = 'dark';
     <div class="bleed-feature is-reel reveal">
       <div class="tile g-tile g-feature ar-219" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" aria-label="Play: VIDPOD showreel"><div class="tile-media"><img src="img/work/break-reel-v7.jpg" alt="VIDPOD showreel: an outback road, a red dirt track and a forest from above" loading="lazy" decoding="async" width="1920" height="822"><video class="g-preview" data-src="video/break-reel-v7.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>VIDPOD showreel</strong></p></div>
     </div>
-    <div class="gallery is-rail reveal">
+    <div class="gallery is-rail reveal" id="workRail">
       <figure class="g-item g-7" id="case-study-videos">
         <span class="g-kind">Customer case studies and testimonials</span>
         <div class="tile g-tile ar-169" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" data-sprite="img/case-studies/inovayt-upsizer-sprite-v9.jpg" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog and a laptop" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div>
@@ -1401,22 +1480,23 @@ document.documentElement.dataset.theme = 'dark';
       <figure class="g-item g-4" id="franchise">
         <span class="g-kind">Franchise and multi-site packs</span>
         <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div>
-        <p class="g-line">One shoot, a matching film for every location.</p>
+        <p class="g-line">One film day, a matching film for every location.</p>
       </figure>
       <figure class="g-item g-4" id="social-versions">
-        <span class="g-kind">Hero films with social versions</span>
+        <span class="g-kind">Main films with social versions</span>
         <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
         <p class="g-line">The main film plus short vertical versions for every platform.</p>
       </figure>
       <figure class="g-item g-12" id="brand-films">
         <span class="g-kind">Brand films</span>
+        <p class="g-line g-line-lead">Films that show who you are, plus explainers and animation for brands like Infrastructure Victoria, MedMate and Equip Super.</p>
         <div class="g-pair">
-          <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
+          <div class="g-pair-item"><div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div><p class="g-line">A launch trailer for the Barefoot Kids book.</p></div>
+          <div class="g-pair-item"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div><p class="g-line">A taste test, made for Nando&#x27;s social channels.</p></div>
         </div>
-        <p class="g-line">Films that show who you are, plus explainers and animation for brands like Infrastructure Victoria, MedMate and Equip Super.</p>
       </figure>
     </div>
+    <div class="rail-foot is-phone"><nav class="snippets-nav" aria-label="More kinds of film"><span class="rail-progress" data-progress="workRail" aria-hidden="true"><span></span></span><button class="snippets-nav-btn" data-rail="workRail" data-dir="-1" aria-label="Previous" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button><button class="snippets-nav-btn" data-rail="workRail" data-dir="1" aria-label="Next" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></nav></div>
   </div>
 </section>
 
@@ -2098,6 +2178,35 @@ document.addEventListener('DOMContentLoaded', function() {
   lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Video');
 })();
 </script>
+
+<script>
+// Work row on phones: arrows scroll one card at a time.
+(function () {
+  document.querySelectorAll('[data-rail]').forEach(function (b) {
+    var rail = document.getElementById(b.getAttribute('data-rail'));
+    if (!rail) return;
+    b.addEventListener('click', function () {
+      var card = rail.querySelector('.g-item'); var step = card ? card.getBoundingClientRect().width + 24 : 300;
+      rail.scrollBy({ left: (parseInt(b.getAttribute('data-dir'), 10) || 1) * step, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+<script>
+// Rail progress line: shows where you are in the row.
+(function () {
+  document.querySelectorAll('[data-progress]').forEach(function (bar) {
+    var rail = document.getElementById(bar.getAttribute('data-progress')); var fill = bar.firstElementChild;
+    if (!rail || !fill) return;
+    function upd() {
+      var max = rail.scrollWidth - rail.clientWidth; var w = Math.min(1, rail.clientWidth / rail.scrollWidth);
+      fill.style.width = (w * 100) + '%'; fill.style.left = (max > 0 ? rail.scrollLeft / max * (1 - w) * 100 : 0) + '%';
+    }
+    rail.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+  });
+})();
+</script>
 <a class="m-chat" id="mChat" href="/#contact">Let&#x27;s chat</a>
 <script>
 // Phone only: a slim Let's chat button appears once the hero has scrolled away, and hides at the closing call to action.
@@ -2148,7 +2257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button type="button" class="enq-close" data-enq-close aria-label="Close">&times;</button>
     <div class="enq-body">
       <p class="enq-title" id="enqTitle">Let&#x27;s make something<span class="dot"></span></p>
-      <p class="enq-lead">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</p>
+      <p class="enq-lead"><span class="enq-lead-long">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</span><span class="enq-lead-short">Tell us what you&#x27;ve got in mind. No brief is too rough.</span></p>
       <div id="enqForm"><p class="enq-lead">Loading the form&hellip;</p></div>
       <p class="enq-alt">Rather talk? <a href="tel:+61401576859">Call 0401 576 859</a></p>
     </div>

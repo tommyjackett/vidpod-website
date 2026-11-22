@@ -8,7 +8,7 @@
 <meta name="description" content="Video podcast production in Melbourne. We film your show beautifully and turn every episode into a bank of clips, quotes, Shorts and pages.">
 <title>Video Podcast Production Melbourne | Corporate Podcasts | VIDPOD</title>
 <link rel="canonical" href="https://www.vidpod.com.au/video-podcast-production-melbourne">
-<link rel="preload" as="image" href="img/podcasts/podcast-hero-poster-v8.jpg">
+<link rel="preload" as="image" href="img/podcasts/podcast-hero-ltt-v11.jpg" imagesrcset="img/podcasts/podcast-hero-ltt-1200-v11.jpg 1200w, img/podcasts/podcast-hero-ltt-v11.jpg 2400w" imagesizes="100vw">
 <meta property="og:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/video-podcast-production-melbourne">
@@ -1267,6 +1267,83 @@ body { overflow-x: clip; }
   .sys-copy-desktop { display: none; }
 }
 @media (min-width: 700px) { .sys-copy-mobile { display: none; } }
+
+/* ---- r10 fix: podcast page ---- */
+.hero-video img.hero-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform-origin: 50% 42%; animation: heroPush 28s ease-in-out infinite alternate; }
+@keyframes heroPush { from { transform: scale(1); } to { transform: scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .hero-video img.hero-still { animation: none; } }
+#snippetsRail.is-four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; overflow: visible; scroll-snap-type: none; }
+#snippetsRail.is-four .snippet-item { width: auto !important; height: auto !important; aspect-ratio: 4 / 5; margin: 0 !important; }
+.sys-page figcaption { top: 8px; right: 8px; bottom: auto; }
+.sys-thumb figcaption { top: auto; bottom: 8px; left: 8px; }
+@media (max-width: 699px) {
+  #snippetsRail.is-four { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0 22px; }
+  .bleed { aspect-ratio: 2.4 / 1; }
+  .bleed img { object-position: 50% 40%; }
+  #snippetsRail.is-four .snippet-show { font-size: 10px; padding: 12px 12px 26px; }
+  .sys-page { width: 74%; right: 0; }
+  .sys-thumb { bottom: 16vw; width: 42%; }
+  .sys-card figcaption { font-size: 8px; padding: 3px 7px; letter-spacing: 0.12em; }
+  .sys-thumb figcaption { left: 5px; bottom: 5px; }
+  .sys-page figcaption { top: 4px; right: 4px; font-size: 8px; padding: 3px 7px; letter-spacing: 0.12em; }
+}
+
+/* ---- r10 fix: enquiry panel fits a 390 x 844 phone, send button on the first screen ---- */
+.enq-lead-short { display: none; }
+@media (max-width: 600px) {
+  .enq-panel { padding: 58px 20px 24px; }
+  .enq-close { top: 10px; right: 12px; }
+  .enq-title { font-size: 28px; margin: 0 0 8px; }
+  .enq-lead { font-size: 15px; line-height: 1.45; margin: 0 0 16px; }
+  .enq-lead-long { display: none; }
+  .enq-lead-short { display: inline; }
+  .enq .contact-form { gap: 10px; }
+  .enq .contact-form label { margin-bottom: 5px; }
+  .enq .contact-form input, .enq .contact-form select { padding: 11px 15px; }
+  .enq .contact-form textarea { min-height: 84px; padding: 11px 15px; }
+  .enq .contact-submit { margin-top: 2px; }
+  .enq .contact-submit button { padding: 15px 26px; }
+  .enq-alt { margin-top: 14px; }
+}
+
+/* ---- r10 fix: controls (Tommy: the play button and phone button looked cheap) ---- */
+/* play: a small frosted glass pill, "Watch" */
+.tile-play, .m-feature .tile-play, .bleed-feature .tile-play { width: auto; height: 40px; padding: 0 17px 0 15px; gap: 10px; border-radius: 100px; display: inline-flex; align-items: center; justify-content: flex-start; background: rgba(14,14,14,0.34); border: 1px solid rgba(255,255,255,0.3); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); box-shadow: 0 8px 24px rgba(0,0,0,0.18); transition: background 0.35s ease, border-color 0.35s ease, transform 0.6s var(--ease); }
+.tile-play::before, .m-feature .tile-play::before { border-left: 9px solid #fff; border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; margin-left: 0; transition: border-color 0.35s ease; }
+.tile-play::after { content: 'Watch'; color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; transition: color 0.35s ease; }
+.m-feature .tile-play, .bleed-feature .tile-play { height: 46px; padding: 0 20px 0 18px; }
+.tile:hover .tile-play, .tile:focus-visible .tile-play { background: #fff; border-color: #fff; transform: none; }
+.tile:hover .tile-play::before, .tile:focus-visible .tile-play::before { border-left-color: #0b0b0b; }
+.tile:hover .tile-play::after, .tile:focus-visible .tile-play::after { color: #0b0b0b; }
+/* clip play: the same pill, bottom left */
+.snippet-play-overlay { align-items: flex-end; justify-content: flex-start; padding: 14px; }
+.snippet-play-btn, .snippets-strip .snippet-play-btn { width: auto; height: 36px; padding: 0 15px 0 13px; gap: 9px; border-radius: 100px; flex-direction: row-reverse; background: rgba(14,14,14,0.34) !important; border: 1px solid rgba(255,255,255,0.3); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); box-shadow: none; transition: background 0.35s ease, border-color 0.35s ease; }
+.snippet-play-btn::after { border-left: 8px solid #fff !important; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 0; }
+.snippet-play-btn::before { content: 'Watch'; color: #fff; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; }
+.snippet-item:hover .snippet-play-btn { transform: none; background: #fff !important; border-color: #fff; }
+.snippet-item:hover .snippet-play-btn::before { color: #0b0b0b; }
+.snippet-item:hover .snippet-play-btn::after { border-left-color: #0b0b0b !important; }
+/* rail arrows: fine line icons, quiet glass, a thin progress line */
+.snippets-nav { align-items: center; gap: 10px; }
+.snippets-nav-btn { width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); color: #fff; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+.snippets-nav-btn svg { width: 17px; height: 17px; stroke-width: 1.6; }
+.snippets-nav-btn:hover { background: #fff; border-color: #fff; color: #0b0b0b; }
+.rail-progress { position: relative; display: block; width: 120px; height: 2px; margin-right: 14px; border-radius: 2px; background: rgba(255,255,255,0.14); overflow: hidden; }
+.rail-progress > span { position: absolute; top: 0; bottom: 0; left: 0; width: 34%; border-radius: 2px; background: #fff; transition: left 0.35s var(--ease), width 0.35s var(--ease); }
+@media (max-width: 699px) {
+  .tile-play { height: 34px; padding: 0 14px 0 12px; gap: 8px; left: 12px; bottom: 12px; }
+  .tile-play::after { font-size: 10px; }
+  .m-feature .tile-play, .bleed-feature .tile-play { height: 36px; padding: 0 15px 0 13px; }
+  .snippet-play-overlay { padding: 10px; }
+  .snippet-play-btn, .snippets-strip .snippet-play-btn { height: 30px; padding: 0 12px 0 11px; gap: 7px; }
+  .snippet-play-btn::before { font-size: 9px; }
+  .rail-foot.is-phone .snippets-nav { width: 100%; }
+  .rail-foot.is-phone .rail-progress { flex: 1; width: auto; }
+  .cs-rail + .rail-foot .rail-progress { display: none; }
+  /* the floating phone button: dark glass with the green dot */
+  .m-chat { min-height: 44px; padding: 0 20px 0 17px; gap: 10px; background: rgba(16,16,16,0.72); color: #fff; border: 1px solid rgba(255,255,255,0.16); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); font-weight: 800; font-size: 12px; letter-spacing: 0.16em; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+  .m-chat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(0,255,170,0.16); }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1318,11 +1395,7 @@ document.documentElement.dataset.theme = 'dark';
 
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
-    <video
-      src="video/podcast-hero-loop-v8.mp4"
-      poster="img/podcasts/podcast-hero-poster-v8.jpg"
-      autoplay muted loop playsinline preload="auto"
-      tabindex="-1"></video>
+    <img class="hero-still" src="img/podcasts/podcast-hero-ltt-v11.jpg" srcset="img/podcasts/podcast-hero-ltt-1200-v11.jpg 1200w, img/podcasts/podcast-hero-ltt-v11.jpg 2400w" sizes="100vw" alt="" width="2400" height="1600" fetchpriority="high" decoding="async">
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video podcast production, <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
@@ -1390,7 +1463,7 @@ document.documentElement.dataset.theme = 'dark';
         <p class="tile-cap"><strong>Carlisle Homes</strong><span class="cap-rest">, Home Files</span></p>
       </a>
       <a class="tile" href="podcasts/help-at-hand">
-        <div class="tile-media is-square"><img src="img/podcasts/help-at-hand-v7.jpg" alt="The Huddle, Help at Hand Education" loading="lazy" decoding="async" width="760" height="760"></div>
+        <div class="tile-media is-square"><img src="img/podcasts/help-at-hand-v11.jpg" alt="Help at Hand Education: the host laughing on the blue sofa during a recording" loading="lazy" decoding="async" width="760" height="760"></div>
         <p class="tile-cap"><strong>Help at Hand Education</strong><span class="cap-rest">, The Huddle</span></p>
       </a>
       <a class="tile" href="podcasts/the-daily-talk-show">
@@ -1411,7 +1484,7 @@ document.documentElement.dataset.theme = 'dark';
       <h2 class="section-title">Corporate podcasts for your <span class="nowrap-dot">team<span class="dot"></span></span></h2>
       <p>Many of the shows we make are private, made for staff or members, like the members-only podcast for Help at Hand Education. A video podcast is an easy learning resource: your experts share what they know, and your people watch when it suits them.</p>
       <ul class="split-points">
-        <li><strong>Training and onboarding</strong> your team can come back to.</li>
+        <li><strong>Training and onboarding</strong> your team can come back to whenever they need.</li>
         <li><strong>Leadership updates</strong> your team will actually watch.</li>
         <li><strong>Expert knowledge</strong> captured once and shared across the business.</li>
       </ul>
@@ -1436,7 +1509,7 @@ document.documentElement.dataset.theme = 'dark';
       <img class="system-still" src="img/podcasts/tng-hero/01.jpg" srcset="img/podcasts/tng-hero/01-sm.jpg 480w, img/podcasts/tng-hero/01.jpg 1800w" sizes="(max-width: 860px) 100vw, 680px" alt="Recording an episode of The Numbers Game" loading="lazy" decoding="async" width="1800" height="1012">
       <figure class="sys-card sys-thumb"><img src="img/podcasts/system/tng-episode-thumb-v9.jpg" alt="The thumbnail made for that episode" loading="lazy" decoding="async" width="640" height="360"><figcaption>Thumbnail</figcaption></figure>
       <figure class="sys-card sys-clip"><img src="img/podcasts/clips/h1yiNZ7Zk1Y-v8.jpg" alt="A short vertical clip from The Numbers Game" loading="lazy" decoding="async" width="540" height="960"><figcaption>Short</figcaption></figure>
-      <figure class="sys-card sys-page"><img src="img/podcasts/system/tng-episode-page-v10.jpg" alt="The Numbers Game episode page: the title and show notes for the Pokemon cards episode" loading="lazy" decoding="async" width="800" height="266"><figcaption>Episode page</figcaption></figure>
+      <figure class="sys-card sys-page"><img src="img/podcasts/system/tng-episode-page-v11.jpg" alt="The Numbers Game episode page: the title and the start of the show notes for the Pokemon cards episode" loading="lazy" decoding="async" width="800" height="172"><figcaption>Episode page</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1446,33 +1519,16 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap">
     <h2 class="reveal">Clips from our shows<span class="dot"></span></h2>
   </div>
-  <div class="snippets-rail reveal" id="snippetsRail">
-    <div class="snippet-item" data-yt-id="bXwfIc0kbZA" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="img/podcasts/clips/bXwfIc0kbZA-v8.jpg" width="540" height="960" alt="Unconventional Business clip" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="9RfQ7Nqrv-8" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="img/podcasts/clips/9RfQ7Nqrv-8-v8.jpg" width="540" height="960" alt="Let&#x27;s Talk Teaching clip" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="erxV1euSSAA" role="button" tabindex="0" aria-label="Play: The Numbers Game clip"><img src="img/podcasts/clips/erxV1euSSAA-v8.jpg" width="540" height="960" alt="The Numbers Game clip" loading="lazy" decoding="async"><span class="snippet-show">The Numbers Game</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="gnX6yYos30Q" role="button" tabindex="0" aria-label="Play: Help at Hand Education clip"><img src="img/podcasts/clips/gnX6yYos30Q-v8.jpg" width="540" height="960" alt="Help at Hand Education clip" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand Education</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="5gvZf8BntUU" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="img/podcasts/clips/5gvZf8BntUU-v8.jpg" width="540" height="960" alt="Unconventional Business clip" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="6UCHB9E8Eg8" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="img/podcasts/clips/6UCHB9E8Eg8-v8.jpg" width="540" height="960" alt="Let&#x27;s Talk Teaching clip" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="DW808g9HINM" role="button" tabindex="0" aria-label="Play: The Numbers Game clip"><img src="img/podcasts/clips/DW808g9HINM-v8.jpg" width="540" height="960" alt="The Numbers Game clip" loading="lazy" decoding="async"><span class="snippet-show">The Numbers Game</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="AIjg80SysUU" role="button" tabindex="0" aria-label="Play: Help at Hand Education clip"><img src="img/podcasts/clips/AIjg80SysUU-v8.jpg" width="540" height="960" alt="Help at Hand Education clip" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand Education</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="fj_bWMYKn7E" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="img/podcasts/clips/fj_bWMYKn7E-v8.jpg" width="540" height="960" alt="Unconventional Business clip" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="CPuYWArC1EA" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="img/podcasts/clips/CPuYWArC1EA-v8.jpg" width="540" height="960" alt="Let&#x27;s Talk Teaching clip" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-    <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg" role="button" tabindex="0" aria-label="Play: Help at Hand Education clip"><img src="img/podcasts/clips/2xT2Fp9_Qpg-v8.jpg" width="540" height="960" alt="Help at Hand Education clip" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand Education</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
-  </div>
-  <div class="wrap">
-    <nav class="snippets-nav reveal">
-      <button class="snippets-nav-btn" data-dir="-1" aria-label="Previous snippets" type="button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      </button>
-      <button class="snippets-nav-btn" data-dir="1" aria-label="Next snippets" type="button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </nav>
+  <div class="snippets-rail is-four reveal" id="snippetsRail">
+    <div class="snippet-item" data-yt-id="t_yUPzH-bk0" role="button" tabindex="0" aria-label="Play: The Numbers Game clip"><img src="img/podcasts/clips/t_yUPzH-bk0-v11.jpg" width="600" height="750" alt="The Numbers Game clip: a host at the microphone in the studio" loading="lazy" decoding="async"><span class="snippet-show">The Numbers Game</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="6UCHB9E8Eg8" role="button" tabindex="0" aria-label="Play: Let&#x27;s Talk Teaching clip"><img src="img/podcasts/clips/6UCHB9E8Eg8-v11.jpg" width="600" height="750" alt="Let&#x27;s Talk Teaching clip: a guest smiling at the microphone" loading="lazy" decoding="async"><span class="snippet-show">Let&#x27;s Talk Teaching</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="2xT2Fp9_Qpg" role="button" tabindex="0" aria-label="Play: Help at Hand Education clip"><img src="img/podcasts/clips/2xT2Fp9_Qpg-v11.jpg" width="600" height="750" alt="Help at Hand Education clip: a guest in bright scrubs mid conversation" loading="lazy" decoding="async"><span class="snippet-show">Help at Hand Education</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
+    <div class="snippet-item" data-yt-id="5gvZf8BntUU" role="button" tabindex="0" aria-label="Play: Unconventional Business clip"><img src="img/podcasts/clips/5gvZf8BntUU-v11.jpg" width="600" height="750" alt="Unconventional Business clip: a guest speaking to camera" loading="lazy" decoding="async"><span class="snippet-show">Unconventional Business</span><div class="snippet-play-overlay"><div class="snippet-play-btn"></div></div></div>
   </div>
 </section>
 
 <div class="bleed">
-  <img src="img/podcasts/ltt/ltt-068A2603.jpg" alt="Let&#x27;s Talk Teaching recording in the studio at Monash University" loading="lazy" decoding="async" width="1600" height="1067">
+  <img src="img/podcasts/ltt/ltt-068A2540-v11.jpg" alt="Two guests laughing on the Let&#x27;s Talk Teaching set at Monash University" loading="lazy" decoding="async" width="1600" height="1067">
 </div>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
@@ -1926,7 +1982,7 @@ document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
     <button type="button" class="enq-close" data-enq-close aria-label="Close">&times;</button>
     <div class="enq-body">
       <p class="enq-title" id="enqTitle">Let&#x27;s make something<span class="dot"></span></p>
-      <p class="enq-lead">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</p>
+      <p class="enq-lead"><span class="enq-lead-long">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</span><span class="enq-lead-short">Tell us what you&#x27;ve got in mind. No brief is too rough.</span></p>
       <div id="enqForm"><p class="enq-lead">Loading the form&hellip;</p></div>
       <p class="enq-alt">Rather talk? <a href="tel:+61401576859">Call 0401 576 859</a></p>
     </div>
