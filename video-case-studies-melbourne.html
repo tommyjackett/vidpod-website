@@ -6,17 +6,17 @@
 <link rel="icon" type="image/png" href="img/brand/vidpod-logo-square.png">
 <link rel="apple-touch-icon" href="img/brand/vidpod-logo-square.png">
 <meta name="description" content="Case study videos made in Melbourne. We find your customer&#x27;s turning point, film it beautifully and turn it into proof that wins your next client.">
-<title>Case Study &amp; Testimonial Videos Melbourne | VIDPOD</title>
+<title>Case Study Video Production Melbourne | Customer Testimonial Videos | VIDPOD</title>
 <link rel="canonical" href="https://www.vidpod.com.au/video-case-studies-melbourne">
 <link rel="preload" as="image" href="img/case-studies/case-studies-hero-poster-v8.jpg">
 <meta property="og:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.vidpod.com.au/video-case-studies-melbourne">
-<meta property="og:title" content="Case Study &amp; Testimonial Videos Melbourne | VIDPOD">
+<meta property="og:title" content="Case Study Video Production Melbourne | Customer Testimonial Videos | VIDPOD">
 <meta property="og:description" content="Case study videos made in Melbourne. We find your customer&#x27;s turning point, film it beautifully and turn it into proof that wins your next client.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.vidpod.com.au/img/social/og-default.jpg">
-<meta name="twitter:title" content="Case Study &amp; Testimonial Videos Melbourne | VIDPOD">
+<meta name="twitter:title" content="Case Study Video Production Melbourne | Customer Testimonial Videos | VIDPOD">
 <meta name="twitter:description" content="Case study videos made in Melbourne. We find your customer&#x27;s turning point, film it beautifully and turn it into proof that wins your next client.">
 <script type="application/ld+json">
 {
@@ -120,6 +120,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Wherever your customer is. Usually it's half a day with them, and we can also film at your place to show your team and work. We're based in Melbourne and travel interstate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you film several customers so the films match?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We can film a series of customer stories with the same look and structure, so they work together on your website, in sales and on social."
           }
         }
       ]
@@ -1069,6 +1077,142 @@ a:focus-visible, button:focus-visible, .tile:focus-visible { outline: 2px solid 
 @media (max-width: 699px) { .bleed { aspect-ratio: 2 / 1; } .split-points { gap: 10px; margin-top: 20px; } }
 .split-points a, #faq .faq-list p a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .split-points a:hover, #faq .faq-list p a:hover { color: var(--green); }
+/* ---- v9: cinematic gallery (video and case studies) ---- */
+.gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 56px 24px; margin-top: 48px; align-items: start; }
+.g-12 { grid-column: span 12; } .g-8 { grid-column: span 8; } .g-3 { grid-column: span 3; } .g-7 { grid-column: span 7; } .g-5 { grid-column: span 5; } .g-4 { grid-column: span 4; }
+.g-item { margin: 0; min-width: 0; scroll-margin-top: 110px; }
+.g-kind { display: block; margin: 0 0 14px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.g-line { margin: 12px 0 0; font-size: 16px; line-height: 1.55; opacity: 0.78; max-width: 52ch; }
+.g-line a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.g-line a:hover { color: var(--green); }
+.g-tile.ar-219 .tile-media { aspect-ratio: 21 / 9; }
+.g-tile.ar-169 .tile-media { aspect-ratio: 16 / 9; }
+.g-tile.ar-54 .tile-media { aspect-ratio: 1.27 / 1; }
+.g-feature .tile-cap { font-size: 15px; }
+.g-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; }
+.g-preview.is-on { opacity: 1; }
+.g-also { display: inline-block; margin-top: 8px; font-size: 15px; font-weight: 600; cursor: pointer; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
+.g-also:hover { color: var(--green); }
+.g-stack { display: grid; gap: 24px; }
+/* one play control everywhere: a thin ring with a small triangle */
+.tile-play { width: 56px; height: 56px; left: 20px; bottom: 20px; background: none; border: 1.5px solid rgba(255,255,255,0.95); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 2px 12px rgba(0,0,0,0.25); transition: transform 0.6s var(--ease), border-color 0.3s ease; }
+.tile-play::before { border-left: 12px solid #fff; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 4px; }
+.tile:hover .tile-play, .tile:focus-visible .tile-play { background: none; transform: scale(1.1); }
+.tile:hover .tile-play::before { border-left-color: #fff; }
+.snippet-play-btn { background: none !important; border: 1.5px solid rgba(255,255,255,0.95); box-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+.snippet-play-btn::after { border-left-color: #fff !important; }
+/* hover: brighten, ease to 1.03 over 600ms, caption underline draws in; YouTube tiles get a slow push */
+.tile-media img { transition: transform 0.6s var(--ease), filter 0.6s ease; }
+.tile:hover .tile-media img, .tile:focus-visible .tile-media img { transform: scale(1.03); filter: contrast(1.04) saturate(0.94) brightness(1.08); }
+.tile[data-yt-id]:hover .tile-media img { transform: scale(1.08); transition: transform 6s cubic-bezier(.2,.6,.3,1), filter 0.6s ease; }
+.tile:hover .tile-media, .tile:focus-visible .tile-media { transform: none; box-shadow: none; }
+.tile-cap strong { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; padding-bottom: 2px; transition: background-size 0.6s var(--ease); }
+.tile:hover .tile-cap strong, .tile:focus-visible .tile-cap strong { background-size: 100% 1px; }
+.sprite-scrub { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 1000% 100%; opacity: 0; transition: opacity 0.2s ease; }
+.sprite-scrub.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .tile-media img, .tile[data-yt-id]:hover .tile-media img { transition: none; transform: none; } }
+@media (max-width: 860px) { .gallery { gap: 40px 18px; } .g-7, .g-5 { grid-column: span 6; } }
+@media (max-width: 699px) {
+  .tile-play { width: 44px; height: 44px; left: 12px; bottom: 12px; }
+  .tile-play::before { border-left-width: 10px; border-top-width: 6px; border-bottom-width: 6px; margin-left: 3px; }
+  .gallery.is-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin-left: -22px; margin-right: -22px; padding: 0 22px 6px; scrollbar-width: none; }
+  .gallery.is-rail::-webkit-scrollbar { display: none; }
+  .gallery.is-rail .g-item { flex: 0 0 78%; scroll-snap-align: start; }
+  .gallery.is-rail .g-tile .tile-media { aspect-ratio: 16 / 10; }
+  .gallery.is-2up { gap: 28px 14px; }
+  .gallery.is-2up .g-item { grid-column: span 6; }
+  .gallery.is-2up .g-item.g-12, .gallery.is-2up .g-item.g-8, .gallery.is-2up .g-item.g-4 { grid-column: span 12; }
+  .gallery.is-2up .g-stack { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .gallery.is-2up .g-tile .tile-media { aspect-ratio: 16 / 10; }
+  .gallery.is-2up .g-feature .tile-media, .gallery.is-2up .g-12 .tile-media { aspect-ratio: 16 / 9; }
+  .g-line { font-size: 14px; }
+  .gallery .tile-cap { font-size: 13px; }
+}
+.gallery .g-feature { margin-bottom: 8px; }
+/* ---- v9: video page case studies band, dark with one green accent ---- */
+.case-band.is-dark { background: #0A0A0A; color: #fff; border-top: 1px solid rgba(255,255,255,0.08); }
+.case-band.is-dark .section-title { color: #fff; }
+.case-band.is-dark .section-title .dot { background: var(--green); }
+.case-band.is-dark .section-intro { color: rgba(255,255,255,0.74); }
+.case-band.is-dark .quiet-link { color: var(--green); }
+/* ---- v9: podcast, the system behind your show ---- */
+.system { background: #0A0A0A; color: #fff; padding: 120px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+.system-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: center; }
+.system-copy p { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.78); max-width: 52ch; }
+.system-copy .section-title { color: #fff; margin: 0; }
+.system-copy .section-title .dot { background: var(--green); }
+.system-copy .system-proof { color: #fff; }
+.system-copy .system-proof a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.system .quiet-link { margin-top: 28px; }
+.system-stage { position: relative; padding: 0 6% 16% 0; }
+.system-still { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 14px; display: block; filter: contrast(1.04) saturate(0.94); }
+.sys-card { position: absolute; margin: 0; border-radius: 12px; overflow: hidden; background: #111; box-shadow: 0 24px 60px rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.12); opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s var(--ease); }
+.sys-card img { display: block; width: 100%; height: auto; }
+.sys-card figcaption { position: absolute; left: 10px; top: 10px; padding: 5px 9px; border-radius: 100px; background: rgba(0,0,0,0.66); color: #fff; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.sys-thumb { width: 44%; left: -6%; bottom: 2%; }
+.sys-page figcaption { left: auto; right: 10px; top: auto; bottom: 10px; }
+.sys-clip { width: 22%; right: 0; top: 8%; }
+.sys-page { width: 52%; right: 4%; bottom: 0; }
+.system-stage.is-in .sys-card { opacity: 1; transform: none; }
+.system-stage.is-in .sys-thumb { transition-delay: 0s; }
+.system-stage.is-in .sys-clip { transition-delay: 0.12s; }
+.system-stage.is-in .sys-page { transition-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) { .sys-card { opacity: 1; transform: none; transition: none; } }
+@media (max-width: 860px) { .system { padding: 72px 0; } .system-grid { grid-template-columns: 1fr; gap: 40px; } .sys-thumb { left: 0; } }
+.split-more { margin: 22px 0 0; font-size: 16px; color: rgba(255,255,255,0.78); }
+.split-more a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.split-more a:hover { color: var(--green); }
+/* clips rail starts on the content column */
+.snippets-rail { padding-inline: max(22px, calc((100vw - 1280px) / 2 + 32px)); scroll-padding-inline: max(22px, calc((100vw - 1280px) / 2 + 32px)); }
+.snippets-rail .snippet-item:first-child { margin-inline-start: 0; }
+.snippets-rail .snippet-item:last-child { margin-inline-end: 0; }
+/* ---- v9: case studies Studio filmstrip ---- */
+.filmstrip-main { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; display: block; filter: contrast(1.04) saturate(0.94); }
+.filmstrip-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+.moment-card { margin: 0; border-radius: 12px; overflow: hidden; background: #141416; border: 1px solid rgba(255,255,255,0.1); opacity: 0; transform: translateX(24px); transition: opacity 0.6s ease, transform 0.6s var(--ease); }
+.moment-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.moment-card figcaption { padding: 10px 12px 12px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: #fff; }
+.filmstrip.is-in .moment-card { opacity: 1; transform: none; }
+.filmstrip.is-in .moment-card:nth-child(2) { transition-delay: 0.12s; }
+.filmstrip.is-in .moment-card:nth-child(3) { transition-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) { .moment-card { opacity: 1; transform: none; transition: none; } }
+@media (max-width: 699px) { .moment-card figcaption { font-size: 11px; padding: 8px; } }
+/* ---- v9: tighter rhythm (96 / 64) and shorter pages ---- */
+.hero { min-height: 76vh; }
+.work-pod, .work-vid, .sel-work, .case-band, .split, .steps-band, .pod-sec, .snippets-strip, .system { padding-top: 96px; padding-bottom: 96px; }
+.filmstrip-row { overflow: hidden; }
+.moment-card { transform: translateY(14px); }
+.g-feature.ar-169 .tile-media { aspect-ratio: 21 / 9; }
+.g-stack .g-tile .tile-media { aspect-ratio: 2 / 1; }
+#vidpod-studio .split-grid { grid-template-columns: 6fr 6fr; gap: 64px; }
+#faq .faq-list summary { padding: 19px 0; }
+.gallery { gap: 40px 24px; margin-top: 40px; }
+.steps { margin-top: 32px; }
+.quiet-link { margin-top: 32px; }
+.split-points { gap: 10px; }
+.split .quiet-link { margin-top: 24px; }
+.split-body > p { margin-top: 18px; }
+.split-body > p { font-size: 17px; }
+@media (max-width: 699px) {
+  .hero { min-height: 74vh; }
+  .work-pod, .work-vid, .sel-work, .case-band, .split, .steps-band, .pod-sec, .snippets-strip, .system { padding-top: 64px; padding-bottom: 64px; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 18px 14px; }
+  .split-media > img { aspect-ratio: 16 / 10; }
+  .system-still { aspect-ratio: 16 / 9; }
+  .system-copy p { font-size: 16px; }
+  .snippet-item { width: 180px !important; height: 320px !important; }
+  .steps h3 { font-size: 15px; }
+  .steps p { font-size: 13px; }
+  .gallery.is-2up { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-left: -22px; margin-right: -22px; padding: 0 22px 6px; scrollbar-width: none; flex-wrap: nowrap; }
+  .gallery.is-2up::-webkit-scrollbar { display: none; }
+  .gallery.is-2up .g-item { flex: 0 0 72%; scroll-snap-align: start; }
+  .gallery.is-2up .g-item.g-8 { flex-basis: 88%; }
+  .gallery.is-2up .g-stack { display: flex; gap: 14px; flex: 0 0 auto; }
+  .gallery.is-2up .g-stack .g-tile { width: 72vw; flex: 0 0 auto; }
+}
+/* ---- v9: enquiry panel width and an even backdrop ---- */
+.enq-panel { width: min(680px, 100%); }
+.enq-backdrop { background: rgba(8,8,8,0.82); }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1121,7 +1265,7 @@ document.documentElement.dataset.theme = 'dark';
 <header class="hero">
   <div class="hero-video" aria-hidden="true">
     <video
-      src="video/case-studies/case-studies-hero-loop-v8.mp4"
+      src="video/case-studies/case-studies-hero-loop-v9.mp4"
       poster="img/case-studies/case-studies-hero-poster-v8.jpg"
       autoplay muted loop playsinline preload="metadata"
       tabindex="-1"></video>
@@ -1174,39 +1318,19 @@ document.documentElement.dataset.theme = 'dark';
 <section class="work-vid" id="work">
   <div class="wrap work-inner">
     <h2 class="section-title reveal">Customer <span class="nowrap-dot">stories<span class="dot"></span></span></h2>
-    <div class="tile-grid is-4 cs-wide reveal">
-      <div class="tile" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Total Tools, customer story">
-        <div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story">
-        <div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt, first home buyer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, first home buyer story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story">
-        <div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Border Express</strong><span class="cap-rest">, customer story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study">
-        <div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Marathon Foods, customer story">
-        <div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Marathon Foods, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Marathon Foods</strong><span class="cap-rest">, customer story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, upsizer story">
-        <div class="tile-media"><img src="img/case-studies/inovayt-upsizer-wide.jpg" alt="Inovayt, upsizer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="MOabmPW88Yg" aria-label="Play: RWW, Water NSW case study">
-        <div class="tile-media"><img src="img/case-studies/MOabmPW88Yg.jpg" alt="RWW, Water NSW case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>RWW</strong><span class="cap-rest">, Water NSW case study</span></p>
-      </div>
-      <div class="tile" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Food Industry Asia, customer story">
-        <div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Food Industry Asia, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div>
-        <p class="tile-cap"><strong>Food Industry Asia</strong><span class="cap-rest">, customer story</span></p>
-      </div>
+    <div class="gallery is-2up reveal">
+      <figure class="g-item g-8">
+        <div class="tile g-tile g-feature ar-169" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story"><div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt, first home buyer story" loading="lazy" decoding="async" width="960" height="540"><video class="g-preview" data-src="video/case-studies/inovayt-fhb-preview-v9.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, first home buyer story</span></p></div>
+        <span class="tile g-also" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, upsizer story">Also watch the upsizer story</span>
+      </figure>
+      <figure class="g-item g-4 g-stack">
+        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="MOabmPW88Yg" aria-label="Play: RWW, Water NSW case study"><div class="tile-media"><img src="img/case-studies/MOabmPW88Yg.jpg" alt="RWW, Water NSW case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>RWW</strong><span class="cap-rest">, Water NSW case study</span></p></div>
+        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Food Industry Asia, customer story"><div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Food Industry Asia, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Food Industry Asia</strong><span class="cap-rest">, customer story</span></p></div>
+      </figure>
+      <figure class="g-item g-3"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Total Tools, customer story"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Total Tools, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Total Tools</strong><span class="cap-rest">, customer story</span></p></div></figure>
+      <figure class="g-item g-3"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story"><div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Border Express</strong><span class="cap-rest">, customer story</span></p></div></figure>
+      <figure class="g-item g-3"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div></figure>
+      <figure class="g-item g-3"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Marathon Foods, customer story"><div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Marathon Foods, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Marathon Foods</strong><span class="cap-rest">, customer story</span></p></div></figure>
     </div>
     <a class="quiet-link reveal" href="video-production-melbourne">See all our video work</a>
   </div>
@@ -1227,23 +1351,23 @@ document.documentElement.dataset.theme = 'dark';
 <section class="split is-flip" id="vidpod-studio">
   <div class="wrap split-grid">
     <div class="split-media reveal">
-      <div class="moments-sheet">
-        <img src="img/studio/moment-1.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
-        <img src="img/studio/moment-2.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
-        <img src="img/studio/moment-3.jpg" alt="A moment picked from an Inovayt interview" class="is-picked" loading="lazy" decoding="async" width="640" height="360">
-        <img src="img/studio/moment-4.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
-        <img src="img/studio/moment-5.jpg" alt="A moment picked from an Inovayt interview" class="is-picked" loading="lazy" decoding="async" width="640" height="360">
-        <img src="img/studio/moment-6.jpg" alt="A moment from an Inovayt interview" class="" loading="lazy" decoding="async" width="640" height="360">
+      <div class="filmstrip">
+        <img class="filmstrip-main" src="img/studio/moment-5.jpg" alt="A moment from an Inovayt customer interview" loading="lazy" decoding="async" width="640" height="360">
+        <div class="filmstrip-row">
+          <figure class="moment-card"><img src="img/studio/moment-1.jpg" alt="An interview moment saved as a short for social" loading="lazy" decoding="async" width="640" height="360"><figcaption>Short for social</figcaption></figure>
+          <figure class="moment-card"><img src="img/studio/moment-3.jpg" alt="An interview moment saved as a clip for the website" loading="lazy" decoding="async" width="640" height="360"><figcaption>Clip for the website</figcaption></figure>
+          <figure class="moment-card"><img src="img/studio/moment-4.jpg" alt="An interview moment saved as a line for a sales video" loading="lazy" decoding="async" width="640" height="360"><figcaption>Line for a sales video</figcaption></figure>
+        </div>
       </div>
     </div>
     <div class="split-body reveal">
       <span class="split-eyebrow">VIDPOD Studio</span>
-      <h2 class="section-title">More than filming and <span class="nowrap-dot">editing<span class="dot"></span></span></h2>
-      <p>We film great interviews and make the videos you need. But every interview holds far more than one video can use. VIDPOD Studio is your private space to review your videos and see the extra gold from your interviews.</p>
+      <h2 class="section-title">Your interviews, turned into a content <span class="nowrap-dot">bank<span class="dot"></span></span></h2>
+      <p>We film great interviews and make the videos you need. But every interview holds far more than one video can use. We find the extra gold, the strong lines, stories and reactions, and keep it in a bank you can draw on all year: for social, sales, your website and the next campaign. VIDPOD Studio is where you see it all.</p>
       <ul class="split-points">
-        <li><strong>Review in one place.</strong> Watch each video and leave notes on the exact moment.</li>
-        <li><strong>See what else was said.</strong> The best moments from your interviews, already found for you.</li>
-        <li><strong>Turn moments into more.</strong> Pick the ones you like and we&#x27;ll turn them into new videos and posts, as we do in <a href="video-podcast-production-melbourne">podcast video production</a>.</li>
+        <li><strong>Lock the story first.</strong> Watch the first version, leave a note on the exact moment, and we polish from there.</li>
+        <li><strong>Browse the bank.</strong> Every strong moment from your interviews, already found and ready to use.</li>
+        <li><strong>Ask for more.</strong> Pick the moments you like and we&#x27;ll shape them into new videos and short versions for social, as we do in <a href="video-podcast-production-melbourne">podcast video production</a>.</li>
       </ul>
       <a class="quiet-link" href="/#contact">Ask us how it works</a>
     </div>
@@ -1277,6 +1401,10 @@ document.documentElement.dataset.theme = 'dark';
         <summary>Where do you film?</summary>
         <p>Wherever your customer is. Usually it&#x27;s half a day with them, and we can also film at your place to show your team and work. We&#x27;re based in Melbourne and travel interstate.</p>
       </details>
+      <details>
+        <summary>Can you film several customers so the films match?</summary>
+        <p>Yes. We can film a series of customer stories with the same look and structure, so they work together on your website, in sales and on social.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -1306,12 +1434,15 @@ document.documentElement.dataset.theme = 'dark';
             <h4>Video Services</h4>
             <ul>
               <li><a href="video-production-melbourne">Video Production Melbourne</a></li>
+              <li><a href="video-production-melbourne#selected-work">Corporate Video Production</a></li>
               <li><a href="video-production-melbourne#brand-films">Brand Films</a></li>
               <li><a href="video-case-studies-melbourne">Case Studies &amp; Testimonials</a></li>
-              <li><a href="video-production-melbourne#brand-films">Founder Stories</a></li>
-              <li><a href="index.html#work-vid">Social Content</a></li>
-              <li><a href="index.html#work-vid">Explainer Videos</a></li>
-              <li><a href="index.html#work-vid">Animation</a></li>
+              <li><a href="video-case-studies-melbourne">Customer Testimonial Videos</a></li>
+              <li><a href="video-production-melbourne#founder-stories">Founder Stories</a></li>
+              <li><a href="video-production-melbourne#events">Conference &amp; Event Video</a></li>
+              <li><a href="video-production-melbourne#social-versions">Social Content</a></li>
+              <li><a href="video-production-melbourne#brand-films">Explainer Videos</a></li>
+              <li><a href="video-production-melbourne#brand-films">Animation</a></li>
             </ul>
           </div>
 
@@ -1849,12 +1980,15 @@ document.addEventListener('DOMContentLoaded', function() {
   var wrap = document.getElementById('vidLightboxWrap');
   var closeBtn = document.getElementById('vidLightboxClose');
   if (!lb || !wrap || !closeBtn) return;
+  var lastFocus = null;
   function show(vertical) {
+    lastFocus = document.activeElement;
     wrap.classList.toggle('is-vertical', !!vertical);
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     void lb.offsetHeight;
+    setTimeout(function () { closeBtn.focus({ preventScroll: true }); }, 60);
   }
   function openYt(id) {
     show(false);
@@ -1878,6 +2012,7 @@ document.addEventListener('DOMContentLoaded', function() {
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     wrap.innerHTML = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
   document.querySelectorAll('.tile[data-yt-id], .tile[data-mp4]').forEach(function(tile) {
     function go() {
@@ -1893,8 +2028,11 @@ document.addEventListener('DOMContentLoaded', function() {
   closeBtn.addEventListener('click', closeVid);
   lb.addEventListener('click', function(e) { if (e.target === lb) closeVid(); });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeVid();
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeVid();
+    if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
   });
+  lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Video');
 })();
 </script>
 
@@ -1925,6 +2063,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     t.addEventListener('mouseleave', function () { if (v) { v.pause(); v.classList.remove('is-on'); } });
   });
+})();
+</script>
+
+<script>
+// Gallery: muted previews play only on screen; hover scrub through real frames on desktop.
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    document.querySelectorAll('video.g-preview').forEach(function (v) {
+      new IntersectionObserver(function (e) {
+        if (e[0].isIntersecting) { if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p && p.then) p.then(function () { v.classList.add('is-on'); }).catch(function () {}); }
+        else { v.pause(); }
+      }, { threshold: 0.35 }).observe(v);
+    });
+  }
+  if (reduce || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.tile[data-sprite]').forEach(function (t) {
+    var media = t.querySelector('.tile-media'), layer = null;
+    t.addEventListener('mouseenter', function () {
+      if (!layer) { layer = document.createElement('span'); layer.className = 'sprite-scrub'; layer.style.backgroundImage = 'url(' + t.getAttribute('data-sprite') + ')'; media.insertBefore(layer, media.querySelector('.tile-play')); }
+      layer.classList.add('is-on');
+    });
+    t.addEventListener('mousemove', function (e) {
+      if (!layer) return;
+      var r = media.getBoundingClientRect(), i = Math.max(0, Math.min(9, Math.floor((e.clientX - r.left) / r.width * 10)));
+      layer.style.backgroundPosition = (i * 100 / 9) + '% 0';
+    });
+    t.addEventListener('mouseleave', function () { if (layer) layer.classList.remove('is-on'); });
+  });
+})();
+</script>
+
+<script>
+// Cards fan out once, one after another, when their stage comes into view.
+(function () {
+  var stages = document.querySelectorAll('.system-stage, .filmstrip');
+  if (!('IntersectionObserver' in window)) { stages.forEach(function (s) { s.classList.add('is-in'); }); return; }
+  stages.forEach(function (s) { new IntersectionObserver(function (e, o) { if (e[0].isIntersecting) { s.classList.add('is-in'); o.disconnect(); } }, { threshold: 0.25 }).observe(s); });
 })();
 </script>
 
