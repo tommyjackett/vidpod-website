@@ -1445,6 +1445,18 @@ body { overflow-x: clip; }
 .system-copy .r16-point:last-child { border-bottom: 1px solid rgba(255,255,255,0.12); }
 .system-copy .r16-point h3 { margin: 0 0 5px; font-family: var(--font-body); font-size: 16px; font-weight: 800; color: #fff; }
 .system-copy .r16-point p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.72); max-width: 52ch; }
+@media (min-width: 861px) {
+  #the-system .system-grid { align-items: stretch; }
+  #the-system .system-stage.is-site { aspect-ratio: auto; height: 100%; min-height: 560px; }
+  #the-system .sys-s1 { top: 6px; left: 0; width: 80%; }
+  #the-system .sys-promo { top: 36%; bottom: auto; left: 5%; width: 30%; }
+  #the-system .sys-s2 { top: auto; bottom: 16px; right: 12px; width: 66%; }
+}
+@media (min-width: 861px) and (max-width: 1200px) {
+  #the-system .sys-s1 { width: 92%; }
+  #the-system .sys-promo { width: 35%; top: 34%; }
+  #the-system .sys-s2 { width: 76%; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
