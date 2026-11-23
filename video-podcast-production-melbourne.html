@@ -1422,11 +1422,11 @@ body { overflow-x: clip; }
 
 .r14-band { position: relative; width: 100%; height: 220px; overflow: hidden; background: #0A0A0A; }
 .r14-band-track { display: flex; height: 100%; width: max-content; animation: r14run 140s linear infinite; }
-.r14-band-item { flex: 0 0 auto; height: 100%; margin-right: -36px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%); }
+.r14-band-item { flex: 0 0 auto; height: 100%; margin-right: -16px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px); mask-image: linear-gradient(to right, transparent 0, #000 16px); }
 .r14-band-item img { height: 100%; width: auto; display: block; filter: contrast(1.04) saturate(0.94); }
 @keyframes r14run { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .r14-band-track { animation: none; } }
-@media (max-width: 699px) { .r14-band { height: 140px; } .r14-band-item { margin-right: -24px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 36px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 36px), transparent 100%); } }
+@media (max-width: 699px) { .r14-band { height: 140px; } .r14-band-item { margin-right: -10px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10px); mask-image: linear-gradient(to right, transparent 0, #000 10px); } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>

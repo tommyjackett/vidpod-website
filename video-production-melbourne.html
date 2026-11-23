@@ -1517,29 +1517,40 @@ body { overflow-x: clip; }
 .r15-intro { max-width: 68ch; margin: -12px 0 28px; }
 .r13-sec.r15-moments { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 72px; }
 @media (max-width: 699px) { .r13-sec.r15-moments { padding-top: 48px; } }
-.r15-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
+.r15-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto auto auto auto; column-gap: 36px; row-gap: 0; }
+.r15-moment { display: grid; grid-row: span 5; grid-template-rows: subgrid; align-content: start; }
+.r15-moment .r15-vis { align-self: end; }
+.r15-moment .quiet-link { justify-self: start; align-self: start; }
 .r15-moment h3 { margin: 0 0 8px; font-family: var(--font-head); font-size: 22px; line-height: 1.15; text-transform: uppercase; color: #fff; }
 .r15-moment p { margin: 0 0 20px; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.72); max-width: 40ch; }
 .r15-moment .r13-type { margin-bottom: 10px; }
-.r15-vis { display: flex; align-items: center; height: 200px; margin-bottom: 14px; }
+.r15-vis { display: flex; align-items: flex-end; height: 196px; margin-bottom: 14px; }
 .r15-trio { gap: 10px; }
-.r15-v { flex: 0 0 auto; width: 31%; max-width: 112px; cursor: pointer; }
+.r15-v, .r15-w { flex: 0 0 auto; width: 110px; cursor: pointer; }
 .r15-v .tile-media, .r15-w .tile-media { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
 .r15-v .tile-media { aspect-ratio: 9 / 16; }
 .r15-v img, .r15-w img, .r15-fan img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .r15-v.tile .tile-play, .r15-v.tile:hover .tile-play, .r15-w.tile .tile-play, .r15-w.tile:hover .tile-play { left: 8px; bottom: 8px; transform: none; height: 26px; padding: 0 9px; gap: 0; }
 .r15-v .tile-play::after, .r15-w .tile-play::after { display: none; }
 .r15-duo { gap: 10px; }
-.r15-w { flex: 1 1 0; cursor: pointer; }
-.r15-w .tile-media { aspect-ratio: 16 / 9; }
+.r15-w .tile-media { aspect-ratio: 9 / 16; }
+.r15-w img { object-position: 50% 50%; }
 .r15-fan { padding-left: 4px; }
-.r15-fan img { width: 86px; height: auto; aspect-ratio: 9 / 16; border-radius: 10px; margin-left: -26px; box-shadow: 0 10px 26px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); transition: transform 0.45s var(--ease), margin 0.45s var(--ease); }
+.r15-fan img { width: 110px; height: auto; aspect-ratio: 9 / 16; border-radius: 12px; margin-left: -48px; box-shadow: 0 10px 26px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); transition: transform 0.45s var(--ease), margin 0.45s var(--ease); }
 .r15-fan img:first-child { margin-left: 0; }
 .r15-fan img:nth-child(odd) { transform: rotate(-3deg); }
 .r15-fan img:nth-child(even) { transform: rotate(3deg) translateY(6px); }
-.r15-fan:hover img { margin-left: -12px; }
+.r15-fan:hover img { margin-left: -30px; }
 .r15-fan:hover img:first-child { margin-left: 0; }
-@media (max-width: 899px) { .r15-grid { grid-template-columns: 1fr; gap: 44px; } .r15-vis { height: auto; } }
+@media (max-width: 899px) { .r15-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 44px; } .r15-moment { grid-row: auto; grid-template-rows: none; } }
+
+.r14-band { position: relative; width: 100%; height: 220px; overflow: hidden; background: #0A0A0A; }
+.r14-band-track { display: flex; height: 100%; width: max-content; animation: r14run 140s linear infinite; }
+.r14-band-item { flex: 0 0 auto; height: 100%; margin-right: -16px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px); mask-image: linear-gradient(to right, transparent 0, #000 16px); }
+.r14-band-item img { height: 100%; width: auto; display: block; filter: contrast(1.04) saturate(0.94); }
+@keyframes r14run { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .r14-band-track { animation: none; } }
+@media (max-width: 699px) { .r14-band { height: 140px; } .r14-band-item { margin-right: -10px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10px); mask-image: linear-gradient(to right, transparent 0, #000 10px); } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1726,19 +1737,34 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap"><a href="/#contact" class="btn-vid">Let&#x27;s chat</a></div>
 </section>
 
-<section class="r13-sec r14-bts" id="behind-the-scenes">
-  <div class="wrap">
-    <h2 class="section-title reveal">Behind the <span class="nowrap-dot">scenes<span class="dot"></span></span></h2>
-    <div class="r14-bts-row reveal">
-      <div class="tile r14-bts-item r14-bts-play" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/vidpod-bts-reel-r14.mp4" data-poster="img/work/vidpod-bts-reel-r14.jpg" data-aspect="vertical" aria-label="Play: VIDPOD behind the scenes reel"><div class="tile-media"><img src="img/work/vidpod-bts-reel-r14.jpg" alt="Behind the scenes: an interview framed on the camera monitor" loading="lazy" decoding="async" width="600" height="1066"><span class="tile-play" aria-hidden="true"></span></div></div>
-      <figure class="r14-bts-item"><img src="img/bts-vid/bts-06-sm.jpg" srcset="img/bts-vid/bts-06-sm.jpg 480w, img/bts-vid/bts-06.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Filming a sit-down interview with the clapper board in shot" loading="lazy" decoding="async" width="480" height="640"></figure>
-      <figure class="r14-bts-item"><img src="img/bts-vid/bts-11-sm.jpg" srcset="img/bts-vid/bts-11-sm.jpg 480w, img/bts-vid/bts-11.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: On set with a client by the fireplace, camera and clapper board ready" loading="lazy" decoding="async" width="480" height="640"></figure>
-      <figure class="r14-bts-item"><img src="img/bts-vid/bts-13-sm.jpg" srcset="img/bts-vid/bts-13-sm.jpg 480w, img/bts-vid/bts-13.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Lights and cameras set up for a two-person interview" loading="lazy" decoding="async" width="480" height="640"></figure>
-      <figure class="r14-bts-item"><img src="img/bts-vid/bts-15-sm.jpg" srcset="img/bts-vid/bts-15-sm.jpg 480w, img/bts-vid/bts-15.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Framing an outdoor interview on the camera monitor" loading="lazy" decoding="async" width="480" height="640"></figure>
-      <figure class="r14-bts-item"><img src="img/bts-vid/bts-16-sm.jpg" srcset="img/bts-vid/bts-16-sm.jpg 480w, img/bts-vid/bts-16.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Our crew filming an interview in a garden" loading="lazy" decoding="async" width="480" height="640"></figure>
-    </div>
+<div class="r14-band" id="behind-the-scenes" role="img" aria-label="Behind the scenes on our video shoots">
+  <div class="r14-band-track">
+      <div class="r14-band-item"><img src="img/bts-vid/bts-02-sm.jpg" alt="Behind the scenes: Filming an interview, the shot on the camera monitor" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-04-sm.jpg" alt="Behind the scenes: Camera and monitor set for a boardroom interview" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-05-sm.jpg" alt="Behind the scenes: Lights set for an interview in a city office" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-06-sm.jpg" alt="Behind the scenes: Filming a sit-down interview with the clapper board in shot" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-09-sm.jpg" alt="Behind the scenes: Cameras and lights ready on set" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-11-sm.jpg" alt="Behind the scenes: On set by the fireplace, camera and clapper board ready" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-13-sm.jpg" alt="Behind the scenes: Lights and cameras set up for a two-person interview" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-15-sm.jpg" alt="Behind the scenes: Framing an outdoor interview on the camera monitor" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-16-sm.jpg" alt="Behind the scenes: Our crew filming an interview in a garden" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-18-sm.jpg" alt="Behind the scenes: Cameras and lights set for an interview in a clinic" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-21-sm.jpg" alt="Behind the scenes: A camera rig set up for an interview" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item"><img src="img/bts-vid/bts-23-sm.jpg" alt="Behind the scenes: Framing a product shot on the monitor" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-02-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-04-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-05-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-06-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-09-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-11-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-13-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-15-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-16-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-18-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-21-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/bts-vid/bts-23-sm.jpg" alt="" loading="lazy" decoding="async" width="480" height="640"></div>
   </div>
-</section>
+</div>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
   <div class="wrap faq-wrap">
