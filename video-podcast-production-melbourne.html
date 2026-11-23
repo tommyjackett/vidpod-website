@@ -1411,7 +1411,7 @@ body { overflow-x: clip; }
 .r14-m { margin: 0; border-radius: 14px; overflow: hidden; background: #141416; }
 .r14-m img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.04) saturate(0.94); }
 .r14-m.m-tall { grid-column: 1; grid-row: 1 / span 2; }
-.r14-m.m-tall img { object-position: 50% 20%; }
+.r14-m.m-tall img { object-position: 45% 50%; }
 .r14-m.m-wide { grid-column: 2 / span 2; grid-row: 1; aspect-ratio: 3 / 2; }
 .r14-m.m-a, .r14-m.m-b { aspect-ratio: 4 / 3; }
 .r14-sys-cards { display: grid; gap: 12px; margin-top: 26px; }
@@ -1440,11 +1440,11 @@ body { overflow-x: clip; }
 .system-copy .r15-sys-actions .btn-vid { background: var(--green); color: #000; white-space: nowrap; }
 .system-copy .r15-sys-actions .btn-vid:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,255,170,0.35); }
 .system-copy .r15-sys-link { color: var(--green); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-.system-copy .r16-eyebrow { display: block; margin: 0 0 14px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
-.system-copy .r14-sys-card { border-left: 2px solid var(--green); }
-#the-system .system-copy .section-title { font-size: clamp(30px, 3.1vw, 46px); }
-.system-copy .r14-sys-cards { gap: 10px; margin-top: 22px; }
-.system-copy .r14-sys-card { padding: 15px 18px; }
+.system-copy .r16-points { margin-top: 26px; }
+.system-copy .r16-point { padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.12); }
+.system-copy .r16-point:last-child { border-bottom: 1px solid rgba(255,255,255,0.12); }
+.system-copy .r16-point h3 { margin: 0 0 5px; font-family: var(--font-body); font-size: 16px; font-weight: 800; color: #fff; }
+.system-copy .r16-point p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.72); max-width: 52ch; }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1579,7 +1579,7 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap split-grid">
     <div class="split-media reveal">
       <div class="r14-mosaic">
-        <figure class="r14-m m-tall"><img src="img/podcasts/bts-r14/hah-host-guest-pair-smiling-r14-sm.jpg" srcset="img/podcasts/bts-r14/hah-host-guest-pair-smiling-r14-sm.jpg 600w, img/podcasts/bts-r14/hah-host-guest-pair-smiling-r14.jpg 1000w" sizes="(max-width: 860px) 50vw, 300px" alt="Help at Hand Education: the host and a guest smiling on set" loading="lazy" decoding="async" width="600" height="900"></figure>
+        <figure class="r14-m m-tall"><img src="img/podcasts/bts-r14/tng-ep300-producer-tall-r16.jpg" srcset="img/podcasts/bts-r14/tng-ep300-producer-tall-r16.jpg 600w, img/podcasts/bts-r14/tng-ep300-producer-tall-r16-lg.jpg 1000w" sizes="(max-width: 860px) 50vw, 300px" alt="Our producer in headphones beside the camera, recording The Numbers Game on a rooftop" loading="lazy" decoding="async" width="600" height="900"></figure>
         <figure class="r14-m m-wide"><img src="img/podcasts/bts-r14/hah-set-guest-camera-r14-sm.jpg" srcset="img/podcasts/bts-r14/hah-set-guest-camera-r14-sm.jpg 600w, img/podcasts/bts-r14/hah-set-guest-camera-r14.jpg 1000w" sizes="(max-width: 860px) 100vw, 420px" alt="Help at Hand Education: filming a guest on the blue sofa set, monitor in the foreground" loading="lazy" decoding="async" width="600" height="400"></figure>
         <figure class="r14-m m-a"><img src="img/podcasts/bts-r14/ltt-s4-bts-monitor-wide-r14-sm.jpg" srcset="img/podcasts/bts-r14/ltt-s4-bts-monitor-wide-r14-sm.jpg 600w, img/podcasts/bts-r14/ltt-s4-bts-monitor-wide-r14.jpg 1000w" sizes="(max-width: 860px) 50vw, 210px" alt="Let&#x27;s Talk Teaching for Monash University: two guests on set, seen past the camera monitor" loading="lazy" decoding="async" width="600" height="450"></figure>
         <figure class="r14-m m-b"><img src="img/podcasts/bts-r14/ltt-s4-host-laughing-mic-r14-sm.jpg" srcset="img/podcasts/bts-r14/ltt-s4-host-laughing-mic-r14-sm.jpg 600w, img/podcasts/bts-r14/ltt-s4-host-laughing-mic-r14.jpg 1000w" sizes="(max-width: 860px) 50vw, 210px" alt="Let&#x27;s Talk Teaching for Monash University: the host laughing at the microphone" loading="lazy" decoding="async" width="600" height="400"></figure>
@@ -1602,13 +1602,12 @@ document.documentElement.dataset.theme = 'dark';
 <section class="system" id="the-system">
   <div class="wrap system-grid">
     <div class="system-copy reveal">
-      <span class="r16-eyebrow">Beyond production: podcast partnerships</span>
-      <h2 class="section-title">The team behind your <span class="nowrap-dot">show<span class="dot"></span></span></h2>
+      <h2 class="section-title">More than a <span class="nowrap-dot">podcast<span class="dot"></span></span></h2>
       <p>Most clients come to us to make their episodes. For a few shows, we go further and build and run everything around them, the same systems we run for The Numbers Game.</p>
-      <div class="r14-sys-cards">
-        <div class="r14-sys-card"><h3>Your own show website</h3><p>We build your podcast website on your brand and run it, so every episode has a home and new ones go live on release day.</p></div>
-        <div class="r14-sys-card"><h3>A content bank to explore</h3><p>Your whole back catalogue sorted by topic and moment, so your audience can dig into what you know, and your team can pull from it for marketing.</p></div>
-        <div class="r14-sys-card"><h3>Every moving part, managed</h3><p>Publishing to YouTube, Spotify and Apple, thumbnails, Shorts and release checks, all run by a dedicated producer who knows your show.</p></div>
+      <div class="r16-points">
+        <div class="r16-point"><h3>Your own show website</h3><p>We build your podcast website on your brand and run it, so every episode has a home and new ones go live on release day.</p></div>
+        <div class="r16-point"><h3>A content bank to explore</h3><p>Your whole back catalogue sorted by topic and moment, so your audience can dig into what you know, and your team can pull from it for marketing.</p></div>
+        <div class="r16-point"><h3>Every moving part, managed</h3><p>Publishing to YouTube, Spotify and Apple, thumbnails, Shorts and release checks, all run by a dedicated producer who knows your show.</p></div>
       </div>
       <p class="r15-sys-note">Got a podcast, or want one? We only take on a few partners at a time, so let&#x27;s chat and see if it&#x27;s a fit.</p>
       <div class="r15-sys-actions">
