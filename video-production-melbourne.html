@@ -1496,6 +1496,10 @@ body { overflow-x: clip; }
 .r14-bts-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
 .r14-bts-item { margin: 0; border-radius: 14px; overflow: hidden; aspect-ratio: 3 / 4; background: #141416; }
 .r14-bts-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.r14-bts-play { cursor: pointer; }
+.r14-bts-play .tile-media { position: relative; width: 100%; height: 100%; }
+.r14-bts-play.tile .tile-play, .r14-bts-play.tile:hover .tile-play { left: 10px; bottom: 10px; transform: none; height: 30px; padding: 0 12px 0 11px; gap: 7px; }
+.r14-bts-play .tile-play::after { font-size: 9px; }
 @media (max-width: 899px) {
   .r14-sale-row { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 -22px; padding: 8px 22px 12px; scrollbar-width: none; }
   .r14-sale-row::-webkit-scrollbar { display: none; }
@@ -1570,7 +1574,7 @@ document.documentElement.dataset.theme = 'dark';
     <p class="hero-lede reveal">Got a story worth telling? We help brands get to the heart of it and turn it into video people actually want to watch.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
-      <button type="button" class="btn-reel js-play" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide">Watch the showreel</button>
+      <button type="button" class="btn-reel js-play" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" data-end="36.1">Watch the showreel</button>
     </div>
   </div>
 </header>
@@ -1634,7 +1638,7 @@ document.documentElement.dataset.theme = 'dark';
       <button type="button" class="vid-cat-btn" data-category="product" aria-pressed="false">Product</button>
     </div>
     <div class="r13-grid r14-grid" id="workGrid">
-      <div class="r14-item" data-category="featured"><div class="tile r13-card" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs-r14-card.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div></div>
+      <div class="r14-item" data-category="featured"><div class="tile r13-card" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/barefoot-education-trailer-r14.mp4" data-poster="img/work/barefoot-education-trailer-r14.jpg" data-aspect="wide" aria-label="Play: Barefoot Investor, education course trailer"><div class="tile-media"><img src="img/work/barefoot-education-trailer-r14-card.jpg" alt="Barefoot Investor education course trailer: Scott Pape talking at his desk" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, education course trailer</span></p></div></div>
       <div class="r14-item" data-category="featured"><div class="tile r13-card" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ-v13.jpg" alt="@Pilates, founding story" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div></div>
       <div class="r14-item" data-category="featured"><div class="tile r13-card" role="button" tabindex="0" data-yt-id="GCbtI7zRI4A" aria-label="Play: Brava, brand video"><div class="tile-media"><img src="img/work/GCbtI7zRI4A-r14-card.jpg" alt="Brava, brand video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, brand video</span></p></div></div>
       <div class="r14-item" data-category="featured social-content"><div class="tile r13-card" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI-r14-card.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div></div>
@@ -1687,12 +1691,12 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap">
     <h2 class="section-title reveal">Behind the <span class="nowrap-dot">scenes<span class="dot"></span></span></h2>
     <div class="r14-bts-row reveal">
+      <div class="tile r14-bts-item r14-bts-play" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/vidpod-bts-reel-r14.mp4" data-poster="img/work/vidpod-bts-reel-r14.jpg" data-aspect="vertical" aria-label="Play: VIDPOD behind the scenes reel"><div class="tile-media"><img src="img/work/vidpod-bts-reel-r14.jpg" alt="Behind the scenes: an interview framed on the camera monitor" loading="lazy" decoding="async" width="600" height="1066"><span class="tile-play" aria-hidden="true"></span></div></div>
       <figure class="r14-bts-item"><img src="img/bts-vid/bts-06-sm.jpg" srcset="img/bts-vid/bts-06-sm.jpg 480w, img/bts-vid/bts-06.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Filming a sit-down interview with the clapper board in shot" loading="lazy" decoding="async" width="480" height="640"></figure>
       <figure class="r14-bts-item"><img src="img/bts-vid/bts-11-sm.jpg" srcset="img/bts-vid/bts-11-sm.jpg 480w, img/bts-vid/bts-11.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: On set with a client by the fireplace, camera and clapper board ready" loading="lazy" decoding="async" width="480" height="640"></figure>
       <figure class="r14-bts-item"><img src="img/bts-vid/bts-13-sm.jpg" srcset="img/bts-vid/bts-13-sm.jpg 480w, img/bts-vid/bts-13.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Lights and cameras set up for a two-person interview" loading="lazy" decoding="async" width="480" height="640"></figure>
       <figure class="r14-bts-item"><img src="img/bts-vid/bts-15-sm.jpg" srcset="img/bts-vid/bts-15-sm.jpg 480w, img/bts-vid/bts-15.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Framing an outdoor interview on the camera monitor" loading="lazy" decoding="async" width="480" height="640"></figure>
       <figure class="r14-bts-item"><img src="img/bts-vid/bts-16-sm.jpg" srcset="img/bts-vid/bts-16-sm.jpg 480w, img/bts-vid/bts-16.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Our crew filming an interview in a garden" loading="lazy" decoding="async" width="480" height="640"></figure>
-      <figure class="r14-bts-item"><img src="img/bts-vid/bts-18-sm.jpg" srcset="img/bts-vid/bts-18-sm.jpg 480w, img/bts-vid/bts-18.jpg 900w" sizes="(max-width: 699px) 33vw, 200px" alt="Behind the scenes: Cameras and lights set for an interview in a clinic" loading="lazy" decoding="async" width="480" height="640"></figure>
     </div>
   </div>
 </section>
@@ -2328,9 +2332,10 @@ document.addEventListener('DOMContentLoaded', function() {
     show(false);
     wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&controls=1" title="Video" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>';
   }
-  function openMp4(src, poster, vertical) {
+  function openMp4(src, poster, vertical, end) {
     show(vertical);
     var v = document.createElement('video');
+    if (end) { v.addEventListener('timeupdate', function () { if (v.currentTime >= parseFloat(end)) { v.currentTime = 0; v.play(); } }); }
     v.setAttribute('playsinline', '');
     v.preload = 'auto';
     if (poster) v.poster = poster;
@@ -2352,7 +2357,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function go() {
       var id = tile.getAttribute('data-yt-id');
       if (id) openYt(id);
-      else openMp4(tile.getAttribute('data-mp4'), tile.getAttribute('data-poster'), tile.getAttribute('data-aspect') === 'vertical');
+      else openMp4(tile.getAttribute('data-mp4'), tile.getAttribute('data-poster'), tile.getAttribute('data-aspect') === 'vertical', tile.getAttribute('data-end'));
     }
     tile.addEventListener('click', go);
     tile.addEventListener('keydown', function(e) {
