@@ -1780,7 +1780,15 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
 /* quiet link (same component as the service pages) */
 .quiet-link { display: inline-block; margin-top: 44px; font-size: 15px; font-weight: 600; color: inherit; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; text-decoration: none; padding-bottom: 3px; transition: background-size 0.35s var(--ease); }
 .quiet-link:hover { background-size: 40% 1px; opacity: 1; }
-.work-vid .work-vid-more { margin-top: 32px; }
+.section-exits { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.section-exits .service-cta { margin-bottom: 0; }
+.work-vid .section-exits .service-cta { background: #000; color: var(--green); }
+.work-vid .section-exits .service-cta:hover { box-shadow: 0 14px 30px rgba(0,0,0,0.35); }
+.work-pod .section-exits .service-cta { background: var(--green); color: #000; }
+.work-pod .section-exits .service-cta:hover { box-shadow: 0 14px 30px rgba(0,255,170,0.35); }
+.footer-credits { margin: 22px 0 0; text-align: center; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.footer-credits a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.footer-credits a:hover { color: var(--fg); }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QRDTHHVGQ"></script>
@@ -1790,6 +1798,7 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
   gtag('js', new Date());
   gtag('config', 'G-1QRDTHHVGQ');
 </script>
+<style>.nav-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-decoration-color:var(--green);text-decoration-thickness:2px;text-underline-offset:7px}</style>
 </head>
 <body>
 
@@ -1800,11 +1809,10 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
       <img class="logo-dark"  src="img/brand/vidpod-logo-dark.png"  alt="VIDPOD">
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#what">About</a>
-      <a href="#work-vid">Video</a>
-      <a href="#work-pod">Podcast</a>
-      <a href="#founder">Story</a>
-      <a href="#contact">Contact</a>
+      <a href="/video-production-melbourne">Video</a>
+      <a href="/video-case-studies-melbourne">Case studies</a>
+      <a href="/video-podcast-production-melbourne">Podcast</a>
+      <a href="/story.html">Story</a>
     </div>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -1816,7 +1824,7 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         <div class="sayhi-pop" id="sayhiPop" role="dialog" aria-label="Get in touch">
           <div class="sayhi-pop-label">Ready to chat?</div>
           <div class="sayhi-pop-title">Get in<br>touch now<span class="dot"></span></div>
-          <a href="#contact" class="sayhi-pop-btn" id="sayhiGo">Contact form</a>
+          <a href="/#contact" class="sayhi-pop-btn" id="sayhiGo">Contact form</a>
           <a href="tel:+61401576859" class="sayhi-pop-call">Call now</a>
         </div>
       </div>
@@ -1835,8 +1843,8 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Video &amp; Podcast<br>Production <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
     <div class="hero-actions reveal">
-      <a href="#work-vid" class="btn-vid">See our <span class="label-mark">VID</span> work</a>
-      <a href="#work-pod" class="btn-pod">See our <span class="label-mark">POD</span> work</a>
+      <a href="/video-production-melbourne" class="btn-vid">See our <span class="label-mark">VID</span> work</a>
+      <a href="/video-podcast-production-melbourne" class="btn-pod">See our <span class="label-mark">POD</span> work</a>
     </div>
   </div>
 </header>
@@ -2085,7 +2093,10 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         </div>
       </div>
     </div>
-    <a class="quiet-link work-vid-more" href="video-case-studies-melbourne">See all case studies</a>
+    <div class="section-exits">
+      <a href="/video-production-melbourne" class="service-cta">See video production</a>
+      <a href="/video-case-studies-melbourne" class="service-cta">See case studies</a>
+    </div>
 
     <!-- Mobile-only: scroll back to the category chips -->
     <button type="button" class="back-to-vid-top" aria-label="Back to top of videos">
@@ -2223,6 +2234,9 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         </div>
       </a>
     </div>
+    <div class="section-exits">
+      <a href="/video-podcast-production-melbourne" class="service-cta">See podcast production</a>
+    </div>
 
     <!-- PODCAST BTS — 11 unique photos + 11 aria-hidden clones for seamless -50% wrap.
          JS at page load shuffles visible items + matches clones, so each visit shows a different order. -->
@@ -2277,7 +2291,7 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         <p><strong>Hey. Thanks for stopping by.</strong></p>
         <p>I'm a creator and storyteller at heart. I've been working in this industry for over 10 years. In front of the camera, behind it, on the mic, in the edit. VIDPOD is where that instinct goes to work for brands who want their story told properly.</p>
         <div class="founder-actions">
-          <a href="story.html" class="btn btn-primary">See what I've been up to</a>
+          <a href="/story.html" class="btn btn-primary">See what I've been up to</a>
         </div>
       </div>
       <div class="founder-portrait reveal">
@@ -2347,48 +2361,50 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
           <div class="sitemap-col">
             <h4>Video Services</h4>
             <ul>
-              <li><a href="video-production-melbourne">Video Production Melbourne</a></li>
-              <li><a href="video-production-melbourne#brand-films">Brand Videos</a></li>
-              <li><a href="video-case-studies-melbourne">Case Studies &amp; Testimonials</a></li>
-              <li><a href="video-production-melbourne#founder-stories">Founder Stories</a></li>
-              <li><a href="video-production-melbourne#social-versions">Social Content</a></li>
-              <li><a href="video-production-melbourne#explainers">Explainer Videos</a></li>
-              <li><a href="video-production-melbourne#explainers">Animation</a></li>
+              <li><a href="/video-production-melbourne">Video Production Melbourne</a></li>
+              <li><a href="/video-production-melbourne#selected-work">Corporate Video Production</a></li>
+              <li><a href="/video-production-melbourne#brand-films">Brand Videos</a></li>
+              <li><a href="/video-case-studies-melbourne">Case Studies &amp; Testimonials</a></li>
+              <li><a href="/video-case-studies-melbourne#work">Customer Testimonial Videos</a></li>
+              <li><a href="/video-production-melbourne#founder-stories">Founder Stories</a></li>
+              <li><a href="/video-production-melbourne#social-versions">Social Content</a></li>
+              <li><a href="/video-production-melbourne#explainers">Explainer Videos</a></li>
+              <li><a href="/video-production-melbourne#explainers">Animation</a></li>
             </ul>
           </div>
 
           <div class="sitemap-col">
             <h4>Podcast Services</h4>
             <ul>
-              <li><a href="video-podcast-production-melbourne">Podcast Production Melbourne</a></li>
-              <li><a href="#work-pod">Branded Podcasts</a></li>
-              <li><a href="#work-pod">Educational Podcasts</a></li>
-              <li><a href="#work-pod">Internal Podcasts</a></li>
-              <li><a href="video-podcast-production-melbourne">Video Podcasts</a></li>
-              <li><a href="#work-pod">Remote Podcast Recording</a></li>
-              <li><a href="#work-pod">Podcast Launch</a></li>
-              <li><a href="#work-pod">Podcast Strategy</a></li>
+              <li><a href="/video-podcast-production-melbourne">Podcast Production Melbourne</a></li>
+              <li><a href="/video-podcast-production-melbourne#shows">Branded Podcasts</a></li>
+              <li><a href="/video-podcast-production-melbourne#shows">Educational Podcasts</a></li>
+              <li><a href="/video-podcast-production-melbourne#internal-podcasts">Internal Podcasts</a></li>
+              <li><a href="/video-podcast-production-melbourne">Video Podcasts</a></li>
+              <li><a href="/video-podcast-production-melbourne">Remote Podcast Recording</a></li>
+              <li><a href="/video-podcast-production-melbourne">Podcast Launch</a></li>
+              <li><a href="/video-podcast-production-melbourne">Podcast Strategy</a></li>
             </ul>
           </div>
 
           <div class="sitemap-col">
             <h4>Our Shows</h4>
             <ul>
-              <li><a href="podcasts/the-numbers-game.html">The Numbers Game</a></li>
-              <li><a href="podcasts/lets-talk-teaching.html">Let&apos;s Talk Teaching <span style="color:var(--muted);font-size:13px">(Monash)</span></a></li>
-              <li><a href="podcasts/unconventional-business.html">Unconventional Business <span style="color:var(--muted);font-size:13px">(HubSpot)</span></a></li>
-              <li><a href="podcasts/help-at-hand.html">The Huddle <span style="color:var(--muted);font-size:13px">(Help at Hand Education)</span></a></li>
-              <li><a href="podcasts/carlisle-homes.html">Home Files <span style="color:var(--muted);font-size:13px">(Carlisle Homes)</span></a></li>
-              <li><a href="podcasts/the-daily-talk-show.html">The Daily Talk Show</a></li>
+              <li><a href="/podcasts/the-numbers-game.html">The Numbers Game</a></li>
+              <li><a href="/podcasts/lets-talk-teaching.html">Let&apos;s Talk Teaching <span style="color:var(--muted);font-size:13px">(Monash)</span></a></li>
+              <li><a href="/podcasts/unconventional-business.html">Unconventional Business <span style="color:var(--muted);font-size:13px">(HubSpot)</span></a></li>
+              <li><a href="/podcasts/help-at-hand.html">The Huddle <span style="color:var(--muted);font-size:13px">(Help at Hand Education)</span></a></li>
+              <li><a href="/podcasts/carlisle-homes.html">Home Files <span style="color:var(--muted);font-size:13px">(Carlisle Homes)</span></a></li>
+              <li><a href="/podcasts/the-daily-talk-show.html">The Daily Talk Show</a></li>
             </ul>
           </div>
 
           <div class="sitemap-col">
             <h4>VIDPOD</h4>
             <ul>
-              <li><a href="story.html">Meet the Founder</a></li>
-              <li><a href="#contact">Get a Quote</a></li>
-              <li><a href="#contact">Get in Touch</a></li>
+              <li><a href="/story.html">Meet the Founder</a></li>
+              <li><a href="/#contact">Get a Quote</a></li>
+              <li><a href="/#contact">Get in Touch</a></li>
             </ul>
           </div>
 
@@ -2405,11 +2421,12 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
       </span>
       <span class="footer-copy">&copy; 2026 VIDPOD &middot; Melbourne, Australia</span>
       <div class="socials">
-        <a href="https://instagram.com/vid.pod" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.instagram.com/vid.pod" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
         <a href="https://www.youtube.com/@vid_pod" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
         <a href="https://www.linkedin.com/company/vidpodproduction" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       </div>
     </div>
+    <p class="footer-credits">Founded by <a href="https://tommyjackett.com" target="_blank" rel="noopener">Tommy Jackett</a></p>
   </div>
 </footer>
 
