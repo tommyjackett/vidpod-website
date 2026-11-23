@@ -2614,10 +2614,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ---------- Per-track CSS animation + touch swipe + click to zoom ----------
-  // Visual speed locked to ~120 px/sec across all marquees (pod BTS speed).
+  // Visual speed locked to ~15 px/sec across all marquees, matching the photo strips on the service pages.
   // Each track gets its own animation-duration based on width so adding/removing
   // items doesn't change perceived scroll speed.
-  var TARGET_SPEED = 120; // px/sec
+  var TARGET_SPEED = 15; // px/sec
 
   function getTrackX(el) {
     var style = window.getComputedStyle(el);
