@@ -1420,13 +1420,13 @@ body { overflow-x: clip; }
   .r14-tng-bts { padding-bottom: 56px; }
 }
 
-.r14-band { position: relative; width: 100%; aspect-ratio: 21 / 9; max-height: 78vh; overflow: hidden; background: #0A0A0A; }
-.r14-band-track { display: flex; height: 100%; width: max-content; animation: r14run 200s linear infinite; }
-.r14-band-item { flex: 0 0 auto; height: 100%; margin-right: -70px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 110px, #000 calc(100% - 110px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 110px, #000 calc(100% - 110px), transparent 100%); }
+.r14-band { position: relative; width: 100%; height: 220px; overflow: hidden; background: #0A0A0A; }
+.r14-band-track { display: flex; height: 100%; width: max-content; animation: r14run 140s linear infinite; }
+.r14-band-item { flex: 0 0 auto; height: 100%; margin-right: -36px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%); }
 .r14-band-item img { height: 100%; width: auto; display: block; filter: contrast(1.04) saturate(0.94); }
 @keyframes r14run { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .r14-band-track { animation: none; } }
-@media (max-width: 699px) { .r14-band { aspect-ratio: 2 / 1; } .r14-band-item { margin-right: -40px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%); } }
+@media (max-width: 699px) { .r14-band { height: 140px; } .r14-band-item { margin-right: -24px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 36px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 36px), transparent 100%); } }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1616,20 +1616,22 @@ document.documentElement.dataset.theme = 'dark';
 
 <div class="r14-band" role="img" aria-label="Behind the scenes on the podcasts we produce">
   <div class="r14-band-track">
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/hah-set-wide-camera-band-r14.jpg" alt="Recording Help at Hand Education on the blue sofa set, camera in the foreground" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/tng-ep300-hosts-skyline-smiling-band-r14.jpg" alt="The Numbers Game hosts smiling on a Melbourne rooftop" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/hah-host-guest-smiling-band-r14.jpg" alt="The Help at Hand Education host and a guest smiling on set" loading="lazy" decoding="async" width="600" height="900"></div>
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-guests-laughing-host-foreground-band-r14.jpg" alt="Guests laughing during a Let&#x27;s Talk Teaching recording for Monash University" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/tng-ep200-set-monitor-band-r14.jpg" alt="Filming a live episode of The Numbers Game, the shot on the camera monitor" loading="lazy" decoding="async" width="676" height="900"></div>
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-studio-wide-lights-band-r14.jpg" alt="The Let&#x27;s Talk Teaching studio set up with lights and cameras" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-two-guests-conversation-band-r14.jpg" alt="Two guests in conversation on the Let&#x27;s Talk Teaching set" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/hah-set-wide-camera-band-r14.jpg" alt="" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/tng-ep300-hosts-skyline-smiling-band-r14.jpg" alt="" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/hah-host-guest-smiling-band-r14.jpg" alt="" loading="lazy" decoding="async" width="600" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-guests-laughing-host-foreground-band-r14.jpg" alt="" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/tng-ep200-set-monitor-band-r14.jpg" alt="" loading="lazy" decoding="async" width="676" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-studio-wide-lights-band-r14.jpg" alt="" loading="lazy" decoding="async" width="1350" height="900"></div>
-      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-two-guests-conversation-band-r14.jpg" alt="" loading="lazy" decoding="async" width="1350" height="900"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/hah-set-wide-camera-thin-r14.jpg" alt="Recording Help at Hand Education, camera and lights on set" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-bts-audio-desk-thin-r14.jpg" alt="The audio desk during a Let&#x27;s Talk Teaching recording" loading="lazy" decoding="async" width="360" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/tng-ep300-crew-behind-cameras-thin-r14.jpg" alt="Our crew behind the cameras filming The Numbers Game on a rooftop" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-bts-multi-monitor-thin-r14.jpg" alt="Camera monitors on the Let&#x27;s Talk Teaching set" loading="lazy" decoding="async" width="640" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/tng-ep200-set-monitor-thin-r14.jpg" alt="Filming a live episode of The Numbers Game, the shot on the camera monitor" loading="lazy" decoding="async" width="360" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-studio-wide-lights-thin-r14.jpg" alt="The Let&#x27;s Talk Teaching studio with lights and cameras" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/tng-ep300-camera-rig-skyline-thin-r14.jpg" alt="A camera rig set up on the rooftop, the city skyline behind" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item"><img src="img/podcasts/bts-r14/ltt-s4-two-guests-conversation-thin-r14.jpg" alt="Two guests in conversation on the Let&#x27;s Talk Teaching set" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/hah-set-wide-camera-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-bts-audio-desk-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="360" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/tng-ep300-crew-behind-cameras-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-bts-multi-monitor-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="640" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/tng-ep200-set-monitor-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="360" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-studio-wide-lights-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/tng-ep300-camera-rig-skyline-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="720" height="480"></div>
+      <div class="r14-band-item" aria-hidden="true"><img src="img/podcasts/bts-r14/ltt-s4-two-guests-conversation-thin-r14.jpg" alt="" loading="lazy" decoding="async" width="720" height="480"></div>
   </div>
 </div>
 
