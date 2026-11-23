@@ -1372,6 +1372,46 @@ body { overflow-x: clip; }
   #workRail .tile-play { height: 28px; padding: 0 10px 0 9px; gap: 6px; left: 8px; bottom: 8px; }
   #workRail .tile-play::after { font-size: 9px; }
 }
+
+/* ---- round 11: case studies hand, services strip ---- */
+.case-hand { position: relative; height: 262px; --w: 190px; --gx: 186px; --gy: 58px; }
+.fan-card { position: absolute; left: 50%; top: 50%; width: var(--w); aspect-ratio: 16 / 9; margin-left: calc(var(--w) / -2); margin-top: calc(var(--w) * -0.28125); border-radius: 12px; overflow: hidden; cursor: pointer; background: #111;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.14);
+  transform: translate(calc(var(--cx) * var(--gx)), calc(var(--cy) * var(--gy))) rotate(var(--r)); transition: transform 0.45s var(--ease), box-shadow 0.45s ease; }
+.fan-card:nth-child(1) { --cx: -1; --cy: -1; --r: -5deg; z-index: 2; }
+.fan-card:nth-child(2) { --cx: 0; --cy: -1.08; --r: 2deg; z-index: 1; }
+.fan-card:nth-child(3) { --cx: 1; --cy: -1; --r: 5.5deg; z-index: 2; }
+.fan-card:nth-child(4) { --cx: -1; --cy: 1; --r: 3.5deg; z-index: 3; }
+.fan-card:nth-child(5) { --cx: 0; --cy: 1.08; --r: -2.5deg; z-index: 4; }
+.fan-card:nth-child(6) { --cx: 1; --cy: 1; --r: -5deg; z-index: 3; }
+.fan-card .tile-media { position: absolute; inset: 0; border-radius: 0; aspect-ratio: auto; }
+.fan-card .tile-media img { width: 100%; height: 100%; object-fit: cover; }
+.fan-card .tile-play { opacity: 0; transition: opacity 0.3s ease; }
+.fan-card:hover, .fan-card:focus-visible { z-index: 20; box-shadow: 0 26px 60px rgba(0,0,0,0.65); transform: translate(calc(var(--cx) * var(--gx)), calc(var(--cy) * var(--gy) - 10px)) rotate(var(--r)) scale(1.04); }
+.fan-card:hover .tile-play, .fan-card:focus-visible .tile-play { opacity: 1; }
+.hero-fan-note { margin: 6px 0 0; text-align: center; font-size: 13px; color: rgba(255,255,255,0.6); }
+@media (prefers-reduced-motion: reduce) { .fan-card { transition: none; } }
+.services-strip { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; margin-top: 44px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,0.12); }
+.services-strip .g-kind { margin: 4px 0 0; }
+.services-line { margin: 0; font-size: 18px; line-height: 1.5; color: #fff; max-width: 60ch; }
+.also-worked { margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.62); max-width: 78ch; }
+.also-worked a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.also-worked a:hover { color: var(--green); }
+@media (max-width: 900px) {
+  .case-hand { height: 300px; --w: 200px; --gx: 196px; --gy: 60px; }
+}
+@media (max-width: 699px) {
+  .case-hand { height: 158px; --w: 106px; --gx: 112px; --gy: 34px; margin-top: 6px; }
+  .fan-card { border-radius: 8px; box-shadow: 0 10px 24px rgba(0,0,0,0.5); }
+  .hero-fan-note { font-size: 12px; margin-top: 0; }
+  #workRail .g-line-lead { display: none; }
+  #workRail { row-gap: 24px; }
+  .services-strip { grid-template-columns: 1fr; gap: 8px; margin-top: 30px; padding-top: 20px; }
+  .services-line { font-size: 16px; }
+  .also-worked { font-size: 13px; }
+  #workRail #founder-stories, #workRail #case-study-videos { grid-column: 1 / -1; }
+  #founder-stories .g-kind { min-height: 0; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1489,12 +1529,15 @@ document.documentElement.dataset.theme = 'dark';
       </figure>
       <figure class="g-item g-5" id="founder-stories">
         <span class="g-kind">Founder stories</span>
-        <div class="tile g-tile ar-54" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W founding story: the founder smiling in a wheat field" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
+        <div class="g-pair is-even">
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W founding story: the founder smiling in a wheat field" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
+          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ-v13.jpg" alt="@Pilates founding story: the founder smiling in her studio" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div>
+        </div>
         <p class="g-line">Why you started, told by the people who started it.</p>
       </figure>
       <figure class="g-item g-6" id="franchise">
         <span class="g-kind">Franchise and multi-site packs</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div>
+        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="SXORkm2BG3U" aria-label="Play: @Pilates, franchise sales film"><div class="tile-media"><img src="img/work/SXORkm2BG3U-v13.jpg" alt="@Pilates franchise sales film: a member training in the studio" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise sales film</span></p></div>
         <p class="g-line">One film day, a matching film for every location.</p>
       </figure>
       <figure class="g-item g-6" id="social-versions">
@@ -1519,6 +1562,13 @@ document.documentElement.dataset.theme = 'dark';
         </div>
       </figure>
     </div>
+    <div class="services-strip reveal">
+      <span class="g-kind">Services</span>
+      <div>
+        <p class="services-line">We also colour grade, make animation and explainers, and take existing interviews and edit them into a content bank.</p>
+        <p class="also-worked">Also worked on: colour grading for <a href="https://www.foodtrailsouthafrica.com/" target="_blank" rel="noopener">Food Trail South Africa</a>, working with the show&#x27;s producers, and as production partner on <a href="https://ingunswetrustfilm.com/" target="_blank" rel="noopener">In Guns We Trust</a>, with a story credit for Tommy Jackett, who also worked on story development and hosting.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1530,7 +1580,15 @@ document.documentElement.dataset.theme = 'dark';
       <a class="quiet-link" href="video-case-studies-melbourne">See all our case study videos</a>
     </div>
     <div class="reveal">
-      <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Total Tools case study</span></p></div>
+      <div class="case-hand" role="group" aria-label="Customer stories we have made">
+        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
+        <div class="tile fan-card" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story"><div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt first home buyer story: a couple laughing on a jetty" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
+        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story"><div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
+        <div class="tile fan-card" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-hayley-case-study.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-hayley-case-study-poster.jpg" data-aspect="wide" aria-label="Play: @Pilates Palm Beach, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-hayley-case-study-poster.jpg" alt="@Pilates Palm Beach franchisee story: the studio owner talking to camera" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
+        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Focus Insights, Marathon Foods case study"><div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Focus Insights, Marathon Foods case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
+        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Focus Insights, Food Industry Asia case study"><div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Focus Insights, Food Industry Asia case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
+      </div>
+      <p class="hero-fan-note">A few of our customer stories. Tap any one to watch.</p>
     </div>
   </div>
 </section>
