@@ -1397,6 +1397,28 @@ body { overflow-x: clip; }
 .vid-info ul, .vid-info ol { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
 .vid-info strong { color: #fff; }
 @media (max-width: 900px) { .vid-info { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ===== round 14 ===== */
+.r14-mosaic { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; gap: 12px; }
+.r14-m { margin: 0; border-radius: 14px; overflow: hidden; background: #141416; }
+.r14-m img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.04) saturate(0.94); }
+.r14-m.m-tall { grid-column: 1; grid-row: 1 / span 2; }
+.r14-m.m-tall img { object-position: 50% 20%; }
+.r14-m.m-wide { grid-column: 2 / span 2; grid-row: 1; aspect-ratio: 3 / 2; }
+.r14-m.m-a, .r14-m.m-b { aspect-ratio: 4 / 3; }
+.r14-sys-cards { display: grid; gap: 12px; margin-top: 26px; }
+.r14-sys-card { padding: 18px 20px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+.r14-sys-card h3 { margin: 0 0 6px; font-family: var(--font-body); font-size: 16px; font-weight: 800; color: #fff; }
+.system-copy .r14-sys-card p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.75); }
+.r14-tng-bts { background: #0A0A0A; padding: 0 0 96px; }
+.r14-label { display: block; margin: 0 0 16px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.r14-photo-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.r14-photo-row .r14-m { aspect-ratio: 3 / 2; }
+@media (max-width: 699px) {
+  .r14-mosaic { gap: 8px; }
+  .r14-photo-row { grid-template-columns: 1fr; gap: 10px; }
+  .r14-tng-bts { padding-bottom: 56px; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1530,7 +1552,12 @@ document.documentElement.dataset.theme = 'dark';
 <section class="split" id="internal-podcasts">
   <div class="wrap split-grid">
     <div class="split-media reveal">
-      <img src="img/podcasts/help-at-hand-hero/01.jpg" srcset="img/podcasts/help-at-hand-hero/01-sm.jpg 480w, img/podcasts/help-at-hand-hero/01-800-v10.jpg 800w, img/podcasts/help-at-hand-hero/01.jpg 1200w" sizes="(max-width: 860px) 100vw, 640px" alt="Recording the members-only Help at Hand Education podcast" loading="lazy" decoding="async" width="1200" height="800">
+      <div class="r14-mosaic">
+        <figure class="r14-m m-tall"><img src="img/podcasts/bts-r14/hah-host-guest-pair-smiling-r14-sm.jpg" srcset="img/podcasts/bts-r14/hah-host-guest-pair-smiling-r14-sm.jpg 600w, img/podcasts/bts-r14/hah-host-guest-pair-smiling-r14.jpg 1000w" sizes="(max-width: 860px) 50vw, 300px" alt="Help at Hand Education: the host and a guest smiling on set" loading="lazy" decoding="async" width="600" height="900"></figure>
+        <figure class="r14-m m-wide"><img src="img/podcasts/bts-r14/hah-set-guest-camera-r14-sm.jpg" srcset="img/podcasts/bts-r14/hah-set-guest-camera-r14-sm.jpg 600w, img/podcasts/bts-r14/hah-set-guest-camera-r14.jpg 1000w" sizes="(max-width: 860px) 100vw, 420px" alt="Help at Hand Education: filming a guest on the blue sofa set, monitor in the foreground" loading="lazy" decoding="async" width="600" height="400"></figure>
+        <figure class="r14-m m-a"><img src="img/podcasts/bts-r14/ltt-s4-bts-monitor-wide-r14-sm.jpg" srcset="img/podcasts/bts-r14/ltt-s4-bts-monitor-wide-r14-sm.jpg 600w, img/podcasts/bts-r14/ltt-s4-bts-monitor-wide-r14.jpg 1000w" sizes="(max-width: 860px) 50vw, 210px" alt="Let&#x27;s Talk Teaching for Monash University: two guests on set, seen past the camera monitor" loading="lazy" decoding="async" width="600" height="450"></figure>
+        <figure class="r14-m m-b"><img src="img/podcasts/bts-r14/ltt-s4-host-laughing-mic-r14-sm.jpg" srcset="img/podcasts/bts-r14/ltt-s4-host-laughing-mic-r14-sm.jpg 600w, img/podcasts/bts-r14/ltt-s4-host-laughing-mic-r14.jpg 1000w" sizes="(max-width: 860px) 50vw, 210px" alt="Let&#x27;s Talk Teaching for Monash University: the host laughing at the microphone" loading="lazy" decoding="async" width="600" height="400"></figure>
+      </div>
     </div>
     <div class="split-body reveal">
       <h2 class="section-title">Corporate podcasts for your <span class="nowrap-dot">team<span class="dot"></span></span></h2>
@@ -1550,10 +1577,13 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap system-grid">
     <div class="system-copy reveal">
       <h2 class="section-title">Every episode keeps <span class="nowrap-dot">working<span class="dot"></span></span></h2>
-      <p>We build the system behind your show, so every episode goes further and gets found: a searchable library on your own website, broken into moments people can jump straight to.</p>
-      <p>Recorded in your office, on campus or remotely. Any room looks and sounds like a studio.</p>
+      <p>It&#x27;s what we do for The Numbers Game every week, and we can do it for any show.</p>
+      <div class="r14-sys-cards">
+        <div class="r14-sys-card"><h3>Your own show website</h3><p>Every episode gets its own page on your site, with the video, show notes and full transcript.</p></div>
+        <div class="r14-sys-card"><h3>Every moment searchable</h3><p>We break the library into moments, so people can search a topic and jump straight to it, and Google can find it too.</p></div>
+        <div class="r14-sys-card"><h3>An always-on producer</h3><p>We keep your show working between episodes, with clips and Shorts from the best moments going out every week.</p></div>
+      </div>
       <p class="system-proof"><a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">See it live on The Numbers Game</a></p>
-      <a class="quiet-link" href="/#contact">Tell us about your show</a>
     </div>
     <div class="system-stage is-site">
       <figure class="sys-card sys-screen sys-s1"><img src="img/podcasts/system/tng-site-episode-v12.jpg" alt="The Numbers Game website: the episode page for its 300th episode" loading="lazy" decoding="async" width="1200" height="750"><figcaption>Episode page</figcaption></figure>
@@ -1576,9 +1606,16 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </section>
 
-<div class="bleed">
-  <img class="bleed-rooftop" src="img/podcasts/tng-ep300-rooftop-v13.jpg" alt="Recording The Numbers Game on a Melbourne rooftop, cameras rolling and the city skyline behind" loading="lazy" decoding="async" width="1920" height="1080">
-</div>
+<section class="r14-tng-bts">
+  <div class="wrap">
+    <span class="r14-label reveal">On set with The Numbers Game</span>
+    <div class="r14-photo-row reveal">
+      <figure class="r14-m "><img src="img/podcasts/bts-r14/tng-ep300-hosts-skyline-smiling-r14-sm.jpg" srcset="img/podcasts/bts-r14/tng-ep300-hosts-skyline-smiling-r14-sm.jpg 600w, img/podcasts/bts-r14/tng-ep300-hosts-skyline-smiling-r14.jpg 1000w" sizes="(max-width: 699px) 100vw, 400px" alt="The Numbers Game hosts smiling on a Melbourne rooftop, the city skyline behind them" loading="lazy" decoding="async" width="600" height="400"></figure>
+      <figure class="r14-m "><img src="img/podcasts/bts-r14/tng-ep300-camera-rig-skyline-r14-sm.jpg" srcset="img/podcasts/bts-r14/tng-ep300-camera-rig-skyline-r14-sm.jpg 600w, img/podcasts/bts-r14/tng-ep300-camera-rig-skyline-r14.jpg 1000w" sizes="(max-width: 699px) 100vw, 400px" alt="Our camera rig set up on the rooftop for The Numbers Game, the skyline behind" loading="lazy" decoding="async" width="600" height="400"></figure>
+      <figure class="r14-m "><img src="img/podcasts/bts-r14/tng-ep300-crew-behind-cameras-r14-sm.jpg" srcset="img/podcasts/bts-r14/tng-ep300-crew-behind-cameras-r14-sm.jpg 600w, img/podcasts/bts-r14/tng-ep300-crew-behind-cameras-r14.jpg 1000w" sizes="(max-width: 699px) 100vw, 400px" alt="Our crew behind the cameras filming The Numbers Game on the rooftop" loading="lazy" decoding="async" width="600" height="400"></figure>
+    </div>
+  </div>
+</section>
 
 <section class="pod-sec sec-white dark-alt" id="faq">
   <div class="wrap faq-wrap">
