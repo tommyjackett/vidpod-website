@@ -1455,6 +1455,11 @@ body { overflow-x: clip; }
 .r13-reel .tile-media { aspect-ratio: 16 / 9; }
 .r13-reel.tile .tile-play, .r13-reel.tile:hover .tile-play, .r13-reel.tile:focus-visible .tile-play { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, -50%); }
 .r13-cta { padding: 0 0 96px; }
+.r13-cta { margin-top: -40px; }
+.r13-cta + .r13-sec { padding-top: 0; }
+.r13-cta .btn-vid { background: var(--green); color: #000; }
+.r13-cta .btn-vid:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,255,170,0.35); }
+@media (max-width: 699px) { .r13-cta { margin-top: -20px; } }
 .r13-pointer-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 28px; }
 .r13-pointer-head .section-title { margin: 0; }
 @media (max-width: 699px) {
