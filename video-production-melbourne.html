@@ -1520,7 +1520,8 @@ body { overflow-x: clip; }
 .r15-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto auto auto auto; column-gap: 36px; row-gap: 0; }
 .r15-moment { display: grid; grid-row: span 5; grid-template-rows: subgrid; align-content: start; }
 .r15-moment .r15-vis { align-self: end; }
-.r15-moment .quiet-link { justify-self: start; align-self: start; }
+.r15-series-btn { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 2; background: var(--green); color: #000; padding: 12px 20px; font-size: 12px; white-space: nowrap; box-shadow: 0 10px 26px rgba(0,0,0,0.45); }
+.r15-series-btn:hover { box-shadow: 0 12px 30px rgba(0,255,170,0.35); }
 .r15-moment h3 { margin: 0 0 8px; font-family: var(--font-head); font-size: 22px; line-height: 1.15; text-transform: uppercase; color: #fff; }
 .r15-moment p { margin: 0 0 20px; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.72); max-width: 40ch; }
 .r15-moment .r13-type { margin-bottom: 10px; }
@@ -1536,12 +1537,11 @@ body { overflow-x: clip; }
 .r15-w .tile-media { aspect-ratio: 9 / 16; }
 .r15-w img { object-position: 50% 50%; }
 .r15-fan { padding-left: 4px; }
-.r15-fan img { width: 110px; height: auto; aspect-ratio: 9 / 16; border-radius: 12px; margin-left: -48px; box-shadow: 0 10px 26px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); transition: transform 0.45s var(--ease), margin 0.45s var(--ease); }
+.r15-fan { position: relative; }
+.r15-fan img { width: 110px; height: auto; aspect-ratio: 9 / 16; border-radius: 12px; margin-left: -48px; box-shadow: 0 10px 26px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); }
 .r15-fan img:first-child { margin-left: 0; }
 .r15-fan img:nth-child(odd) { transform: rotate(-3deg); }
 .r15-fan img:nth-child(even) { transform: rotate(3deg) translateY(6px); }
-.r15-fan:hover img { margin-left: -30px; }
-.r15-fan:hover img:first-child { margin-left: 0; }
 @media (max-width: 899px) { .r15-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 44px; } .r15-moment { grid-row: auto; grid-template-rows: none; } }
 
 .r14-band { position: relative; width: 100%; height: 220px; overflow: hidden; background: #0A0A0A; }
@@ -1717,8 +1717,7 @@ document.documentElement.dataset.theme = 'dark';
         <span class="r13-type">Case study series</span>
         <h3>One look, a whole network</h3>
         <p>Eight @Pilates franchisees from around Australia, each with their own film and the same look, so they work alone or as a set.</p>
-        <a class="r15-vis r15-fan" href="video-case-studies-melbourne#series" aria-label="See the @Pilates case study series"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster-xs.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster-xs.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="img/case-studies/atpilates-2025-courtney-face-r13.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster-xs.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="img/case-studies/atpilates-2025-ricki-face-r13.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"></a>
-        <a class="quiet-link" href="video-case-studies-melbourne#series">See the series</a>
+        <div class="r15-vis r15-fan"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster-xs.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster-xs.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="img/case-studies/atpilates-2025-courtney-face-r13.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster-xs.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><img src="img/case-studies/atpilates-2025-ricki-face-r13.jpg" alt="" loading="lazy" decoding="async" width="400" height="711"><a class="btn-vid r15-series-btn" href="video-case-studies-melbourne#series">See the series</a></div>
       </div>
       <div class="r15-moment reveal" id="founder-stories">
         <span class="r13-type">Founder stories</span>
