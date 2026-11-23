@@ -32,6 +32,7 @@ document.documentElement.dataset.theme = 'dark';
   gtag('config', 'G-1QRDTHHVGQ');
 </script>
 <style>.nav-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-decoration-color:var(--green);text-decoration-thickness:2px;text-underline-offset:7px}</style>
+<style>/* nav: same size and layout as the homepage and About page */ .nav{padding:22px 0} .nav .nav-inner{padding:0 36px} @media (max-width:640px){.nav .nav-inner{padding:0 22px}} .nav .nav-links a, .nav .nav-cta{font-weight:700}</style>
 </head>
 <body>
 <h1 class="sr-only">Let's Talk Teaching podcast — Monash University education podcast</h1>
@@ -50,7 +51,7 @@ document.documentElement.dataset.theme = 'dark';
       <a href="/story.html">About</a>
     </div>
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="display:none">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="visibility:hidden" tabindex="-1" aria-hidden="true">
         <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
