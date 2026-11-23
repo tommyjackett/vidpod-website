@@ -1428,6 +1428,10 @@ body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) { .r14-band-track { animation: none; } }
 @media (max-width: 699px) { .r14-band { height: 140px; } .r14-band-item { margin-right: -10px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10px); mask-image: linear-gradient(to right, transparent 0, #000 10px); } }
 .system-copy .r15-sys-note { margin-top: 22px; color: #fff; font-weight: 600; }
+.system-copy .r15-sys-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 26px; }
+.system-copy .r15-sys-actions .btn-vid { background: var(--green); color: #000; white-space: nowrap; }
+.system-copy .r15-sys-actions .btn-vid:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,255,170,0.35); }
+.system-copy .r15-sys-link { color: var(--green); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1585,15 +1589,18 @@ document.documentElement.dataset.theme = 'dark';
 <section class="system" id="the-system">
   <div class="wrap system-grid">
     <div class="system-copy reveal">
-      <h2 class="section-title">We run the show behind your <span class="nowrap-dot">show<span class="dot"></span></span></h2>
-      <p>Most podcasts disappear a week after they go out. For The Numbers Game, we run everything behind the scenes every week, and we can do the same for you.</p>
+      <h2 class="section-title">Take your podcast <span class="nowrap-dot">further<span class="dot"></span></span></h2>
+      <p>Already have a podcast, or want to start one? We partner with a small number of shows to build them into something bigger. The Numbers Game is where that can go.</p>
       <div class="r14-sys-cards">
-        <div class="r14-sys-card"><h3>A home you own</h3><p>Your show gets its own website, with every episode on its own page, the video, show notes and full transcript, all searchable by topic so people and Google can find it.</p></div>
-        <div class="r14-sys-card"><h3>Promoted every week</h3><p>We keep your show working between episodes, with clips and Shorts from the best moments going out across your channels every week.</p></div>
-        <div class="r14-sys-card"><h3>We watch what works</h3><p>We keep an eye on the analytics, see which topics and clips people come back for, and use that to shape what&#x27;s next.</p></div>
+        <div class="r14-sys-card"><h3>Your own show website</h3><p>Every episode gets its own page, with the video, show notes and full transcript, all searchable by topic so people and Google can find it.</p></div>
+        <div class="r14-sys-card"><h3>Marketing that keeps it growing</h3><p>Clips and Shorts from the best moments go out every week, and we read the analytics together to see what&#x27;s landing and shape what&#x27;s next.</p></div>
+        <div class="r14-sys-card"><h3>A dedicated producer</h3><p>A producer who knows your show and works alongside you, handling the backend and the systems so you can focus on the conversations.</p></div>
       </div>
-      <p class="r15-sys-note">We set it all up and run it for you. You just turn up and talk.</p>
-      <p class="system-proof"><a href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">See it live on The Numbers Game</a></p>
+      <p class="r15-sys-note">We only take on a few partners at a time. If this sounds like your show, let&#x27;s chat and see if it&#x27;s a fit.</p>
+      <div class="r15-sys-actions">
+        <a href="/#contact" class="btn-vid">Let&#x27;s chat</a>
+        <a class="r15-sys-link" href="https://thenumbersgamepodcast.com.au" target="_blank" rel="noopener">See it live on The Numbers Game</a>
+      </div>
     </div>
     <div class="system-stage is-site">
       <figure class="sys-card sys-screen sys-s1"><img src="img/podcasts/system/tng-site-episode-v12.jpg" alt="The Numbers Game website: the episode page for its 300th episode" loading="lazy" decoding="async" width="1200" height="750"><figcaption>Episode page</figcaption></figure>
