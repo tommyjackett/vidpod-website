@@ -119,7 +119,7 @@
           "name": "How long is a case study video?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually a couple of minutes for the main film, with short versions for social. We shape the length around where it will be watched and what your buyers need to hear."
+            "text": "Usually a couple of minutes for the main film. We shape the length around where it will be watched and what your buyers need to hear."
           }
         },
         {
@@ -1404,6 +1404,55 @@ body { overflow-x: clip; }
 .vid-info p { margin: 0; }
 .vid-info ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
 @media (max-width: 900px) { .vid-info { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ===== round 13: one card system ===== */
+.r13-sec { padding: 96px 0; }
+.r13-sec + .r13-sec { padding-top: 0; }
+.r13-sec .section-title { margin-bottom: 32px; }
+.r13-card { cursor: pointer; }
+.r13-card .tile-media { aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; position: relative; }
+.r13-card .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.r13-card .tile-cap { margin: 12px 0 0; font-size: 15px; }
+.r13-feature { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.r13-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
+.r13-type { display: block; margin: 0 0 10px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.r13-reel .tile-media { aspect-ratio: 16 / 9; }
+.r13-reel.tile .tile-play, .r13-reel.tile:hover .tile-play, .r13-reel.tile:focus-visible .tile-play { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, -50%); }
+.r13-cta { padding: 0 0 96px; }
+.r13-pointer-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 28px; }
+.r13-pointer-head .section-title { margin: 0; }
+@media (max-width: 699px) {
+  .r13-sec { padding: 56px 0; }
+  .r13-sec + .r13-sec { padding-top: 0; }
+  .r13-sec .section-title { margin-bottom: 22px; }
+  .r13-feature, .r13-grid { grid-template-columns: 1fr; gap: 28px; }
+  .r13-cta { padding-bottom: 56px; }
+  .r13-pointer-head { flex-direction: column; gap: 8px; margin-bottom: 20px; }
+}
+/* vertical fan (9:16, slight rotation, spreads on hover, swipe on phones) */
+.r13-fan { display: flex; justify-content: center; padding: 18px 0 8px; }
+.r13-fan .tile { flex: 0 0 auto; width: 150px; margin-left: -38px; cursor: pointer; transition: transform 0.45s var(--ease), margin 0.45s var(--ease); }
+.r13-fan .tile:first-child { margin-left: 0; }
+.r13-fan .tile .tile-media { aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); }
+.r13-fan .tile .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.r13-fan .tile:nth-child(odd) { transform: rotate(-3deg); }
+.r13-fan .tile:nth-child(even) { transform: rotate(3deg) translateY(10px); }
+.r13-fan:hover .tile { margin-left: 8px; }
+.r13-fan:hover .tile:first-child { margin-left: 0; }
+.r13-fan .tile:hover { transform: rotate(0) translateY(-8px); z-index: 5; }
+.r13-fan .tile .tile-play, .r13-fan .tile:hover .tile-play, .r13-fan .tile:focus-visible .tile-play { left: 50%; bottom: 12px; top: auto; transform: translateX(-50%); height: 30px; padding: 0 12px 0 11px; gap: 7px; }
+.r13-fan .tile .tile-play::after { font-size: 9px; }
+.r13-line { margin: -16px 0 8px; font-size: 16px; color: rgba(255,255,255,0.7); }
+@media (max-width: 899px) {
+  .r13-fan { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -22px; padding: 12px 22px 8px; scrollbar-width: none; }
+  .r13-fan::-webkit-scrollbar { display: none; }
+  .r13-fan .tile, .r13-fan:hover .tile { margin-left: 0; width: 42vw; max-width: 180px; scroll-snap-align: start; }
+  .r13-fan .tile:nth-child(odd), .r13-fan .tile:nth-child(even) { transform: none; }
+}
+
+.r13-series .r13-line { margin: -16px 0 28px; }
+.r13-series .wrap { overflow: visible; }
+.r13-card.g-tile .tile-media { border-radius: 14px; }
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1463,7 +1512,7 @@ document.documentElement.dataset.theme = 'dark';
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Case study video production in <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
-    <p class="hero-lede reveal">Your best sales pitch is a happy customer. We make customer testimonial videos and case studies that show the problem, what changed and where they are now, so your next client hears it from someone just like them.</p>
+    <p class="hero-lede reveal">Your happiest customers are your best sales pitch. We get them talking and turn it into a story your next client will trust.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
     </div>
@@ -1509,18 +1558,15 @@ document.documentElement.dataset.theme = 'dark';
 <section class="stories-dark" id="work">
   <div class="wrap work-inner">
     <h2 class="section-title reveal">Customer <span class="nowrap-dot">stories<span class="dot"></span></span></h2>
-    <p class="section-intro reveal">Stories we&#x27;ve made for clients across property, retail, logistics, food and fitness.</p>
-    <div class="bleed-feature is-story reveal">
-      <div class="tile g-tile g-feature ar-219" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story"><div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt first home buyer story: a couple laughing on a jetty" loading="lazy" decoding="async" width="960" height="540"><video class="g-preview" data-src="video/case-studies/inovayt-fhb-preview-v9.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, first home buyer story</span></p></div>
-    </div>
     <div class="gallery is-2up cs-rail reveal" id="storiesRail">
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Total Tools case study</span></p></div></figure>
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" data-sprite="img/case-studies/inovayt-upsizer-sprite-v9.jpg" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog and a laptop" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div></figure>
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story"><div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Border Express</strong><span class="cap-rest">, customer story</span></p></div></figure>
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Focus Insights, Marathon Foods case study"><div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Focus Insights, Marathon Foods case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Marathon Foods case study</span></p></div></figure>
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="MOabmPW88Yg" aria-label="Play: RWW, Water NSW case study"><div class="tile-media"><img src="img/case-studies/MOabmPW88Yg.jpg" alt="RWW, Water NSW case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>RWW</strong><span class="cap-rest">, Water NSW case study</span></p></div></figure>
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Focus Insights, Food Industry Asia case study"><div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Focus Insights, Food Industry Asia case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Food Industry Asia case study</span></p></div></figure>
-      <figure class="g-item g-4"><div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile r13-card" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story"><div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt first home buyer story: a couple laughing on a jetty" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, first home buyer story</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Total Tools case study</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" data-sprite="img/case-studies/inovayt-upsizer-sprite-v9.jpg" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog and a laptop" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story"><div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Border Express</strong><span class="cap-rest">, customer story</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Focus Insights, Marathon Foods case study"><div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Focus Insights, Marathon Foods case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Marathon Foods case study</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-yt-id="MOabmPW88Yg" aria-label="Play: RWW, Water NSW case study"><div class="tile-media"><img src="img/case-studies/MOabmPW88Yg.jpg" alt="RWW, Water NSW case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>RWW</strong><span class="cap-rest">, Water NSW case study</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Focus Insights, Food Industry Asia case study"><div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Focus Insights, Food Industry Asia case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Food Industry Asia case study</span></p></div></figure>
+      <figure class="g-item g-4"><div class="tile g-tile ar-169 r13-card" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise case study"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise case study" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise case study</span></p></div></figure>
     </div>
     <div class="rail-foot reveal">
       <a class="quiet-link" href="video-production-melbourne">See all our video work</a>
@@ -1529,19 +1575,22 @@ document.documentElement.dataset.theme = 'dark';
         <button class="snippets-nav-btn" data-rail="storiesRail" data-dir="1" aria-label="Next stories" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </nav>
     </div>
-    <div class="suite reveal">
-      <span class="g-kind">A suite for @Pilates</span>
-      <p class="g-line">A series of franchisee stories with one consistent look, ready to use one by one or together.</p>
-      <div class="suite-row">
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Zoey, Mackay"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster-xs.jpg" alt="@Pilates franchisee story: Zoey, Mackay" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Zoey</strong><span class="cap-rest"><span class="cap-sep">, </span>Mackay</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Christian, Yeppoon"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster-xs.jpg" alt="@Pilates franchisee story: Christian, Yeppoon" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Christian</strong><span class="cap-rest"><span class="cap-sep">, </span>Yeppoon</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Maleah, Sippy Downs"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster-xs.jpg" alt="@Pilates franchisee story: Maleah, Sippy Downs" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Maleah</strong><span class="cap-rest"><span class="cap-sep">, </span>Sippy Downs</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Courtney, Toowoomba"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney-poster-xs.jpg" alt="@Pilates franchisee story: Courtney, Toowoomba" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Courtney</strong><span class="cap-rest"><span class="cap-sep">, </span>Toowoomba</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Ricki, Maroochydore"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki-poster-xs.jpg" alt="@Pilates franchisee story: Ricki, Maroochydore" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Ricki</strong><span class="cap-rest"><span class="cap-sep">, </span>Maroochydore</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Danielle, Southport"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle-poster-xs.jpg" alt="@Pilates franchisee story: Danielle, Southport" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Danielle</strong><span class="cap-rest"><span class="cap-sep">, </span>Southport</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Sharnie, Mildura"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie-poster-xs.jpg" alt="@Pilates franchisee story: Sharnie, Mildura" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Sharnie</strong><span class="cap-rest"><span class="cap-sep">, </span>Mildura</span></p></div>
-        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Megan, Campbelltown"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan-poster-xs.jpg" alt="@Pilates franchisee story: Megan, Campbelltown" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Megan</strong><span class="cap-rest"><span class="cap-sep">, </span>Campbelltown</span></p></div>
-      </div>
+  </div>
+</section>
+
+<section class="stories-dark r13-sec r13-series" id="series">
+  <div class="wrap">
+    <h2 class="section-title reveal">Building a <span class="nowrap-dot">series<span class="dot"></span></span></h2>
+    <p class="r13-line reveal">Eight franchisee stories, one consistent look.</p>
+    <div class="r13-fan reveal" role="group" aria-label="@Pilates franchisee stories">
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
+      <div class="tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, franchisee story"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan-poster-xs.jpg" alt="@Pilates franchisee story" loading="lazy" decoding="async" width="400" height="711"><span class="tile-play" aria-hidden="true"></span></div></div>
     </div>
   </div>
 </section>
@@ -1553,23 +1602,8 @@ document.documentElement.dataset.theme = 'dark';
       <li><span class="step-num">01</span><h3>Plan</h3><p>We start with a quick chat about what you want people to feel and do after watching.</p></li>
       <li><span class="step-num">02</span><h3>Prepare</h3><p>We brief your customer beforehand, so they know exactly what to expect and feel at ease.</p></li>
       <li><span class="step-num">03</span><h3>Film</h3><p>We come to them and capture their story, plus the real work you did together.</p></li>
-      <li><span class="step-num">04</span><h3>Deliver</h3><p>You get a polished main video, plus shorter versions ready for your website, socials and sales.</p></li>
+      <li><span class="step-num">04</span><h3>Deliver</h3><p>You get a polished film, ready to share wherever your next customers are looking.</p></li>
     </ol>
-    <div class="vid-info reveal">
-      <div>
-        <h3>What you get</h3>
-        <ul>
-          <li>A main film that tells the full story: the problem, what you changed and the result.</li>
-          <li>Short versions for social, your website and sales conversations.</li>
-          <li>A bank of the best moments, ready for future posts and campaigns.</li>
-          <li>A calm, well planned day for your customer, guided by our producers.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Who it&#x27;s for</h3>
-        <p>Businesses that win work on trust: professional services, franchises, suppliers, software and not for profits. If your customers already say great things about you, a case study video lets the right buyers hear it, on your website, in proposals and in sales meetings.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1577,23 +1611,17 @@ document.documentElement.dataset.theme = 'dark';
   <div class="wrap split-grid">
     <div class="split-media reveal">
       <div class="filmstrip">
-        <img class="filmstrip-main" src="img/studio/bts-ltt-two-guests-v17.jpg" alt="Two guests in conversation on the Let&#x27;s Talk Teaching set" loading="lazy" decoding="async" width="960" height="640">
+        <img class="filmstrip-main" src="img/case-studies/inovayt-moment-r13-2.jpg" alt="Inovayt upsizer story: Brett and Owen with their dogs outside the Retreat Hotel" loading="lazy" decoding="async" width="1280" height="720">
         <div class="filmstrip-row">
-          <figure class="moment-card"><img src="img/studio/bts-hah-set-camera-v17.jpg" alt="Camera and monitor on the Help at Hand Education set" loading="lazy" decoding="async" width="960" height="640"><figcaption>Help at Hand Education</figcaption></figure>
-          <figure class="moment-card"><img src="img/studio/bts-tng-camera-hosts-v17.jpg" alt="Camera rolling on The Numbers Game hosts" loading="lazy" decoding="async" width="960" height="640"><figcaption>The Numbers Game</figcaption></figure>
-          <figure class="moment-card"><img src="img/studio/bts-ltt-guests-laughing-v17.jpg" alt="Guests laughing on the Let&#x27;s Talk Teaching set" loading="lazy" decoding="async" width="960" height="640"><figcaption>Monash University</figcaption></figure>
+          <figure class="moment-card"><img src="img/case-studies/inovayt-moment-r13-1.jpg" alt="Inovayt upsizer story: Brett and Owen with their dogs outside the Retreat Hotel" loading="lazy" decoding="async" width="1280" height="720"></figure>
+          <figure class="moment-card"><img src="img/case-studies/inovayt-moment-r13-3.jpg" alt="Inovayt upsizer story: Brett telling their story" loading="lazy" decoding="async" width="1280" height="720"></figure>
+          <figure class="moment-card"><img src="img/case-studies/inovayt-moment-r13-4.jpg" alt="Inovayt upsizer story: walking the dogs down their street" loading="lazy" decoding="async" width="1280" height="720"></figure>
         </div>
       </div>
     </div>
     <div class="split-body reveal">
-      <span class="split-eyebrow">Your production partner</span>
       <h2 class="section-title">More from every <span class="nowrap-dot">interview<span class="dot"></span></span></h2>
-      <p>One customer interview holds far more than one video. We keep the best lines and moments, label them, and turn them into short clips and new videos when you need them, so your marketing always has real customer voices to draw on.</p>
-      <ul class="split-points">
-        <li><strong>Plan it together.</strong> We map what your marketing needs before we film, so every interview feeds it.</li>
-        <li><strong>See every moment.</strong> Your best moments are found, labelled and kept in VIDPOD Studio, your private review space.</li>
-        <li><strong>Ask for more.</strong> Pick the moments you like and we&#x27;ll make them into new videos and short versions for social, as we do in <a href="video-podcast-production-melbourne">podcast video production</a>.</li>
-      </ul>
+      <p>One customer interview holds far more than one video. We keep the best moments and turn them into new videos whenever you need them.</p>
       <a class="quiet-link" href="/#contact">Ask us how it works</a>
     </div>
   </div>
@@ -1624,7 +1652,7 @@ document.documentElement.dataset.theme = 'dark';
       </details>
       <details>
         <summary>How long is a case study video?</summary>
-        <p>Usually a couple of minutes for the main film, with short versions for social. We shape the length around where it will be watched and what your buyers need to hear.</p>
+        <p>Usually a couple of minutes for the main film. We shape the length around where it will be watched and what your buyers need to hear.</p>
       </details>
       <details>
         <summary>Who should we ask to be in our case study?</summary>
@@ -2372,7 +2400,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button type="button" class="enq-close" data-enq-close aria-label="Close">&times;</button>
     <div class="enq-body">
       <p class="enq-title" id="enqTitle">Let&#x27;s make something<span class="dot"></span></p>
-      <p class="enq-lead"><span class="enq-lead-long">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</span><span class="enq-lead-short">Tell us what you&#x27;ve got in mind. No brief is too rough.</span></p>
+      <p class="enq-lead">Tell us what you&#x27;ve got in mind. No brief is too rough.</p>
       <div id="enqForm"><p class="enq-lead">Loading the form&hellip;</p></div>
       <p class="enq-alt">Rather talk? <a href="tel:+61401576859">Call 0401 576 859</a></p>
     </div>
