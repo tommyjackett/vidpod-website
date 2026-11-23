@@ -87,7 +87,7 @@
           "name": "What does VIDPOD do?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "VIDPOD is a Melbourne video and podcast production company, founded by Tommy Jackett. We make brand films, case studies, explainers and social content, and take each one from the first chat to the finished video. You deal with one team the whole way, so nothing gets lost between people."
+            "text": "VIDPOD is a Melbourne video and podcast production company, founded by Tommy Jackett. We make brand films, case studies, explainers and social content, and you deal with one team from first chat to final film, so nothing gets lost between people."
           }
         },
         {
@@ -95,7 +95,7 @@
           "name": "What kinds of videos do you make?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Brand films, branded content, explainers and animation, social content and customer case studies. Most projects give you more than one video: a main piece, plus shorter versions ready for your website, socials and presentations. We also look after video podcast production for brands and universities."
+            "text": "Brand films, branded content, explainers and animation, social content and customer case studies. We also look after video podcast production for brands and universities."
           }
         },
         {
@@ -135,7 +135,7 @@
           "name": "Can you help us use the video once it's made?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. We make versions for each place it will live, from your website to social and sales decks, and we can plan a rhythm for sharing them so the film keeps working long after launch."
+            "text": "Yes. We help you plan where it will live and a rhythm for sharing it, so the film keeps working long after launch."
           }
         },
         {
@@ -1440,6 +1440,52 @@ body { overflow-x: clip; }
 .mid-cta span { font-size: 15px; color: rgba(255,255,255,0.7); }
 @media (max-width: 900px) { .vid-info { grid-template-columns: 1fr; gap: 24px; } }
 @media (max-width: 699px) { .vid-info { margin-top: 34px; padding-top: 24px; } .mid-cta { margin-top: 28px; gap: 12px; } }
+
+/* ===== round 13: one card system ===== */
+.r13-sec { padding: 96px 0; }
+.r13-sec + .r13-sec { padding-top: 0; }
+.r13-sec .section-title { margin-bottom: 32px; }
+.r13-card { cursor: pointer; }
+.r13-card .tile-media { aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; position: relative; }
+.r13-card .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.r13-card .tile-cap { margin: 12px 0 0; font-size: 15px; }
+.r13-feature { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.r13-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
+.r13-type { display: block; margin: 0 0 10px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+.r13-reel .tile-media { aspect-ratio: 16 / 9; }
+.r13-reel .tile-play, .r13-reel.tile .tile-play { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, -50%); }
+.r13-reel:hover .tile-play { transform: translate(-50%, -50%); }
+.r13-cta { padding: 0 0 96px; }
+.r13-pointer-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 28px; }
+.r13-pointer-head .section-title { margin: 0; }
+@media (max-width: 699px) {
+  .r13-sec { padding: 56px 0; }
+  .r13-sec + .r13-sec { padding-top: 0; }
+  .r13-sec .section-title { margin-bottom: 22px; }
+  .r13-feature, .r13-grid { grid-template-columns: 1fr; gap: 28px; }
+  .r13-cta { padding-bottom: 56px; }
+  .r13-pointer-head { flex-direction: column; gap: 8px; margin-bottom: 20px; }
+}
+/* vertical fan (9:16, slight rotation, spreads on hover, swipe on phones) */
+.r13-fan { display: flex; justify-content: center; padding: 18px 0 8px; }
+.r13-fan .tile { flex: 0 0 auto; width: 150px; margin-left: -38px; cursor: pointer; transition: transform 0.45s var(--ease), margin 0.45s var(--ease); }
+.r13-fan .tile:first-child { margin-left: 0; }
+.r13-fan .tile .tile-media { aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); }
+.r13-fan .tile .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.r13-fan .tile:nth-child(odd) { transform: rotate(-3deg); }
+.r13-fan .tile:nth-child(even) { transform: rotate(3deg) translateY(10px); }
+.r13-fan:hover .tile { margin-left: 8px; }
+.r13-fan:hover .tile:first-child { margin-left: 0; }
+.r13-fan .tile:hover { transform: rotate(0) translateY(-8px); z-index: 5; }
+.r13-fan .tile-play { left: 50%; top: 50%; bottom: auto; transform: translate(-50%, -50%); height: 30px; padding: 0 11px 0 10px; }
+.r13-fan .tile-play::after { display: none; }
+.r13-line { margin: -16px 0 8px; font-size: 16px; color: rgba(255,255,255,0.7); }
+@media (max-width: 899px) {
+  .r13-fan { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -22px; padding: 12px 22px 8px; scrollbar-width: none; }
+  .r13-fan::-webkit-scrollbar { display: none; }
+  .r13-fan .tile, .r13-fan:hover .tile { margin-left: 0; width: 42vw; max-width: 180px; scroll-snap-align: start; }
+  .r13-fan .tile:nth-child(odd), .r13-fan .tile:nth-child(even) { transform: none; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1499,7 +1545,7 @@ document.documentElement.dataset.theme = 'dark';
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-sub reveal">Corporate video production in <span class="nowrap-dot">Melbourne<span class="dot"></span></span></h1>
-    <p class="hero-lede reveal">Video that helps people understand what you do and why it matters. Our Melbourne team plans, films and edits brand films, customer stories and explainers that look beautiful and get watched.</p>
+    <p class="hero-lede reveal">Got a story worth telling? We help brands get to the heart of it and turn it into video people actually want to watch.</p>
     <div class="hero-actions reveal">
       <a href="/#contact" class="btn-vid">Let's chat</a>
     </div>
@@ -1542,106 +1588,50 @@ document.documentElement.dataset.theme = 'dark';
   </div>
 </section>
 
-<section class="sel-work" id="selected-work">
+<section class="r13-sec" id="selected-work">
   <div class="wrap">
-    <h2 class="section-title reveal">Corporate video, made to keep <span class="nowrap-dot">working<span class="dot"></span></span></h2>
-    <p class="section-intro reveal">Every film starts with one question: what should the right person understand, feel and do after watching? Here&#x27;s how that looks across our work.</p>
-    <div class="bleed-feature is-reel reveal">
-      <div class="tile g-tile g-feature ar-219" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" aria-label="Play: VIDPOD showreel"><div class="tile-media"><img src="img/work/break-reel-v7.jpg" alt="VIDPOD showreel: an outback road, a red dirt track and a forest from above" loading="lazy" decoding="async" width="1920" height="822"><video class="g-preview" data-src="video/break-reel-v7.mp4" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>VIDPOD showreel</strong></p></div>
-    </div>
-    <div class="gallery is-rail reveal" id="workRail">
-      <figure class="g-item g-7" id="case-study-videos">
-        <span class="g-kind">Customer case studies and testimonials</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" data-sprite="img/case-studies/inovayt-upsizer-sprite-v9.jpg" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog and a laptop" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div>
-        <p class="g-line">Your customers explain the change you made, in their own words. See our <a href="video-case-studies-melbourne">case study videos</a>.</p>
-      </figure>
-      <figure class="g-item g-5" id="founder-stories">
-        <span class="g-kind">Founder stories</span>
-        <div class="g-pair is-even">
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W founding story: the founder smiling in a wheat field" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ-v13.jpg" alt="@Pilates founding story: the founder smiling in her studio" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div>
-        </div>
-        <p class="g-line">The story behind your business, told by the people who started it.</p>
-      </figure>
-      <figure class="g-item g-6" id="franchise">
-        <span class="g-kind">Franchise and multi-site packs</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise story"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise story" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise story</span></p></div>
-        <p class="g-line">One film day that gives every location a film that matches.</p>
-      </figure>
-      <figure class="g-item g-6" id="social-versions">
-        <span class="g-kind">Main films with social versions</span>
-        <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div>
-        <p class="g-line">One main film, plus short vertical versions for every channel.</p>
-      </figure>
-      <figure class="g-item g-6" id="brand-films">
-        <span class="g-kind">Brand films</span>
-        <p class="g-line g-line-lead">Films that show who you are, like the Barefoot Kids book trailer and a taste test for Nando&#x27;s.</p>
-        <div class="g-pair is-even">
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div>
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="960" height="540"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div>
-        </div>
-      </figure>
-      <figure class="g-item g-6" id="explainers">
-        <span class="g-kind">Explainers and animation</span>
-        <p class="g-line g-line-lead">Complex ideas made simple and easy to watch, for Infrastructure Victoria and Equip Super.</p>
-        <div class="g-pair is-even">
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" aria-label="Play: Infrastructure Victoria, explainer video"><div class="tile-media"><img src="img/work/YH-LnvrsxDo-v12.jpg" alt="Infrastructure Victoria explainer: a project director speaking in front of the city" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, explainer video</span></p></div>
-          <div class="tile g-tile ar-169" role="button" tabindex="0" data-yt-id="4ph0RxWnMUk" aria-label="Play: Equip Super, animated explainer"><div class="tile-media"><img src="img/work/4ph0RxWnMUk-v12.jpg" alt="Equip Super animated explainer: a set of scales balancing a laptop and a beach chair" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, animated explainer</span></p></div>
-        </div>
-      </figure>
-    </div>
-    <div class="services-strip reveal">
-      <span class="g-kind">Services</span>
-      <div>
-        <p class="services-line">We also colour grade, make animation and explainers, and take existing interviews and edit them into a content bank.</p>
-        <p class="also-worked">Also worked on: colour grading for <a href="https://www.foodtrailsouthafrica.com/" target="_blank" rel="noopener">Food Trail South Africa</a>, working with the show&#x27;s producers, and as production partner on <a href="https://ingunswetrustfilm.com/" target="_blank" rel="noopener">In Guns We Trust</a>, with a story credit for Tommy Jackett, who also worked on story development and hosting.</p>
-      </div>
-    </div>
-    <div class="vid-info reveal">
-      <div>
-        <h3>What you get</h3>
-        <ul>
-          <li>A film made for one clear job, planned around the people you need to reach.</li>
-          <li>Short versions for social, your website and sales, whenever you need them.</li>
-          <li>One team from first chat to final film, so nothing gets lost between people.</li>
-          <li>Clear reviews: you see each version and we polish it from your notes.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Who it&#x27;s for</h3>
-        <p>Marketing teams, founders and leaders at Australian businesses, franchises, universities and not for profits who need video that explains what they do and earns trust. If you have a story worth telling and want it to look as good as your brand, we&#x27;re a good fit.</p>
-      </div>
-      <div>
-        <h3>How a project runs</h3>
-        <ol>
-          <li><strong>A short chat.</strong> What the video needs to do, who it&#x27;s for and where it will live.</li>
-          <li><strong>A plan.</strong> The story, the people, the places and the look, agreed before anything is filmed.</li>
-          <li><strong>Film day.</strong> We bring the lighting, sound and crew, and make everyone on camera feel at ease.</li>
-          <li><strong>Edit and review.</strong> You see each version, leave notes, and we finish it, with short versions if you need them.</li>
-        </ol>
-      </div>
-    </div>
-    <div class="mid-cta reveal"><a href="/#contact" class="btn-vid">Let&#x27;s chat</a><span>Tell us what you&#x27;re making. We&#x27;ll come back with a plan.</span></div>
+    <div class="tile r13-card r13-reel reveal" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/VIDPOD%20Video%20Production%20Showreel%20-%20%20-%202026-05-21%2009-10-33.mp4" data-poster="img/work/break-reel-v7.jpg" data-aspect="wide" aria-label="Play: VIDPOD showreel"><div class="tile-media"><img src="img/work/break-reel-v7.jpg" alt="VIDPOD showreel: an outback road from above" loading="lazy" decoding="async" width="1920" height="822"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>VIDPOD showreel</strong></p></div>
   </div>
 </section>
 
-<section class="case-band is-dark" id="case-studies">
-  <div class="wrap case-band-grid">
-    <div class="reveal">
-      <h2 class="section-title">Case <span class="nowrap-dot">studies<span class="dot"></span></span></h2>
-      <p class="section-intro">Your customers tell the story better than any ad. See the customer stories we&#x27;ve made for Focus Insights, Inovayt and @Pilates.</p>
-      <a class="quiet-link" href="video-case-studies-melbourne">See all our case study videos</a>
+<section class="r13-sec" id="founder-stories">
+  <div class="wrap">
+    <h2 class="section-title reveal">Founder <span class="nowrap-dot">stories<span class="dot"></span></span></h2>
+    <div class="r13-feature reveal">
+      <div class="tile r13-card" role="button" tabindex="0" data-yt-id="zyJLmbsxy9Y" aria-label="Play: Wunder W, founding story"><div class="tile-media"><img src="img/work/zyJLmbsxy9Y-v9.jpg" alt="Wunder W founding story: the founder smiling in a wheat field" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Wunder W</strong><span class="cap-rest">, founding story</span></p></div>
+      <div class="tile r13-card" role="button" tabindex="0" data-yt-id="fsJkJAmqskQ" aria-label="Play: @Pilates, founding story"><div class="tile-media"><img src="img/work/fsJkJAmqskQ-v13.jpg" alt="@Pilates founding story: the founder smiling in her studio" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, founding story</span></p></div>
     </div>
-    <div class="reveal">
-      <div class="case-hand" role="group" aria-label="Customer stories we have made">
-        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
-        <div class="tile fan-card" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-first-home-buyer-wide.mp4" data-poster="img/case-studies/inovayt-first-home-buyer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, first home buyer story"><div class="tile-media"><img src="img/case-studies/inovayt-first-home-buyer-wide.jpg" alt="Inovayt first home buyer story: a couple laughing on a jetty" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
-        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="UaxJNro4WeM" aria-label="Play: Border Express, customer story"><div class="tile-media"><img src="img/case-studies/UaxJNro4WeM.jpg" alt="Border Express, customer story" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
-        <div class="tile fan-card" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
-        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Focus Insights, Marathon Foods case study"><div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Focus Insights, Marathon Foods case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
-        <div class="tile fan-card" role="button" tabindex="0" data-yt-id="gFsnwLUhmrc" aria-label="Play: Focus Insights, Food Industry Asia case study"><div class="tile-media"><img src="img/case-studies/gFsnwLUhmrc.jpg" alt="Focus Insights, Food Industry Asia case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div></div>
-      </div>
-      <p class="hero-fan-note">A few of our customer stories. Tap any one to watch.</p>
+  </div>
+</section>
+
+<section class="r13-sec" id="kinds">
+  <div class="wrap">
+    <h2 class="section-title reveal">Kinds of video we <span class="nowrap-dot">make<span class="dot"></span></span></h2>
+    <div class="r13-grid reveal">
+      <figure id="brand-films"><span class="r13-type">Brand films</span><div class="tile r13-card" role="button" tabindex="0" data-yt-id="oSlSom4mKNs" aria-label="Play: Barefoot Investor, book launch video"><div class="tile-media"><img src="img/work/oSlSom4mKNs.jpg" alt="Barefoot Investor, book launch video" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Barefoot Investor</strong><span class="cap-rest">, book launch video</span></p></div></figure>
+      <figure><span class="r13-type">Brand films</span><div class="tile r13-card" role="button" tabindex="0" data-yt-id="NyWZ61PCJLI" aria-label="Play: Nando&#x27;s, taste test"><div class="tile-media"><img src="img/work/NyWZ61PCJLI.jpg" alt="Nando&#x27;s, taste test" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Nando&#x27;s</strong><span class="cap-rest">, taste test</span></p></div></figure>
+      <figure id="social-versions"><span class="r13-type">Main films with social versions</span><div class="tile r13-card" role="button" tabindex="0" data-yt-id="cyOn7RNLOhw" aria-label="Play: Brava, Obsessed with Fit campaign"><div class="tile-media"><img src="img/work/cyOn7RNLOhw-v7.jpg" alt="Brava, Obsessed with Fit campaign" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Brava</strong><span class="cap-rest">, Obsessed with Fit campaign</span></p></div></figure>
+      <figure id="explainers"><span class="r13-type">Explainers and animation</span><div class="tile r13-card" role="button" tabindex="0" data-yt-id="YH-LnvrsxDo" aria-label="Play: Infrastructure Victoria, explainer video"><div class="tile-media"><img src="img/work/YH-LnvrsxDo-v12.jpg" alt="Infrastructure Victoria explainer: a project director speaking in front of the city" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Infrastructure Victoria</strong><span class="cap-rest">, explainer video</span></p></div></figure>
+      <figure><span class="r13-type">Explainers and animation</span><div class="tile r13-card" role="button" tabindex="0" data-yt-id="4ph0RxWnMUk" aria-label="Play: Equip Super, animated explainer"><div class="tile-media"><img src="img/work/4ph0RxWnMUk-v12.jpg" alt="Equip Super animated explainer: a set of scales balancing a laptop and a beach chair" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Equip Super</strong><span class="cap-rest">, animated explainer</span></p></div></figure>
+      <figure id="franchise"><span class="r13-type">Franchise and multi-site packs</span><div class="tile r13-card" role="button" tabindex="0" data-yt-id="EizFidt8UTU" aria-label="Play: @Pilates, franchise story"><div class="tile-media"><img src="img/case-studies/EizFidt8UTU.jpg" alt="@Pilates, franchise story" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>@Pilates</strong><span class="cap-rest">, franchise story</span></p></div></figure>
+    </div>
+  </div>
+</section>
+
+<section class="r13-cta">
+  <div class="wrap"><a href="/#contact" class="btn-vid">Let&#x27;s chat</a></div>
+</section>
+
+<section class="r13-sec" id="case-studies">
+  <div class="wrap">
+    <div class="r13-pointer-head reveal">
+      <h2 class="section-title">Customer <span class="nowrap-dot">stories<span class="dot"></span></span></h2>
+      <a class="quiet-link" href="video-case-studies-melbourne">See all case studies</a>
+    </div>
+    <div class="r13-grid reveal">
+      <div class="tile r13-card" role="button" tabindex="0" data-mp4="video/case-studies/inovayt-upsizer-wide.mp4" data-poster="img/case-studies/inovayt-upsizer-wide.jpg" data-aspect="wide" aria-label="Play: Inovayt, upsizer story"><div class="tile-media"><img src="img/case-studies/inovayt-upsizer-v10.jpg" alt="Inovayt upsizer story: two homeowners on the sofa with their dog" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Inovayt</strong><span class="cap-rest">, upsizer story</span></p></div>
+      <div class="tile r13-card" role="button" tabindex="0" data-yt-id="TLXo1eYwyKo" aria-label="Play: Focus Insights, Total Tools case study"><div class="tile-media"><img src="img/case-studies/TLXo1eYwyKo.jpg" alt="Focus Insights, Total Tools case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Total Tools case study</span></p></div>
+      <div class="tile r13-card" role="button" tabindex="0" data-yt-id="1FoqCF_BsvU" aria-label="Play: Focus Insights, Marathon Foods case study"><div class="tile-media"><img src="img/case-studies/1FoqCF_BsvU.jpg" alt="Focus Insights, Marathon Foods case study" loading="lazy" decoding="async" width="1280" height="720"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Focus Insights</strong><span class="cap-rest">, Marathon Foods case study</span></p></div>
     </div>
   </div>
 </section>
@@ -1655,11 +1645,11 @@ document.documentElement.dataset.theme = 'dark';
     <div class="faq-list reveal">
       <details>
         <summary>What does VIDPOD do?</summary>
-        <p>VIDPOD is a Melbourne video and podcast production company, founded by Tommy Jackett. We make brand films, case studies, explainers and social content, and take each one from the first chat to the finished video. You deal with one team the whole way, so nothing gets lost between people.</p>
+        <p>VIDPOD is a Melbourne video and podcast production company, founded by Tommy Jackett. We make brand films, case studies, explainers and social content, and you deal with one team from first chat to final film, so nothing gets lost between people.</p>
       </details>
       <details>
         <summary>What kinds of videos do you make?</summary>
-        <p>Brand films, branded content, explainers and animation, social content and customer case studies. Most projects give you more than one video: a main piece, plus shorter versions ready for your website, socials and presentations. We also look after <a href="video-podcast-production-melbourne">video podcast production</a> for brands and universities.</p>
+        <p>Brand films, branded content, explainers and animation, social content and customer case studies. We also look after video podcast production for brands and universities.</p>
       </details>
       <details>
         <summary>Do we get social versions?</summary>
@@ -1679,7 +1669,7 @@ document.documentElement.dataset.theme = 'dark';
       </details>
       <details>
         <summary>Can you help us use the video once it&#x27;s made?</summary>
-        <p>Yes. We make versions for each place it will live, from your website to social and sales decks, and we can plan a rhythm for sharing them so the film keeps working long after launch.</p>
+        <p>Yes. We help you plan where it will live and a rhythm for sharing it, so the film keeps working long after launch.</p>
       </details>
       <details>
         <summary>Do you work outside Melbourne?</summary>
@@ -2397,7 +2387,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button type="button" class="enq-close" data-enq-close aria-label="Close">&times;</button>
     <div class="enq-body">
       <p class="enq-title" id="enqTitle">Let&#x27;s make something<span class="dot"></span></p>
-      <p class="enq-lead"><span class="enq-lead-long">Tell us what you&#x27;ve got in mind. A brand film, a new podcast, a full series. No brief is too rough. We&#x27;d love to set up a call and have a chat.</span><span class="enq-lead-short">Tell us what you&#x27;ve got in mind. No brief is too rough.</span></p>
+      <p class="enq-lead">Tell us what you&#x27;ve got in mind. No brief is too rough.</p>
       <div id="enqForm"><p class="enq-lead">Loading the form&hellip;</p></div>
       <p class="enq-alt">Rather talk? <a href="tel:+61401576859">Call 0401 576 859</a></p>
     </div>
