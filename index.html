@@ -1774,6 +1774,11 @@ footer a{text-decoration:none}
 html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-light{display:none}
 html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block}
 
+
+/* quiet link (same component as the service pages) */
+.quiet-link { display: inline-block; margin-top: 44px; font-size: 15px; font-weight: 600; color: inherit; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; text-decoration: none; padding-bottom: 3px; transition: background-size 0.35s var(--ease); }
+.quiet-link:hover { background-size: 40% 1px; opacity: 1; }
+.work-vid .work-vid-more { margin-top: 32px; }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QRDTHHVGQ"></script>
@@ -1844,7 +1849,7 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         <div class="service-body">
           <h3>Video Production</h3>
           <p>We're passionate creators and problem solvers with over a decade of experience helping brands get to the heart of their story and connect with their audience through video content. Got an idea ready to roll, or just something you want to talk through? We'd love to chat about your project.</p>
-          <a href="video-production-melbourne" class="service-cta">Learn more</a>
+          <a href="video-production-melbourne" class="service-cta">See video production</a>
           <div class="service-marquee service-marquee-vid">
             <div class="service-marquee-track">
               <span>Founding stories</span><span class="sep">·</span>
@@ -1869,7 +1874,7 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         <div class="service-body">
           <h3>Podcast Production</h3>
           <p>Podcasts give you the ability to connect deeply with your audience. That might be sharing customer stories, building authority in your niche, or creating internal shows for learning and development. We've built and produced thousands of episodes and can support you in all areas of building your show from the ground up.</p>
-          <a href="video-podcast-production-melbourne" class="service-cta">Learn more</a>
+          <a href="video-podcast-production-melbourne" class="service-cta">See podcast production</a>
           <div class="service-marquee service-marquee-pod">
             <div class="service-marquee-track">
               <span>Show ideation</span><span class="sep">·</span>
@@ -1933,9 +1938,9 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
       </div>
 
       <!-- 4. Bottom-left — @Pilates · Sales / franchise video -->
-      <div class="pcard reveal" data-yt-id="SXORkm2BG3U" data-aspect="wide" data-category="featured">
+      <div class="pcard reveal" data-yt-id="EizFidt8UTU" data-aspect="wide" data-category="featured">
         <div class="pcard-media">
-          <img src="https://i.ytimg.com/vi/SXORkm2BG3U/maxresdefault.jpg?v=2026-05-08-3" alt="@Pilates — Sales / franchise video" loading="lazy">
+          <img src="https://i.ytimg.com/vi/EizFidt8UTU/maxresdefault.jpg" alt="@Pilates, franchise case study" loading="lazy">
         </div>
       </div>
 
@@ -2078,6 +2083,7 @@ html[data-theme="dark"] .footer-bottom-row .footer-logo .logo-dark{display:block
         </div>
       </div>
     </div>
+    <a class="quiet-link work-vid-more" href="video-case-studies-melbourne">See all case studies</a>
 
     <!-- Mobile-only: scroll back to the category chips -->
     <button type="button" class="back-to-vid-top" aria-label="Back to top of videos">
