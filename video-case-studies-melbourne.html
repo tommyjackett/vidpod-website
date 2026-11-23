@@ -1362,6 +1362,24 @@ body { overflow-x: clip; }
 
 /* ---- 23 Nov: case studies notes ---- */
 .bleed-feature.is-story .tile-media img, .bleed-feature.is-story .tile-media video { object-position: 50% 14%; }
+
+/* ---- round 12: @Pilates 2025 suite ---- */
+.suite { margin-top: 56px; }
+.suite .g-line { margin: 0 0 18px; }
+.suite-row { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; }
+.suite-tile .tile-media { aspect-ratio: 9 / 16; }
+.suite-tile .tile-cap { font-size: 13px; margin-top: 8px; }
+.suite-tile .tile-play { height: 30px; padding: 0 11px 0 10px; gap: 7px; left: 8px; bottom: 8px; }
+.suite-tile .tile-play::after { font-size: 9px; }
+@media (max-width: 699px) {
+  .suite { margin-top: 36px; }
+  .suite-row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px 8px; }
+  .suite-tile .tile-cap { font-size: 11px; line-height: 1.3; }
+  .suite-tile .tile-cap .cap-rest { display: block; }
+  .suite-tile .cap-sep { display: none; }
+  .suite-tile .tile-play { height: 24px; padding: 0 8px; left: 5px; bottom: 5px; }
+  .suite-tile .tile-play::after { display: none; }
+}
 /* ===== END ONE SYSTEM ===== */
 </style>
 <script>
@@ -1486,6 +1504,20 @@ document.documentElement.dataset.theme = 'dark';
         <button class="snippets-nav-btn" data-rail="storiesRail" data-dir="-1" aria-label="Previous stories" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
         <button class="snippets-nav-btn" data-rail="storiesRail" data-dir="1" aria-label="Next stories" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </nav>
+    </div>
+    <div class="suite reveal">
+      <span class="g-kind">A suite for @Pilates</span>
+      <p class="g-line">A series of franchisee stories with one consistent look, ready to use one by one or together.</p>
+      <div class="suite-row">
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Zoey, Mackay"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-zoey-poster.jpg" alt="@Pilates franchisee story: Zoey, Mackay" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Zoey</strong><span class="cap-rest"><span class="cap-sep">, </span>Mackay</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Christian, Yeppoon"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-christian-poster.jpg" alt="@Pilates franchisee story: Christian, Yeppoon" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Christian</strong><span class="cap-rest"><span class="cap-sep">, </span>Yeppoon</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Maleah, Sippy Downs"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-maleah-poster.jpg" alt="@Pilates franchisee story: Maleah, Sippy Downs" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Maleah</strong><span class="cap-rest"><span class="cap-sep">, </span>Sippy Downs</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Courtney, Toowoomba"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-courtney-poster.jpg" alt="@Pilates franchisee story: Courtney, Toowoomba" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Courtney</strong><span class="cap-rest"><span class="cap-sep">, </span>Toowoomba</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Ricki, Maroochydore"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-ricki-poster.jpg" alt="@Pilates franchisee story: Ricki, Maroochydore" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Ricki</strong><span class="cap-rest"><span class="cap-sep">, </span>Maroochydore</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Danielle, Southport"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-danielle-poster.jpg" alt="@Pilates franchisee story: Danielle, Southport" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Danielle</strong><span class="cap-rest"><span class="cap-sep">, </span>Southport</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Sharnie, Mildura"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-sharnie-poster.jpg" alt="@Pilates franchisee story: Sharnie, Mildura" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Sharnie</strong><span class="cap-rest"><span class="cap-sep">, </span>Mildura</span></p></div>
+        <div class="tile g-tile suite-tile" role="button" tabindex="0" data-mp4="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan.mp4" data-poster="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan-poster.jpg" data-aspect="vertical" aria-label="Play: @Pilates, Megan, Campbelltown"><div class="tile-media"><img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/vidpod-site/atpilates-2025-megan-poster.jpg" alt="@Pilates franchisee story: Megan, Campbelltown" loading="lazy" decoding="async" width="720" height="1280"><span class="tile-play" aria-hidden="true"></span></div><p class="tile-cap"><strong>Megan</strong><span class="cap-rest"><span class="cap-sep">, </span>Campbelltown</span></p></div>
+      </div>
     </div>
   </div>
 </section>
